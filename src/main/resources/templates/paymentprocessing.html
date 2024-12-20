@@ -1,109 +1,38 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:fragment="summary">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
 
 <head>
+<title>IPSAdmin</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css"
-	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css"
-	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
-	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
-<link rel="stylesheet" type="text/css"
-	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
-	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 
-<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
-	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
-	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-<script src="/webjars/jquery/3.4.1/jquery.min.js"
-	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
-	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
 
-<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
-	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-
-<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
-	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
-
-<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
-	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
-<script
-	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
-	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
-
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
 
 <style>
-body {
-	background-color: lightgrey;
-}
-
-.h2, h2 {
-	font-size: 2rem;
-	background-color: #555;
-	color: white;
-}
-
-.tag-btn {
-	font-size: 10px;
-	text-transform: uppercase;
-	font-weight: bold;
-	color: #fff;
-	cursor: pointer;
-	z-index: 5;
-	position: relative;
-	padding: 10px;
-	margin: 0;
-	line-height: 5px;
-	-webkit-transition: all 0.2s ease-in-out;
-	-moz-transition: all 0.2s ease-in-out;
-	-o-transition: all 0.2s ease-in-out;
-	-ms-transition: all 0.2s ease-in-out;
-	transition: all 0.2s ease-in-out;
-	background-color: #F08080;
-	border: none;
-	color: #fff;
-	box-shadow: none;
-}
-
-.pagebut {
-	margin-top: 1%;
-	/*  width: 58%;  */
-	padding: 1% 1%;
-	background-color: #2e455d;
-	color: white;
-}
-
-select {
-	width: 150px;
-	margin: 10px;
-}
-
 td {
 	background-color: #f8f7ff;
 }
 
-select:focus {
-	min-width: 150px;
-	width: auto;
+.underline {
+	text-decoration: underline;
+	color: #08a6f1;
+	cursor: pointer;
 }
 
-#hidden_div {
-	display: none;
-}
-
-table th {
-	color: white;
-	background-color: #2e455deb;
-	font-size: small;
-}
-
-table td {
-	font-size: small;
+.imageround {
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	border-color: red;
 }
 
 .container-manager {
@@ -114,105 +43,84 @@ table td {
 	margin-top: 80px;
 }
 
-input[type="text"] {
-	line-height: 15px;
-	font-size: x-small;
-	height: 25px;
-}
-
 .dataTables_empty {
 	color: #be3232;
 }
 
-#overlay {
-	position: fixed;
-	top: 0;
-	z-index: 100;
-	width: 100%;
-	height: 100%;
-	display: none;
-	background: rgba(0, 0, 0, 0.6);
+.dataTables_wrapper .dataTables_filter {
+	float: right;
+	margin-right: 20px;
+	margin-top: 10px;
 }
 
-.cv-spinner {
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.dataTables_filter input {
+	color: black;
+	background-color: white;
 }
 
-.spinner {
-	/* width: 40px;
-	height: 40px;
-	border: 4px #00343d solid;
-	border-top: 4px #181818 solid;
-	border-radius: 50%;
-	animation: sp-anime 0.8s infinite linear; */
-	
+.menu-title-header {
+	padding: 0.45rem 0.45rem;
+	background: #377486;
+	color: #fff;
+	font-family: "Nunito", calibry;
 }
 
-table.dataTable thead th, table.dataTable tfoot th {
-	font-weight: normal;
+.modal-title {
+	text-align: center;
+	font-size: 14px;
+	color: #332d2d;
+	font-family: calibry
 }
 
-table.table .thead-light th {
-	font-size: 13px;
-	border-color: #d4d7da;
-}
-
-@
-keyframes sp-anime { 100% {
-	transform: rotate(360deg);
-}
-
-.
-.btn-outline-dark {
-	
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+.autocomplete {
+	position: relative;
+	display: inline-block;
 }
 
 .dataTables_scrollBody {
 	overflow: unset !important;
 }
 
-#merchandId, #userId, #unitId, #deviceId {
-	width: 100%;
-	min-width: 100%;
-	height: auto;
-	/* Let the height adjust automatically */
-	box-sizing: border-box;
-	padding: .200rem .75rem;
-	/* Reduced padding to prevent text cutoff */
+#country-list {
+	min-width: 60px;
+}
+
+.input-group-prepend {
+	width: auto;
+}
+
+.input-group .form-control {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+#phoneNumber_Error {
+	font-size: 13px;
+	color: red;
+	padding-left: 10px;
+}
+
+.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
 	color: black;
-	font-size: 0.820rem;
+	font-style: italic;
 }
 
-.btn-outline-primary {
-	border-radius: 50px; /* Optional: More rounded */
-	padding: 10px 20px;
-	width: 30% /* Optional: Adjust padding */
+input, select {
+	height: 35px !important;
 }
 
-.btn-outline-primary2 {
-	border-radius: 50px; /* Optional: More rounded */
-	padding: 10px 20px;
-	width: 30%; /* Optional: Adjust padding */
-	background-color: #007bff;
-	color: white;
+label {
+	font-size: 18px !important;
 }
 
-.button_container {
-	display: flex;
+.actionBtn .dropdown-menu {
+	min-width: 5rem !important;
 }
 </style>
 </head>
 
-<script type="text/javascript">
+<script th:inline="javascript">
+
 	function switchForm(formMode) {
 		// Hide both forms initially
 		document.getElementById("settlementForm").style.display = "none";
@@ -230,13 +138,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	        // Reset all buttons to default styles
 	        const buttons = document.querySelectorAll('.tablinks');
 	        buttons.forEach((btn) => {
-	            btn.style.backgroundColor = '';
-	            btn.style.color = 'black';
-	        });
-
-	        // Highlight the clicked button
-	        button.style.backgroundColor = '#018398';
-	        button.style.color = 'white';
+	           	btn.style.backgroundColor = '#35488dbf';
+				btn.style.color = 'white';
+				btn.style.fontWeight = '100';
+			});
+			button.style.backgroundColor = '#162b75';
+			button.style.color = 'white';
+			button.style.fontWeight = '700';
 
 	        // Hide all forms
 	        const forms = ['settlementForm', 'feesForm'];
@@ -277,21 +185,15 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		}
 
 
-	  
-	  
+	/*]]>*/
 </script>
 
-
-<title>IPS</title>
+</head>
 
 <body>
-	<!-- <div th:replace="MMenupage :: header"></div> -->
-
 	<div th:insert="MMenupage :: header"></div>
-
-
 	<div class="container-manager">
-		<div class="card">
+				<div class="card">
 
 			<div class="card-header" id="modheadtitle"
 				style="height: 47px; font-size: 1.2rem;">
@@ -323,7 +225,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					<label for="merchandName">Merchant Name</label>
 				</div>
 				<div class="col-sm-2">
-					<input type="text" id="merchandName" class="form-control"
+					<input type="text" id="merchandName" class="form-control "
 						name="merchandName" style="color: black; font-size: 0.820rem;"
 						autocomplete="off" />
 				</div>
@@ -331,12 +233,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 			</div>
 			<div
-				style="background-color: lightgrey; width: 100%; margin-left: 1px; margin-top: 10px; margin-bottom: 10px"
+				style=" width: 100%; margin-left: 1px; margin-top: 10px; margin-bottom: 10px"
 				class="row formline mt-2 p-2" id="tabs">
 				<div class="col-sm-1"></div>
 				<div>
 					<button class="tablinks" id="smooth1View"
-						style="width: 200px; height: 40px; background-color: #018398; color: white"
+						style="width: 200px; height: 40px; background-color: #162b75; color: white;font-weight: 700"
 						onclick="changeColorView(this, 'settlementForm')">Settlement
 						Transaction</button>
 				</div>
@@ -344,7 +246,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 				<div style="margin-left: 20px;">
 					<button class="tablinks" id="smooth2View"
 						onclick="changeColorView(this, 'feesForm')"
-						style="width: 200px; height: 40px;">Fees and Charges</button>
+						style="width: 200px; height: 40px; background-color: #35488dbf; color: white">Fees and Charges</button>
 				</div>
 			</div>
 
@@ -649,11 +551,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 			</div>
 
 		</div>
-
-	</div>
-
+</div>
 
 
+</div>
 </body>
 
 </html>
