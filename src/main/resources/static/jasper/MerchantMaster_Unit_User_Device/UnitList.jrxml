@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UnitList" pageWidth="1600" pageHeight="842" columnWidth="1560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81d26120-0bff-4239-a2a5-8eeedd642a42">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CIMBIPS.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="merchant_user_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from BIPS_MERCHANT_UNIT_MANAGEMENT where merchant_user_id=$P{merchant_user_id} and del_flg='N' ]]>
+	</queryString>
+	<field name="MERCHANT_USER_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MERCHANT_USER_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="MERCHANT_USER_ID"/>
+	</field>
+	<field name="MERCHANT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MERCHANT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="MERCHANT_NAME"/>
+	</field>
+	<field name="UNIT_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="UNIT_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNIT_ID"/>
+	</field>
+	<field name="LOCATION_DETAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="LOCATION_DETAIL"/>
+		<property name="com.jaspersoft.studio.field.label" value="LOCATION_DETAIL"/>
+	</field>
+	<field name="UNIT_TYPE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="UNIT_TYPE"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNIT_TYPE"/>
+	</field>
+	<field name="UNIT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="UNIT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNIT_NAME"/>
+	</field>
+	<field name="ADDRESS_1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ADDRESS_1"/>
+		<property name="com.jaspersoft.studio.field.label" value="ADDRESS_1"/>
+	</field>
+	<field name="ADDRESS_2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ADDRESS_2"/>
+		<property name="com.jaspersoft.studio.field.label" value="ADDRESS_2"/>
+	</field>
+	<field name="CITY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CITY"/>
+		<property name="com.jaspersoft.studio.field.label" value="CITY"/>
+	</field>
+	<field name="STATE_" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="STATE_"/>
+		<property name="com.jaspersoft.studio.field.label" value="STATE_"/>
+	</field>
+	<field name="COUNTRY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="COUNTRY"/>
+		<property name="com.jaspersoft.studio.field.label" value="COUNTRY"/>
+	</field>
+	<field name="ZIP_CODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ZIP_CODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="ZIP_CODE"/>
+	</field>
+	<field name="PHONE_NO" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PHONE_NO"/>
+		<property name="com.jaspersoft.studio.field.label" value="PHONE_NO"/>
+	</field>
+	<field name="REMARKS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="REMARKS"/>
+		<property name="com.jaspersoft.studio.field.label" value="REMARKS"/>
+	</field>
+	<field name="EMAIL_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMAIL_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMAIL_ID"/>
+	</field>
+	<field name="BRANCH_HEAD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BRANCH_HEAD"/>
+		<property name="com.jaspersoft.studio.field.label" value="BRANCH_HEAD"/>
+	</field>
+	<field name="DESIGNATION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DESIGNATION"/>
+		<property name="com.jaspersoft.studio.field.label" value="DESIGNATION"/>
+	</field>
+	<field name="CONTACT_PERSON1_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON1_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON1_NAME"/>
+	</field>
+	<field name="CONTACT_PERSON1_MOBILE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON1_MOBILE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON1_MOBILE"/>
+	</field>
+	<field name="CONTACT_PERSON2_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON2_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON2_NAME"/>
+	</field>
+	<field name="CONTACT_PERSON2_MOBILE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON2_MOBILE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON2_MOBILE"/>
+	</field>
+	<field name="BANKCODE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BANKCODE_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="BANKCODE_NAME"/>
+	</field>
+	<field name="BRANCHCODE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BRANCHCODE_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="BRANCHCODE_NAME"/>
+	</field>
+	<field name="BRANCH_SWIFTCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="BRANCH_SWIFTCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="BRANCH_SWIFTCODE"/>
+	</field>
+	<field name="ENTRY_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ENTRY_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="ENTRY_USER"/>
+	</field>
+	<field name="MODIFY_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MODIFY_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="MODIFY_USER"/>
+	</field>
+	<field name="VERIFY_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="VERIFY_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="VERIFY_USER"/>
+	</field>
+	<field name="ENTRY_TIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="ENTRY_TIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="ENTRY_TIME"/>
+	</field>
+	<field name="MODIFY_TIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="MODIFY_TIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="MODIFY_TIME"/>
+	</field>
+	<field name="VERIFY_TIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="VERIFY_TIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="VERIFY_TIME"/>
+	</field>
+	<field name="CONTACT_PERSON3_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON3_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON3_NAME"/>
+	</field>
+	<field name="CONTACT_PERSON3_MOBILE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON3_MOBILE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON3_MOBILE"/>
+	</field>
+	<field name="CONTACT_PERSON1_EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON1_EMAIL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON1_EMAIL"/>
+	</field>
+	<field name="CONTACT_PERSON2_EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON2_EMAIL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON2_EMAIL"/>
+	</field>
+	<field name="CONTACT_PERSON3_EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON3_EMAIL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON3_EMAIL"/>
+	</field>
+	<field name="ENTRY_FLAG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ENTRY_FLAG"/>
+		<property name="com.jaspersoft.studio.field.label" value="ENTRY_FLAG"/>
+	</field>
+	<field name="MODIFY_FLAG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MODIFY_FLAG"/>
+		<property name="com.jaspersoft.studio.field.label" value="MODIFY_FLAG"/>
+	</field>
+	<field name="CONTACT_PERSON4_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON4_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON4_NAME"/>
+	</field>
+	<field name="CONTACT_PERSON5_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON5_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON5_NAME"/>
+	</field>
+	<field name="CONTACT_PERSON6_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON6_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON6_NAME"/>
+	</field>
+	<field name="CONTACT_PERSON4_EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON4_EMAIL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON4_EMAIL"/>
+	</field>
+	<field name="CONTACT_PERSON5_EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON5_EMAIL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON5_EMAIL"/>
+	</field>
+	<field name="CONTACT_PERSON6_EMAIL" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON6_EMAIL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON6_EMAIL"/>
+	</field>
+	<field name="CONTACT_PERSON4_MOBILE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON4_MOBILE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON4_MOBILE"/>
+	</field>
+	<field name="CONTACT_PERSON5_MOBILE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON5_MOBILE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON5_MOBILE"/>
+	</field>
+	<field name="CONTACT_PERSON6_MOBILE" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="CONTACT_PERSON6_MOBILE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CONTACT_PERSON6_MOBILE"/>
+	</field>
+	<field name="CP1_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CP1_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CP1_COUNTRYCODE"/>
+	</field>
+	<field name="CP2_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CP2_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CP2_COUNTRYCODE"/>
+	</field>
+	<field name="CP3_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CP3_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CP3_COUNTRYCODE"/>
+	</field>
+	<field name="CP4_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CP4_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CP4_COUNTRYCODE"/>
+	</field>
+	<field name="CP5_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CP5_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CP5_COUNTRYCODE"/>
+	</field>
+	<field name="CP6_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CP6_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="CP6_COUNTRYCODE"/>
+	</field>
+	<field name="PH_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PH_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="PH_COUNTRYCODE"/>
+	</field>
+	<field name="DEL_FLG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEL_FLG"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEL_FLG"/>
+	</field>
+	<field name="DELETE_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DELETE_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="DELETE_USER"/>
+	</field>
+	<field name="DELETE_DATE" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="DELETE_DATE"/>
+		<property name="com.jaspersoft.studio.field.label" value="DELETE_DATE"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="670" y="0" width="190" height="30" uuid="cc0b4d87-99cb-4206-8247-08e1415eb6fc"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT LIST FOR - ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="860" y="0" width="170" height="31" uuid="de71a630-6fc7-41c5-8168-067e46655e6f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[  $P{merchant_user_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="100" width="130" height="20" backcolor="#7FCCF0" uuid="e7b44809-5229-4b0d-a518-750f02dd95ed"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="290" y="100" width="230" height="20" backcolor="#7FCCF0" uuid="cda9cdff-db3f-465d-8c39-f7f252052b13"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMAIL ADDRESS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1220" y="100" width="170" height="20" backcolor="#7FCCF0" uuid="5b193c34-a935-4a39-bac5-47234f6f351f"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODIFY USER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="670" y="100" width="190" height="20" backcolor="#7FCCF0" uuid="b26a365a-5089-43a7-a444-e64224d7c802"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOCATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1390" y="100" width="170" height="20" backcolor="#7FCCF0" uuid="ad5f3c02-7d90-4903-80ef-45248293399e"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VERIFY USER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1030" y="100" width="190" height="20" backcolor="#7FCCF0" uuid="01e7a8d1-0760-4821-b127-7e38b3e6b9ec"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTRY USER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="130" y="100" width="160" height="20" backcolor="#7FCCF0" uuid="8abe0f80-3507-46c8-a45e-4b731b34991f"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="860" y="100" width="170" height="20" backcolor="#7FCCF0" uuid="74f4d608-be48-42d5-a027-ec433c58da94"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATUS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1220" y="50" width="170" height="30" uuid="635c061b-1eb9-4018-9b56-59cf00e935bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Download Date:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="1390" y="50" width="170" height="30" uuid="ef8cbae6-cd7b-4a49-815a-a20f12c2fb06"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="520" y="100" width="150" height="20" backcolor="#7FCCF0" uuid="fb558222-f22e-4c27-b03f-fe30065ab57a"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PHONE NO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1220" y="0" width="170" height="20" uuid="357a7d63-d5b2-46e4-9e8f-67ec6738a952">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODIFY_USER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1030" y="0" width="190" height="20" uuid="f2361003-5a59-4a9d-9f6e-bcf958871788">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENTRY_USER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="290" y="0" width="230" height="20" uuid="889709db-b5d0-4927-80bd-714e75e6ab71">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONTACT_PERSON1_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="130" y="0" width="160" height="20" uuid="3d10f61d-be2e-4c45-9408-37063291ff3f">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNIT_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="670" y="0" width="190" height="20" uuid="c67c0d74-2094-4f4b-88c0-78acf9b77bdb">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{LOCATION_DETAIL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1390" y="0" width="170" height="20" uuid="f531d439-b0e8-4790-b38e-7afa93620648">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VERIFY_USER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="0" y="0" width="130" height="20" uuid="b072f40a-e928-4812-9b24-cc0ccbb5e7b0">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNIT_ID}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="860" y="0" width="170" height="20" uuid="f6a9c626-a5b7-435b-9a51-dc075d866472">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENTRY_FLAG} != null && $F{ENTRY_FLAG}.equals("Y") ? "VERIFIED" : "UNVERIFIED"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="520" y="0" width="150" height="20" uuid="80999de1-65c9-422e-80de-b807cfa0d68d">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PHONE_NO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="520" height="20" uuid="a05c156e-b493-4876-b291-b721df3d7709"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[This is a system-generated statement. Hence, it does not require any signature.]]></text>
+			</staticText>
+			<textField pattern="PAGE NO ">
+				<reportElement x="1390" y="30" width="170" height="20" uuid="7d4387f2-54bd-4f2c-9081-b93e8f2e91e3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

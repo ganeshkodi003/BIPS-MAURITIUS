@@ -1,0 +1,291 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="js/bootstrap411.js"></script>
+
+<style>
+
+td {
+	font-size: small;
+	background-color: #f8f7ff;
+}
+
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 18.3%;
+	margin-top: 80px;
+}
+
+input, select {
+	height: 35px !important;
+}
+
+label {
+	font-size: 18px !important;
+}
+</style>
+
+<script>
+	function home() {
+		location.href = './IPSDashboard'
+	}
+
+	function back() {
+		window.history.back();
+	}
+
+	function handleIn(input) {
+		input.value = input.value.replace(/[^\w\s]/gi, '').toUpperCase();
+		updateMerchantId(input.value);
+	}
+
+	function handleFilterChange() {
+		var selectedOption = document.getElementById('transactionFilter').value;
+		window.location.href = selectedOption;
+	}
+
+	function listServ(a) {
+		var request_id = a.getAttribute("data-request_id");
+		location.href = 'ViewService?formmode=ServReq&request_id=' + request_id
+	}
+
+	$(document).ready(function() {
+		$('#usertable').DataTable({
+			"destroy" : true,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : true,
+			"oLanguage" : {
+				"sSearch" : "",
+				"sSearchPlaceholder" : "Search Here"
+			},
+			"searching" : true,
+			"pageLength" : 10,
+			"lengthChange" : false,
+		});
+	});
+
+	function handleApprove() {
+		$.ajax({
+			url : './ServiceApprove',
+			data : $("#ServiceReqForm").serialize(),
+			type : 'POST',
+			success : function(response) {
+				$('#myModalpopup2').modal("toggle");
+				$('#myModalpopup2 .modal-body').text(response);
+			},
+		});
+	}
+</script>
+
+</head>
+
+<body>
+	<div th:insert="MMenupage :: header"></div>
+	<div class="container-manager pt-3">
+		<div th:if="${formmode}=='Approvallist' OR ${formmode}=='Pendinglist'" class="content">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h4 style="color: white; font-size: 1.5rem;" th:if="${formmode}=='Pendinglist'">Service Pending List</h4>
+					<h4 style="color: white; font-size: 1.5rem;" th:if="${formmode}=='Approvallist'">Service Approval List</h4>
+					<div>
+						<select class="form-control-sm bg-white" id="transactionFilter" onchange="handleFilterChange()" style="background-color: #e3e3e4; font-size: 15px;">
+							<option value="" hidden="true">Select</option>
+							<option th:selected="${formmode}=='Pendinglist'" value="PendingServlist">Service Pending List</option>
+							<option th:selected="${formmode}=='Approvallist'" value="ApprovalServlist">Service Approval List</option>
+						</select>
+					</div>
+				</div>
+				<div class="card-body p-0">
+					<table class="table table-striped table-bordered table-hover table-sm" id="usertable" style="table-layout: fixed; width: 100%;">
+						<thead>
+							<tr>
+								<th>Merchant Id</th>
+								<th>Request ID</th>
+								<th>Request Date</th>
+								<th>Entry User</th>
+								<th>Priority</th>
+								<th>Status</th>
+								<th>Select</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="request:${Service}">
+								<td th:text="${request?.merchant_id != null ? request.merchant_id.toUpperCase() : ''}"></td>
+								<td th:text="${request?.request_id != null ? request.request_id.toUpperCase() : ''}"></td>
+								<td th:text="${#dates.format(request.request_date,'dd-MM-yyy')}"></td>
+								<td th:text="${request?.entry_user != null ? request.entry_user.toUpperCase() : ''}"></td>
+								<td th:text="${request?.priority != null ? request.priority.toUpperCase() : ''}"></td>
+								<td th:text="${request?.status != null ? request.status.toUpperCase() : ''}"
+									th:attr="style=${request?.status == 'APPROVED' ? 'color: green;' : (request?.status == 'PENDING' ? 'color: red;' : '')}"
+								></td>
+								<td><input type="radio" id="btnclick" name="btnradio" style="cursor: pointer;" th:attr="data-request_id=${request?.request_id}" th:id="${request?.request_id}" onclick="listServ(this);" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer text-center">
+					<button type="button" class="btn btn-sm commonBtnStyle mr-2" data-dismiss="modal" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm commonBtnStyle" data-dismiss="modal" onclick="back();">Back</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="content pt-3" th:if="${formmode}=='ServReq'">
+			<div class="card">
+				<div class=" card-header">
+					<div class="float-left">
+						<h4 style="color: white; font-size: 1.5rem;">Service Request</h4>
+					</div>
+				</div>
+				<div class="card-body">
+					<form action="#" method="POST" autocomplete="off" id="ServiceReqForm" style="width: 100%;" th:object="${viewreq}">
+						<div class="row formline">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Request Id </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="request_id" name="request_id" th:value="${viewreq?.request_id}" onkeyup="this.value = this.value.toUpperCase();handleInForId(this)" class="form-control form-control-sm"
+									required readonly
+								>
+							</div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Merchant Id </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="merchant_id" name="merchant_id" th:value="${viewreq?.merchant_id}" class="form-control form-control-sm" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<br>
+						<div class="row formline">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Request Type </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="request_type" name="request_type" th:value="${viewreq?.request_type}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm"
+									required readonly
+								>
+							</div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Request Description </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="request_description" name="request_description" th:value="${viewreq?.request_description}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<br>
+						<div class="row formline">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Steps to Reproduce </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="steps_to_reproduce" name="steps_to_reproduce" th:value="${viewreq?.steps_to_reproduce}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required readonly
+								>
+							</div>
+							<div class="col-sm-2 text-left"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Error Message </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="error_message" name="error_message" th:value="${viewreq?.error_message}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<br>
+						<div class="row formline">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Priority </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="priority" name="priority" th:value="${viewreq?.priority}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm" required
+									readonly
+								>
+							</div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Contact Email </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="email" id="contact_email" name="contact_email" th:value="${viewreq?.contact_email}" class="form-control form-control-sm" required readonly>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<br>
+						<div class="row formline">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Contact Phone </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="number" id="contact_phone" name="contact_phone" onkeyup="validateMobileNumber(this)" th:value="${viewreq?.contact_phone}" class="form-control form-control-sm" required readonly>
+							</div>
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2" style="text-align: left">
+								<label for="ticket_date" style="font-size: 14px;">Additional Notes </label>
+							</div>
+							<div class="col-sm-2 text-left">
+								<input type="text" id="additional_notes" name="additional_notes" th:value="${viewreq?.additional_notes}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+					</form>
+				</div>
+				<div class="card-footer text-center">
+					<button type="button" class="btn btn-sm commonBtnStyle mr-2" data-dismiss="modal" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm commonBtnStyle mr-2" th:if="${viewreq?.status} != 'APPROVED'" data-dismiss="modal" onclick="handleApprove()">Approve</button>
+					<button type="button" class="btn btn-sm commonBtnStyle" data-dismiss="modal" onclick="back();">Back</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-------------- Model Box -------------------->
+
+	<div class="modal fade" id="myModalpopup2" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<div class="text-center">
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" onclick="back()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

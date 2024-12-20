@@ -1,0 +1,727 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script src="js/bootstrap411.js"></script>
+
+<style>
+td {
+	background-color: #f8f7ff;
+}
+
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 18.3%;
+	margin-top: 80px;
+}
+
+.dataTables_empty {
+	color: #be3232;
+}
+
+input, select {
+	height: 35px !important;
+}
+
+label {
+	font-size: 18px !important;
+}
+
+.actionBtn .dropdown-menu {
+	min-width: 5rem !important;
+}
+</style>
+<title>IPSAdmin</title>
+</head>
+
+<body>
+	<div th:insert="MMenupage :: header"></div>
+	<div class="container-manager pt-3">
+		<div th:if="${formmode}=='list'">
+			<div class="card">
+				<div class="card-header">
+					<div class="d-flex justify-content-between align-items-center">
+						<h6 style="font-size: 25px; color: white; font-weight: 700;">Settlement Account</h6>
+						<button type="button" class="btn btn-sm commonBtnStyle" id="addBtn" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'" onclick="AddModal(this)" title="Add">Add</button>
+					</div>
+				</div>
+				<div class="card-body p-0 mt-3">
+					<table class="table table-striped table-bordered table-hover table-sm" id="my_table">
+						<thead>
+							<tr>
+								<th>Account Code</th>
+								<th>Account No</th>
+								<th>Name</th>
+								<th>Account Type</th>
+								<th>Currency</th>
+								<!-- <th>Limit</th>
+								<th>Debit Cap</th>
+								<th>Check Flg</th>
+								<th style="width: 120px;">Acct Balance</th>
+								<th style="width: 140px;">Notional Balance</th> 
+								<th>Criteria</th>-->
+								<th>Remarks</th>
+								<th>Status</th>
+								<th>Select</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="settlementAccount : ${SettleAccount}" class="userlist">
+								<td th:text="${settlementAccount?.acc_code}"></td>
+								<td th:text="${settlementAccount?.account_number}"></td>
+								<td th:text="${settlementAccount?.name}"></td>
+								<td th:text="${settlementAccount?.acct_type}"></td>
+								<td th:text="${settlementAccount?.crncy}"></td>
+								<!--<td th:text="${settlementAccount?.acct_limit}"></td>
+								<td style="text-align: end;" th:text="${#numbers.formatDecimal(settlementAccount?.acct_debit_cap, 0, 'COMMA', 2, 'POINT')}"></td>
+								<td th:text="${settlementAccount?.acct_chk_flg}"></td>
+								<td style="text-align: end;" th:text="${#numbers.formatDecimal(settlementAccount?.acct_bal, 0, 'COMMA', 2, 'POINT')}"></td>
+								<td style="text-align: end;" th:text="${#numbers.formatDecimal(settlementAccount?.not_bal, 0, 'COMMA', 2, 'POINT')}"></td>
+								<td th:text="${settlementAccount?.acct_criteria}"></td>-->
+								<td th:text="${settlementAccount?.acct_remarks}"></td>
+								<th:block th:switch="${settlementAccount?.entity_flg}">
+									<td th:case="'Y'" style="color: green;">VERIFIED</td>
+									<td th:case="'N'" style="color: red;">UNVERIFIED</td>
+								</th:block>
+								<td>
+									<div class="dropdown actionBtn">
+										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+											style="line-height: 0.7; width: 70px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+										>Action</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background-color: #e3e3e4; color: #3a4550;">
+											<a class="dropdown-item" title="Modify" th:attr="data-account_code=${settlementAccount?.acc_code}"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="view_value" onclick="view_btn_submit(this)"
+											>View</a>
+											<div class="dropdown-divider" th:if=" ${settlementAccount.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'"></div>
+											<a th:attr="data-account_code=${settlementAccount?.acc_code}" th:if="${settlementAccount?.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'" class="dropdown-item" title="Delete"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												onclick="delete_btn_submit(this)" id="delete_value"
+											>Delete</a>
+											<div class="dropdown-divider" th:if="${settlementAccount.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'"></div>
+											<a class="dropdown-item" title="Verify" th:if="${settlementAccount.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'" th:attr="data-account_code=${settlementAccount?.acc_code}"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="verify_value" onclick="alert_verify(this)"
+											>Verify</a>
+											<div class="dropdown-divider" th:if="${settlementAccount.entity_flg}=='Y' and ${IPSRoleMenu.work_class}=='C'"></div>
+											<a class="dropdown-item" title="Modify" th:if="${settlementAccount.entity_flg}=='Y' and ${IPSRoleMenu.work_class}=='C'" th:attr="data-account_code=${settlementAccount?.acc_code}"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="edit_value" onclick="edit_btn_submit(this)"
+											>Modify</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer text-center">
+					<button type="button" class="btn btn-sm mr-2" id="btnHome" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm" id="btnBack" onclick="back();">Back</button>
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${formmode}=='add'" class="card">
+			<form action="#" th:object="${AddSettle}" method="POST" autocomplete="off" id="AddSettle">
+				<div class="card-header text-left">
+					<b style="font-size: 1.5rem; color: white;">Settlement Account - Add</b> <input type="hidden" th:value="${formmode}" id="formmode1" style="display: none;">
+				</div>
+				<div class="content" id="yes">
+					<div class="card-body pb-0">
+						<input autocomplete="false" name="hidden" type="text" style="display: none;">
+						<div class="row formline">
+							<label for="userName" class="col-sm-2"> Account Code <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div class="col-sm-3">
+								<input type="text" id="acc_code" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="acc_code" maxlength="100"
+									autocomplete="off" required
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Account No <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div class="col-sm-3">
+								<input type="text" maxlength="14" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="account_number" class="form-control form-control-sm commonBackground" name="account_number"
+									autocomplete="off" required
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label for="userName" class="col-sm-2">Account Name <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div class="col-sm-3">
+								<input type="text" id="name" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="name" maxlength="100" autocomplete="off"
+									required
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Account Type <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div class="col-sm-3">
+								<input type="text" id="acct_type" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="acct_type" maxlength="100"
+									autocomplete="off" required
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Tran Code</label>
+							<div class="col-sm-3">
+								<input type="text" id="tran_code" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="tran_code" maxlength="100"
+									autocomplete="off"
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Tran Type</label>
+							<div class="col-sm-3">
+								<select name="tran_type" id="tran_type" class="form-control form-control-sm w-100">
+									<option value="">SELECT</option>
+									<option value="DR">DEBIT</option>
+									<option value="CR">CREDIT</option>
+								</select>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Currency</label>
+							<div class="col-sm-3">
+								<input type="text" id="crncy" maxlength="3" th:value="BWP" class="form-control form-control-sm" name="crncy" autocomplete="off" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Limit</label>
+							<div class="col-sm-3">
+								<input type="number" maxlength="15" step="0.01" id="acct_limit" class="form-control form-control-sm commonBackground" name="acct_limit" autocomplete="off">
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Debit Cap</label>
+							<div class="col-sm-3">
+								<input type="number" step="0.01" id="acct_debit_cap" class="form-control form-control-sm commonBackground" name="acct_debit_cap" autocomplete="off">
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Category</label>
+							<div class="col-sm-3">
+								<input type="text" id="category" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="category" autocomplete="off">
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Check Flg</label>
+							<div class="col-sm-3">
+								<input type="text" id="acct_chk_flg" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="acct_chk_flg" autocomplete="off">
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Account Balance</label>
+							<div class="col-sm-3">
+								<input type="text" maxlength="15" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="acct_bal" class="form-control form-control-sm commonBackground" name="acct_bal" autocomplete="off">
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Notional Balance</label>
+							<div class="col-sm-3">
+								<input type="text" maxlength="15" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" oninput="this.value=this.value.replace(/[^0-9]/g,'');" id="not_bal"
+									class="form-control form-control-sm commonBackground" name="not_bal" autocomplete="off"
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Criteria</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" id="acct_criteria" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="acct_criteria" maxlength="1"
+									autocomplete="off"
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Remarks</label>
+							<div class="col-sm-3">
+								<input type="text" id="acct_remarks" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="acct_remarks" autocomplete="off">
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="card-footer text-center">
+				<button type="button" class="btn btn-sm mr-2" id="btnHome" onclick="home();">Home</button>
+				<button type="button" class="btn btn-sm commonBtnStyle mr-2" onclick="submitaddform(this)" form="AddSettle" id="btnDelete" th:attr="data-formmode=addsubmit">Submit</button>
+				<button type="button" class="btn btn-sm btn-primary" id="btnBack" onclick="back();">Back</button>
+			</div>
+		</div>
+
+		<div th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete' " class="card">
+			<form action="#" th:object="${SettlementAccount}" method="POST" autocomplete="off" id="SettlementModify">
+				<div class="card-header text-left">
+					<b th:text="${menuname1}" style="color: white; font-size: 25px;"></b> <input type="hidden" th:value="${formmode}" id="formmode1" style="display: none;">
+				</div>
+				<div class="content" id="yes">
+					<div class="card-body">
+						<input autocomplete="false" name="hidden" type="text" style="display: none;">
+						<div class="row formline">
+							<label class="col-sm-2">Account Code</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" maxlength="14" th:value="${SettlementAccount?.acc_code}" class="form-control form-control-sm" autocomplete="off" readonly> <input
+									th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="text" th:value="${SettlementAccount?.acc_code}" class="form-control form-control-sm" autocomplete="off"
+									readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Account No</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" maxlength="14" oninput="this.value=this.value.replace(/[^0-9]/g,'');" th:value="${SettlementAccount?.account_number}" id="account_number"
+									class="form-control form-control-sm commonBackground" name="account_number" autocomplete="off" required
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="text" th:value="${SettlementAccount?.account_number}" id="account_number"
+									class="form-control form-control-sm" name="account_number" autocomplete="off" readonly
+								> <input type="hidden" th:value="${SettlementAccount?.acc_code}" id="acc_code" class="form-control form-control-sm" name="acc_code">
+							</div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label for="userName" class="col-sm-2">Account Name </label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" th:value="${SettlementAccount?.name}" id="name" class="form-control form-control-sm commonBackground" name="name"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" maxlength="100" autocomplete="off" required
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="text" th:value="${SettlementAccount?.name}" id="name" class="form-control form-control-sm"
+									name="name" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Account Type</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" th:value="${SettlementAccount?.acct_type}" id="acct_type" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm commonBackground" name="acct_type" maxlength="100" autocomplete="off" required
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" th:value="${SettlementAccount?.acct_type}" id="acct_type" class="form-control form-control-sm"
+									name="acct_type" autocomplete="off" readonly
+								>
+							</div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Tran Code</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" th:value="${SettlementAccount?.tran_code}" id="tran_code" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm commonBackground" name="tran_code" maxlength="100" autocomplete="off"
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" th:value="${SettlementAccount?.tran_code}" id="tran_code" class="form-control form-control-sm"
+									name="tran_code" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Tran Type</label>
+							<div class="col-sm-3" th:if="${formmode}=='edit'">
+								<select th:field="*{tran_type}" name="tran_type" style="width: 100%" th:value="${SettlementAccount?.tran_type}" id="tran_type" class="form-control form-control-sm">
+									<option value="">SELECT</option>
+									<option value="DR">DEBIT</option>
+									<option value="CR">CREDIT</option>
+								</select>
+							</div>
+							<div class="col-sm-3" th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'">
+								<input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" th:value="${SettlementAccount?.tran_type}" id="tran_type" class="form-control form-control-sm"
+									name="tran_type" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Currency</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" th:value="${SettlementAccount?.crncy}" id="crncy" maxlength="3" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm commonBackground" name="crncy" autocomplete="off" readonly
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="text" th:value="${SettlementAccount?.crncy}" id="crncy" class="form-control form-control-sm"
+									name="crncy" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Limit</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="number" maxlength="15" step="0.01" th:value="${SettlementAccount?.acct_limit}" id="acct_limit" class="form-control form-control-sm commonBackground"
+									name="acct_limit" autocomplete="off"
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="text" th:value="${SettlementAccount?.acct_limit}" id="acct_limit"
+									class="form-control form-control-sm" name="acct_limit" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Debit Cap</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="number" step="0.01" th:value="${SettlementAccount?.acct_debit_cap}" id="acct_debit_cap" class="form-control form-control-sm commonBackground"
+									name="acct_debit_cap" autocomplete="off"
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="text" th:value="${SettlementAccount?.acct_debit_cap}" id="acct_debit_cap"
+									class="form-control form-control-sm" name="acct_debit_cap" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Category</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" th:value="${SettlementAccount?.category}" id="category" class="form-control form-control-sm commonBackground" name="category"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off"
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="text" th:value="${SettlementAccount?.category}" id="category"
+									class="form-control form-control-sm" name="category" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Check Flg</label>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" th:value="${SettlementAccount?.acct_chk_flg}" id="acct_chk_flg" class="form-control form-control-sm commonBackground" name="acct_chk_flg"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify' OR ${formmode}=='delete' OR ${formmode}=='view'" th:value="${SettlementAccount?.acct_chk_flg}" id="acct_chk_flg"
+									class="form-control form-control-sm" name="acct_chk_flg" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Account Balance</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" maxlength="15" oninput="this.value=this.value.replace(/[^0-9]/g,'');" th:value="${SettlementAccount?.acct_bal}" id="acct_bal"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="acct_bal" autocomplete="off" readonly
+								> <input th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" type="number" th:value="${SettlementAccount?.acct_bal}" id="acct_bal"
+									class="form-control form-control-sm" name="acct_bal" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Notional Balance</label>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" maxlength="15" oninput="this.value=this.value.replace(/[^0-9]/g,'');" th:value="${SettlementAccount?.not_bal}" id="not_bal"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="not_bal" autocomplete="off" readonly
+								> <input type="number" th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" th:value="${SettlementAccount?.not_bal}" id="not_bal"
+									class="form-control form-control-sm" name="not_bal" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Criteria</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" th:value="${SettlementAccount?.acct_criteria}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" id="acct_criteria"
+									class="form-control form-control-sm commonBackground" name="acct_criteria" autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" th:value="${SettlementAccount?.acct_criteria}" id="acct_criteria"
+									class="form-control form-control-sm" name="acct_criteria" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Remarks</label>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" th:value="${SettlementAccount?.acct_remarks}" id="acct_remarks" class="form-control form-control-sm commonBackground" name="acct_remarks"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete'" th:value="${SettlementAccount?.acct_remarks}" id="acct_remarks"
+									class="form-control form-control-sm" name="acct_remarks" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div class="card-footer text-center p-2">
+				<button type="button" class="btn btn-sm commonBtnStyle mr-2" id="btnHome" onclick="home();">Home</button>
+				<button th:if="${formmode}=='verify'" type="button" class="btn btn-sm commonBtnStyle mr-2" onclick="verifyform(this);" form="SettlementModify" id="btnVerify" th:attr="data-formmode=${formmode}">Verify</button>
+				<button th:if="${formmode}=='delete'" type="button" class="btn btn-sm commonBtnStyle mr-2" onclick="deleteform(this);" form="SettlementModify" id="btnDelete" th:attr="data-formmode=${formmode}">Delete</button>
+				<button th:if="${formmode}=='edit'" type="button" class="btn btn-sm commonBtnStyle mr-2" onclick="submiteditform(this);" form="SettlementModify" id="btnSubmit" th:attr="data-formmode=${formmode}">Submit</button>
+				<button type="button" class="btn btn-sm commonBtnStyle" id="btnBack" onclick="back();">Back</button>
+			</div>
+			<div class="content border mx-3 my-2" style="padding: 15px; background-color: #dbdfe2;">
+				<div class="row formline mb-2">
+					<label class="col-sm-2">Entry User</label>
+					<div class="col-sm-2">
+						<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='view' " th:value="${SettlementAccount?.entry_user}"
+							id="entry_user" name="entry_user" class="form-control form-control-sm" autocomplete="off" readonly
+						/>
+					</div>
+					<label class="col-sm-2">Modify User</label>
+					<div class="col-sm-2">
+						<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='view' " th:value="${SettlementAccount?.modify_user}"
+							id="modify_user" name="modify_user" class="form-control form-control-sm" autocomplete="off" readonly
+						/>
+					</div>
+					<label class="col-sm-2">Verify User</label>
+					<div class="col-sm-2">
+						<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='view' " id="verify_user"
+							th:value="${SettlementAccount?.verify_user}" name="verify_user" class="form-control form-control-sm" autocomplete="off" readonly
+						/>
+					</div>
+				</div>
+				<div class="row formline">
+					<label class="col-sm-2">Entry Time</label>
+					<div class="col-sm-2">
+						<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='view' " id="entry_time" name="entry_time"
+							th:value="${#dates.format(SettlementAccount?.entry_time,'dd-MM-yyyy HH:mm')}" class="form-control form-control-sm" autocomplete="off" readonly
+						/>
+					</div>
+					<label class="col-sm-2">Modify Time</label>
+					<div class="col-sm-2">
+						<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='view' " id="modify_time" name="modify_time"
+							th:value="${#dates.format(SettlementAccount?.modify_time,'dd-MM-yyyy HH:mm')}" class="form-control form-control-sm" autocomplete="off" readonly
+						/>
+					</div>
+					<label class="col-sm-2">Verify Time</label>
+					<div class="col-sm-2">
+						<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='view' "
+							th:value="${#dates.format(SettlementAccount?.verify_time,'dd-MM-yyyy HH:mm')}" id="verify_time" name="verify_time" class="form-control form-control-sm" autocomplete="off" readonly
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Model Box -->
+
+		<div class="modal fade" id="myModalpopup2" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+					<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+					<div class="text-center">
+						<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" onclick="back()">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+					<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+					<div class="text-center">
+						<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		/*<![CDATA[*/
+
+		function handleIn(input) {
+			input.value = input.value.replace(/[^a-zA-Z0-9\s]/g, '').toUpperCase();
+		}
+
+		function handleInUserName(input) {
+			input.value = input.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
+		}
+
+		$(function() {
+			function alert_add(a) {
+				var formmode = a.getAttribute("frmode");
+				location.href = "./SettlementAccount?formmode=" + formmode;
+			}
+		});
+
+		$(document).ready(function() {
+			$(window).keydown(function(event) {
+				if (event.keyCode == 13) {
+					event.preventDefault();
+					return false;
+				}
+			});
+		});
+
+		$(function() {
+			$('input[type=radio]').click(function() {
+				if ($(this).prop('id') == "emailno") {
+					$("#alpha_flg").prop("readonly", true);
+					$("#num_flg").prop("readonly", true);
+					$("#cap_flg").prop("readonly", true);
+					$("#spl_char_flg").prop("readonly", true);
+				} else if ($(this).prop('id') == "emailyes") {
+					$("#alpha_flg").prop("readonly", false);
+					$("#num_flg").prop("readonly", false);
+					$("#cap_flg").prop("readonly", false);
+					$("#spl_char_flg").prop("readonly", false);
+				}
+			});
+		});
+
+		$(document).ready(function() {
+			$('#my_table').DataTable({
+				"destroy" : true,
+				"scrollCollapse" : true,
+				"paging" : true,
+				"autoWidth" : false,
+				"ordering" : true,
+				/* "oLanguage" : {
+					"sSearch" : "",
+					"sSearchPlaceholder" : "Search Here"
+				}, */
+				"searching" : false,
+				"pageLength" : 10,
+				"lengthChange" : false,
+			});
+		});
+
+		function AddModal(a) {
+			location.href = './SettlementAccount?formmode=add';
+		}
+
+		function fnClick(a) {
+			var srlno = a.getAttribute("data-srl_no")
+			location.href = 'SettlementAccount?formmode=verify&srlno=' + srlno;
+		}
+
+		function verifypage(a) {
+			var srlno = a.getAttribute("data-account_code");
+			location.href = 'SettlementAccount?formmode=verify&srlno=' + srlno;
+		}
+
+		function delete_btn_submit(a) {
+			var srlno = a.getAttribute("data-account_code");
+			location.href = 'SettlementAccount?formmode=delete&srlno=' + srlno;
+		}
+
+		function submitformdelete(a) {
+			var srlno = a.getAttribute("data-srl_no");
+			location.href = 'settlementaccount?formmode=delete&srlno=' + deleteval;
+		};
+
+		function home() {
+			location.href = './IPSDashboard'
+		}
+
+		function back() {
+			window.history.back();
+		}
+
+		function list() {
+			location.href = 'SettlementAccount?formmode=list';
+		}
+
+		function Add_Settle(a) {
+			location.href = './SettlementAccount?formmode=add';
+		}
+
+		function edit_btn_submit(a) {
+			var acctcode = a.getAttribute("data-account_code");
+			location.href = 'SettlementAccount?formmode=edit&acctcode=' + acctcode;
+		}
+
+		function delete_btn_submit(a) {
+			var acctcode = a.getAttribute("data-account_code");
+			location.href = 'SettlementAccount?formmode=delete&acctcode=' + acctcode;
+		}
+
+		function view_btn_submit(a) {
+			var acctcode = a.getAttribute("data-account_code");
+			location.href = 'SettlementAccount?formmode=view&acctcode=' + acctcode;
+		}
+
+		function alert_verify(a) {
+			var acctcode = a.getAttribute("data-account_code");
+			location.href = 'SettlementAccount?formmode=verify&acctcode=' + acctcode;
+		}
+
+		// ADD
+
+		function submitaddform(a) {
+			if ($("#AddSettle").valid()) {
+				var formmode = a.getAttribute("data-formmode");
+				var url = "createSettlementAccount?formmode=" + formmode;
+				$("#AddSettle").attr('action', url);
+				var options = {
+					success : showResponse,
+					error : showError
+				};
+				$("#AddSettle").ajaxSubmit(options);
+			}
+		};
+
+		// EDIT FORM
+
+		function submiteditform(a) {
+			if ($("#SettlementModify").valid()) {
+				var formmode = a.getAttribute("data-formmode");
+				var url = "createSettlementAccount?formmode=" + formmode;
+				$("#SettlementModify").attr('action', url);
+				var options = {
+					success : showResponse,
+					error : showError
+				};
+				$("#SettlementModify").ajaxSubmit(options);
+			}
+		};
+
+		// VERIFY FORM
+
+		function verifyform(a) {
+			if ($("#SettlementModify").valid()) {
+				var entry = $("#entry_user").val();
+				var modify = $("#modify_user").val();
+				var verify = $("#verify_user").val();
+
+				var formmode = a.getAttribute("data-formmode");
+				var url = "createSettlementAccount?formmode=" + formmode;
+				$("#SettlementModify").attr('action', url);
+				var options = {
+					success : showResponse,
+					error : showError
+				};
+				$("#SettlementModify").ajaxSubmit(options);
+			}
+		};
+
+		// DELETE FORM
+
+		function deleteform(a) {
+			if ($("#SettlementModify").valid()) {
+				var entry = $("#entry_user").val();
+				var modify = $("#modify_user").val();
+				var verify = $("#verify_user").val();
+				var formmode = a.getAttribute("data-formmode");
+				var url = "createSettlementAccount?formmode=" + formmode;
+				$("#SettlementModify").attr('action', url);
+				var options = {
+					success : showResponse,
+					error : showError
+				};
+				$("#SettlementModify").ajaxSubmit(options);
+			}
+		};
+
+		function showResponse(responseText, statusText, xhr, $form) {
+			$('#myModalpopup2').modal("toggle");
+			$('#myModalpopup2 .modal-body').text(responseText);
+		}
+		function showError(xhr, status, error) {
+			var errorMessage = xhr.responseText || "An error occurred. Please try again.";
+			$('#myModalpopup1').modal("toggle");
+			$('#myModalpopup1 .modal-body').text(errorMessage);
+		}
+
+		/*]]>*/
+	</script>
+</body>
+</html>

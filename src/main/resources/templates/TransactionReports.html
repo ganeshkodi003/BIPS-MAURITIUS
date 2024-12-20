@@ -1,0 +1,336 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script src="js/bootstrap411.js"></script>
+
+<style>
+td {
+	background-color: #f8f7ff;
+}
+
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 18.3%;
+	margin-top: 80px;
+}
+
+.dataTables_empty {
+	color: #be3232;
+}
+
+.dataTables_scrollBody {
+	overflow: unset !important;
+}
+
+input, select {
+	height: 35px !important;
+}
+
+label {
+	font-size: 18px !important;
+}
+</style>
+</head>
+
+<script>
+	$(function() {
+		$("#Fromdate").datepicker({
+			dateFormat : 'dd-mm-yy',
+			maxDate : new Date(),
+			defaultDate : new Date(),
+			onClose : function(selectedDate) {
+				$("#Todate").datepicker("option", "minDate", selectedDate);
+			}
+		}).datepicker("setDate", new Date());
+		$("#Todate").datepicker({
+			dateFormat : 'dd-mm-yy',
+			maxDate : new Date(),
+			onClose : function(selectedDate) {
+				$("#Fromdate").datepicker("option", "maxDate", selectedDate);
+			}
+		});
+	});
+
+	function formatDate1(dateString) {
+		var dateParts = dateString.split("/");
+		var day = dateParts[0];
+		var month = parseInt(dateParts[1], 10);
+		var year = dateParts[2];
+		var monthNames = [ "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" ];
+		var monthName = monthNames[month - 1];
+		return day + "-" + monthName + "-" + year;
+	}
+
+	function home() {
+		location.href = './IPSDashboard';
+	}
+
+	function back() {
+		window.history.back();
+	}
+
+	$(document).ready(function() {
+		$('#usertable').DataTable({
+			"destroy" : true,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : true,
+			"searching" : false,
+			"pageLength" : 10,
+			"lengthChange" : false,
+		});
+	});
+
+	function getMerchantData() {
+		var merchantId = $('#merchandId').val();
+		$.ajax({
+			url : './getMerchantName?merchantId=' + merchantId,
+			type : 'GET',
+			success : function(data) {
+				$('#merchandName').val(data);
+				$.ajax({
+					url : './getMerchantUserId?merchantId=' + merchantId,
+					type : 'GET',
+					success : function(data) {
+						var userIdSelect = $('#userId');
+						userIdSelect.empty();
+						userIdSelect.append('<option value="">Select</option>');
+						$.each(data, function(index, value) {
+							userIdSelect.append('<option value="' + value + '">' + value + '</option>');
+						});
+						$.ajax({
+							url : './getMerchantUnitId?merchantId=' + merchantId,
+							type : 'GET',
+							success : function(data) {
+								var unitIdSelect = $('#unitId');
+								unitIdSelect.empty();
+								unitIdSelect.append('<option value="">Select</option>');
+								$.each(data, function(index, value) {
+									unitIdSelect.append('<option value="' + value + '">' + value + '</option>');
+								});
+								$.ajax({
+									url : './getMerchantDeviceId?merchantId=' + merchantId,
+									type : 'GET',
+									success : function(data) {
+										var deviceIdSelect = $('#deviceId');
+										deviceIdSelect.empty();
+										deviceIdSelect.append('<option value="">Select</option>');
+										$.each(data, function(index, value) {
+											deviceIdSelect.append('<option value="' + value + '">' + value + '</option>');
+										});
+									},
+									error : function() {
+										showErrorModal('Error fetching data');
+									}
+								});
+							},
+							error : function() {
+								showErrorModal('Error fetching data');
+							}
+						});
+					},
+					error : function() {
+						showErrorModal('Error fetching data');
+					}
+				});
+			},
+			error : function() {
+				showErrorModal('Error fetching data');
+			}
+		});
+	}
+
+	function commanValues() {
+		var merchantId = $('#merchandId').val();
+		var fromDate = $('#Fromdate').val();
+		var toDate = $('#Todate').val();
+		var value;
+		if (merchantId === "") {
+			$('#myModalpopup1').modal("toggle");
+			$('#myModalpopup1 .modal-body').text("Choose Merchant Id");
+			value = false;
+		} else if (fromDate === "") {
+			$('#myModalpopup1').modal("toggle");
+			$('#myModalpopup1 .modal-body').text("Choose From Date");
+			value = false;
+		} else if (toDate === "") {
+			$('#myModalpopup1').modal("toggle");
+			$('#myModalpopup1 .modal-body').text("Choose To Date");
+			value = false;
+		} else {
+			value = true;
+		}
+		return value;
+	}
+
+	function displayRecords() {
+		event.preventDefault();
+		var merchantId = $('#merchandId').val() != null || $('#merchandId').val() != "" ? $('#merchandId').val() : "";
+		var fromDate = $('#Fromdate').val() != null || $('#merchandId').val() != "" ? $('#Fromdate').val() : "";
+		var toDate = $('#Todate').val() != null || $('#Todate').val() != "" ? $('#Todate').val() : "";
+		var unitId = $('#unitId').val();
+		var userId = $('#userId').val();
+		var deviceId = $('#deviceId').val();
+		var formatFromDate = formatDateForBackend(fromDate);
+		var formatToDate = formatDateForBackend(toDate);
+		if (commanValues()) {
+			var count = null;
+			$.ajax({
+				url : './DownloadTransactionDateChecking',
+				type : 'GET',
+				data : {
+					from_date : formatFromDate,
+					to_date : formatToDate
+				},
+				success : function(response) {
+					count = response;
+					if (count > 0) {
+						var url = './transactionRecordsView?merchantId=' + merchantId + '&fromDate=' + fromDate + '&toDate=' + toDate + '&unitId=' + unitId + '&userId=' + userId + '&deviceId='
+							+ deviceId;
+						window.location.href = url;
+					} else {
+						$('#myModalpopup1').modal("toggle");
+						$('#myModalpopup1 .modal-body').text("There is no Transaction in these between Dates.");
+					}
+				},
+				error : function(xhr, status, error) {
+					$('#myModalpopup1').modal("toggle");
+					$('#myModalpopup1 .modal-body').text("An error occurred while processing the request.");
+				}
+			});
+		} else {
+			event.preventDefault();
+		}
+	}
+	
+	function formatDateForBackend(dateStr) {
+	    var parts = dateStr.split('-');
+	    var day = parts[0];
+	    var month = parseInt(parts[1], 10);
+	    var year = parts[2];
+	    var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+	    var monthName = monthNames[month - 1];
+	    return `${day}-${monthName}-${year}`;
+	}
+</script>
+<title>IPSAdmin</title>
+
+<body>
+	<div th:insert="MMenupage :: header"></div>
+	<div class="container-manager pt-3">
+		<div class="card">
+			<div class="card-header" id="modheadtitle">
+				<h4 class="text-white font-weight-bold" style="font-size: 1.5rem;" th:text="${menuname}"></h4>
+			</div>
+			<div class="card-body p-0">
+				<div class="row formline mt-2">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label for="merchandId">Merchant Id</label><span style="color: red; font-size: 20px;"> *</span>
+					</div>
+					<div class="col-sm-2">
+						<select id="merchandId" class="form-control form-control-sm" name="merchandId" onchange="getMerchantData();">
+							<option value="">Select</option>
+							<th:block th:each="merchantId : ${merchantIds}">
+								<option th:value="${merchantId}" th:text="${merchantId}"></option>
+							</th:block>
+						</select>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label for="merchandName">Merchant Name</label>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" id="merchandName" class="form-control" name="merchandName" style="color: black; font-size: 0.820rem;" autocomplete="off" readonly />
+					</div>
+				</div>
+				<div class="row formline mt-2">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label for="Fromdate">From Date</label><span style="color: red; font-size: 20px;"> *</span>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" id="Fromdate" class="form-control" name="Fromdate" style="color: black; font-size: 0.820rem;" autocomplete="off" readonly />
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label for="Todate">To Date</label><span style="color: red; font-size: 20px;"> *</span>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" id="Todate" class="form-control " name="Todate" autocomplete="off" style="color: black; font-size: 0.820rem;" readonly />
+					</div>
+				</div>
+				<div class="row formline mt-2">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label for="unitId">Unit Id</label>
+					</div>
+					<div class="col-sm-2">
+						<select id="unitId" class="form-control form-control-sm" name="unitId">
+							<option value="">Select</option>
+						</select>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label for="deviceId">Device Id</label>
+					</div>
+					<div class="col-sm-2">
+						<select id="deviceId" class="form-control form-control-sm" name="deviceId">
+							<option value="">Select</option>
+						</select>
+					</div>
+				</div>
+				<div class="row formline mt-2">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2">
+						<label for="userId">User Id</label>
+					</div>
+					<div class="col-sm-2">
+						<select id="userId" class="form-control form-control-sm" name="userId">
+							<option value="">Select</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer text-center mt-2 p-2">
+				<button type="button" class="btn btn-xs commonBtnStyle mr-2" id="btnHome" onclick="home();">Home</button>
+				<button type="button" class="btn btn-xs commonBtnStyle mr-2" id="btnHome" onclick="displayRecords();">Submit</button>
+				<button type="button" class="btn btn-xs commonBtnStyle" id="btnBack" onclick="back();">Back</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Model Box  -->
+
+	<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<div class="text-center">
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

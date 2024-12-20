@@ -1,0 +1,925 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script src="js/bootstrap411.js"></script>
+
+<style>
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 19.3%;
+	margin-top: 80px;
+}
+
+td {
+	background-color: #f8f7ff;
+}
+
+.dataTables_empty {
+	color: #be3232;
+}
+
+input, select {
+	height: 35px !important;
+}
+
+label {
+	font-size: 18px !important;
+}
+
+.actionBtn .dropdown-menu {
+	min-width: 5rem !important;
+}
+</style>
+</head>
+
+<script>
+	$(document).ready(function() {
+		$(window).keydown(function(event) {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+				return false;
+			}
+		});
+	});
+
+	// ADD CHARGE
+
+	function submitaddform(a) {
+		if ($("#ChargesAndFeesAdd").valid()) {
+			var formmode = a.getAttribute("data-formmode");
+			var url = "addverifyMerchantFeesAndServices?formmode=add";
+			$("#ChargesAndFeesAdd").attr('action', url);
+			var options = {
+				success : showResponse,
+				error : showError
+			};
+			$("#ChargesAndFeesAdd").ajaxSubmit(options);
+			function showResponse(responseText, statusText, xhr, $form) {
+				$('#myModalpopup2').modal("toggle");
+				$('#myModalpopup2 .modal-body').text(responseText);
+			}
+			function showError(xhr, status, error) {
+				var errorMessage = xhr.responseText || "An error occurred. Please try again.";
+				$('#myModalpopup1').modal("toggle");
+				$('#myModalpopup1 .modal-body').text(errorMessage);
+			}
+		}
+	};
+
+	// EDIT & DELETE CHARGE 
+
+	function submiteditform(a) {
+		var entryuserss = a.getAttribute("data-entry_user");
+		var modifyuser = a.getAttribute("data-modify_user");
+		var verifyuser = a.getAttribute("data-verify_user");
+		var loginUser = a.getAttribute("data-login_User");
+		var modifyflg = a.getAttribute("data-modify_flg");
+		var formmode = a.getAttribute("data-formmode");
+		var user_id = a.getAttribute("data-user_id");
+		var loginuser = /*[[${session.USERID}]]*/null;
+		if (formmode === "delete") {
+			if (loginUser === entryuserss && modifyflg === "N") {
+				$('#myModalpopup1').modal("toggle");
+				$('#myModalpopup1 .modal-body').text("Same user can't delete the record.");
+			} else {
+				if ($("#ChargesAndFees").valid()) {
+					var formmode = a.getAttribute("data-formmode");
+					var url = "./editMerchantFeesAndServices?formmode=" + formmode + "&verifyuser=" + verifyuser + "&entryuserss=" + entryuserss;
+					$("#ChargesAndFees").attr('action', url);
+					var options = {
+						success : showResponse,
+						error : showError
+					};
+					$("#ChargesAndFees").ajaxSubmit(options);
+					function showResponse(responseText, statusText, xhr, $form) {
+						$('#myModalpopup2').modal("toggle");
+						$('#myModalpopup2 .modal-body').text(responseText);
+					}
+					function showError(xhr, status, error) {
+						var errorMessage = xhr.responseText || "An error occurred. Please try again.";
+						$('#myModalpopup1').modal("toggle");
+						$('#myModalpopup1 .modal-body').text(errorMessage);
+					}
+				}
+			}
+		} else {
+			if ($("#ChargesAndFees").valid()) {
+				var formmode = a.getAttribute("data-formmode");
+				var url = "./editMerchantFeesAndServices?formmode=" + formmode + "&verifyuser=" + verifyuser + "&entryuserss=" + entryuserss;
+				$("#ChargesAndFees").attr('action', url);
+				var options = {
+					success : showResponse,
+					error : showError
+				};
+				$("#ChargesAndFees").ajaxSubmit(options);
+				function showResponse(responseText, statusText, xhr, $form) {
+					$('#myModalpopup2').modal("toggle");
+					$('#myModalpopup2 .modal-body').text(responseText);
+				}
+				function showError(xhr, status, error) {
+					var errorMessage = xhr.responseText || "An error occurred. Please try again.";
+					$('#myModalpopup1').modal("toggle");
+					$('#myModalpopup1 .modal-body').text(errorMessage);
+				}
+			}
+		}
+	};
+
+	// VERIFY CHARGE
+
+	function verifyform(a) {
+		var entryuser = a.getAttribute("data-entry_user");
+		var modifyuser = a.getAttribute("data-modify_user");
+		var modifytime = a.getAttribute("data-modify_time");
+		var entrytime = a.getAttribute("data-entry_time");
+		var loginUser = a.getAttribute("data-login_User");
+		var modifyflg = a.getAttribute("data-modify_flg");
+		var work_class = a.getAttribute("data-work_class");
+		var user_id = a.getAttribute("data-user_id");
+		var loginuser = /*[[${session.USERID}]]*/null;
+		if (work_class != "C") {
+			$('#myModalpopup1').modal("toggle");
+			$('#myModalpopup1 .modal-body').text("Same user can't delete the record.");
+		} else {
+			var formmode = a.getAttribute("data-formmode");
+			var url = "addverifyMerchantFeesAndServices?formmode=" + formmode;
+			$("#ChargesAndFees").attr('action', url);
+			var options = {
+				data : {
+					modifytime : modifytime,
+					entrytime : entrytime
+				},
+				success : showResponse,
+				error : showError
+			};
+			$("#ChargesAndFees").ajaxSubmit(options);
+			function showResponse(responseText, statusText, xhr, $form) {
+				$('#myModalpopup2').modal("toggle");
+				$('#myModalpopup2 .modal-body').text(responseText);
+			}
+			function showError(xhr, status, error) {
+				var errorMessage = xhr.responseText || "An error occurred. Please try again.";
+				$('#myModalpopup1').modal("toggle");
+				$('#myModalpopup1 .modal-body').text(errorMessage);
+			}
+		}
+	}
+
+	$(document).ready(function() {
+		$('#usertable').DataTable({
+			"destroy" : true,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : true,
+			"oLanguage" : {
+				"sSearch" : "",
+				"sSearchPlaceholder" : "Search Here"
+			},
+			"searching" : true,
+			"pageLength" : 10,
+			"lengthChange" : false,
+		});
+	});
+
+	function AddModal(a) {
+		location.href = './MerchantServiceChargesAndFees?formmode=add';
+	}
+
+	function editpage(a) {
+		var ref_num = a.getAttribute("data-ref_num");
+		location.href = './MerchantServiceChargesAndFees?formmode=edit&ref_num=' + ref_num;
+	}
+
+	function viewpage(a) {
+		var ref_num = a.getAttribute("data-ref_num");
+		location.href = './MerchantServiceChargesAndFees?formmode=viewpage&ref_num=' + ref_num;
+	}
+
+	function viewnewpage(a) {
+		var ref_num = a.getAttribute("data-ref_num");
+		location.href = './MerchantServiceChargesAndFees?formmode=viewnewpage&ref_num=' + ref_num;
+	}
+
+	function delete_btn_submit(a) {
+		var ref_num = a.getAttribute("data-ref_num");
+		location.href = './MerchantServiceChargesAndFees?formmode=delete&ref_num=' + ref_num;
+	}
+
+	function verifypage(a) {
+		var ref_num = a.getAttribute("data-ref_num");
+		location.href = './MerchantServiceChargesAndFees?formmode=verify&ref_num=' + ref_num;
+	}
+
+	function home() {
+		location.href = './IPSDashboard'
+	}
+	function home1() {
+		$("#dataHome").modal("toggle");
+	}
+
+	function back() {
+		window.history.back();
+	}
+
+	$(function() {
+		$("#next_due_date").datepicker({
+			minDate : 0,
+			changeMonth : true,
+			changeYear : true,
+			dateFormat : "dd-mm-yy",
+			onSelect : function(selected) {
+				var dt = $(this).datepicker('getDate');
+				dt.setDate(dt.getDate());
+			}
+		});
+	});
+
+	$(function() {
+		$("#last_tried_date").datepicker({
+			maxDate : 0,
+			changeMonth : true,
+			changeYear : true,
+			dateFormat : "dd-mm-yy",
+			onSelect : function(selected) {
+				var dt = $(this).datepicker('getDate');
+				dt.setDate(dt.getDate());
+			}
+		});
+
+	});
+
+	function setfeestype(a) {
+		var Fees_type = $("#type").val();
+		const amount = document.getElementById("amount");
+		const percentage = document.getElementById("percentage");
+		if (Fees_type == "Fixed") {
+			amount.setAttribute("required", "required");
+			percentage.removeAttribute("required", "required");
+		} else if (Fees_type == "percentage") {
+			percentage.setAttribute("required", "required");
+			amount.removeAttribute("required", "required");
+		}
+	}
+
+	window.onload = function() {
+		var typeSelect = document.getElementById('type');
+		var amountInput = document.getElementById('amount');
+		var percentageInput = document.getElementById('percentage');
+
+		function toggleInputs() {
+			if (typeSelect.value === 'FIXED') {
+				amountInput.removeAttribute('readonly');
+				amountInput.setAttribute('required', 'required');
+				percentageInput.setAttribute('readonly', 'readonly');
+				percentageInput.removeAttribute('required');
+				percentageInput.value = '';
+				document.getElementById('amount-asterisk').style.display = 'inline';
+				document.getElementById('percentage-asterisk').style.display = 'none';
+			} else if (typeSelect.value === 'PERCENTAGE') {
+				percentageInput.removeAttribute('readonly');
+				percentageInput.setAttribute('required', 'required');
+				amountInput.setAttribute('readonly', 'readonly');
+				amountInput.removeAttribute('required');
+				amountInput.value = '';
+				document.getElementById('percentage-asterisk').style.display = 'inline';
+				document.getElementById('amount-asterisk').style.display = 'none';
+			} else {
+				amountInput.setAttribute('readonly', 'readonly');
+				amountInput.removeAttribute('required');
+				amountInput.value = '';
+				percentageInput.setAttribute('readonly', 'readonly');
+				percentageInput.removeAttribute('required');
+				percentageInput.value = '';
+				document.getElementById('amount-asterisk').style.display = 'none';
+				document.getElementById('percentage-asterisk').style.display = 'none';
+			}
+		}
+		typeSelect.addEventListener('change', toggleInputs);
+		toggleInputs();
+	};
+
+	function handleIn(input) {
+		input.value = input.value.replace(/[^\w\s]/gi, '').toUpperCase();
+	}
+
+	function validateaccount(input) {
+		var cleanValue = input.value.replace(/\D/g, '');
+		cleanValue = cleanValue.substring(0, 14);
+		input.value = cleanValue;
+	}
+
+	function handleMinInput(minInput) {
+		var min = parseFloat(minInput.value);
+		var maxField = document.getElementById('max');
+
+		if (!isNaN(min) && min > 0) {
+			maxField.disabled = false;
+		} else {
+			maxField.disabled = true;
+			maxField.value = '';
+		}
+	}
+
+	function handleMaxInput(maxInput) {
+		var min = parseFloat(document.getElementById('min').value);
+		var max = parseFloat(maxInput.value);
+		if (!isNaN(min) && !isNaN(max)) {
+			if (max <= min) {
+				alert('Maximum amount should be greater than Minimum amount.');
+				maxInput.value = '';
+			}
+		}
+	}
+
+	function checkUniqueId(a) {
+		var desc = document.getElementById("description").value;
+		$.ajax({
+			url : './checkUniqueId',
+			data : {
+				desc : desc
+			},
+			type : 'GET',
+			success : function(response) {
+				if (response === null || response === "null" || response === "") {
+					// Handle the case where response is considered "empty"
+					// Optionally do something here
+				} else {
+					console.log(response); // Show the response message
+					$("#description").val(""); // Clear the input field
+				}
+			},
+			error : function(error) {
+				console.error(error); // Log any error to the console
+			}
+		});
+	}
+</script>
+
+<body>
+	<div th:insert="MMenupage :: header"></div>
+	<div class="container-manager pt-3">
+		<div th:if="${formmode}=='list'">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h6 style="font-size: 1.5rem; color: white;">Merchant Charges And Fees - List</h6>
+					<div>
+						<button type="button" class="btn btn-sm commonBtnStyle" id="addBtn" onclick="AddModal(this)" title="Add" th:if="${IPSRoleMenu.permissions}=='W'">Add Charge</button>
+					</div>
+				</div>
+				<div class="card-body p-0">
+					<table class="table table-striped table-bordered table-hover table-sm" id="usertable">
+						<thead>
+							<tr>
+								<th style="text-align: left;">Ref No</th>
+								<th style="text-align: left;">Description</th>
+								<th style="text-align: left;">Type</th>
+								<th style="text-align: left;">Criteria</th>
+								<th style="text-align: left;">Fee</th>
+								<th style="text-align: left;">Percentage</th>
+								<th style="text-align: left;">Currency</th>
+								<th style="text-align: left;">Status</th>
+								<th style="text-align: left;" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Select</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="font-size: smaller" th:each="serviceFees : ${serviceFees}" class="userlist">
+								<td style="text-align: left;" th:text="${serviceFees?.reference_number !=null ? serviceFees?.reference_number.toUpperCase() : ''}"></td>
+								<td style="text-align: left;" th:text="${serviceFees?.description !=null ? serviceFees?.description.toUpperCase() : ''}"></td>
+								<td style="text-align: left;" th:text="${serviceFees?.type !=null ? serviceFees?.type.toUpperCase() : ''}"></td>
+								<td style="text-align: left;" th:text="${serviceFees?.criteria !=null ? serviceFees?.criteria.toUpperCase() : ''}"></td>
+								<td style="text-align: right;" th:text="${serviceFees?.amount != null ? #numbers.formatDecimal(serviceFees.amount, 0, 'COMMA', 2, 'POINT') : ''}"></td>
+								<td style="text-align: right;" th:text="${serviceFees?.percentage != null ? #numbers.formatDecimal(serviceFees.percentage, 1, 'COMMA', 1, 'POINT') : ''}"></td>
+								<td style="text-align: left;" th:text="${serviceFees?.currency !=null ? serviceFees?.currency.toUpperCase() : ''}"></td>
+								<th:block th:switch="${serviceFees.entity_flg}">
+									<td th:case='Y' style="color: green; text-align: left;">VERIFIED</td>
+									<td th:case='N' style="color: red; text-align: left;">UNVERIFIED</td>
+									<td th:case='NULL' style="color: red; text-align: left;">UNVERIFIED</td>
+								</th:block>
+								<td style="text-align: left;" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+									<div class="dropdown actionBtn">
+										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+											style="line-height: 0.7; width: 70px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+										>Action</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background-color: #e3e3e4; color: #3a4550;">
+											<a class="dropdown-item" title="Modify" th:attr="data-ref_num=${serviceFees?.reference_number}" th:if="${serviceFees.entity_flg}=='Y'"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="reference_number" onclick="editpage(this)"
+											>Modify</a>
+
+											<div class="dropdown-divider" th:if="${serviceFees.entity_flg}=='Y'"></div>
+											<a class="dropdown-item" title="Modify" th:attr="data-ref_num=${serviceFees?.reference_number}" th:if="${serviceFees.entity_flg}=='Y'"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="reference_number" onclick="viewpage(this)"
+											>View</a> <a class="dropdown-item" title="Delete" th:if="${serviceFees.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'" th:attr="data-ref_num=${serviceFees?.reference_number}"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="delete_value" onclick="delete_btn_submit(this)"
+											>Delete</a>
+											<div class="dropdown-divider" th:if="${serviceFees.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'"></div>
+											<a class="dropdown-item" title="Verify" th:if="${serviceFees.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'" th:attr="data-ref_num=${serviceFees?.reference_number}"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="verify_value" onclick="verifypage(this)"
+											>Verify</a>
+											<div class="dropdown-divider" th:if="${serviceFees.entity_flg}=='N'"></div>
+											<a class="dropdown-item" title="Verify" th:if="${serviceFees.entity_flg}=='N' and ${IPSRoleMenu.work_class}=='C'" th:attr="data-ref_num=${serviceFees?.reference_number}"
+												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+												id="verify_value" onclick="viewnewpage(this)"
+											>View </a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer text-center">
+					<button type="button" class="btn btn-sm commonBtnStyle mr-2" id="btnHome" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm commonBtnStyle" id="btnBack" onclick="home();">Back</button>
+				</div>
+			</div>
+		</div>
+		<div th:if="${formmode}=='add'" class="content">
+			<div class="card">
+				<div class="card-header text-left">
+					<h6 style="font-size: 1.5rem; color: white;">Merchant Charges And Fees</h6>
+				</div>
+				<div class="card-body">
+					<form action="#" th:object="${ChargesAndFees}" method="POST" autocomplete="off" id="ChargesAndFeesAdd">
+						<div class="row formline">
+							<label class="col-sm-2">Reference No <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' ">*</span></label>
+							<div class="col-sm-3">
+								<input type="text" id="reference_number" class="form-control form-control-sm" th:value="${MerchantRef}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" maxlength="10"
+									name="reference_number" autocomplete="off" required readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label for="userName" class="col-sm-2"> Description <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' ">*</span>
+							</label>
+							<div class="col-sm-3">
+								<input type="text" id="description" class="form-control form-control-sm commonBackground" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" maxlength="25"
+									onchange="checkUniqueId(this)" name="description" autocomplete="off" required
+								>
+							</div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Fees Derivation type <span id="type-asterisk" style="color: red; font-size: 20px;">*</span></label>
+							<div class="col-sm-3">
+								<select name="type" id="type" onchange="setfeestype(this)" style="width: 100%" class="form-control form-control-sm" required>
+									<option value="">SELECT</option>
+									<option value="FIXED">FIXED AMOUNT</option>
+									<option value="PERCENTAGE">PERCENTAGE AMOUNT</option>
+								</select>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Amount<span id="amount-asterisk" style="color: red; font-size: 20px;">*</span></label>
+							<div class="col-sm-3">
+								<input type="number" id="amount" class="form-control form-control-sm" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" name="amount" maxlength="50" autocomplete="off">
+							</div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Percentage<span id="percentage-asterisk" style="color: red; font-size: 20px;">*</span></label>
+							<div class="col-sm-3">
+								<input type="number" id="percentage" class="form-control form-control-sm" maxlength="50" name="percentage" autocomplete="off">
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Charge Collection Currency</label>
+							<div class="col-sm-3">
+								<input type="text" id="currency" class="form-control form-control-sm" name="currency" maxlength="100" value="BWP" autocomplete="off" readonly required>
+							</div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Minimum Amount <span id="percentage-asterisk" style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-3">
+								<input type="number" id="min" class="form-control form-control-sm commonBackground" name="min" onkeyup="handleMinInput(this)" maxlength="3" autocomplete="off" required>
+							</div>
+							<div class="col-sm-1"></div>
+
+							<label class="col-sm-2">Maximum Amount <span id="percentage-asterisk" style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-3">
+								<input type="number" id="max" class="form-control form-control-sm commonBackground" name="max" onchange="handleMaxInput(this)" maxlength="50" autocomplete="off" required disabled>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<div class="col-sm-2">
+								<label for="userId">Office Account No <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' ">*</span></label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" id="gl_id" class="form-control form-control-sm commonBackground" name="gl_id" oninput="validateaccount(this)" maxlength="14" autocomplete="off" required>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Office Account Name <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' ">*</span></label>
+							<div class="col-sm-3">
+								<input type="text" id="script_name" class="form-control form-control-sm commonBackground" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" maxlength="50" name="script_name"
+									autocomplete="off" required
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Office Account Type <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' ">*</span></label>
+							<div class="col-sm-3">
+								<select id="tran_type" name="tran_type" style="width: 100%" class="form-control form-control-sm" required>
+									<option value="">SELECT</option>
+									<option value="BANK ACCOUNT">BANK ACCOUNT</option>
+									<option value="GL ACCOUNT">GL ACCOUNT</option>
+								</select>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Transaction Code</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" id="tran_code" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="tran_code" maxlength="10"
+									autocomplete="off"
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Transaction Remarks 1</label>
+							<div class="col-sm-3">
+								<input type="text" id="remarks1" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="remarks1" maxlength="50"
+									autocomplete="off"
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Transaction Remarks 2</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" id="remarks2" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="remarks2" maxlength="50"
+									autocomplete="off"
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label for=""></label>
+						<div class="row formline">
+							<label class="col-sm-2">Fees Type <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' ">*</span></label>
+							<div class="col-sm-3">
+								<select id="criteria" name="criteria" style="width: 100%" class="form-control form-control-sm" required>
+									<option value="">SELECT</option>
+									<option value="GENERAL">GENERAL</option>
+									<option value="VAT">VAT</option>
+								</select>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Linked Charge id</label>
+							</div>
+							<div class="col-sm-3">
+								<select class="form-control form-control-sm" name="borne_by" style="width: 100%" id="borne_by">
+									<option value="">SELECT</option>
+									<option th:each="feestype : ${feestype}" th:value="${feestype.reference_number}" th:text="${feestype.reference_number}"></option>
+								</select>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+					</form>
+				</div>
+				<div class="card-footer text-center">
+					<button type="button" class="btn btn-sm commonBtnStyle mr-2" id="btnHome" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm commonBtnStyle mr-2" form="ChargesAndFeesAdd" th:attr="data-formmode=add" onclick="submitaddform(this);">Submit</button>
+					<button type="button" class="btn btn-sm commonBtnStyle" data-dismiss="modal" onclick="back();">Back</button>
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='delete' OR ${formmode}=='viewpage' OR ${formmode}=='viewnewpage'" class="content">
+			<div class="card">
+				<div class="card-header text-left">
+					<h6 style="font-size: 1.5rem; color: white;">Merchant Service Charges And Fees</h6>
+				</div>
+				<div class="card-body pb-0">
+					<form action="#" th:object="${ChargesAndFees}" method="POST" autocomplete="off" id="ChargesAndFees">
+						<input autocomplete="false" name="hidden" type="text" style="display: none;">
+						<div class="row formline">
+							<label class="col-sm-2">Reference No<span style="color: red; font-size: 20px;" th:if="${formmode}=='edit' ">*</span></label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" maxlength="10" th:value="${serviceFees?.reference_number}" id="reference_number" class="form-control form-control-sm" name="reference_number"
+									autocomplete="off" readonly
+								> <input th:if="${formmode}=='verify'" type="text" th:value="${serviceFees?.reference_number}" id="reference_number" class="form-control form-control-sm" name="reference_number"
+									autocomplete="off" readonly
+								> <input th:if="${formmode}=='delete'" type="text" th:value="${serviceFees?.reference_number}" id="reference_number" class="form-control form-control-sm" name="reference_number"
+									autocomplete="off" readonly
+								> <input th:if="${formmode}=='viewnewpage'" type="text" th:value="${serviceFees?.reference_number}" id="reference_number" class="form-control form-control-sm" name="reference_number"
+									autocomplete="off" readonly
+								> <input th:if="${formmode}=='viewpage'" type="text" th:value="${serviceFees?.reference_number}" id="reference_number" class="form-control form-control-sm" name="reference_number"
+									autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label for="userName" class="col-sm-2"> Description </label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" maxlength="25" th:value="${serviceFees?.description}" id="description" class="form-control form-control-sm commonBackground" name="description"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off" readonly
+								> <input th:if="${formmode}=='verify'" type="text" th:value="${serviceFees?.description}" id="description" class="form-control form-control-sm" name="description" autocomplete="off" readonly>
+								<input th:if="${formmode}=='delete'" type="text" th:value="${serviceFees?.description}" id="description" class="form-control form-control-sm" name="description" autocomplete="off" readonly><input
+									th:if="${formmode}=='viewnewpage'" type="text" th:value="${serviceFees?.description}" id="description" class="form-control form-control-sm" name="description" autocomplete="off" readonly
+								><input th:if="${formmode}=='viewpage'" type="text" th:value="${serviceFees?.description}" id="description" class="form-control form-control-sm" name="description" autocomplete="off"
+									readonly
+								>
+							</div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Fee Derivation Type<span style="color: red; font-size: 20px;" th:if="${formmode}=='edit' ">*</span></label>
+							<div class="col-sm-3">
+								<select th:if="${formmode}=='edit'" name="type" id="type" style="width: 100%" class="form-control form-control-sm" onchange="setfeestype(this)" required>
+									<option value="">SELECT</option>
+									<option value="FIXED" th:selected="${serviceFees?.type}=='FIXED'">FIXED AMOUNT</option>
+									<option value="PERCENTAGE" th:selected="${serviceFees?.type}=='PERCENTAGE'">PERCENTAGE AMOUNT</option>
+								</select> <input th:if="${formmode}=='verify'" type="text" th:value="${serviceFees?.type}" id="type" class="form-control form-control-sm" name="type" autocomplete="off" readonly> <input
+									th:if="${formmode}=='delete'" type="text" th:value="${serviceFees?.type}" id="type" class="form-control form-control-sm" name="type" autocomplete="off" readonly
+								> <input th:if="${formmode}=='viewnewpage'" type="text" th:value="${serviceFees?.type}" id="type" class="form-control form-control-sm" name="type" autocomplete="off" readonly> <input
+									th:if="${formmode}=='viewpage'" type="text" th:value="${serviceFees?.type}" id="type" class="form-control form-control-sm" name="type" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Amount</label>
+							<div class="col-sm-3">
+								<input type="number" th:if="${formmode}=='edit'" th:value="${serviceFees?.amount}" id="amount" class="form-control form-control-sm commonBackground" name="amount" maxlength="100"
+									autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify'" th:value="${serviceFees?.amount}" id="amount1" class="form-control form-control-sm" name="amount" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='delete'" th:value="${#numbers.formatDecimal(serviceFees?.amount, 0, 'COMMA', 2, 'POINT')}" id="amounts" class="form-control form-control-sm" name="amount"
+									autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewnewpage'" th:value="${#numbers.formatDecimal(serviceFees?.amount, 0, 'COMMA', 2, 'POINT')}" id="amounts" class="form-control form-control-sm"
+									name="amount" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewpage'" th:value="${#numbers.formatDecimal(serviceFees?.amount, 0, 'COMMA', 2, 'POINT')}" id="amounts" class="form-control form-control-sm"
+									name="amount" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Percentage</label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="number" step="0.01" th:value="${serviceFees?.percentage}" id="percentage" maxlength="100" class="form-control form-control-sm commonBackground"
+									name="percentage" autocomplete="off"
+								> <input th:if="${formmode}=='verify'" type="text" th:value="${serviceFees?.percentage}" id="percentages" class="form-control form-control-sm" name="percentage" autocomplete="off" readonly>
+								<input th:if="${formmode}=='delete'" type="text" th:value="${serviceFees?.percentage}" id="percentage" class="form-control form-control-sm" name="percentage" autocomplete="off" readonly>
+								<input th:if="${formmode}=='viewnewpage'" type="text" th:value="${serviceFees?.percentage}" id="percentages" class="form-control form-control-sm" name="percentage" autocomplete="off" readonly>
+								<input th:if="${formmode}=='viewpage'" type="text" th:value="${serviceFees?.percentage}" id="percentages" class="form-control form-control-sm" name="percentage" autocomplete="off" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Charge Collection Currency</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" th:value="${serviceFees?.currency}" id="currency" onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" name="currency" maxlength="3" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='verify'" th:value="${serviceFees?.currency}" id="currency" class="form-control form-control-sm" name="currency" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='delete'" th:value="${serviceFees?.currency}" id="currency" class="form-control form-control-sm" name="currency" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='viewnewpage'" th:value="${serviceFees?.currency}" id="currency" class="form-control form-control-sm" name="currency" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewpage'" th:value="${serviceFees?.currency}" id="currency" class="form-control form-control-sm" name="currency" autocomplete="off" readonly>
+							</div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Minimum Amount<span style="color: red; font-size: 20px;" th:if="${formmode}=='edit' ">*</span></label>
+							<div class="col-sm-3">
+								<input th:if="${formmode}=='edit'" type="text" th:value="${serviceFees?.min}" maxlength="50" id="min" class="form-control form-control-sm commonBackground" name="min" autocomplete="off">
+								<input th:if="${formmode}=='verify'" type="text" th:value="${serviceFees?.min}" id="min" class="form-control form-control-sm" name="min" autocomplete="off" readonly> <input
+									th:if="${formmode}=='delete'" type="text" th:value="${serviceFees?.min}" id="min" class="form-control form-control-sm" name="min" autocomplete="off" readonly
+								> <input th:if="${formmode}=='viewnewpage'" type="text" th:value="${serviceFees?.min}" id="min" class="form-control form-control-sm" name="min" autocomplete="off" readonly> <input
+									th:if="${formmode}=='viewpage'" type="text" th:value="${serviceFees?.min}" id="min" class="form-control form-control-sm" name="min" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Maximum Amount<span style="color: red; font-size: 20px;" th:if="${formmode}=='edit' ">*</span></label>
+							<div class="col-sm-3">
+								<input type="number" th:if="${formmode}=='edit'" th:value="${serviceFees?.max}" maxlength="50" id="max" class="form-control form-control-sm commonBackground" name="max" autocomplete="off">
+								<input type="text" th:if="${formmode}=='verify'" th:value="${serviceFees?.max}" id="max" class="form-control form-control-sm" name="max" autocomplete="off" readonly> <input
+									type="number" th:if="${formmode}=='delete'" th:value="${serviceFees?.max}" id="max" class="form-control form-control-sm" name="max" autocomplete="off" readonly
+								> <input type="number" th:if="${formmode}=='viewnewpage'" th:value="${serviceFees?.max}" id="max" class="form-control form-control-sm" name="max" autocomplete="off" readonly> <input
+									type="number" th:if="${formmode}=='viewpage'" th:value="${serviceFees?.max}" id="max" class="form-control form-control-sm" name="max" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<div class="col-sm-2">
+								<label for="userId">Office Account No<span style="color: red; font-size: 20px;" th:if="${formmode}=='edit' ">*</span></label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" th:if="${formmode}=='edit'" id="gl_id" maxlength="14" class="form-control form-control-sm commonBackground" name="gl_id" th:value="${serviceFees?.gl_id}"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off" required
+								> <input type="text" th:if="${formmode}=='verify'" id="gl_id" class="form-control form-control-sm" name="gl_id" th:value="${serviceFees?.gl_id}" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='delete'" id="gl_id" class="form-control form-control-sm" name="gl_id" th:value="${serviceFees?.gl_id}" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewnewpage'" id="gl_id" class="form-control form-control-sm" name="gl_id" th:value="${serviceFees?.gl_id}" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='viewpage'" id="gl_id" class="form-control form-control-sm" name="gl_id" th:value="${serviceFees?.gl_id}" autocomplete="off" readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+							<label class="col-sm-2">Office Account Name</label>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" maxlength="50" th:value="${serviceFees?.script_name}" id="script_name" class="form-control form-control-sm commonBackground" name="script_name"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify'" th:value="${serviceFees?.script_name}" id="script_name" class="form-control form-control-sm" name="script_name" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='delete'" th:value="${serviceFees?.script_name}" id="script_name" class="form-control form-control-sm" name="script_name" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='viewnewpage'" th:value="${serviceFees?.script_name}" id="script_name" class="form-control form-control-sm" name="script_name" autocomplete="off"
+									readonly
+								> <input type="text" th:if="${formmode}=='viewpage'" th:value="${serviceFees?.script_name}" id="script_name" class="form-control form-control-sm" name="script_name" autocomplete="off"
+									readonly
+								>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label for=""></label>
+						<div class="row formline">
+							<label class="col-sm-2">Office Account Type</label>
+							<div class="col-sm-3">
+								<select th:if="${formmode}=='edit'" name="tran_type" style="width: 100%" id="tran_type" class="form-control form-control-sm">
+									<option value="">SELECT</option>
+									<option value="BANK ACCOUNT" th:selected="${serviceFees?.tran_type}=='BANK ACCOUNT'">BANK ACCOUNT</option>
+									<option value="GL ACCOUNT" th:selected="${serviceFees?.tran_type}=='GL ACCOUNT'">GL ACCOUNT</option>
+								</select> <input type="text" th:if="${formmode}=='delete'" id="tran_type" class="form-control form-control-sm" name="tran_type" th:value="${serviceFees?.tran_type}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='verify'" id="tran_type" class="form-control form-control-sm" name="tran_type" th:value="${serviceFees?.tran_type}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='viewnewpage'" id="tran_type" class="form-control form-control-sm" name="tran_type" th:value="${serviceFees?.tran_type}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='viewpage'" id="tran_type" class="form-control form-control-sm" name="tran_type" th:value="${serviceFees?.tran_type}" autocomplete="off" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Transaction Code</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" id="tran_code" maxlength="10" class="form-control form-control-sm commonBackground" name="tran_code" th:value="${serviceFees?.tran_code}"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify'" id="tran_code" class="form-control form-control-sm" name="tran_code" th:value="${serviceFees?.tran_code}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='delete'" id="tran_code" class="form-control form-control-sm" name="tran_code" th:value="${serviceFees?.tran_code}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='viewnewpage'" id="tran_code" class="form-control form-control-sm" name="tran_code" th:value="${serviceFees?.tran_code}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='viewpage'" id="tran_code" class="form-control form-control-sm" name="tran_code" th:value="${serviceFees?.tran_code}" autocomplete="off" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+						<label></label>
+						<div class="row formline">
+							<label class="col-sm-2">Transaction Remarks 1</label>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" id="remarks1" maxlength="50" class="form-control form-control-sm commonBackground" name="remarks1" th:value="${serviceFees?.remarks1}"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify'" id="remarks1" class="form-control form-control-sm" name="remarks1" th:value="${serviceFees?.remarks1}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='delete'" id="remarks1" class="form-control form-control-sm" name="remarks1" th:value="${serviceFees?.remarks1}" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='viewnewpage'" id="remarks1" class="form-control form-control-sm" name="remarks1" th:value="${serviceFees?.remarks1}" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewpage'" id="remarks1" class="form-control form-control-sm" name="remarks1" th:value="${serviceFees?.remarks1}" autocomplete="off" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Transaction Remarks 2</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="text" th:if="${formmode}=='edit'" id="remarks2" maxlength="50" class="form-control form-control-sm commonBackground" name="remarks2" th:value="${serviceFees?.remarks2}"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" autocomplete="off"
+								> <input type="text" th:if="${formmode}=='verify'" id="remarks2" class="form-control form-control-sm" name="remarks2" th:value="${serviceFees?.remarks2}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='delete'" id="remarks2" class="form-control form-control-sm" name="remarks2" th:value="${serviceFees?.remarks2}" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='viewnewpage'" id="remarks2" class="form-control form-control-sm" name="remarks2" th:value="${serviceFees?.remarks2}" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewpage'" id="remarks2" class="form-control form-control-sm" name="remarks2" th:value="${serviceFees?.remarks2}" autocomplete="off" readonly>
+							</div>
+						</div>
+						<label for=""></label>
+						<div class="row formline">
+							<label class="col-sm-2">Fees Type<span style="color: red; font-size: 20px;" th:if="${formmode}=='edit' ">*</span></label>
+							<div class="col-sm-3">
+								<select th:if="${formmode}=='edit'" name="criteria" style="width: 100%" id="criteria" class="form-control form-control-sm" onchange="feetype(this)">
+									<option value="">SELECT</option>
+									<option value="GENERAL" th:selected="${serviceFees?.criteria}=='GENERAL'">GENERAL</option>
+									<option value="VAT" th:selected="${serviceFees?.criteria}=='VAT'">VAT</option>
+								</select> <input type="text" th:if="${formmode}=='verify'" id="criteria" class="form-control form-control-sm" name="criteria" th:value="${serviceFees?.criteria}" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='delete'" id="criteria" class="form-control form-control-sm" name="criteria" th:value="${serviceFees?.criteria}" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewnewpage'" id="criteria" class="form-control form-control-sm" name="criteria" th:value="${serviceFees?.criteria}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='viewpage'" id="criteria" class="form-control form-control-sm" name="criteria" th:value="${serviceFees?.criteria}" autocomplete="off" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="userId">Linked Charge id</label>
+							</div>
+							<div class="col-sm-3">
+								<select th:if="${formmode}=='edit'" style="width: 100%" class="form-control form-control-sm" name="borne_by" id="borne_by">
+									<option th:each="feestype : ${feestype}" th:value="${feestype.reference_number}" th:text="${feestype.reference_number}" th:selected="${feestype.reference_number == 'GENERAL'}"></option>
+								</select> <input type="text" th:if="${formmode}=='verify'" id="borne_by" class="form-control form-control-sm" name="borne_by" th:value="${serviceFees?.borne_by}" autocomplete="off" readonly> <input
+									type="text" th:if="${formmode}=='delete'" id="borne_by" class="form-control form-control-sm" name="borne_by" th:value="${serviceFees?.borne_by}" autocomplete="off" readonly
+								> <input type="text" th:if="${formmode}=='viewnewpage'" id="borne_by" class="form-control form-control-sm" name="borne_by" th:value="${serviceFees?.borne_by}" autocomplete="off" readonly>
+								<input type="text" th:if="${formmode}=='viewpage'" id="borne_by" class="form-control form-control-sm" name="borne_by" th:value="${serviceFees?.borne_by}" autocomplete="off" readonly>
+							</div>
+							<div class="col-sm-1"></div>
+						</div>
+					</form>
+				</div>
+				<div class="card-footer text-center p-2">
+					<button type="button" class="btn btn-sm commonBtnStyle mr-2" id="btnHome" onclick="home();">Home</button>
+					<button th:if="${formmode}=='verify' And ${serviceFees.entity_flg}=='N'" type="button" class="btn btn-sm commonBtnStyle mr-2" onclick="verifyform(this);" form="ChargesAndFees" id="btnVerify"
+						th:attr="data-formmode='verify',data-entry_user=${serviceFees.entry_user},data-modify_time=${serviceFees.modify_time},data-entry_time=${serviceFees.entry_time},data-modify_flg=${serviceFees.modify_flg},data-modify_user=${serviceFees.modify_user},
+									data-login_user=${user_id},
+									data-work_class=${IPSRoleMenu.work_class}"
+					>Verify</button>
+					<button th:if="${formmode}=='delete'"
+						th:attr="data-formmode='delete',data-entry_user=${serviceFees.entry_user},data-modify_flg=${serviceFees.modify_flg},data-verify_flg=${serviceFees.entity_flg},data-login_user=${user_id},data-verify_user=${serviceFees.verify_user}"
+						type="button" class="btn btn-xs commonBtnStyle mr-2" onclick="submiteditform(this);" form="ChargesAndFees" id="btnDelete"
+					>Delete</button>
+					<button th:if="${formmode}=='edit'" type="button" class="btn btn-sm commonBtnStyle mr-2"
+						th:attr="data-formmode='edit',data-entry_user=${serviceFees.entry_user},data-modify_flg=${serviceFees.modify_flg},data-verify_flg=${serviceFees.entity_flg},data-login_user=${user_id},data-verify_user=${serviceFees.verify_user}"
+						onclick="submiteditform(this);" form="ChargesAndFees" id="btnSubmit"
+					>Submit</button>
+					<button type="button" class="btn btn-sm commonBtnStyle" id="btnBack" onclick="back();">Back</button>
+				</div>
+				<div class="content border mx-3 my-2" style="border: 1px solid #36404a; padding: 15px; background-color: #dee2e6;">
+					<div class="row formline mb-2">
+						<label class="col-sm-2">Entry User</label>
+						<div class="col-sm-2">
+							<input type="text" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='delete' OR ${formmode}=='viewpage' OR ${formmode}=='viewnewpage'"
+								th:value="${serviceFees?.entry_user}" id="entry_user" class="form-control form-control-sm" autocomplete="off" readonly
+							/>
+						</div>
+						<label class="col-sm-2">Modify User</label>
+						<div class="col-sm-2">
+							<input type="text" th:if=" ${formmode}=='edit' OR  ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='delete' OR ${formmode}=='viewpage' OR ${formmode}=='viewnewpage'"
+								th:value="${serviceFees?.modify_user}" id="modify_user" form="ChargesAndFees" class="form-control form-control-sm" autocomplete="off" readonly
+							/>
+						</div>
+						<label class="col-sm-2">Verify User</label>
+						<div class="col-sm-2">
+							<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit'  OR ${formmode}=='delete' OR ${formmode}=='viewpage' OR ${formmode}=='viewnewpage'"
+								id="verify_user" th:value="${serviceFees?.verify_user}" class="form-control form-control-sm" autocomplete="off" readonly
+							/>
+						</div>
+					</div>
+					<div class="row formline">
+						<label class="col-sm-2">Entry Time</label>
+						<div class="col-sm-2">
+							<input type="text" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='delete' OR ${formmode}=='viewpage' OR ${formmode}=='viewnewpage'"
+								th:value="${#dates.format(serviceFees?.entry_time,'dd-MM-yyyy HH:mm')}" id="entry_date" class="form-control form-control-sm" autocomplete="off" readonly
+							/>
+						</div>
+						<label class="col-sm-2">Modify Time</label>
+						<div class="col-sm-2">
+							<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel'  OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='viewpage' OR ${formmode}=='viewnewpage'"
+								th:value="${#dates.format(serviceFees?.modify_time,'dd-MM-yyyy HH:mm')}" id="modify_date" class="form-control form-control-sm" autocomplete="off" readonly
+							/>
+						</div>
+						<label class="col-sm-2">Verify Time</label>
+						<div class="col-sm-2">
+							<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='viewpage' OR ${formmode}=='viewnewpage' "
+								th:value="${#dates.format(serviceFees?.verify_time,'dd-MM-yyyy HH:mm')}" id="verify_date" class="form-control form-control-sm" autocomplete="off" readonly
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Box -->
+
+	<div class="modal fade" id="myModalpopup2" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<div class="text-center">
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" onclick="back()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<div class="text-center">
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

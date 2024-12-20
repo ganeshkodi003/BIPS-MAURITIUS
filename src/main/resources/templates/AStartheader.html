@@ -1,0 +1,44 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<head>
+
+<style>
+#ipsword {
+	color: #ffffff;
+	font-weight: 900;
+	text-align: center;
+}
+
+html {
+	zoom: 0.8;
+}
+
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("images/background.jpg");
+	background-size: cover;
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+@media ( min-width : 200px) and (max-width: 768px) {
+	body {
+		background-size: unset !important;
+	}
+	#ipsword {
+		font-size: 20px !important;
+		padding: 18px !important;
+	}
+}
+</style>
+
+</head>
+
+<body>
+	<div class="col-sm-12" style="background: white">
+		<h3 id="ipsword" style="Padding: 12px; color: #f26223;">QR PAYMENT BANK ADMIN PORTAL</h3>
+	</div>
+</body>
+
+</html>

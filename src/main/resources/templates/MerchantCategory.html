@@ -1,0 +1,379 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script src="js/bootstrap411.js"></script>
+
+<style>
+td {
+	background-color: #f8f7ff;
+}
+
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 18.3%;
+	margin-top: 80px;
+}
+
+.dataTables_empty {
+	color: #be3232;
+}
+
+input, select {
+	height: 35px !important;
+}
+
+label {
+	font-size: 18px !important;
+}
+
+#merchant_desc:focus {
+	background-color: transparent !important;
+}
+</style>
+</head>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+
+	function fnadd() {
+		$("#addedit").modal("toggle");
+		$("#formmode").val("add");
+		$("#btnSubmit").attr("onclick", "submitaddform()");
+	}
+
+	function fnedit(a) {
+		var ref = a.getAttribute("data-merchantCode");
+		var refdesc = a.getAttribute("data-merchantdesc");
+		$("#merchant_code").val(ref);
+		$("#merchant_desc").val(refdesc);
+		$("#formmode").val("edit");
+		$("#addedit").modal("toggle");
+		$("#btnSubmit").attr("onclick", "submitaddform()");
+	}
+
+	function fndelete(a) {
+		var ref = a.getAttribute("data-merchantCode");
+		var refdesc = a.getAttribute("data-merchantdesc");
+		$("#merchant_code1").val(ref);
+		$("#merchant_desc1").val(refdesc);
+		$("#formmode1").val("delete");
+		$("#delete").modal("toggle");
+		$("#btnSubmit1").attr("onclick", "submitdeleteform()");
+	}
+
+	// ADD SUBMIT
+	function submitaddform() {
+		console.log("Inside");
+		var hasError = false;
+		if ($("#merchant_desc").val() === "") {
+			showError($("#merchant_desc"), 'Reference Code Type is Required');
+			hasError = true;
+		} else {
+			hideError($("#merchant_desc"));
+		}
+		if (hasError) {
+			$("#errorMsg").show();
+		} else {
+			$("#addedit").modal("hide");
+			$("#loader1").modal("toggle");
+			var ref = $("#merchant_code").val();
+			var refdesc = $("#merchant_desc").val();
+			var formmode = $("#formmode").val();
+			console.log("formmode : " + formmode);
+			var url = "./createmerchantcategory?formmode=" + formmode + "&refcode=" + ref + "&refdesc=" + refdesc;
+			$.ajax({
+				type : 'post',
+				url : url,
+				success : function(response) {
+					$("#loader1").modal("hide");
+					$('#myModalpopup2').modal("toggle");
+					$('#myModalpopup2 .modal-body').text(response);
+				},
+				eror : function(xhr, status, error) {
+					$("#loader1").modal("hide");
+					var errorMessage = xhr.responseText || "An error occurred. Please try again.";
+					$('#myModalpopup1').modal("toggle");
+					$('#myModalpopup1 .modal-body').text(errorMessage);
+				}
+			});
+		}
+	}
+
+	function submitdeleteform() {
+		$("#delete").hide();
+		$("#loader1").modal("toggle");
+		var ref = $("#merchant_code1").val();
+		var refdesc = $("#merchant_desc1").val();
+		var formmode = $("#formmode1").val();
+		var url = "./createmerchantcategory?formmode=" + formmode + "&refcode=" + ref + "&refdesc=" + refdesc;
+		$.ajax({
+			type : 'post',
+			url : url,
+			success : function(response) {
+				$("#loader1").hide();
+				$('#myModalpopup2').modal("toggle");
+				$('#myModalpopup2 .modal-body').text(response);
+			},
+			eror : function(xhr, status, error) {
+				$("#loader1").modal("hide");
+				var errorMessage = xhr.responseText || "An error occurred. Please try again.";
+				$('#myModalpopup1').modal("toggle");
+				$('#myModalpopup1 .modal-body').text(errorMessage);
+			}
+		})
+	}
+
+	function showError(element, message) {
+		var errorSpan = $('<span class="error-message"></span>').text(message);
+		errorSpan.css({
+			'color' : 'red',
+			'font-size' : '13px',
+			'margin-top' : '10px',
+			'margin-left' : '250px'
+		});
+		element.next('.error-message').remove();
+		element.after(errorSpan);
+	}
+
+	function hideError(element) {
+		element.next('.error-message').remove();
+	}
+
+	$(function() {
+		$(document).ready(function() {
+			var formode = $("#formmode1").val();
+			if (formode == "view") {
+				$('input').attr('readonly', true);
+			} else if (formode == "verify") {
+				$('input').attr('readonly', true);
+			}
+		});
+	});
+
+	function home() {
+		location.href = './IPSDashboard'
+	}
+
+	function back() {
+		window.history.back();
+	}
+
+	function list() {
+		location.href = 'MerchantCategoryCode';
+	}
+
+	$(document).ready(function() {
+		$('#usertable').DataTable({
+			"destroy" : true,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : true,
+			"oLanguage" : {
+				"sSearch" : "",
+				"sSearchPlaceholder" : "Search Here"
+			},
+			"searching" : true,
+			"pageLength" : 10,
+			"lengthChange" : false,
+		});
+	});
+
+	function handleIn(input) {
+		input.value = input.value.replace(/[^\w\s]/gi, '').toUpperCase();
+	}
+
+	function fnClickview(a) {
+		var userid = a.getAttribute("data-userid")
+		location.href = 'UserProfile?formmode=view&userid=' + userid
+	}
+
+	function fnClickCancel(a) {
+		var userid = a.getAttribute("data-userid")
+		location.href = 'UserProfile?formmode=cancel&userid=' + userid
+	}
+
+	function fnClickviewnew(a) {
+		var userid = a.getAttribute("data-userid")
+		location.href = 'UserProfile?formmode=viewnew&userid=' + userid
+	}
+	function fnClickdel(a) {
+		var userid = a.getAttribute("data-userid")
+		location.href = 'UserProfile?formmode=delete&userid=' + userid
+	}
+
+	function fnClickVerify(a) {
+		var userid = a.getAttribute("data-userid")
+		location.href = 'UserProfile?formmode=verify&userid=' + userid
+	}
+
+	/*]]>*/
+</script>
+
+</head>
+<title>IPSAdmin</title>
+<body>
+	<div th:insert="MMenupage :: header"></div>
+	<div class="container-manager pt-3">
+		<div th:if="${formmode}=='list'">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between align-items-center">
+					<h6 style="font-size: 1.5rem; color: white;">Merchant Category Code</h6>
+					<div class="btn-group nav-buttons float-right" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+						<button type="button" class="btn btn-sm commonBtnStyle" id="addBtn" onclick="fnadd()" title="Add">Add</button>
+					</div>
+				</div>
+				<div class="card-body p-0">
+					<table class="table  table-bordered table-hover table-condensed table-sm" id="usertable" style="table-layout: fixed; width: 100%;">
+						<thead>
+							<tr>
+								<th style="text-align: left;">Reference Code</th>
+								<th style="text-align: left;">Description</th>
+								<th style="text-align: left;">Modify</th>
+								<th style="text-align: left;">Delete</th>
+							</tr>
+						</thead>
+						<tbody id="refcodeconfig">
+							<tr style="font-size: smaller" th:each="merchantProfile : ${merchantcategory}" class="userlist">
+								<td th:text="${merchantProfile.merchant_code != null ? merchantProfile.merchant_code.toUpperCase() : ''}"></td>
+								<td th:text="${merchantProfile.merchant_desc != null ? merchantProfile.merchant_desc.toUpperCase() : ''}"></td>
+								<td th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'"><a href="#" data-toggle="tooltip" class="editrec"
+									th:attr="data-merchantCode=${merchantProfile.merchant_code},data-merchantdesc=${merchantProfile.merchant_desc}" onclick="fnedit(this);"
+								> <!-- Replace the Font Awesome icon with an image --> <img style="width: 16px; height: 16px;" th:src="@{/images/Edit.png}" alt="Edit">
+								</a></td>
+								<td th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'"><a href="#" data-toggle="tooltip" class="editrec"
+									th:attr="data-merchantCode=${merchantProfile.merchant_code},data-merchantdesc=${merchantProfile.merchant_desc}" onclick="fndelete(this);"
+								> <!-- Replace the Font Awesome icon with an image --> <img style="width: 16px; height: 16px;" th:src="@{/images/MinusCategory.png}" alt="Delete">
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer text-center">
+					<button type="button" class="btn btn-xs mr-2" id="btnHome" onclick="home();">Home</button>
+					<button type="button" class="btn btn-xs" id="btnBack" onclick="home();">Back</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Model Box -->
+
+	<div class="modal fade" id="addedit" style="background: #000000b0;">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #f26223;">
+					<h4 class="modal-title text-white" style="font-weight: 700; font-size: 20px;">Add/Edit Records</h4>
+					<button type="button" class="close" style="font-size: 27px" data-dismiss="modal">X</button>
+				</div>
+				<div class="modal-body pb-0" style="text-align: center">
+					<form th:object=${merchantcategory} id="dataedit" method="post">
+						<input type="hidden" id="trClass" />
+						<div class="form-group">
+							<div class="row mb-2">
+								<label class="col-sm-6" for="refcode">Reference Code</label> <input class="form-control col-sm-5" type="text" autocomplete="off" th:value="${MerchantRef}" maxlength="5" readonly
+									id="merchant_code"
+								/>
+							</div>
+							<div class="row">
+								<label class="col-sm-6" for="refCodeDesc">Ref Code Type</label> <input class="form-control col-sm-5" type="text" id="merchant_desc" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+								/>
+								<div class="col-sm-12">
+									<span id="errorMsg" class="error-message" style="display: none;"></span>
+								</div>
+								<input type="hidden" id="formmode">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="text-center mb-2">
+					<button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitdataform();">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModalpopup2" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<div class="text-center">
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" onclick="list()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<div class="text-center">
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="loader1" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content" style="background: transparent;">
+				<div class="modal-body" style="text-align: center">
+					<div>
+						<img th:src=@{/images/loader.gif} id="bfirelogo" style="width: 153px; margin-left: 18px;" alt="Bornfire">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="delete" style="background: #000000b0;">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #f26223;">
+					<h4 class="modal-title text-white" style="font-weight: 700; font-size: 20px;">Delete Record</h4>
+					<button type="button" class="close" style="font-size: 27px" data-dismiss="modal">X</button>
+				</div>
+				<div class="modal-body pb-0" style="text-align: center">
+					<form th:object=${merchantcategory} id="dataDelete" method="post">
+						<input type="hidden" id="trClassDelete" />
+						<div class="form-group">
+							<div class="row mb-2">
+								<label class="col-sm-6" for="refcode">Reference Code</label> <input class="form-control col-sm-5" type="text" id="merchant_code1" autocomplete="off" maxlength="5" required readonly />
+							</div>
+							<div class="row">
+								<label class="col-sm-6" for="refCodeDesc">Ref Code Type</label> <input class="form-control col-sm-5" type="text" maxlength="5" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" id="merchant_desc1" required readonly
+								/> <input type="hidden" maxlength="5" id="formmode1" readonly>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="text-center mb-2">
+					<span id="errorMsg" style="display: none;"></span>
+					<button type="button" class="btn btn-primary" id="btnSubmit1">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="table">
+<meta name="description" content="banking process">
+<meta name="author" content="thisauthor">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+<title>IPSAdmin</title>
+
+<style type="text/css">
+#forgetPassword:hover {
+	color: #f26223;
+}
+
+.profile-name-card {
+	color: #f26223;
+	font-weight: bold;
+	text-align: center;
+	margin: 10px 0 0;
+	min-height: 1em;
+}
+
+.image_head {
+	text-align: center;
+	margin: auto;
+	width: 200px;
+	height: 80px;
+	width: 270px;
+}
+
+.profile-img-card {
+	width: 90%;
+	height: auto;
+	object-fit: cover;
+	image-rendering: crisp-edges;
+}
+
+.card {
+	width: 350px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px 25px 30px;
+	margin: 0 auto 25px;
+	display: inline-grid;
+	border-radius: 2px;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.form-signin .form-control:focus {
+	border-color: rgb(104, 145, 162);
+	outline: 0;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgb(242, 103, 34);
+}
+
+.btn.btn-signin {
+	background-color: #ff5722;
+	padding: 0px;
+	font-weight: 700;
+	font-size: 14px;
+	height: 36px;
+	border-radius: 3px;
+	border: none;
+	transition: all 0.218s;
+}
+
+.btn {
+	font-weight: 700;
+	height: 36px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+.form-signin #inputEmail, .form-signin #inputPassword {
+	direction: ltr;
+	height: 44px;
+	font-size: 16px;
+}
+
+.form-signin input[type=email], .form-signin input[type=password], .form-signin input[type=text], .form-signin button {
+	width: 100%;
+	display: block;
+	margin-bottom: 10px;
+	z-index: 1;
+	position: relative;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.btn.btn-signin:hover, .btn.btn-signin:active, .btn.btn-signin:focus {
+	background-color: rgb(238, 51, 36);
+}
+
+.forgot-password {
+	color: rgb(104, 145, 162);
+}
+
+.forgot-password:hover, .forgot-password:active, .forgot-password:focus {
+	color: rgb(12, 97, 33);
+}
+
+@media ( min-width : 300px) and (max-width: 700px) {
+	.card {
+		top: 50%;
+		width: 350px;
+	}
+}
+</style>
+
+<script>
+	function openForm(event) {
+		event.preventDefault(); // Prevent default action
+		location.href = './changePasswordLogin';
+	}
+
+	function forget(event) {
+		event.preventDefault();
+		// Prevent default action
+		location.href = './forgetpassword';
+	}
+
+	function handleInputUserId(input) {
+		input.value = input.value.replace(/[^a-zA-Z0-9\s]/g, '').toUpperCase().trim();
+	}
+</script>
+
+</head>
+<body>
+
+	<div class="container-fluid p-0">
+		<div class="row m-0">
+			<div class="col-sm-12 p-0">
+				<div th:insert="AStartheader :: header"></div>
+			</div>
+			<div class="col-sm-12" style="position: unset !important">
+				<div class="card">
+					<div class="image_head">
+						<img id="profile-img" class="profile-img-card" title="BOB_ImageBc" th:src=@{/images/Bmerchant.png} />
+					</div>
+					<h4 id="profile-name" class="profile-name-card">
+						<b><i>LOGIN</i></b>
+					</h4>
+					<form th:action="@{/login}" method="post" name="Login_Form" class="form-signin">
+						<input type="text" style="margin-top: 20px" autocomplete="off" onkeyup="this.value = this.value.toUpperCase();handleInputUserId(this);" class="form-control" name="userid" placeholder="User Id"
+							id="userid" required autofocus
+						> <input type="password" autocomplete="off" class="form-control" name="password" placeholder="Password" id="password" required>
+						<div style="text-align: center; padding-bottom: 10px;">
+							<span style="color: #cd103c;" th:if="${param.error}" th:text="${param.error}">test</span> <span style="color: #34af32;" th:if="${param.logout}">You have been logged out.</span>
+						</div>
+						<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" style="font-size: 18px">Sign in</button>
+						<a onclick="forget(event)" style="cursor: pointer" id="forgetPassword"><u><i>Forget password ?</i></u></a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

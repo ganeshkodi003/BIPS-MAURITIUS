@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="UserList" pageWidth="1600" pageHeight="842" columnWidth="1560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b52a21ae-286d-48f1-92ea-b7f673840d10">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CIMBIPS.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="merchant_user_id" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select * from BIPS_MERCHANT_USER_MANAGEMENT where merchant_user_id=$P{merchant_user_id} and del_flag1='N']]>
+	</queryString>
+	<field name="MERCHANT_USER_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MERCHANT_USER_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="MERCHANT_USER_ID"/>
+	</field>
+	<field name="MERCHANT_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MERCHANT_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="MERCHANT_NAME"/>
+	</field>
+	<field name="MERCHANT_LEGAL_USER_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MERCHANT_LEGAL_USER_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="MERCHANT_LEGAL_USER_ID"/>
+	</field>
+	<field name="MERCHANT_CORPORATE_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MERCHANT_CORPORATE_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="MERCHANT_CORPORATE_NAME"/>
+	</field>
+	<field name="USER_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_ID"/>
+	</field>
+	<field name="USER_NAME" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_NAME"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_NAME"/>
+	</field>
+	<field name="USER_DESIGNATION" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_DESIGNATION"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_DESIGNATION"/>
+	</field>
+	<field name="USER_ROLE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_ROLE"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_ROLE"/>
+	</field>
+	<field name="PASSWORD1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PASSWORD1"/>
+		<property name="com.jaspersoft.studio.field.label" value="PASSWORD1"/>
+	</field>
+	<field name="PASSWORD_EXPIRY_DATE1" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="PASSWORD_EXPIRY_DATE1"/>
+		<property name="com.jaspersoft.studio.field.label" value="PASSWORD_EXPIRY_DATE1"/>
+	</field>
+	<field name="PASSWORD_LIFE1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="PASSWORD_LIFE1"/>
+		<property name="com.jaspersoft.studio.field.label" value="PASSWORD_LIFE1"/>
+	</field>
+	<field name="ACCOUNT_EXPIRY_DATE1" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="ACCOUNT_EXPIRY_DATE1"/>
+		<property name="com.jaspersoft.studio.field.label" value="ACCOUNT_EXPIRY_DATE1"/>
+	</field>
+	<field name="MAKE_OR_CHECKER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MAKE_OR_CHECKER"/>
+		<property name="com.jaspersoft.studio.field.label" value="MAKE_OR_CHECKER"/>
+	</field>
+	<field name="SUPERVISOR_FLAG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SUPERVISOR_FLAG"/>
+		<property name="com.jaspersoft.studio.field.label" value="SUPERVISOR_FLAG"/>
+	</field>
+	<field name="USER_DISABLE_FLAG1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_DISABLE_FLAG1"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_DISABLE_FLAG1"/>
+	</field>
+	<field name="USER_DISABLE_FROM_DATE1" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="USER_DISABLE_FROM_DATE1"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_DISABLE_FROM_DATE1"/>
+	</field>
+	<field name="USER_DISABLE_TO_DATE1" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="USER_DISABLE_TO_DATE1"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_DISABLE_TO_DATE1"/>
+	</field>
+	<field name="DEL_FLAG1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEL_FLAG1"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEL_FLAG1"/>
+	</field>
+	<field name="USER_STATUS1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_STATUS1"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_STATUS1"/>
+	</field>
+	<field name="LOGIN_STATUS1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="LOGIN_STATUS1"/>
+		<property name="com.jaspersoft.studio.field.label" value="LOGIN_STATUS1"/>
+	</field>
+	<field name="LOGIN_CHANNEL1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="LOGIN_CHANNEL1"/>
+		<property name="com.jaspersoft.studio.field.label" value="LOGIN_CHANNEL1"/>
+	</field>
+	<field name="MOBILE_NO1" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="MOBILE_NO1"/>
+		<property name="com.jaspersoft.studio.field.label" value="MOBILE_NO1"/>
+	</field>
+	<field name="ALTERNATE_MOBILE_NO1" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="ALTERNATE_MOBILE_NO1"/>
+		<property name="com.jaspersoft.studio.field.label" value="ALTERNATE_MOBILE_NO1"/>
+	</field>
+	<field name="EMAIL_ADDRESS1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="EMAIL_ADDRESS1"/>
+		<property name="com.jaspersoft.studio.field.label" value="EMAIL_ADDRESS1"/>
+	</field>
+	<field name="ALTERNATE_EMAIL_ID1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ALTERNATE_EMAIL_ID1"/>
+		<property name="com.jaspersoft.studio.field.label" value="ALTERNATE_EMAIL_ID1"/>
+	</field>
+	<field name="DEFAULT_DEVICE_ID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DEFAULT_DEVICE_ID"/>
+		<property name="com.jaspersoft.studio.field.label" value="DEFAULT_DEVICE_ID"/>
+	</field>
+	<field name="ALTERNATIVE_DEVICE_ID1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ALTERNATIVE_DEVICE_ID1"/>
+		<property name="com.jaspersoft.studio.field.label" value="ALTERNATIVE_DEVICE_ID1"/>
+	</field>
+	<field name="ENTRY_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ENTRY_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="ENTRY_USER"/>
+	</field>
+	<field name="MODIFY_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MODIFY_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="MODIFY_USER"/>
+	</field>
+	<field name="VERIFY_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="VERIFY_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="VERIFY_USER"/>
+	</field>
+	<field name="ENTRY_TIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="ENTRY_TIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="ENTRY_TIME"/>
+	</field>
+	<field name="MODIFY_TIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="MODIFY_TIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="MODIFY_TIME"/>
+	</field>
+	<field name="VERIFY_TIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="VERIFY_TIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="VERIFY_TIME"/>
+	</field>
+	<field name="ALTERNATIVE_DEVICE_ID2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ALTERNATIVE_DEVICE_ID2"/>
+		<property name="com.jaspersoft.studio.field.label" value="ALTERNATIVE_DEVICE_ID2"/>
+	</field>
+	<field name="UNIT_ID_U" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="UNIT_ID_U"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNIT_ID_U"/>
+	</field>
+	<field name="UNIT_TYPE_U" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="UNIT_TYPE_U"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNIT_TYPE_U"/>
+	</field>
+	<field name="UNIT_NAME_U" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="UNIT_NAME_U"/>
+		<property name="com.jaspersoft.studio.field.label" value="UNIT_NAME_U"/>
+	</field>
+	<field name="ENTRY_FLAG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ENTRY_FLAG"/>
+		<property name="com.jaspersoft.studio.field.label" value="ENTRY_FLAG"/>
+	</field>
+	<field name="MODIFY_FLAG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="MODIFY_FLAG"/>
+		<property name="com.jaspersoft.studio.field.label" value="MODIFY_FLAG"/>
+	</field>
+	<field name="NO_OF_ATTMP" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="NO_OF_ATTMP"/>
+		<property name="com.jaspersoft.studio.field.label" value="NO_OF_ATTMP"/>
+	</field>
+	<field name="USER_LOCKED_FLG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_LOCKED_FLG"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_LOCKED_FLG"/>
+	</field>
+	<field name="USER_CATEGORY" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="USER_CATEGORY"/>
+		<property name="com.jaspersoft.studio.field.label" value="USER_CATEGORY"/>
+	</field>
+	<field name="COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="COUNTRYCODE"/>
+	</field>
+	<field name="AUTHENTICATION_FLG" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="AUTHENTICATION_FLG"/>
+		<property name="com.jaspersoft.studio.field.label" value="AUTHENTICATION_FLG"/>
+	</field>
+	<field name="ALT_COUNTRYCODE" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ALT_COUNTRYCODE"/>
+		<property name="com.jaspersoft.studio.field.label" value="ALT_COUNTRYCODE"/>
+	</field>
+	<field name="REMARK" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="REMARK"/>
+		<property name="com.jaspersoft.studio.field.label" value="REMARK"/>
+	</field>
+	<field name="DELETE_TIME" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="DELETE_TIME"/>
+		<property name="com.jaspersoft.studio.field.label" value="DELETE_TIME"/>
+	</field>
+	<field name="DELETE_USER" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DELETE_USER"/>
+		<property name="com.jaspersoft.studio.field.label" value="DELETE_USER"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="340" y="100" width="180" height="20" backcolor="#7FCCF0" uuid="5f1cc638-a59e-4bc1-9854-6be290b043ef"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1220" y="100" width="170" height="20" backcolor="#7FCCF0" uuid="75991363-9085-4cad-978a-7c47eac33e0e"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODIFY USER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="160" y="100" width="180" height="20" backcolor="#7FCCF0" uuid="10bfab8d-ef30-4cbc-bbba-5f99c8ae14e3"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USER NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="670" y="0" width="190" height="30" uuid="ce4d1cee-8314-4345-9acc-73caa588c288"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USER LIST FOR - ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1030" y="100" width="190" height="20" backcolor="#7FCCF0" uuid="9bcd88b3-b6b6-47df-8836-679f4b2e5cfa"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENTRY USER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="860" y="100" width="170" height="20" backcolor="#7FCCF0" uuid="f79fec5c-084a-4113-8d4b-d8af1188a383"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATUS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="100" width="160" height="20" backcolor="#7FCCF0" uuid="ab861770-6dc4-4184-b556-257d664fad01"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USER ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1390" y="100" width="170" height="20" backcolor="#7FCCF0" uuid="4390bb85-0235-48ff-9867-f60998a4c55b"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VERIFY USER]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="860" y="0" width="170" height="31" uuid="4e41f45f-f01f-4b1f-8eb2-d86f8bdc09d3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{merchant_user_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="670" y="100" width="190" height="20" backcolor="#7FCCF0" uuid="c85adad1-d0de-4a66-a1f2-db9715c044c1"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIT NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1220" y="50" width="170" height="30" uuid="73319c78-1dc8-4671-8990-abe8e7e13ad5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Download Date:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="1390" y="50" width="170" height="30" uuid="bb704b58-fd9f-4cf0-994d-b5d826d454f9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="520" y="100" width="150" height="20" backcolor="#7FCCF0" uuid="345a2b60-0368-4d4c-94bb-717decc7edc5"/>
+				<box leftPadding="5">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Verdana" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PHONE NO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="340" y="0" width="180" height="20" uuid="95b2a7e5-6311-4a55-85b6-e73970ebcb82">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNIT_ID_U}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1030" y="0" width="190" height="20" uuid="1dd3bb5b-dcd5-4329-b39a-a62a6730e7b1">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENTRY_USER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="160" y="0" width="180" height="20" uuid="683a0bdb-c0a4-4bba-b45c-8dacfd4dcd82">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{USER_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1390" y="0" width="170" height="20" uuid="bb27f756-c4be-4e59-98a3-5b3643b0ea8f">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VERIFY_USER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="860" y="0" width="170" height="20" uuid="a34d6779-53bd-4fcd-a3e8-39c7bd29e439">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENTRY_FLAG} != null && $F{ENTRY_FLAG}.equals("Y") ? "VERIFIED" : "UNVERIFIED"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="0" y="0" width="160" height="20" uuid="90163ac3-f5b2-43b5-ae24-7a4716f834e4">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{USER_ID}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="670" y="0" width="190" height="20" uuid="017c4929-91e0-4bbd-8790-f78d1375a01f">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{UNIT_NAME_U}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="1220" y="0" width="170" height="20" uuid="59689dce-5d14-4643-b0fa-1a8d4f261876">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODIFY_USER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MM-yyyy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="520" y="0" width="150" height="20" uuid="f7ce4213-f7b0-488b-b17f-c7020bb2aa49">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Verdana" size="12"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MOBILE_NO1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50" splitType="Stretch">
+			<textField pattern="PAGE NO ">
+				<reportElement x="1390" y="30" width="170" height="20" uuid="987cf7bf-0f5a-4a13-a18c-81ca731c1e28"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="520" height="20" uuid="3b056ce5-8301-4651-81b2-46a7ae7149b3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[This is a system-generated statement. Hence, it does not require any signature.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

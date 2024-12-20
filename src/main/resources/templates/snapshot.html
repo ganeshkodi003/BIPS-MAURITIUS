@@ -1,0 +1,603 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+	<script src="js/bootstrap411.js"></script>
+	<script src="js/Chart.js"></script>
+
+
+	<style>
+		body {
+			background-color: lightgrey;
+		}
+
+		.h2,
+		h2 {
+			font-size: 2rem;
+			background-color: #555;
+			color: white;
+		}
+
+		.tag-btn {
+			font-size: 10px;
+			text-transform: uppercase;
+			font-weight: bold;
+			color: #fff;
+			cursor: pointer;
+			z-index: 5;
+			position: relative;
+			padding: 10px;
+			margin: 0;
+			line-height: 5px;
+			-webkit-transition: all 0.2s ease-in-out;
+			-moz-transition: all 0.2s ease-in-out;
+			-o-transition: all 0.2s ease-in-out;
+			-ms-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+			background-color: #F08080;
+			border: none;
+			color: #fff;
+			box-shadow: none;
+		}
+
+		.pagebut {
+			margin-top: 1%;
+			/*  width: 58%;  */
+			padding: 1% 1%;
+			background-color: #2e455d;
+			color: white;
+		}
+
+		select {
+			width: 150px;
+			margin: 10px;
+		}
+
+		td {
+			background-color: #f8f7ff;
+		}
+
+		table.dataTable thead th,
+		table.dataTable tfoot th {
+			font-weight: normal;
+		}
+
+		table.table .thead-light th {
+			font-size: 13px;
+			border-color: #d4d7da;
+		}
+
+		select:focus {
+			min-width: 150px;
+			width: auto;
+		}
+
+		#hidden_div {
+			display: none;
+		}
+
+		table th {
+			color: white;
+			background-color: #2e455deb;
+			font-size: small;
+		}
+
+		table td {
+			font-size: small;
+		}
+
+		.container-manager {
+			padding-right: 43px;
+			padding-left: 15px;
+			margin-right: auto;
+			margin-left: 18.3%;
+			margin-top: 80px;
+		}
+
+		input[type="text"] {
+			line-height: 15px;
+			font-size: small;
+			height: 25px;
+		}
+
+		.dataTables_empty {
+			color: #be3232;
+		}
+
+		#overlay {
+			position: fixed;
+			top: 0;
+			z-index: 100;
+			width: 100%;
+			height: 100%;
+			display: none;
+			background: rgba(0, 0, 0, 0.6);
+		}
+
+		.cv-spinner {
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.spinner {
+			/* width: 40px;
+	height: 40px;
+	border: 4px #00343d solid;
+	border-top: 4px #181818 solid;
+	border-radius: 50%;
+	animation: sp-anime 0.8s infinite linear; */
+
+		}
+
+		@keyframes sp-anime {
+			100% {
+				transform: rotate(360deg);
+			}
+
+		}
+
+		/* Chrome, Safari, Edge, Opera */
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		#usertable {
+			border-collapse: separate;
+			border-spacing: 0;
+		}
+
+		#usertable tr {
+			border-bottom: 1px solid #808080;
+		}
+
+		#usertable td,
+		#usertable th {
+			border: 2px solid #095776;
+			padding: 15px;
+		}
+
+		#usertable th:last-child,
+		#usertable td:last-child {
+			border-right: none;
+		}
+
+		.dataTables_scrollBody {
+			overflow: unset !important;
+		}
+
+		td {
+			font-size: small;
+		}
+
+		th {
+			color: white;
+			background-color: #2e455deb;
+			font-size: medium;
+		}
+
+		table,
+		tr {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th,
+		td {
+			border: 1px solid #dddddd;
+			padding: 12px;
+			text-align: left;
+		}
+
+		#usertable_wrapper .dataTables_filter input[type="search"] {
+			/* Adjust the value as needed */
+			margin-left: -10px;
+		}
+
+		.dataTables_wrapper .dataTables_filter {
+			float: right;
+			margin-right: 20px;
+
+		}
+
+		.dataTables_filter input {
+			color: black;
+			background-color: white;
+		}
+
+		.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
+			color: black;
+			font-style: italic;
+		}
+	</style>
+</head>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	$(function () {
+		// Initialize datepickers
+		$("#from_date").datepicker({
+			dateFormat: 'dd/mm/yy',
+			maxDate: new Date(), // Set max date to current date
+			onClose: function (selectedDate) {
+				// Set the min date of to_date to the selected from_date
+				$("#to_date").datepicker("option", "minDate", selectedDate);
+			}
+		});
+		$("#to_date").datepicker({
+			dateFormat: 'dd/mm/yy',
+			maxDate: new Date(), // Set max date to current date
+			onClose: function (selectedDate) {
+				// Set the max date of from_date to the selected to_date
+				$("#from_date").datepicker("option", "maxDate", selectedDate);
+			}
+		});
+	});
+
+	function formatDate(dateString) {
+		var dateParts = dateString.split("/");
+		var day = dateParts[0];
+		var month = parseInt(dateParts[1], 10); // Convert month to integer
+		var year = dateParts[2];
+		var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL",
+			"AUG", "SEP", "OCT", "NOV", "DEC"];
+		var monthName = monthNames[month - 1];
+		return day + "-" + monthName + "-" + year;
+	}
+
+	function home() {
+		location.href = '/IPSAdmin/IPSDashboard'
+	}
+
+	function back() {
+		window.history.back();
+	}
+	$(document).ready(function () {
+		$('#usertable').DataTable({
+			"destroy": true,
+			"scrollCollapse": true,
+			"paging": true,
+			"autoWidth": false,
+			"ordering": true,
+			"oLanguage": {
+				"sSearch": "",
+				"sSearchPlaceholder": "Search Here"
+			},
+			"searching": true,
+			"pageLength": 10,
+			"lengthChange": false,
+		});
+	});
+
+	$(document).ready(function () {
+		var currentDate = $.datepicker.formatDate('dd-mm-yy', new Date());
+
+		$("#currentDate").val(currentDate); // Set the current date in the input field
+
+		$("#currentDate").datepicker({
+			dateFormat: 'dd-mm-yy',
+			maxDate: new Date()
+
+		});
+	});
+
+
+	/*<![CDATA[*/
+</script>
+<script>
+	function getTransactionRecords() {
+		var valueDate = $('#currentDate').val();
+
+		$.ajax({
+			url: './getTransactionRecords?valueDate=' + valueDate,
+			type: 'GET',
+			success: function (data) {
+
+				var trHTML = '';
+				if (data.length > 0) {
+					data.forEach(function (entity) {
+
+						var tranDate = null;
+
+						if (entity.tran_date != null) {
+							var originalStartDate = new Date(entity.tran_date);
+							var startYear = originalStartDate.getFullYear();
+							var startMonth = String(originalStartDate.getMonth() + 1).padStart(2, '0');
+							var startDay = String(originalStartDate.getDate()).padStart(2, '0');
+							tranDate = `${startDay}-${startMonth}-${startYear}`;
+						} else {
+							tranDate = "";
+						}
+
+						var reversalDate = null;
+
+						if (entity.reversal_date != null) {
+							var originalStartDate = new Date(entity.reversal_date);
+							var startYear = originalStartDate.getFullYear();
+							var startMonth = String(originalStartDate.getMonth() + 1).padStart(2, '0');
+							var startDay = String(originalStartDate.getDate()).padStart(2, '0');
+							reversalDate = `${startDay}-${startMonth}-${startYear}`;
+						} else {
+							reversalDate = "";
+						}
+
+						var tranAmount = null;
+
+						if (entity.tran_amount != null) {
+							let stringValue1 = entity.tran_amount;
+							let floatValue1 = parseFloat(stringValue1);
+							let roundedValue1 = floatValue1.toFixed(2);
+							tranAmount = formatNumberWithCommas(roundedValue1);
+						} else {
+							tranAmount = "0.00";
+						}
+
+						var reversalAmount = null;
+
+						if (entity.reversal_amount != null) {
+							let stringValue1 = entity.reversal_amount;
+							let floatValue1 = parseFloat(stringValue1);
+							let roundedValue1 = floatValue1.toFixed(2);
+							reversalAmount = formatNumberWithCommas(roundedValue1);
+						} else {
+							reversalAmount = "0.00";
+						}
+
+
+						var merchantId = entity.merchant_id != null ? entity.merchant_id : "";
+						var sequenceUniqueId = entity.sequence_unique_id != null ? entity.sequence_unique_id : "";
+						var tranAuditNumber = entity.tran_audit_number != null ? entity.tran_audit_number : "";
+						var ipsxAcct = entity.ipsx_account != null ? entity.ipsx_account : "";
+						var ipsxAcctName = entity.ipsx_account_name != null ? entity.ipsx_account_name : "";
+						var cimAcct = entity.cim_account != null ? entity.cim_account : "";
+						var cimAcctName = entity.cim_account_name != null ? entity.cim_account_name : "";
+						var tranCurrency = entity.tran_currency != null ? entity.tran_currency : "";
+						var tranStatus = entity.tran_status != null ? entity.tran_status : "";
+						var tranRemarks = entity.tran_rmks != null ? entity.tran_rmks : "";
+						var reversalRemarks = entity.reversal_remarks != null ? entity.reversal_remarks : "";
+
+						var color = tranStatus === 'SUCCESS' ? "green" : "red";
+
+
+						trHTML += '<tr>' +
+							'<td style="text-align: left;">' + tranDate + '</td>' +
+							'<td style="text-align: left;">' + merchantId + '</td>' +
+							'<td style="text-align: left;">' + tranAuditNumber + '</td>' +
+							'<td style="text-align: left;">' + cimAcct + '</td>' +
+							'<td style="text-align: left;">' + cimAcctName + '</td>' +
+							'<td style="text-align: left;">' + ipsxAcct + '</td>' +
+							'<td style="text-align: left;">' + ipsxAcctName + '</td>' +
+							'<td style="text-align: left;">' + tranCurrency + '</td>' +
+							'<td style="text-align: right;">' + tranAmount + '</td>' +
+							'<td style="text-align: left;color:' + color + ';">' + tranStatus + '</td>' +
+							'<td style="text-align: left;">' + tranRemarks + '</td>' +
+							'<td style="text-align: left;">' + reversalDate + '</td>' +
+							'<td style="text-align: right;">' + reversalAmount + '</td>' +
+							'<td style="text-align: left;">' + reversalRemarks + '</td>' +
+							// Add more columns for end date and interest amount if needed
+							'</tr>';
+					});
+
+					var userTable = $('#usertable').DataTable({
+						"destroy": true,
+						"scrollCollapse": true,
+						"paging": true,
+						"autoWidth": false,
+						"ordering": true,
+						"oLanguage": {
+							"sSearch": "",
+							"sSearchPlaceholder": "Search Here"
+						},
+						"searching": true,
+						"pageLength": 10,
+						"lengthChange": false,
+					});
+
+					userTable.clear().draw();
+
+
+					$('#transactionBody').empty().append(trHTML);
+
+
+					userTable.rows.add($('#transactionBody tr')).draw();
+
+				} else {
+					trHTML += '<tr><td colspan="10" class="text-center" style="color:red;">No data available</td></tr>';
+
+					$('#transactionBody').empty().append(trHTML);
+
+					var userTable = $('#usertable').DataTable({
+						"destroy": true,
+						"scrollCollapse": true,
+						"paging": true,
+						"autoWidth": false,
+						"ordering": true,
+						"oLanguage": {
+							"sSearch": "",
+							"sSearchPlaceholder": "Search Here"
+						},
+						"searching": true,
+						"pageLength": 10,
+						"lengthChange": false,
+					});
+
+					userTable.clear().draw();
+				}
+
+
+
+
+			},
+			error: function () {
+				showErrorModal('Error fetching data');
+			}
+		});
+	}
+</script>
+
+<script>
+	function formatNumberWithCommas(number) {
+
+		if (!number && number !== 0) return '';
+
+		let numberString = number.toString();
+
+
+		let [integerPart, decimalPart] = numberString.split('.');
+
+		let lastThreeDigits = integerPart.slice(-3);
+		let otherDigits = integerPart.slice(0, -3);
+
+		if (otherDigits !== '') {
+			lastThreeDigits = ',' + lastThreeDigits;
+		}
+
+		let formattedIntegerPart = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThreeDigits;
+
+		if (!decimalPart) {
+			decimalPart = '00';
+		}
+		let formattedNumber = formattedIntegerPart + '.' + decimalPart;
+
+
+		return formattedNumber;
+	}
+</script>
+
+<body>
+	<div th:insert="MMenupage :: header"></div>
+	<div class="container-manager pt-3">
+		<div class="card">
+			<div class="card-header">
+				<div class="float-left">
+					<h6 style="font-size: 1.4rem; color: white;"> Snapshot - All
+						Over Transaction List</h6>
+				</div>
+			</div>
+			<div>
+				<div class="row formline mt-2 ml-2">
+					<div class="col-sm-2"><label>Search Records by Date :</label></div>
+					<div class="col-sm-2"><input type="text" id="currentDate" onchange="getTransactionRecords();"
+							readonly></div>
+				</div>
+				<!--class="text-nowrap"-->
+				<table id="usertable">
+					<thead>
+						<tr>
+							<th>Tran Date</th>
+							<th>Mer Id</th>
+							<th>Audit Ref</th>
+							<th>Mer Acct</th>
+							<th>Mer Acct Name</th>
+							<th>Cust Acct</th>
+							<th>Cust Acct Name</th>
+							<th>Currency</th>
+							<th>Amount</th>
+							<th>Status</th>
+							<th>Remarks</th>
+							<th>Rev Date</th>
+							<th>Rev Amt</th>
+							<th>Rev Remarks</th>
+
+						</tr>
+					</thead>
+					<tbody id="transactionBody">
+						<tr th:each="profile:${click}">
+							<td
+								th:text="${profile.tran_date != null ? #dates.format(profile.tran_date,'dd-MM-yyyy') : ''}">
+							</td>
+							<td th:text="${profile.merchant_id !=null ? profile.merchant_id.toUpperCase() : ''}"></td>
+
+							<td
+								th:text="${profile.tran_audit_number !=null ? profile.tran_audit_number.toUpperCase() : ''}">
+							</td>
+							<td th:text="${profile.cim_account !=null ? profile.cim_account.toUpperCase() : ''}"></td>
+							<td
+								th:text="${profile.cim_account_name !=null ? profile.cim_account_name.toUpperCase() : ''}">
+							</td>
+							<td th:text="${profile.ipsx_account !=null ? profile.ipsx_account.toUpperCase() : ''}"></td>
+							<td
+								th:text="${profile.ipsx_account_name !=null ? profile.ipsx_account_name.toUpperCase() : ''}">
+							</td>
+							<td th:text="${profile.tran_currency !=null ? profile.tran_currency.toUpperCase() : ''}">
+							</td>
+							<td style="text-align: right;"
+								th:text="${profile.tran_amount != null ? #numbers.formatDecimal(profile.tran_amount, 0, 'COMMA', 2, 'POINT') : ''}">
+							</td>
+							<th:block th:switch="${profile.tran_status}">
+								<td th:case="'SUCCESS'" style="color: green">SUCCESS</td>
+								<td th:case="'FAILURE'" style="color: red">FAILURE</td>
+								<td th:case="*">UNKNOWN STATUS</td> <!-- Handle any other cases -->
+							</th:block>
+							<td th:text="${profile.tran_rmks !=null ? profile.tran_rmks.toUpperCase() : ''}"></td>
+							<td
+								th:text="${profile.reversal_date != null ? #dates.format(profile.reversal_date,'dd-MM-yyyy') : ''}">
+							</td>
+							<td style="text-align: right;"
+								th:text="${profile.reversal_amount != null ? #numbers.formatDecimal(profile.reversal_amount, 0, 'COMMA', 2, 'POINT') : ''}">
+							</td>
+							<td
+								th:text="${profile.reversal_remarks !=null ? profile.reversal_remarks.toUpperCase() : ''}">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer text-center">
+				<button type="button" class="btn btn-sm commonBtnStyle mr-2" data-dismiss="modal"
+					onclick="home();">Home</button>
+				<button type="button" class="btn btn-sm commonBtnStyle" data-dismiss="modal"
+					onclick="back();">Back</button>
+			</div>
+		</div>
+		<!------------------------------------------------------------- Modal ------------------------------------------------------------>
+		<div class="modal fade" id="alert">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p style="color: #000;" id="alertmsg"></p>
+						<button type="button" class="btn btn-primary" onclick="$('#alert').modal('hide');"
+							th:att>Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

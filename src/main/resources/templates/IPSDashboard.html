@@ -1,0 +1,1289 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="summary">
+<head>
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+<!-- Include Feather Icons -->
+
+
+<style>
+body {
+	background-color: lightgrey;
+	overflow-x: hidden;
+}
+
+.card {
+	box-shadow: 0 0.15rem 1.75rem rgba(0, 0, 0, 0.15);
+	border-radius: 0.5rem;
+}
+
+.stat {
+	font-size: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.carousel-item {
+	text-align: center;
+}
+
+.chart-container {
+	position: relative;
+	width: 100%;
+	height: 300px;
+}
+
+.table {
+	margin-top: 20px;
+}
+
+.text-end {
+	text-align: right;
+}
+
+.card-box {
+	background-color: #d9dbdc;
+	background-clip: border-box;
+	padding: 1.1rem;
+	margin-bottom: 24px;
+	border-radius: .25rem;
+}
+
+button {
+	background-color: #616c77;
+	color: white;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+	opacity: 0.8;
+	bottom: 23px;
+	right: 28px;
+	width: 150px;
+}
+
+.container-manager {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 17.3%;
+	margin-top: 80px;
+}
+
+.content-page {
+	margin-left: 55px;
+	overflow: hidden;
+	padding: 0 15px 65px 15px;
+	min-height: 80vh;
+	margin-top: 101px;
+}
+
+.input-card {
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	padding: 20px;
+	background-color: transparent;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
+	width: 170px;
+	height: 170px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	color: rgb(0, 177, 157);
+	margin-top: 40px;
+	margin-bottom: 45px;
+}
+
+.input-card:hover {
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scroll {
+	max-height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.main-container {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end; /* Align to the right */
+}
+
+.search-container {
+	width: 20%; /* 30% width for the search container */
+	margin-right: 15px; /* Add some margin for spacing */
+	padding: 10px;
+}
+
+.result-list {
+	max-height: 100px;
+	overflow-y: auto;
+	max-height: 200px;
+	overflow-y: auto;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.list-group-item {
+	background-color: #e5e9ec;
+}
+
+#results {
+	position: absolute;
+	/* Position the list absolute to prevent layout shifts */
+	max-height: 300px; /* Set a maximum height for the results list */
+	overflow-y: auto; /* Enable vertical scrolling */
+	margin-top: 10px; /* Small gap between input field and results */
+	display: none; /* Initially hide the results container */
+	background-color: #ffffff;
+	/* Set background color of the list to white */
+	border: 1px solid #ddd; /* Add a border for better visibility */
+	border-radius: 4px; /* Slight border radius */
+	z-index: 100; /* Ensure it appears above other elements */
+}
+
+/* Make each item in the results list have a background color */
+.list-group-item {
+	background-color: #ffffff !important;
+	/* White background for each item */
+	cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Optional: Highlight a list item when hovering */
+.list-group-item:hover {
+	background-color: #f1f1f1; /* Light grey on hover */
+}
+
+.tablinks {
+	width: 200px;
+	height: 40px;
+	background-color: #7b838b;
+	color: white;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+	margin: 0 10px;
+	border-radius: 5px; /* Rounded corners */
+	transition: background-color 0.3s;
+}
+
+/* Style for active button */
+.tablinks.active {
+	background-color: #018398; /* Darker shade when active */
+}
+
+.chart-bar {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+#static-legend {
+	display: flex;
+	justify-content: center; /* Center the items horizontally */
+	align-items: center; /* Center the items vertically */
+	width: 100%;
+	padding-top: 10px; /* Optional: Space above the legend */
+	padding-bottom: 10px; /* Optional: Space below the legend */
+}
+
+.legend-item {
+	margin-right: 20px; /* Space between legend items */
+	display: flex;
+	align-items: center;
+}
+
+.legend-color {
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	border-radius: 3px; /* Optional: rounded corners */
+}
+</style>
+
+</head>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+
+	// SUBMIT SECURITY ANSWER
+	function add1submit() {
+		var hasError = 0;
+		for (var i = 1; i <= 10; i++) {
+			var securityAnswer = $("#security_answer_" + i).val().trim();
+			if (securityAnswer === "") {
+				hasError += 1;
+			} else {
+				hideError($("#security_answer_" + i));
+			}
+		}
+		if (hasError > 7) {
+			alert("Please fill at least three answers!");
+		} else {
+			var formData = $("#uploadForm1").serialize();
+			$.ajax({
+				url : './submitdashboard',
+				data : formData,
+				type : 'POST',
+				success : function(response) {
+					var responseObject = typeof response === 'string' ? JSON.parse(response) : response;
+					if (responseObject.authenticate_flg === "Y") {
+						$("#myModalpopup").css("display", "none");
+						$('#changepassword1').modal('show');
+					} else {
+						alert("Authentication failed.");
+					}
+				},
+				error : function(xhr, status, error) {
+					console.error("Error:", error);
+					alert("Failed to submit form. Please try again.");
+				}
+			});
+		}
+	}
+
+	// CHANGE PASSWORD
+
+	function submitPassword() {
+		if ($("#passSubmitForm").valid()) {
+			var newpass = $("#newpassData").val();
+			var conpass12 = document.getElementById("conpass").value;
+			var userid = $("#userId").val();
+			if (newpass.length > 6) {
+				if (newpass === conpass12) {
+					$.ajax({
+						type : "post",
+						cache : false,
+						url : './changePasswordwithoutoldpassword',
+						data : {
+							userid : userid,
+							newpass : newpass
+						},
+						success : function(data) {
+							$('#changepassword1').modal('hide');
+							$('#myModalpopup2').modal("toggle");
+							$('#myModalpopup2 .modal-body').text(data);
+						},
+						error : function(xhr, status, error) {
+							alert("Error changing password. Please try again.");
+						}
+					});
+				} else {
+					alert("New Password and Confirm Password must match.");
+				}
+			} else {
+				alert("Password requires at least one Uppercase, Lowercase, Numeric and minimum 6.");
+			}
+		}
+	}
+
+	function togglePasswordVisibility(inputId, eyeImgId) {
+		const passwordInput = document.getElementById(inputId);
+		const eyeImg = document.getElementById(eyeImgId);
+		if (passwordInput.type === 'password') {
+			passwordInput.type = 'text';
+			eyeImg.src = '/IPSAdmin/Image/eyeSlide.png';
+			eyeImg.title = "Hide Password";
+		} else {
+			passwordInput.type = 'password';
+			eyeImg.src = '/IPSAdmin/Image/eye.png';
+			eyeImg.title = "Show Password";
+		}
+	}
+
+	$(document).ready(function() {
+		$(window).keydown(function(event) {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+				return false;
+			}
+		});
+	});
+
+	$(document).ready(function() {
+		var countsuccess = /*[[${countsuccess}]]*/0;
+		var countfailure = /*[[${countfailure}]]*/0;
+		var countinitiated = /*[[${countinitiated}]]*/0;
+		var countzero = /*[[${countzero}]]*/0;
+
+		var data, sliceColors;
+
+		if (countsuccess === 0 && countfailure === 0 && countinitiated === 0) {
+			data = [ countsuccess, countfailure, countinitiated, countzero ];
+			sliceColors = [ "#77b179", "#ff8f9f", "#8a929a", "#f7bb86" ];
+		} else {
+			data = [ countsuccess, countfailure, countinitiated ];
+			sliceColors = [ "#77b179", "#ff8f9f", "#8a929a" ];
+		}
+
+		$("#INC1").sparkline(data, {
+			type : "pie",
+			width : "210",
+			height : "210",
+			sliceColors : sliceColors
+		});
+
+		var resizeTimeout;
+		$(window).resize(function() {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(function() {
+				$("#INC1").sparkline(data, {
+					type : "pie",
+					width : "210",
+					height : "210",
+					sliceColors : sliceColors
+				});
+			}, 300);
+		});
+	});
+
+	$(document).ready(function() {
+		var CountVerifiedMerchant = /*[[${CountVerifiedMerchant}]]*/0;
+		var CountUnverifiedMerchant = /*[[${CountUnverifiedMerchant}]]*/0;
+
+		var data, sliceColors;
+
+		if (CountVerifiedMerchant === 0 && CountUnverifiedMerchant === 0) {
+			data = [ CountVerifiedMerchant, CountUnverifiedMerchant ];
+			sliceColors = [ "#77b179", "#ff8f9f" ];
+		} else {
+			data = [ CountVerifiedMerchant, CountUnverifiedMerchant ];
+			sliceColors = [ "#77b179", "#ff8f9f" ];
+		}
+
+		$("#INC").sparkline(data, {
+			type : "pie",
+			width : "210",
+			height : "210",
+			sliceColors : sliceColors
+		});
+
+		var resizeTimeout;
+		$(window).resize(function() {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(function() {
+				$("#INC1").sparkline(data, {
+					type : "pie",
+					width : "210",
+					height : "210",
+					sliceColors : sliceColors
+				});
+			}, 300);
+		});
+	});
+
+	function change() {
+		$('#changepassword1').modal('show');
+	}
+
+	function openModal() {
+		var modal = document.getElementById("myModalpopup");
+		var flag = document.getElementById("flag").value;
+		if (flag === "N") {
+			modal.style.display = "block";
+		} else {
+			modal.style.display = "none";
+		}
+	}
+
+	window.onload = function() {
+		openModal();
+	};
+
+	function closeModal() {
+		var modal = document.getElementById("popupvalidate");
+		modal.style.display = "none";
+	}
+
+	function showError(element, message) {
+		var errorSpan = $('<span class="error-message"></span>').text(message);
+		errorSpan.css({
+			'color' : 'red',
+			'font-size' : '13px',
+			'margin-top' : '10px',
+			'margin-left' : '250px'
+		});
+		element.next('.error-message').remove();
+		element.after(errorSpan);
+	}
+
+	function hideError(element) {
+		element.next('.error-message').remove();
+	}
+
+	function backpopup() {
+		window.location.href = './login';
+	}
+    // Simulate a click on the Cummulative button on page load to make it active
+    window.onload = function() {
+        const cummulativeButton = document.getElementById('smooth1View');
+        changeColorView(cummulativeButton, 'Cummulative');  // Make "Cummulative" chart visible and the button active
+    };
+
+    // Function to switch between charts and change the button colors
+    function changeColorView(button, chartType) {
+        // Hide both charts
+        document.getElementById('Cummulative').style.display = 'none';
+        document.getElementById('Progressive').style.display = 'none';
+
+        // Show the selected chart
+        document.getElementById(chartType).style.display = 'block';
+
+        // Remove the 'active' class from all buttons
+        const buttons = document.querySelectorAll('.tablinks');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Add the 'active' class to the clicked button to change its color
+        button.classList.add('active');
+    }
+	/*<![CDATA[*/
+</script>
+<body>
+	<div th:insert="MMenupage :: header"></div>
+
+	<div class="container-manager">
+		<div class="content-page" style="height: 100%;">
+
+			<div class="row ">
+				<div class="col-lg-5 col-md-12 mb-4">
+
+					<div class="card-body card-body px-3 pt-lg-6 pb-lg-5">
+						<div class="row h-100">
+							<div
+								class="col-lg-12 my-auto text-center d-lg-block d-flex justify-content-center">
+								<div id="chart-pie"></div>
+								<div id="merchant-header" style="width: 100	%;padding: 15px">hello</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Second Card: Sales Overview -->
+
+
+				<div class="col-lg-7 col-md-12">
+					<div >
+						<div>
+							<h6 style="font-size: 16px; font-weight: bold;">List</h6>
+
+							<p class="text-sm">
+								<i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
+							</p>
+
+							<input type="text" id="filterInput"
+								class="form-control form-control-sm col-sm-2"
+								placeholder="Search..." autocomplete="off">
+
+							<!-- Results Container -->
+							<ul id="results" class="list-group result-list"
+								style="width: 250px;"></ul>
+
+						</div>
+					</div>
+					<div class="row formline " id="tabs"
+						style="display: flex; justify-content: flex-end; align-items: center;">
+						<button class="tablinks active" id="smooth1View"
+							onclick="changeColorView(this, 'Cummulative')">Cummulative</button>
+						<button class="tablinks" id="smooth2View"
+							onclick="changeColorView(this, 'Progressive')">Progressive</button>
+					</div>
+
+					<div class="card-body ">
+						<div class="chart-container" id="Cummulative">
+
+							<canvas id="cummulativeChart"></canvas>
+						</div>
+						<div class="chart-container" id="Progressive"
+							style="display: none;">
+
+							<canvas id="progressiveChart"></canvas>
+						</div>
+					</div>
+
+				</div>
+
+				<!--Row Two -->
+				<div style=" width: 100%; display: flex;">
+					<div style="width: 50%"></div>
+					<div style="width: 50%; text-align: center;padding: 15px">
+						<h1>Merchant wise</h1>
+					</div>
+				</div>
+				<!-- Row for displaying charts -->
+				<div class="row " style="height: 100%; width: 100%">
+
+					<!-- Each chart represents one month -->
+					<div class="chart col-lg-3" id="chart-jan">
+						<canvas id="chart-bars-jan" class="chart-bar chart-canvas"></canvas>
+					</div>
+					<div class="chart col-lg-3" id="chart-feb">
+						<canvas id="chart-bars-feb" class="chart-bar chart-canvas"></canvas>
+					</div>
+					<div class="chart col-lg-3" id="chart-mar">
+						<canvas id="chart-bars-mar" class="chart-bar chart-canvas"></canvas>
+					</div>
+					<div class="chart col-lg-3" id="chart-apr">
+						<canvas id="chart-bars-apr" class="chart-bar chart-canvas"></canvas>
+					</div>
+
+					<!-- Static legend container: Centered in one row -->
+					<div
+						class="col-12 d-flex justify-content-center align-items-center"
+						id="static-legend">
+						<div class="legend-item">
+							<span class="legend-color" style="background-color: #fb6340;"></span>
+							Volume
+						</div>
+						<div class="legend-item">
+							<span class="legend-color" style="background-color: #36a2eb;"></span>
+							No. of Trans.
+						</div>
+						<div class="legend-item">
+							<span class="legend-color" style="background-color: #4caf50;"></span>
+							Amount of Trans. (in Millions)
+						</div>
+						<div class="legend-item">
+							<span class="legend-color" style="background-color: #cb9cb3;"></span>
+							No. of Merchants
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<!-- End of Row -->
+			</div>
+		</div>
+
+
+		<div id="myModalpopup" class="modal" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-content"
+				style="width: 1000px; margin-top: 90px; margin-left: 650px; text-align: center">
+				<div class="menu-title-header">
+					<div class="modal-title pt-2" id="exampleModalLabel"
+						style="text-align: center; color: white;">SECURITY QUESTION
+						FORM</div>
+				</div>
+				<div class="modal-body scroll"
+					style="text-align: center; background-color: #c6ccd2;">
+					<form id="uploadForm1" method="post" autocomplete="off">
+						<input type="text" name="flag" id="flag" autocomplete="off"
+							th:value="${authenticationValue}"
+							class="form-control form-control-sm" hidden="true" />
+
+						<div class="form-group row">
+							<label for="user_id" class="col-sm-6 col-form-label">User
+								ID <span style="color: red; font-size: 20px;"></span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="user_id" id="user_id"
+									autocomplete="off" th:value="${USERID}" readonly
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="username" class="col-sm-6 col-form-label">User
+								Name <span style="color: red; font-size: 20px;"></span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="username" id="username"
+									th:value="${USERNAME}" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									readonly class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_1" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE BOOK <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_1"
+									id="security_answer_1" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_2" class="col-sm-6 col-form-label">WHAT
+								IS THE NAME OF THE ROAD YOU GREW UP ON <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_2"
+									id="security_answer_2" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_3" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE PET <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_3"
+									id="security_answer_3" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_4" class="col-sm-6 col-form-label">WHAT
+								WAS THE FIRST COMPANY THAT YOU WORKED FOR <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_4"
+									id="security_answer_4" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_5" class="col-sm-6 col-form-label">WHAT
+								IS YOUR MOTHER'S NAME <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_5"
+									id="security_answer_5" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_6" class="col-sm-6 col-form-label">WHAT
+								IS YOUR DATE OF BIRTH <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_6"
+									id="security_answer_6" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_7" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE SCHOOL TEACHER'S NAME <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_7"
+									id="security_answer_7" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_8" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE MOVIE <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_8"
+									id="security_answer_8" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_9" class="col-sm-6 col-form-label">WHAT
+								WAS YOUR FIRST VEHICLE <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_9"
+									id="security_answer_9" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_10" class="col-sm-6 col-form-label">WHAT
+								CITY WERE YOU BORN IN <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_10"
+									id="security_answer_10"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="text-center">
+							<button type="button" class="btn btn-primary"
+								onclick="add1submit();">Submit</button>
+							<button type="button" class="btn btn-primary"
+								onclick="backpopup()">Back</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="changepassword1" data-backdrop="static"
+			data-keyboard="false">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="color: cadetblue;">
+					<!-- Modal Header -->
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel"
+							style="text-align: center; color: white;">CHANGE PASSWORD</div>
+					</div>
+					<div class="modal-body"
+						style="text-align: center; background-color: #c6ccd2">
+						<form th:object="${passform}" id="passFormNew" method="post">
+							<div class="form-group">
+								<div class="row">
+									<label class="col-sm-5">User ID :</label> <input
+										autocomplete="off" class="form-control col-sm-5" type="text"
+										id="userId" th:value="${USERID}" name="userId" required />
+								</div>
+								<div class="row">
+									<label class="col-sm-5">New Password :</label> <input
+										autocomplete="off" class="form-control col-sm-5"
+										type="password" id="newpass1" name="newpass1" required />
+								</div>
+								<div class="row">
+									<label class="col-sm-5" for="acctName">Confirm New
+										Password :</label> <input class="form-control col-sm-5"
+										autocomplete="off" type="password" id="Connpass1"
+										name="Connpass1" required />
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2">
+						<button type="button" class="btn btn-primary"
+							onclick="submitPassword()">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="popupvalidate" data-backdrop="static"
+			data-keyboard="false">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="color: cadetblue;">
+					<!-- Modal Header -->
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel"
+							style="text-align: center; color: white;">VALIDATION</div>
+					</div>
+					<div class="modal-body"
+						style="text-align: center; background-color: #c6ccd2">
+						<div class="form-group">
+							<div class="row">
+								<label class="col-sm-8" for="acctName">Fill THE REQUIRD
+									FIELD</label>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2">
+						<button type="button" class="btn btn-primary"
+							onclick="closeModal()">CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		feather.replace(); // Replaces placeholder icons with Feather icons
+	
+	// Datas for chart 
+	
+	
+	//Line Chart 
+	
+	
+	 // Mock data fetched from the backend
+    const backendData = {
+        cummulative: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                {
+                    label: "Units",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#cb0c9f",
+                    borderWidth: 3,
+                    backgroundColor: "rgba(203,12,159,0.2)",
+                    fill: true,
+                    data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120], // Example data
+                },
+                {
+                    label: "Terminals",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#3A416F",
+                    borderWidth: 3,
+                    backgroundColor: "rgba(72,72,176,0.2)",
+                    fill: true,
+                    data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125], // Example data
+                },
+                {
+                    label: "Users",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#FFC107",
+                    borderWidth: 3,
+                    backgroundColor: "rgba(255,193,7,0.2)",
+                    fill: true,
+                    data: [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130], // Example data
+                },
+            ],
+        },
+        progressive: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                {
+                    label: "Units",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#cb0c9f",
+                    borderWidth: 3,
+                    backgroundColor: "rgba(203,12,159,0.2)",
+                    fill: true,
+                    data: [5, 15, 25, 75, 85, 95, 105, 115, 35, 45, 55, 65,], // Example data
+                },
+                {
+                    label: "Terminals",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#3A416F",
+                    borderWidth: 3,
+                    backgroundColor: "rgba(72,72,176,0.2)",
+                    fill: true,
+                    data: [10, 20, 30, 40, 50, 90, 100, 110, 120 ,60, 70, 80,], // Example data
+                },
+                {
+                    label: "Users",
+                    tension: 0.4,
+                    borderWidth: 0,
+                    pointRadius: 0,
+                    borderColor: "#FFC107",
+                    borderWidth: 3,
+                    backgroundColor: "rgba(255,193,7,0.2)",
+                    fill: true,
+                    data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125], // Example data
+                },
+            ],
+        },
+    };
+
+    const backendPieData = {
+            labels: ['Merchants', 'Units', 'Users'], // Example labels
+            series: [40, 30, 30], // Example series (data percentages or values)
+            colors: ['#28a745', '#6c757d', '#dc3545'], // Optional custom colors
+        };
+			
+
+
+	
+	
+    // Function to initialize a Line chart dynamically
+    function initializeChart(canvasId, chartLabels, chartDatasets) {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        return new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: chartDatasets,
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "top",
+                    },
+                },
+                interaction: {
+                    intersect: false,
+                    mode: "index",
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: true,
+                            drawOnChartArea: true,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                        },
+                        ticks: {
+                            display: true,
+                            padding: 10,
+                            color: "#b2b9bf",
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                            },
+                        },
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            borderDash: [5, 5],
+                        },
+                        ticks: {
+                            display: true,
+                            color: "#b2b9bf",
+                            padding: 20,
+                            font: {
+                                size: 11,
+                                family: "Open Sans",
+                            },
+                        },
+                    },
+                },
+            },
+        });
+    }
+    
+    
+    // Function to initialize the Pie Chart
+    function initializePieChart(data) {
+    	console.log('hello');
+        const chartPie = new ApexCharts(
+            document.querySelector("#chart-pie"),
+            {
+                chart: {
+                    type: 'donut',
+                    height: 300,
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                plotOptions: {
+                    pie: {
+                        customScale: 1,
+                        expandOnClick: false,
+                        donut: {
+                            size: "80%",
+                        },
+                    },
+                },
+                legend: {
+                    show: true,
+                    position: "right",
+                    formatter: function (seriesName, opts) {
+                        const value = opts.w.globals.series[opts.seriesIndex];
+                        return seriesName + ": " + value;
+                    },
+                    labels: {
+                        useSeriesColors: true,
+                    },
+                },
+                series: data.series, // Dynamic data for the series
+                labels: data.labels, // Dynamic data for the labels
+                colors: data.colors || ['#28a745', '#6c757d', '#dc3545'], // Default or dynamic colors
+                responsive: [
+                    {
+                        breakpoint: 1550,
+                        options: {
+                            chart: {
+                                height: 340,
+                            },
+                            legend: {
+                                position: "bottom",
+                                verticalAlign: "bottom",
+                            },
+                        },
+                    },
+                    {
+                        breakpoint: 1450,
+                        options: {
+                            chart: {
+                                height: 300,
+                            },
+                        },
+                    },
+                ],
+            }
+        );
+
+        // Render the Pie Chart
+        chartPie.render();
+    }
+
+ 
+
+    window.onload = function () {
+        // Initialize Pie Chart
+        initializePieChart(backendPieData);
+
+        // Initialize Line Charts
+        initializeChart('cummulativeChart', backendData.cummulative.labels, backendData.cummulative.datasets);
+        initializeChart('progressiveChart', backendData.progressive.labels, backendData.progressive.datasets);
+
+        // Update Merchant Header with Current Date
+        updateMerchantHeader();
+    };
+
+    /**
+     * Updates the merchant header with today's date.
+     */
+    function updateMerchantHeader() {
+        const date = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+
+        document.getElementById('merchant-header').innerHTML = `Merchants - ${date}`;
+    }
+
+
+
+
+
+
+      
+
+	var data = /*[[${merchantid}]]*/ '[[${merchantid}]]'.split(',');
+
+	// Log merchant IDs (optional for debugging)
+	for (let i = 0; i < data.length; i++) {
+	    console.log("Merchant ID #" + (i + 1) + ": " + data[i]);
+	}
+
+	const filterInput = document.getElementById("filterInput");
+	const resultsContainer = document.getElementById("results");
+	console.log(resultsContainer)
+
+	// Function to filter results based on user input
+	function filterResults(query) {
+	    return new Promise((resolve) => {
+	        setTimeout(() => {
+	            const filteredData = data.filter(item => 
+	                item.toLowerCase().includes(query.toLowerCase())
+	            );
+	            resolve(filteredData);
+	        }, 300); // Simulated delay for better UX
+	    });
+	}
+
+	// Function to render filtered results in the list
+	function renderResults(filteredData) {
+	    resultsContainer.innerHTML = ""; // Clear previous results
+	    console.log(resultsContainer)
+	    if (filteredData.length === 0) {
+	        resultsContainer.innerHTML = "<li class='list-group-item text-muted'>No results found</li>";
+	        return;
+	    }
+	    filteredData.forEach(item => {	
+	        const li = document.createElement("li");
+	        li.className = "list-group-item";
+	        li.textContent = item;
+	        
+	        // Add click event listener to update charts and hide the list
+	        li.addEventListener("click", () => {
+	            // Randomly select new data for both charts
+	            const randomLineDataIndex = Math.floor(Math.random() * lineChartData.length);
+	            const randomPieDataIndex = Math.floor(Math.random() * pieChartData.length);
+	            const randomtranDataIndex = Math.floor(Math.random() * transdata.length);
+
+	            // Update Line Chart
+	            lineChart.data.datasets.forEach((dataset, index) => {
+	                dataset.data = lineChartData[randomLineDataIndex].data[index]; // Set new data for each dataset
+	            });
+	            lineChart.update();
+
+	            // Update Pie Chart
+	            chartPie.updateSeries(pieChartData[randomPieDataIndex]); // Update the pie chart dynamically
+	            
+	            
+	            const data = transdata[randomtranDataIndex];  // Get data based on the random index
+
+	            // Update Transaction Cards with random data
+	            document.getElementById('total-transaction-value').innerText = data.totalTransaction.value;
+	            document.getElementById('total-transaction-percentage').innerHTML = `<i data-feather="arrow-down-right"></i> ${data.totalTransaction.percentage}`;
+
+	            document.getElementById('transactions-value').innerText = data.transactions.value;
+	            document.getElementById('transactions-percentage').innerHTML = `<i data-feather="arrow-up-right"></i> ${data.transactions.percentage}`;
+
+	            document.getElementById('chargeback-value').innerText = data.chargeBack.value;
+	            document.getElementById('chargeback-percentage').innerHTML = `<i data-feather="arrow-down-right"></i> ${data.chargeBack.percentage}`;
+
+	            document.getElementById('hold-reject-value').innerText = data.holdReject.value;
+	            document.getElementById('hold-reject-percentage').innerHTML = `<i data-feather="arrow-up-right"></i> ${data.holdReject.percentage}`;
+
+
+	            // Hide the results list and clear the input field
+	            resultsContainer.style.display = "none";
+	            filterInput.value = ""; // Clear the input field
+
+	            console.log("Input Value cleared: " + filterInput.value);
+	        });
+	        
+	        resultsContainer.appendChild(li);
+	    });
+	}
+
+	// Event listener for input field to filter results as the user types
+	filterInput.addEventListener("input", (e) => {
+	    const query = e.target.value;
+	    if (query.trim() === "") {
+	        resultsContainer.innerHTML = ""; // Clear results if input is empty
+	        resultsContainer.style.display = "none"; // Hide the results container if input is empty
+	        return;
+	    }
+
+	    // Display the results list if query is not empty
+	    resultsContainer.style.display = "block";
+	    
+	    // Perform the filtering and render results
+	    filterResults(query).then(renderResults);
+	});
+
+	// Optional: To hide the list when clicking outside (for better UX)
+	document.addEventListener('click', function(event) {
+	    if (!resultsContainer.contains(event.target) && event.target !== filterInput) {
+	        resultsContainer.style.display = "none"; // Hide the results list if clicked outside
+	    }
+	});
+	  var Overall = {
+		        Overall: [150, 234, 703], // Data for January
+		        
+		    };
+	  var Monthly = {
+		        Month: [50, 60, 70], // Data for January
+		        
+		    };
+	  var MWOverall = {
+		        Overall: [70, 40, 120], // Data for January
+		        
+		    };
+	  var MWMonthly = {
+		        Month: [10, 10, 70], // Data for January
+		        
+		    };
+
+
+		    // Create charts for each month
+		    function createChart(month, canvasId ,data ) {
+		        var chartElement = document.getElementById(canvasId);
+
+		        if (!chartElement.getAttribute('data-chart-initialized')) {
+		            new Chart(chartElement, {
+		                type: "bar",  // Bar chart type
+		                data: {
+		                    labels: [month], // Only one label, the current month
+		                    datasets: [
+		                        {
+		                            label: "Volume",  // First dataset label
+		                            backgroundColor: "#fb6340", // Red color for volume
+		                            data: [data[month][0]], // Volume data for the month
+		                            maxBarThickness: 20,  // Maximum thickness of each bar
+		                        },
+		                        {
+		                            label: "No. of Trans.",  // Second dataset label
+		                            backgroundColor: "#36a2eb", // Blue color for transactions
+		                            data: [data[month][1]], // No. of transactions for the month
+		                            maxBarThickness: 20,
+		                        },
+		                        {
+		                            label: "Amount of Trans. (in Millions)",  // Third dataset label
+		                            backgroundColor: "#4caf50", // Green color for the amount
+		                            data: [data[month][2]], // Amount of transactions for the month
+		                            maxBarThickness: 20,
+		                        },
+		                        {
+		                            label: "No. of Merchants",  // First dataset label
+		                            backgroundColor: "#cb9cb3", // Red color for volume
+		                            data: [data[month][0]], // Volume data for the month
+		                            maxBarThickness: 20,  // Maximum thickness of each bar
+		                        }
+		                    ],
+		                },
+		                options: {
+		                    indexAxis: 'x', // Set the orientation to horizontal (left-to-right bars)
+		                    responsive: true,  // Ensure the chart resizes with window
+		                    maintainAspectRatio: false,  // Allow resizing without distortion
+		                    plugins: {
+		                        legend: {
+		                            display: false,  // Display legend to distinguish datasets
+		                        },
+		                        tooltip: {
+		                            enabled: true,  // Enable tooltips
+		                            mode: "index",  // Tooltip mode: show tooltip for index
+		                            intersect: false,  // Do not show tooltip on exact intersection
+		                        }
+		                    },
+		                    scales: {
+		                        x: {
+		                            beginAtZero: true,  // Start x-axis from zero
+		                            ticks: {
+		                                color: "#8898aa",  // Tick font color
+		                            },
+		                            grid: {
+		                                color: "rgba(200, 200, 200, 0.3)" // Gridline color
+		                            }
+		                        },
+		                        y: {
+		                            ticks: {
+		                                color: "#8898aa",  // Tick font color
+		                            },
+		                            grid: {
+		                                display: false  // Disable y-axis grid lines
+		                            }
+		                        }
+		                    }
+		                },
+		            });
+
+		            chartElement.setAttribute("data-chart-initialized", "true");
+		        }
+		    }
+
+		    // Initialize charts for each month
+		    createChart('Overall', 'chart-bars-jan',Overall);
+		    createChart('Month', 'chart-bars-feb',Monthly);
+		    createChart('Overall', 'chart-bars-mar',MWOverall);
+		    createChart('Month', 'chart-bars-apr',MWMonthly);	
+	
+    </script>
+</body>
+</html>
