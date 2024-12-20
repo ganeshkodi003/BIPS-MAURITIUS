@@ -1,38 +1,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
-		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
-		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
-	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
-		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
-	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
-		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
-		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
-		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
-		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
-		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
-	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
-		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<link href="../static/css/custom-styles.css" rel="stylesheet">
+<script src="js/bootstrap411.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/signature_pad/dist/signature-pad.css">
-	<script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
-	<script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
-	<link rel="stylesheet" href="css/signature-pad.css">
-	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
-		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
-	<script src="js/bootstrap411.js"></script>
 
 	<style type="text/css">
 		.signature-pad {
@@ -316,7 +301,7 @@
 		}
 
 		.panels {
-			background: #dbdfe2;
+			background: ;
 			min-height: 200px;
 			width: 100%;
 			max-width: 100%;
@@ -410,10 +395,6 @@
 			background-color: #f8f7ff;
 		}
 
-		table.dataTable thead th,
-		table.dataTable tfoot th {
-			font-weight: normal;
-		}
 
 		table.table .thead-light th {
 			font-size: 15px;
@@ -430,8 +411,8 @@
 		}
 
 		table th {
-			color: white;
-			background-color: #2e455deb;
+			color: 332d2d;
+			
 			font-size: small;
 		}
 
@@ -6893,10 +6874,10 @@ function updateMerchant(value) {
 									</td>
 
 									<td>
-										<div class="dropdown">
+										<div class="dropdown actionBtn">
 											<button class="btn btn-secondary dropdown-toggle" type="button"
 												id="dropdownMenuButton"
-												style="line-height: 0.7; width: 80px; font-size: 11px; color: #3a4550; background: #e3e3e4;"
+												style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
 												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">QR
 												Type</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
@@ -6904,7 +6885,7 @@ function updateMerchant(value) {
 												<a class="dropdown-item" title="Static QR"
 													th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name}"
 													th:if="${bankList?.type_maucas}=='Maucas'"
-													style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="edit_value" onclick="StaticQR(this)">Static QR</a>
 
 												<!--<div class="dropdown-divider"
@@ -6928,10 +6909,10 @@ function updateMerchant(value) {
 										</div>
 									</td>
 									<td th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
-										<div class="dropdown">
+										<div class="dropdown actionBtn">
 											<button class="btn btn-secondary dropdown-toggle" type="button"
 												id="dropdownMenuButton"
-												style="line-height: 0.7; width: 64px; font-size: 11px; color: #3a4550; background: #e3e3e4;"
+												style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
 												data-toggle="dropdown" aria-haspopup="true"
 												aria-expanded="false">Action</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
@@ -6939,7 +6920,7 @@ function updateMerchant(value) {
 												<a class="dropdown-item" title="View"
 													th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'"
 													th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
-													style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="delete_value" onclick="view_btn(this)">View</a>
 												<div class="dropdown-divider"
 													th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'">
@@ -6947,12 +6928,12 @@ function updateMerchant(value) {
 												<a class="dropdown-item" title="View"
 													th:if="${bankList.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'"
 													th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
-													style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="view_value" onclick="view_new_btn(this)">View</a> <a
 													class="dropdown-item" title="Modify"
 													th:if="${bankList.entity_flg}=='Y'"
 													th:attr="data-bank_code=${bankList?.merchant_id}"
-													style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px"
+													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="edit_value" onclick="edit_btn_submit(this)">Modify</a>
 
 												<div class="dropdown-divider"
@@ -6961,12 +6942,12 @@ function updateMerchant(value) {
 												<a class="dropdown-item" title="Verify"
 													th:if="${bankList.entity_flg}=='N'"
 													th:attr="data-bank_code=${bankList?.merchant_id}"
-													style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="delete_value" onclick="verify_btn_submit(this)">Verify</a>
 												<div class="dropdown-divider"></div>
 												<a class="dropdown-item" title="Delete"
 													th:attr="data-merchant_id=${bankList?.merchant_id}"
-													style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="delete_value" onclick="deleteMerchantData(this)">Delete</a>
 
 											</div>
@@ -7077,7 +7058,7 @@ function updateMerchant(value) {
 						<h4 style="color: white; font-size: 1.2rem;">Merchant Master
 							- File Upload</h4>
 					</div>
-					<div class="card-body p-0 mt-3">
+					<div class="card-body p-0 mt-3" style="background-color:#ffffff ;">
 						<div class="panel-heading text-center">
 							<div class="form-group ">
 								<div class="row">
@@ -7164,7 +7145,7 @@ function updateMerchant(value) {
 
 				</div> -->
 				
-				<div class="card-body mb-0 pb-0 " style="background-color: gainsboro;">
+				<div class="card-body mb-0 pb-0 " >
 					<form action="#" th:object="${branchDet}" method="POST" name="merchantMaster" autocomplete="off"
 						id="BankandBranch">
 						<div class="panels mb-0 pb-0">
@@ -9180,7 +9161,7 @@ function updateMerchant(value) {
 				<br>
 				<div class="card-body">
 					<form action="#" method="POST" name="mainform" id="TabForm">
-						<div style="background-color: gainsboro;">
+						<div >
 							<!-- Tab buttons -->
 							<div style="background-color: lightgrey;"
 								class="row formline d-flex justify-content-around p-2" id="tabs">
@@ -10420,7 +10401,7 @@ function updateMerchant(value) {
 							Merchant Master - View</h4>
 					</div>
 				</div>
-				<div class="card-body" style="background-color: gainsboro;">
+				<div class="card-body" >
 					<form action="#" th:object="${branchDet}" method="POST" name="merchantMaster" autocomplete="off"
 						id="BankandBranch">
 						<div class>
@@ -12038,23 +12019,23 @@ function updateMerchant(value) {
 															DETAILS</h6>
 													</div>
 												</div>
-												<div class="card-body" style="background-color: gainsboro;">
+												<div class="card-body" >
 													<div class="panel panel-default">
 														<table class="" id="sign"
 															style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 															<tr>
 																<td
-																	style="text-align: center;background-color: gainsboro;">
+																	style="text-align: center;;">
 																	Name: <input type="text" th:value="${branchDet?.merchant_corp_name}"
-																		style="border: none; outline: none; background-color: gainsboro; margin-left: 20px; width: 150px;"
+																		style="border: none; outline: none; ; margin-left: 20px; width: 150px;"
 																		id="ca_first_name" readonly />
 																</td>
 
 																<td rowspan="2"
-																	style="text-align: center;background-color: gainsboro;">
+																	style="text-align: center;;">
 																	Signature:
 																	<div id="imgCapture1"
-																		style="border: 1px solid #ccc;background-color: gainsboro"
+																		style="border: 1px solid #ccc;"
 																		height="60" width="30"></div>
 																	<div style="display: none; margin-left: 55px;"
 																		id="signature">
@@ -12909,7 +12890,7 @@ function updateMerchant(value) {
 								</div>
 							</div>
 							<div class="content"
-								style="border: 1px solid #36404a; padding: 15px; background-color: #dbdfe2;">
+								style="border: 1px solid #36404a; padding: 15px; ">
 								<div class="row formline">
 									<label class="col-sm-1">Entry User</label>
 									<div class="col-sm-2">
@@ -12985,7 +12966,7 @@ function updateMerchant(value) {
 					<br>
 					<div class="card-body pt-0">
 						<form action="#" method="POST" name="mainform" id="TabForm" th:object="${MerUnit}">
-							<div style="background-color: gainsboro; padding-left: 50px; padding-top: 30px;">
+							<div style=" padding-left: 50px; padding-top: 30px;">
 								<div class="row formline">
 									<div class="col-sm-2">
 										<label for="merchant_legal_user_id">Merchant User Id<span
@@ -14311,7 +14292,7 @@ function updateMerchant(value) {
 							</div>
 
 							<div class="content"
-								style="padding: 15px; background-color: #dbdfe2; border: 1px solid #36404a;"
+								style="padding: 15px;  border: 1px solid #36404a;"
 								th:if="${formmode}!='UnitmAdd'">
 								<div class="row formline">
 									<label class="col-sm-1">Entry User</label>
@@ -14390,7 +14371,7 @@ function updateMerchant(value) {
 						</div>
 					</div>
 					<br>
-					<form style="background-color: gainsboro; padding-top: 10px;" action="#" method="POST"
+					<form style="; padding-top: 10px;" action="#" method="POST"
 						th:object="${Meruserlist}" name="mainform" id="TabForm">
 						<div class="card-body pt-0">
 							<div style="margin-left: 40px">
@@ -15097,7 +15078,7 @@ function updateMerchant(value) {
 								<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal"
 									onclick="back();">Back</button>
 							</div>
-							<div class="content" style="margin-left: 20px; padding: 15px; background-color: #dbdfe2;"
+							<div class="content" style="margin-left: 20px; padding: 15px; "
 								th:if="${formmode}!='UsermAdd'">
 								<div class="row formline">
 									<label class="col-sm-1">Entry User</label>
@@ -15830,7 +15811,7 @@ function updateMerchant(value) {
 								onclick="back();">Back</button>
 						</div>
 
-						<div class="content" style="margin-left: 20px; padding: 15px; background-color: #dbdfe2;"
+						<div class="content" style="margin-left: 20px; padding: 15px; "
 							th:if="${formmode}!='DevicemAdd'">
 							<div class="row formline">
 								<label class="col-sm-1">Entry User</label>
@@ -17344,23 +17325,23 @@ function updateMerchant(value) {
 																					DETAILS</h6>
 																			</div>
 																		</div>
-																		<div class="card-body" style="background-color: gainsboro;">
+																		<div class="card-body" >
 																			<div class="panel panel-default">
 																				<table class="" id="sign"
 																					style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 																					<tr>
 																						<td
-																							style="text-align: center;background-color: gainsboro;">
+																							style="text-align: center;;">
 																							Name: <input type="text" th:value="${branchDet?.merchant_corp_name}"
-																								style="border: none; outline: none; background-color: gainsboro; margin-left: 20px; width: 150px;"
+																								style="border: none; outline: none; ; margin-left: 20px; width: 150px;"
 																								id="ca_first_name" readonly />
 																						</td>
 
 																						<td rowspan="2"
-																							style="text-align: center;background-color: gainsboro;">
+																							style="text-align: center;;">
 																							Signature:
 																							<div id="imgCapture1"
-																								style="border: 1px solid #ccc;background-color: gainsboro"
+																								style="border: 1px solid #ccc;"
 																								height="60" width="30"></div>
 																							<div style="display: none; margin-left: 55px;"
 																								id="signature">
@@ -17754,7 +17735,7 @@ function updateMerchant(value) {
 						</div>
 					</div>
 					<div class="content mt-0"
-						style="border: 1px solid #36404a; padding: 15px; background-color: #dbdfe2; margin: 30px;">
+						style="border: 1px solid #36404a; padding: 15px;  margin: 30px;">
 						<div class="row formline">
 							<label class="col-sm-1">Entry User</label>
 							<div class="col-sm-2">
@@ -19112,23 +19093,23 @@ function updateMerchant(value) {
 																					DETAILS</h6>
 																			</div>
 																		</div>
-																		<div class="card-body" style="background-color: gainsboro;">
+																		<div class="card-body" >
 																			<div class="panel panel-default">
 																				<table class="" id="sign"
 																					style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 																					<tr>
 																						<td
-																							style="text-align: center;background-color: gainsboro;">
+																							style="text-align: center;;">
 																							Name: <input type="text" th:text="${branchDet?.merchant_corp_name}"
-																								style="border: none; outline: none; background-color: gainsboro; margin-left: 20px; width: 150px;"
+																								style="border: none; outline: none; ; margin-left: 20px; width: 150px;"
 																								id="ca_first_name" readonly />
 																						</td>
 
 																						<td rowspan="2"
-																							style="text-align: center;background-color: gainsboro;">
+																							style="text-align: center">
 																							Signature:
 																							<div id="imgCapture1"
-																								style="border: 1px solid #ccc;background-color: gainsboro"
+																								style="border: 1px solid #ccc;"
 																								height="60" width="30"></div>
 																							<div style="display: none; margin-left: 55px;"
 																								id="signature">
@@ -19460,7 +19441,7 @@ function updateMerchant(value) {
 						</div>
 					</div>
 					<div class="content mt-0"
-						style="border: 1px solid #36404a; padding: 15px; background-color: #dbdfe2; margin: 30px;">
+						style="border: 1px solid #36404a; padding: 15px;  margin: 30px;">
 						<div class="row formline">
 							<label class="col-sm-1">Entry User</label>
 							<div class="col-sm-2">
@@ -20376,7 +20357,7 @@ function updateMerchant(value) {
 						</div>
 					</div>
 					<div class="content mt-0"
-						style="border: 1px solid #36404a; padding: 15px; background-color: #dbdfe2; margin: 30px;">
+						style="border: 1px solid #36404a; padding: 15px;  margin: 30px;">
 						<div class="row formline">
 							<label class="col-sm-1">Entry User</label>
 							<div class="col-sm-2">
@@ -20823,7 +20804,7 @@ function updateMerchant(value) {
 						<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal"
 							onclick="back();">Back</button>
 					</div>
-					<div class="content" style="margin-left: 20px; padding: 15px; background-color: #dbdfe2;">
+					<div class="content" style="margin-left: 20px; padding: 15px; ">
 						<div class="row formline">
 							<label class="col-sm-1">Entry User</label>
 							<div class="col-sm-2">

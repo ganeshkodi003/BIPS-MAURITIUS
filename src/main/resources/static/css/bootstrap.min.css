@@ -15568,91 +15568,8 @@ body {
 }
 
 0%{
--webkit-transform
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:translateY(40px)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;
-transform
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:translateY(40px)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-webkit-transform:translateY(40px);
+transform:translateY(40px);
 }
 }
 @
@@ -16163,3 +16080,13 @@ input {
 	background : transparent !important;
 }
 /*# sourceMappingURL=bootstrap.min.css.map */
+
+
+.card-header-custom{
+
+	font-size: 14px;
+	font-family: sans-serif;
+	font-style: times new roman;
+	color: white;
+	margin-bottom: 0;
+}
