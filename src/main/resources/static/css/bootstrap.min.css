@@ -2319,11 +2319,11 @@ pre code {
 
 .table thead th {
 	vertical-align: bottom;
-	border-bottom: 2px solid #495561
+	border-bottom: 1px solid #495561
 }
 
 .table tbody+tbody {
-	border-top: 2px solid #495561
+	border-top: 1px solid #495561
 }
 
 .table-sm td, .table-sm th {
@@ -2339,7 +2339,7 @@ pre code {
 }
 
 .table-bordered thead td, .table-bordered thead th {
-	border-bottom-width: 2px
+	border-bottom-width: 1px
 }
 
 .table-borderless tbody+tbody, .table-borderless td, .table-borderless th,
