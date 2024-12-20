@@ -10,6 +10,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import java.util.function.BiConsumer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialBlob;
 import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 
@@ -32,6 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +46,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,6 +78,8 @@ import com.bornfire.entity.BIPS_UnitManagement_Repo;
 import com.bornfire.entity.BIPS_Unit_Mangement_Entity;
 import com.bornfire.entity.BankAgentTable;
 import com.bornfire.entity.BankAgentTableRep;
+import com.bornfire.entity.DocumentMaster_Entity;
+import com.bornfire.entity.DocumentMaster_Repo;
 import com.bornfire.entity.IPSAuditTable;
 import com.bornfire.entity.IPSAuditTableRep;
 import com.bornfire.entity.IPSChargesAndFees;
@@ -85,6 +91,8 @@ import com.bornfire.entity.MerchantMasterMod;
 import com.bornfire.entity.MerchantMasterModRep;
 import com.bornfire.entity.MerchantMasterRep;
 import com.bornfire.entity.SettlementAccount;
+import com.bornfire.entity.Sign_Master_Entity;
+import com.bornfire.entity.Sign_Master_Repo;
 import com.bornfire.entity.UserProfile;
 import com.bornfire.entity.UserProfileRep;
 import com.bornfire.exception.Connect24Exception;
@@ -195,6 +203,12 @@ public class IPSRestController {
 
 	@Autowired
 	BIPS_CheckList_Repo bIPS_CheckList_Repo;
+	
+	@Autowired
+	Sign_Master_Repo Sign_Master_Repo;
+	
+	@Autowired
+	DocumentMaster_Repo documentMaster_Repo;
 
 
 	@RequestMapping(value = "TransactionDownload", method = RequestMethod.GET)
@@ -1866,6 +1880,77 @@ public class IPSRestController {
 			}
 
 			return response;
+		}
+		@GetMapping("/{uniqueId}")
+		@ResponseBody
+		public ResponseEntity<ByteArrayResource> viewOrDownloadFile(@PathVariable String uniqueId) {
+			System.out.println("Unique ID: " + uniqueId);
+
+			DocumentMaster_Entity document = documentMaster_Repo.findByUnique1(uniqueId);
+
+			if (document != null) {
+				byte[] documentContent = document.getUpd_file();
+				String fileName = document.getFile_name();
+				String fileType = determineFileType(fileName);
+
+				// Log the file type
+				System.out.println("File Type: " + fileType);
+
+				ByteArrayResource resource = new ByteArrayResource(documentContent);
+				return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
+						.contentType(MediaType.parseMediaType(fileType)).contentLength(documentContent.length)
+						.header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
+						.header(HttpHeaders.PRAGMA, "no-cache").header(HttpHeaders.EXPIRES, "0").body(resource);
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		}
+
+		private String determineFileType(String fileName) {
+			if (fileName.endsWith(".png")) {
+				return "image/png";
+			} else if (fileName.endsWith(".pdf")) {
+				return "application/pdf";
+			} else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg") || fileName.endsWith(".jfif")) {
+				return "image/jpeg";
+			} else if (fileName.endsWith(".mp4")) {
+				return "video/mp4";
+			} else if (fileName.endsWith(".xls")) {
+				return "application/vnd.ms-excel"; // MIME type for .xls
+			} else if (fileName.endsWith(".xlsx")) {
+				return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"; // MIME type for .xlsx
+			} else {
+				return "application/octet-stream"; // Fallback MIME type
+			}
+		}
+
+		@PostMapping(value = "/AddStudentss")
+		@ResponseBody
+		public String uploadSignatureAndPhoto(@RequestParam String merchant_Id, @RequestParam String srcURL)
+				throws IOException, SQLException {
+
+			String msg = null;
+			try {
+				Sign_Master_Entity signatureEntity = new Sign_Master_Entity();
+
+				BigDecimal srlnoStr = Sign_Master_Repo.getSequence();
+				signatureEntity.setS_no(srlnoStr);
+
+				signatureEntity.setMerchant_Id(merchant_Id);
+				;
+				byte[] buff = srcURL.getBytes();
+				Blob blob = new SerialBlob(buff);
+				signatureEntity.setSign(blob);
+
+				Sign_Master_Repo.save(signatureEntity);
+
+				msg = "Signature details Uploaded successfully...";
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "Signature details Upload Unsuccessfull...";
+			}
+
+			return msg;
 		}
 
 }

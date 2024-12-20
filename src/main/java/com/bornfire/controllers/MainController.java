@@ -1,7 +1,10 @@
 package com.bornfire.controllers;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
@@ -102,6 +105,8 @@ import com.bornfire.entity.NotificationParmsRep;
 import com.bornfire.entity.ReferenceCodeEntity;
 import com.bornfire.entity.ReferenceCodeRep;
 import com.bornfire.entity.SettlementAccountRepository;
+import com.bornfire.entity.Sign_Master_Entity;
+import com.bornfire.entity.Sign_Master_Repo;
 import com.bornfire.entity.Two_factor_auth;
 import com.bornfire.entity.Twofactorauth;
 import com.bornfire.entity.UserProfile;
@@ -255,6 +260,9 @@ public class MainController {
 
 	@Autowired
 	BIPS_Service_ReqMonitoring_Repo bIPS_Service_ReqMonitoring_Repo;
+	
+	@Autowired
+	Sign_Master_Repo Sign_Master_Repo;
 
 	private String pagesize;
 
@@ -4179,5 +4187,29 @@ public class MainController {
 	        md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
 	    }
 	    return "paymentprocessing.html";  // Using TransactionReports.html for now
+	}
+	@RequestMapping(value = "/getimages", method = { RequestMethod.GET })
+	@ResponseBody
+	public String getimagesss(@RequestParam(required = false) String appl_ref_no) throws SQLException {
+
+		String msg = null;
+		String lastChars = null;
+		System.out.println(appl_ref_no);
+		try {
+			System.out.println("inside");
+			List<Sign_Master_Entity> vv = Sign_Master_Repo.findByref_no(appl_ref_no);
+			System.out.println("The encryptedddddd" + vv.get(0).getSign());
+
+			InputStream ll = vv.get(0).getSign().getBinaryStream();
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(ll));
+			msg = reader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		lastChars = msg.substring(22, msg.length());
+
+		return lastChars;
+
 	}
 }
