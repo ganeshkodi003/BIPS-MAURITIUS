@@ -1,0 +1,3216 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+	<script src="js/bootstrap411.js"></script>
+	<script src="js/Chart.js"></script>
+
+	<style>
+		.modaldoc {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 30%;
+			width: 50%;
+			height: 100%;
+			/*  background-color: rgba(0, 0, 0, 0.7); */
+			z-index: 1;
+		}
+
+		.modal-contentdoc {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: #fff;
+			border: 1px solid #888;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			text-align: center;
+		}
+
+		.closedoc {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-size: 30px;
+			cursor: pointer;
+			color: white;
+		}
+
+		h2 {
+			color: #000;
+			text-align: center;
+			font-size: 2em;
+			margin: 20px 0;
+		}
+
+		.tabs {
+			float: right;
+		}
+
+		.tab {
+			cursor: pointer;
+			padding: 10px 20px;
+			margin: 0px 2px;
+			background: #32557f;
+			display: inline-block;
+			color: #fff;
+			border-radius: 3px 3px 0px 0px;
+			box-shadow: 0 0.5rem 0.8rem #00000080;
+		}
+
+		.panels {
+			background: #dbdfe2;
+			min-height: 200px;
+			width: 100%;
+			max-width: 100%;
+			border-radius: 3px;
+			overflow: hidden;
+			padding: 20px;
+		}
+
+		.panel {
+			/* display: none; */
+			animation: fadein 0.8s;
+		}
+
+		@ keyframes fadein {
+			from {
+				opacity: 0;
+
+			}
+
+			to {
+				opacity: 1;
+			}
+
+		}
+
+		.panel-title {
+			font-size: 1.5em;
+			font-weight: bold;
+		}
+
+		#one:checked~.tabs #one-tab,
+		#two:checked~.tabs #two-tab,
+		#three:checked~.tabs #three-tab,
+		#four:checked~.tabs #four-tab,
+		#four1:checked~.tabs #four1-tab,
+		#five:checked~.tabs #five-tab {
+			background: #fff;
+			color: #000;
+			border-top: 3px solid #32557f;
+		}
+
+		.radio {
+			display: none;
+		}
+
+		#one:checked~.panels #one-panel,
+		#two:checked~.panels #two-panel,
+		#three:checked~.panels #three-panel,
+		#four:checked~.panels #four-panel,
+		#four1:checked~.panels #four1-panel,
+		#five:checked~.panels #five-panel {
+			display: block;
+		}
+
+		#one:checked~.tabs #one-tab,
+		#two:checked~.tabs #two-tab,
+		#three:checked~.tabs #three-tab,
+		#four:checked~.tabs #four-tab,
+		#four1:checked~.tabs #four1-tab,
+		#five:checked~.tabs #five-tab {
+			background: #fff;
+			color: #000;
+			border-top: 3px solid #32557f;
+		}
+
+		body {
+			background-color: lightgrey;
+		}
+
+		.h2,
+		h2 {
+			font-size: 2rem;
+			background-color: #555;
+			color: white;
+		}
+
+		.pagebut {
+			margin-top: 1%;
+			/*  width: 58%;  */
+			padding: 1% 1%;
+			background-color: #2e455d;
+			color: white;
+		}
+
+		select {
+			width: 150px;
+			margin: 10px;
+		}
+
+		td {
+			background-color: #f8f7ff;
+		}
+
+		table.dataTable thead th,
+		table.dataTable tfoot th {
+			font-weight: normal;
+		}
+
+		table.table .thead-light th {
+			font-size: 15px;
+			border-color: #d4d7da;
+		}
+
+		select:focus {
+			min-width: 150px;
+			width: auto;
+		}
+
+		#hidden_div {
+			display: none;
+		}
+
+		table th {
+			color: white;
+			background-color: #2e455deb;
+			font-size: small;
+		}
+
+		.menu-title-header {
+			padding: 0.45rem 0.45rem;
+			background: #377486;
+			color: #fff;
+			font-family: "Nunito", calibry;
+		}
+
+		.modal-title {
+			text-align: center;
+			font-size: 14px;
+			font-weight: 900;
+			color: #332d2d;
+			font-family: calibry
+		}
+
+		table td {
+			font-size: small;
+		}
+
+		.container-manager {
+			padding-right: 43px;
+			padding-left: 15px;
+			margin-right: auto;
+			margin-left: 18.3%;
+			margin-top: 80px;
+		}
+
+		#overlay {
+			position: fixed;
+			top: 0;
+			z-index: 100;
+			width: 100%;
+			height: 100%;
+			display: none;
+			background: rgba(0, 0, 0, 0.6);
+		}
+
+		.cv-spinner {
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		.dataTables_empty {
+			color: #be3232;
+		}
+
+		.button_plus {
+			position: absolute;
+			width: 35px;
+			height: 35px;
+			background: #fff;
+			cursor: pointer;
+			border: 2px solid #095776;
+			/* Mittig */
+			top: 50%;
+			left: 50%;
+		}
+
+		.button_plus:after {
+			content: '';
+			position: absolute;
+			transform: translate(-50%, -50%);
+			height: 4px;
+			width: 50%;
+			background: #095776;
+			top: 50%;
+			left: 50%;
+		}
+
+		.button_plus:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: #095776;
+			height: 50%;
+			width: 4px;
+		}
+
+		.button_plus:hover:before,
+		.button_plus:hover:after {
+			background: #fff;
+			transition: 0.2s;
+		}
+
+		.button_plus:hover {
+			background-color: #095776;
+			transition: 0.2s;
+		}
+
+		#Merchant_detials td,
+		#merchant1 td,
+		#Merchant_detials1 td {
+			background-color: transparent !important;
+		}
+
+		#Merchant_detials2 td,
+		#merchant1 td,
+		#Merchant_detials1 td {
+			background-color: transparent !important;
+		}
+
+		.underline {
+			text-decoration: underline;
+			color: #08a6f1;
+			cursor: pointer;
+		}
+
+		.reqError {
+			font-size: 14px;
+			padding: 6px 0 4px;
+			color: red;
+			display: block
+		}
+
+		#status_enable-error {
+			position: absolute;
+			top: 23px;
+			left: 14px;
+		}
+
+		.tablinks:active {
+			background-color: lightblue;
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		}
+
+		.tablinks:hover {
+			background-color: lightblue;
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		}
+
+		.tab-content {
+			display: none;
+		}
+
+		#hideAfterSuccess {
+			display: none;
+		}
+
+		.active-tab {
+			display: block;
+		}
+
+		.input-group {
+			position: relative;
+		}
+
+		#toggle-password {
+			background-color: transparent;
+			/* Make background transparent */
+			border: none;
+			/* Remove border */
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			cursor: pointer;
+			background-color: transparent;
+			border: none;
+		}
+
+		#eye-icon {
+			color: black;
+			background-color: transparent !important;
+		}
+
+		.dataTables_filter input {
+			float: right;
+			margin-top: 10px;
+			margin-right: 20px;
+		}
+
+		#Merchant_detials td,
+		#merchant1 td,
+		#Merchant_detials1 td {
+			background-color: transparent !important;
+		}
+
+		#country-list {
+			min-width: 60px;
+		}
+
+		#countrycode,
+		#alt_countrycode,
+		#ph_countrycode,
+		#cp1_countrycode,
+		#cp6_countrycode,
+		#cp2_countrycode,
+		#cp3_countrycode,
+		#cp4_countrycode,
+		#cp5_countrycode,
+		#ph_countrycode_r1,
+		#ph_countrycode_r2,
+		#ph_countrycode_r3,
+		#ph_countrycode_r4,
+		#ph_countrycode_r5,
+		#ph_countrycode_r6,
+		#ph_countrycode_r7,
+		#ph_countrycode_r8,
+		#ph_countrycode_r9,
+		#ph_countrycode_r10,
+		#ofc_countrycode_r1,
+		#ofc_countrycode_r2,
+		#ofc_countrycode_r3,
+		#ofc_countrycode_r4,
+		#ofc_countrycode_r5,
+		#ofc_countrycode_r6,
+		#ofc_countrycode_r7,
+		#ofc_countrycode_r8,
+		#ofc_countrycode_r9,
+		#ofc_countrycode_r10 {
+			min-width: 60px;
+		}
+
+		.input-group-prepend {
+			width: auto;
+		}
+
+		.input-group .form-control {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+		.dataTables_scrollBody {
+			overflow: unset !important;
+		}
+
+		.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
+			color: black;
+			font-style: italic;
+		}
+
+		#filterInputCode::placeholder,
+		#filterInputName::placeholder {
+			color: black;
+		}
+
+		.circle {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			background-color: #3498db;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+		}
+
+		.plus-button {
+			font-size: 25px;
+			color: white;
+			cursor: pointer;
+			text-decoration: none;
+			position: absolute;
+			top: 43%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.minus-button {
+			font-size: 25px;
+			color: white;
+			cursor: pointer;
+			text-decoration: none;
+			position: absolute;
+			top: 43%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.SlabRateTable th {
+			border-color: #FFA500;
+			/* Border color for <th> elements */
+			background-color: white;
+			color: black;
+		}
+
+		.SlabRateTable td {
+			border-color: #FFA500;
+			/* Border color for <td> elements */
+		}
+
+
+		.col-form-label {
+			color: #343a40;
+			font-weight: bold;
+		}
+	</style>
+	<script>
+		function clickPhoto(a) {
+			var userid = a.getAttribute("data-userid")
+			$.ajax({
+				type: 'get',
+				url: "./getMerBlobImage/" + userid,
+				success: function (response) {
+					$('#imageshow').modal('show');
+					document.getElementById("doc_image").src = "data:image/png;base64," +
+						response;
+				}
+			});
+		}
+
+		function show1(a) {
+			$("#imgCapture11 img").empty();
+			$("#imgCapture11").html("");
+			//var values = document.getElementById("merchant_legal_id").value;
+			var values = a.getAttribute("data-doc_types");
+			var value1 = a.getAttribute("data-doc_type");
+			console.log(values);
+			console.log(value1);
+			$.ajax({
+				type: 'get',
+				url: './getproof1?appl_ref_no=' + values + '&doc_type=' + value1,
+				success: function (response) {
+					console.log(response); // Logs the base64 string
+					const base64String = response;
+					const uint8Array = base64ToUint8Array(base64String);
+					console.log(uint8Array); // Logs the converted Uint8Array
+					const blob = new Blob([uint8Array]);
+					console.log(blob); // Logs the created Blob object
+					const imageUrl = URL.createObjectURL(blob);
+
+					const img = document.createElement("img");
+					img.src = imageUrl;
+
+
+					img.style.width = "350px";
+					img.style.height = "250px";
+					$(document).ready(function () {
+						$(function () {
+							$('#popup1').css("visibility", "visible");
+							$('#popup1').css("opacity", 1);
+						});
+
+						$(".imageclose").click(function () {
+							$('#popup1').css("visibility", "hidden");
+							$('#popup1').css("opacity", 0);
+						});
+					});
+					var modaldoc = document.getElementById("myModaldoc");
+					modaldoc.style.display = "block";
+					var element = document.getElementById("imgCapture11");
+					element.appendChild(img);
+					console.log(img);
+				}
+			});
+
+		}
+		function base64ToUint8Array(base64) {
+			const binaryString = window.atob(base64); // Decode base64 string
+			const len = binaryString.length;
+			const bytes = new Uint8Array(len);
+
+			for (let i = 0; i < len; i++) {
+				bytes[i] = binaryString.charCodeAt(i);
+			}
+
+			return bytes;
+		}
+
+		function closeDoc(a) {
+			var modaldoc = document.getElementById("myModaldoc");
+			modaldoc.style.display = "none";
+		}
+		function home() {
+			location.href = '/IPSAdmin/IPSDashboard'
+		}
+		function submitlist() {
+			location.href = './merchantReg2?formmode=list';
+		}
+
+
+		function onimageon() {
+			var appl_ref_no = document.getElementById("MerID").value;
+			//alert(appl_ref_no);
+			console.log(appl_ref_no);
+			$.ajax({
+				type: 'get',
+				url: './getimages?appl_ref_no=' + appl_ref_no,
+				success: function (response) {
+
+					// alert(response)
+					const base64String = response;
+
+					const uint8Array = base64ToUint8Array(base64String);
+
+					const blob = new Blob([uint8Array]);
+
+					const imageUrl = URL.createObjectURL(blob);
+					const imgelement = document.createElement("img");
+					imgelement.src = imageUrl;
+
+					imgelement.style.width = "200px";
+					imgelement.style.height = "100px";
+					var element1 = document.getElementById("imgCapture1");
+					element1.appendChild(imgelement);
+
+					console.log(img);
+				}
+
+
+			});
+
+
+		};
+		function close() {
+			$('#imageshow').modal('hide');
+		}
+	</script>
+</head>
+
+<body onload=" onimageon();">
+
+	<div class="content-manager">
+		<div id="overlay">
+			<div class="cv-spinner">
+				<span class="spinner"></span>
+			</div>
+		</div>
+
+		<div th:if="${formmode}=='view'" class="content" style="border: 2px solid #FF7F50; margin: 5px;">
+			<div class="card">
+				<div class="card-header d-flex justify-content-between"
+					style="background: linear-gradient(to bottom, #FFA500, #FF7F50); padding: 5px 10px; color: white; border-radius: 5px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);">
+					<div class="float-left">
+						<h6 style="font-size: 15px; margin: 0;">Merchant Master</h6>
+					</div>
+				</div>
+
+
+
+				<form action="#" th:object="${branchDet}" method="POST" autocomplete="off" id="BankandBranchverify">
+					<div class="card-body" style="margin-top: -10px;">
+						<div class="card" style="border: 2px solid #FF7F50; border-radius: 8px;">
+							<div class="float-left mt-2">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">MERCHANT
+									DETAILS</h6>
+							</div>
+							<div class="ml-2" style="margin-top: -10px;">
+								<div class="row formline" style="font-size: 11px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant Id
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_legal_id" name="merchant_legal_id"
+											th:text="${branchDet?.merchant_id}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Corporate Name :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_addr" name="merchant_addr"
+											th:text="${branchDet?.merchant_corp_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Name :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_addr" name="merchant_addr"
+											th:text="${branchDet?.merchant_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Registered
+										Address Line 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_name" name="merchant_name"
+											th:text="${branchDet?.merchant_addr}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Registered
+										Address Line 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_addr" name="merchant_addr"
+											th:text="${branchDet?.merchant_addr_2}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Registered
+										Address Line 3 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_addr" name="merchant_addr"
+											th:text="${branchDet?.merchant_addr_3}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Business Registration No :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_name" name="merchant_name"
+											th:text="${branchDet?.brn_no}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Business Registration Date :</label>
+									<div class="col-sm-2">
+										<label type="text" name="merchant_addr"
+											th:text="${#dates.format(branchDet?.brn_date, 'dd-MM-yyyy')}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Mode :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_name" name="merchant_name"
+											th:text="${branchDet?.merchant_mode}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="row formline pl-2" style="font-size: 11px; margin-top: -15px;">
+
+								<label class="col-sm-2 col-form-label"
+									style="color: #343a40; font-weight: bold;">Merchant
+									Status :</label>
+								<div class="col-sm-2" style="font-size: 11px;margin-top: 10px;">
+									<!--<input th:if="${branchDet.status_enable} != 'Enable'" type="radio" name="status_enable" value="Enable" id="status_enable" 
+										           style="transform: scale(0.8); margin-right: 2px;">
+										    <input th:if="${branchDet.status_enable} == 'Enable'" type="radio" name="status_enable" value="Enable" id="status_enable" checked
+										           style="transform: scale(0.8); margin-right: 2px; ">
+										    <label style="font-size: 0.6rem;">ENABLE</label>
+
+										    <input th:if="${branchDet.status_enable} != 'Disable'" type="radio" name="status_enable" value="Disable" id="status_disable" 
+										           style="transform: scale(0.8); margin-left: 10px; margin-right: 2px;">
+										    <input th:if="${branchDet.status_enable} == 'Disable'" type="radio" name="status_enable" value="Disable" id="status_disable" checked 
+										           style="transform: scale(0.8); margin-left: 10px; margin-right: 2px;">
+										    <label style="font-size: 0.6rem;">DISABLE</label>-->
+									<input th:if="${branchDet.status_enable} != 'Enable'" type="radio"
+										name="status_enable" Value="Enable" id="status_enable" style="transform: scale(0.8); margin-right: 2px;"> 
+										<input style="transform: scale(0.8); margin-right: 2px;"
+										th:if="${branchDet.status_enable} == 'Enable'" type="radio" name="status_enable"
+										Value="Enable" id="status_enable" checked>
+									<label>Enable</label> <input th:if="${branchDet.status_enable} != 'Disable'" style="transform: scale(0.8); margin-right: 2px;"
+										type="radio" name="status_enable" Value="Disable" id="status_disable">
+									<input th:if="${branchDet.status_enable} == 'Disable'" type="radio" style="transform: scale(0.8); margin-right: 2px;"
+										name="status_enable" Value="Disable" id="status_disable" checked>
+									<label>Disable</label> <span id="status_enable_vali" class="reqError"></span> 
+								</div>
+
+								<label class="col-sm-2 col-form-label"
+									style="color: #343a40; font-weight: bold;">Merchant
+									Partner :</label>
+								<div class="col-sm-2">
+									<label type="text" id="merchant_addr" name="merchant_addr"
+										th:text="${branchDet?.mer_partner}" readonly
+										style="margin-top: 10px; font-size: 0.6rem; ">
+									</label>
+								</div>
+								<label class="col-sm-2 col-form-label" style="color: #343a40; font-weight: bold;">Charge
+									Back
+									Approval :</label>
+								<div class="col-sm-2">
+									<label type="text" id="merchant_name" th:text="${branchDet?.chargeback_approval}"
+										name="merchant_name" readonly
+										style="margin-top: 10px; font-size: 0.6rem; ">
+									</label>
+								</div>
+							</div>
+							<div class="row formline pl-2" style="font-size: 11px;margin-top: -19px;">
+
+								<label class="col-sm-2 col-form-label" style="color: #343a40; font-weight: bold;">Charge
+									Back
+									Amount : </label>
+								<div class="col-sm-2">
+									<label type="text" id="merchant_addr" name="merchant_addr"
+										th:text="${branchDet?.chargeback_amount == 0 ? '0.00' :#numbers.formatDecimal(branchDet?.chargeback_amount, 0, 'COMMA', 2, 'POINT')}"
+										readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</label>
+								</div>
+								<label class="col-sm-2 col-form-label"
+									style="color: #343a40; font-weight: bold;">Transaction
+									Amount : </label>
+								<div class="col-sm-2">
+									<label type="text" id="merchant_addr" name="merchant_addr"
+										th:text="${branchDet?.transaction_amount == 0 ? '0.00' :#numbers.formatDecimal(branchDet?.transaction_amount, 0, 'COMMA', 2, 'POINT')}"
+										readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</label>
+								</div>
+								<label class="col-sm-2 col-form-label" style="color: #343a40; font-weight: bold;">Upload
+									Image</label>
+								<div class="col-sm-2" style="margin-top: 7px">
+									<span class="underline" onclick="clickPhoto(this);"
+										th:attr="data-userid=${branchDet.merchant_id}" th:if="${branchDet?.photo}!=null"
+										title="click to view Image" id="openUploadModal">show view</span>
+								</div>
+							</div>
+
+
+
+
+							<label></label>
+							<div class="float-left">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">OUTLET DETAILS
+								</h6>
+							</div>
+							<label></label>
+							<div class="ml-2">
+								<div class="row formline" style="font-size: 11px; margin-top: -10px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										BIPS Number :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_name" name="merchant_name"
+											th:text="${branchDet?.merchant_id}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Terminal
+										Name :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_addr" name="merchant_addr"
+											th:text="${branchDet?.merchant_terminal}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Type :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_addr" name="merchant_addr"
+											th:text="${branchDet?.merchant_type}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Outlet
+										Location :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_location" name="merchant_location"
+											th:text="${branchDet?.merchant_location}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Address
+										Line 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_out_addr_1" name="merchant_out_addr_1"
+											th:text="${branchDet?.merchant_out_addr_1}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Address
+										Line 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_out_addr_2" name="merchant_out_addr_2"
+											th:text="${branchDet?.merchant_out_addr_2}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Category Code :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_cat_code" name="merchant_cat_code"
+											th:text="${branchDet?.merchant_cat_code}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Category Description :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchant_cat_desc" name="merchant_cat_desc"
+											th:text="${branchDet?.merchant_cat_desc}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Type of QR
+										Acceptance :</label>
+									<div class="col-sm-2" style="margin-top: 10px; font-size: 11px">
+										<input th:if="${branchDet?.type_maucas} != 'Maucas'" type="checkbox"
+											name="type_maucas" value="Maucas" id="type_maucas"
+											style="transform: scale(0.8); margin-right: 2px;"> <input
+											th:if="${branchDet?.type_maucas} == 'Maucas'" type="checkbox"
+											name="type_maucas" value="Maucas" id="type_maucas" checked
+											style="transform: scale(0.8); margin-right: 2px;"> <label
+											style="font-size: 0.6rem; margin-top: -10px;">MAUCAS</label>
+
+										<input th:if="${branchDet?.type_upi} != 'Upi'" type="checkbox" name="type_upi"
+											value="Upi" id="type_upi"
+											style="transform: scale(0.8); margin-left: 10px; margin-right: 2px;">
+										<input th:if="${branchDet?.type_upi} == 'Upi'" type="checkbox" name="type_upi"
+											value="Upi" id="type_upi" checked
+											style="transform: scale(0.8); margin-left: 10px; margin-right: 2px;">
+										<label style="font-size: 0.6rem;">UPI</label>
+									</div>
+
+								</div>
+							</div>
+							<label></label>
+							<div class="float-left" style="margin-top: -10px;">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">MAUCAS</h6>
+							</div>
+							<label></label>
+							<div class="ml-2">
+								<div class="row formline" style="font-size: 11px; margin-top: -10px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Tip or
+										Convenience Indicator :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tip_or_conv_indicator" name="tip_or_conv_indicator"
+											th:text="${branchDet?.tip_or_conv_indicator}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Convenience
+										Fee type :</label>
+									<div class="col-sm-2">
+										<label type="text" id="conv_fees_type" name="conv_fees_type"
+											th:text="${branchDet?.conv_fees_type}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Value of
+										Convenience Fee :</label>
+									<div class="col-sm-2">
+										<label type="text" id="value_conv_fees" name="value_conv_fees"
+											th:text="${branchDet?.value_conv_fees}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Loyalty
+										Number :</label>
+									<div class="col-sm-2">
+										<label type="text" id="loyalty_number" name="loyalty_number"
+											th:text="${branchDet?.loyalty_number}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Purpose Of
+										Transaction :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose_of_tran" name="purpose_of_tran"
+											th:text="${branchDet?.purpose_of_tran}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Static/Dynamic
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="static_field" name="static_field"
+											th:text="${branchDet?.static_field}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+							</div>
+							<label></label>
+							<div class="float-left" style="margin-top: -10px;">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">UPI</h6>
+							</div>
+							<label></label>
+							<div class="ml-2">
+								<div class="row formline" style="font-size: 11px; margin-top: -10px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Version :</label>
+									<div class="col-sm-2">
+										<label type="text" id="version" name="version" th:text="${branchDet?.version}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Modes :</label>
+									<div class="col-sm-2">
+										<label type="text" id="modes" name="modes" th:text="${branchDet?.modes}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Purpose :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose" name="purpose" th:text="${branchDet?.purpose}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Original Id
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="orgid" name="orgid" th:text="${branchDet?.orgid}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Transaction
+										ID :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tid" name="tid" th:text="${branchDet?.tid}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Transaction
+										Reference :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tr" name="tr" th:text="${branchDet?.tr}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Transaction
+										Note :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tn" name="tn" th:text="${branchDet?.tn}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Payee UPI
+										ID :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pa" name="pa" th:text="${branchDet?.pa}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Store ID :</label>
+									<div class="col-sm-2">
+										<label type="text" id="msid" name="msid" th:text="${branchDet?.msid}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Terminal Id :</label>
+									<div class="col-sm-2">
+										<label type="text" id="mtid" name="mtid" th:text="${branchDet?.mtid}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Transaction
+										Mandatory Amount :</label>
+									<div class="col-sm-2">
+										<label type="text" id="bam" name="bam" th:text="${branchDet?.bam}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Transaction
+										Currency Code :</label>
+									<div class="col-sm-2">
+										<label type="text" id="curr" name="curr" th:text="${branchDet?.curr}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Invoice No :</label>
+									<div class="col-sm-2">
+										<label type="text" id="invoiceno" name="invoiceno"
+											th:text="${branchDet?.invoiceno}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Invoice Date :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose_of_tran" name="purpose_of_tran"
+											th:text="${#dates.format(branchDet?.invoicedate,'dd-MM-yyyy')}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Invoice Name :</label>
+									<div class="col-sm-2">
+										<label type="text" id="invoicename" name="invoicename"
+											th:text="${branchDet?.invoicename}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label" style="color: #343a40; font-weight: bold;">QR
+										Expire
+										Date :</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
+											th:text="${#dates.format(branchDet?.qrexpire,'dd-MM-yyyy')}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Amount :</label>
+									<div class="col-sm-2">
+										<label type="text" id="am" name="am" th:text="${branchDet?.am}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Pincode :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pincode" name="pincode" th:text="${branchDet?.pincode}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Tier :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tier" name="tier" th:text="${branchDet?.tier}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Merchant
+										Tran Type :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tran_type" name="tran_type"
+											th:text="${branchDet?.tran_type}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label" style="color: #343a40; font-weight: bold;">Qr
+										Medium :</label>
+									<div class="col-sm-2">
+										<label type="text" id="qrmedium" name="qrmedium"
+											th:text="${branchDet?.qrmedium}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Tip or
+										Convenience Indicator :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tip_or_conv_indicator_upi"
+											name="tip_or_conv_indicator_upi "
+											th:text="${branchDet?.tip_or_conv_indicator_upi}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Convenience
+										Fee type :</label>
+									<div class="col-sm-2">
+										<label type="text" id="conv_fees_type_upi" name="conv_fees_type_upi"
+											th:text="${branchDet?.conv_fees_type_upi}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Value of
+										Convenience Fee :</label>
+									<div class="col-sm-2">
+										<label type="text" id="value_conv_fees_upi" name="value_conv_fees_upi"
+											th:text="${branchDet?.value_conv_fees_upi}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+							</div>
+
+							<div class="float-left">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">BANK DETAILS
+								</h6>
+							</div>
+							<label></label>
+							<div class="ml-2">
+								<div class="row formline" style="font-size: 11px; margin-top: -10px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Bank Name 1
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="version" name="version"
+											th:text="${branchDet?.bank_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Bank Branch
+										1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="modes" name="modes" th:text="${branchDet?.bank_branch}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">IBAN 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose" name="purpose" th:text="${branchDet?.iban}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Settlement
+										Frequency 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="orgid" name="orgid"
+											th:text="${branchDet?.settlement_frequency}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Bank Code 1
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="tid" name="tid" th:text="${branchDet?.bank_code}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Bank
+										Account Number 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tr" name="tr" th:text="${branchDet?.bank_account_no}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Bank
+										Account Name 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="accountName1" name="accountName1"
+											th:text="${branchDet?.accountName1}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Currency 1
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="currency" name="currency"
+											th:text="${branchDet?.currency}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Bank
+										Address 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="detailed_address1" name="detailed_address1"
+											th:text="${branchDet?.detailed_address1}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Lien Amount
+										1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="mtid" name="mtid" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Hold Amount
+										1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="bam" name="bam" th:text="${branchDet?.bam}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Next
+										Settlement date 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="curr" name="curr" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Last
+										Settlement date 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="invoiceno" name="invoiceno" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -10px;">
+									<label class="col-sm-2 col-form-label"
+										style="color: #343a40; font-weight: bold;">Bank Name 2
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="version" name="version"
+											th:value="${branchDet?.bank_name2}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+
+									<label class="col-sm-2 col-form-label">Bank Branch 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="modes" name="modes" th:value="${branchDet?.bank_branch2}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">IBAN 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose" name="purpose" th:text="${branchDet?.iban2}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Settlement
+										Frequency 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="orgid" name="orgid"
+											th:text="${branchDet?.settlement_frequency2}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Bank Code 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tid" name="tid" th:text="${branchDet?.bank_code2}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Bank Account
+										Number 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tr" name="tr" th:text="${branchDet?.bank_account_no2}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Bank Account
+										Name 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="accountName1" name="accountName1"
+											th:text="${branchDet?.accountName2}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Currency 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="currency" name="currency"
+											th:text="${branchDet?.currency2}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Bank Address 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="detailed_address1" name="detailed_address1"
+											th:text="${branchDet?.detailed_address2}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Lien Amount 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="mtid" name="mtid" th:text="${branchDet?.mtid}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Hold Amount 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="bam" name="bam" th:text="${branchDet?.bam}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Next Settlement
+										date 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="curr" name="curr" th:text="${branchDet?.curr}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Last Settlement
+										date 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="invoiceno" name="invoiceno"
+											th:text="${branchDet?.invoiceno}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+							</div>
+							<label></label>
+							<div class="float-left" style="margin-top: -10px;">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">UNIT
+									MANAGEMENT</h6>
+							</div>
+							<div class="ml-2">
+								<div class="row formline" style="font-size: 11px;">
+									<label class="col-sm-2 col-form-label">Unit Id :</label>
+									<div class="col-sm-2">
+										<label type="text" id="version" name="version" th:text="${MerUnit.unit_id}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+
+									<label class="col-sm-2 col-form-label">Unit Type :</label>
+									<div class="col-sm-2">
+										<label type="text" id="modes" name="modes" th:text="${MerUnit.unit_type}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Unit Name :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose" name="purpose" th:text="${MerUnit.unit_name}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Location :</label>
+									<div class="col-sm-2">
+										<label type="text" id="orgid" name="orgid" th:text="${MerUnit.location_detail}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Address 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tid" name="tid" th:text="${MerUnit.address_1}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Bank Account No :</label>
+									<div class="col-sm-2">
+										<label type="text" id="invoiceno" name="invoiceno"
+											th:text="${MerUnit.bank_acct_no}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">City :</label>
+									<div class="col-sm-2">
+										<label type="text" id="tn" name="tn" th:text="${MerUnit.city}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">State :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pa" name="pa" th:text="${MerUnit.state_}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Country :</label>
+									<div class="col-sm-2">
+										<label type="text" id="msid" name="msid" th:text="${MerUnit.country}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Zip Code :</label>
+									<div class="col-sm-2">
+										<label type="text" id="mtid" name="mtid" th:text="${MerUnit.zip_code}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Phone No :</label>
+									<div class="col-sm-2" style="margin-top: 10px;">
+										<label style="font-size: 0.6rem; height: 20px;"> <span
+												th:text="${MerUnit.ph_countrycode}"></span> <span
+												th:text="${MerUnit.phone_no}"></span>
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label">Branch Swift
+										Code :</label>
+									<div class="col-sm-2">
+										<label type="text" id="curr" name="curr" th:text="${MerUnit.branch_swiftcode}"
+											readonly style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Unit Head :</label>
+									<div class="col-sm-2">
+										<label type="text" id="invoiceno" name="invoiceno"
+											th:text="${MerUnit.branch_head}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Designation :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose_of_tran" name="purpose_of_tran"
+											th:text="${MerUnit.designation}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Branch Name :</label>
+									<div class="col-sm-2">
+										<label type="text" id="purpose_of_tran" name="purpose_of_tran"
+											th:text="${MerUnit.branch_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Contact Person 1
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
+											th:text="${MerUnit.contact_person1_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Mobile No 1 :</label>
+									<div class="col-sm-2" style="margin-top: 10px;">
+										<label style="font-size: 0.6rem; height: 20px;"> <span
+												th:text="${MerUnit.cp1_countrycode}"></span> <span
+												th:text="${MerUnit.contact_person1_mobile}"></span>
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label">Email Id 1 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pincode" name="pincode"
+											th:text="${MerUnit.contact_person1_email}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Contact Person 2
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
+											th:text="${MerUnit.contact_person2_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Mobile No 2 :</label>
+									<div class="col-sm-2" style="margin-top: 10px;">
+										<label style="font-size: 0.6rem; height: 20px;"> <span
+												th:text="${MerUnit.cp2_countrycode}"></span> <span
+												th:text="${MerUnit.contact_person2_mobile}"></span>
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label">Email Id 2 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pincode" name="pincode"
+											th:text="${MerUnit.contact_person2_email}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Contact Person 3
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
+											th:text="${MerUnit.contact_person3_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Mobile No 3 :</label>
+									<div class="col-sm-2" style="margin-top: 10px;">
+										<label style="font-size: 0.6rem; height: 20px;"> <span
+												th:text="${MerUnit.cp3_countrycode}"></span> <span
+												th:text="${MerUnit.contact_person3_mobile}"></span>
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label">Email Id 3 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pincode" name="pincode"
+											th:text="${MerUnit.contact_person3_email}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Contact Person 4
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
+											th:text="${MerUnit.contact_person4_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Mobile No 4 :</label>
+									<div class="col-sm-2" style="margin-top: 10px;">
+										<label style="font-size: 0.6rem; height: 20px;"> <span
+												th:text="${MerUnit.cp4_countrycode}"></span> <span
+												th:text="${MerUnit.contact_person4_mobile}"></span>
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label">Email Id 4 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pincode" name="pincode"
+											th:text="${MerUnit.contact_person4_email}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Contact Person 5
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
+											th:text="${MerUnit.contact_person5_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Mobile No 5 :</label>
+									<div class="col-sm-2" style="margin-top: 10px;">
+										<label style="font-size: 0.6rem; height: 20px;"> <span
+												th:text="${MerUnit.cp5_countrycode}"></span> <span
+												th:text="${MerUnit.contact_person5_mobile}"></span>
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label">Email Id 5 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pincode" name="pincode"
+											th:text="${MerUnit.contact_person5_email}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
+									<label class="col-sm-2 col-form-label">Contact Person 6
+										:</label>
+									<div class="col-sm-2">
+										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
+											th:text="${MerUnit.contact_person6_name}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+									<label class="col-sm-2 col-form-label">Mobile No 6 :</label>
+									<div class="col-sm-2" style="margin-top: 10px;">
+										<label style="font-size: 0.6rem; height: 20px;"> <span
+												th:text="${MerUnit.cp6_countrycode}"></span> <span
+												th:text="${MerUnit.contact_person6_mobile}"></span>
+										</label>
+									</div>
+									<label class="col-sm-2 col-form-label">Email Id 6 :</label>
+									<div class="col-sm-2">
+										<label type="text" id="pincode" name="pincode"
+											th:text="${MerUnit.contact_person6_email}" readonly
+											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									</div>
+								</div>
+							</div>
+							<label></label>
+							<div class="float-left">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">MERCHANT
+									CONTACT DETAILS</h6>
+							</div>
+
+							<div class="table-responsive ">
+								<table class="table table-bordered SlabRateTable"
+									style="text-align: center; vertical-align: 22px; margin-top: 2px; font-size: 15px;"
+									id="Merchant_tblverify">
+									<thead>
+										<tr>
+											<th
+												style="font-size: 0.7rem; padding: 0.1rem; background-color: white; color: black;border-color: FFD580; ">
+												<label class="mt-1">Representative Id</label>
+											</th>
+											<th
+												style="font-size: 0.7rem; padding: 0.1rem; background-color: white; color: black;border-color: FFD580;">
+												<label>Contact Person</label>
+											</th>
+											<th
+												style="font-size: 0.7rem; padding: 0.1rem; background-color: white; color: black;border-color: FFD580; ">
+												<label>Phone Number</label>
+											</th>
+											<th
+												style="font-size: 0.7rem; padding: 0.1rem; background-color: white; color: black;border-color: FFD580; ">
+												<label>National Id</label>
+											</th>
+											<th
+												style="font-size: 0.7rem; padding: 0.1rem; background-color: white; color: black;border-color: FFD580; ">
+												<label>Email Address</label>
+											</th>
+											<th
+												style="font-size: 0.7rem; padding: 0.1rem; background-color: white; color: black;border-color: FFD580; ">
+												<label>Notification Mode</label>
+											</th>
+											<th
+												style="font-size: 0.7rem; padding: 0.1rem; background-color: white; color: black;border-color: FFD580; ">
+												<label>Send Notification</label>
+											</th>
+										</tr>
+									</thead>
+
+
+									<tbody th:each="MERLST : ${branchDet}">
+										<tr th:if="${MERLST.mer_user_id_r1 != null }">
+											<td th:text="${MERLST?.mer_user_id_r1}" class="rowDataField brdclr"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+											<td th:text="${MERLST?.mer_cont_pers}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r1"
+															name="ph_countrycode_r1"
+															th:text="${MERLST?.ph_countrycode_r1}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"></label>
+													</div>
+													<label type="number" id="mer_ph_no" name="mer_ph_no"
+														th:text="${MERLST?.mer_ph_no}" maxlength="10" autocomplete="off"
+														class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"></label>
+												</div>
+											</td>
+
+											<td th:text="${MERLST?.mer_nat_id}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r1}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td th:if="${MERLST?.send_notifi == 'Y'}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												id="send_notifi" name="send_notifi" type="checkbox" checked disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi != 'Y'}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												id="send_notifi" name="send_notifi" type="checkbox" disabled></td>
+										</tr>
+
+										<tr th:if="${MERLST.mer_user_id_r2 != null }">
+											<td th:text="${MERLST?.mer_user_id_r2}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r2}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r2"
+															name="ph_countrycode_r1"
+															th:text="${MERLST?.ph_countrycode_r2}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r2" name="mer_ph_no_r2"
+														th:text="${MERLST?.mer_ph_no_r2}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+
+											<td th:text="${MERLST?.mer_nat_id_r2}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r2}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r2}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r2 == 'Y'}" class="rowDataField"
+												id="send_notifi_r2" name="send_notifi_r2" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r2 != 'Y'}" class="rowDataField"
+												id="send_notifi_r2" name="send_notifi_r2" type="checkbox" disabled></td>
+										</tr>
+
+										<tr th:if="${MERLST.mer_user_id_r3 != null }">
+											<td th:text="${MERLST?.mer_user_id_r3}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r2}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r3"
+															name="ph_countrycode_r3"
+															th:text="${MERLST?.ph_countrycode_r3}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r3" name="mer_ph_no_r3"
+														th:text="${MERLST?.mer_ph_no_r3}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+
+											<td th:text="${MERLST?.mer_nat_id_r3}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r3}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r3}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r3 == 'Y'}" class="rowDataField"
+												id="send_notifi_r2" name="send_notifi_r3" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r3 != 'Y'}" class="rowDataField"
+												id="send_notifi_r3" name="send_notifi_r3" type="checkbox" disabled></td>
+										</tr>
+
+										<tr th:if="${MERLST.mer_user_id_r4 != null }">
+											<td th:text="${MERLST?.mer_user_id_r4}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r4}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r4"
+															name="ph_countrycode_r4"
+															th:text="${MERLST?.ph_countrycode_r4}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r4" name="mer_ph_no_r4"
+														th:text="${MERLST?.mer_ph_no_r4}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+											<td th:text="${MERLST?.mer_nat_id_r4}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r4}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r4}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r4 == 'Y'}" class="rowDataField"
+												id="send_notifi_r4" name="send_notifi_r4" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r4 != 'Y'}" class="rowDataField"
+												id="send_notifi_r4" name="send_notifi_r4" type="checkbox" disabled></td>
+										</tr>
+
+										<tr th:if="${MERLST.mer_user_id_r5 != null }">
+											<td th:text="${MERLST?.mer_user_id_r5}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r5}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r5"
+															name="ph_countrycode_r4"
+															th:text="${MERLST?.ph_countrycode_r5}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r5" name="mer_ph_no_r5"
+														th:text="${MERLST?.mer_ph_no_r5}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+											<td th:text="${MERLST?.mer_nat_id_r5}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r5}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r5}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r5 == 'Y'}" class="rowDataField"
+												id="send_notifi_r5" name="send_notifi_r5" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r5 != 'Y'}" class="rowDataField"
+												id="send_notifi_r5" name="send_notifi_r5" type="checkbox" disabled></td>
+										</tr>
+
+
+										<tr th:if="${MERLST.mer_user_id_r6 != null }">
+											<td th:text="${MERLST?.mer_user_id_r6}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r6}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r6"
+															name="ph_countrycode_r6"
+															th:text="${MERLST?.ph_countrycode_r6}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r6" name="mer_ph_no_r6"
+														th:text="${MERLST?.mer_ph_no_r6}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+
+											<td th:text="${MERLST?.mer_nat_id_r6}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r6}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r6}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r6 == 'Y'}" class="rowDataField"
+												id="send_notifi_r6" name="send_notifi_r6" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r6 != 'Y'}" class="rowDataField"
+												id="send_notifi_r6" name="send_notifi_r6" type="checkbox" disabled></td>
+										</tr>
+
+
+										<tr th:if="${MERLST.mer_user_id_r7 != null }">
+											<td th:text="${MERLST?.mer_user_id_r7}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r7}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r7"
+															name="ph_countrycode_r7"
+															th:text="${MERLST?.ph_countrycode_r7}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r7" name="mer_ph_no_r7"
+														th:text="${MERLST?.mer_ph_no_r7}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+											<td th:text="${MERLST?.mer_nat_id_r7}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r7}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r7}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r7 == 'Y'}" class="rowDataField"
+												id="send_notifi_r7" name="send_notifi_r7" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r7 != 'Y'}" class="rowDataField"
+												id="send_notifi_r7" name="send_notifi_r7" type="checkbox" disabled></td>
+										</tr>
+
+
+										<tr th:if="${MERLST.mer_user_id_r8 != null }">
+											<td th:text="${MERLST?.mer_user_id_r8}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r8}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r8"
+															name="ph_countrycode_r8"
+															th:text="${MERLST?.ph_countrycode_r8}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r8" name="mer_ph_no_r8"
+														th:text="${MERLST?.mer_ph_no_r8}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+											<td th:text="${MERLST?.mer_nat_id_r8}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r8}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r8}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r8 == 'Y'}" class="rowDataField"
+												id="send_notifi_r8" name="send_notifi_r8" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r8 != 'Y'}" class="rowDataField"
+												id="send_notifi_r8" name="send_notifi_r8" type="checkbox" disabled></td>
+										</tr>
+
+
+										<tr th:if="${MERLST.mer_user_id_r9 != null }">
+											<td th:text="${MERLST?.mer_user_id_r9}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r9}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r9"
+															name="ph_countrycode_r9"
+															th:text="${MERLST?.ph_countrycode_r9}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r9" name="mer_ph_no_r9"
+														th:text="${MERLST?.mer_ph_no_r9}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+											<td th:text="${MERLST?.mer_nat_id_r9}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r9}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r9}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r9 == 'Y'}" class="rowDataField"
+												id="send_notifi_r4" name="send_notifi_r9" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r9 != 'Y'}" class="rowDataField"
+												id="send_notifi_r9" name="send_notifi_r9" type="checkbox" disabled></td>
+										</tr>
+
+
+										<tr th:if="${MERLST.mer_user_id_r10 != null }">
+											<td th:text="${MERLST?.mer_user_id_r10}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td th:text="${MERLST?.mer_cont_pers_r10}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+
+											<td style="font-size: 0.6rem; padding: 0.10rem;">
+												<div class="input-group" style="width: 100%">
+													<div class="input-group-prepend rowDataField">
+														<label type="text" id="ph_countrycode_r10"
+															name="ph_countrycode_r4"
+															th:text="${MERLST?.ph_countrycode_r10}" maxlength="10"
+															autocomplete="off" class="col-2 rowDataField"
+															style="font-size: 0.6rem; padding: 0.10rem;"></label>
+													</div>
+													<label type="number" id="mer_ph_no_r10" name="mer_ph_no_r10"
+														th:text="${MERLST?.mer_ph_no_r10}" maxlength="10"
+														autocomplete="off" class="rowDataField"
+														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+												</div>
+											</td>
+											<td th:text="${MERLST?.mer_nat_id_r10}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+											</td>
+
+											<td class="rowDataField" th:text="${MERLST?.mer_email_addr_r10}" readonly
+												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+											<td class="rowDataField" th:text="${MERLST?.mer_notifi_mode_r10}" readonly
+												style="font-size: 0.7rem; padding: 0.10rem;"></td>
+
+											<td th:if="${MERLST?.send_notifi_r10 == 'Y'}" class="rowDataField"
+												id="send_notifi_r10" name="send_notifi_r10" type="checkbox" checked
+												disabled>
+											</td>
+											<td th:if="${MERLST?.send_notifi_r10 != 'Y'}" class="rowDataField"
+												id="send_notifi_r10" name="send_notifi_r10" type="checkbox" disabled>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+							<label></label>
+							<div class="float-left">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 14px">MERCHANT FEES
+									DETAILS</h6>
+							</div>
+							<div class="table-responsive" style="overflow: auto;">
+								<table class="table table-bordered SlabRateTable"
+									style="text-align: center; vertical-align: 22px; font-size: 15px;">
+									<thead>
+										<tr>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580;  ">
+												<label>Fee Description</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Fee Derivation Type</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Amount / Percentage</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Fee Frequency</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Fee Type</label>
+											</th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="Fee : ${merchantFeeDetails}">
+											<td class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												th:text="${Fee?.fee_desc}"></td>
+											<td class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												th:text="${Fee?.fee_type}"></td>
+											<td class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												th:text="${Fee?.amount_per == 0 ? '0.00' :#numbers.formatDecimal(Fee?.amount_per, 0, 'COMMA', 2, 'POINT')}">
+											</td>
+											<td class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												th:text="${Fee?.fee_freq}"></td>
+											<td class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												th:text="${Fee?.vat_collect}"></td>
+										</tr>
+									</tbody>
+
+								</table>
+							</div>
+							<div class="float-left">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">DOCUMENT
+									DETAILS</h6>
+							</div>
+							<div class="table-responsive " style="overflow: auto;">
+								<table border="1" id="dynamicTable" class="table table-bordered SlabRateTable"
+									style="text-align: center; vertical-align: 22px; font-size: 15px;">
+									<thead>
+										<tr>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580;  ">
+												<label class="mt-1">Document Type</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Document Code</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Document Description</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Unique Id</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Place of Issue</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Issue Date</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Expiry Date</label>
+											</th>
+											<th style="font-size: 0.7rem; padding: 0.1rem;border-color: FFD580; ">
+												<label>Document View</label>
+											</th>
+										</tr>
+									<tbody id="dataTables">
+										<tr th:each="Doocument : ${DocumentList}">
+
+											<td th:text="${Doocument?.document_type}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												Address</td>
+											<td th:text="${Doocument?.document_code}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												ADD001</td>
+											<td th:text="${Doocument?.document_type_desc}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												Passport</td>
+											<td th:text="${Doocument?.unique_id}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												D324234234</td>
+											<td th:text="${Doocument?.place_of_issue}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												Madurai</td>
+											<td th:text="${Doocument?.issue_date}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												18-JUN-2018</td>
+											<td th:text="${Doocument?.expiry_date}" class="rowDataField"
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												15-JUN-2023</td>
+											<td style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+												<img th:src="@{/images/info.png}" onclick="show1(this)"
+													id="openModaldoc"
+													th:attr="data-doc_type=${Doocument?.unique_id},data-doc_types=${Doocument?.merchant_id}"
+													style="cursor: pointer; width: 20px; height: 20px; margin-left: 30px;"
+													data-toggle="modal" data-target=".bd-example-modal-lg" alt="Info">
+											</td>
+											<td style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+												<a th:href="@{'/' + ${Doocument?.unique_id}}"
+													style="text-decoration: none; color: DodgerBlue;"> <img
+														th:src="@{/images/info.png}"
+														style="width: 20px; height: 20px; margin-left: 30px;"
+														alt="Info">
+												</a>
+											</td>
+
+
+											<td th:text="${Doocument?.file_name}" class="rowDataField"
+												style="width: 100px;" hidden></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="float-left">
+								<h6 class="font-weight-bold ml-2" style="color: #00008B; font-size: 13px">SIGNATURE
+									DETAILS
+								</h6>
+							</div>
+							<input id="MerID" th:value="${branchDet?.merchant_id}" hidden>
+							<div class="card-body" style="background-color: #ffffff;">
+								<div class="panel panel-default">
+									<table class="" id="sign"
+										style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
+										<tr>
+											<td style="text-align: center; background-color: #ffffff;">Name:
+												<input type="text" th:text="${branchDet?.merchant_corp_name}"
+													style="border: none; outline: none; margin-left: 20px; width: 150px; background-color: #ffffff;"
+													id="ca_first_name" readonly />
+											</td>
+
+											<td rowspan="2"
+												style="text-align: center; background-color: #ffffff; font-size: 14px;">
+											
+												<div id="imgCapture1"
+													style="border: 1px solid #ccc; background-color: #ffffff;"
+													height="60" width="30"></div>
+													Signature
+												<div style="display: none; margin-left: 55px;" id="signature">
+													<input id="sign" type="file" readonly />
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						
+						<label></label>
+						<div class="card" style="border: 2px solid #FF7F50; border-radius: 8px;">
+							<div class="card-footer text-center"
+								style="background: linear-gradient(to bottom, #FFA500, #FF7F50); padding: 5px 10px; color: white; border-radius: 5px;">
+								<button type="button" class="btn btn-sm"
+									style="padding: 3px 6px; font-size: 12px; color: #FFA500; background-color: white; border: 1px solid #FFA500; font-weight: bold;"
+									data-dismiss="modal" onclick="home(this);">Home</button>
+								<button type="button" class="btn btn-sm"
+									style="padding: 3px 6px; font-size: 12px; color: #FFA500; background-color: white; border: 1px solid #FFA500; font-weight: bold;"
+									id="btnBack" onclick="submitlist();">Submit</button>
+								<button type="button" class="btn btn-sm"
+									style="padding: 3px 6px; font-size: 12px; color: #FFA500; background-color: white; border: 1px solid #FFA500; font-weight: bold;"
+									onclick="back();">Back</button>
+							</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+		<!-- ------------------------------------------------------- PASSVIEW----------------------------------------- -->
+
+
+		<!--------------------------------------------------------------- Modal for alert messages-------------------------------->
+		<div class="modal fade" id="verifybox">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="verifyboxmsg" style="font-size: 16px;"></p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="back();">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="alert">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="alertmsg" style="font-size: 16px;"></p>
+						<button type="button" class="btn btn-primary" onclick="back();" th:att>Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="alert1userpopup">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="alertmsg" style="font-size: 16px;"></p>
+						<button type="button" class="btn btn-primary" onclick="closemodal();" th:att>Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="alert1">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="alertmsg" style="font-size: 16px;"></p>
+						<button type="button" class="btn btn-primary" onclick="back();" th:att>Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="Addval">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="ADDMANRSN" style="font-size: 16px;"></p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="error" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="errormsg"></p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="wait">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-body" style="text-align: center">
+						<div id="wait">
+							<!-- <img src='demo_wait.gif' width="64" height="64" /><br>Loading.. -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--------------------------------------------File Upload Modal Ends----------------------------------------------------------->
+		<script>
+			$(document).ready(function () {
+				$("#close").click(function () {
+					location.reload(true);
+				});
+			});
+
+			function back(a) {
+				window.history.back(-2);
+			}
+		</script>
+		<!--------------------------------------------File Upload Modal Starts----------------------------------------------------------->
+		<div class="modal fade" id="table1">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-body" style="text-align: center">
+						<div class="table-responsive">
+							<table class="table table-bordered  table-hover table-sm" id="table">
+								<thead class="thead-light">
+									<tr>
+										<th>Merchant Id</th>
+										<th>Merchant Account Number</th>
+										<th>Merchant Name</th>
+										<th>Merchant Power Card Number</th>
+										<th>Merchant City</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="wait" style="display: none;">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="width: 248px;">
+					<div class="modal-body" style="text-align: center">
+						<div>
+							<!-- <div class="spinner-border text-primary" role="status"> <span class="sr-only"></span>Loading... </div> -->
+							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+							Loading...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<!-- Add content here if needed -->
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							style="margin-right: 45%;">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModalupload" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<!-- Add content here if needed -->
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 45%;"
+							onclick="listmer()">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModalpopup2" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<!-- Add content here if needed -->
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 45%;"
+							onclick="back()">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" data-backdrop="false" data-keyboard="false" id="mypopup2" tabindex="-1" role="dialog"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="width: 120%; height: 25%">
+					<div class="card">
+						<!-- Header with Alert Message -->
+						<div class="modal-header">
+							<h5 class="modal-title" id="popupAlert" style="font-size: 13px">Alert
+								Message</h5>
+							<!-- Alert message will appear here -->
+						</div>
+
+						<!-- Body with Response -->
+						<div class="modal-body"
+							style="text-align: center; display: flex; justify-content: center; align-items: center; height: 100px; overflow-y: auto; font-weight: bold; font-size: 15px">
+							<h6 id="popupmsg"></h6>
+							<!-- Response will be displayed here -->
+						</div>
+
+						<!-- Footer with Close Button -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal"
+								onclick="openCity(event, 'india');">Close</button>
+							<!-- Calls goBack function -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="popupeditcondition" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+
+					<div class="modal-body">Same user cannot verify</div>
+
+					<!-- Modal Footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal"
+							onclick="popclose()">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="holdModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="holdModalLabel" style="font-size: 14px;">HOLD CONFIRMATION</h5>
+					</div>
+					<div class="modal-body">
+						<p style="font-size: 14px;">Are you sure to Hold this record?</p>
+						<div class="row formline align-items-center" style="font-weight: 500; margin-top: 10px;">
+							<label class="col-sm-4 col-form-label" style="font-size: 14px;">Hold
+								Remarks</label>
+							<div class="col-sm-8">
+								<input type="text" id="hr_hold_remarks" style="font-weight: 500;"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" name="hr_hold_remarks" autocomplete="off">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" onclick="holdfin();">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="confirmationModalreject" tabindex="-1" aria-labelledby="holdModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="holdModalLabel" style="font-size: 14px;">REJECT CONFIRMATION</h5>
+					</div>
+					<div class="modal-body">
+						<p style="font-size: 14px;">Are you sure to Hold this record?</p>
+						<div class="row formline align-items-center" style="font-weight: 500; margin-top: 10px;">
+							<label class="col-sm-4 col-form-label" style="font-size: 14px;">Reject
+								Remarks</label>
+							<div class="col-sm-8">
+								<input type="text" id="hr_reject_remarks" style="font-weight: 500;"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" name="hr_reject_remarks" autocomplete="off">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" onclick="RejectAcc();">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="mymodel" tabindex="-1" role="dialog" aria-labelledby="mymodelLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="mymodelLabel">Modal Title</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<!-- Response content will be displayed here -->
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<!-- Add additional buttons if needed -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="addCredit" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p>Please fill the required fields</p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="invalidfile" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="invalidfilemsg"></p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="loader1" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="background: transparent;">
+					<div class="modal-body" style="text-align: center">
+						<div>
+							<img th:src=@{/images/loader.gif} id="bfirelogo" style="width: 153px; margin-left: 18px;"
+								alt="Bornfire">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="alertrsn">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							style="margin-right: 45%;">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal" id="qrcode">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content" style="width: 600px; height: 600px;">
+					<div class="modal-header" style="background: #377486; color: white;">
+						<h4 style="background: #377486; color: white" class="modal-title">Merchant
+							QR</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+							style="color: white;">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p id="alertmsg"></p>
+						<img style="display: block; width: 500px; height: 500px; margin-top: -32px;" id="base64image" />
+						<div class="row">
+							<div class="col text-center">
+								<button type="button" class="btn btn-primary" onclick="DownloadQRCode();">Download
+									QR</button>
+								<input type="text" id="qrsource" style="display: none;">
+								<input type="text" id="qrsourcename" style="display: none;">
+								<input type="text" id="qrsourcenumber" style="display: none;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="QRstatic">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">QR Generation</h4>
+						<button type="button" class="close" data-dismiss="modal">×</button>
+					</div>
+					<div class="modal-body" style="text-align: center; flex: 0 0 auto;">
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Merchant ID</label> <input class="form-control col-sm-5" type="text"
+								id="acct_num" readonly />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Merchant Name</label> <input class="form-control col-sm-5"
+								type="text" id="acct_name" readonly />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Unit ID</label> <select id="unitId" class="form-control col-sm-5"
+								name="unitId" autocomplete="off" style="color: black;" readonly>
+								<option value="">SELECT</option>
+							</select>
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Terminal ID</label> <select id="deviceId"
+								class="form-control col-sm-5" name="deviceId" autocomplete="off" style="color: black;"
+								readonly>
+								<option value="">SELECT</option>
+							</select>
+						</div>
+						<label></label>
+						<div class="row">
+							<div class="col text-center">
+								<button type="button" class="btn btn-primary" onclick="generateQRCodeStatic();">Generate
+									QR</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="QRdynamic">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">QR Generation</h4>
+						<button type="button" class="close" data-dismiss="modal">×</button>
+					</div>
+					<div class="modal-body" style="text-align: center; flex: 0 0 auto;">
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Merchant ID</label> <input class="form-control col-sm-5" type="text"
+								id="merchantID_DY" readonly />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Transaction Amount</label> <input class="form-control col-sm-5"
+								type="number" id="tran_amt_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Bill/Invoice Number</label> <input class="form-control col-sm-5"
+								type="text" id="bill_number_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Mobile Number</label> <input class="form-control col-sm-5"
+								type="number" id="mobile_number_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Loyalty Number</label> <input class="form-control col-sm-5"
+								type="number" id="loyalty_number_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Store Label</label> <input class="form-control col-sm-5" type="text"
+								id="store_label_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Customer Label</label> <input class="form-control col-sm-5"
+								type="text" id="customer_label_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Reference Label</label> <input class="form-control col-sm-5"
+								type="text" id="reference_label_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Terminal Label</label> <input class="form-control col-sm-5"
+								type="text" id="terminal_label_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Purpose Of Transaction</label> <input class="form-control col-sm-5"
+								type="text" id="purpose_of_transaction_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<label class="col-sm-5">Additional Details</label> <input class="form-control col-sm-5"
+								type="text" id="additional_details_dy" />
+						</div>
+						<label></label>
+						<div class="row">
+							<div class="col text-center">
+								<button type="button" class="btn btn-primary" onclick="generateQRCode();">Generate
+									QR</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="modal fade" id="QRdynamic">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">QR Generation</h4>
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
+				<div class="modal-body" style="text-align: center; flex: 0 0 auto;">
+					<label></label>
+					<div class="row">
+						<label class="col-sm-5">Merchant ID</label> <input class="form-control col-sm-5" type="text"
+							id="merchantID_DY" readonly />
+					</div>
+					<label></label>
+					<div class="row">
+						<label class="col-sm-5">Transaction Amount</label> <input class="form-control col-sm-5"
+							type="number" id="tran_amt_dy" required />
+					</div>
+					<label></label>
+					<div class="row">
+						<label class="col-sm-5">Bill/Invoice Number</label> <input class="form-control col-sm-5"
+							type="text" id="bill_number_dy" required />
+					</div>
+
+					<label></label>
+					<div class="row">
+						<div class="col text-center">
+							<button type="button" class="btn btn-primary" onclick="generateQRCode();">Generate
+								QR</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>-->
+		<div class="modal fade" id="alert1userpopup1">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="alertmsgee" style="font-size: 16px;"></p>
+						<button type="button" class="btn btn-primary" onclick="closemodals();">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="alert1userpopupaccvalidation">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p id="alertmsgee1" style="font-size: 16px;"></p>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="alertverify" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p>Same user cannot verify</p>
+						<button type="button" class="btn btn-primary" onclick="back()">
+							Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="alertmodify" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+						<p>same user cannot verify</p>
+						<button type="button" class="btn btn-primary" onclick="back()">
+							Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="slabRateModel" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="" style="text-align: center; color: white;">BANK OF BARODA</div>
+					</div>
+					<div class="modal-body "
+						style="text-align: center; background-color: #c6ccd2; display: flex; align-items: center; justify-content: center;">
+
+						<table class="SlabRateTable"
+							style="width: 90%; border-collapse: collapse; background-color: #c6ccd2;">
+
+							<thead>
+								<tr>
+									<th>Start Rate</th>
+									<th>End Rate</th>
+									<th>Charges</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="slabrate : ${SlabRate}" onclick="updateAmountPer(this);">
+									<td th:text="${slabrate.startRate}">Start Rate</td>
+									<td th:text="${slabrate.endRate}">End Rate</td>
+									<td th:text="${slabrate.charges}">Charges</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							style="margin-right: 45%;">Close</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="MyModalBank">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h4 class="modal-title">Merchant Category Code</h4>
+						<button type="button" class="close" style="color: black; font-size: 20px"
+							data-dismiss="modal">×</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<table class="table table-hover" id="finusertb">
+							<thead class="thead-light">
+								<tr class="filters">
+									<th style="background-color: unset"><input type="text" oninput="filterBanks()"
+											placeholder="Code" style="width: 100% !important;" class="form-control "
+											id="filterInputCode"></th>
+									<!-- onkeyup="this.value = this.value.toUpperCase();filterUserId(this)" -->
+									<th style="background-color: unset"><input type="text" oninput="filterBanks()"
+											placeholder="Description" style="width: 100% !important"
+											class="form-control" id="filterInputName" autocomplete="off"></th>
+									<!-- onkeyup="this.value = this.value.toUpperCase();handleInputUserId(this)" -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="bankbranchdata : ${merchantcategory}"
+									th:id="${bankbranchdata.merchant_code}" class="userlist"
+									th:onclick="pressBankBranchData(this)" th:attr="data-mer_code=${bankbranchdata.merchant_code},
+								data-mer_name=${bankbranchdata.merchant_desc}">
+									<td th:text="${bankbranchdata.merchant_code}">123</td>
+									<td th:text="${bankbranchdata.merchant_desc}">123</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="imageshow" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="width: 300px;background-color: transparent; border: none;">
+					<div class="modal-body" style="text-align: center; position: relative;">
+						<span class="closedoc" id="closeModaldoc" data-dismiss="modal"
+							style="position: absolute; top: 65px; right: 20px; cursor: pointer; font-size: 24px; color: red;">&times;</span>
+						<br /><br />
+						<img class="img-responsive" id="doc_image" style="max-height: 500px; width: 100%;">
+					</div>
+					<!-- <button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">Close</button> -->
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="imageopen" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="width: 1042px;">
+					<div class="modal-body" style="text-align: center">
+
+						<br /> <br /> <img class="img-responsive" id="doc_image" style="max-height: 500px;">
+					</div>
+					<button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modelUserRemarks" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<form action="#" method="GET" name="merchantUserData" autocomplete="off" id="merchantUserDelete">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">
+								BANK OF BARODA</div>
+						</div>
+						<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+							<label>Remarks : </label> <input class="ml-4" id="userRemarks" name="userRemarks"
+								style="width: 75%;" required />
+						</div>
+						<div class="modal-footer"
+							style="background-color: #c6ccd2; border-top: none; text-align: center;">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" id="data_userRemarks"
+								style="margin-right: 45%;" onclick="deleteUserRec(this)">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modelDeviceRemarks" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<form action="#" method="GET" name="merchantDeviceData" autocomplete="off"
+						id="merchantDeviceDelete">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">
+								BANK OF BARODA</div>
+						</div>
+						<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+							<label>Remarks : </label> <input class="ml-4" id="deviceRemarks" name="deviceRemarks"
+								style="width: 75%;" required />
+						</div>
+						<div class="modal-footer"
+							style="background-color: #c6ccd2; border-top: none; text-align: center;">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" id="data_deviceRemarks"
+								style="margin-right: 45%;" onclick="deleteDeviceRec(this)">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modelPasswordManageRemarks" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<form action="#" method="GET" name="merchantPasswordManageData" autocomplete="off"
+						id="merchantPasswordManageDelete">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">
+								BANK OF BARODA</div>
+						</div>
+						<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+							<label>Remarks : </label> <input class="ml-4" id="passwordManageRemarks"
+								name="passwordManageRemarks" style="width: 75%;" required />
+						</div>
+						<div class="modal-footer"
+							style="background-color: #c6ccd2; border-top: none; text-align: center;">
+							<button type="button" class="btn btn-primary" data-dismiss="modal"
+								id="data_passwordManageRemarks" style="margin-right: 45%;"
+								onclick="deletePasswordManageRec(this)">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modelMerchantRemarks" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<form action="#" method="GET" name="merchantMerchantData" autocomplete="off"
+						id="merchantMerchantDelete">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">
+								BANK OF BARODA</div>
+						</div>
+						<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+							<label>Remarks : </label> <input class="ml-4" id="merchantRemarks" name="merchantRemarks"
+								style="width: 75%;" required />
+						</div>
+						<div class="modal-footer"
+							style="background-color: #c6ccd2; border-top: none; text-align: center;">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" id="data_merchantRemarks"
+								style="margin-right: 45%;" onclick="deleteMerchantRec(this)">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modelUnitRemarks" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<form action="#" method="GET" name="merchantUnitData" autocomplete="off" id="merchantUnitDelete">
+						<div class="menu-title-header">
+							<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">
+								BANK OF BARODA</div>
+						</div>
+						<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+							<label>Remarks : </label> <input class="ml-4" id="unitRemarks" name="unitRemarks"
+								style="width: 75%;" required />
+						</div>
+						<div class="modal-footer"
+							style="background-color: #c6ccd2; border-top: none; text-align: center;">
+							<button type="button" class="btn btn-primary" data-dismiss="modal" id="data_unitRemarks"
+								style="margin-right: 45%;" onclick="deleteUnitRec(this)">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="deleteModelUser" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 45%;"
+							onclick="closeUser()">close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Success Modal -->
+		<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="successModalLabel">Success</h5>
+					</div>
+					<div class="modal-body">
+						<!-- Success message will be inserted here -->
+						<p id="successMessage"></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="deleteModelDevice" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 45%;"
+							onclick="closeUser()">close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="deleteModelUnit" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 45%;"
+							onclick="closeUser()">close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="deleteModelPasswordManage" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+							OF BARODA</div>
+					</div>
+					<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
+					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary" data-dismiss="modal" style="margin-right: 45%;"
+							onclick="closeUser()">close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Confirmation Modal -->
+		<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+						<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+					</div>
+					<div class="modal-body">Are you sure want to reset the user?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" id="confirmResetBtn">Yes,
+							Reset</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="myModaldoc" class="modaldoc" style="display: none">
+			<div class="modal-contentdoc">
+				<span class="closedoc" id="closeModaldoc" onclick=closeDoc(this)>&times;</span>
+				<div id="popup1" class="overlay "
+					style="z-index: 1001; display: flex; justify-content: center; align-items: center;">
+					<div class="popupw-img">
+						<a class="imageclosedoc" href="#"></a>
+						<div class="card-bodydoc">
+							<div id="imgCapture11"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+
+</html>
