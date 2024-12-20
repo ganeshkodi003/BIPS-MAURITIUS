@@ -1,6 +1,7 @@
 package com.bornfire.entity;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -265,6 +266,185 @@ public class MerchantMasterMod {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date delete_time;
 	private String delete_remarks;
+
+	private String hr_status;
+	private String hr_hold_remarks;
+	private String hr_reject_remarks;
+	private Character hr_holdreject_flg; 
+	private String hr_hold_user;
+	private String hr_reject_user;
+	private Date hr_hold_date;
+	private Date hr_reject_date; 
+	private String brn_no;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date brn_date;
+	private String mer_nat_id;
+	private String mer_nat_id_r2;
+	private String mer_nat_id_r3;
+	private String mer_nat_id_r4;
+	private String mer_nat_id_r5;
+	private String mer_nat_id_r6;
+	private String mer_nat_id_r7;
+	private String mer_nat_id_r8;
+	private String mer_nat_id_r9;
+	private String mer_nat_id_r10;
+
+	
+	public String getMer_nat_id() {
+		return mer_nat_id;
+	}
+
+	public void setMer_nat_id(String mer_nat_id) {
+		this.mer_nat_id = mer_nat_id;
+	}
+
+	public String getMer_nat_id_r2() {
+		return mer_nat_id_r2;
+	}
+
+	public void setMer_nat_id_r2(String mer_nat_id_r2) {
+		this.mer_nat_id_r2 = mer_nat_id_r2;
+	}
+
+	public String getMer_nat_id_r3() {
+		return mer_nat_id_r3;
+	}
+
+	public void setMer_nat_id_r3(String mer_nat_id_r3) {
+		this.mer_nat_id_r3 = mer_nat_id_r3;
+	}
+
+	public String getMer_nat_id_r4() {
+		return mer_nat_id_r4;
+	}
+
+	public void setMer_nat_id_r4(String mer_nat_id_r4) {
+		this.mer_nat_id_r4 = mer_nat_id_r4;
+	}
+
+	public String getMer_nat_id_r5() {
+		return mer_nat_id_r5;
+	}
+
+	public void setMer_nat_id_r5(String mer_nat_id_r5) {
+		this.mer_nat_id_r5 = mer_nat_id_r5;
+	}
+
+	public String getMer_nat_id_r6() {
+		return mer_nat_id_r6;
+	}
+
+	public void setMer_nat_id_r6(String mer_nat_id_r6) {
+		this.mer_nat_id_r6 = mer_nat_id_r6;
+	}
+
+	public String getMer_nat_id_r7() {
+		return mer_nat_id_r7;
+	}
+
+	public void setMer_nat_id_r7(String mer_nat_id_r7) {
+		this.mer_nat_id_r7 = mer_nat_id_r7;
+	}
+
+	public String getMer_nat_id_r8() {
+		return mer_nat_id_r8;
+	}
+
+	public void setMer_nat_id_r8(String mer_nat_id_r8) {
+		this.mer_nat_id_r8 = mer_nat_id_r8;
+	}
+
+	public String getMer_nat_id_r9() {
+		return mer_nat_id_r9;
+	}
+
+	public void setMer_nat_id_r9(String mer_nat_id_r9) {
+		this.mer_nat_id_r9 = mer_nat_id_r9;
+	}
+
+	public String getMer_nat_id_r10() {
+		return mer_nat_id_r10;
+	}
+	public String getBrn_no() {
+		return brn_no;
+	}
+
+	public void setBrn_no(String brn_no) {
+		this.brn_no = brn_no;
+	}
+
+	public Date getBrn_date() {
+		return brn_date;
+	}
+
+	public void setBrn_date(Date brn_date) {
+		this.brn_date = brn_date;
+	}
+
+	
+	public Character getHr_holdreject_flg() {
+		return hr_holdreject_flg;
+	}
+
+	public void setHr_holdreject_flg(Character hr_holdreject_flg) {
+		this.hr_holdreject_flg = hr_holdreject_flg;
+	}
+
+	public String getHr_status() {
+		return hr_status;
+	}
+
+	public void setHr_status(String hr_status) {
+		this.hr_status = hr_status;
+	}
+
+	public String getHr_hold_remarks() {
+		return hr_hold_remarks;
+	}
+
+	public void setHr_hold_remarks(String hr_hold_remarks) {
+		this.hr_hold_remarks = hr_hold_remarks;
+	}
+
+	public String getHr_reject_remarks() {
+		return hr_reject_remarks;
+	}
+
+	public void setHr_reject_remarks(String hr_reject_remarks) {
+		this.hr_reject_remarks = hr_reject_remarks;
+	}
+ 
+	public String getHr_hold_user() {
+		return hr_hold_user;
+	}
+
+	public void setHr_hold_user(String hr_hold_user) {
+		this.hr_hold_user = hr_hold_user;
+	}
+
+	public String getHr_reject_user() {
+		return hr_reject_user;
+	}
+
+	public void setHr_reject_user(String hr_reject_user) {
+		this.hr_reject_user = hr_reject_user;
+	}
+
+	public Date getHr_hold_date() {
+		return hr_hold_date;
+	}
+
+	public void setHr_hold_date(Date hr_hold_date) {
+		this.hr_hold_date = hr_hold_date;
+	}
+
+	public Date getHr_reject_date() {
+		return hr_reject_date;
+	}
+
+	public void setHr_reject_date(Date hr_reject_date) {
+		this.hr_reject_date = hr_reject_date;
+	}
 
 	public String getDetailed_address1() {
 		return detailed_address1;
@@ -2193,311 +2373,8 @@ public class MerchantMasterMod {
 	public void setTransaction_amount(String transaction_amount) {
 		this.transaction_amount = transaction_amount;
 	}
-
-	public MerchantMasterMod(String merchant_id, String merchant_pow_ca_no, String merchant_acc_no,
-			String merchant_addr, String merchant_legal_id, String merchant_cont_per, String merchant_name,
-			String merchant_cont_details, String company_name, String trading_name, String bill_acc_no,
-			String tran_curr, String tran_amount, String remitter, String remitter_acc_no, String remitter_ref_no,
-			String tran_type, String tran_remarks1, String merchant_corp_name, String merchant_mob_no,
-			String merchant_type, String type_of_qr, String merchant_cat_code, String merchant_fees,
-			String merchant_city, String merchant_posting, String amount_percentage1, String periodicity1,
-			String merchant_terminal, String merchant_number, String outlet_no, String entry_user, Date entry_time,
-			Date modify_time, String auth_user, String modify_user, Date auth_time, Character entity_flg,
-			Character del_flg, String freeze_flg, String freeze_type, String add_details_req, String paritioning_type,
-			Character modify_flg, String amount_percentage2, String periodicity2, String tran_remarks2,
-			String amount_percentage3, String periodicity3, String tran_remarks3, String tran_remarks, String version,
-			String modes, String purpose, String orgid, String tid, String tr, String tn, String pa, String msid,
-			String mtid, String bam, String curr, String invoiceno, Date invoicedate, String invoicename, Date qrexpire,
-			String am, String pincode, String tier, String txntype, String qrmedium, String tranasactio_crncy,
-			String tip_or_conv_indicator, String conv_fees_type, String value_conv_fees, String zip_code,
-			String bill_number, String loyalty_number, String customer_label, String store_label, String terminal_label,
-			String reference_label, String purpose_of_tran, String status, String merchant_coun_cod,
-			String merchant_brand, String merchant_location, String merchant_genre, String merchant_onboard,
-			String type_maucas, String type_upi, String tip_or_conv_indicator_upi, String conv_fees_type_upi,
-			String value_conv_fees_upi, String bank_name, String bank_account_no, String bank_branch, String bank_code,
-			String iban, String currency, String merchant_card_acc_id, String merchant_mode, String merchant_bips_no,
-			String mer_contact_per, String mer_email_addr, String send_notify, String mer_phone_num, String fee_desc,
-			String fee_type, String amount_per, String fee_freq, String vat_collect, String fee_desc_r1,
-			String fee_type_r1, String amount_per_r1, String fee_freq_r1, String vat_collect_r1, String del_flag,
-			String status_enable, String status_disable, String merchant_cat_desc, String notify_mode,
-			String mer_partner, String merchant_addr_2, String merchant_addr_3, String merchant_office_number,
-			String merchant_out_addr_2, String merchant_out_addr_3, String merchant_out_addr_1,
-			String settlement_frequency, String settlement_day, String settlement_date, Date next_settlement_date,
-			String static_field, String mer_user_id_r1, String mer_user_id_r2, String mer_user_id_r3,
-			String mer_user_id_r4, String mer_user_id_r5, String mer_user_id_r6, String mer_user_id_r7,
-			String mer_user_id_r8, String mer_user_id_r9, String mer_user_id_r10, String mer_cont_pers,
-			String mer_cont_pers_r2, String mer_cont_pers_r3, String mer_cont_pers_r4, String mer_cont_pers_r5,
-			String mer_cont_pers_r6, String mer_cont_pers_r7, String mer_cont_pers_r8, String mer_cont_pers_r9,
-			String mer_cont_pers_r10, BigDecimal mer_ph_no, BigDecimal mer_ph_no_r2, BigDecimal mer_ph_no_r3,
-			BigDecimal mer_ph_no_r4, BigDecimal mer_ph_no_r5, BigDecimal mer_ph_no_r6, BigDecimal mer_ph_no_r7,
-			BigDecimal mer_ph_no_r8, BigDecimal mer_ph_no_r9, BigDecimal mer_ph_no_r10, BigDecimal mer_ofc_no,
-			BigDecimal mer_ofc_no_r2, BigDecimal mer_ofc_no_r3, BigDecimal mer_ofc_no_r4, BigDecimal mer_ofc_no_r5,
-			BigDecimal mer_ofc_no_r6, BigDecimal mer_ofc_no_r7, BigDecimal mer_ofc_no_r8, BigDecimal mer_ofc_no_r9,
-			BigDecimal mer_ofc_no_r10, String mer_email_addr_r1, String mer_email_addr_r2, String mer_email_addr_r3,
-			String mer_email_addr_r4, String mer_email_addr_r5, String mer_email_addr_r6, String mer_email_addr_r7,
-			String mer_email_addr_r8, String mer_email_addr_r9, String mer_email_addr_r10, String mer_notifi_mode,
-			String mer_notifi_mode_r2, String mer_notifi_mode_r3, String mer_notifi_mode_r4, String mer_notifi_mode_r5,
-			String mer_notifi_mode_r6, String mer_notifi_mode_r7, String mer_notifi_mode_r8, String mer_notifi_mode_r9,
-			String mer_notifi_mode_r10, String send_notifi, String send_notifi_r2, String send_notifi_r3,
-			String send_notifi_r4, String send_notifi_r5, String send_notifi_r6, String send_notifi_r7,
-			String send_notifi_r8, String send_notifi_r9, String send_notifi_r10, String bank_name2,
-			String bank_account_no2, String bank_branch2, String bank_code2, String iban2, String currency2,
-			String settlement_frequency2, String settlement_day2, String settlement_date2, byte[] photo,
-			String accountName1, String accountName2, String ph_countrycode_r1, String ph_countrycode_r2,
-			String ph_countrycode_r3, String ph_countrycode_r4, String ph_countrycode_r5, String ph_countrycode_r6,
-			String ph_countrycode_r7, String ph_countrycode_r8, String ph_countrycode_r9, String ph_countrycode_r10,
-			String ofc_countrycode_r1, String ofc_countrycode_r2, String ofc_countrycode_r3, String ofc_countrycode_r4,
-			String ofc_countrycode_r5, String ofc_countrycode_r6, String ofc_countrycode_r7, String ofc_countrycode_r8,
-			String ofc_countrycode_r9, String ofc_countrycode_r10, String chargeback_approval,
-			BigDecimal chargeback_amount, String transaction_amount,String detailed_address1,String detailed_address2,String delete_user, Date delete_time,
-			String delete_remarks) {
-		super();
-		this.merchant_id = merchant_id;
-		this.merchant_pow_ca_no = merchant_pow_ca_no;
-		this.merchant_acc_no = merchant_acc_no;
-		this.merchant_addr = merchant_addr;
-		this.merchant_legal_id = merchant_legal_id;
-		this.merchant_cont_per = merchant_cont_per;
-		this.merchant_name = merchant_name;
-		this.merchant_cont_details = merchant_cont_details;
-		this.company_name = company_name;
-		this.trading_name = trading_name;
-		this.bill_acc_no = bill_acc_no;
-		this.tran_curr = tran_curr;
-		this.tran_amount = tran_amount;
-		this.remitter = remitter;
-		this.remitter_acc_no = remitter_acc_no;
-		this.remitter_ref_no = remitter_ref_no;
-		this.tran_type = tran_type;
-		this.tran_remarks1 = tran_remarks1;
-		this.merchant_corp_name = merchant_corp_name;
-		this.merchant_mob_no = merchant_mob_no;
-		this.merchant_type = merchant_type;
-		this.type_of_qr = type_of_qr;
-		this.merchant_cat_code = merchant_cat_code;
-		this.merchant_fees = merchant_fees;
-		this.merchant_city = merchant_city;
-		this.merchant_posting = merchant_posting;
-		this.amount_percentage1 = amount_percentage1;
-		this.periodicity1 = periodicity1;
-		this.merchant_terminal = merchant_terminal;
-		this.merchant_number = merchant_number;
-		this.outlet_no = outlet_no;
-		this.entry_user = entry_user;
-		this.entry_time = entry_time;
-		this.modify_time = modify_time;
-		this.auth_user = auth_user;
-		this.modify_user = modify_user;
-		this.auth_time = auth_time;
-		this.entity_flg = entity_flg;
-		this.del_flg = del_flg;
-		this.freeze_flg = freeze_flg;
-		this.freeze_type = freeze_type;
-		this.add_details_req = add_details_req;
-		this.paritioning_type = paritioning_type;
-		this.modify_flg = modify_flg;
-		this.amount_percentage2 = amount_percentage2;
-		this.periodicity2 = periodicity2;
-		this.tran_remarks2 = tran_remarks2;
-		this.amount_percentage3 = amount_percentage3;
-		this.periodicity3 = periodicity3;
-		this.tran_remarks3 = tran_remarks3;
-		this.tran_remarks = tran_remarks;
-		this.version = version;
-		this.modes = modes;
-		this.purpose = purpose;
-		this.orgid = orgid;
-		this.tid = tid;
-		this.tr = tr;
-		this.tn = tn;
-		this.pa = pa;
-		this.msid = msid;
-		this.mtid = mtid;
-		this.bam = bam;
-		this.curr = curr;
-		this.invoiceno = invoiceno;
-		this.invoicedate = invoicedate;
-		this.invoicename = invoicename;
-		this.qrexpire = qrexpire;
-		this.am = am;
-		this.pincode = pincode;
-		this.tier = tier;
-		this.txntype = txntype;
-		this.qrmedium = qrmedium;
-		this.tranasactio_crncy = tranasactio_crncy;
-		this.tip_or_conv_indicator = tip_or_conv_indicator;
-		this.conv_fees_type = conv_fees_type;
-		this.value_conv_fees = value_conv_fees;
-		this.zip_code = zip_code;
-		this.bill_number = bill_number;
-		this.loyalty_number = loyalty_number;
-		this.customer_label = customer_label;
-		this.store_label = store_label;
-		this.terminal_label = terminal_label;
-		this.reference_label = reference_label;
-		this.purpose_of_tran = purpose_of_tran;
-		this.status = status;
-		this.merchant_coun_cod = merchant_coun_cod;
-		this.merchant_brand = merchant_brand;
-		this.merchant_location = merchant_location;
-		this.merchant_genre = merchant_genre;
-		this.merchant_onboard = merchant_onboard;
-		this.type_maucas = type_maucas;
-		this.type_upi = type_upi;
-		this.tip_or_conv_indicator_upi = tip_or_conv_indicator_upi;
-		this.conv_fees_type_upi = conv_fees_type_upi;
-		this.value_conv_fees_upi = value_conv_fees_upi;
-		this.bank_name = bank_name;
-		this.bank_account_no = bank_account_no;
-		this.bank_branch = bank_branch;
-		this.bank_code = bank_code;
-		this.iban = iban;
-		this.currency = currency;
-		this.merchant_card_acc_id = merchant_card_acc_id;
-		this.merchant_mode = merchant_mode;
-		this.merchant_bips_no = merchant_bips_no;
-		this.mer_contact_per = mer_contact_per;
-		this.mer_email_addr = mer_email_addr;
-		this.send_notify = send_notify;
-		this.mer_phone_num = mer_phone_num;
-		this.fee_desc = fee_desc;
-		this.fee_type = fee_type;
-		this.amount_per = amount_per;
-		this.fee_freq = fee_freq;
-		this.vat_collect = vat_collect;
-		this.fee_desc_r1 = fee_desc_r1;
-		this.fee_type_r1 = fee_type_r1;
-		this.amount_per_r1 = amount_per_r1;
-		this.fee_freq_r1 = fee_freq_r1;
-		this.vat_collect_r1 = vat_collect_r1;
-		this.del_flag = del_flag;
-		this.status_enable = status_enable;
-		this.status_disable = status_disable;
-		this.merchant_cat_desc = merchant_cat_desc;
-		this.notify_mode = notify_mode;
-		this.mer_partner = mer_partner;
-		this.merchant_addr_2 = merchant_addr_2;
-		this.merchant_addr_3 = merchant_addr_3;
-		this.merchant_office_number = merchant_office_number;
-		this.merchant_out_addr_2 = merchant_out_addr_2;
-		this.merchant_out_addr_3 = merchant_out_addr_3;
-		this.merchant_out_addr_1 = merchant_out_addr_1;
-		this.settlement_frequency = settlement_frequency;
-		this.settlement_day = settlement_day;
-		this.settlement_date = settlement_date;
-		this.next_settlement_date = next_settlement_date;
-		this.static_field = static_field;
-		this.mer_user_id_r1 = mer_user_id_r1;
-		this.mer_user_id_r2 = mer_user_id_r2;
-		this.mer_user_id_r3 = mer_user_id_r3;
-		this.mer_user_id_r4 = mer_user_id_r4;
-		this.mer_user_id_r5 = mer_user_id_r5;
-		this.mer_user_id_r6 = mer_user_id_r6;
-		this.mer_user_id_r7 = mer_user_id_r7;
-		this.mer_user_id_r8 = mer_user_id_r8;
-		this.mer_user_id_r9 = mer_user_id_r9;
-		this.mer_user_id_r10 = mer_user_id_r10;
-		this.mer_cont_pers = mer_cont_pers;
-		this.mer_cont_pers_r2 = mer_cont_pers_r2;
-		this.mer_cont_pers_r3 = mer_cont_pers_r3;
-		this.mer_cont_pers_r4 = mer_cont_pers_r4;
-		this.mer_cont_pers_r5 = mer_cont_pers_r5;
-		this.mer_cont_pers_r6 = mer_cont_pers_r6;
-		this.mer_cont_pers_r7 = mer_cont_pers_r7;
-		this.mer_cont_pers_r8 = mer_cont_pers_r8;
-		this.mer_cont_pers_r9 = mer_cont_pers_r9;
-		this.mer_cont_pers_r10 = mer_cont_pers_r10;
-		this.mer_ph_no = mer_ph_no;
-		this.mer_ph_no_r2 = mer_ph_no_r2;
-		this.mer_ph_no_r3 = mer_ph_no_r3;
-		this.mer_ph_no_r4 = mer_ph_no_r4;
-		this.mer_ph_no_r5 = mer_ph_no_r5;
-		this.mer_ph_no_r6 = mer_ph_no_r6;
-		this.mer_ph_no_r7 = mer_ph_no_r7;
-		this.mer_ph_no_r8 = mer_ph_no_r8;
-		this.mer_ph_no_r9 = mer_ph_no_r9;
-		this.mer_ph_no_r10 = mer_ph_no_r10;
-		this.mer_ofc_no = mer_ofc_no;
-		this.mer_ofc_no_r2 = mer_ofc_no_r2;
-		this.mer_ofc_no_r3 = mer_ofc_no_r3;
-		this.mer_ofc_no_r4 = mer_ofc_no_r4;
-		this.mer_ofc_no_r5 = mer_ofc_no_r5;
-		this.mer_ofc_no_r6 = mer_ofc_no_r6;
-		this.mer_ofc_no_r7 = mer_ofc_no_r7;
-		this.mer_ofc_no_r8 = mer_ofc_no_r8;
-		this.mer_ofc_no_r9 = mer_ofc_no_r9;
-		this.mer_ofc_no_r10 = mer_ofc_no_r10;
-		this.mer_email_addr_r1 = mer_email_addr_r1;
-		this.mer_email_addr_r2 = mer_email_addr_r2;
-		this.mer_email_addr_r3 = mer_email_addr_r3;
-		this.mer_email_addr_r4 = mer_email_addr_r4;
-		this.mer_email_addr_r5 = mer_email_addr_r5;
-		this.mer_email_addr_r6 = mer_email_addr_r6;
-		this.mer_email_addr_r7 = mer_email_addr_r7;
-		this.mer_email_addr_r8 = mer_email_addr_r8;
-		this.mer_email_addr_r9 = mer_email_addr_r9;
-		this.mer_email_addr_r10 = mer_email_addr_r10;
-		this.mer_notifi_mode = mer_notifi_mode;
-		this.mer_notifi_mode_r2 = mer_notifi_mode_r2;
-		this.mer_notifi_mode_r3 = mer_notifi_mode_r3;
-		this.mer_notifi_mode_r4 = mer_notifi_mode_r4;
-		this.mer_notifi_mode_r5 = mer_notifi_mode_r5;
-		this.mer_notifi_mode_r6 = mer_notifi_mode_r6;
-		this.mer_notifi_mode_r7 = mer_notifi_mode_r7;
-		this.mer_notifi_mode_r8 = mer_notifi_mode_r8;
-		this.mer_notifi_mode_r9 = mer_notifi_mode_r9;
-		this.mer_notifi_mode_r10 = mer_notifi_mode_r10;
-		this.send_notifi = send_notifi;
-		this.send_notifi_r2 = send_notifi_r2;
-		this.send_notifi_r3 = send_notifi_r3;
-		this.send_notifi_r4 = send_notifi_r4;
-		this.send_notifi_r5 = send_notifi_r5;
-		this.send_notifi_r6 = send_notifi_r6;
-		this.send_notifi_r7 = send_notifi_r7;
-		this.send_notifi_r8 = send_notifi_r8;
-		this.send_notifi_r9 = send_notifi_r9;
-		this.send_notifi_r10 = send_notifi_r10;
-		this.bank_name2 = bank_name2;
-		this.bank_account_no2 = bank_account_no2;
-		this.bank_branch2 = bank_branch2;
-		this.bank_code2 = bank_code2;
-		this.iban2 = iban2;
-		this.currency2 = currency2;
-		this.settlement_frequency2 = settlement_frequency2;
-		this.settlement_day2 = settlement_day2;
-		this.settlement_date2 = settlement_date2;
-		this.photo = photo;
-		this.accountName1 = accountName1;
-		this.accountName2 = accountName2;
-		this.ph_countrycode_r1 = ph_countrycode_r1;
-		this.ph_countrycode_r2 = ph_countrycode_r2;
-		this.ph_countrycode_r3 = ph_countrycode_r3;
-		this.ph_countrycode_r4 = ph_countrycode_r4;
-		this.ph_countrycode_r5 = ph_countrycode_r5;
-		this.ph_countrycode_r6 = ph_countrycode_r6;
-		this.ph_countrycode_r7 = ph_countrycode_r7;
-		this.ph_countrycode_r8 = ph_countrycode_r8;
-		this.ph_countrycode_r9 = ph_countrycode_r9;
-		this.ph_countrycode_r10 = ph_countrycode_r10;
-		this.ofc_countrycode_r1 = ofc_countrycode_r1;
-		this.ofc_countrycode_r2 = ofc_countrycode_r2;
-		this.ofc_countrycode_r3 = ofc_countrycode_r3;
-		this.ofc_countrycode_r4 = ofc_countrycode_r4;
-		this.ofc_countrycode_r5 = ofc_countrycode_r5;
-		this.ofc_countrycode_r6 = ofc_countrycode_r6;
-		this.ofc_countrycode_r7 = ofc_countrycode_r7;
-		this.ofc_countrycode_r8 = ofc_countrycode_r8;
-		this.ofc_countrycode_r9 = ofc_countrycode_r9;
-		this.ofc_countrycode_r10 = ofc_countrycode_r10;
-		this.chargeback_approval = chargeback_approval;
-		this.chargeback_amount = chargeback_amount;
-		this.transaction_amount = transaction_amount;
-		this.detailed_address1=detailed_address1;
-		this.detailed_address2=detailed_address2;
-		this.delete_user = delete_user;
-		this.delete_time = delete_time;
-		this.delete_remarks = delete_remarks;
-	}
+ 
+	
 
 	public MerchantMasterMod() {
 		// TODO Auto-generated constructor stub
@@ -2535,4 +2412,115 @@ public class MerchantMasterMod {
 		this.delete_remarks = delete_remarks;
 	}
 
+	@Override
+	public String toString() {
+		return "MerchantMasterMod [merchant_id=" + merchant_id + ", merchant_pow_ca_no=" + merchant_pow_ca_no
+				+ ", merchant_acc_no=" + merchant_acc_no + ", merchant_addr=" + merchant_addr + ", merchant_legal_id="
+				+ merchant_legal_id + ", merchant_cont_per=" + merchant_cont_per + ", merchant_name=" + merchant_name
+				+ ", merchant_cont_details=" + merchant_cont_details + ", company_name=" + company_name
+				+ ", trading_name=" + trading_name + ", bill_acc_no=" + bill_acc_no + ", tran_curr=" + tran_curr
+				+ ", tran_amount=" + tran_amount + ", remitter=" + remitter + ", remitter_acc_no=" + remitter_acc_no
+				+ ", remitter_ref_no=" + remitter_ref_no + ", tran_type=" + tran_type + ", tran_remarks1="
+				+ tran_remarks1 + ", merchant_corp_name=" + merchant_corp_name + ", merchant_mob_no=" + merchant_mob_no
+				+ ", merchant_type=" + merchant_type + ", type_of_qr=" + type_of_qr + ", merchant_cat_code="
+				+ merchant_cat_code + ", merchant_fees=" + merchant_fees + ", merchant_city=" + merchant_city
+				+ ", merchant_posting=" + merchant_posting + ", amount_percentage1=" + amount_percentage1
+				+ ", periodicity1=" + periodicity1 + ", merchant_terminal=" + merchant_terminal + ", merchant_number="
+				+ merchant_number + ", outlet_no=" + outlet_no + ", entry_user=" + entry_user + ", entry_time="
+				+ entry_time + ", modify_time=" + modify_time + ", auth_user=" + auth_user + ", modify_user="
+				+ modify_user + ", auth_time=" + auth_time + ", entity_flg=" + entity_flg + ", del_flg=" + del_flg
+				+ ", freeze_flg=" + freeze_flg + ", freeze_type=" + freeze_type + ", add_details_req=" + add_details_req
+				+ ", paritioning_type=" + paritioning_type + ", modify_flg=" + modify_flg + ", amount_percentage2="
+				+ amount_percentage2 + ", periodicity2=" + periodicity2 + ", tran_remarks2=" + tran_remarks2
+				+ ", amount_percentage3=" + amount_percentage3 + ", periodicity3=" + periodicity3 + ", tran_remarks3="
+				+ tran_remarks3 + ", tran_remarks=" + tran_remarks + ", version=" + version + ", modes=" + modes
+				+ ", purpose=" + purpose + ", orgid=" + orgid + ", tid=" + tid + ", tr=" + tr + ", tn=" + tn + ", pa="
+				+ pa + ", msid=" + msid + ", mtid=" + mtid + ", bam=" + bam + ", curr=" + curr + ", invoiceno="
+				+ invoiceno + ", invoicedate=" + invoicedate + ", invoicename=" + invoicename + ", qrexpire=" + qrexpire
+				+ ", am=" + am + ", pincode=" + pincode + ", tier=" + tier + ", txntype=" + txntype + ", qrmedium="
+				+ qrmedium + ", tranasactio_crncy=" + tranasactio_crncy + ", tip_or_conv_indicator="
+				+ tip_or_conv_indicator + ", conv_fees_type=" + conv_fees_type + ", value_conv_fees=" + value_conv_fees
+				+ ", zip_code=" + zip_code + ", bill_number=" + bill_number + ", loyalty_number=" + loyalty_number
+				+ ", customer_label=" + customer_label + ", store_label=" + store_label + ", terminal_label="
+				+ terminal_label + ", reference_label=" + reference_label + ", purpose_of_tran=" + purpose_of_tran
+				+ ", status=" + status + ", merchant_coun_cod=" + merchant_coun_cod + ", merchant_brand="
+				+ merchant_brand + ", merchant_location=" + merchant_location + ", merchant_genre=" + merchant_genre
+				+ ", merchant_onboard=" + merchant_onboard + ", type_maucas=" + type_maucas + ", type_upi=" + type_upi
+				+ ", tip_or_conv_indicator_upi=" + tip_or_conv_indicator_upi + ", conv_fees_type_upi="
+				+ conv_fees_type_upi + ", value_conv_fees_upi=" + value_conv_fees_upi + ", bank_name=" + bank_name
+				+ ", bank_account_no=" + bank_account_no + ", bank_branch=" + bank_branch + ", bank_code=" + bank_code
+				+ ", iban=" + iban + ", currency=" + currency + ", merchant_card_acc_id=" + merchant_card_acc_id
+				+ ", merchant_mode=" + merchant_mode + ", merchant_bips_no=" + merchant_bips_no + ", mer_contact_per="
+				+ mer_contact_per + ", mer_email_addr=" + mer_email_addr + ", send_notify=" + send_notify
+				+ ", mer_phone_num=" + mer_phone_num + ", fee_desc=" + fee_desc + ", fee_type=" + fee_type
+				+ ", amount_per=" + amount_per + ", fee_freq=" + fee_freq + ", vat_collect=" + vat_collect
+				+ ", fee_desc_r1=" + fee_desc_r1 + ", fee_type_r1=" + fee_type_r1 + ", amount_per_r1=" + amount_per_r1
+				+ ", fee_freq_r1=" + fee_freq_r1 + ", vat_collect_r1=" + vat_collect_r1 + ", del_flag=" + del_flag
+				+ ", status_enable=" + status_enable + ", status_disable=" + status_disable + ", merchant_cat_desc="
+				+ merchant_cat_desc + ", notify_mode=" + notify_mode + ", mer_partner=" + mer_partner
+				+ ", merchant_addr_2=" + merchant_addr_2 + ", merchant_addr_3=" + merchant_addr_3
+				+ ", merchant_office_number=" + merchant_office_number + ", merchant_out_addr_2=" + merchant_out_addr_2
+				+ ", merchant_out_addr_3=" + merchant_out_addr_3 + ", merchant_out_addr_1=" + merchant_out_addr_1
+				+ ", settlement_frequency=" + settlement_frequency + ", settlement_day=" + settlement_day
+				+ ", settlement_date=" + settlement_date + ", next_settlement_date=" + next_settlement_date
+				+ ", static_field=" + static_field + ", mer_user_id_r1=" + mer_user_id_r1 + ", mer_user_id_r2="
+				+ mer_user_id_r2 + ", mer_user_id_r3=" + mer_user_id_r3 + ", mer_user_id_r4=" + mer_user_id_r4
+				+ ", mer_user_id_r5=" + mer_user_id_r5 + ", mer_user_id_r6=" + mer_user_id_r6 + ", mer_user_id_r7="
+				+ mer_user_id_r7 + ", mer_user_id_r8=" + mer_user_id_r8 + ", mer_user_id_r9=" + mer_user_id_r9
+				+ ", mer_user_id_r10=" + mer_user_id_r10 + ", mer_cont_pers=" + mer_cont_pers + ", mer_cont_pers_r2="
+				+ mer_cont_pers_r2 + ", mer_cont_pers_r3=" + mer_cont_pers_r3 + ", mer_cont_pers_r4=" + mer_cont_pers_r4
+				+ ", mer_cont_pers_r5=" + mer_cont_pers_r5 + ", mer_cont_pers_r6=" + mer_cont_pers_r6
+				+ ", mer_cont_pers_r7=" + mer_cont_pers_r7 + ", mer_cont_pers_r8=" + mer_cont_pers_r8
+				+ ", mer_cont_pers_r9=" + mer_cont_pers_r9 + ", mer_cont_pers_r10=" + mer_cont_pers_r10 + ", mer_ph_no="
+				+ mer_ph_no + ", mer_ph_no_r2=" + mer_ph_no_r2 + ", mer_ph_no_r3=" + mer_ph_no_r3 + ", mer_ph_no_r4="
+				+ mer_ph_no_r4 + ", mer_ph_no_r5=" + mer_ph_no_r5 + ", mer_ph_no_r6=" + mer_ph_no_r6 + ", mer_ph_no_r7="
+				+ mer_ph_no_r7 + ", mer_ph_no_r8=" + mer_ph_no_r8 + ", mer_ph_no_r9=" + mer_ph_no_r9
+				+ ", mer_ph_no_r10=" + mer_ph_no_r10 + ", mer_ofc_no=" + mer_ofc_no + ", mer_ofc_no_r2=" + mer_ofc_no_r2
+				+ ", mer_ofc_no_r3=" + mer_ofc_no_r3 + ", mer_ofc_no_r4=" + mer_ofc_no_r4 + ", mer_ofc_no_r5="
+				+ mer_ofc_no_r5 + ", mer_ofc_no_r6=" + mer_ofc_no_r6 + ", mer_ofc_no_r7=" + mer_ofc_no_r7
+				+ ", mer_ofc_no_r8=" + mer_ofc_no_r8 + ", mer_ofc_no_r9=" + mer_ofc_no_r9 + ", mer_ofc_no_r10="
+				+ mer_ofc_no_r10 + ", mer_email_addr_r1=" + mer_email_addr_r1 + ", mer_email_addr_r2="
+				+ mer_email_addr_r2 + ", mer_email_addr_r3=" + mer_email_addr_r3 + ", mer_email_addr_r4="
+				+ mer_email_addr_r4 + ", mer_email_addr_r5=" + mer_email_addr_r5 + ", mer_email_addr_r6="
+				+ mer_email_addr_r6 + ", mer_email_addr_r7=" + mer_email_addr_r7 + ", mer_email_addr_r8="
+				+ mer_email_addr_r8 + ", mer_email_addr_r9=" + mer_email_addr_r9 + ", mer_email_addr_r10="
+				+ mer_email_addr_r10 + ", mer_notifi_mode=" + mer_notifi_mode + ", mer_notifi_mode_r2="
+				+ mer_notifi_mode_r2 + ", mer_notifi_mode_r3=" + mer_notifi_mode_r3 + ", mer_notifi_mode_r4="
+				+ mer_notifi_mode_r4 + ", mer_notifi_mode_r5=" + mer_notifi_mode_r5 + ", mer_notifi_mode_r6="
+				+ mer_notifi_mode_r6 + ", mer_notifi_mode_r7=" + mer_notifi_mode_r7 + ", mer_notifi_mode_r8="
+				+ mer_notifi_mode_r8 + ", mer_notifi_mode_r9=" + mer_notifi_mode_r9 + ", mer_notifi_mode_r10="
+				+ mer_notifi_mode_r10 + ", send_notifi=" + send_notifi + ", send_notifi_r2=" + send_notifi_r2
+				+ ", send_notifi_r3=" + send_notifi_r3 + ", send_notifi_r4=" + send_notifi_r4 + ", send_notifi_r5="
+				+ send_notifi_r5 + ", send_notifi_r6=" + send_notifi_r6 + ", send_notifi_r7=" + send_notifi_r7
+				+ ", send_notifi_r8=" + send_notifi_r8 + ", send_notifi_r9=" + send_notifi_r9 + ", send_notifi_r10="
+				+ send_notifi_r10 + ", bank_name2=" + bank_name2 + ", bank_account_no2=" + bank_account_no2
+				+ ", bank_branch2=" + bank_branch2 + ", bank_code2=" + bank_code2 + ", iban2=" + iban2 + ", currency2="
+				+ currency2 + ", settlement_frequency2=" + settlement_frequency2 + ", settlement_day2="
+				+ settlement_day2 + ", settlement_date2=" + settlement_date2 + ", photo=" + Arrays.toString(photo)
+				+ ", accountName1=" + accountName1 + ", accountName2=" + accountName2 + ", detailed_address1="
+				+ detailed_address1 + ", detailed_address2=" + detailed_address2 + ", ph_countrycode_r1="
+				+ ph_countrycode_r1 + ", ph_countrycode_r2=" + ph_countrycode_r2 + ", ph_countrycode_r3="
+				+ ph_countrycode_r3 + ", ph_countrycode_r4=" + ph_countrycode_r4 + ", ph_countrycode_r5="
+				+ ph_countrycode_r5 + ", ph_countrycode_r6=" + ph_countrycode_r6 + ", ph_countrycode_r7="
+				+ ph_countrycode_r7 + ", ph_countrycode_r8=" + ph_countrycode_r8 + ", ph_countrycode_r9="
+				+ ph_countrycode_r9 + ", ph_countrycode_r10=" + ph_countrycode_r10 + ", ofc_countrycode_r1="
+				+ ofc_countrycode_r1 + ", ofc_countrycode_r2=" + ofc_countrycode_r2 + ", ofc_countrycode_r3="
+				+ ofc_countrycode_r3 + ", ofc_countrycode_r4=" + ofc_countrycode_r4 + ", ofc_countrycode_r5="
+				+ ofc_countrycode_r5 + ", ofc_countrycode_r6=" + ofc_countrycode_r6 + ", ofc_countrycode_r7="
+				+ ofc_countrycode_r7 + ", ofc_countrycode_r8=" + ofc_countrycode_r8 + ", ofc_countrycode_r9="
+				+ ofc_countrycode_r9 + ", ofc_countrycode_r10=" + ofc_countrycode_r10 + ", chargeback_approval="
+				+ chargeback_approval + ", chargeback_amount=" + chargeback_amount + ", transaction_amount="
+				+ transaction_amount + ", delete_user=" + delete_user + ", delete_time=" + delete_time
+				+ ", delete_remarks=" + delete_remarks + ", hr_status=" + hr_status + ", hr_hold_remarks="
+				+ hr_hold_remarks + ", hr_reject_remarks=" + hr_reject_remarks + ", hr_holdreject_flg="
+				+ hr_holdreject_flg + ", hr_hold_user=" + hr_hold_user + ", hr_reject_user=" + hr_reject_user
+				+ ", hr_hold_date=" + hr_hold_date + ", hr_reject_date=" + hr_reject_date + ", brn_no=" + brn_no
+				+ ", brn_date=" + brn_date + ", mer_nat_id=" + mer_nat_id + ", mer_nat_id_r2=" + mer_nat_id_r2
+				+ ", mer_nat_id_r3=" + mer_nat_id_r3 + ", mer_nat_id_r4=" + mer_nat_id_r4 + ", mer_nat_id_r5="
+				+ mer_nat_id_r5 + ", mer_nat_id_r6=" + mer_nat_id_r6 + ", mer_nat_id_r7=" + mer_nat_id_r7
+				+ ", mer_nat_id_r8=" + mer_nat_id_r8 + ", mer_nat_id_r9=" + mer_nat_id_r9 + ", mer_nat_id_r10="
+				+ mer_nat_id_r10 + "]";
+	}
+
+	
 }

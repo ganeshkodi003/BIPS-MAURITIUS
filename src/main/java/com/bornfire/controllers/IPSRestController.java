@@ -16,9 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,16 +54,22 @@ import com.bornfire.configuration.ErrorResponseCod;
 import com.bornfire.configuration.SequenceGenerator;
 import com.bornfire.entity.AccessandRolesRepository;
 import com.bornfire.entity.AccountContactResponse;
+import com.bornfire.entity.BIPS_Black_Repo;
 import com.bornfire.entity.BIPS_ChargeBack_Repo;
 import com.bornfire.entity.BIPS_Charge_Back_Entity;
+import com.bornfire.entity.BIPS_CheckListEntity;
+import com.bornfire.entity.BIPS_CheckList_Repo;
+import com.bornfire.entity.BIPS_Dedup_Repo;
 import com.bornfire.entity.BIPS_MerDeviceManagement_Repo;
 import com.bornfire.entity.BIPS_MerUserManagement_Repo;
 import com.bornfire.entity.BIPS_Mer_Device_Management_Entity;
 import com.bornfire.entity.BIPS_Mer_User_Management_Entity;
+import com.bornfire.entity.BIPS_Negative_Repo;
 import com.bornfire.entity.BIPS_OutwardTransMonitoring_Repo;
 import com.bornfire.entity.BIPS_Outward_Trans_Monitoring_Entity;
 import com.bornfire.entity.BIPS_PasswordManagement_Repo;
 import com.bornfire.entity.BIPS_Password_Management_Entity;
+import com.bornfire.entity.BIPS_Pep_Repo;
 import com.bornfire.entity.BIPS_UnitManagement_Repo;
 import com.bornfire.entity.BIPS_Unit_Mangement_Entity;
 import com.bornfire.entity.BankAgentTable;
@@ -171,6 +180,22 @@ public class IPSRestController {
 
 	@Autowired
 	BIPS_MerDeviceManagement_Repo bIPS_MerDeviceManagement_Repo;
+	
+	@Autowired
+	BIPS_Dedup_Repo dedup_Repo;
+
+	@Autowired
+	BIPS_Black_Repo black_Repo;
+
+	@Autowired
+	BIPS_Negative_Repo Negative_Repo;
+
+	@Autowired
+	BIPS_Pep_Repo Pep_Repo;
+
+	@Autowired
+	BIPS_CheckList_Repo bIPS_CheckList_Repo;
+
 
 	@RequestMapping(value = "TransactionDownload", method = RequestMethod.GET)
 	@ResponseBody
@@ -1047,5 +1072,800 @@ public class IPSRestController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
+	// AML CHECK
+
+		@RequestMapping(value = "CheckUnit", method = { RequestMethod.GET })
+		@ResponseBody
+		public Map<String, String> CheckUnit(@RequestParam(required = false) String brn_no,
+				@RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date brn_date,
+				HttpServletRequest req) {
+			System.out.println(brn_no);
+			Map<String, String> response = new HashMap<>();
+			StringBuilder duplicateMsg = new StringBuilder();
+			StringBuilder negativeMsg = new StringBuilder();
+			StringBuilder blackMsg = new StringBuilder();
+			StringBuilder pepMsg = new StringBuilder();
+			String userID = (String) req.getSession().getAttribute("USERID");
+			boolean duplicateFound = false;
+			boolean negativeFound = false;
+			boolean blackFound = false;
+			boolean pepFound = false;
+			try {
+				String sequenceValue = bIPS_CheckList_Repo.getSequence();
+
+				BIPS_CheckListEntity checklist = new BIPS_CheckListEntity();
+				checklist.setSrl_no(sequenceValue);
+				checklist.setEntry_user(userID);
+				checklist.setDel_flg("N");
+				checklist.setEntry_time(new Date());
+				checklist.setBrn_unit(brn_no);
+				checklist.setBrn_date_unit(brn_date);
+				
+				// Check for duplicates
+				List<String> brn_no1 = dedup_Repo.getBrn_No_Unit();
+				if (brn_no1.contains(brn_no)) {
+					duplicateFound = true;
+					duplicateMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+
+				// Format the date
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				String formattedBrnDate = dateFormat.format(brn_date);
+
+				// Check for duplicate date
+				List<Date> brn_date1 = dedup_Repo.findBrnDateUnit();
+				List<String> formattedBrnDates = new ArrayList<>();
+				for (Date date : brn_date1) {
+					formattedBrnDates.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDates.contains(formattedBrnDate)) {
+					duplicateFound = true;
+					duplicateMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDate)
+							.append("</td><td>").append(formattedBrnDate).append("</td></tr>");
+				}
+
+				// Prepare duplicate response
+				if (duplicateFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(duplicateMsg).append("</tbody>").append("</table>");
+					checklist.setBrn_unit(brn_no);
+
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setDuplicate_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("duplicate", table.toString());
+
+				} else {
+					checklist.setDuplicate_check("YES");
+
+					checklist.setRemark("No Match Found");
+					checklist.setEntry_user(userID);
+					checklist.setDel_flg("N");
+					checklist.setEntry_time(new Date());
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("duplicate", "MATCH NOT FOUND");
+				}
+
+				// Check for negative list
+				List<String> brn_no_neg = Negative_Repo.getBrn_No_Unit();
+				if (brn_no_neg.contains(brn_no)) {
+					negativeFound = true;
+					negativeMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+
+				String formattedBrnDateNeg = dateFormat.format(brn_date);
+				List<Date> brn_date_neg = Negative_Repo.findBrnDateUnit();
+				List<String> formattedBrnDatesNeg = new ArrayList<>();
+				for (Date date : brn_date_neg) {
+					formattedBrnDatesNeg.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDatesNeg.contains(formattedBrnDateNeg)) {
+					negativeFound = true;
+					negativeMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDateNeg)
+							.append("</td><td>").append(formattedBrnDateNeg).append("</td></tr>");
+				}
+
+				// Prepare negative response
+				if (negativeFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(negativeMsg).append("</tbody>").append("</table>");
+
+					checklist.setBrn_unit(brn_no);
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setNegative_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+
+					response.put("negative", table.toString());
+				} else {
+					checklist.setNegative_check("YES");
+					response.put("negative", "MATCH NOT FOUND");
+				}
+				// black list found
+
+				List<String> brn_no_blac = black_Repo.getBrn_No_Unit();
+				if (brn_no_blac.contains(brn_no)) {
+					blackFound = true;
+					blackMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+
+				String formattedBrnDateBlac = dateFormat.format(brn_date);
+				List<Date> brn_date_bla = black_Repo.findBrnDateUnit();
+				List<String> formattedBrnDatesBla = new ArrayList<>();
+				for (Date date : brn_date_bla) {
+					formattedBrnDatesBla.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDatesBla.contains(formattedBrnDateBlac)) {
+					blackFound = true;
+					blackMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDateNeg)
+							.append("</td><td>").append(formattedBrnDateNeg).append("</td></tr>");
+				}
+
+				// Prepare negative response
+				if (blackFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(blackMsg).append("</tbody>").append("</table>");
+
+					checklist.setBrn_unit(brn_no);
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setBlack_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+
+					response.put("Black", table.toString());
+				} else {
+					checklist.setBlack_check("YES");
+					response.put("Black", "MATCH NOT FOUND");
+				}
+
+				// pep list found
+
+				List<String> brn_no_pep = Pep_Repo.getBrn_No_Unit();
+				if (brn_no_pep.contains(brn_no)) {
+					pepFound = true;
+					pepMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+
+				String formattedBrnDatePep = dateFormat.format(brn_date);
+				List<Date> brn_date_pep = Pep_Repo.findBrnDateUnit();
+				List<String> formattedBrnDatespep = new ArrayList<>();
+				for (Date date : brn_date_pep) {
+					formattedBrnDatespep.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDatespep.contains(formattedBrnDatePep)) {
+					pepFound = true;
+					pepMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDateNeg)
+							.append("</td><td>").append(formattedBrnDateNeg).append("</td></tr>");
+				}
+
+				// Prepare negative response
+				if (pepFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(pepMsg).append("</tbody>").append("</table>");
+
+					checklist.setBrn_unit(brn_no);
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setPep_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+
+					response.put("Pep", table.toString());
+				} else {
+					checklist.setPep_check("YES");
+					response.put("Pep", "MATCH NOT FOUND");
+				}
+				if (duplicateFound && negativeFound && blackFound && pepFound) {
+					checklist.setRemark("Match Found");
+				} else if (duplicateFound || negativeFound || blackFound || pepFound) {
+					checklist.setRemark("Match Found");
+				} else if (duplicateFound) {
+					checklist.setRemark("Duplicate Match Found");
+				} else if (negativeFound) {
+					checklist.setRemark("Negative List Match Found");
+				} else if (blackFound) {
+					checklist.setRemark("Black List Match Found");
+				} else if (pepFound) {
+					checklist.setRemark("Pep List Match Found");
+				} else {
+					checklist.setRemark("No Match Found");
+				}
+				bIPS_CheckList_Repo.save(checklist);
+			} catch (NullPointerException e) {
+				response.put("error", "clear");
+			}
+
+			return response;
+		}
+
+		@RequestMapping(value = "CheckMerchant", method = { RequestMethod.GET })
+		@ResponseBody
+		public Map<String, String> CheckMerchant(@RequestParam(required = false) String brn_no,
+				@RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date brn_date,
+				HttpServletRequest req, @RequestParam(required = false) String merchant_corp_name) {
+			System.out.println(brn_no);
+			Map<String, String> response = new HashMap<>();
+			StringBuilder duplicateMsg = new StringBuilder();
+			StringBuilder negativeMsg = new StringBuilder();
+			StringBuilder blackMsg = new StringBuilder();
+			StringBuilder pepMsg = new StringBuilder();
+			String userID = (String) req.getSession().getAttribute("USERID");
+			boolean duplicateFound = false;
+			boolean negativeFound = false;
+			boolean blackFound = false;
+			boolean pepFound = false;
+			try {
+				String sequenceValue = bIPS_CheckList_Repo.getSequence();
+
+				BIPS_CheckListEntity checklist = new BIPS_CheckListEntity();
+				checklist.setSrl_no(sequenceValue);
+				checklist.setEntry_user(userID);
+				checklist.setDel_flg("N");
+				checklist.setEntry_time(new Date());
+				checklist.setBrn_unit(brn_no);
+				checklist.setBrn_date_unit(brn_date);
+				checklist.setCorporatename(merchant_corp_name);
+				// Check for duplicates
+				List<String> brn_no1 = dedup_Repo.getBrn_No_Unit();
+				if (brn_no1.contains(brn_no)) {
+					duplicateFound = true;
+					duplicateMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+				List<String> merchant_corp_name1 = dedup_Repo.getcorporatename();
+				if (merchant_corp_name1.contains(merchant_corp_name)) {
+					duplicateFound = true;
+					duplicateMsg.append("<tr><td>Merchant Corporate Name</td><td>").append(merchant_corp_name)
+							.append("</td><td>").append(merchant_corp_name).append("</td></tr>");
+				}
+				// Format the date
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				String formattedBrnDate = dateFormat.format(brn_date);
+
+				// Check for duplicate date
+				List<Date> brn_date1 = dedup_Repo.findBrnDateUnit();
+				List<String> formattedBrnDates = new ArrayList<>();
+				for (Date date : brn_date1) {
+					formattedBrnDates.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDates.contains(formattedBrnDate)) {
+					duplicateFound = true;
+					duplicateMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDate)
+							.append("</td><td>").append(formattedBrnDate).append("</td></tr>");
+				}
+
+				// Prepare duplicate response
+				if (duplicateFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(duplicateMsg).append("</tbody>").append("</table>");
+					checklist.setBrn_unit(brn_no);
+
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setDuplicate_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("duplicate", table.toString());
+
+				} else {
+					checklist.setDuplicate_check("YES");
+
+					checklist.setRemark("No Match Found");
+					checklist.setEntry_user(userID);
+					checklist.setDel_flg("N");
+					checklist.setEntry_time(new Date());
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("duplicate", "MATCH NOT FOUND");
+				}
+
+				// Check for negative list
+				List<String> brn_no_neg = Negative_Repo.getBrn_No_Unit();
+				if (brn_no_neg.contains(brn_no)) {
+					negativeFound = true;
+					negativeMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+				List<String> merchant_corp_name_neg1 = Negative_Repo.getcorporatename();
+				if (merchant_corp_name_neg1.contains(merchant_corp_name)) {
+					negativeFound = true;
+					negativeMsg.append("<tr><td>Merchant Corporate Name</td><td>").append(merchant_corp_name)
+							.append("</td><td>").append(merchant_corp_name).append("</td></tr>");
+				}
+
+				String formattedBrnDateNeg = dateFormat.format(brn_date);
+				List<Date> brn_date_neg = Negative_Repo.findBrnDateUnit();
+				List<String> formattedBrnDatesNeg = new ArrayList<>();
+				for (Date date : brn_date_neg) {
+					formattedBrnDatesNeg.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDatesNeg.contains(formattedBrnDateNeg)) {
+					negativeFound = true;
+					negativeMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDateNeg)
+							.append("</td><td>").append(formattedBrnDateNeg).append("</td></tr>");
+				}
+
+				// Prepare negative response
+				if (negativeFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(negativeMsg).append("</tbody>").append("</table>");
+
+					checklist.setBrn_unit(brn_no);
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setNegative_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+
+					response.put("negative", table.toString());
+				} else {
+					checklist.setNegative_check("YES");
+					response.put("negative", "MATCH NOT FOUND");
+				}
+				// black list found
+
+				List<String> brn_no_blac = black_Repo.getBrn_No_Unit();
+				if (brn_no_blac.contains(brn_no)) {
+					blackFound = true;
+					blackMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+				List<String> merchant_corp_name_bla1 = black_Repo.getcorporatename();
+				if (merchant_corp_name_bla1.contains(merchant_corp_name)) {
+					blackFound = true;
+					blackMsg.append("<tr><td>Merchant Corporate Name</td><td>").append(merchant_corp_name)
+							.append("</td><td>").append(merchant_corp_name).append("</td></tr>");
+				}
+
+				String formattedBrnDateBlac = dateFormat.format(brn_date);
+				List<Date> brn_date_bla = black_Repo.findBrnDateUnit();
+				List<String> formattedBrnDatesBla = new ArrayList<>();
+				for (Date date : brn_date_bla) {
+					formattedBrnDatesBla.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDatesBla.contains(formattedBrnDateBlac)) {
+					blackFound = true;
+					blackMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDateNeg)
+							.append("</td><td>").append(formattedBrnDateNeg).append("</td></tr>");
+				}
+
+				// Prepare negative response
+				if (blackFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(blackMsg).append("</tbody>").append("</table>");
+
+					checklist.setBrn_unit(brn_no);
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setBlack_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+
+					response.put("Black", table.toString());
+				} else {
+					checklist.setBlack_check("YES");
+					response.put("Black", "MATCH NOT FOUND");
+				}
+
+				// pep list found
+
+				List<String> brn_no_pep = Pep_Repo.getBrn_No_Unit();
+				if (brn_no_pep.contains(brn_no)) {
+					pepFound = true;
+					pepMsg.append("<tr><td>Business Registration No</td><td>").append(brn_no).append("</td><td>")
+							.append(brn_no).append("</td></tr>");
+				}
+				List<String> merchant_corp_namepep_1 = Pep_Repo.getcorporatename();
+				if (merchant_corp_namepep_1.contains(merchant_corp_name)) {
+					pepFound = true;
+					pepMsg.append("<tr><td>Merchant Corporate Name</td><td>").append(merchant_corp_name).append("</td><td>")
+							.append(merchant_corp_name).append("</td></tr>");
+				}
+
+				String formattedBrnDatePep = dateFormat.format(brn_date);
+				List<Date> brn_date_pep = Pep_Repo.findBrnDateUnit();
+				List<String> formattedBrnDatespep = new ArrayList<>();
+				for (Date date : brn_date_pep) {
+					formattedBrnDatespep.add(dateFormat.format(date));
+				}
+
+				if (formattedBrnDatespep.contains(formattedBrnDatePep)) {
+					pepFound = true;
+					pepMsg.append("<tr><td>Business Registration Date</td><td>").append(formattedBrnDateNeg)
+							.append("</td><td>").append(formattedBrnDateNeg).append("</td></tr>");
+				}
+
+				// Prepare negative response
+				if (pepFound) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(pepMsg).append("</tbody>").append("</table>");
+
+					checklist.setBrn_unit(brn_no);
+					checklist.setBrn_date_unit(brn_date);
+					checklist.setPep_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+
+					response.put("Pep", table.toString());
+				} else {
+					checklist.setPep_check("YES");
+					response.put("Pep", "MATCH NOT FOUND");
+				}
+				if (duplicateFound && negativeFound && blackFound && pepFound) {
+					checklist.setRemark("Match Found");
+				} else if (duplicateFound || negativeFound || blackFound || pepFound) {
+					checklist.setRemark("Match Found");
+				} else if (duplicateFound) {
+					checklist.setRemark("Duplicate Match Found");
+				} else if (negativeFound) {
+					checklist.setRemark("Negative List Match Found");
+				} else if (blackFound) {
+					checklist.setRemark("Black List Match Found");
+				} else if (pepFound) {
+					checklist.setRemark("Pep List Match Found");
+				} else {
+					checklist.setRemark("No Match Found");
+				}
+				bIPS_CheckList_Repo.save(checklist);
+			} catch (NullPointerException e) {
+				response.put("error", "clear");
+			}
+
+			return response;
+		}
+
+		@RequestMapping(value = "CheckContact", method = { RequestMethod.GET })
+		@ResponseBody
+		public Map<String, String> CheckContact(HttpServletRequest req,
+				@RequestParam(value = "mer_ph_no", required = false) String merPhNo,
+				@RequestParam(value = "mer_ph_no_r2", required = false) String merPhNoR2,
+				@RequestParam(value = "mer_ph_no_r3", required = false) String merPhNoR3,
+				@RequestParam(value = "mer_ph_no_r4", required = false) String merPhNoR4,
+				@RequestParam(value = "mer_ph_no_r5", required = false) String merPhNoR5,
+				@RequestParam(value = "mer_ph_no_r6", required = false) String merPhNoR6,
+				@RequestParam(value = "mer_ph_no_r7", required = false) String merPhNoR7,
+				@RequestParam(value = "mer_ph_no_r8", required = false) String merPhNoR8,
+				@RequestParam(value = "mer_ph_no_r9", required = false) String merPhNoR9,
+				@RequestParam(value = "mer_ph_no_r10", required = false) String merPhNoR10,
+				@RequestParam(value = "mer_nat_id", required = false) String merNatId,
+				@RequestParam(value = "mer_nat_id_r2", required = false) String merNatIdR2,
+				@RequestParam(value = "mer_nat_id_r3", required = false) String merNatIdR3,
+				@RequestParam(value = "mer_nat_id_r4", required = false) String merNatIdR4,
+				@RequestParam(value = "mer_nat_id_r5", required = false) String merNatIdR5,
+				@RequestParam(value = "mer_nat_id_r6", required = false) String merNatIdR6,
+				@RequestParam(value = "mer_nat_id_r7", required = false) String merNatIdR7,
+				@RequestParam(value = "mer_nat_id_r8", required = false) String merNatIdR8,
+				@RequestParam(value = "mer_nat_id_r9", required = false) String merNatIdR9,
+				@RequestParam(value = "mer_nat_id_r10", required = false) String merNatIdR10) {
+			System.out.println(merPhNo);
+			Map<String, String> response = new HashMap<>();
+			StringBuilder duplicateMsg = new StringBuilder();
+			StringBuilder negativeMsg = new StringBuilder();
+			StringBuilder blackMsg = new StringBuilder();
+			StringBuilder pepMsg = new StringBuilder();
+			String userID = (String) req.getSession().getAttribute("USERID");
+
+			Map<String, String> duplicateMsgMap = new HashMap<>();
+			boolean[] duplicateFound = { false };
+			boolean[] negativeFound = { false };
+			boolean[] blackFound = { false };
+			boolean[] pepFound = { false };
+			try {
+				String sequenceValue = bIPS_CheckList_Repo.getSequence();
+
+				BIPS_CheckListEntity checklist = new BIPS_CheckListEntity();
+				checklist.setSrl_no(sequenceValue);
+				checklist.setEntry_user(userID);
+				checklist.setDel_flg("N");
+				checklist.setEntry_time(new Date());
+				
+				List<String> phoneNumbers = new ArrayList<>();
+				if (merPhNo != null)
+					phoneNumbers.add(merPhNo);
+				if (merPhNoR2 != null)
+					phoneNumbers.add(merPhNoR2);
+				if (merPhNoR3 != null)
+					phoneNumbers.add(merPhNoR3);
+				if (merPhNoR4 != null)
+					phoneNumbers.add(merPhNoR4);
+				if (merPhNoR5 != null)
+					phoneNumbers.add(merPhNoR5);
+				if (merPhNoR6 != null)
+					phoneNumbers.add(merPhNoR6);
+				if (merPhNoR7 != null)
+					phoneNumbers.add(merPhNoR7);
+				if (merPhNoR8 != null)
+					phoneNumbers.add(merPhNoR8);
+				if (merPhNoR9 != null)
+					phoneNumbers.add(merPhNoR9);
+				if (merPhNoR10 != null)
+					phoneNumbers.add(merPhNoR10);
+				String concatenatedPhoneNumbers = String.join(",", phoneNumbers);
+				checklist.setMbl_num(concatenatedPhoneNumbers);
+				System.out.println("Concatenated Phone Numbers: " + concatenatedPhoneNumbers);
+				List<String> nationalId = new ArrayList<>();
+				if (merNatId != null)
+					nationalId.add(merNatId);
+				if (merNatIdR2 != null)
+					nationalId.add(merNatIdR2);
+				if (merNatIdR3 != null)
+					nationalId.add(merNatIdR3);
+				if (merNatIdR4 != null)
+					nationalId.add(merNatIdR4);
+				if (merNatIdR5 != null)
+					nationalId.add(merNatIdR5);
+				if (merNatIdR6 != null)
+					nationalId.add(merNatIdR6);
+				if (merNatIdR7 != null)
+					nationalId.add(merNatIdR7);
+				if (merNatIdR8 != null)
+					nationalId.add(merNatIdR8);
+				if (merNatIdR9 != null)
+					nationalId.add(merNatIdR9);
+				if (merNatIdR10 != null)
+					nationalId.add(merNatIdR10);
+				String concatenatednationalId = String.join(",", nationalId);
+				System.out.println("Concatenated Phone Numbers: " + concatenatednationalId);
+				checklist.setNational_id(concatenatednationalId);
+				;
+
+				// Check for duplicates
+				List<String> mobe_num_dup = dedup_Repo.findmbl_num();
+				BiConsumer<String, String> checkDuplicate = (phoneNumber, paramName) -> {
+					if (phoneNumber != null && mobe_num_dup.contains(phoneNumber)) {
+						duplicateFound[0] = true;
+						duplicateMsg.append("<tr><td>Mobile No</td><td>").append(phoneNumber).append("</td><td>")
+								.append(phoneNumber).append("</td></tr>");
+					}
+				};
+				checkDuplicate.accept(merPhNo, "Phone No 1");
+				checkDuplicate.accept(merPhNoR2, "Phone No 2");
+				checkDuplicate.accept(merPhNoR3, "Phone No 3");
+				checkDuplicate.accept(merPhNoR4, "Phone No 4");
+				checkDuplicate.accept(merPhNoR5, "Phone No 5");
+				checkDuplicate.accept(merPhNoR6, "Phone No 6");
+				checkDuplicate.accept(merPhNoR7, "Phone No 7");
+				checkDuplicate.accept(merPhNoR8, "Phone No 8");
+				checkDuplicate.accept(merPhNoR9, "Phone No 9");
+				checkDuplicate.accept(merPhNoR10, "Phone No 10");
+
+				List<String> national_dup = dedup_Repo.findnational_id();
+
+				BiConsumer<String, String> checkDuplicateNat = (phoneNumber, paramName) -> {
+					if (phoneNumber != null && national_dup.contains(phoneNumber)) {
+						duplicateFound[0] = true;
+						duplicateMsg.append("<tr><td>National Id</td><td>").append(phoneNumber).append("</td><td>")
+								.append(phoneNumber).append("</td></tr>");
+					}
+				};
+
+				checkDuplicateNat.accept(merNatId, "National Id 1");
+				checkDuplicateNat.accept(merNatIdR2, "National Id 2");
+				checkDuplicateNat.accept(merNatIdR3, "National Id 3");
+				checkDuplicateNat.accept(merNatIdR4, "National Id 4");
+				checkDuplicateNat.accept(merNatIdR5, "National Id 5");
+				checkDuplicateNat.accept(merNatIdR6, "National Id 6");
+				checkDuplicateNat.accept(merNatIdR7, "National Id 7");
+				checkDuplicateNat.accept(merNatIdR8, "National Id 8");
+				checkDuplicateNat.accept(merNatIdR9, "National Id 9");
+				checkDuplicateNat.accept(merNatIdR10, "National Id 10");
+
+				if (duplicateFound[0]) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(duplicateMsg).append("</tbody>").append("</table>");
+					checklist.setDuplicate_check("YES");
+					System.out.println(table.toString());
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("duplicate", table.toString());
+
+				} else {
+					checklist.setDuplicate_check("YES");
+					checklist.setRemark("No Match Found");
+					checklist.setEntry_user("userID"); // Replace with actual user ID
+					checklist.setDel_flg("N");
+					checklist.setEntry_time(new Date());
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("duplicate", "MATCH NOT FOUND");
+				}
+				// Check for negative list
+
+				List<String> mobe_num_neg = Negative_Repo.findmbl_num();
+				BiConsumer<String, String> checkNegative = (phoneNumber, paramName) -> {
+					if (phoneNumber != null && mobe_num_neg.contains(phoneNumber)) {
+						negativeFound[0] = true;
+						negativeMsg.append("<tr><td>Mobile No</td><td>").append(phoneNumber).append("</td><td>")
+								.append(phoneNumber).append("</td></tr>");
+					}
+				};
+
+				checkNegative.accept(merPhNo, "Phone No 1");
+				checkNegative.accept(merPhNoR2, "Phone No 2");
+				checkNegative.accept(merPhNoR3, "Phone No 3");
+				checkNegative.accept(merPhNoR4, "Phone No 4");
+				checkNegative.accept(merPhNoR5, "Phone No 5");
+				checkNegative.accept(merPhNoR6, "Phone No 6");
+				checkNegative.accept(merPhNoR7, "Phone No 7");
+				checkNegative.accept(merPhNoR8, "Phone No 8");
+				checkNegative.accept(merPhNoR9, "Phone No 9");
+				checkNegative.accept(merPhNoR10, "Phone No 10");
+
+				List<String> national_neg = Negative_Repo.findnational_id();
+
+				BiConsumer<String, String> checkNegaiveNat = (phoneNumber, paramName) -> {
+					if (phoneNumber != null && national_neg.contains(phoneNumber)) {
+						negativeFound[0] = true;
+						negativeMsg.append("<tr><td>National Id</td><td>").append(phoneNumber).append("</td><td>")
+								.append(phoneNumber).append("</td></tr>");
+					}
+				};
+
+				checkNegaiveNat.accept(merNatId, "National Id 1");
+				checkNegaiveNat.accept(merNatIdR2, "National Id 2");
+				checkNegaiveNat.accept(merNatIdR3, "National Id 3");
+				checkNegaiveNat.accept(merNatIdR4, "National Id 4");
+				checkNegaiveNat.accept(merNatIdR5, "National Id 5");
+				checkNegaiveNat.accept(merNatIdR6, "National Id 6");
+				checkNegaiveNat.accept(merNatIdR7, "National Id 7");
+				checkNegaiveNat.accept(merNatIdR8, "National Id 8");
+				checkNegaiveNat.accept(merNatIdR9, "National Id 9");
+				checkNegaiveNat.accept(merNatIdR10, "National Id 10");
+
+				if (negativeFound[0]) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(negativeMsg).append("</tbody>").append("</table>");
+					checklist.setNegative_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("negative", table.toString());
+
+				} else {
+					checklist.setNegative_check("YES");
+					checklist.setRemark("No Match Found");
+					checklist.setEntry_user("userID"); // Replace with actual user ID
+					checklist.setDel_flg("N");
+					checklist.setEntry_time(new Date());
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("negative", "MATCH NOT FOUND");
+				}
+
+				// black list found
+
+				List<String> mob_no_blac = black_Repo.findmbl_num();
+				BiConsumer<String, String> checkBlack = (phoneNumber, paramName) -> {
+					if (phoneNumber != null && mob_no_blac.contains(phoneNumber)) {
+						blackFound[0] = true;
+						blackMsg.append("<tr><td>Mobile No</td><td>").append(phoneNumber).append("</td><td>")
+								.append(phoneNumber).append("</td></tr>");
+					}
+				};
+
+				checkBlack.accept(merPhNo, "Phone No 1");
+				checkBlack.accept(merPhNoR2, "Phone No 2");
+				checkBlack.accept(merPhNoR3, "Phone No 3");
+				checkBlack.accept(merPhNoR4, "Phone No 4");
+				checkBlack.accept(merPhNoR5, "Phone No 5");
+				checkBlack.accept(merPhNoR6, "Phone No 6");
+				checkBlack.accept(merPhNoR7, "Phone No 7");
+				checkBlack.accept(merPhNoR8, "Phone No 8");
+				checkBlack.accept(merPhNoR9, "Phone No 9");
+				checkBlack.accept(merPhNoR10, "Phone No 10");
+
+				List<String> national_black = black_Repo.findnational_id();
+
+				BiConsumer<String, String> checkPepNat = (phoneNumber, paramName) -> {
+					if (phoneNumber != null && national_black.contains(phoneNumber)) {
+						negativeFound[0] = true;
+						negativeMsg.append("<tr><td>National Id</td><td>").append(phoneNumber).append("</td><td>")
+								.append(phoneNumber).append("</td></tr>");
+					}
+				};
+				if (blackFound[0]) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(blackMsg).append("</tbody>").append("</table>");
+					checklist.setBlack_check("YES");
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("Black", table.toString());
+				} else {
+					checklist.setBlack_check("YES");
+					checklist.setRemark("No Match Found");
+					checklist.setEntry_user("userID"); // Replace with actual user ID
+					checklist.setDel_flg("N");
+					checklist.setEntry_time(new Date());
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("Black", "MATCH NOT FOUND");
+				}
+
+				// pep list found
+
+				List<String> mob_no_pep = Pep_Repo.findmbl_num();
+				BiConsumer<String, String> checkPep = (phoneNumber, paramName) -> {
+					if (phoneNumber != null && mob_no_pep.contains(phoneNumber)) {
+						pepFound[0] = true;
+						pepMsg.append("<tr><td>Mobile No</td><td>").append(phoneNumber).append("</td><td>")
+								.append(phoneNumber).append("</td></tr>");
+					}
+				};
+
+				checkPep.accept(merPhNo, "Phone No 1");
+				checkPep.accept(merPhNoR2, "Phone No 2");
+				checkPep.accept(merPhNoR3, "Phone No 3");
+				checkPep.accept(merPhNoR4, "Phone No 4");
+				checkPep.accept(merPhNoR5, "Phone No 5");
+				checkPep.accept(merPhNoR6, "Phone No 6");
+				checkPep.accept(merPhNoR7, "Phone No 7");
+				checkPep.accept(merPhNoR8, "Phone No 8");
+				checkPep.accept(merPhNoR9, "Phone No 9");
+				checkPep.accept(merPhNoR10, "Phone No 10");
+				if (pepFound[0]) {
+					StringBuilder table = new StringBuilder();
+					table.append("<table border='1' style='width:100%;text-align:center;'>").append(
+							"<thead><tr><th>Match Type</th><th>Existing Value</th><th>Current Value</th></tr></thead>")
+							.append("<tbody>").append(pepMsg).append("</tbody>").append("</table>");
+					checklist.setPep_check("YES");
+
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("Pep", table.toString());
+
+				} else {
+					checklist.setPep_check("YES");
+					checklist.setRemark("No Match Found");
+					checklist.setEntry_user("userID"); // Replace with actual user ID
+					checklist.setDel_flg("N");
+					checklist.setEntry_time(new Date());
+					bIPS_CheckList_Repo.save(checklist);
+					response.put("Pep", "MATCH NOT FOUND");
+				}
+
+				if (duplicateFound[0] && negativeFound[0] && blackFound[0] && pepFound[0]) {
+					checklist.setRemark("Match Found");
+				} else if (duplicateFound[0] || negativeFound[0] || blackFound[0] || pepFound[0]) {
+					checklist.setRemark("Match Found");
+				} else if (duplicateFound[0]) {
+					checklist.setRemark("Duplicate Match Found");
+				} else if (negativeFound[0]) {
+					checklist.setRemark("Negative List Match Found");
+				} else if (blackFound[0]) {
+					checklist.setRemark("Black List Match Found");
+				} else if (pepFound[0]) {
+					checklist.setRemark("Pep List Match Found");
+				} else {
+					checklist.setRemark("No Match Found");
+				}
+				bIPS_CheckList_Repo.save(checklist);
+			} catch (NullPointerException e) {
+				response.put("error", "clear");
+			}
+
+			return response;
+		}
 
 }

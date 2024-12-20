@@ -36,6 +36,9 @@ public class BIPS_Unit_Mangement_Entity {
 	private String entry_user;
 	private String modify_user;
 	private String verify_user;
+	private String branch_name;
+	private String bank_acct_no;
+	
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date entry_time;
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
@@ -73,6 +76,25 @@ public class BIPS_Unit_Mangement_Entity {
 	private String delete_user;
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date delete_date;
+	private String brn_no;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date brn_date;
+
+	public String getBrn_no() {
+		return brn_no;
+	}
+
+	public void setBrn_no(String brn_no) {
+		this.brn_no = brn_no;
+	}
+
+	public Date getBrn_date() {
+		return brn_date;
+	}
+
+	public void setBrn_date(Date brn_date) {
+		this.brn_date = brn_date;
+	}
 
 	public String getDel_flg() {
 		return del_flg;
@@ -522,20 +544,39 @@ public class BIPS_Unit_Mangement_Entity {
 		this.modify_flag = modify_flag;
 	}
 
+	
+
+		public String getBranch_name() {
+		return branch_name;
+	}
+
+	public void setBranch_name(String branch_name) {
+		this.branch_name = branch_name;
+	}
+
+	public String getBank_acct_no() {
+		return bank_acct_no;
+	}
+
+	public void setBank_acct_no(String bank_acct_no) {
+		this.bank_acct_no = bank_acct_no;
+	}
+
 	public BIPS_Unit_Mangement_Entity(String merchant_user_id, String merchant_name, String unit_id,
 			String location_detail, String unit_type, String unit_name, String address_1, String address_2, String city,
 			String state_, String country, String zip_code, String phone_no, String remarks, String email_id,
-			String branch_head, String designation, String contact_person1_name, BigDecimal contact_person1_mobile,
-			String contact_person2_name, BigDecimal contact_person2_mobile, String bankcode_name,
-			String branchcode_name, String branch_swiftcode, String entry_user, String modify_user, String verify_user,
-			Date entry_time, Date modify_time, Date verify_time, String contact_person3_name,
-			String contact_person4_name, String contact_person5_name, String contact_person6_name,
-			BigDecimal contact_person3_mobile, BigDecimal contact_person4_mobile, BigDecimal contact_person5_mobile,
-			BigDecimal contact_person6_mobile, String contact_person1_email, String contact_person2_email,
-			String contact_person3_email, String contact_person4_email, String contact_person5_email,
-			String contact_person6_email, String ph_countrycode, String cp1_countrycode, String cp2_countrycode,
-			String cp3_countrycode, String cp4_countrycode, String cp5_countrycode, String cp6_countrycode,
-			String entry_flag, String modify_flag, String del_flg, String delete_user, Date delete_date) {
+			String branch_head, String designation, String bankcode_name, String branchcode_name,
+			String branch_swiftcode, String entry_user, String modify_user, String verify_user, String branch_name,
+			String bank_acct_no, Date entry_time, Date modify_time, Date verify_time, String contact_person1_name,
+			String contact_person2_name, String contact_person3_name, String contact_person4_name,
+			String contact_person5_name, String contact_person6_name, BigDecimal contact_person1_mobile,
+			BigDecimal contact_person2_mobile, BigDecimal contact_person3_mobile, BigDecimal contact_person4_mobile,
+			BigDecimal contact_person5_mobile, BigDecimal contact_person6_mobile, String contact_person1_email,
+			String contact_person2_email, String contact_person3_email, String contact_person4_email,
+			String contact_person5_email, String contact_person6_email, String ph_countrycode, String cp1_countrycode,
+			String cp2_countrycode, String cp3_countrycode, String cp4_countrycode, String cp5_countrycode,
+			String cp6_countrycode, String entry_flag, String modify_flag, String del_flg, String delete_user,
+			Date delete_date, String brn_no, Date brn_date) {
 		super();
 		this.merchant_user_id = merchant_user_id;
 		this.merchant_name = merchant_name;
@@ -554,23 +595,25 @@ public class BIPS_Unit_Mangement_Entity {
 		this.email_id = email_id;
 		this.branch_head = branch_head;
 		this.designation = designation;
-		this.contact_person1_name = contact_person1_name;
-		this.contact_person1_mobile = contact_person1_mobile;
-		this.contact_person2_name = contact_person2_name;
-		this.contact_person2_mobile = contact_person2_mobile;
 		this.bankcode_name = bankcode_name;
 		this.branchcode_name = branchcode_name;
 		this.branch_swiftcode = branch_swiftcode;
 		this.entry_user = entry_user;
 		this.modify_user = modify_user;
 		this.verify_user = verify_user;
+		this.branch_name = branch_name;
+		this.bank_acct_no = bank_acct_no;
 		this.entry_time = entry_time;
 		this.modify_time = modify_time;
 		this.verify_time = verify_time;
+		this.contact_person1_name = contact_person1_name;
+		this.contact_person2_name = contact_person2_name;
 		this.contact_person3_name = contact_person3_name;
 		this.contact_person4_name = contact_person4_name;
 		this.contact_person5_name = contact_person5_name;
 		this.contact_person6_name = contact_person6_name;
+		this.contact_person1_mobile = contact_person1_mobile;
+		this.contact_person2_mobile = contact_person2_mobile;
 		this.contact_person3_mobile = contact_person3_mobile;
 		this.contact_person4_mobile = contact_person4_mobile;
 		this.contact_person5_mobile = contact_person5_mobile;
@@ -593,11 +636,16 @@ public class BIPS_Unit_Mangement_Entity {
 		this.del_flg = del_flg;
 		this.delete_user = delete_user;
 		this.delete_date = delete_date;
+		this.brn_no = brn_no;
+		this.brn_date = brn_date;
 	}
 
 	public BIPS_Unit_Mangement_Entity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 
 }

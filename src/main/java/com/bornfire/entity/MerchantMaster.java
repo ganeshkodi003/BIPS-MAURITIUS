@@ -46,13 +46,10 @@ public class MerchantMaster {
 	private String merchant_number;
 	private String outlet_no;
 	private String entry_user;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date entry_time;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date modify_time;
 	private String auth_user;
 	private String modify_user;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date auth_time;
 	private Character entity_flg;
 	private Character del_flg;
@@ -152,7 +149,6 @@ public class MerchantMaster {
 	private String settlement_frequency;
 	private String settlement_day;
 	private String settlement_date;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date next_settlement_date;
 	private String static_field;
 	private String mer_user_id_r1;
@@ -268,6 +264,265 @@ public class MerchantMaster {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date delete_time;
 	private String delete_remarks;
+
+	private String hr_status;
+	private String hr_hold_remarks;
+	private String hr_reject_remarks;
+	private Character hr_holdreject_flg;
+	private String hr_hold_user;
+	private String hr_reject_user;
+	private Date hr_hold_date;
+	private Date hr_reject_date;
+	private String brn_no;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date brn_date;
+	private String mer_nat_id;
+	private String mer_nat_id_r2;
+	private String mer_nat_id_r3;
+	private String mer_nat_id_r4;
+	private String mer_nat_id_r5;
+	private String mer_nat_id_r6;
+	private String mer_nat_id_r7;
+	private String mer_nat_id_r8;
+	private String mer_nat_id_r9;
+	private String mer_nat_id_r10; 
+	private String lien_amount1;
+	private String lien_amount2;
+	private String hold_amount1;
+	private String hold_amount2;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date next_settlementdate1;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date next_settlementdate2;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date last_settlementdate1;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date last_settlementdate2;
+
+	
+	public String getLien_amount1() {
+		return lien_amount1;
+	}
+
+	public void setLien_amount1(String lien_amount1) {
+		this.lien_amount1 = lien_amount1;
+	}
+
+	public String getLien_amount2() {
+		return lien_amount2;
+	}
+
+	public void setLien_amount2(String lien_amount2) {
+		this.lien_amount2 = lien_amount2;
+	}
+
+	public String getHold_amount1() {
+		return hold_amount1;
+	}
+
+	public void setHold_amount1(String hold_amount1) {
+		this.hold_amount1 = hold_amount1;
+	}
+
+	public String getHold_amount2() {
+		return hold_amount2;
+	}
+
+	public void setHold_amount2(String hold_amount2) {
+		this.hold_amount2 = hold_amount2;
+	}
+
+	public Date getNext_settlementdate1() {
+		return next_settlementdate1;
+	}
+
+	public void setNext_settlementdate1(Date next_settlementdate1) {
+		this.next_settlementdate1 = next_settlementdate1;
+	}
+
+	public Date getNext_settlementdate2() {
+		return next_settlementdate2;
+	}
+
+	public void setNext_settlementdate2(Date next_settlementdate2) {
+		this.next_settlementdate2 = next_settlementdate2;
+	}
+
+	public Date getLast_settlementdate1() {
+		return last_settlementdate1;
+	}
+
+	public void setLast_settlementdate1(Date last_settlementdate1) {
+		this.last_settlementdate1 = last_settlementdate1;
+	}
+
+	public Date getLast_settlementdate2() {
+		return last_settlementdate2;
+	}
+
+	public void setLast_settlementdate2(Date last_settlementdate2) {
+		this.last_settlementdate2 = last_settlementdate2;
+	}
+
+	public String getMer_nat_id() {
+		return mer_nat_id;
+	}
+
+	public void setMer_nat_id(String mer_nat_id) {
+		this.mer_nat_id = mer_nat_id;
+	}
+
+	public String getMer_nat_id_r2() {
+		return mer_nat_id_r2;
+	}
+
+	public void setMer_nat_id_r2(String mer_nat_id_r2) {
+		this.mer_nat_id_r2 = mer_nat_id_r2;
+	}
+
+	public String getMer_nat_id_r3() {
+		return mer_nat_id_r3;
+	}
+
+	public void setMer_nat_id_r3(String mer_nat_id_r3) {
+		this.mer_nat_id_r3 = mer_nat_id_r3;
+	}
+
+	public String getMer_nat_id_r4() {
+		return mer_nat_id_r4;
+	}
+
+	public void setMer_nat_id_r4(String mer_nat_id_r4) {
+		this.mer_nat_id_r4 = mer_nat_id_r4;
+	}
+
+	public String getMer_nat_id_r5() {
+		return mer_nat_id_r5;
+	}
+
+	public void setMer_nat_id_r5(String mer_nat_id_r5) {
+		this.mer_nat_id_r5 = mer_nat_id_r5;
+	}
+
+	public String getMer_nat_id_r6() {
+		return mer_nat_id_r6;
+	}
+
+	public void setMer_nat_id_r6(String mer_nat_id_r6) {
+		this.mer_nat_id_r6 = mer_nat_id_r6;
+	}
+
+	public String getMer_nat_id_r7() {
+		return mer_nat_id_r7;
+	}
+
+	public void setMer_nat_id_r7(String mer_nat_id_r7) {
+		this.mer_nat_id_r7 = mer_nat_id_r7;
+	}
+
+	public String getMer_nat_id_r8() {
+		return mer_nat_id_r8;
+	}
+
+	public void setMer_nat_id_r8(String mer_nat_id_r8) {
+		this.mer_nat_id_r8 = mer_nat_id_r8;
+	}
+
+	public String getMer_nat_id_r9() {
+		return mer_nat_id_r9;
+	}
+
+	public void setMer_nat_id_r9(String mer_nat_id_r9) {
+		this.mer_nat_id_r9 = mer_nat_id_r9;
+	}
+
+	public String getMer_nat_id_r10() {
+		return mer_nat_id_r10;
+	}
+
+	public void setMer_nat_id_r10(String mer_nat_id_r10) {
+		this.mer_nat_id_r10 = mer_nat_id_r10;
+	}
+
+	public String getBrn_no() {
+		return brn_no;
+	}
+
+	public void setBrn_no(String brn_no) {
+		this.brn_no = brn_no;
+	}
+
+	public Date getBrn_date() {
+		return brn_date;
+	}
+
+	public void setBrn_date(Date brn_date) {
+		this.brn_date = brn_date;
+	}
+
+	public Character getHr_holdreject_flg() {
+		return hr_holdreject_flg;
+	}
+
+	public void setHr_holdreject_flg(Character hr_holdreject_flg) {
+		this.hr_holdreject_flg = hr_holdreject_flg;
+	}
+
+	public String getHr_status() {
+		return hr_status;
+	}
+
+	public void setHr_status(String hr_status) {
+		this.hr_status = hr_status;
+	}
+
+	public String getHr_hold_remarks() {
+		return hr_hold_remarks;
+	}
+
+	public void setHr_hold_remarks(String hr_hold_remarks) {
+		this.hr_hold_remarks = hr_hold_remarks;
+	}
+
+	public String getHr_reject_remarks() {
+		return hr_reject_remarks;
+	}
+
+	public void setHr_reject_remarks(String hr_reject_remarks) {
+		this.hr_reject_remarks = hr_reject_remarks;
+	}
+
+	public String getHr_hold_user() {
+		return hr_hold_user;
+	}
+
+	public void setHr_hold_user(String hr_hold_user) {
+		this.hr_hold_user = hr_hold_user;
+	}
+
+	public String getHr_reject_user() {
+		return hr_reject_user;
+	}
+
+	public void setHr_reject_user(String hr_reject_user) {
+		this.hr_reject_user = hr_reject_user;
+	}
+
+	public Date getHr_hold_date() {
+		return hr_hold_date;
+	}
+
+	public void setHr_hold_date(Date hr_hold_date) {
+		this.hr_hold_date = hr_hold_date;
+	}
+
+	public Date getHr_reject_date() {
+		return hr_reject_date;
+	}
+
+	public void setHr_reject_date(Date hr_reject_date) {
+		this.hr_reject_date = hr_reject_date;
+	}
 
 	public String getDelete_user() {
 		return delete_user;
@@ -2270,17 +2525,17 @@ public class MerchantMaster {
 			String send_notifi_r8, String send_notifi_r9, String send_notifi_r10, String bank_name2,
 			String bank_account_no2, String bank_branch2, String bank_code2, String iban2, String currency2,
 			String settlement_frequency2, String settlement_day2, String settlement_date2, byte[] photo,
-			String accountName1, String accountName2, String ph_countrycode_r1, String ph_countrycode_r2,
-			String ph_countrycode_r3, String ph_countrycode_r4, String ph_countrycode_r5, String ph_countrycode_r6,
-			String ph_countrycode_r7, String ph_countrycode_r8, String ph_countrycode_r9, String ph_countrycode_r10,
-			String ofc_countrycode_r1, String ofc_countrycode_r2, String ofc_countrycode_r3, String ofc_countrycode_r4,
-			String ofc_countrycode_r5, String ofc_countrycode_r6, String ofc_countrycode_r7, String ofc_countrycode_r8,
-			String ofc_countrycode_r9, String ofc_countrycode_r10, String chargeback_approval,
-			BigDecimal chargeback_amount, String transaction_amount, String detailed_address1, String detailed_address2,
-			String delete_user, Date delete_time, String delete_remarks) {
+			String accountName1, String accountName2, String detailed_address1, String detailed_address2,
+			String ph_countrycode_r1, String ph_countrycode_r2, String ph_countrycode_r3, String ph_countrycode_r4,
+			String ph_countrycode_r5, String ph_countrycode_r6, String ph_countrycode_r7, String ph_countrycode_r8,
+			String ph_countrycode_r9, String ph_countrycode_r10, String ofc_countrycode_r1, String ofc_countrycode_r2,
+			String ofc_countrycode_r3, String ofc_countrycode_r4, String ofc_countrycode_r5, String ofc_countrycode_r6,
+			String ofc_countrycode_r7, String ofc_countrycode_r8, String ofc_countrycode_r9, String ofc_countrycode_r10,
+			String chargeback_approval, BigDecimal chargeback_amount, String transaction_amount, String delete_user,
+			Date delete_time, String delete_remarks, String hr_status, String hr_hold_remarks, String hr_reject_remarks,
+			Character hr_holdreject_flg, String hr_hold_user, String hr_reject_user, Date hr_hold_date,
+			Date hr_reject_date) {
 		super();
-		this.detailed_address1 = detailed_address1;
-		this.detailed_address2 = detailed_address2;
 		this.merchant_id = merchant_id;
 		this.merchant_pow_ca_no = merchant_pow_ca_no;
 		this.merchant_acc_no = merchant_acc_no;
@@ -2498,6 +2753,8 @@ public class MerchantMaster {
 		this.photo = photo;
 		this.accountName1 = accountName1;
 		this.accountName2 = accountName2;
+		this.detailed_address1 = detailed_address1;
+		this.detailed_address2 = detailed_address2;
 		this.ph_countrycode_r1 = ph_countrycode_r1;
 		this.ph_countrycode_r2 = ph_countrycode_r2;
 		this.ph_countrycode_r3 = ph_countrycode_r3;
@@ -2524,6 +2781,14 @@ public class MerchantMaster {
 		this.delete_user = delete_user;
 		this.delete_time = delete_time;
 		this.delete_remarks = delete_remarks;
+		this.hr_status = hr_status;
+		this.hr_hold_remarks = hr_hold_remarks;
+		this.hr_reject_remarks = hr_reject_remarks;
+		this.hr_holdreject_flg = hr_holdreject_flg;
+		this.hr_hold_user = hr_hold_user;
+		this.hr_reject_user = hr_reject_user;
+		this.hr_hold_date = hr_hold_date;
+		this.hr_reject_date = hr_reject_date;
 	}
 
 	public MerchantMaster(MerchantMasterMod user) {
@@ -2769,6 +3034,14 @@ public class MerchantMaster {
 		this.delete_user = user.getDelete_user();
 		this.delete_time = user.getDelete_time();
 		this.delete_remarks = user.getDelete_remarks();
+		this.hr_hold_date = user.getHr_hold_date();
+		this.hr_hold_remarks = user.getHr_hold_remarks();
+		this.hr_reject_date = user.getHr_reject_date();
+		this.hr_reject_remarks = user.getHr_reject_remarks();
+		this.hr_status = user.getHr_status();
+		this.hr_hold_user = user.getHr_hold_user();
+		this.hr_reject_user = user.getHr_reject_user();
+		this.hr_holdreject_flg = user.getHr_holdreject_flg();
 	}
 
 	public byte[] getPhoto() {
