@@ -453,13 +453,94 @@ button {
         // Add the 'active' class to the clicked button to change its color
         button.classList.add('active');
     }
-	/*<![CDATA[*/
+function insertDate() {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+
+    // Format the start date: 01-01-currentYear
+    const startDate = `01-01-${currentYear}`;
+
+    // Format today's date as dd-mm-yyyy
+    const todayDate = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${currentYear}`;
+
+    // Update all elements with the class "insert-date"
+    const dateElements = document.querySelectorAll('.insert-date');
+    dateElements.forEach((element) => {
+        element.innerHTML = `Overall Merchants From ${startDate} to ${todayDate}`;
+    });
+
+    // Populate dropdowns
+    populateMonthDropdowns();
+}
+
+function populateMonthDropdowns() {
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const dropdowns = document.querySelectorAll('.month-dropdown');
+    dropdowns.forEach((dropdown) => {
+        // Clear existing options (if any)
+        dropdown.innerHTML = "";
+
+        // Populate dropdown with month options
+        months.forEach((month, index) => {
+            const option = document.createElement('option');
+            option.value = index; // Month index (0-11)
+            option.textContent = month;
+            dropdown.appendChild(option);
+        });
+
+        // Set current month as default
+        dropdown.value = new Date().getMonth();
+    });
+}
+
+function updateSelectedMonth(selectElement) {
+    const selectedMonth = selectElement.options[selectElement.selectedIndex].text;
+
+    // Find the sibling display area to show the selected month
+    const displayDiv = selectElement.nextElementSibling;
+    displayDiv.innerHTML = `Selected Month: <strong>${selectedMonth}</strong>`;
+}
+
+// Ensure the JavaScript is executed only after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', insertDate);
+
+
+
 </script>
 <body>
 	<div th:insert="MMenupage :: header"></div>
 
 	<div class="container-manager">
 		<div class="content-page" style="height: 100%;">
+
+			<div style="text-align: center; font-weight: bold; font-size: xx-large;padding-bottom: 10px;"> Merchant Statistics</div>
+			<div id="top-row" style="display: flex; ">
+				<div id="merchant-header" style=" padding: 15px; width:25%;text-align: center; margin-left: 8% ;font-size: larger; font-weight: 500; "></div>
+				<div style="width:25%; padding: 15px; margin-left: 10%">
+												
+
+							<input type="text" id="filterInput"
+								class="form-control form-control-sm " style="width: 250px;"
+								placeholder="Enter Merchant Code" autocomplete="off">
+
+							<!-- Results Container -->
+							<ul id="results" class="list-group result-list"
+								style="width: 250px;"></ul>
+</div>
+<div class="row formline " id="tabs"
+						style="display: flex;width: 50%; justify-content: flex-end; align-items: center;">
+						<button class="tablinks active" id="smooth1View"
+							onclick="changeColorView(this, 'Cummulative')">Cummulative</button>
+						<button class="tablinks" id="smooth2View"
+							onclick="changeColorView(this, 'Progressive')">Month Wise</button>
+					</div>
+			</div>
+
+
 
 			<div class="row ">
 				<div class="col-lg-5 col-md-12 mb-4">
@@ -468,8 +549,9 @@ button {
 						<div class="row h-100">
 							<div
 								class="col-lg-12 my-auto text-center d-lg-block d-flex justify-content-center">
+							
 								<div id="chart-pie"></div>
-								<div id="merchant-header" style="width: 100	%;padding: 15px">hello</div>
+								
 
 							</div>
 						</div>
@@ -479,31 +561,8 @@ button {
 
 
 				<div class="col-lg-7 col-md-12">
-					<div >
-						<div>
-							<h6 style="font-size: 16px; font-weight: bold;">List</h6>
-
-							<p class="text-sm">
-								<i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-							</p>
-
-							<input type="text" id="filterInput"
-								class="form-control form-control-sm col-sm-2"
-								placeholder="Search..." autocomplete="off">
-
-							<!-- Results Container -->
-							<ul id="results" class="list-group result-list"
-								style="width: 250px;"></ul>
-
-						</div>
-					</div>
-					<div class="row formline " id="tabs"
-						style="display: flex; justify-content: flex-end; align-items: center;">
-						<button class="tablinks active" id="smooth1View"
-							onclick="changeColorView(this, 'Cummulative')">Cummulative</button>
-						<button class="tablinks" id="smooth2View"
-							onclick="changeColorView(this, 'Progressive')">Progressive</button>
-					</div>
+					
+					
 
 					<div class="card-body ">
 						<div class="chart-container" id="Cummulative">
@@ -518,15 +577,39 @@ button {
 					</div>
 
 				</div>
+				<hr>
 
-				<!--Row Two -->
-				<div style=" width: 100%; display: flex;">
-					<div style="width: 50%"></div>
-					<div style="width: 50%; text-align: center;padding: 15px">
-						<h1>Merchant wise</h1>
-					</div>
-				</div>
-				<!-- Row for displaying charts -->
+<div style="width: 100%; display: flex;">
+    <div style="width: 50%; text-align: center; padding-bottom: 15px">Overall</div>
+    <div style="width: 50%; text-align: center; padding-bottom: 15px">
+        <h1>Merchant wise</h1>
+    </div>
+</div>
+<div style="width: 100%; display: flex;">
+    <div style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
+        <div class="insert-date" style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
+        <div style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
+            <select class="month-dropdown" onchange="updateSelectedMonth(this)">
+                <!-- Month options will be added dynamically -->
+            </select>
+            <div class="selected-month-display" style="margin-top: 10px;"></div>
+        </div>
+    </div>
+    <div style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
+        <div class="insert-date" style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
+        <div style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
+            <select class="month-dropdown" onchange="updateSelectedMonth(this)">
+                <!-- Month options will be added dynamically -->
+            </select>
+            <div class="selected-month-display" style="margin-top: 10px;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+				
 				<div class="row " style="height: 100%; width: 100%">
 
 					<!-- Each chart represents one month -->
@@ -549,16 +632,13 @@ button {
 						id="static-legend">
 						<div class="legend-item">
 							<span class="legend-color" style="background-color: #fb6340;"></span>
-							Volume
+							Vol. of Trans.
 						</div>
 						<div class="legend-item">
 							<span class="legend-color" style="background-color: #36a2eb;"></span>
 							No. of Trans.
 						</div>
-						<div class="legend-item">
-							<span class="legend-color" style="background-color: #4caf50;"></span>
-							Amount of Trans. (in Millions)
-						</div>
+						
 						<div class="legend-item">
 							<span class="legend-color" style="background-color: #cb9cb3;"></span>
 							No. of Merchants
@@ -1060,21 +1140,19 @@ button {
 
         // Update Merchant Header with Current Date
         updateMerchantHeader();
+				insertdate();
+
     };
 
     /**
      * Updates the merchant header with today's date.
      */
     function updateMerchantHeader() {
-        const date = new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
-
-        document.getElementById('merchant-header').innerHTML = `Merchants - ${date}`;
-    }
-
+    const date = new Date();
+    const formattedDate = `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
+    
+    document.getElementById('merchant-header').innerHTML = `Merchants - ${formattedDate}`;
+}
 
 
 
@@ -1213,7 +1291,7 @@ button {
 		                    labels: [month], // Only one label, the current month
 		                    datasets: [
 		                        {
-		                            label: "Volume",  // First dataset label
+		                            label: "Vol. of Trans.",  // First dataset label
 		                            backgroundColor: "#fb6340", // Red color for volume
 		                            data: [data[month][0]], // Volume data for the month
 		                            maxBarThickness: 20,  // Maximum thickness of each bar
@@ -1224,12 +1302,7 @@ button {
 		                            data: [data[month][1]], // No. of transactions for the month
 		                            maxBarThickness: 20,
 		                        },
-		                        {
-		                            label: "Amount of Trans. (in Millions)",  // Third dataset label
-		                            backgroundColor: "#4caf50", // Green color for the amount
-		                            data: [data[month][2]], // Amount of transactions for the month
-		                            maxBarThickness: 20,
-		                        },
+		                       
 		                        {
 		                            label: "No. of Merchants",  // First dataset label
 		                            backgroundColor: "#cb9cb3", // Red color for volume

@@ -195,9 +195,26 @@ label {
 	<div class="container-manager">
 				<div class="card">
 
-			<div class="card-header" id="modheadtitle"
-				style="height: 47px; font-size: 1.2rem;">
-				<b style="margin-left:8rem;">Payment Processing</b>
+			<div class="card-header  d-flex" id="modheadtitle"
+				style=" font-size: 1.2rem;">
+				<b style="width:20%; padding: 0;">Payment Processing</b>
+				<div
+				style=" width:80%; margin-left: 1px; margin-top: 10px; margin-bottom: 10px"
+				class="row formline d-flex" id="tabs">
+				
+				<div>
+					<button class="tablinks" id="smooth1View"
+						style="width: 250px; height: 40px; background-color: #162b75; color: white;font-weight: 700"
+						onclick="changeColorView(this, 'settlementForm')">Settlement
+						Transaction</button>
+				</div>
+				
+				<div style="margin-left: 20px;">
+					<button class="tablinks" id="smooth2View"
+						onclick="changeColorView(this, 'feesForm')"
+						style="width: 250px; height: 40px; background-color: #35488dbf; color: white">Fees and Charges</button>
+				</div>
+			</div>
 			</div>
 			<label></label>
 			<div class="row formline mt-2">
@@ -232,23 +249,7 @@ label {
 
 
 			</div>
-			<div
-				style=" width: 100%; margin-left: 1px; margin-top: 10px; margin-bottom: 10px"
-				class="row formline mt-2 p-2" id="tabs">
-				<div class="col-sm-1"></div>
-				<div>
-					<button class="tablinks" id="smooth1View"
-						style="width: 200px; height: 40px; background-color: #162b75; color: white;font-weight: 700"
-						onclick="changeColorView(this, 'settlementForm')">Settlement
-						Transaction</button>
-				</div>
-				<div class="col-sm-1"></div>
-				<div style="margin-left: 20px;">
-					<button class="tablinks" id="smooth2View"
-						onclick="changeColorView(this, 'feesForm')"
-						style="width: 200px; height: 40px; background-color: #35488dbf; color: white">Fees and Charges</button>
-				</div>
-			</div>
+			
 
 
 			<div id="settlementForm">

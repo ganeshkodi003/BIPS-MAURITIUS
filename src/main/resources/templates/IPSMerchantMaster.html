@@ -7404,7 +7404,7 @@ function updateMerchant(value) {
 														Number <span style="color: red; font-size: 20px;">*</span>
 													</label></th>
 												<th style="background: transparent; color: black;"><label>National
-														Id<span style="color: red; font-size: 20px;">*</span></label></th>
+														Id</label></th>
 												<th style="background: transparent; color: black;"><label>Email
 														Address <span style="color: red; font-size: 20px;">*</span>
 													</label></th>
@@ -8155,13 +8155,14 @@ function updateMerchant(value) {
 										</div>
 									</div>
 									<label></label>
-									<div class="pt-2 pb-2 " style=" color: #332d2d; display: flex; width: 100%;">
+									<div class="pt-2 pb-2 " style=" color: #332d2d; display: flex; width: 95%;justify-content: space-between;">
 										<div class="float-left">
 											<h6 style="font-size: 1.2rem; font-weight: bold;">DOCUMENT
 												DETAILS</h6>
 										</div>
 										<div class="float-right">
- 									<img th:src="@{/images/add.png}" aria-hidden="true"
+
+							 <img th:src="@{/images/add.png}" aria-hidden="true"
 												style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
 												onclick="rowadd()" alt="Add"> <img th:src="@{/images/MinusIcon.png}"
 												aria-hidden="true"
@@ -8266,8 +8267,8 @@ function updateMerchant(value) {
 									
 									<div class="table-responsive" style="overflow: auto;">
 										<table border="1" id="dynamicTable"
-											class="table table-bordered SlabRateTable"
-											style="text-align: center; vertical-align: 22px; ; font-size: 15px;">
+											class="table table-bordered "
+											style="text-align: center; vertical-align: 22px; ; font-size: 15px; ">
 											<thead>
 												<tr>
 
@@ -9114,7 +9115,7 @@ function updateMerchant(value) {
 																	class="form-control form-control-sm w-75"></td>
 															<td><select name="fee_freq" id="fee_freq"
 																	class="form-control form-control-sm w-75">
-																	<option value=" ">SELECT</option>
+																	<option value="select">SELECT</option>
 																	<option value="ONE TIME FEE">ONE TIME FEE</option>
 																	<option value="PER TRANSACTION FEE">PER
 																		TRANSACTION FEE</option>
@@ -10414,7 +10415,7 @@ function updateMerchant(value) {
 					<form action="#" th:object="${branchDet}" method="POST" name="merchantMaster" autocomplete="off"
 						id="BankandBranch">
 						<div class>
-							<div style="background-color: lightgrey;"
+							<div style=""
 								class="row formline d-flex justify-content-around p-2" id="tabs">
 								<div>
 									<button class="tablinks" id="smooth1View"
@@ -21022,7 +21023,7 @@ function updateMerchant(value) {
 				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA  LTD</h3>
 				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" >Close</button>
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" onclick="back()">Close</button>
 				</div>
 			</div>
 		</div>
@@ -21429,12 +21430,14 @@ function updateMerchant(value) {
 					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK OF
 						BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #f26223">
-					<p id="alertmsgee" style="font-size: 16px;"></p> 
+				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+					<p id="alertmsgee" style="font-size: 16px;"></p>
+					<button type="button" class="btn btn-primary commonBtnStyle" onclick="closemodals();">Close</button>
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
+
 	<div class="modal fade" id="alert1userpopupaccvalidation">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
@@ -21480,59 +21483,41 @@ function updateMerchant(value) {
 		</div>
 	</div>
 
-	<div class="modal fade" id="slabRateModel" data-backdrop="static" data-keyboard="false"
-		style="background: #000000b0;" aria-hidden="true">
+
+	<div class="modal fade" id="slabRateModel" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA</h3>
-				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px">
-					<table style="width: 90%; border-collapse: collapse; background-color: #f26223;">
+				<div class="menu-title-header">
+					<div class="modal-title" id="" style="text-align: center; color: white;">BANK OF BARODA</div>
+				</div>
+				<div class="modal-body "
+					style="text-align: center; background-color: #c6ccd2; display: flex; align-items: center; justify-content: center;">
+
+					<table class="SlabRateTable"
+						style="width: 90%; border-collapse: collapse; background-color: #c6ccd2;">
+
 						<thead>
 							<tr>
-								<th style="font-size: 15px;">S.No</th>
-								<th  style="font-size: 15px;">Start Rate</th>
-								<th  style="font-size: 15px;">End Rate</th>
-								<th  style="font-size: 15px;">Charges</th>
+								<th>Start Rate</th>
+								<th>End Rate</th>
+								<th>Charges</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
+							<tr th:each="slabrate : ${SlabRate}" onclick="updateAmountPer(this);">
+								<td th:text="${slabrate.startRate}">Start Rate</td>
+								<td th:text="${slabrate.endRate}">End Rate</td>
+								<td th:text="${slabrate.charges}">Charges</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-							</tr>
-							<tr>
-								<td>5</td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-								<td><input type="text" style="width: 100%;"></td>
-							</tr>
+
 						</tbody>
 					</table>
-				</h4>
-				<div class="text-center">
-					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;"
-						data-dismiss="modal">Submit</button>
 				</div>
+				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal"
+						style="margin-right: 45%;">Close</button>
+				</div>
+
 			</div>
 		</div>
 	</div>
