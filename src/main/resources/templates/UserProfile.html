@@ -617,12 +617,12 @@ $(document)
 			<div class="row">
 				<div class="col-sm-12 mt-2">
 					<div class="card panel panel-primary filterable">
-						<div class="card-header p-1">
-							<div  style="display: flex; justify-content: space-between; align-items: center;">
+						<div class="card-header p-1 ">
+							<div  class="dispayflexpropty">
 								<h6 style="font-size: 25px; color: white; font-weight: 700;">User Profile</h6>
 								<div class="">
-								<button type="button" class="btn btn-sm mr-2 commonBtnStyle" id="btnAdd" onclick="adduser();" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Create User</button>
-									<button type="button" class="btn btn-primary btns btn-filter commonBtnStyle">Filter</button>
+								<button type="button" class="btn btn-sm mr-2 headerbutton" id="btnAdd" onclick="adduser();" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Create User</button>
+									<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
 								</div>
 							</div>
 							</div> 
@@ -648,7 +648,7 @@ $(document)
 														<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="Status"
 														disabled></th> 
-											 	<th class="pb-2" style="font-size:16px;font-weight:700">Select</th>
+											 	<th class="pb-2 select_th" >Select</th>
 											</tr>
 								</thead>
 								<tbody>
@@ -706,11 +706,12 @@ $(document)
 								</tbody>
 							</table>
 						</div>
-						</div>
 						<div class="card-footer text-center">
 							<button type="button" class="btn btn-xs btn-primary mr-2" id="btnHome" onclick="home();">Home</button>
 							<button type="button" class="btn btn-xs btn-primary" id="btnBack" onclick="home();">Back</button>
 						</div>
+						</div>
+						
 					</div>
 				</div>
 			</div>

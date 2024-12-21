@@ -16107,6 +16107,23 @@ input {
 	.table.dataTable tbody th, table.dataTable tbody td{
 	padding:8px 18px !important;
 	}
-	
-	
+	.headerbutton {
+	background-color: #f26223;
+	border-color: #f26223;
+	font-size: 17px;
+	font-weight: bold
+   }
+
+.select_th{
+	font-size: 16px;
+	font-weight: 700 !important;
 }
+
+.dispayflexpropty{
+	
+	display: flex; 
+	justify-content: space-between; 
+	align-items: center;
+}
+
+

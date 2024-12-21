@@ -1,23 +1,64 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="summary">
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
-<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
-<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
-<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
-<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
 
 <style>
+.filterable .filters input[disabled] {
+	background-color: transparent;
+	border: none;
+	cursor: auto;
+	box-shadow: none;
+	padding: 0;
+	height: auto;
+}
+
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]::-moz-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]:-ms-input-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
+
 input, select {
 	height: 35px !important;
 }
@@ -178,7 +219,9 @@ td {
 			}
 			function errorResponse(xhr, status, error) {
 				$('#myModalpopup1').modal("toggle");
-				$('#myModalpopup1 .modal-body').text("An error occurred while processing your request. Please try again later.");
+				$('#myModalpopup1 .modal-body')
+						.text(
+								"An error occurred while processing your request. Please try again later.");
 			}
 		}
 	}
@@ -205,7 +248,9 @@ td {
 			}
 			function errorResponse(xhr, status, error) {
 				$('#myModalpopup1').modal("toggle");
-				$('#myModalpopup1 .modal-body').text("An error occurred while processing your request. Please try again later.");
+				$('#myModalpopup1 .modal-body')
+						.text(
+								"An error occurred while processing your request. Please try again later.");
 			}
 		}
 	}
@@ -233,12 +278,83 @@ td {
 			}
 			function errorResponse(xhr, status, error) {
 				$('#myModalpopup1').modal("toggle");
-				$('#myModalpopup1 .modal-body').text("An error occurred while processing your request. Please try again later.");
+				$('#myModalpopup1 .modal-body')
+						.text(
+								"An error occurred while processing your request. Please try again later.");
 			}
 		}
 	}
 
 	/*]]>*/
+</script>
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$('.filterable .btn-filter')
+								.click(
+										function() {
+											var $panel = $(this).parents(
+													'.filterable'), $filters = $panel
+													.find('.filters input'), $tbody = $panel
+													.find('.table tbody');
+											if ($filters.prop('disabled') == true) {
+												$filters
+														.prop('disabled', false);
+												$filters.first().focus();
+											} else {
+												$filters.val('').prop(
+														'disabled', true);
+												$tbody.find('.no-result')
+														.remove();
+												$tbody.find('tr').show();
+											}
+										});
+
+						$('.filterable .filters input')
+								.keyup(
+										function(e) {
+											/* Ignore tab key */
+											var code = e.keyCode || e.which;
+											if (code == '9')
+												return;
+											/* Useful DOM data and selectors */
+											var $input = $(this), inputContent = $input
+													.val().toLowerCase(), $panel = $input
+													.parents('.filterable'), column = $panel
+													.find('.filters th')
+													.index($input.parents('th')), $table = $panel
+													.find('.table'), $rows = $table
+													.find('tbody tr');
+											/* Dirtiest filter function ever ;) */
+											var $filteredRows = $rows
+													.filter(function() {
+														var value = $(this)
+																.find('td').eq(
+																		column)
+																.text()
+																.toLowerCase();
+														return value
+																.indexOf(inputContent) === -1;
+													});
+											/* Clean previous no-result if exist */
+											$table.find('tbody .no-result')
+													.remove();
+											/* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+											$rows.show();
+											$filteredRows.hide();
+											/* Prepend no-result row if all rows are filtered */
+											if ($filteredRows.length === $rows.length) {
+												$table
+														.find('tbody')
+														.prepend(
+																$('<tr class="no-result text-center"><td colspan="'
+																		+ $table
+																				.find('.filters th').length
+																		+ '">No Record found</td></tr>'));
+											}
+										});
+					});
 </script>
 </head>
 
@@ -246,27 +362,54 @@ td {
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager">
 		<div class="pt-3" th:if="${formmode}=='list'">
-			<div class="card">
-				<div class="card-header">
-					<div class="d-flex justify-content-between align-items-center">
-						<h6 style="font-size: 1.5rem; color: white;">Bank and Branch Master</h6>
-						<button type="button" class="btn btn-sm commonBtnStyle" id="addBtn" onclick="AddModal(this)" title="Add" th:if="${IPSRoleMenu.permissions}=='W'">Add New</button>
+			<div class="card panel panel-primary filterable">
+				<div class="card-header ">
+
+
+					<div class="dispayflexpropty">
+						<h6 style="font-size: 1.5rem; color: white;">Bank and Branch
+							Master</h6>
+						<div class="">
+							<button type="button"
+								class="btn btn-primary btns btn-filter headerbutton "
+								onclick="AddModal(this)">Add Role</button>
+
+							<button type="button"
+								class="btn  btns btn-filter headerbutton">Filter</button>
+						</div>
 					</div>
 				</div>
 				<div>
-					<table class="table table-striped table-bordered table-hover table-sm" id="my_table">
+					<table
+						class="table table-striped table-bordered table-hover table-sm"
+						id="">
 						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Bank ID</th>
-								<th>Bank Name</th>
-								<th>Branch ID</th>
-								<th>Branch Name</th>
-								<!-- <th>Address</th> -->
-								<th>City</th>
-								<th>Country</th>
-								<th>Status</th>
-								<th style="width: 10px;">Select</th>
+							<tr  class="filters">
+							
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="ID" disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Bank ID"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Bank Name"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Branch ID"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Branch Name"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="City"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Country"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Status"
+									disabled></th>
+								<th class="pb-2 select_th">Select</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -285,31 +428,48 @@ td {
 								</th:block>
 								<td>
 									<div class="dropdown actionBtn">
-										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-											style="line-height: 0.7; width: 70px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-										>Action</button>
-										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background-color: #e3e3e4; color: #3a4550;">
-											<a class="dropdown-item" title="Modify" th:attr="data-sol_id=${bankdetails?.sol_id}"
+										<button class="btn btn-secondary dropdown-toggle"
+											type="button" id="dropdownMenuButton"
+											style="line-height: 0.7; width: 70px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
+											data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false">Action</button>
+										<div class="dropdown-menu"
+											aria-labelledby="dropdownMenuButton"
+											style="background-color: #e3e3e4; color: #3a4550;">
+											<a class="dropdown-item" title="Modify"
+												th:attr="data-sol_id=${bankdetails?.sol_id}"
 												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-												id="edit_value" onclick="edit_btn_submit(this)" th:if="${bankdetails.entity_flg} == 'Y' AND ${IPSRoleMenu.permissions}=='W'"
-											>Modify</a> <a th:if="${bankdetails.entity_flg} == 'N' AND ${IPSRoleMenu.work_class}=='C'" class="dropdown-item" title="Verify" th:attr="data-sol_id=${bankdetails?.sol_id}"
+												id="edit_value" onclick="edit_btn_submit(this)"
+												th:if="${bankdetails.entity_flg} == 'Y' AND ${IPSRoleMenu.permissions}=='W'">Modify</a>
+											<a
+												th:if="${bankdetails.entity_flg} == 'N' AND ${IPSRoleMenu.work_class}=='C'"
+												class="dropdown-item" title="Verify"
+												th:attr="data-sol_id=${bankdetails?.sol_id}"
 												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-												id="verify_value" onclick="verify_btn_submit(this)"
-											>Verify</a>
-											<div class="dropdown-divider" th:if="${bankdetails.entity_flg} == 'Y' AND ${IPSRoleMenu.permissions}=='W'"></div>
-											<div class="dropdown-divider" th:if="${bankdetails.entity_flg} == 'N' AND ${IPSRoleMenu.work_class}=='C'"></div>
-											<a class="dropdown-item" title="View" th:attr="data-sol_id=${bankdetails?.sol_id}"
+												id="verify_value" onclick="verify_btn_submit(this)">Verify</a>
+											<div class="dropdown-divider"
+												th:if="${bankdetails.entity_flg} == 'Y' AND ${IPSRoleMenu.permissions}=='W'"></div>
+											<div class="dropdown-divider"
+												th:if="${bankdetails.entity_flg} == 'N' AND ${IPSRoleMenu.work_class}=='C'"></div>
+											<a class="dropdown-item" title="View"
+												th:attr="data-sol_id=${bankdetails?.sol_id}"
 												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-												id="view_btn" onclick="view_btn_submit(this)" th:if="${bankdetails.modify_flg}=='Y'"
-											>View</a> <a class="dropdown-item" title="View" th:attr="data-sol_id=${bankdetails?.sol_id}"
+												id="view_btn" onclick="view_btn_submit(this)"
+												th:if="${bankdetails.modify_flg}=='Y'">View</a>
+											<a class="dropdown-item" title="View"
+												th:attr="data-sol_id=${bankdetails?.sol_id}"
 												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-												id="view_btn" onclick="view_new_btn_submit(this)" th:if="${bankdetails.modify_flg}=='N'"
-											>View</a>
-											<div class="dropdown-divider" th:if="${bankdetails.entity_flg}=='N' " style="height: 2px; line-height: 0.7;"></div>
+												id="view_btn" onclick="view_new_btn_submit(this)"
+												th:if="${bankdetails.modify_flg}=='N'">View</a>
+											<div class="dropdown-divider"
+												th:if="${bankdetails.entity_flg}=='N' "
+												style="height: 2px; line-height: 0.7;"></div>
 											<a class="dropdown-item" title="Cancel"
 												style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-												th:attr="data-sol_id=${bankdetails.sol_id}" onclick="cancel_btn_submit(this);" th:id="${bankdetails.sol_id}" th:if="${bankdetails.entity_flg}=='N' "
-											>Delete</a>
+												th:attr="data-sol_id=${bankdetails.sol_id}"
+												onclick="cancel_btn_submit(this);"
+												th:id="${bankdetails.sol_id}"
+												th:if="${bankdetails.entity_flg}=='N' ">Delete</a>
 										</div>
 									</div>
 								</td>
@@ -317,8 +477,10 @@ td {
 						</tbody>
 					</table>
 					<div class="card-footer text-center">
-						<button type="button" class="btn btn-sm btn-primary mr-2" id="btnHome" onclick="home();">Home</button>
-						<button type="button" class="btn btn-sm btn-primary" id="btnBack" onclick="back();">Back</button>
+						<button type="button" class="btn btn-sm btn-primary mr-2"
+							id="btnHome" onclick="home();">Home</button>
+						<button type="button" class="btn btn-sm btn-primary" id="btnBack"
+							onclick="back();">Back</button>
 					</div>
 				</div>
 			</div>
@@ -326,54 +488,87 @@ td {
 
 		<!-- Add Bank and Branch Master Screen -->
 
-		<div th:if="${formmode}=='add' OR ${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view' OR ${formmode}=='viewnew'" class="content pt-2">
+		<div
+			th:if="${formmode}=='add' OR ${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view' OR ${formmode}=='viewnew'"
+			class="content pt-2">
 			<div class="card">
-				<form action="#" th:object="${BankDetails}" method="POST" autocomplete="off" id="BankDetails">
-					<div class="card-header d-flex justify-content-between align-items-center">
-						<h6 th:if="${formmode}=='add'" style="font-size: 1.5rem; color: white;">Bank and Branch Master - Add</h6>
-						<h6 th:if="${formmode}=='edit'" style="font-size: 1.5rem; color: white;">Bank and Branch Master - Edit</h6>
-						<h6 th:if="${formmode}=='verify'" style="font-size: 1.5rem; color: white;">Bank and Branch Master - Verify</h6>
-						<h6 th:if="${formmode}=='cancel'" style="font-size: 1.5rem; color: white;">Bank and Branch Master - Cancel</h6>
-						<h6 th:if="${formmode}=='view' OR ${formmode}=='viewnew'" style="font-size: 1.5rem; color: white;">Bank and Branch Master - View</h6>
-						<button type="button" class="btn btn-xs commonBtnStyle" id="btnInq" onclick="list()">List</button>
+				<form action="#" th:object="${BankDetails}" method="POST"
+					autocomplete="off" id="BankDetails">
+					<div
+						class="card-header d-flex justify-content-between align-items-center">
+						<h6 th:if="${formmode}=='add'"
+							style="font-size: 1.5rem; color: white;">Bank and Branch
+							Master - Add</h6>
+						<h6 th:if="${formmode}=='edit'"
+							style="font-size: 1.5rem; color: white;">Bank and Branch
+							Master - Edit</h6>
+						<h6 th:if="${formmode}=='verify'"
+							style="font-size: 1.5rem; color: white;">Bank and Branch
+							Master - Verify</h6>
+						<h6 th:if="${formmode}=='cancel'"
+							style="font-size: 1.5rem; color: white;">Bank and Branch
+							Master - Cancel</h6>
+						<h6 th:if="${formmode}=='view' OR ${formmode}=='viewnew'"
+							style="font-size: 1.5rem; color: white;">Bank and Branch
+							Master - View</h6>
+						<button type="button" class="btn btn-xs commonBtnStyle"
+							id="btnInq" onclick="list()">List</button>
 					</div>
 					<!-- Modal body -->
 					<div class="card-body  pb-0">
 						<div class="row formline">
 							<div class="col-sm-2">
-								<label for="srl_no">ID <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+								<label for="srl_no">ID <span
+									style="color: red; font-size: 20px;"
+									th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='view'OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.sol_id}" onkeyup="this.value = this.value.toUpperCase();" id="sol_id" class="form-control form-control-sm" name="sol_id" autocomplete="off"
-									readonly
-								>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view'OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.sol_id}"
+									onkeyup="this.value = this.value.toUpperCase();" id="sol_id"
+									class="form-control form-control-sm" name="sol_id"
+									autocomplete="off" readonly>
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='add' or ${formmode}=='edit'">
-								<input type="text" th:value="${BankandBranch?.sol_id}" onkeyup="this.value = this.value.toUpperCase();" id="sol_id" class="form-control form-control-sm commonBackground" name="sol_id"
-									autocomplete="off" required
-								>
+							<div class="col-sm-3"
+								th:if="${formmode}=='add' or ${formmode}=='edit'">
+								<input type="text" th:value="${BankandBranch?.sol_id}"
+									onkeyup="this.value = this.value.toUpperCase();" id="sol_id"
+									class="form-control form-control-sm commonBackground"
+									name="sol_id" autocomplete="off" required>
 							</div>
 
 							<div class="col-sm-1"></div>
 							<label for="userName" class="col-sm-2">Description </label>
-							<div class="col-sm-3" th:if=" ${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.sol_desc}" id="sol_desc" name="sol_desc" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm" autocomplete="off"
-									readonly
-								/>
+							<div class="col-sm-3"
+								th:if=" ${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.sol_desc}"
+									id="sol_desc" name="sol_desc"
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
-							<div class="col-sm-3" th:if=" ${formmode}=='edit' OR ${formmode}=='add' ">
-								<input th:if="${formmode}=='edit'" type="text" th:value="${BankandBranch?.sol_desc}" id="sol_desc" name="sol_desc" onkeyup="this.value = this.value.toUpperCase();"
-									class="form-control form-control-sm commonBackground" autocomplete="off"
-								/> <input th:if="${formmode}=='add' " type="text" th:value="${BankandBranch?.sol_desc}" id="sol_desc" name="sol_desc" onkeyup="this.value = this.value.toUpperCase();"
-									class="form-control form-control-sm commonBackground" autocomplete="off"
-								/>
+							<div class="col-sm-3"
+								th:if=" ${formmode}=='edit' OR ${formmode}=='add' ">
+								<input th:if="${formmode}=='edit'" type="text"
+									th:value="${BankandBranch?.sol_desc}" id="sol_desc"
+									name="sol_desc"
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" /> <input
+									th:if="${formmode}=='add' " type="text"
+									th:value="${BankandBranch?.sol_desc}" id="sol_desc"
+									name="sol_desc"
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" />
 							</div>
 						</div>
 						<label></label>
 						<div class="row formline">
 							<label class="col-sm-2">SOL Type</label>
 							<div th:if="${formmode}=='add'  " class="col-sm-3">
-								<select name="sol_type" id="showme1" class="form-control form-control-sm w-100">
+								<select name="sol_type" id="showme1"
+									class="form-control form-control-sm w-100">
 									<option th:value="${BankandBranch?.sol_type}">SELECT</option>
 									<option value="HEAD OFFICE">HEAD OFFICE</option>
 									<option value="ADMIN OFFICE">ADMIN OFFICE</option>
@@ -381,215 +576,328 @@ td {
 								</select>
 							</div>
 							<div th:if=" ${formmode}=='edit'" class="col-sm-3">
-								<select name="sol_type" id="showme1" class="form-control form-control-sm w-100">
+								<select name="sol_type" id="showme1"
+									class="form-control form-control-sm w-100">
 									<option>SELECT</option>
-									<option value="HEAD OFFICE" th:selected="${BankandBranch?.sol_type}=='HEAD OFFICE'">HEAD OFFICE</option>
-									<option value="ADMIN OFFICE" th:selected="${BankandBranch?.sol_type}=='ADMIN OFFICE'">ADMIN OFFICE</option>
-									<option value="BRANCH OFFICE" th:selected="${BankandBranch?.sol_type}=='BRANCH OFFICE'">BRANCH OFFICE</option>
+									<option value="HEAD OFFICE"
+										th:selected="${BankandBranch?.sol_type}=='HEAD OFFICE'">HEAD
+										OFFICE</option>
+									<option value="ADMIN OFFICE"
+										th:selected="${BankandBranch?.sol_type}=='ADMIN OFFICE'">ADMIN
+										OFFICE</option>
+									<option value="BRANCH OFFICE"
+										th:selected="${BankandBranch?.sol_type}=='BRANCH OFFICE'">BRANCH
+										OFFICE</option>
 								</select>
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.sol_type}" id="sol_type" name="sol_type" class="form-control form-control-sm" autocomplete="off" readonly />
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.sol_type}"
+									id="sol_type" name="sol_type"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
 							<div class="col-sm-1"></div>
 							<label class="col-sm-2">BOD Sysdate</label>
 							<div class="col-sm-3">
-								<input type="text" id="bod_sysdate" name="bod_sysdate" th:if="${formmode}=='add' " class="form-control form-control-sm commonBackground" autocomplete="off" readonly /> <input type="text"
-									id="bod_sysdate" name="bod_sysdate" th:if="  ${formmode}=='edit'" th:value="${#dates.format(BankandBranch?.bod_sysdate,'dd-MM-yyyy')}" class="form-control form-control-sm commonBackground"
-									readonly autocomplete="off"
-								/> <input type="text" id="" name="bod_sysdate" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'" class="form-control form-control-sm" autocomplete="off"
-									th:value="${#dates.format(BankandBranch?.bod_sysdate,'dd-MM-yyyy')}" readonly
-								/>
+								<input type="text" id="bod_sysdate" name="bod_sysdate"
+									th:if="${formmode}=='add' "
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" readonly /> <input type="text"
+									id="bod_sysdate" name="bod_sysdate"
+									th:if="  ${formmode}=='edit'"
+									th:value="${#dates.format(BankandBranch?.bod_sysdate,'dd-MM-yyyy')}"
+									class="form-control form-control-sm commonBackground" readonly
+									autocomplete="off" /> <input type="text" id=""
+									name="bod_sysdate"
+									th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'"
+									class="form-control form-control-sm" autocomplete="off"
+									th:value="${#dates.format(BankandBranch?.bod_sysdate,'dd-MM-yyyy')}"
+									readonly />
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 						<label></label>
 						<div class="row formline">
-							<label class="col-sm-2"> Bank Code<span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
-							<div th:if="${formmode}=='add' OR ${formmode}=='edit'" class="col-sm-3">
-								<input class="form-control form-control-sm commonBackground" id="bank_code" name="bank_code" onkeyup="this.value = this.value.toUpperCase();" th:value="${BankandBranch?.bank_code}"
-									style="float: left; font-size: 13px;" required
-								>
+							<label class="col-sm-2"> Bank Code<span
+								style="color: red; font-size: 20px;"
+								th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div th:if="${formmode}=='add' OR ${formmode}=='edit'"
+								class="col-sm-3">
+								<input class="form-control form-control-sm commonBackground"
+									id="bank_code" name="bank_code"
+									onkeyup="this.value = this.value.toUpperCase();"
+									th:value="${BankandBranch?.bank_code}"
+									style="float: left; font-size: 13px;" required>
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.bank_code}" id="bank_code" name="bank_code" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm"
-									autocomplete="off" readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.bank_code}"
+									id="bank_code" name="bank_code"
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
 							<div class="col-sm-1"></div>
-							<label class="col-sm-2"> Bank Name<span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
-							<div th:if="${formmode}=='add' OR ${formmode}=='edit'" class="col-sm-3">
-								<input class="form-control form-control-sm commonBackground" id="bank_name" name="bank_name" th:value="${BankandBranch?.bank_name}" onkeyup="this.value = this.value.toUpperCase();"
-									style="float: left; font-size: 13px;" required
-								>
+							<label class="col-sm-2"> Bank Name<span
+								style="color: red; font-size: 20px;"
+								th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div th:if="${formmode}=='add' OR ${formmode}=='edit'"
+								class="col-sm-3">
+								<input class="form-control form-control-sm commonBackground"
+									id="bank_name" name="bank_name"
+									th:value="${BankandBranch?.bank_name}"
+									onkeyup="this.value = this.value.toUpperCase();"
+									style="float: left; font-size: 13px;" required>
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.bank_name}" id="bank_name" name="bank_name" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm"
-									autocomplete="off" readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.bank_name}"
+									id="bank_name" name="bank_name"
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 						<label></label>
 						<div class="row formline">
-							<label class="col-sm-2"> Branch Code<span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
-							<div th:if="${formmode}=='add' OR ${formmode}=='edit'" class="col-sm-3">
-								<input class="form-control form-control-sm commonBackground" id="parm_1" name="parm_1" th:value="${BankandBranch?.parm_1}" onkeyup="this.value = this.value.toUpperCase();"
-									style="float: left; font-size: 13px;" required
-								>
+							<label class="col-sm-2"> Branch Code<span
+								style="color: red; font-size: 20px;"
+								th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div th:if="${formmode}=='add' OR ${formmode}=='edit'"
+								class="col-sm-3">
+								<input class="form-control form-control-sm commonBackground"
+									id="parm_1" name="parm_1" th:value="${BankandBranch?.parm_1}"
+									onkeyup="this.value = this.value.toUpperCase();"
+									style="float: left; font-size: 13px;" required>
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.parm_1}" id="parm_1" name="parm_1" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm" autocomplete="off"
-									readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.parm_1}"
+									id="parm_1" name="parm_1"
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
 							<div class="col-sm-1"></div>
-							<label class="col-sm-2">Branch Name<span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
-							<div th:if="${formmode}=='add' OR ${formmode}=='edit'" class="col-sm-3">
-								<input class="form-control form-control-sm commonBackground" id="parm_2" name="parm_2" th:value="${BankandBranch?.parm_2}" onkeyup="this.value = this.value.toUpperCase();"
-									style="float: left; font-size: 13px;" required
-								>
+							<label class="col-sm-2">Branch Name<span
+								style="color: red; font-size: 20px;"
+								th:if="${formmode}=='add' OR ${formmode}=='modify'">*</span></label>
+							<div th:if="${formmode}=='add' OR ${formmode}=='edit'"
+								class="col-sm-3">
+								<input class="form-control form-control-sm commonBackground"
+									id="parm_2" name="parm_2" th:value="${BankandBranch?.parm_2}"
+									onkeyup="this.value = this.value.toUpperCase();"
+									style="float: left; font-size: 13px;" required>
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.parm_2}" id="parm_2" name="parm_2" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm" autocomplete="off"
-									readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.parm_2}"
+									id="parm_2" name="parm_2"
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 						<label></label>
 						<div class="row formline">
 							<label class="col-sm-2">Address 1</label>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.addr_1}" id="addr_1" name="addr_1" value="" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm"
-									autocomplete="off" readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.addr_1}"
+									id="addr_1" name="addr_1" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='add' OR ${formmode}=='edit'">
-								<input type="text" th:value="${BankandBranch?.addr_1}" id="addr_1" name="addr_1" value="" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm commonBackground"
-									autocomplete="off"
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='add' OR ${formmode}=='edit'">
+								<input type="text" th:value="${BankandBranch?.addr_1}"
+									id="addr_1" name="addr_1" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" />
 							</div>
 							<div class="col-sm-1"></div>
 							<label class="col-sm-2">Address 2</label>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.addr_2}" id="addr_2" name="addr_2" value="" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm"
-									autocomplete="off" readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.addr_2}"
+									id="addr_2" name="addr_2" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='add' OR ${formmode}=='edit'">
-								<input type="text" th:value="${BankandBranch?.addr_2}" id="addr_2" name="addr_2" value="" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm commonBackground"
-									autocomplete="off"
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='add' OR ${formmode}=='edit'">
+								<input type="text" th:value="${BankandBranch?.addr_2}"
+									id="addr_2" name="addr_2" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" />
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 						<label></label>
 						<div class="row formline">
 							<label class="col-sm-2">City</label>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.city_code}" id="city_code" name="city_code" value="" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm"
-									autocomplete="off" readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.city_code}"
+									id="city_code" name="city_code" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='add' OR ${formmode}=='edit'">
-								<input type="text" th:value="${BankandBranch?.city_code}" id="city_code" name="city_code" value="" onkeyup="this.value = this.value.toUpperCase();"
-									class="form-control form-control-sm commonBackground" autocomplete="off"
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='add' OR ${formmode}=='edit'">
+								<input type="text" th:value="${BankandBranch?.city_code}"
+									id="city_code" name="city_code" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" />
 							</div>
 							<div class="col-sm-1"></div>
 							<label class="col-sm-2">State</label>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.state_code}" id="state_code" name="state_code" value="" onkeyup="this.value = this.value.toUpperCase();" class="form-control form-control-sm"
-									autocomplete="off" readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.state_code}"
+									id="state_code" name="state_code" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='add' OR ${formmode}=='edit'">
-								<input type="text" th:value="${BankandBranch?.state_code}" id="state_code" name="state_code" value="" onkeyup="this.value = this.value.toUpperCase();"
-									class="form-control form-control-sm commonBackground" autocomplete="off"
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='add' OR ${formmode}=='edit'">
+								<input type="text" th:value="${BankandBranch?.state_code}"
+									id="state_code" name="state_code" value=""
+									onkeyup="this.value = this.value.toUpperCase();"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" />
 							</div>
 							<div class="col-sm-1"></div>
 						</div>
 						<label></label>
 						<div class="row formline">
 							<label class="col-sm-2"> Country</label>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="text" th:value="${BankandBranch?.country_code}" onkeyup="this.value = this.value.toUpperCase();" id="country_code" value="" name="country_code"
-									class="form-control form-control-sm" autocomplete="off" readonly
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="text" th:value="${BankandBranch?.country_code}"
+									onkeyup="this.value = this.value.toUpperCase();"
+									id="country_code" value="" name="country_code"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='add' OR ${formmode}=='edit'">
-								<input type="text" th:value="${BankandBranch?.country_code}" onkeyup="this.value = this.value.toUpperCase();" id="country_code" value="" name="country_code"
-									class="form-control form-control-sm commonBackground" autocomplete="off"
-								/>
+							<div class="col-sm-3"
+								th:if="${formmode}=='add' OR ${formmode}=='edit'">
+								<input type="text" th:value="${BankandBranch?.country_code}"
+									onkeyup="this.value = this.value.toUpperCase();"
+									id="country_code" value="" name="country_code"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" />
 							</div>
 							<div class="col-sm-1"></div>
 							<label class="col-sm-2">Zip Code</label>
-							<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
-								<input type="number" th:value="${BankandBranch?.zip_code}" id="zip_code" value="" name="zip_code" class="form-control form-control-sm" autocomplete="off" readonly />
+							<div class="col-sm-3"
+								th:if="${formmode}=='view' OR ${formmode}=='verify' OR ${formmode}=='cancel' or ${formmode}=='viewnew'">
+								<input type="number" th:value="${BankandBranch?.zip_code}"
+									id="zip_code" value="" name="zip_code"
+									class="form-control form-control-sm" autocomplete="off"
+									readonly />
 							</div>
-							<div class="col-sm-3" th:if="${formmode}=='add' OR ${formmode}=='edit'">
-								<input type="number" th:value="${BankandBranch?.zip_code}" id="zip_code" value="" name="zip_code" class="form-control form-control-sm commonBackground" autocomplete="off" />
+							<div class="col-sm-3"
+								th:if="${formmode}=='add' OR ${formmode}=='edit'">
+								<input type="number" th:value="${BankandBranch?.zip_code}"
+									id="zip_code" value="" name="zip_code"
+									class="form-control form-control-sm commonBackground"
+									autocomplete="off" />
 							</div>
 						</div>
 					</div>
 				</form>
 				<div class="card-footer text-center p-2">
-					<button type="button" class="btn btn-xs mr-2" id="btnHome" onclick="home();">Home</button>
-					<button th:if="${formmode}=='add' OR ${formmode}=='edit' " type="button" class="btn btn-xs commonBtnStyle mr-2" onclick="submitform(this);" form="BankDetails" id="btnSubmit"
-						th:attr="data-formmode=${formmode}"
-					>Submit</button>
-					<button th:if="${formmode}=='verify' " type="button" class="btn btn-xs commonBtnStyle mr-2" onclick="verifyform(this);" form="BankDetails" id="btnSubmit"
-						th:attr="data-formmode=${formmode},data-newflg=${BankandBranch?.new_bank_flg}"
-					>Verify</button>
-					<button th:if="${formmode}=='cancel' " type="button" class="btn btn-xs commonBtnStyle mr-2" onclick="cancelform(this);" form="BankDetails" id="btnSubmit"
-						th:attr="data-formmode=${formmode},data-newflg=${BankandBranch?.new_bank_flg}"
-					>Delete</button>
-					<button type="button" class="btn btn-xs" id="btnBack" onclick="back();">Back</button>
+					<button type="button" class="btn btn-xs mr-2" id="btnHome"
+						onclick="home();">Home</button>
+					<button th:if="${formmode}=='add' OR ${formmode}=='edit' "
+						type="button" class="btn btn-xs commonBtnStyle mr-2"
+						onclick="submitform(this);" form="BankDetails" id="btnSubmit"
+						th:attr="data-formmode=${formmode}">Submit</button>
+					<button th:if="${formmode}=='verify' " type="button"
+						class="btn btn-xs commonBtnStyle mr-2" onclick="verifyform(this);"
+						form="BankDetails" id="btnSubmit"
+						th:attr="data-formmode=${formmode},data-newflg=${BankandBranch?.new_bank_flg}">Verify</button>
+					<button th:if="${formmode}=='cancel' " type="button"
+						class="btn btn-xs commonBtnStyle mr-2" onclick="cancelform(this);"
+						form="BankDetails" id="btnSubmit"
+						th:attr="data-formmode=${formmode},data-newflg=${BankandBranch?.new_bank_flg}">Delete</button>
+					<button type="button" class="btn btn-xs" id="btnBack"
+						onclick="back();">Back</button>
 				</div>
-				<div class="content m-2 border" th:if=" ${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view' " th:each="alert : ${BankandBranch}" style="padding: 15px;">
+				<div class="content m-2 border"
+					th:if=" ${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view' "
+					th:each="alert : ${BankandBranch}" style="padding: 15px;">
 					<div class="row formline mb-2">
 						<label class="col-sm-2">Entry User</label>
 						<div class="col-sm-2">
-							<input type="text" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'" th:value="${alert?.entry_user}" id="entry_user" name="entry_user"
-								class="form-control form-control-sm" autocomplete="off" readonly
-							/>
+							<input type="text"
+								th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'"
+								th:value="${alert?.entry_user}" id="entry_user"
+								name="entry_user" class="form-control form-control-sm"
+								autocomplete="off" readonly />
 						</div>
 						<label class="col-sm-2">Modify User</label>
 						<div class="col-sm-2">
-							<input type="text" th:if=" ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'" th:value="${alert?.modify_user}" id="modify_user" name="modify_user"
-								class="form-control form-control-sm" autocomplete="off" readonly
-							/> <input type="text" th:if="${formmode}=='edit'" th:value="${alert?.modify_user}" id="modify_user" name="modify_user" class="form-control form-control-sm" autocomplete="off" readonly />
+							<input type="text"
+								th:if=" ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'"
+								th:value="${alert?.modify_user}" id="modify_user"
+								name="modify_user" class="form-control form-control-sm"
+								autocomplete="off" readonly /> <input type="text"
+								th:if="${formmode}=='edit'" th:value="${alert?.modify_user}"
+								id="modify_user" name="modify_user"
+								class="form-control form-control-sm" autocomplete="off" readonly />
 						</div>
 						<label class="col-sm-2">Verify User</label>
 						<div class="col-sm-2">
-							<input type="text" th:value="${alert?.verify_user}" th:if="${formmode}=='edit'" id="verify_user" name="verify_user" class="form-control form-control-sm" autocomplete="off" readonly /> <input
-								type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'" th:value="${alert?.verify_user}" id="verify_user" name="verify_user"
-								class="form-control form-control-sm" autocomplete="off" readonly
-							/>
+							<input type="text" th:value="${alert?.verify_user}"
+								th:if="${formmode}=='edit'" id="verify_user" name="verify_user"
+								class="form-control form-control-sm" autocomplete="off" readonly />
+							<input type="text"
+								th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'"
+								th:value="${alert?.verify_user}" id="verify_user"
+								name="verify_user" class="form-control form-control-sm"
+								autocomplete="off" readonly />
 						</div>
 					</div>
 					<div class="row formline">
 						<label class="col-sm-2">Entry Time</label>
 						<div class="col-sm-2">
-							<input type="text" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'" th:value="${#dates.format(alert?.entry_time,'dd-MM-yyyy HH:mm')}"
-								id="entry_time" name="entry_time" class="form-control form-control-sm" autocomplete="off" readonly
-							/>
+							<input type="text"
+								th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'"
+								th:value="${#dates.format(alert?.entry_time,'dd-MM-yyyy HH:mm')}"
+								id="entry_time" name="entry_time"
+								class="form-control form-control-sm" autocomplete="off" readonly />
 						</div>
 						<label class="col-sm-2">Modify Time</label>
 						<div class="col-sm-2">
-							<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'" th:value="${#dates.format(alert?.modify_time,'dd-MM-yyyy HH:mm')}" id="modify_time"
-								name="modify_time" class="form-control form-control-sm" autocomplete="off" readonly
-							/> <input type="text" th:if="${formmode}=='edit'" th:value="${#dates.format(alert?.modify_time,'dd-MM-yyyy HH:mm')}" id="modify_time" name="modify_time" class="form-control form-control-sm"
-								autocomplete="off" readonly
-							/>
+							<input type="text"
+								th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view'"
+								th:value="${#dates.format(alert?.modify_time,'dd-MM-yyyy HH:mm')}"
+								id="modify_time" name="modify_time"
+								class="form-control form-control-sm" autocomplete="off" readonly />
+							<input type="text" th:if="${formmode}=='edit'"
+								th:value="${#dates.format(alert?.modify_time,'dd-MM-yyyy HH:mm')}"
+								id="modify_time" name="modify_time"
+								class="form-control form-control-sm" autocomplete="off" readonly />
 						</div>
 						<label class="col-sm-2">Verify Time</label>
 						<div class="col-sm-2">
-							<input type="text" th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view' OR ${formmode}=='edit'" th:value="${#dates.format(alert?.verify_time,'dd-MM-yyyy HH:mm')}"
-								id="verify_date" name="verify_time" class="form-control form-control-sm" autocomplete="off" readonly
-							/>
+							<input type="text"
+								th:if="${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view' OR ${formmode}=='edit'"
+								th:value="${#dates.format(alert?.verify_time,'dd-MM-yyyy HH:mm')}"
+								id="verify_date" name="verify_time"
+								class="form-control form-control-sm" autocomplete="off" readonly />
 						</div>
 						<label></label>
 					</div>
@@ -599,25 +907,39 @@ td {
 	</div>
 
 	<!-- Model Box -->
-	<div class="modal fade" id="myModalpopup2" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="myModalpopup2" data-backdrop="static"
+		data-keyboard="false" style="background: #000000b0;"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
-				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<h3 class="text-center p-2 text-white font-weight-bold"
+					style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold"
+					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" onclick="back()">Close</button>
+					<button type="button" class="btn mb-2"
+						style="width: 16%; background: #f26223; font-size: 17px;"
+						data-dismiss="modal" onclick="back()">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="myModalpopup1" data-backdrop="static"
+		data-keyboard="false" style="background: #000000b0;"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
-				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<h3 class="text-center p-2 text-white font-weight-bold"
+					style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold"
+					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal">Close</button>
+					<button type="button" class="btn mb-2"
+						style="width: 16%; background: #f26223; font-size: 17px;"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -625,25 +947,32 @@ td {
 
 	<!--  Details delete modal dialog  -->
 
-	<div class="modal fade" id="datadelete" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="datadelete" data-backdrop="static"
+		data-keyboard="false">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<div class="modal-body" style="margin-top: 8px; text-align: center; color: aliceblue;">
+				<div class="modal-body"
+					style="margin-top: 8px; text-align: center; color: aliceblue;">
 					<button type="button" class="close" data-dismiss="modal">×</button>
 					Are you Sure want to delete?
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" onclick="submitformdelete(this);" th:attr="data-formmode=delete">Submit</button>
+					<button type="button" class="btn btn-primary"
+						onclick="submitformdelete(this);" th:attr="data-formmode=delete">Submit</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="dataHome" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="dataHome" data-backdrop="static"
+		data-keyboard="false">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<div class="modal-body" style="margin-top: 8px; text-align: center; color: aliceblue;">
+				<div class="modal-body"
+					style="margin-top: 8px; text-align: center; color: aliceblue;">
 					<button type="button" class="close" data-dismiss="modal">×</button>
 					Are you Sure want to Leave?
 				</div>
@@ -655,10 +984,13 @@ td {
 		</div>
 	</div>
 
-	<div class="modal fade" id="dataBack" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="dataBack" data-backdrop="static"
+		data-keyboard="false">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<div class="modal-body" style="margin-top: 8px; text-align: center; color: aliceblue;">
+				<div class="modal-body"
+					style="margin-top: 8px; text-align: center; color: aliceblue;">
 					<button type="button" class="close" data-dismiss="modal">×</button>
 					Are you Sure want to Leave?
 				</div>
@@ -670,13 +1002,17 @@ td {
 		</div>
 	</div>
 
-	<div class="modal fade" id="alert" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="alert" data-backdrop="static"
+		data-keyboard="false">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="menu-title-header">
-					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK OF BARODA</div>
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsg"></p>
 					<button type="button" class="btn btn-primary" onclick="list();">Close</button>
 				</div>
@@ -684,13 +1020,17 @@ td {
 		</div>
 	</div>
 
-	<div class="modal fade" id="verifybox" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="verifybox" data-backdrop="static"
+		data-keyboard="false">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="menu-title-header">
-					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK OF BARODA</div>
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
 					<p id="verifyboxmsg"></p>
 					<button type="button" class="btn btn-primary" onclick="list()">OK</button>
 				</div>
