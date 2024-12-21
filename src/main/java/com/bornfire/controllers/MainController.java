@@ -4241,4 +4241,26 @@ public class MainController {
 		return lastChars;
 
 	}
+	
+	
+	@RequestMapping(value = "MerOnbordParam")
+	public String MerOnbordParam(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String acctcode, @RequestParam(required = false) String userid,
+			@RequestParam(required = false) Optional<Integer> page,
+			@RequestParam(value = "size", required = false) Optional<Integer> size,
+			 Model md, HttpServletRequest req)
+			throws FileNotFoundException, SQLException, IOException {
+
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("PdfViewer", "SettlementAccount");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("formmode", "list");
+			md.addAttribute("menu", "MMenupage");
+		} else if (formmode.equals("add")) {
+			md.addAttribute("formmode", formmode);
+		}
+		return "MerOnboardParam";
+	}
 }

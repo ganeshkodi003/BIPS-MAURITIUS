@@ -1,0 +1,806 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+
+	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+
+	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+
+
+	<script src="js/bootstrap411.js"></script>
+	<script src="js/Chart.js"></script>
+
+	<style>
+		.checkbox-group {
+			display: flex;
+			flex-direction: column;
+			/* Stack checkboxes in a vertical column */
+			gap: 15px;
+			/* Space between checkboxes */
+		}
+
+		.checkbox-label .label-text {
+			background-color: transparent;
+			/* Remove background color from label text */
+			color: black;
+			/* Optional: Set text color if needed */
+		}
+
+		.checkbox-label {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			/* Ensure it takes up full width */
+		}
+
+		.checkbox-label span {
+			display: inline-block;
+			width: 20px;
+			/* Adjust the size of the circle */
+			height: 20px;
+			/* Adjust the size of the circle */
+			border-radius: 50%;
+			/* Makes the span circular */
+			background-color: lightgray;
+			/* Change to your desired background color */
+			color: black;
+			/* Text color */
+			line-height: 20px;
+			/* Centers the text vertically */
+			margin-left: 5px;
+			/* Space between the checkbox and the circle */
+		}
+
+		.aln {
+			text-align: center;
+		}
+
+		.checkbox-label input[type="checkbox"] {
+			margin-left: 10px;
+			/* Spacing between checkbox and label */
+			width: 20px;
+			height: 20px;
+		}
+
+		.checkbox-label .serial {
+			margin-left: 10px;
+		}
+
+		.label-text {
+			flex: 1;
+			/* Ensure the label text takes up the remaining space */
+		}
+
+		.checkbox-label span {
+			margin-left: 10px;
+			display: inline-block;
+		}
+
+		.row.formline {
+			margin-top: 20px;
+			/* Adjust space around rows if needed */
+		}
+	</style>
+	<style>
+		body {
+			background-color: lightgrey;
+		}
+
+		.h2,
+		h2 {
+			font-size: 2rem;
+			background-color: #555;
+			color: white;
+		}
+
+		.tag-btn {
+			font-size: 10px;
+			text-transform: uppercase;
+			font-weight: bold;
+			color: #fff;
+			cursor: pointer;
+			z-index: 5;
+			position: relative;
+			padding: 10px;
+			margin: 0;
+			line-height: 5px;
+			-webkit-transition: all 0.2s ease-in-out;
+			-moz-transition: all 0.2s ease-in-out;
+			-o-transition: all 0.2s ease-in-out;
+			-ms-transition: all 0.2s ease-in-out;
+			transition: all 0.2s ease-in-out;
+			background-color: #F08080;
+			border: none;
+			color: #fff;
+			box-shadow: none;
+		}
+
+		.pagebut {
+			margin-top: 1%;
+			/*  width: 58%;  */
+			padding: 1% 1%;
+			background-color: #2e455d;
+			color: white;
+		}
+
+		select {
+			width: 150px;
+			margin: 10px;
+		}
+
+	 
+
+		table.dataTable thead th,
+		table.dataTable tfoot th {
+			font-weight: normal;
+		}
+
+		table.table .thead-light th {
+			font-size: 13px;
+			border-color: #d4d7da;
+		}
+
+		select:focus {
+			min-width: 150px;
+			width: auto;
+		}
+
+		#hidden_div {
+			display: none;
+		}
+
+		table th {
+			color: white;
+			background-color: #2e455deb;
+			font-size: small;
+		}
+
+		table td {
+			font-size: small;
+		}
+
+		.container-manager {
+			padding-right: 43px;
+			padding-left: 15px;
+			margin-right: auto;
+			margin-left: 18.3%;
+			margin-top: 80px;
+		}
+
+		input[type="text"] {
+			line-height: 15px;
+			font-size: small;
+			height: 25px;
+		}
+
+		.dataTables_empty {
+			color: #be3232;
+		}
+
+		#overlay {
+			position: fixed;
+			top: 0;
+			z-index: 100;
+			width: 100%;
+			height: 100%;
+			display: none;
+			background: rgba(0, 0, 0, 0.6);
+		}
+
+		.cv-spinner {
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.spinner {
+			/* width: 40px;
+	height: 40px;
+	border: 4px #00343d solid;
+	border-top: 4px #181818 solid;
+	border-radius: 50%;
+	animation: sp-anime 0.8s infinite linear; */
+
+		}
+
+		@keyframes sp-anime {
+			100% {
+				transform: rotate(360deg);
+			}
+
+		}
+
+		/* Chrome, Safari, Edge, Opera */
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		#usertable {
+			border-collapse: separate;
+			border-spacing: 0;
+		}
+
+		#usertable tr {
+			border-bottom: 1px solid #808080;
+		}
+
+		#usertable td,
+		#usertable th {
+			border: 2px solid #095776;
+			padding: 15px;
+		}
+
+		#usertable th:last-child,
+		#usertable td:last-child {
+			border-right: none;
+		}
+
+		.dataTables_scrollBody {
+			overflow: unset !important;
+		}
+
+		td {
+			font-size: small;
+		}
+
+		th {
+			color: white;
+			background-color: #2e455deb;
+			font-size: medium;
+		}
+
+		table,
+		tr {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th,
+		td {
+			border: 1px solid #dddddd;
+			padding: 12px;
+			text-align: left;
+		}
+
+		#usertable_wrapper .dataTables_filter input[type="search"] {
+			/* Adjust the value as needed */
+			margin-left: -10px;
+		}
+
+		.dataTables_wrapper .dataTables_filter {
+			float: right;
+			margin-right: 20px;
+
+		}
+
+		.dataTables_filter input {
+			color: black;
+			background-color: white;
+		}
+
+		.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
+			color: black;
+			font-style: italic;
+		}
+	</style>
+</head>
+
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	$(function () {
+		// Initialize datepickers
+		$("#from_date").datepicker({
+			dateFormat: 'dd/mm/yy',
+			maxDate: new Date(), // Set max date to current date
+			onClose: function (selectedDate) {
+				// Set the min date of to_date to the selected from_date
+				$("#to_date").datepicker("option", "minDate", selectedDate);
+			}
+		});
+		$("#to_date").datepicker({
+			dateFormat: 'dd/mm/yy',
+			maxDate: new Date(), // Set max date to current date
+			onClose: function (selectedDate) {
+				// Set the max date of from_date to the selected to_date
+				$("#from_date").datepicker("option", "maxDate", selectedDate);
+			}
+		});
+	});
+
+	function formatDate(dateString) {
+		var dateParts = dateString.split("/");
+		var day = dateParts[0];
+		var month = parseInt(dateParts[1], 10); // Convert month to integer
+		var year = dateParts[2];
+		var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL",
+			"AUG", "SEP", "OCT", "NOV", "DEC"];
+		var monthName = monthNames[month - 1];
+		return day + "-" + monthName + "-" + year;
+	}
+
+	function downloadPdfExcel(a) {
+		var from_date = document.getElementById("from_date").value;
+		var to_date = document.getElementById("to_date").value;
+
+		if (!from_date || !to_date) {
+			alert("Please fill the From Date and To Date");
+			return;
+		}
+		var formatted_from_date = formatDate(from_date);
+		var formatted_to_date = formatDate(to_date);
+		var filetype = a.getAttribute("data-fileType");
+		var count = null;
+		$.ajax({
+			url: 'DownloadTransactionDateChecking',
+			type: 'GET', // Assuming you want to send data via POST method
+
+			data: {
+				filetype: filetype,
+				from_date: formatted_from_date,
+				to_date: formatted_to_date
+			},
+			success: function (response) {
+				console.log(response);
+				count = response;
+				if (count > 0) {
+					var url = './TransactionDownload?filetype=' + filetype + '&from_date=' + formatted_from_date + '&to_date=' + formatted_to_date;
+					window.location.href = url;
+				} else {
+					alert("There is no Transaction in these between Dates.");
+				}
+			},
+			error: function (xhr, status, error) {
+				alert("An error occurred while processing the request.");
+				console.error(xhr, status, error);
+				// Handle error response from server
+			}
+		});
+	}
+
+	function home() {
+		location.href = '/IPSAdmin/IPSDashboard'
+	}
+
+	function back() {
+		window.history.back();
+	}
+	$(document).ready(function () {
+		$('#usertable').DataTable({
+			"destroy": true,
+			"scrollCollapse": true,
+			"paging": true,
+			"autoWidth": false,
+			"ordering": true,
+			"oLanguage": {
+				"sSearch": "",
+				"sSearchPlaceholder": "Search Here"
+			},
+			"searching": true,
+			"pageLength": 10,
+			"lengthChange": false,
+		});
+	});
+
+	$(document).ready(function () {
+		var currentDate = $.datepicker.formatDate('dd-mm-yy', new Date());
+
+		$("#currentDate").val(currentDate); // Set the current date in the input field
+
+		$("#currentDate").datepicker({
+			dateFormat: 'dd-mm-yy',
+			maxDate: new Date()
+
+		});
+	});
+
+
+	/*<![CDATA[*/
+</script>
+<script>
+	function getTransactionRecords() {
+		var valueDate = $('#currentDate').val();
+
+		$.ajax({
+			url: './getTransactionRecords?valueDate=' + valueDate,
+			type: 'GET',
+			success: function (data) {
+
+				var trHTML = '';
+				if (data.length > 0) {
+					data.forEach(function (entity) {
+
+						var tranDate = null;
+
+						if (entity.tran_date != null) {
+							var originalStartDate = new Date(entity.tran_date);
+							var startYear = originalStartDate.getFullYear();
+							var startMonth = String(originalStartDate.getMonth() + 1).padStart(2, '0');
+							var startDay = String(originalStartDate.getDate()).padStart(2, '0');
+							tranDate = `${startDay}-${startMonth}-${startYear}`;
+						} else {
+							tranDate = "";
+						}
+
+						var reversalDate = null;
+
+						if (entity.reversal_date != null) {
+							var originalStartDate = new Date(entity.reversal_date);
+							var startYear = originalStartDate.getFullYear();
+							var startMonth = String(originalStartDate.getMonth() + 1).padStart(2, '0');
+							var startDay = String(originalStartDate.getDate()).padStart(2, '0');
+							reversalDate = `${startDay}-${startMonth}-${startYear}`;
+						} else {
+							reversalDate = "";
+						}
+
+						var tranAmount = null;
+
+						if (entity.tran_amount != null) {
+							let stringValue1 = entity.tran_amount;
+							let floatValue1 = parseFloat(stringValue1);
+							let roundedValue1 = floatValue1.toFixed(2);
+							tranAmount = formatNumberWithCommas(roundedValue1);
+						} else {
+							tranAmount = "0.00";
+						}
+
+						var reversalAmount = null;
+
+						if (entity.reversal_amount != null) {
+							let stringValue1 = entity.reversal_amount;
+							let floatValue1 = parseFloat(stringValue1);
+							let roundedValue1 = floatValue1.toFixed(2);
+							reversalAmount = formatNumberWithCommas(roundedValue1);
+						} else {
+							reversalAmount = "0.00";
+						}
+
+
+						var merchantId = entity.merchant_id != null ? entity.merchant_id : "";
+						var sequenceUniqueId = entity.sequence_unique_id != null ? entity.sequence_unique_id : "";
+						var tranAuditNumber = entity.tran_audit_number != null ? entity.tran_audit_number : "";
+						var ipsxAcct = entity.ipsx_account != null ? entity.ipsx_account : "";
+						var ipsxAcctName = entity.ipsx_account_name != null ? entity.ipsx_account_name : "";
+						var cimAcct = entity.cim_account != null ? entity.cim_account : "";
+						var cimAcctName = entity.cim_account_name != null ? entity.cim_account_name : "";
+						var tranCurrency = entity.tran_currency != null ? entity.tran_currency : "";
+						var tranStatus = entity.tran_status != null ? entity.tran_status : "";
+						var tranRemarks = entity.tran_rmks != null ? entity.tran_rmks : "";
+						var reversalRemarks = entity.reversal_remarks != null ? entity.reversal_remarks : "";
+
+						var color = tranStatus === 'SUCCESS' ? "green" : "red";
+
+
+						trHTML += '<tr>' +
+							'<td style="text-align: left;">' + tranDate + '</td>' +
+							'<td style="text-align: left;">' + merchantId + '</td>' +
+							'<td style="text-align: left;">' + tranAuditNumber + '</td>' +
+							'<td style="text-align: left;">' + cimAcct + '</td>' +
+							'<td style="text-align: left;">' + cimAcctName + '</td>' +
+							'<td style="text-align: left;">' + ipsxAcct + '</td>' +
+							'<td style="text-align: left;">' + ipsxAcctName + '</td>' +
+							'<td style="text-align: left;">' + tranCurrency + '</td>' +
+							'<td style="text-align: right;">' + tranAmount + '</td>' +
+							'<td style="text-align: left;color:' + color + ';">' + tranStatus + '</td>' +
+							'<td style="text-align: left;">' + tranRemarks + '</td>' +
+							'<td style="text-align: left;">' + reversalDate + '</td>' +
+							'<td style="text-align: right;">' + reversalAmount + '</td>' +
+							'<td style="text-align: left;">' + reversalRemarks + '</td>' +
+							// Add more columns for end date and interest amount if needed
+							'</tr>';
+					});
+
+					var userTable = $('#usertable').DataTable({
+						"destroy": true,
+						"scrollCollapse": true,
+						"paging": true,
+						"autoWidth": false,
+						"ordering": true,
+						"oLanguage": {
+							"sSearch": "",
+							"sSearchPlaceholder": "Search Here"
+						},
+						"searching": true,
+						"pageLength": 10,
+						"lengthChange": false,
+					});
+
+					userTable.clear().draw();
+
+
+					$('#transactionBody').empty().append(trHTML);
+
+
+					userTable.rows.add($('#transactionBody tr')).draw();
+
+				} else {
+					trHTML += '<tr><td colspan="10" class="text-center" style="color:red;">No data available</td></tr>';
+
+					$('#transactionBody').empty().append(trHTML);
+
+					var userTable = $('#usertable').DataTable({
+						"destroy": true,
+						"scrollCollapse": true,
+						"paging": true,
+						"autoWidth": false,
+						"ordering": true,
+						"oLanguage": {
+							"sSearch": "",
+							"sSearchPlaceholder": "Search Here"
+						},
+						"searching": true,
+						"pageLength": 10,
+						"lengthChange": false,
+					});
+
+					userTable.clear().draw();
+				}
+
+
+
+
+			},
+			error: function () {
+				showErrorModal('Error fetching data');
+			}
+		});
+	}
+</script>
+
+<script>
+	function formatNumberWithCommas(number) {
+
+		if (!number && number !== 0) return '';
+
+		let numberString = number.toString();
+
+
+		let [integerPart, decimalPart] = numberString.split('.');
+
+		let lastThreeDigits = integerPart.slice(-3);
+		let otherDigits = integerPart.slice(0, -3);
+
+		if (otherDigits !== '') {
+			lastThreeDigits = ',' + lastThreeDigits;
+		}
+
+		let formattedIntegerPart = otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThreeDigits;
+
+		if (!decimalPart) {
+			decimalPart = '00';
+		}
+		let formattedNumber = formattedIntegerPart + '.' + decimalPart;
+
+
+		return formattedNumber;
+	}
+</script>
+
+<body>
+
+	<div th:insert="MMenupage :: header"></div>
+
+	<div class="container-manager">
+
+		<!-- 	<div class="card-group"> -->
+
+
+		<div class="card">
+			<div class="card-header">
+				<div class="float-left">
+
+					<h6 style="font-size: 1.2rem; color: white;">Merchant
+						Onboarding Parameter</h6>
+				</div>
+			</div>
+			<div class="panels mb-0 pb-0">
+				<div class="panel" id="one-panel">
+					<div class="card-body pt-0 mb-0">
+						<div class="card-header mt-1" style="height:40px">
+							<div class="float-left">
+								<h6 style="font-size: 1.2rem; color: white;height:50px;">Check List</h6>
+							</div>
+
+						</div>
+						<div>
+							<div > 
+								<div class="col-sm-4">
+
+									<label class="checkbox-label"> <span class="label-text" id="label1">1. MERCHANT
+											DETAILS</span> <input type="checkbox" value="" name="cpb.chlist2"
+											id="chlist2" class="chl" onclick="updateSerial(this, 'label1', 'sr1')">
+										<span class="aln" name="minimal_data" id="sr1"></span>
+										<!-- Span for serial number -->
+									</label> <br> <label class="checkbox-label"> <span class="label-text" id="label2">2.
+											MERCHANT CONTACT
+											DETAILS</span> <input type="checkbox" value="" name="cpb.chlist3"
+											id="chlist3" class="chl" onclick="updateSerial(this, 'label2', 'sr2')">
+										<span class="aln" name="customer_checks" id="sr2"></span>
+									</label> <br> <label class="checkbox-label"> <span class="label-text" id="label3">3.
+											OUTLET DETAILS</span> <input type="checkbox" value="" name="cpb.chlist4"
+											id="chlist4" class="chl" onclick="updateSerial(this, 'label3', 'sr3')">
+										<span class="aln" name="customer_information" id="sr3"></span>
+									</label> <br> <label class="checkbox-label"> <span class="label-text" id="label4">4.
+											MAUCAS</span> <input type="checkbox" value="" name="cpb.chlist5"
+											id="chlist5" class="chl" onclick="updateSerial(this, 'label4', 'sr4')">
+										<span class="aln" name="account_information" id="sr4"></span>
+									</label><br> <label class="checkbox-label"> <span class="label-text" id="label5">5.
+											UPI</span> <input type="checkbox" value="" name="cpb.chlist6" id="chlist6"
+											class="chl" onclick="updateSerial(this, 'label5', 'sr5')">
+										<span class="aln" name="documents_upload" id="sr5"></span>
+									</label><br> <label class="checkbox-label"> <span class="label-text" id="label6">6.
+											DOCUMENT DETAILS</span> <input type="checkbox" value="" name="cpb.chlist7"
+											id="chlist7" class="chl" onclick="updateSerial(this, 'label6', 'sr6')">
+										<span class="aln" name="signature_capture" id="sr6"></span>
+									</label><br> <label class="checkbox-label"> <span class="label-text" id="label7">7.
+											SIGNATURE DETAILS</span> <input type="checkbox" value="" name="cpb.chlist6"
+											id="chlist6" class="chl" onclick="updateSerial(this, 'label7', 'sr7')">
+										<span class="aln" name="photo_upload" id="sr7"></span>
+									</label> <br> <label class="checkbox-label"> <span class="label-text" id="label8">8.
+											BANK DETAILS</span> <input type="checkbox" value="" name="cpb.chlist7"
+											id="chlist7" class="chl" onclick="updateSerial(this, 'label8', 'sr8')">
+										<span class="aln" name="aof" id="sr8"></span>
+									</label> <br> <label class="checkbox-label"> <span class="label-text" id="label9">9.
+											FEES DETAILS
+										</span> <input type="checkbox" value="" name="cpb.chlist8" id="chlist8"
+											class="chl" onclick="updateSerial(this, 'label9', 'sr9')"> <span class="aln"
+											name="submission_approval" id="sr9"></span>
+									</label><br>
+									<label class="checkbox-label"> <span class="label-text" id="label1">10. UNIT
+											MANAGEMENT</span> <input type="checkbox" value="" name="cpb.chlist2"
+											id="chlist2" class="chl" onclick="updateSerial(this, 'label1', 'sr1')">
+										<span class="aln" name="minimal_data" id="sr1"></span>
+										<!-- Span for serial number -->
+									</label> <br>
+									<label class="checkbox-label"> <span class="label-text" id="label1">11. USER
+											MANAGEMENT</span> <input type="checkbox" value="" name="cpb.chlist2"
+											id="chlist2" class="chl" onclick="updateSerial(this, 'label1', 'sr1')">
+										<span class="aln" name="minimal_data" id="sr1"></span>
+										<!-- Span for serial number -->
+									</label> <br>
+									<label class="checkbox-label"> <span class="label-text" id="label1">12. DEVICE
+											MANAGEMENT</span> <input type="checkbox" value="" name="cpb.chlist2"
+											id="chlist2" class="chl" onclick="updateSerial(this, 'label1', 'sr1')">
+										<span class="aln" name="minimal_data" id="sr1"></span>
+										<!-- Span for serial number -->
+									</label> <br>
+
+								</div>
+							</div>
+						</div>
+						<div class="card-header" style="height:40px">
+							<div class="float-left" style="margin-bottom:-15px">
+								<h6 style="font-size: 1.2rem; color: white;margin-bottom:-15px">Document Details</h6>
+							</div>
+						</div>
+						<div class="mt-1 mb-0">
+							<table class="table table-bordered" style="width: 100%; border-color: black;">
+								<thead style="font-size: 13px;">
+									<tr>
+										<th>Document Category</th>
+										<th>Document Code</th>
+										<th>Document Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><select name="documents_type1" id="documents_type1" class="form-control doc"
+												onchange="updateDocumentDescription(1)">
+												<option value="">Select</option>
+												<option value="Customer">Customer</option>
+												<option value="Account">Account</option>
+											</select></td>
+										<td><select class="form-control doc" name="documents_desc1" id="documents_desc1"
+												onchange="updateDocumentCode(1)">
+												<option value="">Select</option>
+												<option value="NIC">NIC</option>
+												<option value="PSP">PSP</option>
+												<option value="BRN">BRN</option>
+												<option value="COR">COR</option>
+											</select></td>
+										<td><input class="form-control doc" name="documents_code1" id="documents_code1"
+												type="text" style="height: 10%;"></td>
+									</tr>
+									<tr>
+										<td><select name="documents_type1" id="documents_type1" class="form-control doc"
+												onchange="updateDocumentDescription(2)">
+												<option value="">Select</option>
+												<option value="Customer">Customer</option>
+												<option value="Account">Account</option>
+											</select></td>
+										<td><select class="form-control doc" name="documents_desc2" id="documents_desc2"
+												onchange="updateDocumentCode(2)">
+												<option value="">Select</option>
+												<option value="NIC">NIC</option>
+												<option value="PSP">PSP</option>
+												<option value="BRN">BRN</option>
+												<option value="COR">COR</option>
+											</select></td>
+										<td><input class="form-control doc" name="documents_code2" id="documents_code2"
+												type="text" style="height: 10%;"></td>
+									</tr>
+									<tr>
+										<td><select name="documents_type1" id="documents_type1" class="form-control doc"
+												onchange="updateDocumentDescription(3)">
+												<option value="">Select</option>
+												<option value="Customer">Customer</option>
+												<option value="Account">Account</option>
+											</select></td>
+										<td><select class="form-control doc" name="documents_desc3" id="documents_desc3"
+												onchange="updateDocumentCode(3)">
+												<option value="">Select</option>
+												<option value="NIC">NIC</option>
+												<option value="PSP">PSP</option>
+												<option value="BRN">BRN</option>
+												<option value="COR">COR</option>
+											</select></td>
+										<td><input class="form-control doc" name="documents_code3" id="documents_code3"
+												type="text" style="height: 10%;"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer text-center">
+				<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+					onclick="home();">Home</button>
+				<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+					onclick="back();">Back</button>
+			</div>
+		</div>
+	</div>
+	<div>
+	</div>
+
+	</div>
+	<!------------------------------------------------------------- Modal ------------------------------------------------------------>
+	<div class="modal fade" id="alert">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
+						OF BARODA</div>
+				</div>
+				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+					<p style="color: #000;" id="alertmsg"></p>
+					<button type="button" class="btn btn-primary" onclick="$('#alert').modal('hide');"
+						th:att>Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	</div>
+</body>
+
+</html>
