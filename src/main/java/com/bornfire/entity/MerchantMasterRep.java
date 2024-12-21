@@ -56,6 +56,13 @@ public interface MerchantMasterRep extends JpaRepository<MerchantMaster, String>
 	@Query(value = "SELECT MERCHANT_NAME from merchant_master_table WHERE MERCHANT_ID=?1", nativeQuery = true)
 	String getMerchantName(String merchantId);
 	
-	
+	@Query(
+		    value = "SELECT * FROM MERCHANT_MASTER_TABLE WHERE del_flg = 'N' AND hr_holdreject_flg = 'N' " +
+		            "UNION ALL " +
+		            "SELECT * FROM MERCHANT_MASTER_TABLE_MOD WHERE entity_flg = 'N' AND hr_holdreject_flg = 'N'",
+		    nativeQuery = true
+		)
+		List<MerchantMaster> findAllDataHr();
+
 
 }

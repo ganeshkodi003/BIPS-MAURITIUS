@@ -23,4 +23,11 @@ public interface MerchantMasterModRep extends JpaRepository<MerchantMasterMod, S
 	
 	@Query(value = "SELECT COUNT(*) AS merchant_id FROM merchant_master_table_mod", nativeQuery = true)
 	Integer getMerCount();
+	
+	@Query(value = "SELECT MAX(TO_NUMBER(numeric_part)) AS max_numeric_part FROM (SELECT REGEXP_REPLACE(MERCHANT_ID, '[^[:digit:]]', '') AS numeric_part FROM MERCHANT_MASTER_TABLE_MOD)\r\n"
+			+ "", nativeQuery = true)
+	String getMerID();
+	
+	@Query(value = "SELECT * FROM MERCHANT_MASTER_TABLE_MOD WHERE hr_status IN ('HOLD', 'REJECT') and hr_holdreject_flg='Y'", nativeQuery = true)
+	List<MerchantMasterMod> holdrejectlist();
 }

@@ -82,6 +82,7 @@ import com.bornfire.entity.BankAgentTableRep;
 import com.bornfire.entity.BankAgentTmpTableRep;
 import com.bornfire.entity.BankAndBranchBean;
 import com.bornfire.entity.BankAndBranchRepository;
+import com.bornfire.entity.DocumentMaster_Repo;
 import com.bornfire.entity.IPSAccessRole;
 import com.bornfire.entity.IPSAuditTable;
 import com.bornfire.entity.IPSAuditTableRep;
@@ -107,6 +108,7 @@ import com.bornfire.entity.ReferenceCodeRep;
 import com.bornfire.entity.SettlementAccountRepository;
 import com.bornfire.entity.Sign_Master_Entity;
 import com.bornfire.entity.Sign_Master_Repo;
+import com.bornfire.entity.SlabRateRepo;
 import com.bornfire.entity.Two_factor_auth;
 import com.bornfire.entity.Twofactorauth;
 import com.bornfire.entity.UserProfile;
@@ -263,6 +265,13 @@ public class MainController {
 	
 	@Autowired
 	Sign_Master_Repo Sign_Master_Repo;
+	
+	@Autowired
+	DocumentMaster_Repo documentMaster_Repo;
+	
+	@Autowired
+	SlabRateRepo slabRateRepo;
+	
 
 	private String pagesize;
 
@@ -1035,6 +1044,7 @@ public class MainController {
 	// Merchant Master
 	// ****************************
 
+
 	int count = 0;
 
 	@RequestMapping(value = "merchantReg2")
@@ -1051,7 +1061,7 @@ public class MainController {
 			@ModelAttribute MerchantMaster bankAgentTable, Model md, HttpServletRequest req,
 			@RequestParam(required = false) String acctcode,
 			@RequestParam(value = "tranDate", required = false) String date, String Id, String mer_user_id_r1,
-			String merchant_rep_id, String unit_id)
+			String merchant_rep_id, String unit_id, Object msg)
 			throws FileNotFoundException, SQLException, IOException, ParseException {
 
 		String userID = (String) req.getSession().getAttribute("USERID");
@@ -1074,17 +1084,29 @@ public class MainController {
 
 		if (formmode == null || formmode.equals("list")) {
 			md.addAttribute("formmode", "list");
-			md.addAttribute("bankDetail", merchantMasterRep.ALLDATA());
+			md.addAttribute("bankDetail", merchantMasterRep.findAllDataHr());
 		} else if (formmode.equals("add")) {
 			md.addAttribute("tranDate", tranDate);
 			md.addAttribute("formmode", formmode);
+
+			String merid = merchantMasterModRep.getMerID();
+			String MerchantId;
+			if (merid != null) {
+				MerchantId = String.valueOf(Integer.valueOf(merid) + 1);
+			} else {
+				MerchantId = "M001";
+			}
+			md.addAttribute("MerchantID", MerchantId);
+
+			md.addAttribute("SlabRate", slabRateRepo.GetList());
 			md.addAttribute("merchantcategory", merchantCategoryRep.findAllCustom());
 			md.addAttribute("bankAgentName", bankAgentTableRep.findByCustomBankName());
 			md.addAttribute("feeDesc", merchantChargesAndFeesRep.findAllCustomNew());
 			md.addAttribute("BIPSMerchantnum", merchantServices.generateBIPSNumber());
-			// md.addAttribute("branchDet", merchantMasterRep.findAllCustom());
+			md.addAttribute("branchDet", merchantMasterRep.findAllCustom());
 			// Reference Code Table
 			md.addAttribute("CountryCode", referenceCodeRep.getReferenceList("CC01"));
+			md.addAttribute("CurrencyCode", referenceCodeRep.getReferenceList("CC02"));
 			md.addAttribute("Merchant_mode", referenceCodeRep.getReferenceList("MM01"));
 			md.addAttribute("Merchant_city", referenceCodeRep.getReferenceList("MM02"));
 			md.addAttribute("Merchant_notification", referenceCodeRep.getReferenceList("MM03"));
@@ -1093,6 +1115,7 @@ public class MainController {
 			md.addAttribute("formmode", formmode);
 			md.addAttribute("branchDet", merchantMasterRep.findByIdCustom(merchant_acct_no));
 			md.addAttribute("merchant_acct_no", merchant_acct_no);
+			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
 			// md.addAttribute("merchantFeeDetailses",
 			// merchantMasterRep.findByIdCustomvals(merchant_acct_no));
 			md.addAttribute("merchantFeeDetailses", merchantFeesServiceRepo.merchantDetails(merchant_acct_no));
@@ -1102,16 +1125,14 @@ public class MainController {
 			md.addAttribute("MerchantIdUse", merchant_acct_no);
 			md.addAttribute("MerchantNaUse", merchant_nam);
 			md.addAttribute("MerchantUnit", bIPS_UnitManagement_Repo.getUnitlist(merchant_acct_no));
-			md.addAttribute("MerchantUnitCount", bIPS_UnitManagement_Repo.getUnitlist(merchant_acct_no).size());
 			md.addAttribute("pro", bIPS_MerUserManagement_Repo.getUserManage1(merchant_acct_no));
-			md.addAttribute("proCount", bIPS_MerUserManagement_Repo.getUserManage1(merchant_acct_no).size());
 			md.addAttribute("MerchantDevi", bIPS_MerDeviceManagement_Repo.getaddDevice(merchant_acct_no));
-			md.addAttribute("MerchantDeviCount", bIPS_MerDeviceManagement_Repo.getaddDevice(merchant_acct_no).size());
 			md.addAttribute("propass", bIPS_PasswordManagement_Repo.getPassmer(merchant_acct_no));
 		} else if (formmode.equals("viewnew")) {
 			md.addAttribute("formmode", formmode);
 			md.addAttribute("branchDet", merchantMasterModRep.findByIdCustom(merchant_acct_no));
 			md.addAttribute("merchant_acct_no", merchant_acct_no);
+			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
 			// md.addAttribute("merchantFeeDetailses",
 			// merchantMasterModRep.findByIdCustom(merchant_acct_no));
 			md.addAttribute("merchantFeeDetailses", merchantFeesServiceRepo.merchantDetailsFromMod(merchant_acct_no));
@@ -1145,12 +1166,14 @@ public class MainController {
 			md.addAttribute("Merchant_city", referenceCodeRep.getReferenceList("MM02"));
 			md.addAttribute("Merchant_notification", referenceCodeRep.getReferenceList("MM03"));
 			md.addAttribute("Merchant_type", referenceCodeRep.getReferenceList("MM04"));
+			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
 		} else if (formmode.equals("delete")) {
 			md.addAttribute("formmode", formmode);
 			md.addAttribute("merchantFeeDetailses", merchantMasterModRep.findByIdCustom(merchant_acct_no));
 			md.addAttribute("branchDet", merchantMasterModRep.findByIdCustom(merchant_acct_no));
 			md.addAttribute("merchant_acct_no", merchant_acct_no);
 			md.addAttribute("merchantFeeDetails", merchantFeesServiceRepo.merchantDetails(merchant_acct_no));
+			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
 		} else if (formmode.equals("verify")) {
 			md.addAttribute("Merchant_mode", referenceCodeRep.getReferenceList("MM01"));
 			md.addAttribute("Merchant_city", referenceCodeRep.getReferenceList("MM02"));
@@ -1164,6 +1187,7 @@ public class MainController {
 			md.addAttribute("branchDets", bIPS_UnitManagement_Repo.getUnitlist(merchant_acct_no));
 			md.addAttribute("branchDetsunit", bIPS_UnitManagement_Repo.getUnitlist(merchant_acct_no));
 			md.addAttribute("CountryCode", referenceCodeRep.getReferenceList("CC01"));
+			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
 		} else if (formmode.equals("upload")) {
 			md.addAttribute("formmode", formmode);
 			md.addAttribute("menuname", " Merchant -Upload");
@@ -1272,6 +1296,11 @@ public class MainController {
 			md.addAttribute("formmode", "UnitVerify");
 			md.addAttribute("user_id", userID);
 			md.addAttribute("MerUnit", bIPS_UnitManagement_Repo.getUnitId(unit_id));
+		} else if (formmode.equals("UploadFile")) {
+			md.addAttribute("formmode", "UploadFile");
+		} else if (formmode.equals("HoldReject")) {
+			md.addAttribute("formmode", "HoldReject");
+			md.addAttribute("bankDetail", merchantMasterModRep.holdrejectlist());
 		}
 		return "IPSMerchantMaster";
 	}
