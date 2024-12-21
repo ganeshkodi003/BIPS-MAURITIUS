@@ -468,7 +468,8 @@ button, input, optgroup, select, textarea {
 }
 
 button, input {
-	overflow: visible
+	overflow: visible;
+	background-color: white;
 }
 
 button, select {
