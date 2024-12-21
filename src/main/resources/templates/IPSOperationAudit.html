@@ -17,6 +17,31 @@
 <script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
 <style>
+
+.filterable .filters input[disabled] {
+	background-color: transparent;
+	border: none;
+	cursor: auto;
+	box-shadow: none;
+	padding: 0;
+	height: auto;
+}
+
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]::-moz-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]:-ms-input-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
 td {
 	background-color: #f8f7ff;
 }
@@ -203,15 +228,89 @@ label {
 		});
 	}
 </script>
+
+<script type="text/javascript">
+$(document)
+.ready(
+	function () {
+		$('.filterable .btn-filter')
+			.click(
+				function () {
+					var $panel = $(this).parents(
+						'.filterable'), $filters = $panel
+							.find('.filters input'), $tbody = $panel
+								.find('.table tbody');
+					if ($filters.prop('disabled') == true) {
+						$filters
+							.prop('disabled', false);
+						$filters.first().focus();
+					} else {
+						$filters.val('').prop(
+							'disabled', true);
+						$tbody.find('.no-result')
+							.remove();
+						$tbody.find('tr').show();
+					}
+				});
+
+		$('.filterable .filters input')
+			.keyup(
+				function (e) {
+					/* Ignore tab key */
+					var code = e.keyCode || e.which;
+					if (code == '9')
+						return;
+					/* Useful DOM data and selectors */
+					var $input = $(this), inputContent = $input
+						.val().toLowerCase(), $panel = $input
+							.parents('.filterable'), column = $panel
+								.find('.filters th')
+								.index($input.parents('th')), $table = $panel
+									.find('.table'), $rows = $table
+										.find('tbody tr');
+					/* Dirtiest filter function ever ;) */
+					var $filteredRows = $rows
+						.filter(function () {
+							var value = $(this)
+								.find('td').eq(
+									column)
+								.text()
+								.toLowerCase();
+							return value
+								.indexOf(inputContent) === -1;
+						});
+					/* Clean previous no-result if exist */
+					$table.find('tbody .no-result')
+						.remove();
+					/* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+					$rows.show();
+					$filteredRows.hide();
+					/* Prepend no-result row if all rows are filtered */
+					if ($filteredRows.length === $rows.length) {
+						$table
+							.find('tbody')
+							.prepend(
+								$('<tr class="no-result text-center"><td colspan="'
+									+ $table
+										.find('.filters th').length
+									+ '">No Record found</td></tr>'));
+					}
+				});
+	});
+</script>
 <title>IPS</title>
 
 <body>
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager pt-3">
-		<div class="card">
-			<div class="card-header">
-				<div class="d-flex justify-content-between align-items-center">
-					<h4 style="color: white; font-size: 1.4rem;" th:text="${menuname}"></h4>
+		<div class="card panel panel-primary filterable">
+			<div class="card-header dispayflexpropty  p-1">
+			<h4 class="headerh6" th:text="${menuname}"></h4>
+				<div class="ml-auto d-flex align-items-center">
+					 <div class="d-flex align-items-center mr-3">
+                        <label for="Fromdate" class="mr-2 col-sm-7">Search records By Date:</label>
+                        <input type="text" id="Fromdate" th:value="${Fromdate}" class="form-control form-control-sm" name="cust_id" autocomplete="off" readonly />
+                    </div>
 					<div class="dropdown btnDownload">
 						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" title="Action"
 							style="line-height: 0.7; font-size: 18px; color: #162b75; font-weight: 700; background: #e3e3e4; padding: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -228,30 +327,46 @@ label {
 							>Excel</a>
 						</div>
 					</div>
+					<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
 				</div>
+				
 			</div>
 			<div class="card-body p-0">
-				<div class="row formline ml-2 mt-2">
-					<div class="col-sm-2 d-flex align-items-center">
-						<label for="CUSTID">Search records By Date :</label>
-					</div>
-					<div class="col-sm-2">
-						<input type="text" id="Fromdate" th:value="${Fromdate}" class="form-control form-control-sm" name="cust_id" autocomplete="off" readonly />
-					</div>
-				</div>
-				<table class="table table-striped table-bordered table-hover" id="usertable">
+
+				<table class="table table-striped table-bordered table-hover" id="">
 					<thead>
-						<tr>
-							<th style="width: 8%">Audit Date</th>
-							<th>Table Name</th>
-							<th style="width: 12%">Function</th>
-							<th>Enterer</th>
-							<th>Entry Time</th>
-							<th>Authorizer</th>
-							<th>Field Name</th>
-							<th>Old Value</th>
-							<th>New Value</th>
-							<th>Remarks</th>
+						<tr class="filters">
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Audit Date"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Table Name"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Function"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Enterer"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Entry Time"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Authorizer"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Field Name"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Authorizer"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Old Value"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="New Value"
+								disabled></th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -279,8 +394,8 @@ label {
 				</table>
 			</div>
 			<div class="card-footer text-center">
-				<button type="button" class="btn btn-xs mr-2" id="btnHome" onclick="home();">Home</button>
-				<button type="button" class="btn btn-xs" id="btnBack" onclick="back();">Back</button>
+				<button type="button" class="btn btn-xs mr-2 headerbutton" id="" onclick="home();">Home</button>
+				<button type="button" class="btn btn-xs headerbutton" id="" onclick="back();">Back</button>
 			</div>
 		</div>
 	</div>

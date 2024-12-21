@@ -146,8 +146,8 @@ $(document)
 	<div class="container-manager pt-3">
 		<div th:if="${formmode}=='list'">
 			<div class="card panel panel-primary filterable">
-				<div class="card-header dispayflexpropty">
-				<h6 style="font-size: 25px; color: white; font-weight: 700;">Settlement Account</h6>
+				<div class="card-header p-1 dispayflexpropty">
+				<h6 class="headerh6">Settlement 	</h6>
 					<div class="">
 						
 					<button type="button" class="btn btn-sm headerbutton" id="addBtn" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'" onclick="AddModal(this)" title="Add">Add</button>
@@ -236,8 +236,8 @@ $(document)
 					</table>
 				</div>
 				<div class="card-footer text-center">
-					<button type="button" class="btn btn-sm mr-2" id="btnHome" onclick="home();">Home</button>
-					<button type="button" class="btn btn-sm" id="btnBack" onclick="back();">Back</button>
+					<button type="button" class="btn btn-sm mr-2 headerbutton" id="" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm headerbutton" id="" onclick="back();">Back</button>
 				</div>
 			</div>
 		</div>

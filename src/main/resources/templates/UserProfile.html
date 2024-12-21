@@ -723,7 +723,7 @@ $(document)
 
 		<!-- User Edit form Start -->
 
-		<div class="pt-3" th:if="${formmode}=='view' OR ${formmode}=='add' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='verify'  OR ${formmode}=='viewnew'" style="margin-left:400px;width:1500px">
+		<div class="pt-3" th:if="${formmode}=='view' OR ${formmode}=='add' OR ${formmode}=='cancel' OR ${formmode}=='edit' OR ${formmode}=='delete' OR ${formmode}=='verify'  OR ${formmode}=='viewnew'"style="margin-left:400px;width:1500px;margin-top:-15px">
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="card">
@@ -731,13 +731,13 @@ $(document)
 							<div class="card-header">
 								<div class="d-flex justify-content-between align-items-center">
 									<div>
-										<h3 th:if="${formmode}=='add'" style="font-size: 25px; color: white; font-weight: 700;">User Profile - Add</h3>
-										<h3 th:if="${formmode}=='edit'" style="font-size: 25px; color: white; font-weight: 700;">User Profile - Modify</h3>
-										<h3 th:if="${formmode}=='view'" style="font-size: 25px; color: white; font-weight: 700;">User Profile - View</h3>
-										<h3 th:if="${formmode}=='viewnew'" style="font-size: 25px; color: white; font-weight: 700;">User Profile - View</h3>
-										<h3 th:if="${formmode}=='verify'" style="font-size: 25px; color: white; font-weight: 700;">User Profile - Verify</h3>
-										<h3 th:if="${formmode}=='delete'" style="font-size: 25px; color: white; font-weight: 700;">User Profile - Delete</h3>
-										<h3 th:if="${formmode}=='cancel'" style="font-size: 25px; color: white; font-weight: 700;">User Profile - Cancel</h3>
+										<h3 th:if="${formmode}=='add'" class="headerh6">User Profile - Add</h3>
+										<h3 th:if="${formmode}=='edit'" class="headerh6">User Profile - Modify</h3>
+										<h3 th:if="${formmode}=='view'" class="headerh6">User Profile - View</h3>
+										<h3 th:if="${formmode}=='viewnew'" class="headerh6">User Profile - View</h3>
+										<h3 th:if="${formmode}=='verify'" class="headerh6">User Profile - Verify</h3>
+										<h3 th:if="${formmode}=='delete'" class="headerh6">User Profile - Delete</h3>
+										<h3 th:if="${formmode}=='cancel'" class="headerh6">User Profile - Cancel</h3>
 									</div>
 									<button type="button" class="btn btn-xs commonBtnStyle" id="btnInq" onclick="list();">List</button>
 								</div>
@@ -1027,7 +1027,7 @@ $(document)
 									</div>
 									<!-- <br>
 									<div class="card-header">
-										<h4 style="font-size: 25px; color: white; font-weight: 700;">Role and Rights</h4>
+										<h4 class="headerh6">Role and Rights</h4>
 									</div>
 									<br> -->
 									<label></label>
