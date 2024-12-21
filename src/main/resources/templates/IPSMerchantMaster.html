@@ -6,7 +6,10 @@
 <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
 <link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
-
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/signature_pad/dist/signature-pad.css">
+	<script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
+	<script src="https://cdn.jsdelivr.net/npm/signature_pad"></script>
+	<link rel="stylesheet" href="css/signature-pad.css">
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
 <script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
@@ -20,6 +23,9 @@
 
 
 	<style type="text/css">
+	.rowDataField{
+	background-color: white !important;
+	}
 		.signature-pad {
 			margin: auto;
 			height: auto;
@@ -11962,7 +11968,7 @@ function updateMerchant(value) {
 														class="table table-bordered SlabRateTable"
 														style="text-align: center; vertical-align: 22px; margin-top: 10px; font-size: 15px;">
 														<thead>
-															<tr>
+															<tr class="fw-bold">
 
 																<th>Document Type</th>
 																<th>Document Code</th>
@@ -11989,7 +11995,7 @@ function updateMerchant(value) {
 																	class="rowDataField">18-JUN-2018</td>
 																<td th:text="${Doocument?.expiry_date}"
 																	class="rowDataField">15-JUN-2023</td>
-																<td
+																<td class="rowDataField"
 																	th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
 																	<img th:src=@{/images/info.png}
 																		style="width: 30px; height: 30px"
@@ -11998,7 +12004,7 @@ function updateMerchant(value) {
 																		data-toggle="modal"
 																		data-target=".bd-example-modal-lg">
 																</td>
-																<td
+																<td class="rowDataField"
 																	th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
 																	<a th:href="@{'/' + ${Doocument?.unique_id}}"
 																		style="text-decoration: none; color: DodgerBlue;">
@@ -12428,7 +12434,7 @@ function updateMerchant(value) {
 													readonly>
 											</div>
 										</div>
-										<div
+										<div class="mt-2"
 											style="background-color: white; color: #332d2d; display: flex; justify-content: space-between; align-items: center;">
 											<div>
 												<h6 style="font-size: 1.2rem; font-weight: bold;">UNIT
@@ -12565,13 +12571,13 @@ function updateMerchant(value) {
 													readonly>
 											</div>
 										</div>
-										<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
-										<div class="float-left">
+										<div class="MT-2" style="background-color: white; color: #332d2d;display: flex; justify-content: space-between; align-items: center; ">
+										<div>
 											<h6 style="font-size: 1.2rem; font-weight: bold;">USER
 													MANAGEMENT</h6>
 											</div>
-											<div class="btn-group nav-buttons float-right">
-												<button type="button" class="btn btn-sm btn-primary commonBtnStyle" id="btnAdd"
+											<div>
+												<button type="button" class="btn btn-sm btn-primary colorclass" id="btnAdd"
 													style="margin-top: -5px" onclick="addUserm(this);">Add User</button>
 											</div>
 										</div>
@@ -12683,13 +12689,13 @@ function updateMerchant(value) {
 													readonly>
 											</div>
 										</div>
-										<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="mt-2" style="background-color: white; color: #332d2d; display: flex;justify-content: space-between; align-items: center;  ">
 										<div class="float-left">
 											<h6 style="font-size: 1.2rem; font-weight: bold;">DEVICE
 													MANAGEMENT</h6>
 											</div>
 											<div class="btn-group nav-buttons float-right">
-												<button type="button" class="btn btn-sm btn-primary commonBtnStyle" id="btnAdd"
+												<button type="button" class="btn btn-sm btn-primary colorclass" id="btnAdd"
 													onclick="addDevicem(this);">Add Device</button>
 											</div>
 
@@ -12801,7 +12807,7 @@ function updateMerchant(value) {
 											</div>
 										</div>
 
-										<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="mt-2" style="background-color: white; color: #332d2d; display: flex; ">
 										<div class="float-left">
 											<h6 style="font-size: 1.2rem; font-weight: bold;">PASSWORD
 													MANAGEMENT</h6>

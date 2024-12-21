@@ -2676,7 +2676,7 @@ pre code {
 }
 
 .form-control:focus {
-	color: #fff;
+	color: black;
 	 
 	border-color: #546270;
 	outline: 0;
@@ -16104,7 +16104,9 @@ input {
 	font-size:16px;
 	border-radius:5px;
 }
-	
+	.table.dataTable tbody th, table.dataTable tbody td{
+	padding:8px 18px !important;
+	}
 	
 	
 }
