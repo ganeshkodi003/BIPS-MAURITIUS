@@ -607,17 +607,7 @@
 		#country-list {
 			min-width: 60px;
 		}
-input.form-control {
-
-    background-color: #f8f9fa; /* Change background color */
-
-}
-select.form-control {
-
-    background-color: #f8f9fa; /* Change background color */
-
-}
-
+ 
 
 
 
@@ -7376,8 +7366,7 @@ function updateMerchant(value) {
 										</div>
 
 										<div class="col-sm-1" style="margin-left:95.4rem">
-											<button type="button" class="btn btn-sm btn-primary " style="background-color:#f26223;font-size:16px;"
-												id="amlcheckMerchantbutton" onclick="AMLCheckMerchant();">AML
+											<button type="button" class="btn btn-sm btn-primary colorclass"	id="amlcheckMerchantbutton" onclick="AMLCheckMerchant();">AML
 												Check</button>
 										</div>
 
@@ -7480,7 +7469,7 @@ function updateMerchant(value) {
 												<td colspan="2">
 
 
-													<button type="button" class="btn btn-sm btn-primary " style="background-color:#f26223;font-size:16px;"
+													<button type="button" class="btn btn-sm btn-primary colorclass " 
 														id="amlcheckContactbutton" onclick="AMLCheckContact();">AML
 														Check</button>
 
@@ -12439,16 +12428,18 @@ function updateMerchant(value) {
 													readonly>
 											</div>
 										</div>
-										<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
-										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">UNIT
+										<div
+											style="background-color: white; color: #332d2d; display: flex; justify-content: space-between; align-items: center;">
+											<div>
+												<h6 style="font-size: 1.2rem; font-weight: bold;">UNIT
 													MANAGEMENT</h6>
 											</div>
-											<div class="btn-group nav-buttons float-right">
-												<button type="button" class="btn btn-sm btn-primary commonBtnStyle" id="btnAdd"
-													onclick="addUnitm(this);">Add Unit</button>
+											<div class="btn-group nav-buttons">
+												<button type="button" class="btn btn-sm btn-primary colorclass"
+													id="btnAdd" onclick="addUnitm(this);">Add Unit</button>
 											</div>
 										</div>
+
 										<div>
 											<table class="table table-striped table-bordered  table-hover table-sm"
 												id="usertablepw" style="table-layout: fixed; width: 100%;">
@@ -21308,7 +21299,7 @@ function updateMerchant(value) {
 					<label></label>
 					<div class="row">
 						<div class="col text-center">
-							<button type="button" class="btn btn-primary commonBtnStyle" onclick="generateQRCodeStatic();">Generate
+							<button type="button" class="btn btn-primary " style="background-color:#f26223;font-size:16px;" onclick="generateQRCodeStatic();">Generate
 								QR</button>
 						</div>
 					</div>
@@ -22472,6 +22463,7 @@ function updateMerchant(value) {
 	function AppendTerminalid(unitId, a) {
 		var merchantId = a.getAttribute("data-bank_code");
 		console.log(merchantId, unitId)
+
 		$.ajax({
 			url: './getMerchantTerminalId?merchantId=' + merchantId + '&unitId=' + unitId,
 

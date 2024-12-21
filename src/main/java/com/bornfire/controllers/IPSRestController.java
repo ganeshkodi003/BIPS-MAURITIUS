@@ -1953,4 +1953,16 @@ public class IPSRestController {
 			return msg;
 		}
 
+		@RequestMapping(value = "getMerchantTerminalId", method = RequestMethod.GET)
+		public List<String> getMerchantTerminalId(@RequestParam(required = false) String merchantId,
+				@RequestParam(required = false) String unitId) {
+			System.out.println(merchantId + "hhhhhhhhhhhhhhhhhhhhhhhh" + unitId);
+
+			List<String> terminalIds = bIPS_MerDeviceManagement_Repo.getTerminalId(merchantId, unitId);
+
+			System.out.println(terminalIds.toString());
+
+			return terminalIds;
+		}
+
 }

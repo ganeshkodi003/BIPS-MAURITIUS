@@ -30,4 +30,8 @@ public interface BIPS_MerDeviceManagement_Repo extends JpaRepository<BIPS_Mer_De
 
 	@Query(value = "select * from BIPS_MERCHANT_DEVICE_MANAGEMENT where merchant_user_id=?1", nativeQuery = true)
 	List<BIPS_Mer_Device_Management_Entity> getUnDeleteRecord(String merchant_user_id);
+	
+	@Query(value = "SELECT TERMINAL_ID FROM BIPS_MERCHANT_DEVICE_MANAGEMENT WHERE merchant_user_id = ?1 AND unit_id_d = ?2", nativeQuery = true)
+	List<String> getTerminalId(String merchantId, String unitId);
+
 }

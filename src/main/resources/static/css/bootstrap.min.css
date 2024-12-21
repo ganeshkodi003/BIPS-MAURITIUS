@@ -2650,7 +2650,7 @@ pre code {
 	font-weight: 400;
 	line-height: 1.5;
 	color: #2b2727;
-	background-color: #dee2e6;
+	
 	background-clip: padding-box;
 	border: 1px solid #495561;
 	border-radius: .2rem;
@@ -2677,7 +2677,7 @@ pre code {
 
 .form-control:focus {
 	color: #fff;
-	background-color: #495561;
+	 
 	border-color: #546270;
 	outline: 0;
 	-webkit-box-shadow: none;
@@ -16070,7 +16070,10 @@ label {
 }
 
 .paginate_button a{
-	background: #162b75 !important;
+	background: #f26223 !important;
+	color:white !important;
+	border: unset;
+	
 }
 
 input {
@@ -16092,6 +16095,16 @@ input {
 	margin-bottom: 0;
 }
 .modal-footer{
-	
 	background: #f26223 !important;
+}
+
+
+.colorclass{
+	background-color:#f26223;
+	font-size:16px;
+	border-radius:5px;
+}
+	
+	
+	
 }
