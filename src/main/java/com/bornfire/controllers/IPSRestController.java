@@ -90,11 +90,13 @@ import com.bornfire.entity.MerchantMaster;
 import com.bornfire.entity.MerchantMasterMod;
 import com.bornfire.entity.MerchantMasterModRep;
 import com.bornfire.entity.MerchantMasterRep;
+import com.bornfire.entity.MerchantQRRegistration;
 import com.bornfire.entity.SettlementAccount;
 import com.bornfire.entity.Sign_Master_Entity;
 import com.bornfire.entity.Sign_Master_Repo;
 import com.bornfire.entity.UserProfile;
 import com.bornfire.entity.UserProfileRep;
+import com.bornfire.entity.cimMerchantQRcodeResponse;
 import com.bornfire.exception.Connect24Exception;
 import com.bornfire.exception.ErrorResponseCode;
 import com.bornfire.exception.ServerErrorException;
@@ -103,9 +105,11 @@ import com.bornfire.services.BankAndBranchMasterServices;
 import com.bornfire.services.Connect24Service;
 import com.bornfire.services.ExcelPdfDownloadService;
 import com.bornfire.services.IPSAccessRoleService;
+import com.bornfire.services.IPSServices;
 import com.bornfire.services.LoginSecurityServices;
 import com.bornfire.services.MandateServices;
 import com.bornfire.services.SettlementAccountServices;
+import com.google.zxing.WriterException;
 
 import net.sf.jasperreports.engine.JRException;
 
@@ -209,6 +213,9 @@ public class IPSRestController {
 	
 	@Autowired
 	DocumentMaster_Repo documentMaster_Repo;
+	
+	@Autowired
+	IPSServices ipsServices;
 
 
 	@RequestMapping(value = "TransactionDownload", method = RequestMethod.GET)
@@ -1964,5 +1971,70 @@ public class IPSRestController {
 
 			return terminalIds;
 		}
+		
+		@GetMapping(path = "/getstaticqrcodeMerchantMaucasNewFormat/{acct_num}")
+//		@RequestMapping(value = "/getstaticqrcodeMerchantMaucas/{acct_num}", method = RequestMethod.GET)
+		public String getstaticqrcodeMerchantMaucasNewFormat(@PathVariable("acct_num") String acct_num, Model md)
+				throws IOException, WriterException {
+
+			MerchantMaster ms = merchantMasterRep.findByIdCustom(acct_num);
+			MerchantQRRegistration merchantQRgenerator = new MerchantQRRegistration();
+			String paycode =	 env.getProperty("ipsx.qr.payeecode");
+			String globalUnique = env.getProperty("ipsx.qr.globalUnique");
+			String payload = env.getProperty("ipsx.qr.payload");
+			String poiMethod_static = env.getProperty("ipsx.qr.poiMethod_static");
+			merchantQRgenerator.setPoi_method(poiMethod_static);
+			merchantQRgenerator.setPayee_participant_code(paycode);
+			merchantQRgenerator.setGlobal_unique_id(globalUnique);
+			merchantQRgenerator.setPayload_format_indicator(payload);
+			merchantQRgenerator.setMerchant_acct_no(ms.getMerchant_id());
+			merchantQRgenerator.setMerchant_id(ms.getMerchant_id());
+			merchantQRgenerator.setMerchant_name(ms.getMerchant_name());
+			merchantQRgenerator.setMerchant_category_code(ms.getMerchant_cat_code());
+			merchantQRgenerator.setTransaction_crncy(ms.getCurr());
+			merchantQRgenerator.setTip_or_conv_indicator(ms.getTip_or_conv_indicator());
+			merchantQRgenerator.setConv_fees_type(ms.getConv_fees_type());
+			merchantQRgenerator.setValue_conv_fees(ms.getValue_conv_fees());
+			merchantQRgenerator.setCity(ms.getMerchant_city());
+			merchantQRgenerator.setCountry("MU");
+			merchantQRgenerator.setZip_code(ms.getPincode());
+			merchantQRgenerator.setBill_number(ms.getTr());
+			merchantQRgenerator.setMobile(ms.getMerchant_mob_no());
+			merchantQRgenerator.setLoyalty_number(ms.getLoyalty_number());
+			merchantQRgenerator.setCustomer_label(ms.getCustomer_label());
+			merchantQRgenerator.setStore_label(ms.getStore_label());
+			merchantQRgenerator.setTerminal_label(ms.getTerminal_label());
+			merchantQRgenerator.setReference_label(ms.getReference_label());
+			merchantQRgenerator.setPurpose_of_tran(ms.getPurpose_of_tran());
+			merchantQRgenerator.setAdditional_details(ms.getAdd_details_req());
+
+			merchantQRgenerator.setBill_number(ms.getTr());
+			//merchantQRgenerator.setCustomer_label(ms.getCustomer_label());
+
+			ResponseEntity<cimMerchantQRcodeResponse> merchantQRResponse = ipsServices
+					.getMerchantQrCodeStr(merchantQRgenerator);
+			String QrImg;
+			String imageAsBase64;
+			if (merchantQRResponse.getStatusCode() == HttpStatus.OK) {
+				QrImg = merchantQRResponse.getBody().getBase64QR();
+				imageAsBase64 = "data:image/png;base64," + QrImg;
+			} else {
+				if (merchantQRResponse.getStatusCode() == HttpStatus.BAD_REQUEST) {
+					imageAsBase64 = merchantQRResponse.getBody().getError().toString() + ":"
+							+ merchantQRResponse.getBody().getError_Desc().get(0);
+				} else {
+					imageAsBase64 = "Something went wrong at server end";
+				}
+			}
+
+			/*
+			 * md.addAttribute("merchantId", merchantId); md.addAttribute("deviceId", "PC");
+			 * md.addAttribute("refNumber", refNumber); md.addAttribute("qrCodeImage",
+			 * imageAsBase64); md.addAttribute("formmode", "StaticQR");
+			 */
+
+			return imageAsBase64;
+		}
+
 
 }

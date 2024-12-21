@@ -12456,8 +12456,8 @@ function updateMerchant(value) {
 														<th>Email address</th>
 														<th>Location</th>
 														<th>Status</th>
-														<th>Select</th>
 														<th>QR Code</th>
+														<th>Select</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -12475,6 +12475,24 @@ function updateMerchant(value) {
 															<td th:case='N' style="color: red;">UNVERIFIED</td>
 															<td th:case='NULL' style="color: red;">UNVERIFIED</td>
 														</th:block>
+														<td>
+															<div class="dropdown">
+																<button class="btn btn-secondary dropdown-toggle"
+																	type="button" id="dropdownMenuButton"
+																	style="line-height: 0.7; width: 80px; font-size: 11px; color: #3a4550; background: #e3e3e4;"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">QR Type</button>
+																<div class="dropdown-menu"
+																	aria-labelledby="dropdownMenuButton"
+																	style="background-color: #e3e3e4; color: #3a4550;">
+																	<a class="dropdown-item" title="Static QR"
+																		th:attr="data-bank_code=${unitl?.merchant_user_id},data-acct_name=${unitl?.merchant_name}"
+																		style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+																		id="edit_value" onclick="qrImage()" >Static
+																		QR</a>
+																</div>
+															</div>
+														</td>
 														<td>
 															<div class="dropdown">
 																<button class="btn btn-secondary dropdown-toggle"
@@ -12515,25 +12533,6 @@ function updateMerchant(value) {
 																		id="delete_value"
 																		onclick="deleteUnitData(this)">Delete</a>
 
-																</div>
-															</div>
-														</td>
-														<td>
-															<div class="dropdown">
-																<button class="btn btn-secondary dropdown-toggle"
-																	type="button" id="dropdownMenuButton"
-																	style="line-height: 0.7; width: 80px; font-size: 11px; color: #3a4550; background: #e3e3e4;"
-																	data-toggle="dropdown" aria-haspopup="true"
-																	aria-expanded="false">QR Type</button>
-																<div class="dropdown-menu"
-																	aria-labelledby="dropdownMenuButton"
-																	style="background-color: #e3e3e4; color: #3a4550;">
-																	<a class="dropdown-item" title="Static QR"
-																		th:attr="data-bank_code=${unitl?.merchant_user_id},data-acct_name=${unitl?.merchant_name}"
-																		style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
-																		id="edit_value"
-																		onclick="StaticQRcodeUPI(this)">Static
-																		QR</a>
 																</div>
 															</div>
 														</td>
@@ -21430,7 +21429,7 @@ function updateMerchant(value) {
 					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK OF
 						BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+				<div class="modal-body" style="text-align: center; background-color: white">
 					<p id="alertmsgee" style="font-size: 16px;"></p>
 					<button type="button" class="btn btn-primary commonBtnStyle" onclick="closemodals();">Close</button>
 				</div>
@@ -23263,6 +23262,11 @@ function updateMerchant(value) {
 	  $("#four1-panel").css("display", "none");
 	}
 
+	function qrImage(){
+		
+		$('#qrcode').modal("toggle");
+	}
+	
 </script>
 	
 </html>
