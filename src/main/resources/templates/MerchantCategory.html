@@ -1,19 +1,35 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="summary">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
-<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css" th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 
-<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
-<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
-<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
 
 <style>
@@ -225,6 +241,51 @@ label {
 	/*]]>*/
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Attach click event listener to all edit links with the class "editrec"
+    document.querySelectorAll(".editrec").forEach(function (anchor) {
+        anchor.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default link behavior
+
+            // Get the parent row (tr) and the target cell (Description)
+            const row = this.closest("tr");
+            const descCell = row.querySelector("td:nth-child(2)");
+
+            // Check if the cell is already in edit mode
+            const isEditing = descCell.querySelector("input") !== null;
+
+            if (isEditing) {
+                // If in edit mode, revert to normal text with the current input value
+                const input = descCell.querySelector("input");
+                descCell.textContent = input.value.toUpperCase(); // Save the input value and revert to text
+            } else {
+                // If not in edit mode, enable editing
+                const currentDesc = descCell.textContent.trim();
+                descCell.innerHTML = `<input type="text" class="edit-input" style="width:350px;height:16px" value="${currentDesc}" />`;
+
+                const input = descCell.querySelector("input");
+
+                // Add event listeners to save changes on blur or Enter key press
+                input.addEventListener("blur", () => {
+                    descCell.textContent = input.value.toUpperCase();
+                });
+
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        descCell.textContent = input.value.toUpperCase();
+                        input.blur();
+                    }
+                });
+
+                // Automatically focus the input field
+                input.focus();
+            }
+        });
+    });
+});
+</script>
+
 </head>
 <title>IPSAdmin</title>
 <body>
@@ -232,14 +293,19 @@ label {
 	<div class="container-manager pt-3">
 		<div th:if="${formmode}=='list'">
 			<div class="card">
-				<div class="card-header p-1 d-flex justify-content-between align-items-center">
+				<div
+					class="card-header p-1 d-flex justify-content-between align-items-center">
 					<h6 class="headerh6">Merchant Category Code</h6>
-					<div class="btn-group nav-buttons float-right" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
-						<button type="button" class="btn btn-sm headerbutton" id="addBtn" onclick="fnadd()" title="Add">Add</button>
+					<div class="btn-group nav-buttons float-right"
+						th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+						<button type="button" class="btn btn-sm headerbutton" id="addBtn"
+							onclick="fnadd()" title="Add">Add</button>
 					</div>
 				</div>
 				<div class="card-body p-0">
-					<table class="table  table-bordered table-hover table-condensed table-sm" id="usertable" style="table-layout: fixed; width: 100%;">
+					<table
+						class="table  table-bordered table-hover table-condensed table-sm"
+						id="usertable" style="table-layout: fixed; width: 100%;">
 						<thead>
 							<tr>
 								<th style="text-align: left;">Reference Code</th>
@@ -249,24 +315,37 @@ label {
 							</tr>
 						</thead>
 						<tbody id="refcodeconfig">
-							<tr style="font-size: smaller" th:each="merchantProfile : ${merchantcategory}" class="userlist">
-								<td th:text="${merchantProfile.merchant_code != null ? merchantProfile.merchant_code.toUpperCase() : ''}"></td>
-								<td th:text="${merchantProfile.merchant_desc != null ? merchantProfile.merchant_desc.toUpperCase() : ''}"></td>
-								<td th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'"><a href="#" data-toggle="tooltip" class="editrec"
-									th:attr="data-merchantCode=${merchantProfile.merchant_code},data-merchantdesc=${merchantProfile.merchant_desc}" onclick="fnedit(this);"
-								> <!-- Replace the Font Awesome icon with an image --> <img style="width: 16px; height: 16px;" th:src="@{/images/Edit.png}" alt="Edit">
-								</a></td>
-								<td th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'"><a href="#" data-toggle="tooltip" class="editrec"
-									th:attr="data-merchantCode=${merchantProfile.merchant_code},data-merchantdesc=${merchantProfile.merchant_desc}" onclick="fndelete(this);"
-								> <!-- Replace the Font Awesome icon with an image --> <img style="width: 16px; height: 16px;" th:src="@{/images/MinusCategory.png}" alt="Delete">
-								</a></td>
+							<tr style="font-size: smaller"
+								th:each="merchantProfile : ${merchantcategory}" class="userlist">
+								<td
+									th:text="${merchantProfile.merchant_code != null ? merchantProfile.merchant_code.toUpperCase() : ''}"></td>
+								<td
+									th:text="${merchantProfile.merchant_desc != null ? merchantProfile.merchant_desc.toUpperCase() : ''}"></td>
+								<td
+									th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+									<a href="#" data-toggle="tooltip" class="editrec"
+									th:attr="data-merchantdesc=${merchantProfile.merchant_desc}">
+										<img style="width: 16px; height: 16px;"
+										th:src="@{/images/Edit.png}" alt="Edit">
+								</a>
+								</td>
+								<td
+									th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+									<a href="#" data-toggle="tooltip" onclick="fndelete(this);">
+										<img style="width: 16px; height: 16px;"
+										th:src="@{/images/MinusCategory.png}" alt="Delete">
+								</a>
+								</td>
 							</tr>
 						</tbody>
+
 					</table>
 				</div>
 				<div class="card-footer text-center">
-					<button type="button" class="btn btn-xs mr-2 headerbutton" id="" onclick="home();">Home</button>
-					<button type="button" class="btn btn-xs headerbutton" id="" onclick="home();">Back</button>
+					<button type="button" class="btn btn-xs mr-2 headerbutton" id=""
+						onclick="home();">Home</button>
+					<button type="button" class="btn btn-xs headerbutton" id=""
+						onclick="home();">Back</button>
 				</div>
 			</div>
 		</div>
@@ -275,27 +354,33 @@ label {
 	<!-- Model Box -->
 
 	<div class="modal fade" id="addedit" style="background: #000000b0;">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #f26223;">
-					<h4 class="modal-title text-white" style="font-weight: 700; font-size: 20px;">Add/Edit Records</h4>
-					<button type="button" class="close" style="font-size: 27px" data-dismiss="modal">X</button>
+					<h4 class="modal-title text-white"
+						style="font-weight: 700; font-size: 20px;">Add/Edit Records</h4>
+					<button type="button" class="close" style="font-size: 27px"
+						data-dismiss="modal">X</button>
 				</div>
 				<div class="modal-body pb-0" style="text-align: center">
 					<form th:object=${merchantcategory} id="dataedit" method="post">
 						<input type="hidden" id="trClass" />
 						<div class="form-group">
 							<div class="row mb-2">
-								<label class="col-sm-6" for="refcode">Reference Code</label> <input class="form-control col-sm-5" type="text" autocomplete="off" th:value="${MerchantRef}" maxlength="5" readonly
-									id="merchant_code"
-								/>
+								<label class="col-sm-6" for="refcode">Reference Code</label> <input
+									class="form-control col-sm-5" type="text" autocomplete="off"
+									th:value="${MerchantRef}" maxlength="5" readonly
+									id="merchant_code" />
 							</div>
 							<div class="row">
-								<label class="col-sm-6" for="refCodeDesc">Ref Code Type</label> <input class="form-control col-sm-5" type="text" id="merchant_desc" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-								/>
+								<label class="col-sm-6" for="refCodeDesc">Ref Code Type</label>
+								<input class="form-control col-sm-5" type="text"
+									id="merchant_desc" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" />
 								<div class="col-sm-12">
-									<span id="errorMsg" class="error-message" style="display: none;"></span>
+									<span id="errorMsg" class="error-message"
+										style="display: none;"></span>
 								</div>
 								<input type="hidden" id="formmode">
 							</div>
@@ -303,42 +388,60 @@ label {
 					</form>
 				</div>
 				<div class="text-center mb-2">
-					<button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitdataform();">Submit</button>
+					<button type="button" class="btn btn-primary" id="btnSubmit"
+						onclick="submitdataform();">Submit</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="myModalpopup2" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="myModalpopup2" data-backdrop="static"
+		data-keyboard="false" style="background: #000000b0;"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
-				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<h3 class="text-center p-2 text-white font-weight-bold"
+					style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold"
+					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal" onclick="list()">Close</button>
+					<button type="button" class="btn mb-2"
+						style="width: 16%; background: #f26223; font-size: 17px;"
+						data-dismiss="modal" onclick="list()">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false" style="background: #000000b0;" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="myModalpopup1" data-backdrop="static"
+		data-keyboard="false" style="background: #000000b0;"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
-				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px"></h4>
+				<h3 class="text-center p-2 text-white font-weight-bold"
+					style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold"
+					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;" data-dismiss="modal">Close</button>
+					<button type="button" class="btn mb-2"
+						style="width: 16%; background: #f26223; font-size: 17px;"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="loader1" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="loader1" data-backdrop="static"
+		data-keyboard="false">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content" style="background: transparent;">
 				<div class="modal-body" style="text-align: center">
 					<div>
-						<img th:src=@{/images/loader.gif} id="bfirelogo" style="width: 153px; margin-left: 18px;" alt="Bornfire">
+						<img th:src=@{/images/loader.gif} id="bfirelogo"
+							style="width: 153px; margin-left: 18px;" alt="Bornfire">
 					</div>
 				</div>
 			</div>
@@ -346,23 +449,31 @@ label {
 	</div>
 
 	<div class="modal fade" id="delete" style="background: #000000b0;">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #f26223;">
-					<h4 class="modal-title text-white" style="font-weight: 700; font-size: 20px;">Delete Record</h4>
-					<button type="button" class="close" style="font-size: 27px" data-dismiss="modal">X</button>
+					<h4 class="modal-title text-white"
+						style="font-weight: 700; font-size: 20px;">Delete Record</h4>
+					<button type="button" class="close" style="font-size: 27px"
+						data-dismiss="modal">X</button>
 				</div>
 				<div class="modal-body pb-0" style="text-align: center">
 					<form th:object=${merchantcategory} id="dataDelete" method="post">
 						<input type="hidden" id="trClassDelete" />
 						<div class="form-group">
 							<div class="row mb-2">
-								<label class="col-sm-6" for="refcode">Reference Code</label> <input class="form-control col-sm-5" type="text" id="merchant_code1" autocomplete="off" maxlength="5" required readonly />
+								<label class="col-sm-6" for="refcode">Reference Code</label> <input
+									class="form-control col-sm-5" type="text" id="merchant_code1"
+									autocomplete="off" maxlength="5" required readonly />
 							</div>
 							<div class="row">
-								<label class="col-sm-6" for="refCodeDesc">Ref Code Type</label> <input class="form-control col-sm-5" type="text" maxlength="5" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)" id="merchant_desc1" required readonly
-								/> <input type="hidden" maxlength="5" id="formmode1" readonly>
+								<label class="col-sm-6" for="refCodeDesc">Ref Code Type</label>
+								<input class="form-control col-sm-5" type="text" maxlength="5"
+									autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									id="merchant_desc1" required readonly /> <input
+									type="hidden" maxlength="5" id="formmode1" readonly>
 							</div>
 						</div>
 					</form>
