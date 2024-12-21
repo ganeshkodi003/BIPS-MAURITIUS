@@ -363,11 +363,11 @@ td {
 	<div class="container-manager">
 		<div class="pt-3" th:if="${formmode}=='list'">
 			<div class="card panel panel-primary filterable">
-				<div class="card-header ">
+				<div class="card-header p-1 ">
 
 
 					<div class="dispayflexpropty">
-						<h6 style="font-size: 1.5rem; color: white;">Bank and Branch
+						<h6 class="headerh6">Bank and Branch
 							Master</h6>
 						<div class="">
 							<button type="button"
@@ -477,9 +477,9 @@ td {
 						</tbody>
 					</table>
 					<div class="card-footer text-center">
-						<button type="button" class="btn btn-sm btn-primary mr-2"
-							id="btnHome" onclick="home();">Home</button>
-						<button type="button" class="btn btn-sm btn-primary" id="btnBack"
+						<button type="button" class="btn btn-sm headerbutton mr-2"
+							id="headerbutton" onclick="home();">Home</button>
+						<button type="button" class="btn btn-sm headerbutton" id=""
 							onclick="back();">Back</button>
 					</div>
 				</div>
@@ -497,19 +497,19 @@ td {
 					<div
 						class="card-header d-flex justify-content-between align-items-center">
 						<h6 th:if="${formmode}=='add'"
-							style="font-size: 1.5rem; color: white;">Bank and Branch
+							class="headerh6">Bank and Branch
 							Master - Add</h6>
 						<h6 th:if="${formmode}=='edit'"
-							style="font-size: 1.5rem; color: white;">Bank and Branch
+							class="headerh6">Bank and Branch
 							Master - Edit</h6>
 						<h6 th:if="${formmode}=='verify'"
-							style="font-size: 1.5rem; color: white;">Bank and Branch
+							class="headerh6">Bank and Branch
 							Master - Verify</h6>
 						<h6 th:if="${formmode}=='cancel'"
-							style="font-size: 1.5rem; color: white;">Bank and Branch
+							class="headerh6">Bank and Branch
 							Master - Cancel</h6>
 						<h6 th:if="${formmode}=='view' OR ${formmode}=='viewnew'"
-							style="font-size: 1.5rem; color: white;">Bank and Branch
+							class="headerh6">Bank and Branch
 							Master - View</h6>
 						<button type="button" class="btn btn-xs commonBtnStyle"
 							id="btnInq" onclick="list()">List</button>

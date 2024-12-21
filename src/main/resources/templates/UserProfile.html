@@ -621,7 +621,7 @@ $(document)
 					<div class="card panel panel-primary filterable">
 						<div class="card-header p-1 ">
 							<div  class="dispayflexpropty">
-								<h6 style="font-size: 25px; color: white; font-weight: 700;">User Profile</h6>
+								<h6 class="headerh6">User Profile</h6>
 								<div class="">
 								<button type="button" class="btn btn-sm mr-2 headerbutton" id="btnAdd" onclick="adduser();" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Create User</button>
 								<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
@@ -709,8 +709,8 @@ $(document)
 							</table>
 						</div>
 						<div class="card-footer text-center">
-							<button type="button" class="btn btn-xs btn-primary mr-2" id="btnHome" onclick="home();">Home</button>
-							<button type="button" class="btn btn-xs btn-primary" id="btnBack" onclick="home();">Back</button>
+							<button type="button" class="btn btn-xs  mr-2 headerbutton "  onclick="home();">Home</button>
+							<button type="button" class="btn btn-xs headerbutton" onclick="home();">Back</button>
 						</div>
 						</div>
 						

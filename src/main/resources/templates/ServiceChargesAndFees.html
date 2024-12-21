@@ -503,8 +503,8 @@ label {
 	<div class="container-manager pt-3">
 		<div th:if="${formmode}=='list'">
 			<div class="card panel panel-primary filterable">
-				<div class="card-header dispayflexpropty">
-					<h6 style="font-size: 1.5rem; color: white;">Service Charges
+				<div class="card-header p-1 dispayflexpropty">
+					<h6 class="headerh6 ">Service Charges
 						And Fees - List</h6>
 					<div>
 						<button type="button" class="btn btn-sm headerbutton" id="addBtn"
@@ -615,10 +615,10 @@ label {
 					</table>
 				</div>
 				<div class="card-footer text-center">
-					<button type="button" class="btn btn-sm commonBtnStyle mr-2"
-						id="btnHome" onclick="home();">Home</button>
-					<button type="button" class="btn btn-sm commonBtnStyle"
-						id="btnBack" onclick="home();">Back</button>
+					<button type="button" class="btn btn-sm headerbutton mr-2"
+						id="" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm headerbutton"
+						id="" onclick="home();">Back</button>
 				</div>
 			</div>
 		</div>
@@ -626,7 +626,7 @@ label {
 		<div th:if="${formmode}=='add'" class="content">
 			<div class="card">
 				<div class="card-header text-left">
-					<h6 style="font-size: 1.5rem; color: white;">Service Charges
+					<h6 class="headerh6">Service Charges
 						And Fees - Add</h6>
 				</div>
 				<div class="card-body mb-0 pb-0">
@@ -830,15 +830,15 @@ label {
 			class="content">
 			<div class="card">
 				<div class="card-header text-left">
-					<h6 style="font-size: 1.5rem; color: white;"
+					<h6 class="headerh6"
 						th:if="${formmode}=='edit'">Service Charges And Fees - Edit</h6>
-					<h6 style="font-size: 1.5rem; color: white;"
+					<h6 class="headerh6"
 						th:if="${formmode}=='verify'">Service Charges And Fees -
 						Verify</h6>
-					<h6 style="font-size: 1.5rem; color: white;"
+					<h6 class="headerh6"
 						th:if="${formmode}=='delete'">Service Charges And Fees -
 						Delete</h6>
-					<h6 style="font-size: 1.5rem; color: white;"
+					<h6 class="headerh6"
 						th:if="${formmode}=='viewpage' OR ${formmode}=='viewnewpage'">Service
 						Charges And Fees - View</h6>
 				</div>

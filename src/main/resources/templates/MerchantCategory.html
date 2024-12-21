@@ -232,10 +232,10 @@ label {
 	<div class="container-manager pt-3">
 		<div th:if="${formmode}=='list'">
 			<div class="card">
-				<div class="card-header d-flex justify-content-between align-items-center">
-					<h6 style="font-size: 1.5rem; color: white;">Merchant Category Code</h6>
+				<div class="card-header p-1 d-flex justify-content-between align-items-center">
+					<h6 class="headerh6">Merchant Category Code</h6>
 					<div class="btn-group nav-buttons float-right" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
-						<button type="button" class="btn btn-sm commonBtnStyle" id="addBtn" onclick="fnadd()" title="Add">Add</button>
+						<button type="button" class="btn btn-sm headerbutton" id="addBtn" onclick="fnadd()" title="Add">Add</button>
 					</div>
 				</div>
 				<div class="card-body p-0">
@@ -265,8 +265,8 @@ label {
 					</table>
 				</div>
 				<div class="card-footer text-center">
-					<button type="button" class="btn btn-xs mr-2" id="btnHome" onclick="home();">Home</button>
-					<button type="button" class="btn btn-xs" id="btnBack" onclick="home();">Back</button>
+					<button type="button" class="btn btn-xs mr-2 headerbutton" id="" onclick="home();">Home</button>
+					<button type="button" class="btn btn-xs headerbutton" id="" onclick="home();">Back</button>
 				</div>
 			</div>
 		</div>

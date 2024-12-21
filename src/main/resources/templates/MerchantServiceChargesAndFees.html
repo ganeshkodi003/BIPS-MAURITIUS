@@ -503,8 +503,8 @@ label {
 	<div class="container-manager pt-3">
 		<div th:if="${formmode}=='list'">
 			<div class="card panel panel-primary filterable">
-				<div class="card-header dispayflexpropty">
-					<h6 style="font-size: 1.5rem; color: white;">Merchant Charges
+				<div class="card-header p-1 dispayflexpropty">
+					<h6 class="headerh6">Merchant Charges
 						And Fees - List</h6>
 					<div>
 						<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
@@ -622,17 +622,17 @@ label {
 					</table>
 				</div>
 				<div class="card-footer text-center">
-					<button type="button" class="btn btn-sm commonBtnStyle mr-2"
-						id="btnHome" onclick="home();">Home</button>
-					<button type="button" class="btn btn-sm commonBtnStyle"
-						id="btnBack" onclick="home();">Back</button>
+					<button type="button" class="btn btn-sm headerbutton mr-2"
+						id="" onclick="home();">Home</button>
+					<button type="button" class="btn btn-sm headerbutton"
+						id="" onclick="home();">Back</button>
 				</div>
 			</div>
 		</div>
 		<div th:if="${formmode}=='add'" class="content">
 			<div class="card">
 				<div class="card-header text-left">
-					<h6 style="font-size: 1.5rem; color: white;">Merchant Charges
+					<h6 class="headerh6">Merchant Charges
 						And Fees</h6>
 				</div>
 				<div class="card-body">
@@ -840,7 +840,7 @@ label {
 			class="content">
 			<div class="card">
 				<div class="card-header text-left">
-					<h6 style="font-size: 1.5rem; color: white;">Merchant Service
+					<h6 class="headerh6">Merchant Service
 						Charges And Fees</h6>
 				</div>
 				<div class="card-body pb-0">
