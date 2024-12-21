@@ -136,16 +136,19 @@ label {
 	
 	  function changeColorView(button, formId) {
 	        // Reset all buttons to default styles
+					const merchandId = document.getElementById('merchandId').value;
+					if(merchandId){
 	        const buttons = document.querySelectorAll('.tablinks');
 	        buttons.forEach((btn) => {
-	           	btn.style.backgroundColor = '#35488dbf';
-				btn.style.color = 'white';
+	           	btn.style.backgroundColor = '#f26222';
+				btn.style.color = '#FFE0D1';
 				btn.style.fontWeight = '100';
 			});
-			button.style.backgroundColor = '#162b75';
-			button.style.color = 'white';
+			button.style.backgroundColor = '#FFE0D1';
+			button.style.color = '#f26222';
 			button.style.fontWeight = '700';
 
+			
 	        // Hide all forms
 	        const forms = ['settlementForm', 'feesForm'];
 	        forms.forEach((form) => {
@@ -154,6 +157,10 @@ label {
 
 	        // Show the selected form
 	        document.getElementById(formId).style.display = 'block';
+				}	else{	
+					alert('Please select a merchant ID.');
+				}
+
 	    }
 	  
 	  function getMerchantData(selectElement) {
@@ -195,33 +202,33 @@ label {
 	<div class="container-manager">
 				<div class="card">
 
-			<div class="card-header  d-flex" id="modheadtitle"
+			<div class="card-header  d-flex p-2" id="modheadtitle"
 				style=" font-size: 1.2rem;">
-				<b style="width:20%; padding: 0;">Payment Processing</b>
+				<b style="width:40%; padding: 0; display: flex; align-items: center;">Payment Processing</b>
 				<div
-				style=" width:80%; margin-left: 1px; margin-top: 10px; margin-bottom: 10px"
+				style=" width:60%;  "
 				class="row formline d-flex" id="tabs">
 				
 				<div>
-					<button class="tablinks" id="smooth1View"
-						style="width: 250px; height: 40px; background-color: #162b75; color: white;font-weight: 700"
+					<button class="tablinks btn btn-xs headerbutton" id="smooth1View"
+						
 						onclick="changeColorView(this, 'settlementForm')">Settlement
 						Transaction</button>
 				</div>
 				
 				<div style="margin-left: 20px;">
-					<button class="tablinks" id="smooth2View"
+					<button class="tablinks btn btn-xs headerbutton" id="smooth2View"
 						onclick="changeColorView(this, 'feesForm')"
-						style="width: 250px; height: 40px; background-color: #35488dbf; color: white">Fees and Charges</button>
+						>Fees and Charges</button>
 				</div>
 			</div>
 			</div>
 			<label></label>
-			<div class="row formline mt-2">
+			<div class="row formline mt-1 p-2">
 
-				<div class="col-sm-1"></div>
+				
 
-				<div class="col-sm-2">
+				<div class="col-sm-1">
 					<label for="merchandId">Merchant Id</label><span
 						style="color: red; font-size: 20px;"> *</span>
 				</div>
@@ -236,9 +243,9 @@ label {
 					</select>
 				</div>
 
-				<div class="col-sm-1"></div>
+				<div class="col-sm-5"></div>
 
-				<div class="col-sm-2">
+				<div class="col-sm-1">
 					<label for="merchandName">Merchant Name</label>
 				</div>
 				<div class="col-sm-2">
@@ -252,9 +259,9 @@ label {
 			
 
 
-			<div id="settlementForm">
+			<div id="settlementForm" class="p-2 " style="display: none;">
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+					
 
 					<div class="col-sm-1">
 						<label for="bank">Bank</label><span
@@ -264,7 +271,7 @@ label {
 						<input type="text" id="bank" class="form-control" name="bank"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="accountNumber">Account No.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -274,7 +281,7 @@ label {
 							name="accountNumber" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="accountType">Account Type</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -287,7 +294,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+					
 
 					<div class="col-sm-1">
 						<label for="frequency">Frequency</label><span
@@ -298,7 +305,7 @@ label {
 							name="frequency" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="lastSettlementDate" title="Last Settlement Date">Last Stle Dt.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -311,7 +318,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+					
 
 					<div class="col-sm-1">
 						<label for="date">Date</label><span
@@ -321,7 +328,7 @@ label {
 						<input type="text" id="date" class="form-control" name="date"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="accountBalance">Account Bal.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -331,7 +338,7 @@ label {
 							name="accountBalance" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="balanceIndicator" title="Balance Indicator">Balance Ind.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -344,7 +351,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+					
 
 					<div class="col-sm-1">
 						<label for="tranDate">Tran Date</label><span
@@ -355,7 +362,7 @@ label {
 							name="tranDate" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="tranAmount">Tran Amount</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -365,7 +372,7 @@ label {
 							name="tranAmount" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="tranReference">Tran Reference</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -379,9 +386,9 @@ label {
 			</div>
 
 
-			<div id="feesForm" style="display: none;">
+			<div id="feesForm" style="display: none; padding: 1em;">
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+					
 
 					<div class="col-sm-1">
 						<label for="bank">Bank</label><span
@@ -391,7 +398,7 @@ label {
 						<input type="text" id="bank" class="form-control" name="bank"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="account-number">Account No.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -401,7 +408,7 @@ label {
 							name="accountNumber" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="account-type">Account Type</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -414,7 +421,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+					
 
 					<div class="col-sm-1">
 						<label for="charge-type">Charge Type</label><span
@@ -425,7 +432,7 @@ label {
 							name="chargeType" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="charge-description" title="Charge Description">Charge Des.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -435,7 +442,7 @@ label {
 							name="chargeDescription"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="charge-details">Charge Details</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -448,7 +455,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+					
 
 					<div class="col-sm-1">
 						<label for="frequency">Frequency</label><span
@@ -459,7 +466,7 @@ label {
 							name="frequency" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="last-tran-date">Last Tran Date</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -472,7 +479,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+				
 
 					<div class="col-sm-1">
 						<label for="date">Date</label><span
@@ -481,7 +488,7 @@ label {
 					<div class="col-sm-2">
 						<input type="text" id="date" class="form-control" name="date"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
-					</div>
+					</div><div class="col-sm-1"></div>
 
 					<div class="col-sm-1">
 						<label for="account-balance">Account Bal.</label><span
@@ -492,7 +499,7 @@ label {
 							name="accountBalance" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="balance-indicator">Balance Ind.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -505,7 +512,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					<div class="col-sm-1"></div>
+				
 
 					<div class="col-sm-1">
 						<label for="tran-date">Tran Date</label><span
@@ -516,7 +523,7 @@ label {
 							name="tranDate" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="fee-charge-amount" title="Fee/Charge Amount">Fee/Char Amt</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -526,7 +533,7 @@ label {
 							name="feeChargeAmount" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-
+<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="tran-reference">Tran Reference</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -543,11 +550,11 @@ label {
 
 
 			<div class="card-footer text-center mt-2">
-				<button type="button" class="btn btn-xs btn-primary" id="btnHome"
+				<button type="button" class="btn btn-xs  headerbutton" id=""
 					onclick="home();">Home</button>
-				<button type="button" class="btn btn-xs btn-primary" id="btnHome"
+				<button type="button" class="btn btn-xs headerbutton" id=""
 					onclick="displayRecords();">Submit</button>
-				<button type="button" class="btn btn-xs btn-primary" id="btnBack"
+				<button type="button" class="btn btn-xs  headerbutton" id=""
 					onclick="back();">Back</button>
 			</div>
 

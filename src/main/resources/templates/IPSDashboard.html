@@ -466,49 +466,59 @@ function insertDate() {
     // Update all elements with the class "insert-date"
     const dateElements = document.querySelectorAll('.insert-date');
     dateElements.forEach((element) => {
-        element.innerHTML = `Overall Merchants From ${startDate} to ${todayDate}`;
+			console.log(element);
+        element.innerHTML = `Data From ${startDate} to ${todayDate}`;
     });
 
     // Populate dropdowns
     populateMonthDropdowns();
 }
 
-function populateMonthDropdowns() {
+function populateDropdowns() {
+    const monthDropdowns = document.querySelectorAll('.month-dropdown');
+    const yearDropdowns = document.querySelectorAll('.year-dropdown');
+
+    // Populate months
     const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        'January', 'February', 'March', 'April', 'May', 'June', 
+        'July', 'August', 'September', 'October', 'November', 'December'
     ];
-
-    const dropdowns = document.querySelectorAll('.month-dropdown');
-    dropdowns.forEach((dropdown) => {
-        // Clear existing options (if any)
-        dropdown.innerHTML = "";
-
-        // Populate dropdown with month options
+    monthDropdowns.forEach((dropdown) => {
         months.forEach((month, index) => {
             const option = document.createElement('option');
-            option.value = index; // Month index (0-11)
+            option.value = index + 1; // Month as number (1-12)
             option.textContent = month;
             dropdown.appendChild(option);
         });
+    });
 
-        // Set current month as default
-        dropdown.value = new Date().getMonth();
+    // Populate years
+    const currentYear = new Date().getFullYear();
+    const yearRange = 10; // Number of years to show before and after current year
+    yearDropdowns.forEach((dropdown) => {
+        for (let year = currentYear - yearRange; year <= currentYear + yearRange; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            dropdown.appendChild(option);
+        }
     });
 }
 
-function updateSelectedMonth(selectElement) {
-    const selectedMonth = selectElement.options[selectElement.selectedIndex].text;
+function updateSelectedMonthYear(selectElement) {
+    const parentDiv = selectElement.closest('div'); // Get the parent container of the dropdown
+    const monthDropdown = parentDiv.querySelector('.month-dropdown');
+    const yearDropdown = parentDiv.querySelector('.year-dropdown');
+    const displayDiv = parentDiv.querySelector('.selected-month-year-display');
 
-    // Find the sibling display area to show the selected month
-    const displayDiv = selectElement.nextElementSibling;
-    displayDiv.innerHTML = `Selected Month: <strong>${selectedMonth}</strong>`;
+    const selectedMonth = monthDropdown.options[monthDropdown.selectedIndex]?.text || 'Month';
+    const selectedYear = yearDropdown.options[yearDropdown.selectedIndex]?.text || 'Year';
+
+    displayDiv.innerHTML = `Selected: <strong>${selectedMonth} ${selectedYear}</strong>`;
 }
 
-// Ensure the JavaScript is executed only after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', insertDate);
-
-
+// Populate the dropdowns on page load
+document.addEventListener('DOMContentLoaded', populateDropdowns);
 
 </script>
 <body>
@@ -577,34 +587,42 @@ document.addEventListener('DOMContentLoaded', insertDate);
 					</div>
 
 				</div>
-				<hr>
+				<hr style="border: 1px solid #7b838b; width: 100%;">
+
 
 <div style="width: 100%; display: flex;">
-    <div style="width: 50%; text-align: center; padding-bottom: 15px">Overall</div>
+    <div style="width: 50%; text-align: center; padding-bottom: 15px">All Merchant</div>
     <div style="width: 50%; text-align: center; padding-bottom: 15px">
-        <h1>Merchant wise</h1>
+        <h1>Merchant Wise</h1>
     </div>
 </div>
 <div style="width: 100%; display: flex;">
     <div style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
         <div class="insert-date" style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
         <div style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
-            <select class="month-dropdown" onchange="updateSelectedMonth(this)">
+            <select class="month-dropdown" onchange="updateSelectedMonthYear(this)">
                 <!-- Month options will be added dynamically -->
             </select>
-            <div class="selected-month-display" style="margin-top: 10px;"></div>
+            <select class="year-dropdown" onchange="updateSelectedMonthYear(this)">
+                <!-- Year options will be added dynamically -->
+            </select>
+            <div class="selected-month-year-display" style="margin-top: 10px;"></div>
         </div>
     </div>
     <div style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
         <div class="insert-date" style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
         <div style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
-            <select class="month-dropdown" onchange="updateSelectedMonth(this)">
+            <select class="month-dropdown" onchange="updateSelectedMonthYear(this)">
                 <!-- Month options will be added dynamically -->
             </select>
-            <div class="selected-month-display" style="margin-top: 10px;"></div>
+            <select class="year-dropdown" onchange="updateSelectedMonthYear(this)">
+                <!-- Year options will be added dynamically -->
+            </select>
+            <div class="selected-month-year-display" style="margin-top: 10px;"></div>
         </div>
     </div>
 </div>
+
 
 
 
@@ -1140,7 +1158,7 @@ document.addEventListener('DOMContentLoaded', insertDate);
 
         // Update Merchant Header with Current Date
         updateMerchantHeader();
-				insertdate();
+				insertDate();
 
     };
 
@@ -1267,7 +1285,7 @@ document.addEventListener('DOMContentLoaded', insertDate);
 		        
 		    };
 	  var Monthly = {
-		        Month: [50, 60, 70], // Data for January
+		        Monthly: [50, 60, 70], // Data for January
 		        
 		    };
 	  var MWOverall = {
@@ -1275,7 +1293,7 @@ document.addEventListener('DOMContentLoaded', insertDate);
 		        
 		    };
 	  var MWMonthly = {
-		        Month: [10, 10, 70], // Data for January
+		        Monthly: [12, 25, 70], // Data for January
 		        
 		    };
 
@@ -1306,7 +1324,7 @@ document.addEventListener('DOMContentLoaded', insertDate);
 		                        {
 		                            label: "No. of Merchants",  // First dataset label
 		                            backgroundColor: "#cb9cb3", // Red color for volume
-		                            data: [data[month][0]], // Volume data for the month
+		                            data: [data[month][2]], // Volume data for the month
 		                            maxBarThickness: 20,  // Maximum thickness of each bar
 		                        }
 		                    ],
@@ -1353,9 +1371,9 @@ document.addEventListener('DOMContentLoaded', insertDate);
 
 		    // Initialize charts for each month
 		    createChart('Overall', 'chart-bars-jan',Overall);
-		    createChart('Month', 'chart-bars-feb',Monthly);
+		    createChart('Monthly', 'chart-bars-feb',Monthly);
 		    createChart('Overall', 'chart-bars-mar',MWOverall);
-		    createChart('Month', 'chart-bars-apr',MWMonthly);	
+		    createChart('Monthly', 'chart-bars-apr',MWMonthly);	
 	
     </script>
 </body>
