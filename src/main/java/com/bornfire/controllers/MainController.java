@@ -24,8 +24,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -43,6 +45,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,7 +85,9 @@ import com.bornfire.entity.BankAgentTableRep;
 import com.bornfire.entity.BankAgentTmpTableRep;
 import com.bornfire.entity.BankAndBranchBean;
 import com.bornfire.entity.BankAndBranchRepository;
+import com.bornfire.entity.DocumentMaster_Entity;
 import com.bornfire.entity.DocumentMaster_Repo;
+import com.bornfire.entity.DynamicFromValue;
 import com.bornfire.entity.IPSAccessRole;
 import com.bornfire.entity.IPSAuditTable;
 import com.bornfire.entity.IPSAuditTableRep;
@@ -4263,4 +4268,144 @@ public class MainController {
 		}
 		return "MerOnboardParam";
 	}
+	
+
+	@RequestMapping(value = "MerchantInquiry")
+	public String MerchantInquiry(@RequestParam(required = false) String formmode, Model md, HttpServletRequest req,
+			@RequestParam(required = false) String MerId, @RequestParam(required = false) String UnitId)
+			throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+
+		System.out.println(MerId);
+		if (formmode == null || formmode.equals("view")) {
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("branchDet", merchantMasterModRep.findByIdCustom(MerId));
+			md.addAttribute("merchant_acct_no", MerId);
+			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(MerId));
+			md.addAttribute("MerUnit", bIPS_UnitManagement_Repo.getUnitId(UnitId));
+			md.addAttribute("merchantFeeDetailses", merchantFeesServiceRepo.merchantDetails(MerId));
+			md.addAttribute("bankAgentName", bankAgentTableRep.findByCustomBankName());
+			md.addAttribute("merchantFeeDetails", merchantFeesServiceRepo.merchantDetailsFromMod(MerId));
+			md.addAttribute("SignId", Sign_Master_Repo.getMerId(MerId));
+			// UNIT USER PASSWORD
+			md.addAttribute("MerchantPass", bIPS_PasswordManagement_Repo.getPassList(MerId));
+			md.addAttribute("MerchantIdUse", MerId);
+			// md.addAttribute("MerchantNaUse", merchant_nam);
+			md.addAttribute("MerchantUnit", bIPS_UnitManagement_Repo.getUnitlist(MerId));
+			md.addAttribute("pro", bIPS_MerUserManagement_Repo.getUserManage1(MerId));
+			md.addAttribute("MerchantDevi", bIPS_MerDeviceManagement_Repo.getaddDevice(MerId));
+			md.addAttribute("propass", bIPS_PasswordManagement_Repo.getPassmer(MerId));
+		}
+		return "MerchantInquiry.html"; // Using TransactionReports.html for now
+	}
+	
+
+	@PostMapping("/imageupload11")
+	@ResponseBody
+
+	public String uploadimage(@RequestParam("files") List<MultipartFile> file,
+			@RequestParam("unique") List<String> unique_id,
+			@RequestParam(value = "appl_ref_no", required = false) String appl_ref_no,
+			@RequestParam("dataURL") List<String> dataURL) throws IOException, SerialException, SQLException {
+		String msg = null;
+
+		try {
+
+			for (int i = 0; i < file.size(); i++) {
+
+				byte[] fileBytes = file.get(i).getBytes();
+				DocumentMaster_Entity back = documentMaster_Repo.findByApplAndUnquieimg(appl_ref_no, unique_id.get(i));
+
+				// Check if it's an image (use dataURL), otherwfindBy1ise store the raw
+				// fileBytes
+				if (!file.get(i).getContentType().startsWith("image/")) {
+					// For non-image files (PDF, Excel, etc.), store the raw file bytes
+					back.setUpd_file(fileBytes);
+				} else {
+					// For images, use the dataURL if present
+					String docString = dataURL.get(i);
+					byte[] document = docString.getBytes(); // Handle dataURL for images
+					back.setUpd_file(document);
+				}
+
+				documentMaster_Repo.save(back);
+
+			}
+			msg = " File Uploaded Succesfully ";
+			// System.out.println(" file Size " + file.size());
+		} catch (Exception e) {
+			System.out.println("Exception >>>>>>>>>>>>>>>>>" + e);
+			msg = " File Upload Unsuccesfull ";
+		}
+		return msg;
+	}
+	
+	@RequestMapping(value = "/getproof1", method = { RequestMethod.GET })
+	@ResponseBody
+	public String getproof1(@RequestParam(required = false) String appl_ref_no,
+			@RequestParam(required = false) String doc_type, String md) throws SQLException, ParseException {
+		System.out.println("EXISTING ");
+		System.out.println("MER ID " + appl_ref_no);
+		System.out.println("DOC TYPE " + doc_type);
+		String msg = null;
+		String lastChars = null;
+
+		try {
+			System.out.println("inside");
+			System.out.println("inside");
+			System.out.println("inside");
+			List<DocumentMaster_Entity> vv = documentMaster_Repo.findBy1(appl_ref_no, doc_type);
+			// System.out.println("The encryptedddddd" +
+			// vv.get(0).getUpd_file().toString());
+
+			byte[] ll = vv.get(0).getUpd_file();
+			String str = new String(ll, StandardCharsets.UTF_8);
+			lastChars = str.substring(str.indexOf(",") + 1);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("lastChars" + lastChars);
+
+		return lastChars;
+
+	}
+
+	@PostMapping("/multiline")
+	@ResponseBody
+	public List<String> upLoadForm1(@RequestBody List<DynamicFromValue> dynamicValues,
+			@RequestParam(value = "appl_ref_no", required = false) String appl_ref_no) {
+
+		System.err.println(" size " + dynamicValues.size());
+
+		List<DocumentMaster_Entity> list_of_bacp_record = new ArrayList<>();
+		for (DynamicFromValue dynamic : dynamicValues) {
+			System.err.println(" size " + dynamicValues.size());
+			DocumentMaster_Entity bdcm = new DocumentMaster_Entity();
+			bdcm.setFile_name(dynamic.getFilename());
+			bdcm.setDocument_type(dynamic.getDoctype());
+			bdcm.setDocument_code(dynamic.getDoccode());
+			bdcm.setDocument_type_desc(dynamic.getDoctypesesc());
+			bdcm.setUnique_id(dynamic.getUniqueid());
+			bdcm.setPlace_of_issue(dynamic.getPlaceofissue());
+			bdcm.setIssue_date(dynamic.getIssuedate());
+			bdcm.setExpiry_date(dynamic.getExprydate());
+			bdcm.setMerchant_id(appl_ref_no);
+			documentMaster_Repo.save(bdcm);
+			list_of_bacp_record.add(bdcm);
+		}
+		try {
+			documentMaster_Repo.saveAll(list_of_bacp_record);
+			List<String> uniquelist = list_of_bacp_record.stream().map(e -> e.getUnique_id())
+					.collect(Collectors.toList());
+			return uniquelist;
+		} catch (Exception e) {
+			return new ArrayList();
+		}
+
+	}
+ 
+
 }

@@ -619,7 +619,7 @@ public class BankAndBranchMasterServices {
 					} else {
 						user.setFreeze_flg("N");
 					}
-					user.setCurr("BWP");
+					user.setCurr("MUR");
 					user.setStatus("Unverified");
 					user.setMerchant_acc_no(user.getBank_account_no());
 					user.setAuth_user(up1.get().getAuth_user());
@@ -696,7 +696,7 @@ public class BankAndBranchMasterServices {
 					bankList.get().setAuth_time(new Date());
 					MerchantMaster Main = new MerchantMaster(bankList.get());
 					Main.setEntity_flg('Y');
-					Main.setCurr("BWP");
+					Main.setCurr("MUR");
 					Main.setPhoto(bankList.get().getPhoto());
 					Main.setMerchant_acc_no(Main.getBank_account_no());
 					Main.setDetailed_address1(bankList.get().getDetailed_address1());
@@ -760,7 +760,7 @@ public class BankAndBranchMasterServices {
 					MerchantMasterMod Dmod = merchantMasterModRep.findByIdCustom(user.getMerchant_id());
 					Dmod.setEntity_flg('Y');
 					Dmod.setDel_flg('Y');
-					Dmod.setCurr("BWP");
+					Dmod.setCurr("MUR");
 					Dmod.setModify_user(USERID);
 					Dmod.setModify_time(new Date());
 					merchantMasterModRep.save(Dmod);
@@ -781,10 +781,13 @@ public class BankAndBranchMasterServices {
 					String[] delFlag = user.getDel_flag() == null ? null : user.getDel_flag().split(",");
 					up.setEntity_flg('N');
 					up.setModify_flg('N');
-					up.setCurr("BWP");
+					up.setCurr("MUR");
 					up.setDel_flg('N');
+					up.setHr_holdreject_flg('N');
 					up.setEntry_user(USERID);
 					up.setEntry_time(new Date());
+					up.setModify_user(USERID);
+					up.setModify_time(new Date());
 					if (!user.getStatus_enable().equals("Enable")) {
 						user.setFreeze_flg("Y");
 					} else {
