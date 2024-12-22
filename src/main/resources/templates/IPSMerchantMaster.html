@@ -709,6 +709,30 @@
 			background-color: #c6ccd2;
 			/* Background color for <td> elements */
 		}
+		.filterable .filters input[disabled] {
+	background-color: transparent;
+	border: none;
+	cursor: auto;
+	box-shadow: none;
+	padding: 0;
+	height: auto;
+}
+
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]::-moz-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]:-ms-input-placeholder {
+	color: #333;
+}
+
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
 
 	</style>
 
@@ -3922,6 +3946,7 @@
 				document.getElementById("merchant_type_vali").innerHTML = "Select Merchant Category Code";
 				returnValue = false;
 			}
+			returnValue = true;
 			if (returnValue == true) {
 				$("#one-panel").css("display", "none");
 				$("#four1-panel").css("display", "block");
@@ -6749,7 +6774,73 @@ function updateMerchant(value) {
 
 
 		}
+$(document)
+.ready(
+	function () {
+		$('.filterable .btn-filter')
+			.click(
+				function () {
+					var $panel = $(this).parents(
+						'.filterable'), $filters = $panel
+							.find('.filters input'), $tbody = $panel
+								.find('.table tbody');
+					if ($filters.prop('disabled') == true) {
+						$filters
+							.prop('disabled', false);
+						$filters.first().focus();
+					} else {
+						$filters.val('').prop(
+							'disabled', true);
+						$tbody.find('.no-result')
+							.remove();
+						$tbody.find('tr').show();
+					}
+				});
 
+		$('.filterable .filters input')
+			.keyup(
+				function (e) {
+					/* Ignore tab key */
+					var code = e.keyCode || e.which;
+					if (code == '9')
+						return;
+					/* Useful DOM data and selectors */
+					var $input = $(this), inputContent = $input
+						.val().toLowerCase(), $panel = $input
+							.parents('.filterable'), column = $panel
+								.find('.filters th')
+								.index($input.parents('th')), $table = $panel
+									.find('.table'), $rows = $table
+										.find('tbody tr');
+					/* Dirtiest filter function ever ;) */
+					var $filteredRows = $rows
+						.filter(function () {
+							var value = $(this)
+								.find('td').eq(
+									column)
+								.text()
+								.toLowerCase();
+							return value
+								.indexOf(inputContent) === -1;
+						});
+					/* Clean previous no-result if exist */
+					$table.find('tbody .no-result')
+						.remove();
+					/* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+					$rows.show();
+					$filteredRows.hide();
+					/* Prepend no-result row if all rows are filtered */
+					if ($filteredRows.length === $rows.length) {
+						$table
+							.find('tbody')
+							.prepend(
+								$('<tr class="no-result text-center"><td colspan="'
+									+ $table
+										.find('.filters th').length
+									+ '">No Record found</td></tr>'));
+					}
+				});
+	});
 
 
 
@@ -6766,40 +6857,27 @@ function updateMerchant(value) {
 			</div>
 		</div>
 		<div th:if="${formmode}=='list'" class="content">
-			<div class="card">
-				<div class="card-header">
-					<div class="float-left">
-						<h6 style="font-size: 1.2rem; color: white;">Merchant Master
-							List</h6>
-					</div>
-					<div class="btn-group nav-buttons float-right">
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle ml-2 commonBtnStyle" id="addBtn" onclick="AddModal(this)"
-							title="Add">Add</button>
-					</div>
-					<div class="btn-group nav-buttons float-right">
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle ml-2 commonBtnStyle" id="uploadBtn"
-							onclick="Uploadclick(this)" title="Upload">Upload</button>
-					</div>
-					<!-- <div class="btn-group nav-buttons float-right">
-				        <select class="form-control form-control-sm" id="actionDropdown" title="Select Action">
-				            <option value="" disabled selected>HOLD / REJECT</option>
-				            <option value="hold">HOLD</option>
-				            <option value="reject">REJECT</option>
-				        </select>
-				    </div>-->
-					<!--<div class="btn btn-default float-right" style="margin-top:-17px">
-						<img th:src=@{/images/HoldandReject.png} style="width: 40px; height: 40px"
-							onclick="holdrejectbtn(this)" title="Hold/Reject" id="snapShot" alt="Hold/Reject">
-					</div>-->
-					<div class="btn-group nav-buttons float-right">
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle ml-2 commonBtnStyle" id="uploadBtn"
+			<div class="card panel panel-primary filterable">
+				<div class="card-header p-1">
+					<div  class="dispayflexpropty">
+								<h6 class="headerh6 ">Merchant Master</h6>
+								<div class="">
+								<button type="button"
+							class="btn btn-sm  headerbutton ml-2 " id="uploadBtn"
 							onclick="holdrejectbtn(this)" title="Upload">Hold-Reject</button>
-					</div>
+								<button type="button" class="btn btn-sm  headerbutton ml-2 "
+							id="uploadBtn" onclick="Uploadclick(this)" title="Upload">Upload</button>
+								<button type="button" class="btn btn-sm  headerbutton ml-2 "
+							onclick="AddModal(this)" title="Add">Add</button>
+						<button type="button" class="btn btns btn-filter headerbutton">Filter</button></div>
+							</div>
+					
 				</div>
 
 				<div class="table mt-1 mb-0">
 					<div th:if="${#lists.isEmpty(bankDetail)}">
-						<table class="table table-bordered" id="usertable" style="table-layout: fixed; width: 100%;">
+						<table class="table table-bordered" id=""
+							style="table-layout: fixed; width: 100%;">
 							<thead>
 								<tr>
 									<th>Merchant ID</th>
@@ -6821,23 +6899,39 @@ function updateMerchant(value) {
 					</div>
 
 					<div th:if="${not #lists.isEmpty(bankDetail)}">
-						<table class="table table-striped table-bordered table-hover table-sm" id="usertable"
-							style="table-layout: fixed; width: 100%;">
+						<table class="table table-striped table-bordered table-hover table-sm"
+						
+							id="" style="table-layout: fixed; width: 100%;">
 							<thead>
-								<tr>
-									<th>Merchant ID</th>
-									<th>Mer Corp Name</th>
-									<th>Merchant Type</th>
-									<th>Mer Outlet Address</th>
-									<th>Status</th>
-									<th>QR Acceptance</th>
-									<th>Generate QR</th>
-									<th th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Select
-									</th>
-								</tr>
+								
+									<tr class="filters">
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Merchant ID"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Mer Corp Name"
+														disabled></th> 
+												<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold" placeholder="Merchant Type"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Mer Outlet Address"
+														disabled></th> 
+												
+														<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Status"
+														disabled></th> 
+														<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="QR Acceptance"
+														disabled></th> 
+														<th class="pb-2 select_th"> 
+													Generate QR</th> 
+											 	<th class="pb-2 select_th" th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Select</th>
+											</tr>
 							</thead>
 							<tbody>
-								<tr style="font-size: smaller;" th:each="bankList : ${bankDetail}" class="userlist">
+								<tr style="font-size: smaller;"
+									th:each="bankList : ${bankDetail}" class="userlist">
 									<th:block id="flag" th:switch="${bankList.entity_flg}">
 										<!-- Case for entity_flg == 'Y' -->
 										<td th:case="'Y'"
@@ -6876,22 +6970,23 @@ function updateMerchant(value) {
 									</th:block>
 									<td>
 										<!-- QR Acceptance Column --> <span
-											th:if="${bankList.type_maucas != null}">MAUCAS</span> <span
-											th:if="${bankList.type_upi != null}">UPI</span> <span
-											th:if="${bankList.type_maucas != null && bankList.type_upi != null}">MAUCAS,
+										th:if="${bankList.type_maucas != null}">MAUCAS</span> <span
+										th:if="${bankList.type_upi != null}">UPI</span> <span
+										th:if="${bankList.type_maucas != null && bankList.type_upi != null}">MAUCAS,
 											UPI</span> <span
-											th:if="${bankList.type_maucas == null && bankList.type_upi == null}">NOT
+										th:if="${bankList.type_maucas == null && bankList.type_upi == null}">NOT
 											AVAILABLE</span>
 									</td>
 
 									<td>
 										<div class="dropdown actionBtn">
-											<button class="btn btn-secondary dropdown-toggle" type="button"
-												id="dropdownMenuButton"
+											<button class="btn btn-secondary dropdown-toggle"
+												type="button" id="dropdownMenuButton"
 												style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
-												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">QR
-												Type</button>
-											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">QR Type</button>
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton"
 												style="background-color: #e3e3e4; color: #3a4550;">
 												<a class="dropdown-item" title="Static QR"
 													th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name}"
@@ -6919,14 +7014,16 @@ function updateMerchant(value) {
 											</div>
 										</div>
 									</td>
-									<td th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+									<td
+										th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
 										<div class="dropdown actionBtn">
-											<button class="btn btn-secondary dropdown-toggle" type="button"
-												id="dropdownMenuButton"
+											<button class="btn btn-secondary dropdown-toggle"
+												type="button" id="dropdownMenuButton"
 												style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
 												data-toggle="dropdown" aria-haspopup="true"
 												aria-expanded="false">Action</button>
-											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton"
 												style="background-color: #e3e3e4; color: #3a4550;">
 												<a class="dropdown-item" title="View"
 													th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'"
@@ -6971,9 +7068,11 @@ function updateMerchant(value) {
 				</div>
 				<div class="card-footer text-center">
 					<div class="float-center">
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle " id="btnHome"
+						<button type="button"
+							class="btn btn-sm headerbutton headerbutton " id=""
 							onclick="home();">Home</button>
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle " id="btnBack"
+						<button type="button"
+							class="btn btn-sm headerbutton headerbutton " id=""
 							onclick="home();">Back</button>
 					</div>
 				</div>
@@ -6981,17 +7080,25 @@ function updateMerchant(value) {
 		</div>
 
 		<div th:if="${formmode}=='HoldReject'" class="content">
-			<div class="card">
+			<div class="card panel panel-primary filterable">
 				<div class="card-header" >
-					<div class="float-left">
-						<h6 style="font-size: 1.2rem; color: white;">Hold / Reject
+				 
+						
+							
+							<div  class="dispayflexpropty">
+								<h6 class="headerh6">Hold / Reject
 							List</h6>
-					</div>
+								<div class="">
+								
+								<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
+								</div>
+							</div>
+				
 				</div>
 
 				<div class="table mt-1 mb-0">
 					<div th:if="${#lists.isEmpty(bankDetail)}">
-						<table class="table table-bordered" id="usertable" style="table-layout: fixed; width: 100%;">
+						<table class="table table-bordered" id="" style="table-layout: fixed; width: 100%;">
 							<thead>
 								<tr>
 									<th>Merchant ID</th>
@@ -7002,7 +7109,7 @@ function updateMerchant(value) {
 									<th>Select</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody> 
 								<tr>
 									<td colspan="6" style="text-align: center;">
 										<h4>No Data Found</h4>
@@ -7013,17 +7120,29 @@ function updateMerchant(value) {
 					</div>
 
 					<div th:if="${not #lists.isEmpty(bankDetail)}">
-						<table class="table table-striped table-bordered table-hover table-sm" id="usertable"
+						<table class="table table-striped table-bordered table-hover table-sm" id=""
 							style="table-layout: fixed; width: 100%;">
 							<thead>
-								<tr>
-									<th>Merchant ID</th>
-									<th>Mer Corp Name</th>
-									<th>Merchant Type</th>
-									<th>Mer Outlet Address</th>
-									<th>Status</th>
-									<th>Select</th>
-								</tr>
+							
+								<tr class="filters">
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Merchant ID"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Mer Corp Name"
+														disabled /></th> 
+												<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold" placeholder=">Merchant Type"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Mer Outlet Address"
+														disabled></th> 
+											
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Status"
+														disabled></th> 
+											 	<th class="pb-2 select_th" >Select</th>
+											</tr>
 							</thead>
 							<tbody>
 								<tr style="font-size: smaller;" th:each="bankList : ${bankDetail}" class="userlist">
@@ -9195,7 +9314,7 @@ function updateMerchant(value) {
 							<!-- Tab buttons -->
 						
 
-							<div style="margin-left: 100px; margin-top: 30px; margin-bottom: -20px">
+							<div style="margin-left: 100px; margin-bottom: -20px">
 								<div class="row formline">
 									<div class="col-sm-2">
 										<label for="merchant_legal_user_id">Merchant User Id<span
@@ -10458,11 +10577,9 @@ function updateMerchant(value) {
 											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 														DETAILS</h6>
 												</div>
-											</div>
-											<label></label>
-											<div class="row formline"></div>
+											</div> 
 											<div>
-												<div class="row formline">
+												<div class="row formline mt-2">
 													<label class="col-sm-2">Merchant Id</label>
 													<div class="col-sm-3">
 														<th:block th:switch="${branchDet?.entity_flg}">
@@ -10653,7 +10770,7 @@ function updateMerchant(value) {
 												</div>
 												<label></label>
 												<div>
-													<table class="table table-bordered" style="width: 100%"
+													<table class="table table-bordered mt-2" style="width: 100%"
 														id="Merchant_tbl">
 														<thead>
 															<tr style="background-color: rgb(192, 192, 192)">
@@ -11443,17 +11560,15 @@ function updateMerchant(value) {
 															</tr>
 														</tbody>
 													</table>
-												</div>
-												<label></label>
-												<div class="row formline"></div>
-												<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
+												</div> 
+												<div class=" mt-2 " style="background-color: white; color: #332d2d; display: flex; ">
 										<div class="float-left">
 											<h6 style="font-size: 1.2rem; font-weight: bold;">OUTLET
 															DETAILS</h6>
 													</div>
 												</div>
 												<label></label>
-												<div class="row formline">
+												<div class="row formline mt-2">
 													<label class="col-sm-2">Merchant BIPS Number</label>
 													<div class="col-sm-3">
 														<input type="text" id="merchant_id"
@@ -11592,7 +11707,7 @@ function updateMerchant(value) {
 													</div>
 												</div>
 												<label></label>
-												<div class="row formline">
+												<div class="row formline mt-2">
 													<label class="col-sm-2">Tip or Convenience
 														Indicator </label>
 													<div class="col-sm-3">
@@ -11653,16 +11768,15 @@ function updateMerchant(value) {
 															autocomplete="off" readonly>
 													</div>
 												</div>
-
-												<label></label>
+ 
 												<!--  div for upi fields -->
-												<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
+												<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
 										<div class="float-left">
 											<h6 style="font-size: 1.2rem; font-weight: bold;">UPI</h6>
 													</div>
 												</div>
 												<label></label>
-												<div class="row formline">
+												<div class="row formline mt-2">
 													<label class="col-sm-2">Version</label>
 													<div class="col-sm-3">
 														<input type="text" id="version" th:value="${branchDet?.version}"
@@ -12079,7 +12193,7 @@ function updateMerchant(value) {
 												</div>
 											</div>
 											<label></label>
-											<div class="row formline">
+											<div class="row formline mt-2">
 												<label class="col-sm-2">Bank Name 1</label>
 												<div class="col-sm-3">
 													<input class="form-control form-control-sm" id="bank_name"
@@ -12305,7 +12419,7 @@ function updateMerchant(value) {
 											</div>
 											<label></label>
 
-											<div class="row mb-3">
+											<div class="row mb-3 mt-2">
 												<div class="col-md-12 column">
 													<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
 										<div class="float-left">
@@ -12315,7 +12429,7 @@ function updateMerchant(value) {
 													</div>
 													<label></label>
 													<div th:if="${#lists.isEmpty(merchantFeeDetailses)}">
-														<table class="table table-bordered" style="width: 91%"
+														<table class="table table-bordered mt-2" style="width: 91%"
 															id="Merchant_detials2">
 															<tr>
 																<th style="background: border-box; color: black;">
@@ -12344,7 +12458,7 @@ function updateMerchant(value) {
 														</table>
 													</div>
 													<div th:if="${not #lists.isEmpty(merchantFeeDetailses)}">
-														<table class="table table-bordered" id="Merchant_detials2">
+														<table class="table table-bordered mt-2" id="Merchant_detials2">
 															<tr style="background-color: rgb(192, 192, 192)">
 																<th style="background: border-box; color: black;">
 																	<label>Fee Description</label>
@@ -12414,7 +12528,7 @@ function updateMerchant(value) {
 									</div>
 								</div>
 
-								<div id="tab3" class="tab-content">
+								<div id="tab3" class="tab-content panel panel-primary filterable">
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
@@ -12434,31 +12548,47 @@ function updateMerchant(value) {
 													readonly>
 											</div>
 										</div>
-										<div class="mt-2"
+										<div class="mt-2 mb-1 "
 											style="background-color: white; color: #332d2d; display: flex; justify-content: space-between; align-items: center;">
 											<div>
 												<h6 style="font-size: 1.2rem; font-weight: bold;">UNIT
 													MANAGEMENT</h6>
 											</div>
-											<div class="btn-group nav-buttons">
-												<button type="button" class="btn btn-sm btn-primary colorclass"
+											<div class="btn-group nav-buttons ">
+												<button type="button" class="btn btn-sm btn-primary mr-2 colorclass"
 													id="btnAdd" onclick="addUnitm(this);">Add Unit</button>
+													<button type="button" class="btn  btn-filter colorclass ">Filter</button>
 											</div>
 										</div>
 
-										<div>
+										<div class="">
 											<table class="table table-striped table-bordered  table-hover table-sm"
-												id="usertablepw" style="table-layout: fixed; width: 100%;">
+												id="" style="table-layout: fixed; width: 100%;">
 												<thead>
-													<tr>
-														<th>Unit Id</th>
-														<th>Unit Name</th>
-														<th>Email address</th>
-														<th>Location</th>
-														<th>Status</th>
-														<th>QR Code</th>
-														<th>Select</th>
-													</tr>
+													<thead>
+											
+														<tr class="filters">
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Unit Id"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Unit Name"
+														disabled></th> 
+												<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold" placeholder="Email address"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Location"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Status"
+														disabled></th> 
+														<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="QR Code"
+														disabled></th> 
+											 	<th class="pb-2 select_th" >Select</th>
+											</tr>
+												 
 												</thead>
 												<tbody>
 													<tr th:each=" unitl : ${MerchantUnit}">
@@ -12550,13 +12680,14 @@ function updateMerchant(value) {
 									</div>
 								</div>
 
-								<div id="tab4" class="tab-content">
+								<div id="tab4" class="tab-content panel panel-primary filterable">
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
 												<label for="merchant_legal_user_id">Merchant User Id</label>
 											</div>
 											<div class="col-sm-3">
+
 												<input type="text" id="merchant_user_id1" th:value="${MerchantIdUse}"
 													class="form-control form-control-sm" readonly>
 											</div>
@@ -12570,28 +12701,43 @@ function updateMerchant(value) {
 													readonly>
 											</div>
 										</div>
-										<div class="MT-2" style="background-color: white; color: #332d2d;display: flex; justify-content: space-between; align-items: center; ">
+										<div class="mt-1 mb-1" style="background-color: white; color: #332d2d;display: flex; justify-content: space-between; align-items: center; ">
 										<div>
 											<h6 style="font-size: 1.2rem; font-weight: bold;">USER
+
 													MANAGEMENT</h6>
 											</div>
 											<div>
-												<button type="button" class="btn btn-sm btn-primary colorclass" id="btnAdd"
-													style="margin-top: -5px" onclick="addUserm(this);">Add User</button>
+												<button type="button" class="btn btn-sm btn-primary colorclass mr-2" id="btnAdd"
+													  onclick="addUserm(this);">Add User</button>
+													<button type="button" class="btn btns btn-filter colorclass ">Filter</button>
 											</div>
 										</div>
 										<div>
 											<table class="table table-striped table-bordered  table-hover table-sm"
-												id="usertable22" style="table-layout: fixed; width: 100%;">
+												id="" style="table-layout: fixed; width: 100%;">
 												<thead>
-													<tr>
-														<th>User Id</th>
-														<th>User Name</th>
-														<th>Unit Id</th>
-														<th>Unit Name</th>
-														<th>Status</th>
-														<th>Select</th>
-													</tr>
+												
+														<tr class="filters">
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="User Id"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="User Name"
+														disabled></th> 
+												<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold" placeholder="Unit Id"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Unit Name"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Status"
+														disabled></th> 
+													
+											 	<th class="pb-2 select_th" >Select</th>
+											</tr>
+											
 												</thead>
 												<tbody>
 													<tr th:each="User : ${pro}">
@@ -12668,7 +12814,7 @@ function updateMerchant(value) {
 									</div>
 								</div>
 
-								<div id="tab5" class="tab-content">
+								<div id="tab5" class="tab-content panel panel-primary filterable">
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
@@ -12690,27 +12836,45 @@ function updateMerchant(value) {
 										</div>
 										<div class="mt-2" style="background-color: white; color: #332d2d; display: flex;justify-content: space-between; align-items: center;  ">
 										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">DEVICE
+											<h6 style="font-size: 1.2rem; font-weight: bold; ">DEVICE
 													MANAGEMENT</h6>
 											</div>
-											<div class="btn-group nav-buttons float-right">
-												<button type="button" class="btn btn-sm btn-primary colorclass" id="btnAdd"
+											<!-- <div class="btn-group nav-buttons float-right ">
+												<button type="button" class="btn btn-sm btn-primary colorclass m-2"  id="btnAdd"
 													onclick="addDevicem(this);">Add Device</button>
+													<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
+											</div> -->
+	<div>
+												<button type="button" class="btn btn-sm btn-primary colorclass mr-2" id="btnAdd"
+													  onclick="addDevicem(this);">Add Device</button>
+													<button type="button" class="btn btns btn-filter colorclass m-1 ">Filter</button>
 											</div>
-
 										</div>
 										<div>
 											<table class="table table-striped table-bordered  table-hover table-sm"
-												id="usertable1" style="table-layout: fixed; width: 100%;">
+												id="" style="table-layout: fixed; width: 100%;">
 												<thead>
-													<tr>
-														<th>Device Id</th>
-														<th>Default Status</th>
-														<th>Unit Id</th>
-														<th>Unit Name</th>
-														<th>Status</th>
-														<th>Select</th>
-													</tr>
+											
+										
+														<tr class="filters">
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Device Id"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Default Status"
+														disabled></th> 
+												<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold" placeholder="Unit Id"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Unit Name"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Status"
+														disabled></th> 
+													
+											 	<th class="pb-2 select_th" >Select</th>
+											</tr>
 												</thead>
 												<tbody>
 													<tr th:each="Device : ${MerchantDevi}">
@@ -12784,7 +12948,7 @@ function updateMerchant(value) {
 									</div>
 								</div>
 
-								<div id="tab6" class="tab-content">
+								<div id="tab6" class="tab-content panel panel-primary filterable">
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
@@ -12806,24 +12970,53 @@ function updateMerchant(value) {
 											</div>
 										</div>
 
-										<div class="mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<!-- <div class="mt-2" style="background-color: white; color: #332d2d; display: flex; ">
 										<div class="float-left">
 											<h6 style="font-size: 1.2rem; font-weight: bold;">PASSWORD
 													MANAGEMENT</h6>
 											</div>
-										</div>
-										<table class="table table-bordered  table-hover table-sm" id="user20"
+											<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
+										</div> -->
+																				<div class="mt-2" style="background-color: white; color: #332d2d; display: flex;justify-content: space-between; align-items: center;  ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">PASSWORD
+													MANAGEMENT</h6>
+											</div>
+											
+													<button type="button" class="btn btns btn-filter colorclass m-1 ">Filter</button>
+											</div>
+										
+
+
+
+
+
+										<table class="table table-bordered  table-hover table-sm" id=""
 											style="table-layout: fixed; width: 100%;">
 											<thead>
-												<tr>
-													<th>Representative Id</th>
-													<th>Representative Name</th>
-													<th>Mobile Number</th>
-													<th>Email address</th>
-													<th>Category</th>
-													<th>Status</th>
-													<th>Select</th>
-												</tr>
+											
+														<tr class="filters">
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Representative Id"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Representative Name"
+														disabled></th> 
+												<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold" placeholder="Mobile Number"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Email address"
+														disabled></th> 
+															<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Category"
+														disabled></th> 
+												<th style="text-align: center"> <input type="text"
+														class="form-control font-weight-bold" placeholder="Status"
+														disabled></th> 
+													
+											 	<th class="pb-2 select_th" >Select</th>
+											</tr>
 											</thead>
 											<tbody>
 												<tr th:each=" Pass : ${propass}">
@@ -12968,9 +13161,9 @@ function updateMerchant(value) {
 
 			<div class="content">
 				<div class="card">
-					<div class="card-header">
-						<div class="float-left">
-							<h4 style="color: white; font-size: 1.5rem;">Merchant Master
+						<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">Merchant Master
 								- Unit Management</h4>
 						</div>
 					</div>
@@ -14375,9 +14568,9 @@ function updateMerchant(value) {
 
 			<div class="content">
 				<div class="card">
-					<div class="card-header">
-						<div class="float-left">
-							<h4 style="color: white; font-size: 1.5rem;">Merchant Master
+					<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">Merchant Master
 								- User Management</h4>
 						</div>
 					</div>
@@ -15220,9 +15413,9 @@ function updateMerchant(value) {
 			</div>
 			<div class="content">
 				<div class="card">
-					<div class="card-header">
-						<div class="float-left">
-							<h4 style="color: white; font-size: 1.5rem;">Merchant Master
+						<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">Merchant Master
 								- Device Management</h4>
 						</div>
 					</div>
@@ -15938,7 +16131,7 @@ function updateMerchant(value) {
 
 		<div th:if="${formmode}=='edit'" class="content" style="margin-right: 10px;">
 			<div class="card">
-				<div class="card-header">
+			<div class="card-header">
 					<div class="float-left">
 						<h4 style="color: white; font-size: 1.5rem;">Merchant Master
 							- Modify</h4>
@@ -15947,7 +16140,7 @@ function updateMerchant(value) {
 				<form action="#" th:object="${branchDet}" method="POST" autocomplete="off" id="BankandBranchedit">
 					<div class="panels">
 						<div class="panel" id="one-panel">
-							<div class="card-body pt-0">
+							<div class="card-body mt-2">
 								<div class=" " style="background-color: white; color: #332d2d; display: flex; ">
 										<div class="float-left">
 											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
@@ -16170,7 +16363,7 @@ function updateMerchant(value) {
 
 								</div>
 								<label></label>
-								<table class="table table-bordered" style="width: 100%" id="Merchant_tbl"
+								<table class="table table-bordered mt-2" style="width: 100%" id="Merchant_tbl"
 									th:if="${formmode}=='edit'">
 									<thead>
 										<tr>
@@ -16847,16 +17040,15 @@ function updateMerchant(value) {
 										</tr>
 
 									</tbody>
-								</table>
-								<label></label>
-								<div class="card-header">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">OUTLET
+								</table> 
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">OUTLET
 											DETAILS</h6>
 									</div>
 								</div>
 								<label></label>
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Merchant BIPS Number<span
 											style="color: red; font-size: 20px;">*</span></label>
 									<div class="col-sm-3">
@@ -16948,13 +17140,13 @@ function updateMerchant(value) {
 								</div>
 								<label></label>
 
-								<div class="card-header">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MAUCAS</h6>
+								<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MAUCAS</h6>
 									</div>
 								</div>
 								<label></label>
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Tip or Convenience Indicator </label>
 									<div class="col-sm-3">
 										<select name="tip_or_conv_indicator" id="tip_or_conv_indicator"
@@ -17013,14 +17205,14 @@ function updateMerchant(value) {
 								</div>
 								<label></label>
 
-								<div class="card-header mt-3">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">UPI</h6>
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">UPI</h6>
 									</div>
 								</div>
 								<label></label>
 
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Version</label>
 									<div class="col-sm-3">
 										<input type="text" id="version" th:value="${branchDet?.version}"
@@ -17254,9 +17446,9 @@ function updateMerchant(value) {
 									</div>
 								</div>
 								<label></label>
-								<div class="card-header mt-3">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">DOCUMENT
+								<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">DOCUMENT
 											DETAILS</h6>
 									</div>
 									<!-- <div class="float-right">
@@ -17330,9 +17522,9 @@ function updateMerchant(value) {
 																			</table>
 																		</div>
 
-																		<div class="card-header ">
-																			<div class="float-left">
-																				<h6 style="font-size: 1.2rem; color: white;">SIGNATURE
+																			<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">SIGNATURE
 																					DETAILS</h6>
 																			</div>
 																		</div>
@@ -17376,14 +17568,14 @@ function updateMerchant(value) {
 						<div class="panel" id="four1-panel" style="display: none;">
 							<div class="card-body">
 								<div class="row formline"></div>
-								<div class="card-header">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+								<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 											BANK DETAILS</h6>
 									</div>
 								</div>
 								<label></label>
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Bank Name 1<span
 											style="color: red; font-size: 20px;">*</span></label>
 									<div class="col-sm-3">
@@ -17623,9 +17815,9 @@ function updateMerchant(value) {
 								</div>
 								<div class="row">
 									<div class="col-md-12 column">
-										<div class="card-header mt-3">
-											<div class="float-left">
-												<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+											<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 													FEES DETAILS</h6>
 											</div>
 
@@ -17640,7 +17832,7 @@ function updateMerchant(value) {
 											</div>
 										</div>
 										<label></label>
-										<table class="table table-bordered" id="Merchant_detials1">
+										<table class="table table-bordered mt-2" id="Merchant_detials1">
 											<tr>
 												<th style="background: border-box; color: black;"><label>Fee
 														Description</label></th>
@@ -17815,14 +18007,14 @@ function updateMerchant(value) {
 					<div class="panels">
 						<div class="panel" id="one-panel">
 							<div class="card-body pt-0">
-								<div class="card-header mt-3">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 											DETAILS</h6>
 									</div>
 								</div>
 								<label></label>
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Merchant Id</label>
 									<div class="col-sm-3">
 										<input type="text" id="merchant_legal_id_n"
@@ -17980,14 +18172,14 @@ function updateMerchant(value) {
 									</div>
 								</div>
 								<label></label>
-								<div class="card-header mt-3">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 											CONTACT DETAILS</h6>
 									</div>
 								</div>
 								<label></label>
-								<table class="table table-bordered" style="width: 100%" id="Merchant_tblverify">
+								<table class="table table-bordered mt-2" style="width: 100%" id="Merchant_tblverify">
 									<thead>
 										<tr>
 											<th style="background: border-box; color: black;"><label>
@@ -18592,16 +18784,15 @@ function updateMerchant(value) {
 													name="send_notifi_r10" class="ml-4" type="checkbox" disabled></td>
 										</tr>
 									</tbody>
-								</table>
-								<label></label>
-								<div class="card-header">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">OUTLET
+								</table> 
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">OUTLET
 											DETAILS</h6>
 									</div>
 								</div>
 								<label></label>
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Merchant BIPS Number</label>
 									<div class="col-sm-3">
 										<input type="text" id="merchant_id" th:value="${branchDet?.merchant_id}"
@@ -18703,16 +18894,14 @@ function updateMerchant(value) {
 											class="form-control form-control-sm" name="merchant_out_addr_2"
 											autocomplete="off" readonly>
 									</div>
-								</div>
-								<label></label>
-
-								<div class="card-header">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MAUCAS</h6>
+								</div> 
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MAUCAS</h6>
 									</div>
 								</div>
 								<label></label>
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Tip or Convenience Indicator </label>
 									<div class="col-sm-3">
 										<select name="tip_or_conv_indicator" id="tip_or_conv_indicator"
@@ -18768,17 +18957,16 @@ function updateMerchant(value) {
 											<option value="Dynamic">Dynamic</option>
 										</select>
 									</div>
-								</div>
-								<label></label>
+								</div> 
 
-								<div class="card-header mt-3">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">UPI</h6>
+								<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">UPI</h6>
 									</div>
 								</div>
 								<label></label>
 
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Version</label>
 									<div class="col-sm-3">
 										<input type="text" id="version" th:value="${branchDet?.version}"
@@ -19022,9 +19210,9 @@ function updateMerchant(value) {
 									</div>
 								</div>
 								<label></label>
-								<div class="card-header mt-3">
-																			<div class="float-left pt-2">
-																				<h6 style="font-size: 1.2rem; color: white;">DOCUMENT
+								<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">DOCUMENT
 																					DETAILS</h6>
 																			</div>
 																			<!-- <div class="float-right">
@@ -19070,7 +19258,7 @@ function updateMerchant(value) {
 																							class="rowDataField">18-JUN-2018</td>
 																						<td th:text="${Doocument?.expiry_date}"
 																							class="rowDataField">15-JUN-2023</td>
-																						<td
+																						<td class="rowDataField"
 																							th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
 																							<img th:src=@{/images/info.png}
 																								style="width: 30px; height: 30px"
@@ -19079,7 +19267,7 @@ function updateMerchant(value) {
 																								data-toggle="modal"
 																								data-target=".bd-example-modal-lg">
 																						</td>
-																						<td
+																						<td class="rowDataField"
 																							th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
 																							<a th:href="@{'/' + ${Doocument?.unique_id}}"
 																								style="text-decoration: none; color: DodgerBlue;">
@@ -19098,9 +19286,9 @@ function updateMerchant(value) {
 																			</table>
 																		</div>
 
-																		<div class="card-header ">
-																			<div class="float-left">
-																				<h6 style="font-size: 1.2rem; color: white;">SIGNATUREf
+																			<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">SIGNATURE
 																					DETAILS</h6>
 																			</div>
 																		</div>
@@ -19144,14 +19332,14 @@ function updateMerchant(value) {
 						<div class="panel" id="four1-panel" style="display: none;">
 							<div class="card-body">
 								<div class="row formline"></div>
-								<div class="card-header">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 											BANK DETAILS</h6>
 									</div>
 								</div>
 								<label></label>
-								<div class="row formline">
+								<div class="row formline mt-2">
 									<label class="col-sm-2">Bank Name 1</label>
 									<div class="col-sm-3">
 										<input class="form-control form-control-sm" id="bank_name" name="bank_name"
@@ -19373,14 +19561,15 @@ function updateMerchant(value) {
 								<label></label>
 								<div class="row">
 									<div class="col-md-12 column">
-										<div class="card-header mt-3">
-											<div class="float-left">
-												<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+										<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">
+												MERCHANT
 													FEES DETAILS</h6>
 											</div>
 										</div>
 										<label></label>
-										<table class="table table-bordered" style="width: 91%" id="Merchant_detials1">
+										<table class="table table-bordered mt-2" style="width: 91%" id="Merchant_detials1">
 											<thead>
 												<tr>
 													<th style="background: border-box; color: black;"><label>Fee
@@ -19519,9 +19708,9 @@ function updateMerchant(value) {
 					<div class="panels">
 						<div class="panel" id="one-panel">
 							<div class="card-body pt-0">
-								<div class="card-header mt-3">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 											DETAILS</h6>
 									</div>
 								</div>
@@ -19656,9 +19845,9 @@ function updateMerchant(value) {
 									</div>
 								</div>
 								<label></label>
-								<div class="card-header mt-3">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; color: white;">MERCHANT
+									<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex; ">
+										<div class="float-left">
+											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
 											CONTACT DETAILS</h6>
 									</div>
 								</div>
@@ -21482,7 +21671,7 @@ function updateMerchant(value) {
 		</div>
 	</div>
 
-
+<!-- 
 	<div class="modal fade" id="slabRateModel" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
@@ -21517,6 +21706,65 @@ function updateMerchant(value) {
 						style="margin-right: 45%;">Close</button>
 				</div>
 
+			</div>
+		</div>
+	</div> -->
+
+
+
+	<div class="modal fade" id="slabRateModel" data-backdrop="static" data-keyboard="false"
+		style="background: #000000b0;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px">
+					<table style="width: 90%; border-collapse: collapse; background-color: #f26223;">
+						<thead>
+							<tr>
+								<th style="font-size: 15px;">S.No</th>
+								<th  style="font-size: 15px;">Start Rate</th>
+								<th  style="font-size: 15px;">End Rate</th>
+								<th  style="font-size: 15px;">Charges</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+								<td><input type="text" style="width: 100%;"></td>
+							</tr>
+						</tbody>
+					</table>
+				</h4>
+				<div class="text-center">
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;"
+						data-dismiss="modal">Submit</button>
+				</div>
 			</div>
 		</div>
 	</div>
