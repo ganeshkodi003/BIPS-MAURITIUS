@@ -447,12 +447,22 @@ function fnsubmit(button) {
 									th:text="${merchantProfile.merchant_code != null ? merchantProfile.merchant_code.toUpperCase() : ''}"></td>
 								<td
 									th:text="${merchantProfile.merchant_desc != null ? merchantProfile.merchant_desc.toUpperCase() : ''}"></td>
+									
 								<td
+											th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+											<a href="#" data-toggle="tooltip" class="editrec"
+											th:attr="data-merchantdesc=${merchantProfile.merchant_desc}"
+											> <!-- Replace the Font Awesome icon with an image -->
+												<img style="width: 16px; height: 16px;"
+												th:src="@{/images/Edit.png}" alt="Edit">
+										</a>
+										</td>
+								<!-- <td
 									th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
 									<input type="radio" id="btnclick" class="editrec"
 									style="cursor: pointer;"
 									th:attr="data-merchantdesc=${merchantProfile.merchant_desc}" />
-								</td>
+								</td> -->
 								<td
 									th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
 									<a href="#" data-toggle="tooltip" onclick="fndelete(this);"

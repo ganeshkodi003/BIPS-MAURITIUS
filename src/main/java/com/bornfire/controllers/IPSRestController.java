@@ -1891,29 +1891,90 @@ public class IPSRestController {
 
 			return response;
 		}
+		/*
+		 * @GetMapping("/{uniqueId}")
+		 * 
+		 * @ResponseBody public ResponseEntity<ByteArrayResource>
+		 * viewOrDownloadFile(@PathVariable String uniqueId) {
+		 * System.out.println("Unique ID: " + uniqueId);
+		 * 
+		 * DocumentMaster_Entity document = documentMaster_Repo.findByUnique1(uniqueId);
+		 * 
+		 * if (document != null) { byte[] documentContent = document.getUpd_file();
+		 * String fileName = document.getFile_name(); String fileType =
+		 * determineFileType(fileName);
+		 * 
+		 * // Log the file type System.out.println("File Type: " + fileType);
+		 * 
+		 * ByteArrayResource resource = new ByteArrayResource(documentContent); return
+		 * ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+		 * "inline; filename=\"" + fileName + "\"")
+		 * .contentType(MediaType.parseMediaType(fileType)).contentLength(
+		 * documentContent.length) .header(HttpHeaders.CACHE_CONTROL,
+		 * "no-cache, no-store, must-revalidate") .header(HttpHeaders.PRAGMA,
+		 * "no-cache").header(HttpHeaders.EXPIRES, "0").body(resource); } else { return
+		 * ResponseEntity.notFound().build(); } }
+		 */
+		
 		@GetMapping("/{uniqueId}")
 		@ResponseBody
 		public ResponseEntity<ByteArrayResource> viewOrDownloadFile(@PathVariable String uniqueId) {
-			System.out.println("Unique ID: " + uniqueId);
+		    System.out.println("Unique ID: " + uniqueId);
 
-			DocumentMaster_Entity document = documentMaster_Repo.findByUnique1(uniqueId);
+		    if (uniqueId == null || uniqueId.isEmpty()) {
+		        System.err.println("Unique ID is null or empty.");
+		        return ResponseEntity.badRequest().build();
+		    }
 
-			if (document != null) {
-				byte[] documentContent = document.getUpd_file();
-				String fileName = document.getFile_name();
-				String fileType = determineFileType(fileName);
+		    DocumentMaster_Entity document = documentMaster_Repo.findByUnique1(uniqueId);
 
-				// Log the file type
-				System.out.println("File Type: " + fileType);
+		    if (document != null) {
+		        byte[] documentContent = document.getUpd_file();
+		        String fileName = document.getFile_name();
+		        String fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
 
-				ByteArrayResource resource = new ByteArrayResource(documentContent);
-				return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
-						.contentType(MediaType.parseMediaType(fileType)).contentLength(documentContent.length)
-						.header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
-						.header(HttpHeaders.PRAGMA, "no-cache").header(HttpHeaders.EXPIRES, "0").body(resource);
-			} else {
-				return ResponseEntity.notFound().build();
-			}
+		        // Determine file type
+		        String contentType;
+		        switch (fileExtension) {
+		            case "pdf":
+		                contentType = "application/pdf";
+		                break;
+		            case "xls":
+		            case "xlsx":
+		                contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+		                break;
+		            case "jpeg":
+		            case "jpg":
+		                contentType = "image/jpeg";
+		                break;
+		            case "png":
+		                contentType = "image/png";
+		                break;
+		            default:
+		                contentType = "application/octet-stream";
+		        }
+
+		        ByteArrayResource resource = new ByteArrayResource(documentContent);
+
+		        HttpHeaders headers = new HttpHeaders();
+		        headers.setContentType(MediaType.parseMediaType(contentType));
+
+		        if ("pdf".equals(fileExtension)) {
+		            // Inline for PDF
+		            headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
+		        } else {
+		            // Attachment for others (including images)
+		            headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
+		        }
+
+		        return ResponseEntity.ok()
+		                .headers(headers)
+		                .contentLength(documentContent.length)
+		                .body(resource);
+		    } else {
+		        System.err.println("Document not found for uniqueId: " + uniqueId);
+		        return ResponseEntity.notFound().build();
+		    }
 		}
 
 		private String determineFileType(String fileName) {

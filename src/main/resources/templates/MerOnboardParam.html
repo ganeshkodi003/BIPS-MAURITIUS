@@ -1,315 +1,311 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="summary">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
-		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
-		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
-	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
-		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 
-	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
-		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
-		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
-		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
 
-	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
-		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
 
-	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
-		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
 
-	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
-		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
-	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
-		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 
 
-	<script src="js/bootstrap411.js"></script>
-	<script src="js/Chart.js"></script>
+<script src="js/bootstrap411.js"></script>
+<script src="js/Chart.js"></script>
 
-	<style>
-		.checkbox-group {
-			display: flex;
-			flex-direction: column;
-			/* Stack checkboxes in a vertical column */
-			gap: 15px;
-			/* Space between checkboxes */
-		}
+<style>
+.checkbox-group {
+	display: flex;
+	flex-direction: column;
+	/* Stack checkboxes in a vertical column */
+	gap: 15px;
+	/* Space between checkboxes */
+}
 
-		.checkbox-label .label-text {
-			background-color: transparent;
-			/* Remove background color from label text */
-			color: black;
-			/* Optional: Set text color if needed */
-		}
+.checkbox-label .label-text {
+	background-color: transparent;
+	/* Remove background color from label text */
+	color: black;
+	/* Optional: Set text color if needed */
+}
 
-		.checkbox-label {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			width: 100%;
-			/* Ensure it takes up full width */
-		}
+.checkbox-label {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	/* Ensure it takes up full width */
+}
 
-		.checkbox-label span {
-			display: inline-block;
-			width: 20px;
-			/* Adjust the size of the circle */
-			height: 20px;
-			/* Adjust the size of the circle */
-			border-radius: 50%;
-			/* Makes the span circular */
-			background-color: lightgray;
-			/* Change to your desired background color */
-			color: black;
-			/* Text color */
-			line-height: 20px;
-			/* Centers the text vertically */
-			margin-left: 5px;
-			/* Space between the checkbox and the circle */
-		}
+.checkbox-label span {
+	display: inline-block;
+	width: 20px;
+	/* Adjust the size of the circle */
+	height: 20px;
+	/* Adjust the size of the circle */
+	border-radius: 50%;
+	/* Makes the span circular */
+	background-color: lightgray;
+	/* Change to your desired background color */
+	color: black;
+	/* Text color */
+	line-height: 20px;
+	/* Centers the text vertically */
+	margin-left: 5px;
+	/* Space between the checkbox and the circle */
+}
 
-		.aln {
-			text-align: center;
-		}
+.aln {
+	text-align: center;
+}
 
-		.checkbox-label input[type="checkbox"] {
-			margin-left: 10px;
-			/* Spacing between checkbox and label */
-			width: 20px;
-			height: 20px;
-		}
+.checkbox-label input[type="checkbox"] {
+	margin-left: 10px;
+	/* Spacing between checkbox and label */
+	width: 20px;
+	height: 20px;
+}
 
-		.checkbox-label .serial {
-			margin-left: 10px;
-		}
+.checkbox-label .serial {
+	margin-left: 10px;
+}
 
-		.label-text {
-			flex: 1;
-			/* Ensure the label text takes up the remaining space */
-		}
+.label-text {
+	flex: 1;
+	/* Ensure the label text takes up the remaining space */
+}
 
-		.checkbox-label span {
-			margin-left: 10px;
-			display: inline-block;
-		}
+.checkbox-label span {
+	margin-left: 10px;
+	display: inline-block;
+}
 
-		.row.formline {
-			margin-top: 20px;
-			/* Adjust space around rows if needed */
-		}
-	</style>
-	<style>
-		body {
-			background-color: lightgrey;
-		}
+.row.formline {
+	margin-top: 20px;
+	/* Adjust space around rows if needed */
+}
+</style>
+<style>
+body {
+	background-color: lightgrey;
+}
 
-		.h2,
-		h2 {
-			font-size: 2rem;
-			background-color: #555;
-			color: white;
-		}
+.h2, h2 {
+	font-size: 2rem;
+	background-color: #555;
+	color: white;
+}
 
-		.tag-btn {
-			font-size: 10px;
-			text-transform: uppercase;
-			font-weight: bold;
-			color: #fff;
-			cursor: pointer;
-			z-index: 5;
-			position: relative;
-			padding: 10px;
-			margin: 0;
-			line-height: 5px;
-			-webkit-transition: all 0.2s ease-in-out;
-			-moz-transition: all 0.2s ease-in-out;
-			-o-transition: all 0.2s ease-in-out;
-			-ms-transition: all 0.2s ease-in-out;
-			transition: all 0.2s ease-in-out;
-			background-color: #F08080;
-			border: none;
-			color: #fff;
-			box-shadow: none;
-		}
+.tag-btn {
+	font-size: 10px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+	z-index: 5;
+	position: relative;
+	padding: 10px;
+	margin: 0;
+	line-height: 5px;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	background-color: #F08080;
+	border: none;
+	color: #fff;
+	box-shadow: none;
+}
 
-		.pagebut {
-			margin-top: 1%;
-			/*  width: 58%;  */
-			padding: 1% 1%;
-			background-color: #2e455d;
-			color: white;
-		}
+.pagebut {
+	margin-top: 1%;
+	/*  width: 58%;  */
+	padding: 1% 1%;
+	background-color: #2e455d;
+	color: white;
+}
 
-		select {
-			width: 150px;
-			margin: 10px;
-		}
+select {
+	width: 150px;
+	margin: 10px;
+}
 
-	 
+table.dataTable thead th, table.dataTable tfoot th {
+	font-weight: normal;
+}
 
-		table.dataTable thead th,
-		table.dataTable tfoot th {
-			font-weight: normal;
-		}
+table.table .thead-light th {
+	font-size: 13px;
+	border-color: #d4d7da;
+}
 
-		table.table .thead-light th {
-			font-size: 13px;
-			border-color: #d4d7da;
-		}
+select:focus {
+	min-width: 150px;
+	width: auto;
+}
 
-		select:focus {
-			min-width: 150px;
-			width: auto;
-		}
+#hidden_div {
+	display: none;
+}
 
-		#hidden_div {
-			display: none;
-		}
+table th {
+	color: black;
+	font-weight: 500px;
+	font-size: small;
+}
 
-		table th {
-			color: black;
-			font-weight:500px;
-			font-size: small;
-		}
+table td {
+	font-size: small;
+}
 
-		table td {
-			font-size: small;
-		}
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 18.3%;
+	margin-top: 80px;
+}
 
-		.container-manager {
-			padding-right: 43px;
-			padding-left: 15px;
-			margin-right: auto;
-			margin-left: 18.3%;
-			margin-top: 80px;
-		}
+input[type="text"] {
+	line-height: 15px;
+	font-size: small;
+	height: 25px;
+}
 
-		input[type="text"] {
-			line-height: 15px;
-			font-size: small;
-			height: 25px;
-		}
+.dataTables_empty {
+	color: #be3232;
+}
 
-		.dataTables_empty {
-			color: #be3232;
-		}
+#overlay {
+	position: fixed;
+	top: 0;
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background: rgba(0, 0, 0, 0.6);
+}
 
-		#overlay {
-			position: fixed;
-			top: 0;
-			z-index: 100;
-			width: 100%;
-			height: 100%;
-			display: none;
-			background: rgba(0, 0, 0, 0.6);
-		}
+.cv-spinner {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-		.cv-spinner {
-			height: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-
-		.spinner {
-			/* width: 40px;
+.spinner {
+	/* width: 40px;
 	height: 40px;
 	border: 4px #00343d solid;
 	border-top: 4px #181818 solid;
 	border-radius: 50%;
 	animation: sp-anime 0.8s infinite linear; */
+	
+}
 
-		}
+@
+keyframes sp-anime { 100% {
+	transform: rotate(360deg);
+}
 
-		@keyframes sp-anime {
-			100% {
-				transform: rotate(360deg);
-			}
+}
 
-		}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
 
-		/* Chrome, Safari, Edge, Opera */
-		input::-webkit-outer-spin-button,
-		input::-webkit-inner-spin-button {
-			-webkit-appearance: none;
-			margin: 0;
-		}
+#usertable {
+	border-collapse: separate;
+	border-spacing: 0;
+}
 
-		#usertable {
-			border-collapse: separate;
-			border-spacing: 0;
-		}
+#usertable tr {
+	border-bottom: 1px solid #808080;
+}
 
-		#usertable tr {
-			border-bottom: 1px solid #808080;
-		}
+#usertable td, #usertable th {
+	border: 2px solid #095776;
+	padding: 15px;
+}
 
-		#usertable td,
-		#usertable th {
-			border: 2px solid #095776;
-			padding: 15px;
-		}
+#usertable th:last-child, #usertable td:last-child {
+	border-right: none;
+}
 
-		#usertable th:last-child,
-		#usertable td:last-child {
-			border-right: none;
-		}
+.dataTables_scrollBody {
+	overflow: unset !important;
+}
 
-		.dataTables_scrollBody {
-			overflow: unset !important;
-		}
+td {
+	font-size: small;
+}
 
-		td {
-			font-size: small;
-		}
+th {
+	color: black;
+	font-size: medium;
+}
 
-		th {
-			color:black;
-			
-			font-size: medium;
-		}
+table, tr {
+	border-collapse: collapse;
+	width: 100%;
+}
 
-		table,
-		tr {
-			border-collapse: collapse;
-			width: 100%;
-		}
+th, td {
+	border: 1px solid #dddddd;
+	padding: 12px;
+	text-align: left;
+}
 
-		th,
-		td {
-			border: 1px solid #dddddd;
-			padding: 12px;
-			text-align: left;
-		}
+#usertable_wrapper .dataTables_filter input[type="search"] {
+	/* Adjust the value as needed */
+	margin-left: -10px;
+}
 
-		#usertable_wrapper .dataTables_filter input[type="search"] {
-			/* Adjust the value as needed */
-			margin-left: -10px;
-		}
+.dataTables_wrapper .dataTables_filter {
+	float: right;
+	margin-right: 20px;
+}
 
-		.dataTables_wrapper .dataTables_filter {
-			float: right;
-			margin-right: 20px;
+.dataTables_filter input {
+	color: black;
+	background-color: white;
+}
 
-		}
-
-		.dataTables_filter input {
-			color: black;
-			background-color: white;
-		}
-
-		.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
-			color: black;
-			font-style: italic;
-		}
-	</style>
+.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder
+	{
+	color: black;
+	font-style: italic;
+}
+</style>
 </head>
 
 <script th:inline="javascript">
@@ -623,9 +619,10 @@
 			<div class="panels mb-0 pb-0">
 				<div class="panel" id="one-panel">
 					<div class="card-body pt-0 mb-0">
-						<div class="card-header mt-1" style="height:40px">
+						<div class="card-header mt-1" style="height: 40px">
 							<div class="float-left">
-								<h6 style="font-size: 1.2rem; color: white;height:50px;">Check List</h6>
+								<h6 style="font-size: 1.2rem; color: white; height: 50px;">Check
+									List</h6>
 							</div>
 
 						</div>
@@ -704,69 +701,160 @@
 							</div>
 						</div>
 						<div class="mt-1 mb-0">
-							<table class="table " style="width: 100%; border-color: 10px solid black;">
-								<thead style="font-size: 13px;font-weight:700;">
+							<table class="table "
+								style="width: 100%; border-color: 10px solid black;">
+								<thead style="font-size: 13px; font-weight: 700;">
 									<tr>
-										<th style="font-weight:700;">Document Category</th>
-										<th style="font-weight:700;">Document Code</th>
-										<th style="font-weight:700;">Document Description</th>
+										<th style="font-weight: 700;">Document Category</th>
+										<th style="font-weight: 700;">Document Code</th>
+										<th style="font-weight: 700;">Document Description</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr  >
-										<td><select name="documents_type1" id="documents_type1" class="form-control doc"
-												onchange="updateDocumentDescription(1)" style="width:500px">
-												<option value="">Select</option>
-												<option value="Customer">Customer</option>
-												<option value="Account">Account</option>
-											</select></td>
-										<td><select class="form-control doc" name="documents_desc1" id="documents_desc1"
-												onchange="updateDocumentCode(1)" style="width:500px">
-												<option value="">Select</option>
-												<option value="NIC">NIC</option>
-												<option value="PSP">PSP</option>
-												<option value="BRN">BRN</option>
-												<option value="COR">COR</option>
-											</select></td>
-										<td><input class="form-control doc" name="documents_code1" id="documents_code1"
-												type="text" style="height: 10%;width:300px" ></td>
+									<!-- <tr>
+										<td><select id="docType1" name="docType"
+											onchange="first_change(this)"
+											class="form-control form-control-sm"
+											style="height: 24px; width: 200px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+												<option value="">SELECT</option>
+												<option value="RDOC">REGISTRATION DOCUMENT</option>
+												<option value="BDOC">BUSINESS DOCUMENT</option>
+										</select></td>
+										<td><select id="docCode1" name="docCode1"
+											onchange="updateDescription(this)"
+											class="form-control form-control-sm"
+											style="height: 26px; width: 150px;">
+												<option value="">SELECT</option>
+										</select></td>
+										<td><input type="text" id="docDesc1" name="docDesc"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 150px"
+											readonly></td>
+										<td><input type="text" id="uniqId1" name="uniqId"
+											onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 150px">
+										</td>
+										<td><input type="text" id="docIssPlace1"
+											name="docIssPlace"
+											onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 150px">
+										</td>
+										<td><input type="date" id="docIssDate1" name="docIssDate"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 150px">
+										</td>
+										<td><input type="date" id="docExpDate1" name="docExpDate"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 150px">
+										</td>
+										<td><input type="file" id="file1"
+											onchange="readURL(this);"></td>
+									</tr> -->
+									<tr>
+										<td><select id="docType1" name="docType"
+											onchange="first_change(this)"
+											class="form-control form-control-sm"
+											style="height: 24px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+												<option value="">SELECT</option>
+												<option value="RDOC">REGISTRATION DOCUMENT</option>
+												<option value="BDOC">BUSINESS DOCUMENT</option>
+										</select></td>
+										<td><select id="docCode1" name="docCode1"
+											onchange="updateDescription(this)"
+											class="form-control form-control-sm"
+											style="height: 26px; width: 500px;">
+												<option value="">SELECT</option>
+										</select></td>
+										<td><input type="text" id="docDesc1" name="docDesc"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 400px"
+											></td>
+									</tr>
+									
+									<tr>
+										<td><select id="docType2" name="docType"
+											onchange="first_change2(this)"
+											class="form-control form-control-sm"
+											style="height: 24px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+												<option value="">SELECT</option>
+												<option value="RDOC">REGISTRATION DOCUMENT</option>
+												<option value="BDOC">BUSINESS DOCUMENT</option>
+										</select></td>
+										<td><select id="docCode2" name="docCode2"
+											onchange="updateDescription2(this)"
+											class="form-control form-control-sm"
+											style="height: 26px; width: 500px;">
+												<option value="">SELECT</option>
+										</select></td>
+										<td><input type="text" id="docDesc2" name="docDesc"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 400px"
+											></td>
 									</tr>
 									<tr>
-										<td><select name="documents_type1" id="documents_type1" class="form-control doc"
-												onchange="updateDocumentDescription(2)" style="width:500px">
+										<td><select id="docType3" name="docType"
+											onchange="first_change3(this)"
+											class="form-control form-control-sm"
+											style="height: 24px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+												<option value="">SELECT</option>
+												<option value="RDOC">REGISTRATION DOCUMENT</option>
+												<option value="BDOC">BUSINESS DOCUMENT</option>
+										</select></td>
+										<td><select id="docCode3" name="docCode3"
+											onchange="updateDescription3(this)"
+											class="form-control form-control-sm"
+											style="height: 26px; width: 500px;">
+												<option value="">SELECT</option>
+										</select></td>
+										<td><input type="text" id="docDesc3" name="docDes3"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 400px"
+											></td>
+									</tr>
+									<!-- <tr>
+										<td><select name="documents_type1" id="documents_type1"
+											class="form-control doc"
+											onchange="updateDocumentDescription(2)" style="width: 500px">
 												<option value="">Select</option>
 												<option value="Customer">Customer</option>
 												<option value="Account">Account</option>
-											</select></td>
-										<td><select class="form-control doc" name="documents_desc2" id="documents_desc2"
-												onchange="updateDocumentCode(2)" style="width:500px">
+										</select></td>
+										<td><select class="form-control doc"
+											name="documents_desc2" id="documents_desc2"
+											onchange="updateDocumentCode(2)" style="width: 500px">
 												<option value="">Select</option>
 												<option value="NIC">NIC</option>
 												<option value="PSP">PSP</option>
 												<option value="BRN">BRN</option>
 												<option value="COR">COR</option>
-											</select></td>
-										<td><input class="form-control doc" name="documents_code2" id="documents_code2"
-												type="text" style="height: 10%;width:300px"></td>
+										</select></td>
+										<td><input class="form-control doc"
+											name="documents_code2" id="documents_code2" type="text"
+											style="height: 10%; width: 300px"></td>
 									</tr>
 									<tr>
-										<td><select name="documents_type1" id="documents_type1" class="form-control doc"
-												onchange="updateDocumentDescription(3)" style="width:500px">
+										<td><select name="documents_type1" id="documents_type1"
+											class="form-control doc"
+											onchange="updateDocumentDescription(3)" style="width: 500px">
 												<option value="">Select</option>
 												<option value="Customer">Customer</option>
 												<option value="Account">Account</option>
-											</select></td>
-										<td><select class="form-control doc" name="documents_desc3" id="documents_desc3"
-												onchange="updateDocumentCode(3)" style="width:500px">
+										</select></td>
+										<td><select class="form-control doc"
+											name="documents_desc3" id="documents_desc3"
+											onchange="updateDocumentCode(3)" style="width: 500px">
 												<option value="">Select</option>
 												<option value="NIC">NIC</option>
 												<option value="PSP">PSP</option>
 												<option value="BRN">BRN</option>
 												<option value="COR">COR</option>
-											</select></td>
-										<td><input class="form-control doc" name="documents_code3" id="documents_code3"
-												type="text" style="height: 10%;width:300px"></td>
-									</tr>
+										</select></td>
+										<td><input class="form-control doc"
+											name="documents_code3" id="documents_code3" type="text"
+											style="height: 10%; width: 300px"></td>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -781,22 +869,23 @@
 			</div>
 		</div>
 	</div>
-	<div>
-	</div>
+	<div></div>
 
 	</div>
 	<!------------------------------------------------------------- Modal ------------------------------------------------------------>
 	<div class="modal fade" id="alert">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="menu-title-header">
-					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK
-						OF BARODA</div>
+					<div class="modal-title" id="exampleModalLabel"
+						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2">
 					<p style="color: #000;" id="alertmsg"></p>
-					<button type="button" class="btn btn-primary" onclick="$('#alert').modal('hide');"
-						th:att>Close</button>
+					<button type="button" class="btn btn-primary"
+						onclick="$('#alert').modal('hide');" th:att>Close</button>
 				</div>
 			</div>
 		</div>
@@ -805,5 +894,252 @@
 
 	</div>
 </body>
+
+<script>
+function first_change(selectElement) {
+    const docCodeSelect = document.getElementById('docCode1');
+    const docDescInput = document.getElementById('docDesc1');
+    docCodeSelect.innerHTML = ''; // Clear existing options
+    docDescInput.value = ''; // Clear the Doc Description field
+
+    let options = [];
+    if (selectElement.value === 'RDOC') {
+        options = [
+            { code: 'BRN', description: 'Business Registration Certificate' },
+            { code: 'TAX', description: 'Tax Certificate' },
+            { code: 'TRL', description: 'Trade List' }
+        ];
+    } else if (selectElement.value === 'BDOC') {
+        options = [
+            { code: 'ANR', description: 'Annual Return' },
+            { code: 'BUS', description: 'Business Plan' },
+            { code: 'RNA', description: 'Rental Agreement' },
+            { code: 'UTB', description: 'Utility Bill' }
+        ];
+    }
+
+    // Populate Document Code select
+    if (options.length > 0) {
+        options.forEach((item, index) => {
+            const option = document.createElement('option');
+            option.value = item.code;
+            option.textContent = item.code;
+
+            // Set the first option as selected
+            if (index === 0) {
+                option.selected = true;
+                docDescInput.value = item.description; // Set the Doc Description for the first option
+            }
+
+            docCodeSelect.appendChild(option);
+        });
+
+        // Attach the onchange listener to update the description
+        docCodeSelect.onchange = function () {
+            updateDescription(docCodeSelect);
+        };
+    }
+}
+
+function updateDescription(selectElement) {
+    const docDescInput = document.getElementById('docDesc1');
+    const docTypeSelect = document.getElementById('docType1');
+
+    let options = [];
+    if (docTypeSelect.value === 'RDOC') {
+        options = [
+            { code: 'BRN', description: 'Business Registration Certificate' },
+            { code: 'TAX', description: 'Tax Certificate' },
+            { code: 'TRL', description: 'Trade List' }
+        ];
+    } else if (docTypeSelect.value === 'BDOC') {
+        options = [
+            { code: 'ANR', description: 'Annual Return' },
+            { code: 'BUS', description: 'Business Plan' },
+            { code: 'RNA', description: 'Rental Agreement' },
+            { code: 'UTB', description: 'Utility Bill' }
+        ];
+    }
+
+    // Update the description based on the selected Document Code
+    const selectedCode = selectElement.value;
+    const selectedOption = options.find((item) => item.code === selectedCode);
+    docDescInput.value = selectedOption ? selectedOption.description : '';
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            console.log('File successfully loaded: ', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+function first_change2(selectElement) {
+    const docCodeSelect = document.getElementById('docCode2');
+    const docDescInput = document.getElementById('docDesc2');
+    docCodeSelect.innerHTML = ''; // Clear existing options
+    docDescInput.value = ''; // Clear the Doc Description field
+
+    let options = [];
+    if (selectElement.value === 'RDOC') {
+        options = [
+            { code: 'BRN', description: 'Business Registration Certificate' },
+            { code: 'TAX', description: 'Tax Certificate' },
+            { code: 'TRL', description: 'Trade List' }
+        ];
+    } else if (selectElement.value === 'BDOC') {
+        options = [
+            { code: 'ANR', description: 'Annual Return' },
+            { code: 'BUS', description: 'Business Plan' },
+            { code: 'RNA', description: 'Rental Agreement' },
+            { code: 'UTB', description: 'Utility Bill' }
+        ];
+    }
+
+    // Populate Document Code select
+    if (options.length > 0) {
+        options.forEach((item, index) => {
+            const option = document.createElement('option');
+            option.value = item.code;
+            option.textContent = item.code;
+
+            // Set the first option as selected
+            if (index === 0) {
+                option.selected = true;
+                docDescInput.value = item.description; // Set the Doc Description for the first option
+            }
+
+            docCodeSelect.appendChild(option);
+        });
+
+        // Attach the onchange listener to update the description
+        docCodeSelect.onchange = function () {
+            updateDescription(docCodeSelect);
+        };
+    }
+}
+
+function updateDescription2(selectElement) {
+    const docDescInput = document.getElementById('docDesc2');
+    const docTypeSelect = document.getElementById('docType2');
+
+    let options = [];
+    if (docTypeSelect.value === 'RDOC') {
+        options = [
+            { code: 'BRN', description: 'Business Registration Certificate' },
+            { code: 'TAX', description: 'Tax Certificate' },
+            { code: 'TRL', description: 'Trade List' }
+        ];
+    } else if (docTypeSelect.value === 'BDOC') {
+        options = [
+            { code: 'ANR', description: 'Annual Return' },
+            { code: 'BUS', description: 'Business Plan' },
+            { code: 'RNA', description: 'Rental Agreement' },
+            { code: 'UTB', description: 'Utility Bill' }
+        ];
+    }
+
+    // Update the description based on the selected Document Code
+    const selectedCode = selectElement.value;
+    const selectedOption = options.find((item) => item.code === selectedCode);
+    docDescInput.value = selectedOption ? selectedOption.description : '';
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            console.log('File successfully loaded: ', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+
+function first_change3(selectElement) {
+    const docCodeSelect = document.getElementById('docCode3');
+    const docDescInput = document.getElementById('docDesc3');
+    docCodeSelect.innerHTML = ''; // Clear existing options
+    docDescInput.value = ''; // Clear the Doc Description field
+
+    let options = [];
+    if (selectElement.value === 'RDOC') {
+        options = [
+            { code: 'BRN', description: 'Business Registration Certificate' },
+            { code: 'TAX', description: 'Tax Certificate' },
+            { code: 'TRL', description: 'Trade List' }
+        ];
+    } else if (selectElement.value === 'BDOC') {
+        options = [
+            { code: 'ANR', description: 'Annual Return' },
+            { code: 'BUS', description: 'Business Plan' },
+            { code: 'RNA', description: 'Rental Agreement' },
+            { code: 'UTB', description: 'Utility Bill' }
+        ];
+    }
+
+    // Populate Document Code select
+    if (options.length > 0) {
+        options.forEach((item, index) => {
+            const option = document.createElement('option');
+            option.value = item.code;
+            option.textContent = item.code;
+
+            // Set the first option as selected
+            if (index === 0) {
+                option.selected = true;
+                docDescInput.value = item.description; // Set the Doc Description for the first option
+            }
+
+            docCodeSelect.appendChild(option);
+        });
+
+        // Attach the onchange listener to update the description
+        docCodeSelect.onchange = function () {
+            updateDescription(docCodeSelect);
+        };
+    }
+}
+
+function updateDescription3(selectElement) {
+    const docDescInput = document.getElementById('docDesc3');
+    const docTypeSelect = document.getElementById('docType3');
+
+    let options = [];
+    if (docTypeSelect.value === 'RDOC') {
+        options = [
+            { code: 'BRN', description: 'Business Registration Certificate' },
+            { code: 'TAX', description: 'Tax Certificate' },
+            { code: 'TRL', description: 'Trade List' }
+        ];
+    } else if (docTypeSelect.value === 'BDOC') {
+        options = [
+            { code: 'ANR', description: 'Annual Return' },
+            { code: 'BUS', description: 'Business Plan' },
+            { code: 'RNA', description: 'Rental Agreement' },
+            { code: 'UTB', description: 'Utility Bill' }
+        ];
+    }
+
+    // Update the description based on the selected Document Code
+    const selectedCode = selectElement.value;
+    const selectedOption = options.find((item) => item.code === selectedCode);
+    docDescInput.value = selectedOption ? selectedOption.description : '';
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            console.log('File successfully loaded: ', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+</script>
 
 </html>
