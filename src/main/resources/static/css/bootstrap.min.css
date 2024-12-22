@@ -16132,3 +16132,6 @@ input {
 	font-weight: 600;
 }
 
+.form-control[readonly]{
+	background-color : #f2f2f2;
+}
