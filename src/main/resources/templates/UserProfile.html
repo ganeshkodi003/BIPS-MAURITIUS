@@ -634,13 +634,13 @@ $(document)
 								<thead> 
 									<tr class="filters">
 												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="User Id"
+														class="form-control font-weight-bold" placeholder="User ID"
 														disabled></th> 
 												<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="User Name"
 														disabled></th> 
 												<th style="text-align: center"><input type="text"
-														class="form-control font-weight-bold" placeholder="Employee Id"
+														class="form-control font-weight-bold" placeholder="Employee ID"
 														disabled></th> 
 												<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="Branch code"
@@ -748,7 +748,7 @@ $(document)
 								<div class="form-group">
 									<div class="row formline">
 										<div class="col-sm-2">
-											<label for="userId">User Id <span th:if="${formmode}=='add'" style="color: red; font-size: 20px;">*</span></label>
+											<label for="userId">User ID <span th:if="${formmode}=='add'" style="color: red; font-size: 20px;">*</span></label>
 										</div>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input type="text" onkeyup="this.value = this.value.toUpperCase();handleInputUserId(this)" id="userId" name="userid" maxlength="10"
@@ -838,7 +838,7 @@ $(document)
 									</div>
 									<label></label>
 									<div class="row formline">
-										<label class="col-sm-2">Employee Id <span style="color: red; font-size: 20px;" th:if="${formmode}=='add'">*</span></label>
+										<label class="col-sm-2">Employee ID <span style="color: red; font-size: 20px;" th:if="${formmode}=='add'">*</span></label>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input type="text" name="empid" id="empId" value="" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" maxlength="10" class="form-control form-control-sm commonBackground"
 												autocomplete="off" required
@@ -904,7 +904,7 @@ $(document)
 											<span id="phoneNumber_Error"></span>
 										</div>
 										<div class="col-sm-1"></div>
-										<label class="col-sm-2">Email Id <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+										<label class="col-sm-2">Email ID <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input style="font-size: 17px;" type="email" name="email_id" id="emailId" value="" onkeyup="this.value = this.value.toLowerCase();" class="form-control form-control-sm commonBackground"
 												autocomplete="off" required
@@ -1033,7 +1033,7 @@ $(document)
 									<br> -->
 									<label></label>
 									<div class="row formline">
-										<label class="col-sm-2">Role Id <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
+										<label class="col-sm-2">Role ID <span style="color: red; font-size: 20px;" th:if="${formmode}=='add' OR ${formmode}=='edit'">*</span></label>
 										<div class="col-sm-3" th:if="${formmode}=='view' OR ${formmode}=='viewnew'  OR ${formmode}=='verify'OR ${formmode}=='cancel' OR ${formmode}=='delete' OR ${formmode}=='cancel'">
 											<input name="role_id" th:value="${userProfile?.role_id}" autocomplete="off" id="roleId" class="form-control form-control-sm" readonly>
 										</div>

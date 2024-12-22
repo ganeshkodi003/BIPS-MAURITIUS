@@ -660,7 +660,7 @@ label {
 						<thead>
 							<tr class="filters">
 								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="Role Id"
+									class="form-control font-weight-bold" placeholder="Role ID"
 									disabled></th>
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold"
@@ -684,10 +684,9 @@ label {
 								<td th:text="${AccessRole?.role_id.toUpperCase()}"></td>
 								<td class="init-cap" th:text="${AccessRole?.role_desc.toUpperCase()}"></td>
 								<td>
-									<ul
-										th:each="value : ${#strings.arraySplit(AccessRole?.menulist, ',')}">
-										<li th:text="${value}" class="init-cap"></li>
-									</ul>
+									<ul th:each="value : ${#strings.arraySplit(AccessRole?.menulist.toUpperCase(), ',')}">
+    <li th:if="${value != 'ServiceChargesFees'}" th:text="${value}" class="init-cap"></li>
+</ul>
 								</td>
 								<th:block th:switch="${AccessRole?.work_class}">
 									<td th:case="'M'">MAKER</td>
@@ -770,7 +769,7 @@ label {
 					<form action="#" th:object="${IPSAccessRole}" method="post"
 						autocomplete="off" id="IPSAccessRole" th:fragment="finuserapply">
 						<div class="row formline">
-							<label class="col-sm-2">Role Id <span
+							<label class="col-sm-2">Role ID <span
 								style="color: red; font-size: 20px;" th:if="${formmode}=='add'">*</span></label>
 							<div class="col-sm-3" th:if="${formmode}=='add'">
 								<input type="text" id="role_id1" name="role_id"
@@ -1048,12 +1047,7 @@ label {
 							th:checked="${IPSAccessRole?.ips_parameter}==Y"
 							style="margin-right: 10px" />Merchant Parameter
 						<ul>
-							<li><input type="checkbox" id="ServiceChargesFees" value="Y"
-								name="service_charges_fees"
-								th:checked="${IPSAccessRole?.service_charges_fees == 'Y'}"
-								onclick="checkIPSparam(this)"
-								style="margin-right: 10px; margin-top: 10px" /> <label
-								for="ServiceChargesFees">Service Charges and Fees</label></li>
+					
 							<li><input type="checkbox" id="MerchantFeesCharges"
 								value="Y" name="wallet_fees_charges"
 								th:checked="${IPSAccessRole?.wallet_fees_charges == 'Y'}"
