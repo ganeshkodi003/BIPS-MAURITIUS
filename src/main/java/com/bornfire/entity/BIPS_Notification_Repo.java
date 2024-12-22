@@ -10,4 +10,5 @@ public interface BIPS_Notification_Repo extends JpaRepository<BIPS_Notification_
 	@Query(value = "SELECT DISTINCT * FROM bips_notification", nativeQuery = true)
 	List<BIPS_Notification_Entity> getlst();
 	
+	
 }

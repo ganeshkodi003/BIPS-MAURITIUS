@@ -25,4 +25,7 @@ import org.springframework.stereotype.Repository;
 	
 		@Query(value = "SELECT MAX(TO_NUMBER(numeric_part)) AS max_numeric_part FROM (SELECT REGEXP_REPLACE(RECORD_SRL_NO, '[^[:digit:]]', '') AS numeric_part FROM NOTIFICATION_PARM_MASTER)", nativeQuery = true)
 		String getNotifyRef();
+		
+		@Query(value = "SELECT NOTIFICATION_SEQ.NEXTVAL FROM dual", nativeQuery = true)
+		String getSequence();
 }

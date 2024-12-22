@@ -915,17 +915,23 @@ public class MainController {
 		} else if (formmode.equals("add")) {
 			md.addAttribute("formmode", formmode);
 			String notifyRef = notificationParmsRep.getNotifyRef();
+			
 			String NotifyReference;
 			if (notifyRef != null) {
 				NotifyReference = "NP0" + (Integer.valueOf(notifyRef) + 1);
 			} else {
 				NotifyReference = "NP01";
 			}
+			String seq = notificationParmsRep.getSequence();
+			String seq1=  "EVT"+seq;
+			System.out.println(seq1+"seq1");
+			
 			md.addAttribute("NotifyRef", NotifyReference);
 			md.addAttribute("SMSFlag", referenceCodeRep.getReferenceList("MP06"));
 			md.addAttribute("EmailFlag", referenceCodeRep.getReferenceList("MP07"));
 			md.addAttribute("AlertFlag", referenceCodeRep.getReferenceList("MP08"));
 			md.addAttribute("MANDATEID", sequence.generateMandateRefNo());
+			md.addAttribute("SEQENCE",seq1);
 		} else if (formmode.equals("edit")) {
 			md.addAttribute("formmode", formmode);
 		} else if (formmode.equals("verify")) {
