@@ -6848,6 +6848,7 @@ $(document)
 							<thead>
 								<tr>
 									<th>Merchant ID</th>
+									<th>Merchant Name</th>
 									<th>Merchant Corporate Name</th>
 									<th>Merchant Type</th>
 									<th>Merchant Outlet Address</th>
@@ -6875,6 +6876,9 @@ $(document)
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold"
 										placeholder="Merchant ID" disabled></th>
+									<th style="text-align: center"><input type="text"
+										class="form-control font-weight-bold"
+										placeholder="Merchant Name" disabled></th>
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold"
 										placeholder="Mer Corp Name" disabled></th>
@@ -6921,6 +6925,9 @@ $(document)
 											th:attr="data-MerchantID=${bankList?.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}">
 										</td>
 									</th:block>
+										<td
+										th:text="${bankList?.merchant_name != null ? bankList.merchant_name.toUpperCase() : ''}">
+									</td>
 									<td
 										th:text="${bankList?.merchant_corp_name != null ? bankList.merchant_corp_name.toUpperCase() : ''}">
 									</td>
@@ -16615,7 +16622,7 @@ $(document)
 							<label></label>
 							<div class="row formline">
 								<div class="col-sm-2">
-									<label for="unit_name_d">Terminal Id<span
+									<label for="unit_name_d">Terminal <span
 										style="color: red; font-size: 20px;"
 										th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
 											*</span></label>
