@@ -256,9 +256,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const isEditing = descCell.querySelector("input") !== null;
 
             if (isEditing) {
-                // If in edit mode, revert to normal text with the current input value
+                // If in edit mode, save the input value and revert to text
                 const input = descCell.querySelector("input");
-                descCell.textContent = input.value.toUpperCase(); // Save the input value and revert to text
+                descCell.textContent = input.value.toUpperCase(); // Save the input value as uppercase
             } else {
                 // If not in edit mode, enable editing
                 const currentDesc = descCell.textContent.trim();
@@ -284,6 +284,33 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+function fnsubmit(button) {
+    // Get the closest row (tr) to the clicked button
+    const row = button.closest("tr");
+	const merchantCode = row.querySelector("td:nth-child(1)").textContent.trim();
+    const merchantDesc = row.querySelector("td:nth-child(2)").textContent.trim();
+	console.log("Merchant Code:", merchantCode);
+    console.log("Merchant Description:", merchantDesc);
+    $.ajax({
+        type: 'POST',
+        url: 'updateMerchantDesc', // Replace with your actual endpoint
+        data: {
+            merchantCode: merchantCode,
+            merchantDesc: merchantDesc
+        },
+        success: function(response) {
+        	$("#updated").modal("toggle");
+            console.log("Response from server:", response);
+        },
+        error: function(xhr, status, error) {
+            console.error("Error during AJAX request:", error);
+        }
+    }); 
+
+}
+
 </script>
 
 </head>
@@ -309,9 +336,10 @@ document.addEventListener("DOMContentLoaded", function () {
 						<thead>
 							<tr>
 								<th style="text-align: left;">Reference Code</th>
-								<th style="text-align: left;">Description</th>
+								<th style="text-align: left; width: 350px">Description</th>
 								<th style="text-align: left;">Modify</th>
 								<th style="text-align: left;">Delete</th>
+								<th style="text-align: left;">Submit</th>
 							</tr>
 						</thead>
 						<tbody id="refcodeconfig">
@@ -331,12 +359,18 @@ document.addEventListener("DOMContentLoaded", function () {
 								</td>
 								<td
 									th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
-									<a href="#" data-toggle="tooltip" onclick="fndelete(this);">
+									<a href="#" data-toggle="tooltip" onclick="fndelete(this);"
+									th:attr="data-merchantcode=${merchantProfile.merchant_code},data-merchantdesc=${merchantProfile.merchant_desc}">
 										<img style="width: 16px; height: 16px;"
 										th:src="@{/images/MinusCategory.png}" alt="Delete">
 								</a>
 								</td>
+								<td>
+									<button class="btn btn-success" onclick="fnsubmit(this);"
+										data-toggle="tooltip" title="Submit">Submit</button>
+								</td>
 							</tr>
+
 						</tbody>
 
 					</table>
@@ -472,8 +506,8 @@ document.addEventListener("DOMContentLoaded", function () {
 								<input class="form-control col-sm-5" type="text" maxlength="5"
 									autocomplete="off"
 									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									id="merchant_desc1" required readonly /> <input
-									type="hidden" maxlength="5" id="formmode1" readonly>
+									id="merchant_desc1" required readonly /> <input type="hidden"
+									maxlength="5" id="formmode1" readonly>
 							</div>
 						</div>
 					</form>
@@ -481,6 +515,21 @@ document.addEventListener("DOMContentLoaded", function () {
 				<div class="text-center mb-2">
 					<span id="errorMsg" style="display: none;"></span>
 					<button type="button" class="btn btn-primary" id="btnSubmit1">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="updated" style="background: #000000b0;" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div style="background-color: #f26223; font-weight: 700; font-size: 20px;">
+					<h4 style="color: white; padding: 13px;">BANK OF BARODA BOTSWANA</h4>
+				</div>
+				<h5 style="font-size: 17px; color: black; padding: 15px;text-align:center">Updated Successfully</h5>
+				<div style="padding: 10px; text-align: center;">
+					<button type="button" class="btn btn-secondary" style="font-size: 16px" data-dismiss="modal">Close</button>
+					
 				</div>
 			</div>
 		</div>

@@ -83,6 +83,7 @@ import com.bornfire.entity.DocumentMaster_Repo;
 import com.bornfire.entity.IPSAuditTable;
 import com.bornfire.entity.IPSAuditTableRep;
 import com.bornfire.entity.IPSChargesAndFees;
+import com.bornfire.entity.MerchantCategoryRep;
 import com.bornfire.entity.MerchantChargesAndFees;
 import com.bornfire.entity.MerchantChargesAndFeesRepositry;
 import com.bornfire.entity.MerchantChargesandFeesMod;
@@ -216,7 +217,9 @@ public class IPSRestController {
 	
 	@Autowired
 	IPSServices ipsServices;
-
+	
+	@Autowired
+	MerchantCategoryRep merchantCategoryRep;
 
 	@RequestMapping(value = "TransactionDownload", method = RequestMethod.GET)
 	@ResponseBody
@@ -2036,5 +2039,19 @@ public class IPSRestController {
 			return imageAsBase64;
 		}
 
+		@PostMapping("/updateMerchantDesc")
+		@ResponseBody
+		public String updateMerchantDesc(
+		        @RequestParam(required = false) String merchantCode,
+		        @RequestParam(required = false) String merchantDesc) {
+
+		    // Call the repository method to perform the update
+		    merchantCategoryRep.updateMerchantDescription(merchantCode, merchantDesc);
+
+		    System.out.println("merchantCode: " + merchantCode);
+		    System.out.println("merchantDesc: " + merchantDesc);
+
+		    return "Success"; // Return a success message
+		}
 
 }
