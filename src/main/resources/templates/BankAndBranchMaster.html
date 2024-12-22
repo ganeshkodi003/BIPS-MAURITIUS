@@ -817,7 +817,7 @@ td {
 						</div>
 					</div>
 				</form>
-				<div class="card-footer text-center p-2">
+				<div class="card-footer text-center p-1">
 					<button type="button" class="btn btn-xs mr-2 headerbutton" id="btnHome"
 						onclick="home();">Home</button>
 					<button th:if="${formmode}=='add' OR ${formmode}=='edit' "
@@ -832,7 +832,7 @@ td {
 						class="btn btn-xs headerbutton mr-2" onclick="cancelform(this);"
 						form="BankDetails" id="btnSubmit"
 						th:attr="data-formmode=${formmode},data-newflg=${BankandBranch?.new_bank_flg}">Delete</button>
-					<button type="button" class="btn btn-xs" id=""
+					<button type="button" class="btn btn-xs headerbutton" id=""
 						onclick="back();">Back</button>
 				</div>
 				<div class="content m-2 border"

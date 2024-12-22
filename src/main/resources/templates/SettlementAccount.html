@@ -372,9 +372,9 @@ $(document)
 				</div>
 			</form>
 			<div class="card-footer text-center">
-				<button type="button" class="btn btn-sm mr-2" id="btnHome" onclick="home();">Home</button>
+				<button type="button" class="btn btn-sm mr-2 headerbutton" id="" onclick="home();">Home</button>
 				<button type="button" class="btn btn-sm headerbutton mr-2" onclick="submitaddform(this)" form="AddSettle" id="btnDelete" th:attr="data-formmode=addsubmit">Submit</button>
-				<button type="button" class="btn btn-sm btn-primary" id="" onclick="back();">Back</button>
+				<button type="button" class="btn btn-sm headerbutton" id="" onclick="back();">Back</button>
 			</div>
 		</div>
 
@@ -551,14 +551,14 @@ $(document)
 					</div>
 				</div>
 			</form>
-			<div class="card-footer text-center p-2">
+			<div class="card-footer text-center p-1">
 				<button type="button" class="btn btn-sm headerbutton mr-2" id="btnHome" onclick="home();">Home</button>
 				<button th:if="${formmode}=='verify'" type="button" class="btn btn-sm headerbutton mr-2" onclick="verifyform(this);" form="SettlementModify" id="btnVerify" th:attr="data-formmode=${formmode}">Verify</button>
 				<button th:if="${formmode}=='delete'" type="button" class="btn btn-sm headerbutton mr-2" onclick="deleteform(this);" form="SettlementModify" id="btnDelete" th:attr="data-formmode=${formmode}">Delete</button>
 				<button th:if="${formmode}=='edit'" type="button" class="btn btn-sm headerbutton mr-2" onclick="submiteditform(this);" form="SettlementModify" id="btnSubmit" th:attr="data-formmode=${formmode}">Submit</button>
 				<button type="button" class="btn btn-sm headerbutton" id="" onclick="back();">Back</button>
 			</div>
-			<div class="content border mx-3 my-2" style="padding: 15px; background-color: #dbdfe2;">
+			<div class="content border mx-3 my-2" style="padding: 15px; ">
 				<div class="row formline mb-2">
 					<label class="col-sm-2">Entry User</label>
 					<div class="col-sm-2">

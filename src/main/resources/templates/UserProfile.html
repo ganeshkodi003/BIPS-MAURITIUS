@@ -17,6 +17,13 @@
 <script src="js/bootstrap411.js"></script>
 
 <style>
+.init-cap {
+    text-transform: lowercase; /* Ensure everything starts lowercase */
+}
+
+.init-cap::first-letter {
+    text-transform: uppercase; /* Capitalize the first letter */
+}
 .filterable .filters input[disabled] {
 	background-color: transparent;
 	border: none;
@@ -658,10 +665,10 @@ $(document)
 										<!-- <td th:if="${userProfile.xbrl_report}==null"><img th:src=@{/images/UserImage.png} class="imageround" style="color: blue; font-size: 20px;"></td>
 										<td th:if="${userProfile.xbrl_report}!=null"><img th:src="*{'data:image/png;base64,'+userProfile.xbrl_report}" class="imageround"></img></td> -->
 										<td th:text="${userProfile.userid !=null ? userProfile.userid.toUpperCase() : ''}">456</td>
-										<td th:text="${userProfile.username !=null ? userProfile.username.toUpperCase() : ''}">TEST</td>
+										<td class="init-cap" th:text="${userProfile.username !=null ? userProfile.username.toUpperCase() : ''}">TEST</td>
 										<td th:text="${userProfile.empid !=null ? userProfile.empid.toUpperCase() : ''}">123</td>
 										<td th:text="${userProfile.branch_code !=null ? userProfile.branch_code.toUpperCase() : ''}">123</td>
-										<td th:text="${userProfile.branch_name !=null ? userProfile.branch_name.toUpperCase() : ''}">CHENNAI</td>
+										<td  class="init-cap" th:text="${userProfile.branch_name !=null ? userProfile.branch_name.toUpperCase() : ''}">CHENNAI</td>
 										<th:block th:switch="${userProfile.entity_flg}">
 											<td th:case="'Y'" style="color: green;">VERIFIED</td>
 											<td th:case="'N'" style="color: red;">UNVERIFIED</td>
@@ -728,10 +735,10 @@ $(document)
 				<div class="col-sm-12">
 					<div class="card">
 						<form class="m-0" action="#" th:object="${userProfile}" method="post" autocomplete="off" id="userProfile" th:fragment="finuserapply">
-							<div class="card-header">
+							<div class="card-header p-1">
 								<div class="d-flex justify-content-between align-items-center">
 									<div>
-										<h3 th:if="${formmode}=='add'" class="headerh6">User Profile - Add</h3>
+										<h3 th:if="${formmode}=='add'" class="headerh6 ">User Profile - Add</h3>
 										<h3 th:if="${formmode}=='edit'" class="headerh6">User Profile - Modify</h3>
 										<h3 th:if="${formmode}=='view'" class="headerh6">User Profile - View</h3>
 										<h3 th:if="${formmode}=='viewnew'" class="headerh6">User Profile - View</h3>
@@ -1081,7 +1088,7 @@ $(document)
 								</div>
 							</div>
 						</form>
-						<div class="card-footer text-center p-2">
+						<div class="card-footer text-center p-1">
 							<button type="button" class="btn btn-xs mr-2 headerbutton" id="" onclick="home();">Home</button>
 							<button th:if=" ${formmode}=='verify' AND ${userProfile?.entity_flg}=='N'" type="button" class="btn btn-xs headerbutton mr-2"
 								th:attr="data-userid=${userProfile.userid},data-entry_user=${userProfile.entry_user},

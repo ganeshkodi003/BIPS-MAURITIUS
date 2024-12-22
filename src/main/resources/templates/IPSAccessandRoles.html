@@ -36,9 +36,12 @@
 
 <style>
 .init-cap {
-	text-transform: capitalize;
+    text-transform: lowercase; /* Ensure everything starts lowercase */
 }
 
+.init-cap::first-letter {
+    text-transform: uppercase; /* Capitalize the first letter */
+}
 .filterable .filters input[disabled] {
 	background-color: transparent;
 	border: none;
@@ -647,9 +650,9 @@ label {
 						<h6 class="headerh6"
 							th:text="${menuname}"></h6>
 						<div class="">
-							<button type="button" class="btn  btns btn-filter headerbutton "
+							<button type="button" class="btn  btns  headerbutton "
 								
-								onclick="adduser();">Add Role</button>
+								onclick="adduser();">Add Branch</button>
 
 							<button type="button" class="btn  btns btn-filter headerbutton"
 								>Filter</button>
@@ -685,7 +688,7 @@ label {
 								th:attr="data-userid=${AccessRole?.role_id}"
 								th:id="${AccessRole?.role_id}" class="userlist">
 								<td th:text="${AccessRole?.role_id.toUpperCase()}"></td>
-								<td th:text="${AccessRole?.role_desc.toUpperCase()}"></td>
+								<td class="init-cap" th:text="${AccessRole?.role_desc.toUpperCase()}"></td>
 								<td>
 									<ul
 										th:each="value : ${#strings.arraySplit(AccessRole?.menulist, ',')}">
@@ -908,7 +911,7 @@ label {
 						</div>
 					</form>
 				</div>
-				<div class="card-footer text-center p-2">
+				<div class="card-footer text-center p-1">
 					<button type="button" class="btn btn-sm headerbutton mr-2"
 						data-dismiss="modal" onclick="home();">Home</button>
 					<button th:if="${formmode}=='add'" type="button"
@@ -935,7 +938,7 @@ label {
 						th:attr="data-formmode='delete',data-entry_user=${IPSAccessRole.entry_user},
 									data-modify_user=${IPSAccessRole.modify_user}"
 						id="btnSubmit" onclick="deleteSubmit(this);">Delete</button>
-					<button type="button" class="btn btn-sm btn-primary" id=""
+					<button type="button" class="btn btn-sm headerbutton" id=""
 						onclick="back();">Back</button>
 				</div>
 				<div class="content m-2 border"
