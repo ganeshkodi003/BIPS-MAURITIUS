@@ -511,7 +511,7 @@ td {
 						<h6 th:if="${formmode}=='view' OR ${formmode}=='viewnew'"
 							class="headerh6">Bank and Branch
 							Master - View</h6>
-						<button type="button" class="btn btn-xs commonBtnStyle"
+						<button type="button" class="btn btn-xs headerbutton"
 							id="btnInq" onclick="list()">List</button>
 					</div>
 					<!-- Modal body -->
@@ -818,21 +818,21 @@ td {
 					</div>
 				</form>
 				<div class="card-footer text-center p-2">
-					<button type="button" class="btn btn-xs mr-2" id="btnHome"
+					<button type="button" class="btn btn-xs mr-2 headerbutton" id="btnHome"
 						onclick="home();">Home</button>
 					<button th:if="${formmode}=='add' OR ${formmode}=='edit' "
-						type="button" class="btn btn-xs commonBtnStyle mr-2"
+						type="button" class="btn btn-xs headerbutton mr-2"
 						onclick="submitform(this);" form="BankDetails" id="btnSubmit"
 						th:attr="data-formmode=${formmode}">Submit</button>
 					<button th:if="${formmode}=='verify' " type="button"
-						class="btn btn-xs commonBtnStyle mr-2" onclick="verifyform(this);"
+						class="btn btn-xs headerbutton mr-2" onclick="verifyform(this);"
 						form="BankDetails" id="btnSubmit"
 						th:attr="data-formmode=${formmode},data-newflg=${BankandBranch?.new_bank_flg}">Verify</button>
 					<button th:if="${formmode}=='cancel' " type="button"
-						class="btn btn-xs commonBtnStyle mr-2" onclick="cancelform(this);"
+						class="btn btn-xs headerbutton mr-2" onclick="cancelform(this);"
 						form="BankDetails" id="btnSubmit"
 						th:attr="data-formmode=${formmode},data-newflg=${BankandBranch?.new_bank_flg}">Delete</button>
-					<button type="button" class="btn btn-xs" id="btnBack"
+					<button type="button" class="btn btn-xs" id=""
 						onclick="back();">Back</button>
 				</div>
 				<div class="content m-2 border"

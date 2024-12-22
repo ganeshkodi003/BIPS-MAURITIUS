@@ -659,7 +659,7 @@ label {
 
 				<div class="card-body p-0">
 					<table
-						class="table table-striped table-bordered table-hover table-sm">
+						class="table table-striped table-bordered table-hover table-sm" style="line-height:4px;">
 						<thead>
 							<tr class="filters">
 								<th style="text-align: center"><input type="text"
@@ -909,33 +909,33 @@ label {
 					</form>
 				</div>
 				<div class="card-footer text-center p-2">
-					<button type="button" class="btn btn-sm commonBtnStyle mr-2"
+					<button type="button" class="btn btn-sm headerbutton mr-2"
 						data-dismiss="modal" onclick="home();">Home</button>
 					<button th:if="${formmode}=='add'" type="button"
-						class="btn btn-sm commonBtnStyle mr-2" form="IPSAccessRole"
+						class="btn btn-sm headerbutton mr-2" form="IPSAccessRole"
 						th:attr="data-formmode='add'" id="btnSubmit"
 						onclick="submitform(this);">Submit</button>
 					<button th:if="${formmode}=='edit'" type="button"
-						class="btn btn-sm commonBtnStyle mr-2" form="IPSAccessRole"
+						class="btn btn-sm headerbutton mr-2" form="IPSAccessRole"
 						th:attr="data-formmode='edit'" id="btnSubmit"
 						onclick="submitform(this);">Submit</button>
 					<button th:if="${formmode}=='verify'" type="button"
-						class="btn btn-sm commonBtnStyle mr-2" form="IPSAccessRole"
+						class="btn btn-sm headerbutton mr-2" form="IPSAccessRole"
 						th:attr="data-formmode='verify',data-entry_user=${IPSAccessRole.entry_user},
 									data-modify_user=${IPSAccessRole.modify_user},
 									data-work_class=${IPSRoleMenu.work_class}"
 						id="btnSubmit" onclick="verifySubmit(this);">Verify</button>
 					<button th:if="${formmode}=='cancel'" type="button"
-						class="btn btn-sm commonBtnStyle mr-2" form="IPSAccessRole"
+						class="btn btn-sm headerbutton mr-2" form="IPSAccessRole"
 						th:attr="data-formmode='cancel',data-entry_user=${IPSAccessRole.entry_user},
 									data-modify_user=${IPSAccessRole.modify_user}"
 						id="btnSubmit" onclick="cancelSubmit(this);">Delete</button>
 					<button th:if="${formmode}=='delete'" type="button"
-						class="btn btn-sm commonBtnStyle mr-2" form="IPSAccessRole"
+						class="btn btn-sm headerbutton mr-2" form="IPSAccessRole"
 						th:attr="data-formmode='delete',data-entry_user=${IPSAccessRole.entry_user},
 									data-modify_user=${IPSAccessRole.modify_user}"
 						id="btnSubmit" onclick="deleteSubmit(this);">Delete</button>
-					<button type="button" class="btn btn-sm btn-primary" id="btnBack"
+					<button type="button" class="btn btn-sm btn-primary" id=""
 						onclick="back();">Back</button>
 				</div>
 				<div class="content m-2 border"

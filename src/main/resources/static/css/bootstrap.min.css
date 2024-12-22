@@ -16021,7 +16021,7 @@ b, strong {
 	font-weight: 600
 }
 
-#btnHome,#btnBack,#btnAddUser,#btnAddUnit,#btnAddDevice,#btnRevertTransaction,#btnPrint{
+#btnHome,#,#btnAddUser,#btnAddUnit,#btnAddDevice,#btnRevertTransaction,#btnPrint{
 	background: white !important;
 	color: #162b75 !important;
 	font-size:18px !important;
@@ -16029,13 +16029,13 @@ b, strong {
 	border: unset;
 }
 
-.commonBtnStyle{
+/* /* .headerbutton{
 	background: white !important;
 	color: #162b75 !important;
 	font-size:18px !important;
 	font-weight:600;
 	border: unset;
-}
+} */ */
 
 table {
 	background:white !important;

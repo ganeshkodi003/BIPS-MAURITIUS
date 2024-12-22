@@ -588,7 +588,7 @@ label {
 							</tbody>
 						</table>
 						<div class="card-footer text-center">
-							<button type="button" class="btn btn-xs mr-2 headerbutton" id=""
+							<button type="button" class="btn btn-xs mr-2 headerbutton headerbutton" id=""
 								onclick="home();">Home</button>
 							<button type="button" class="btn btn-xs headerbutton" id=""
 								onclick="back();">Back</button>
@@ -624,7 +624,7 @@ label {
 									<h3 th:if="${formmode}=='delete' "
 										style="font-size: 1.5rem; color: white">Notification
 										Parameter - Delete</h3>
-									<button type="button" class="btn btn-xs commonBtnStyle"
+									<button type="button" class="btn btn-xs headerbutton"
 										id="btnInq" onclick="list();">List</button>
 								</div>
 							</div>
@@ -1042,34 +1042,34 @@ label {
 							</div>
 						</form>
 						<div class="card-footer text-center p-2">
-							<button type="button" class="btn btn-xs commonBtnStyle mr-2"
+							<button type="button" class="btn btn-xs headerbutton mr-2"
 								id="btnHome" onclick="home();">Home</button>
 							<button
 								th:if=" ${formmode}=='delete' AND ${notificationParmsProfile?.DEL_FLG}=='N'"
-								type="button" class="btn btn-xs commonBtnStyle mr-2"
+								type="button" class="btn btn-xs headerbutton mr-2"
 								th:attr="data-formmode=${formmode},data-del=${del_flg}"
 								onclick="deleteform(this);" id="btnModify">Delete</button>
 
 							<button th:if=" ${formmode}=='add'" type="button"
-								class="btn btn-xs commonBtnStyle mr-2"
+								class="btn btn-xs headerbutton mr-2"
 								form="notificationParmsProfile" id="btnSubmit"
 								onclick="submitform();"
 								th:attr="data-formmode=${formmode},data-entity=${ENTITY_FLG}">Submit</button>
 
 							<button th:if="${formmode}=='edit' " type="button"
-								class="btn btn-xs commonBtnStyle mr-2"
+								class="btn btn-xs headerbutton mr-2"
 								form="notificationParmsProfile" id="btnSubmit"
 								onclick="editsubmitform();"
 								th:attr="data-formmode=${formmode},data-entity=${ENTITY_FLG}">Submit</button>
 
 							<button th:if="${formmode}=='verify' " type="button"
-								class="btn btn-xs commonBtnStyle mr-2"
+								class="btn btn-xs headerbutton mr-2"
 								form="notificationParmsProfile" id="btnSubmit"
 								onclick="verifysubmitform(this);"
 								th:attr="data-formmode=${formmode},data-entity=${ENTITY_FLG},data-modify_user=${notificationParmsProfile?.MODIFY_USER},data-entry_user=${notificationParmsProfile?.ENTRY_USER}">Submit</button>
 
-							<button type="button" class="btn btn-xs commonBtnStyle"
-								id="btnBack" onclick="back();">Back</button>
+							<button type="button" class="btn btn-xs headerbutton"
+								id="" onclick="back();">Back</button>
 						</div>
 
 						<div class="content border mx-3 my-2"

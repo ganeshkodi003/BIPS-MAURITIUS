@@ -824,12 +824,12 @@ label {
 					</form>
 				</div>
 				<div class="card-footer text-center">
-					<button type="button" class="btn btn-sm commonBtnStyle mr-2"
+					<button type="button" class="btn btn-sm headerbutton mr-2"
 						id="btnHome" onclick="home();">Home</button>
-					<button type="button" class="btn btn-sm commonBtnStyle mr-2"
+					<button type="button" class="btn btn-sm headerbutton mr-2"
 						form="ChargesAndFeesAdd" th:attr="data-formmode=add"
 						onclick="submitaddform(this);">Submit</button>
-					<button type="button" class="btn btn-sm commonBtnStyle"
+					<button type="button" class="btn btn-sm headerbutton"
 						data-dismiss="modal" onclick="back();">Back</button>
 				</div>
 			</div>
@@ -1291,27 +1291,27 @@ label {
 					</form>
 				</div>
 				<div class="card-footer text-center p-2">
-					<button type="button" class="btn btn-sm commonBtnStyle mr-2"
+					<button type="button" class="btn btn-sm headerbutton mr-2"
 						id="btnHome" onclick="home();">Home</button>
 					<button
 						th:if="${formmode}=='verify' And ${serviceFees.entity_flg}=='N'"
-						type="button" class="btn btn-sm commonBtnStyle mr-2"
+						type="button" class="btn btn-sm headerbutton mr-2"
 						onclick="verifyform(this);" form="ChargesAndFees" id="btnVerify"
 						th:attr="data-formmode='verify',data-entry_user=${serviceFees.entry_user},data-modify_time=${serviceFees.modify_time},data-entry_time=${serviceFees.entry_time},data-modify_flg=${serviceFees.modify_flg},data-modify_user=${serviceFees.modify_user},
 									data-login_user=${user_id},
 									data-work_class=${IPSRoleMenu.work_class}">Verify</button>
 					<button th:if="${formmode}=='delete'"
 						th:attr="data-formmode='delete',data-entry_user=${serviceFees.entry_user},data-modify_flg=${serviceFees.modify_flg},data-verify_flg=${serviceFees.entity_flg},data-login_user=${user_id},data-verify_user=${serviceFees.verify_user}"
-						type="button" class="btn btn-xs commonBtnStyle mr-2"
+						type="button" class="btn btn-xs headerbutton mr-2"
 						onclick="submiteditform(this);" form="ChargesAndFees"
 						id="btnDelete">Delete</button>
 					<button th:if="${formmode}=='edit'" type="button"
-						class="btn btn-sm commonBtnStyle mr-2"
+						class="btn btn-sm headerbutton mr-2"
 						th:attr="data-formmode='edit',data-entry_user=${serviceFees.entry_user},data-modify_flg=${serviceFees.modify_flg},data-verify_flg=${serviceFees.entity_flg},data-login_user=${user_id},data-verify_user=${serviceFees.verify_user}"
 						onclick="submiteditform(this);" form="ChargesAndFees"
 						id="btnSubmit">Submit</button>
-					<button type="button" class="btn btn-sm commonBtnStyle"
-						id="btnBack" onclick="back();">Back</button>
+					<button type="button" class="btn btn-sm headerbutton"
+						id="" onclick="back();">Back</button>
 				</div>
 				<div class="content border mx-3 my-2"
 					style="border: 1px solid #36404a; padding: 15px; ">

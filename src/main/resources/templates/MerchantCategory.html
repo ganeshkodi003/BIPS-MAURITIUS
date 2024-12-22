@@ -351,11 +351,9 @@ function fnsubmit(button) {
 									th:text="${merchantProfile.merchant_desc != null ? merchantProfile.merchant_desc.toUpperCase() : ''}"></td>
 								<td
 									th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
-									<a href="#" data-toggle="tooltip" class="editrec"
-									th:attr="data-merchantdesc=${merchantProfile.merchant_desc}">
-										<img style="width: 16px; height: 16px;"
-										th:src="@{/images/Edit.png}" alt="Edit">
-								</a>
+									<input type="radio" id="btnclick" class="editrec"
+									style="cursor: pointer;"
+									th:attr="data-merchantdesc=${merchantProfile.merchant_desc}" />
 								</td>
 								<td
 									th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
@@ -367,7 +365,7 @@ function fnsubmit(button) {
 								</td>
 								<td>
 									<button class="btn btn-success" onclick="fnsubmit(this);"
-										data-toggle="tooltip" title="Submit">Submit</button>
+										data-toggle="tooltip" style ="background-color:#f26223;" title="Submit">Submit</button>
 								</td>
 							</tr>
 
@@ -376,7 +374,7 @@ function fnsubmit(button) {
 					</table>
 				</div>
 				<div class="card-footer text-center">
-					<button type="button" class="btn btn-xs mr-2 headerbutton" id=""
+					<button type="button" class="btn btn-xs mr-2 headerbutton headerbutton" id=""
 						onclick="home();">Home</button>
 					<button type="button" class="btn btn-xs headerbutton" id=""
 						onclick="home();">Back</button>

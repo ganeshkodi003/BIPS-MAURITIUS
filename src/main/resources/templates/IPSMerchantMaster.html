@@ -7171,9 +7171,9 @@ $(document)
 				</div>
 				<div class="card-footer text-center">
 					<div class="float-center">
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle " id="btnHome"
+						<button type="button" class="btn btn-sm btn-primary headerbutton " id="btnHome"
 							onclick="home();">Home</button>
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle " id="btnBack"
+						<button type="button" class="btn btn-sm btn-primary headerbutton " id=""
 							onclick="back();">Back</button>
 					</div>
 				</div>
@@ -7204,12 +7204,12 @@ $(document)
 						</div>
 					</div>
 					<div class="card-footer text-center" style="background-color: #BBC3CB;">
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle  " id="addBtn"
+						<button type="button" class="btn btn-sm btn-primary headerbutton  " id="addBtn"
 							onclick="home();">Home</button>
-						<button type="button" class="btn  btn-sm btn-primary commonBtnStyle" id="nav"
+						<button type="button" class="btn  btn-sm btn-primary headerbutton" id="nav"
 							onclick="submitexcelgst(this)">Upload</button>
 
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle " id="btnBack"
+						<button type="button" class="btn btn-sm btn-primary headerbutton " id=""
 							onclick="back();">Back</button>
 					</div>
 				</div>
@@ -7606,7 +7606,7 @@ $(document)
 									</table>
 									<!-- <div class="card-header text-center">
 
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle"
+										<button type="button" class="btn btn-sm btn-primary headerbutton"
 											id="amlcheckMerchantbutton" onclick="AMLCheckMerchant();">AML
 											Check</button>
 
@@ -8510,84 +8510,150 @@ $(document)
 												DETAILS</h6>
 										</div>
 									</div>
-									<div class=" mt-2" >
-										<div class=" pl-3" id="collect1">
-											<div id="signatureown1">
-												<div id="imageContainer"
-													style="width: 50%; height: 50%; "> 
-													<div class="image-upload-wrap mt-1" id="imageContainer">
-														<input class="file-upload-input" type='file'
-															onchange="readURL(this);" accept="image/*" name="barathsign"
-															id="barathsign" style="margin-left: 50px;">
-													</div>
-												</div>
-												<div>
-													<p id="Draw_signature" style="margin-bottom: -1rem">
-														Draw signature</p>
-												</div>
-												<!-- <div id="myModal" class="modal" style="display: none;">
-													<div class="modal-content" id="modal-content1">
-														<div class="modal-header">
-															<h2 style="background-color: #BBC3CB;">put your
-																signature</h2>
-															<div class="modal-footer">
-																<span class="close">&times;</span>
-															</div>
-														</div>
-														<div class="modal-body">
-															<button id="clear-button">Clear</button>
-															<button id="save-button">Save</button>
-															<p>please sign your signature</p>
-															<div class="modal-footer" style="padding: 16px 16px;">
-															</div>
-														</div>
-													</div>
-												</div> -->
-												<div class="modal" id="myModal" data-backdrop="static"
-													data-keyboard="false" style="display: none; padding-left: 10%">
-													<div>
-														<div class="modal-content" id="modal-content1"
-															style="width: 600px">
+									<div class="mt-2 ">
+											<table class="" id="sign"
+															style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
+															<tr>
+																<td style="text-align: center;">Name: <input
+																	type="text" 
+																	style="margin-left: 20px; width: 150px;"
+																	id="ca_first_name"  />
+																</td>
 
-															<div class="menu-title-header">
-																<div class="modal-title" id=""
-																	style="text-align: center; color: white;">
-																	Signature Pad <span class="close">&times;</span>
+																<td rowspan="2" style="text-align: center;">
+																	Signature:
+																	<div class=" pl-3" id="collect1">
+															<div id="signatureown1">
+																<div id="imageContainer"
+																	style="width: 50%; height: 50%;margin-left:450px">
+																	<div class="image-upload-wrap mt-1" id="imageContainer" style="margin-left:150px">
+																		<input class="file-upload-input" type='file'
+																			onchange="readURL(this);" accept="image/*"
+																			name="barathsign" id="barathsign"
+																			style="margin-left: 50px;">
+																	</div>
+																</div>
+																<div>
+																	<p id="Draw_signature" style="margin-bottom: -1rem">
+																		Draw signature</p>
+																</div>
+																
+																<div class="modal" id="myModal" data-backdrop="static"
+																	data-keyboard="false"
+																	style="display: none; padding-left: 10%">
+																	<div>
+																		<div class="modal-content" id="modal-content1"
+																			style="width: 600px">
+
+																			<div class="menu-title-header">
+																				<div class="modal-title" id=""
+																					style="text-align: center; color: white;">
+																					Signature Pad <span class="close">&times;</span>
+																				</div>
+
+																			</div>
+																			<div class="modal-body"
+																				style="text-align: center; display: flex; align-item: center; justify-content: center">
+																				<canvas id="signature-pad" width="400" height="200"></canvas>
+																			</div>
+																			<div class="modal-footer"
+																				style="border-top: none; text-align: center;">
+																				<button type="button"
+																					class="btn btn-sm btn-primary commonBtnStyle"
+																					data-dismiss="modal" id="clear-button">Clear</button>
+
+																				<button type="button"
+																					class="btn btn-sm btn-primary commonBtnStyle"
+																					id="save-button">Save</button>
+																			</div>
+																		</div>
+
+
+																	</div>
 																</div>
 
-															</div>
-															<div class="modal-body"
-																style="text-align: center; display: flex; align-item: center; justify-content: center">
-																<canvas id="signature-pad" width="400"
-																	height="200"></canvas>
-															</div>
-															<div class="modal-footer"
-																style="border-top: none; text-align: center;">
-																<button type="button" class="btn btn-sm btn-primary commonBtnStyle"
-																	data-dismiss="modal"
-																	id="clear-button">Clear</button>
 
-																<button type="button" class="btn btn-sm btn-primary commonBtnStyle"
-																	id="save-button">Save</button>
+
 															</div>
 														</div>
+																</td>
+															</tr>
+														</table>
+											
+<!-- 
+												<tbody id="signbody">
+													<tr id="row0">
+
+														<div class=" pl-3" id="collect1">
+															<div id="signatureown1">
+																<div id="imageContainer"
+																	style="width: 50%; height: 50%;">
+																	<div class="image-upload-wrap mt-1" id="imageContainer">
+																		<input class="file-upload-input" type='file'
+																			onchange="readURL(this);" accept="image/*"
+																			name="barathsign" id="barathsign"
+																			style="margin-left: 50px;">
+																	</div>
+																</div>
+																<div>
+																	<p id="Draw_signature" style="margin-bottom: -1rem">
+																		Draw signature</p>
+																</div>
+																
+																<div class="modal" id="myModal" data-backdrop="static"
+																	data-keyboard="false"
+																	style="display: none; padding-left: 10%">
+																	<div>
+																		<div class="modal-content" id="modal-content1"
+																			style="width: 600px">
+
+																			<div class="menu-title-header">
+																				<div class="modal-title" id=""
+																					style="text-align: center; color: white;">
+																					Signature Pad <span class="close">&times;</span>
+																				</div>
+
+																			</div>
+																			<div class="modal-body"
+																				style="text-align: center; display: flex; align-item: center; justify-content: center">
+																				<canvas id="signature-pad" width="400" height="200"></canvas>
+																			</div>
+																			<div class="modal-footer"
+																				style="border-top: none; text-align: center;">
+																				<button type="button"
+																					class="btn btn-sm btn-primary commonBtnStyle"
+																					data-dismiss="modal" id="clear-button">Clear</button>
+
+																				<button type="button"
+																					class="btn btn-sm btn-primary commonBtnStyle"
+																					id="save-button">Save</button>
+																			</div>
+																		</div>
 
 
-													</div>
-												</div>
+																	</div>
+																</div>
 
 
 
-											</div>
+															</div>
+														</div>
+														
+</div>
+													
+													</tr>
+
+												</tbody> -->
+										
+
 										</div>
-									</div>
 									<div style="width: 200px; margin-top: 5px;">
 										<input id="sigurl" type="text"
 											style="display: none; width: 250px; height: 200px" />
 									</div>
 									<!-- <div class="d-flex float-right">
 										<button type="button"
-											class="btn btn-sm btn-primary commonBtnStyle text-right"
+											class="btn btn-sm btn-primary headerbutton text-right"
 											data-dismiss="modal" onclick="SubmitSig();">Submit</button>
 									</div> -->
 									<script>
@@ -8785,11 +8851,11 @@ $(document)
 																				onclick="submitfile(this)">Submit</button>-->
 									<label></label>
 									<div class="card-footer mt-2 text-center padding-bottom:10px">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 											onclick="back();">Back</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 											th:attr="data-refnumber=${merchant_legal_id}"
 											onclick="nextViewBankDet(this);">Next</button>
 									</div>
@@ -9255,15 +9321,15 @@ $(document)
 											</div>
 										</div> -->
 										<div class="card-footer text-center">
-											<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+											<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 												onclick="previous(this);">Previous</button>
-											<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+											<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 												onclick="home();">Home</button>
-											<button type="button" class="btn btn-sm btn-primary commonBtnStyle "
+											<button type="button" class="btn btn-sm btn-primary headerbutton "
 												th:if="${formmode}=='add'" form="BankandBranch"
 												th:attr="data-formmode=addsubmit"
 												onclick="submitaddform(this);">Submit</button>
-											<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+											<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 												onclick="back();">Back</button>
 										</div>
 									</div>
@@ -9875,11 +9941,11 @@ $(document)
 									</div> -->
 
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle " data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton " data-dismiss="modal"
 											onclick="back();">Back</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle"
+										<button type="button" class="btn btn-sm btn-primary headerbutton"
 											th:if="${formmode}=='MerMastadd'" form="TabForm"
 											th:attr="data-formmode=addsubmit" data-dismiss="modal"
 											onclick="UnitSubmit(this);">Next</button>
@@ -9892,7 +9958,7 @@ $(document)
 												MANAGEMENT</h6>
 										</div>
 										<!--<div class="btn-group nav-buttons float-right">
-											<button type="button" class="btn btn-sm btn-primary commonBtnStyle"
+											<button type="button" class="btn btn-sm btn-primary headerbutton"
 												th:if="${ formmode == 'MerMastadd'}" id="btnAdd"
 												style="margin-top: -5px" onclick="addUserm(this);">Add
 												User</button>
@@ -10194,11 +10260,11 @@ $(document)
 										</div>
 									</div> -->
 									<div class="card-footer text-center mt-2">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="userSubmit(this);">Next</button>
 									</div>
 								</div>
@@ -10502,11 +10568,11 @@ $(document)
 										</div>
 									</div> -->
 									<div class="card-footer text-center mt-2">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="deviceSubmit(this);">Submit</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
 									</div>
 								</div>
@@ -12175,10 +12241,10 @@ $(document)
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
 
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
 									</div>
 								</div>
@@ -12521,9 +12587,9 @@ $(document)
 
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
 									</div>
 								</div>
@@ -12673,9 +12739,9 @@ $(document)
 
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
 									</div>
 								</div>
@@ -12807,9 +12873,9 @@ $(document)
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
 									</div>
 								</div>
@@ -12941,9 +13007,9 @@ $(document)
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
 									</div>
 								</div>
@@ -13086,9 +13152,9 @@ $(document)
 										</table>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+										<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 											onclick="back();">Back</button>
 									</div>
 								</div>
@@ -14468,25 +14534,25 @@ $(document)
 							<br> <br>
 							<div class="card-footer text-center">
 								<div class="button-container">
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle d-none"
+									<button type="button" class="btn btn-sm btn-primary headerbutton d-none"
 										th:if="${formmode}=='UnitmAdd'" form="TabForm" id="amlsub"
 										th:attr="data-formmode=addsubmit" data-dismiss="modal"
 										onclick="UnitSubmitNew(this);">Submit</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" id="amlcheckbutton"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" id="amlcheckbutton"
 										th:if="${formmode}=='UnitmAdd'" onclick="AMLCheckUnit();">AML Check</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle"
+									<button type="button" class="btn btn-sm btn-primary headerbutton"
 										th:attr="data-entry_user=${MerUnit.entry_user},
 									data-modify_user=${MerUnit.modify_user},data-user_id=${MerUnit.unit_id},data-login_user=${user_id},data-modify_flag=${MerUnit.modify_flag}"
 										th:if="${formmode}=='UnitVerify' And ${MerUnit.entry_flag}=='N'"
 										data-dismiss="modal" onclick="UnitSubmitverify(this);">Verify</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='UnitEdit'"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='UnitEdit'"
 										data-dismiss="modal"
 										th:attr="data-entry_user=${MerUnit.entry_user},
 									data-modify_user=${MerUnit.modify_user},data-user_id=${MerUnit.unit_id},data-login_user=${user_id},data-modify_flag=${MerUnit.modify_flag},data-verify_user=${MerUnit.verify_user}"
 										onclick="SubmitUnit(this);">Submit</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="back();">Back</button>
 								</div>
 
@@ -15268,18 +15334,18 @@ $(document)
 
 							<br> <br>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 									onclick="home();">Home</button>
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='UsermAdd'"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='UsermAdd'"
 									data-dismiss="modal" onclick="userSubmituser();">Submit</button>
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='UsermEdit'"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='UsermEdit'"
 									data-dismiss="modal" onclick="Submituser(this);">Submit</button>
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" form="TabForm"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" form="TabForm"
 									th:attr="data-entry_user=${Meruserlist.entry_user},
 									data-modify_user=${Meruserlist.modify_user},data-user_id=${Meruserlist.user_id},data-login_user=${user_id},data-modify_flag=${Meruserlist.modify_flag}"
 									th:if="${formmode}=='UsermVerify'" data-dismiss="modal"
 									onclick="Submituserverify(this);">Verify</button>
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 									onclick="back();">Back</button>
 							</div>
 							<div class="content" style="margin-left: 20px; padding: 15px; "
@@ -15996,22 +16062,22 @@ $(document)
 								class="form-control form-control-sm" hidden="true">
 						</div>
 						<div class="card-footer text-center">
-							<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+							<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 								onclick="home();">Home</button>
-							<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='DevicemAdd'"
+							<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='DevicemAdd'"
 								data-dismiss="modal" onclick="deviceSubmitdevice(this);">Submit</button>
-							<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='DevicemVerify'"
+							<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='DevicemVerify'"
 								data-dismiss="modal" th:attr="data-entry_user=${Merdevicelist.entry_user},
 									data-modify_user=${Merdevicelist.modify_user},data-device_id=${Merdevicelist.device_id},
 									data-login_user=${user_id},data-modify_flag=${Merdevicelist.modify_flag}"
 								onclick="Submitdeviceverify(this);">Verify</button>
-							<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='DevicemEdit'"
+							<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='DevicemEdit'"
 								data-dismiss="modal"
 								th:attr="data-entry_user=${Merdevicelist.entry_user},
 									data-modify_user=${Merdevicelist.modify_user},data-device_id=${Merdevicelist.device_id},
 									data-login_user=${user_id},data-modify_flag=${Merdevicelist.modify_flag},data-verify_user=${Merdevicelist.verify_user}"
 								onclick="Submitdevice(this);">Submit</button>
-							<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+							<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 								onclick="back();">Back</button>
 						</div>
 
@@ -17556,11 +17622,11 @@ $(document)
 																			</div>
 																		</div>
 								<div class="card-footer text-center">
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="back();">Back</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="nextViewBankDetNew(this);">Next</button>
 								</div>
 							</div>
@@ -17928,11 +17994,11 @@ $(document)
 								</div>
 							</div>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 									onclick="previous(this);">Previous</button>
-								<button type="button" class="btn btn-primary btn-sm commonBtnStyle" th:attr="data-formmode=editsubmit"
+								<button type="button" class="btn btn-primary btn-sm headerbutton" th:attr="data-formmode=editsubmit"
 									form="BankandBranchedit" onclick="submitaddform(this);">Submit</button>
-								<button type="button" class="btn btn-primary btn-sm commonBtnStyle"
+								<button type="button" class="btn btn-primary btn-sm headerbutton"
 									onclick="Mainlistpage();">Cancel</button>
 							</div>
 						</div>
@@ -19320,11 +19386,11 @@ $(document)
 																			</div>
 																		</div>
 								<div class="card-footer text-center">
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="back();">Back</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="nextViewBankDetNewVerify(this);">Next</button>
 								</div>
 							</div>
@@ -19618,23 +19684,23 @@ $(document)
 								</div>
 							</div>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 									onclick="previousverify(this);">Previous</button>
-								<button type="button" class="btn btn-primary btn-sm commonBtnStyle"
+								<button type="button" class="btn btn-primary btn-sm headerbutton"
 									th:if="${formmode == 'verify' and branchDet?.hr_status != 'HOLD' and branchDet?.hr_status != 'REJECT'}"
 									th:attr="data-formmode=verifysubmit,data-entry_user=${branchDet?.entry_user},
 									data-modify_user=${branchDet?.modify_user},data-login_user=${user_id},data-modify_flag=${branchDet?.modify_flg},data-work_class=${IPSRoleMenu.work_class}"
 									form="BankandBranchverify" onclick="submitverifyform(this)">Verify</button>
-								<button type="button" class="btn btn-primary btn-sm commonBtnStyle" id="btnBack"
+								<button type="button" class="btn btn-primary btn-sm headerbutton" id=""
 									th:if="${branchDet?.hr_status != 'HOLD' and branchDet?.hr_status != 'REJECT'}"
 									onclick="showConfirmationModal();">Hold</button>
-								<button type="button" class="btn btn-primary btn-sm commonBtnStyle" id="btnSubmit"
+								<button type="button" class="btn btn-primary btn-sm headerbutton" id="btnSubmit"
 									th:if="${branchDet?.hr_status != 'HOLD' and branchDet?.hr_status != 'REJECT'}"
 									onclick="showConfirmationModalreject();">Reject</button>
-								<button type="button" class="btn btn-primary btn-sm commonBtnStyle" id="btnSubmit"
+								<button type="button" class="btn btn-primary btn-sm headerbutton" id="btnSubmit"
 									th:if="${branchDet?.hr_status == 'HOLD' or branchDet?.hr_status == 'REJECT'}"
 									onclick="proceedform();">Proceed</button>
-								<button type="button" class="btn btn-primary btn-sm commonBtnStyle"
+								<button type="button" class="btn btn-primary btn-sm headerbutton"
 									onclick="Mainlistpage();">Cancel</button>
 
 							</div>
@@ -20303,11 +20369,11 @@ $(document)
 									</div>
 								</div>
 								<div class="card-footer text-center">
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="back();">Back</button>
-									<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+									<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 										onclick="nextViewBankDetNewVerify(this);">Next</button>
 								</div>
 							</div>
@@ -20546,7 +20612,7 @@ $(document)
 								</div>
 							</div>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+								<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 									onclick="previous(this);">Previous</button>
 								<button type="button" class="btn btn-primary btn-sm"
 									th:attr="data-formmode=deletesubmit" form="BankandBranchdelete"
@@ -20987,21 +21053,21 @@ $(document)
 						</div>
 					</div>
 					<div class="card-footer text-center">
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+						<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 							onclick="home();">Home</button>
-						<!-- <button type="button" class="btn btn-sm btn-primary commonBtnStyle"
+						<!-- <button type="button" class="btn btn-sm btn-primary headerbutton"
 											th:if="${formmode}=='UsermAdd'" data-dismiss="modal"
 											onclick="userSubmit();">Submit</button> -->
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='PassEdit'"
+						<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='PassEdit'"
 							data-dismiss="modal" onclick="passSubmit();">Submit</button>
 
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle" th:if="${formmode}=='PassVerify'"
+						<button type="button" class="btn btn-sm btn-primary headerbutton" th:if="${formmode}=='PassVerify'"
 							data-dismiss="modal" th:attr="data-entry_user=${MerchantPass.entry_user},
 									data-modify_user=${MerchantPass.modify_user},data-merchant_rep_id=${MerchantPass.merchant_rep_id},
 									data-login_user=${user_id},data-modify_flag=${MerchantPass.modify_flag}"
 							onclick="Submitpassverify(this);">Verify</button>
 
-						<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+						<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 							onclick="back();">Back</button>
 					</div>
 					<div class="content" style="margin-left: 20px; padding: 15px; ">
@@ -21065,7 +21131,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="verifyboxmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" onclick="back();">OK</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" onclick="back();">OK</button>
 				</div>
 			</div>
 		</div>
@@ -21079,7 +21145,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="back();" th:att>Close</button>
+					<button type="button" class="btn btn-primary headerbutton" onclick="back();" th:att>Close</button>
 				</div>
 			</div>
 		</div>
@@ -21094,7 +21160,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="closemodal();" th:att>Close</button>
+					<button type="button" class="btn btn-primary headerbutton" onclick="closemodal();" th:att>Close</button>
 				</div>
 			</div>
 		</div>
@@ -21108,7 +21174,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="back();" th:att>Close</button>
+					<button type="button" class="btn btn-primary headerbutton" onclick="back();" th:att>Close</button>
 				</div>
 			</div>
 		</div>
@@ -21123,7 +21189,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="ADDMANRSN" style="font-size: 16px;"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -21137,7 +21203,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="errormsg"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -21227,7 +21293,7 @@ $(document)
 					<!-- Add content here if needed -->
 				</div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" style="margin-right: 45%;"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" style="margin-right: 45%;"
 						onclick="listmer()">Close</button>
 				</div>
 			</div>
@@ -21244,7 +21310,7 @@ $(document)
 					<!-- Add content here if needed -->
 				</div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" style="margin-right: 45%;"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" style="margin-right: 45%;"
 						onclick="back()">Close</button>
 				</div>
 			</div>
@@ -21271,7 +21337,7 @@ $(document)
 
 					<!-- Footer with Close Button -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal"
+						<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal"
 							onclick="openCity(event, 'india');">Close</button>
 						<!-- Calls goBack function -->
 					</div>
@@ -21318,8 +21384,8 @@ $(document)
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="holdfin();">Confirm</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary headerbutton" onclick="holdfin();">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -21345,8 +21411,8 @@ $(document)
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="RejectAcc();">Confirm</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary headerbutton" onclick="RejectAcc();">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -21382,7 +21448,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p>Please fill the required fields</p>
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -21396,7 +21462,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="invalidfilemsg"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -21423,7 +21489,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal"
 						style="margin-right: 45%;">Close</button>
 				</div>
 			</div>
@@ -21447,7 +21513,7 @@ $(document)
 
 					<div class="row">
 						<div class="col text-center">
-							<button type="button" class="btn btn-primary commonBtnStyle"
+							<button type="button" class="btn btn-primary headerbutton"
 								onclick="DownloadQRCode();">Download QR</button>
 							<input type="text" id="qrsource" style="display: none;">
 							<input type="text" id="qrsourcename" style="display: none;">
@@ -21568,7 +21634,7 @@ $(document)
 					<label></label>
 					<div class="row">
 						<div class="col text-center">
-							<button type="button" class="btn btn-primary commonBtnStyle" onclick="generateQRCode();">Generate
+							<button type="button" class="btn btn-primary headerbutton" onclick="generateQRCode();">Generate
 								QR</button>
 						</div>
 					</div>
@@ -21603,7 +21669,7 @@ $(document)
 					<label></label>
 					<div class="row">
 						<div class="col text-center">
-							<button type="button" class="btn btn-primary commonBtnStyle" onclick="generateQRCode();">Generate
+							<button type="button" class="btn btn-primary headerbutton" onclick="generateQRCode();">Generate
 								QR</button>
 						</div>
 					</div>
@@ -21620,7 +21686,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: white">
 					<p id="alertmsgee" style="font-size: 16px;"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="closemodals();">Close</button>
+					<button type="button" class="btn btn-primary headerbutton" onclick="closemodals();">Close</button>
 				</div>
 			</div>
 		</div>
@@ -21635,7 +21701,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsgee1" style="font-size: 16px;"></p>
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -21649,7 +21715,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p>Same user cannot verify</p>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="back()">
+					<button type="button" class="btn btn-primary headerbutton" onclick="back()">
 						Close</button>
 				</div>
 			</div>
@@ -21664,7 +21730,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
 					<p>same user cannot verify</p>
-					<button type="button" class="btn btn-primary commonBtnStyle" onclick="back()">
+					<button type="button" class="btn btn-primary headerbutton" onclick="back()">
 						Close</button>
 				</div>
 			</div>
@@ -21702,7 +21768,7 @@ $(document)
 					</table>
 				</div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal"
 						style="margin-right: 45%;">Close</button>
 				</div>
 
@@ -21861,7 +21927,7 @@ $(document)
 							style="width: 75%;" required />
 					</div>
 					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" id="data_userRemarks"
+						<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" id="data_userRemarks"
 							style="margin-right: 45%;" onclick="deleteUserRec(this)">Submit</button>
 					</div>
 				</form>
@@ -21882,7 +21948,7 @@ $(document)
 							style="width: 75%;" required />
 					</div>
 					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" id="data_deviceRemarks"
+						<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" id="data_deviceRemarks"
 							style="margin-right: 45%;" onclick="deleteDeviceRec(this)">Submit</button>
 					</div>
 				</form>
@@ -21904,7 +21970,7 @@ $(document)
 							name="passwordManageRemarks" style="width: 75%;" required />
 					</div>
 					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal"
+						<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal"
 							id="data_passwordManageRemarks" style="margin-right: 45%;"
 							onclick="deletePasswordManageRec(this)">Submit</button>
 					</div>
@@ -21927,7 +21993,7 @@ $(document)
 							style="width: 75%;" required />
 					</div>
 					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" id="data_merchantRemarks"
+						<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" id="data_merchantRemarks"
 							style="margin-right: 45%;" onclick="deleteMerchantRec(this)">Submit</button>
 					</div>
 				</form>
@@ -21948,7 +22014,7 @@ $(document)
 							style="width: 75%;" required />
 					</div>
 					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" id="data_unitRemarks"
+						<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" id="data_unitRemarks"
 							style="margin-right: 45%;" onclick="deleteUnitRec(this)">Submit</button>
 					</div>
 				</form>
@@ -21965,7 +22031,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" style="margin-right: 45%;"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" style="margin-right: 45%;"
 						onclick="closeUser()">close</button>
 				</div>
 			</div>
@@ -22121,9 +22187,9 @@ $(document)
 					</div>
 				</div>
 				<div class="modal-footer " style="border-top: none; text-align: center;">
-					<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+					<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 						onclick="popclose()">Back</button>
-					<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+					<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 						onclick="closesubmit()">Proceed</button>
 				</div>
 			</div>
@@ -22285,9 +22351,9 @@ $(document)
 					</div>
 				</div>
 				<div class="modal-footer" style="border-top: none; text-align: center;">
-					<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+					<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 						onclick="popclose()">Back</button>
-					<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal">Proceed</button>
+					<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal">Proceed</button>
 				</div>
 			</div>
 
@@ -22387,9 +22453,9 @@ $(document)
 					</div>
 				</div>
 				<div class="modal-footer" style="border-top: none; text-align: center;">
-					<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal"
+					<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal"
 						onclick="popclose()">Back</button>
-					<button type="button" class="btn btn-sm btn-primary commonBtnStyle" data-dismiss="modal">Proceed</button>
+					<button type="button" class="btn btn-sm btn-primary headerbutton" data-dismiss="modal">Proceed</button>
 				</div>
 			</div>
 
@@ -22423,7 +22489,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" style="margin-right: 45%;"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" style="margin-right: 45%;"
 						onclick="closeUser()">close</button>
 				</div>
 			</div>
@@ -22439,7 +22505,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" style="margin-right: 45%;"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" style="margin-right: 45%;"
 						onclick="closeUser()">close</button>
 				</div>
 			</div>
@@ -22455,7 +22521,7 @@ $(document)
 				</div>
 				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn btn-primary commonBtnStyle" data-dismiss="modal" style="margin-right: 45%;"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal" style="margin-right: 45%;"
 						onclick="closeUser()">close</button>
 				</div>
 			</div>
@@ -22474,7 +22540,7 @@ $(document)
 				<div class="modal-body">Are you sure want to reset the user?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-primary commonBtnStyle" id="confirmResetBtn">Yes,
+					<button type="button" class="btn btn-primary headerbutton" id="confirmResetBtn">Yes,
 						Reset</button>
 				</div>
 			</div>

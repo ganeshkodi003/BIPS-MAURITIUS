@@ -739,7 +739,7 @@ $(document)
 										<h3 th:if="${formmode}=='delete'" class="headerh6">User Profile - Delete</h3>
 										<h3 th:if="${formmode}=='cancel'" class="headerh6">User Profile - Cancel</h3>
 									</div>
-									<button type="button" class="btn btn-xs commonBtnStyle" id="btnInq" onclick="list();">List</button>
+									<button type="button" class="btn btn-xs headerbutton" id="btnInq" onclick="list();">List</button>
 								</div>
 							</div>
 							<div class="card-body mb-0 pb-0">
@@ -1082,24 +1082,24 @@ $(document)
 							</div>
 						</form>
 						<div class="card-footer text-center p-2">
-							<button type="button" class="btn btn-xs mr-2" id="btnHome" onclick="home();">Home</button>
-							<button th:if=" ${formmode}=='verify' AND ${userProfile?.entity_flg}=='N'" type="button" class="btn btn-xs commonBtnStyle mr-2"
+							<button type="button" class="btn btn-xs mr-2 headerbutton" id="" onclick="home();">Home</button>
+							<button th:if=" ${formmode}=='verify' AND ${userProfile?.entity_flg}=='N'" type="button" class="btn btn-xs headerbutton mr-2"
 								th:attr="data-userid=${userProfile.userid},data-entry_user=${userProfile.entry_user},
 									data-modify_user=${userProfile.modify_user},data-modify_flg=${userProfile.modify_flg},
 									data-login_user=${user_id},data-entry_time=${userProfile.entry_time},data-auth_user=${userProfile.auth_user},
 									data-work_class=${IPSRoleMenu.work_class}"
 								onclick="verifyform(this);" id="btnModify"
 							>Verify</button>
-							<button th:if=" ${formmode}=='cancel' AND ${userProfile?.entity_flg}=='N'" type="button" class="btn btn-xs commonBtnStyle mr-2" onclick="cancelform(this);" id="btnModify">Delete</button>
-							<button th:if=" ${formmode}=='add'" type="button" class="btn btn-xs commonBtnStyle mr-2" form="userProfile" id="btnSubmit" onclick="submitform(this);"
+							<button th:if=" ${formmode}=='cancel' AND ${userProfile?.entity_flg}=='N'" type="button" class="btn btn-xs headerbutton mr-2" onclick="cancelform(this);" id="btnModify">Delete</button>
+							<button th:if=" ${formmode}=='add'" type="button" class="btn btn-xs headerbutton mr-2" form="userProfile" id="btnSubmit" onclick="submitform(this);"
 								th:attr="data-formmode=${formmode},data-entity=${entity_flg}"
 							>Submit</button>
-							<button th:if="${formmode}=='edit' " type="button" class="btn btn-xs commonBtnStyle mr-2" form="userProfile" id="btnSubmit" onclick="editsubmitform(this);"
+							<button th:if="${formmode}=='edit' " type="button" class="btn btn-xs headerbutton mr-2" form="userProfile" id="btnSubmit" onclick="editsubmitform(this);"
 								th:attr="data-formmode=${formmode},data-userid=${userProfile.userid},data-entry_user=${userProfile.entry_user},data-entry_time=${userProfile.entry_time},
 									data-modify_user=${userProfile.modify_user},data-modify_flg=${userProfile.modify_flg},
 									data-login_user=${user_id},data-auth_time=${userProfile.auth_time},data-auth_user=${userProfile.auth_user}"
 							>Submit</button>
-							<button type="button" class="btn btn-xs commonBtnStyle" id="btnBack" onclick="back();">Back</button>
+							<button type="button" class="btn btn-xs headerbutton" id="" onclick="back();">Back</button>
 						</div>
 						<div class="content m-2 border" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='cancel' OR ${formmode}=='view' or ${formmode}=='viewnew'" style="padding: 15px;">
 							<div class="row formline">

@@ -622,18 +622,18 @@ label {
 						</div>
 					</div>
 					<div class="card-footer  text-center">
-						<button type="button" class="btn btn-xs commonBtnStyle mr-2"
+						<button type="button" class="btn btn-xs headerbutton mr-2"
 							onclick="home()" id="btnHome">Home</button>
 						<button th:if="${formmode}== 'add'" type="button"
-							class="btn btn-xs commonBtnStyle mr-2" form="RefCodeMaster"
+							class="btn btn-xs headerbutton mr-2" form="RefCodeMaster"
 							id="btnSubmit" onclick="submitform(this);"
 							th:attr="data-formmode=${formmode}">Submit</button>
-						<button type="button" class="btn btn-xs commonBtnStyle mr-2"
+						<button type="button" class="btn btn-xs headerbutton mr-2"
 							id="btnEdit" th:if="${formmode}=='modify'"
 							th:attr="data-formmode=${formmode}"
 							onclick="modifyUserData(this);">Submit</button>
-						<button type="button" class="btn btn-xs commonBtnStyle"
-							id="btnBack" onclick="back();">Back</button>
+						<button type="button" class="btn btn-xs headerbutton"
+							id="" onclick="back();">Back</button>
 					</div>
 				</div>
 			</form>
