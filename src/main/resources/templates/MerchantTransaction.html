@@ -504,10 +504,7 @@ $(document)
 									disabled></th>
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Amount"
-									disabled></th>
-								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="Remarks"
-									disabled></th>
+									disabled></th> 
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Status"
 									disabled></th>
@@ -540,9 +537,7 @@ $(document)
 									<td th:case="'FAILURE'" style="color: red">FAILURE</td>
 									<td th:case="*">UNKNOWN STATUS</td>
 									<!-- Handle any other cases -->
-								</th:block>
-								<td
-									th:text="${profile.tran_rmks !=null ? profile.tran_rmks.toUpperCase() : ''}"></td>
+								</th:block> 
 								<!-- <td th:text="${profile.reversal_date != null ? #dates.format(profile.reversal_date,'dd-MM-yyyy') : ''}"></td>
 								<td style="text-align: right;" th:text="${profile.reversal_amount != null ? #numbers.formatDecimal(profile.reversal_amount, 0, 'COMMA', 2, 'POINT') : ''}"></td> -->
 								<td

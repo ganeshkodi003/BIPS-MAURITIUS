@@ -1,203 +1,199 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header">
 
 <head>
-<meta charset="utf-8">
-<title>IPSAdmin</title>
+	<meta charset="utf-8">
+	<title>IPSAdmin</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta
-	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
-	name="description">
-<meta content="Coderthemes" name="author">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+	<meta content="Coderthemes" name="author">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
-	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 
-<script th:src="@{/js/bootstrap411.js}"></script>
-<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
-	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
-	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
-	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
-<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
-	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
-<script
-	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
-	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{/js/bootstrap411.js}"></script>
+	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 
 </head>
 
 <style>
-nav {
-	box-shadow: 3px 1px 11px 1px #e50707b3;
-	z-index: 1031;
-	background-color: white;
-	height: 70px;
-	border-color: red;
-	padding: 10px;
-}
+	nav {
+		box-shadow: 3px 1px 11px 1px #e50707b3;
+		z-index: 1031;
+		background-color: white;
+		height: 70px;
+		border-color: red;
+		padding: 10px;
+	}
 
-.header1 {
-	background-color: #83b5ec;
-}
+	.header1 {
+		background-color: #83b5ec;
+	}
 
-.dropdown-menu>li {
-	margin-left: 10px;
-}
+	.dropdown-menu>li {
+		margin-left: 10px;
+	}
 
-.error {
-	color: red;
-	padding-left: 10px;
-}
+	.error {
+		color: red;
+		padding-left: 10px;
+	}
 
-#menu {
-	box-shadow: 3px 7px 11px 1px #e50707b3;
-	background: white;
-	position: absolute;
-	z-index: 1;
-	width: 300px;
-	top: 70px;
-	left: -1px;
-	position: fixed;
-	overflow-y: auto;
-	height: 100%;
-}
+	#menu {
+		box-shadow: 3px 7px 11px 1px #e50707b3;
+		background: white;
+		position: absolute;
+		z-index: 1;
+		width: 300px;
+		top: 70px;
+		left: -1px;
+		position: fixed;
+		overflow-y: auto;
+		height: 100%;
+	}
 
-#menu>ul>li {
-	background: #f26223;
-}
+	#menu>ul>li {
+		background: #f26223;
+	}
 
-#menu>ul>li>a {
-	display: block;
-	color: white;
-	font-size: small;
-	border-bottom-style: solid;
-	font-weight: bold;
-	font-size: 18px;
-	padding: 15px;
-}
+	#menu>ul>li>a {
+		display: block;
+		color: white;
+		font-size: small;
+		border-bottom-style: solid;
+		font-weight: bold;
+		font-size: 18px;
+		padding: 15px;
+	}
 
-#menu>ul>li>a:hover, .submenu1>ul>li>a:hover {
-	color: #f1eaea;
-}
+	#menu>ul>li>a:hover,
+	.submenu1>ul>li>a:hover {
+		color: #f1eaea;
+	}
 
-#userdtl, #dropico {
-	float: right;
-}
+	#userdtl,
+	#dropico {
+		float: right;
+	}
 
-.submenu1>ul>li>a {
-	display: block;
-	color: #f1eaea;
-	font-size: small;
-}
+	.submenu1>ul>li>a {
+		display: block;
+		color: #f1eaea;
+		font-size: small;
+	}
 
-#headerdiv {
-	left: 50%;
-	color: white;
-	position: absolute;
-	text-align: center;
-	margin: -38px 0 0 -31px;
-}
+	#headerdiv {
+		left: 50%;
+		color: white;
+		position: absolute;
+		text-align: center;
+		margin: -38px 0 0 -31px;
+	}
 
-#showmenu, #userdtl {
-	font-weight: 700;
-	font-size: larger;
-}
+	#showmenu,
+	#userdtl {
+		font-weight: 700;
+		font-size: larger;
+	}
 
-.menu-title-header {
-	padding: 0.45rem 0.45rem;
-	background: #f26223;
-	color: #fff;
-	font-family: "Nunito", calibry;
-}
+	.menu-title-header {
+		padding: 0.45rem 0.45rem;
+		background: #f26223;
+		color: #fff;
+		font-family: "Nunito", calibry;
+	}
 
-.modal-footer {
-	padding: 0.45rem 0.45rem;
-	background: #377486;
-	color: #fff;
-	font-family: "Nunito", calibry;
-}
+	.modal-footer {
+		padding: 0.45rem 0.45rem;
+		background: #377486;
+		color: #fff;
+		font-family: "Nunito", calibry;
+	}
 
-.modal-title {
-	text-align: center;
-	font-size: 20px;
-	font-weight: 900;
-	color: #332d2d;
-	font-family: calibry
-}
+	.modal-title {
+		text-align: center;
+		font-size: 20px;
+		font-weight: 900;
+		color: #332d2d;
+		font-family: calibry
+	}
 
-#logoutmenu {
-	display: none;
-	position: absolute;
-	z-index: 1031;
-	width: 200px;
-	background-color: #dee2e6;
-	border-radius: 5px;
-	background-color: #dee2e6;
-	right: 0px;
-	top: 70px;
-	border: 2px solid #4d8cb9;
-	position: fixed;
-}
+	#logoutmenu {
+		display: none;
+		position: absolute;
+		z-index: 1031;
+		width: 200px;
+		background-color: #dee2e6;
+		border-radius: 5px;
+		background-color: #dee2e6;
+		right: 0px;
+		top: 70px;
+		border: 2px solid #4d8cb9;
+		position: fixed;
+	}
 
-#ques {
-	margin-top: -54px;
-	float: right;
-	padding: 65px;
-}
+	#ques {
+		margin-top: -54px;
+		float: right;
+		padding: 65px;
+	}
 
-.logout {
-	color: #2e7bd0;
-}
+	.logout {
+		color: #2e7bd0;
+	}
 
-html {
-	zoom: 0.7;
-}
+	html {
+		zoom: 0.7;
+	}
 
-label {
-	text-align: left;
-}
+	label {
+		text-align: left;
+	}
 
-#button {
-	display: block;
-	margin: 20px auto;
-	padding: 10px 30px;
-	background-color: #eee;
-	border: solid #ccc 1px;
-	cursor: pointer;
-}
+	#button {
+		display: block;
+		margin: 20px auto;
+		padding: 10px 30px;
+		background-color: #eee;
+		border: solid #ccc 1px;
+		cursor: pointer;
+	}
 
-.modal-backdrop {
-	width: 200vw;
-	height: 200vh;
-}
+	.modal-backdrop {
+		width: 200vw;
+		height: 200vh;
+	}
 
-#ipsword {
-	color: #ffffff;
-	top: 0%;
-	font-weight: 900;
-	position: absolute;
-	padding: 10px 0% 1px;
-	inline-size: max-content;
-	margin: 0 0;
-	margin-left: -345%;
-}
+	#ipsword {
+		color: #ffffff;
+		top: 0%;
+		font-weight: 900;
+		position: absolute;
+		padding: 10px 0% 1px;
+		inline-size: max-content;
+		margin: 0 0;
+		margin-left: -345%;
+	}
 
-ul li ul li:hover ul {
-	display: block;
-
-
-.nav-item:hover {
-        background-color: white;
-        color: #ff751a;
-    }
+	ul li ul li:hover ul {
+		display: block;
 
 
+		.nav-item:hover {
+			background-color: white;
+			color: #ff751a;
+		}
 </style>
 <script type="text/javascript" th:inline="javascript">
 	/*<![CDATA[*/
@@ -484,316 +480,326 @@ ul li ul li:hover ul {
 	<nav class="navbar fixed-top navbar-expand-md navbar-dark  mb-3">
 		<div class="col-sm-12" style="border-color: red">
 			<div class="float-left">
-				<img th:src=@{/images/Bmerchant.png} id="showmenu"
-					style="width: 350px; height: 70px" alt="Bornfire">
+				<img th:src=@{/images/Bmerchant.png} id="showmenu" style="width: 350px; height: 70px" alt="Bornfire">
 			</div>
-			<div class="btn float-right" id="userdtl" title="Profile"
-				style="margin-top: 20px;">
-				<img th:if="${session.IMAGEUSER} == null"
-					style="width: 30px; height: 30px; cursor: pointer;"
-					th:src="@{/Image/userProfile.png}" class="imageround"> <font
-					style="font-family: calibri; color: #162b75; font-size: 20px; cursor: pointer;"
-					th:text="'&nbsp;&nbsp;' + ${session.USERNAME}"></font> <img
-					th:if="${session.IMAGEUSER} != null"
-					th:src="*{'data:image/png;base64,' + session.IMAGEUSER}"
-					class="imageround" style="color: blue; font-size: 20px;">
+			<div class="btn float-right" id="userdtl" title="Profile" style="margin-top: 20px;">
+				<img th:if="${session.IMAGEUSER} == null" style="width: 30px; height: 30px; cursor: pointer;"
+					th:src="@{/Image/userProfile.png}" class="imageround">
+				<font style="font-family: calibri; color: #162b75; font-size: 20px; cursor: pointer;"
+					th:text="'&nbsp;&nbsp;' + ${session.USERNAME}"></font> <img th:if="${session.IMAGEUSER} != null"
+					th:src="*{'data:image/png;base64,' + session.IMAGEUSER}" class="imageround"
+					style="color: blue; font-size: 20px;">
 			</div>
 			<div class="btn float-right" onclick="docEmb()" id="Manual"
 				style="margin-top: 23px; width: 4px; margin-left: 17px; margin-right: 32px;">
-				<img th:src="@{/Image/userManualIcon.png}"
-					style="width: 30px; height: 30px; cursor: pointer;"
-					onclick="docEmb();cursor:pointer;" title="Manual" id="Manual"
-					alt="Manual">
+				<img th:src="@{/Image/userManualIcon.png}" style="width: 30px; height: 30px; cursor: pointer;"
+					onclick="docEmb();cursor:pointer;" title="Manual" id="Manual" alt="Manual">
 			</div>
 			<input type="text" id="pdate" autocomplete="off"
-				th:value="${#dates.format(RoleMenu?.password_expiry_date,'yyyy-MM-dd')}"
-				hidden="true" /> <input type="text" id="pdatebank"
-				autocomplete="off"
-				th:value="${#dates.format(RoleMenuss?.password_expiry_date,'yyyy-MM-dd')}"
-				hidden="true" />
+				th:value="${#dates.format(RoleMenu?.password_expiry_date,'yyyy-MM-dd')}" hidden="true" /> <input
+				type="text" id="pdatebank" autocomplete="off"
+				th:value="${#dates.format(RoleMenuss?.password_expiry_date,'yyyy-MM-dd')}" hidden="true" />
 			<div class="btn btn-default float-right"
 				style="margin-top: 23px; width: 4px; margin-left: 17px; margin-right: 32px;">
-				<img th:src=@{/Image/homePage.png}
-					style="width: 30px; height: 30px; cursor: pointer;"
-					onclick="contentLoad(this)" title="Dashboard" id="IPSDashboard"
-					alt="Dashboard">
+				<img th:src=@{/Image/homePage.png} style="width: 30px; height: 30px; cursor: pointer;"
+					onclick="contentLoad(this)" title="Dashboard" id="IPSDashboard" alt="Dashboard">
 			</div>
 			<div class="btn btn-default float-right"
 				style="margin-top: 23px; width: 4px; margin-left: 17px; margin-right: 32px;">
-				<img th:src=@{/Image/transactionIcon.png}
-					style="width: 30px; height: 30px; cursor: pointer;"
-					onclick="contentLoad(this)" title="Snapshot" id="snapShot"
-					alt="Snapshot">
+				<img th:src=@{/Image/transactionIcon.png} style="width: 30px; height: 30px; cursor: pointer;"
+					onclick="contentLoad(this)" title="Snapshot" id="snapShot" alt="Snapshot">
 			</div>
 		</div>
 	</nav>
 
 	<div id="menu" style="width: 18%; z-index: 1031;">
 		<ul class="nav flex-column" id="Wholeul">
-			<li th:if="${IPSRoleMenu.admin}=='Y'" class="nav-item"><a
-				class="nav-link newtgl" data-toggle="collapse" href="#adminsubmenu"
-				id="admin"> <img th:src=@{/Image/administrator.png}
-					alt="Admin Icon"
-					style="width: 25px; height: 25px; margin-right: 8px;"> Admin
-					Operation<img th:src=@{/images/dropdowns.png} id="dropico"
-					alt="Admin Icon" style="width: 15px; height: 15px; margin-top: 4px">
-			</a>
+			<li th:if="${IPSRoleMenu.admin}=='Y'" class="nav-item"><a class="nav-link newtgl" data-toggle="collapse"
+					href="#adminsubmenu" id="admin"> <img th:src=@{/Image/administrator.png} alt="Admin Icon"
+						style="width: 25px; height: 25px; margin-right: 8px;"> Admin
+					Operation<img th:src=@{/images/dropdowns.png} id="dropico" alt="Admin Icon"
+						style="width: 15px; height: 15px; margin-top: 4px">
+				</a>
 				<div id="adminsubmenu" class="collapse submenu1">
-					<ul style="background: #565612" class="nav flex-column " 
+					<ul style="background: #565612" class="nav flex-column "
 						th:if="${IPSRoleMenu.user_profile_maintenance}=='Y' OR ${IPSRoleMenu.access_role}=='Y' OR ${IPSRoleMenu.reference_code}=='Y' OR ${IPSRoleMenu.bank_branch_master}=='Y'">
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.user_profile_maintenance}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link" id="UserProfile"
-							style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							href="#" onclick="contentLoad(this)">User Profile Maintenance</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_profile_maintenance}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="UserProfile"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="#" onclick="contentLoad(this)">User Profile Maintenance</a></li>
 						<li class="nav-item" th:if="${IPSRoleMenu.access_role}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link"
-							style="font-size: 15px; color: white; padding-left: 50px;font-weight: bold; background-color: #ff751a;"
-							id="IPSAccessandRoles" href="#" onclick="contentLoad(this)">Access
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								style="font-size: 15px; color: white; padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								id="IPSAccessandRoles" href="#" onclick="contentLoad(this)">Access
 								and Roles</a></li>
 						<li class="nav-item" th:if="${IPSRoleMenu.reference_code}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link" data-toggle="collapse"
-							style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							href="javascript: void(0);" onclick="contentLoad(this)"
-							id="refcode"> Reference Code </a></li>
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.bank_branch_master}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link" id="BankBranchMaster"
-							style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							href="javascript: void(0);" onclick="contentLoad(this)">Bank
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								data-toggle="collapse"
+								style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)" id="refcode"> Reference Code
+							</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.bank_branch_master}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="BankBranchMaster"
+								style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Bank
 								Branch Master</a></li>
 					</ul>
-				</div></li>
-			<li th:if="${IPSRoleMenu.ips_parameter}=='Y'" class="nav-item"><a
-				class="nav-link newtgl" data-toggle="collapse"
-				href="#IPSparasubmenu" id="auditmenu"> <img
-					th:src=@{/Image/Parameter.png} alt="Admin Icon"
-					style="width: 25px; height: 25px; margin-right: 8px;">
-					Merchant Parameter <img th:src=@{/images/dropdowns.png}
-					id="dropico" alt="Admin Icon"
-					style="width: 15px; height: 15px; margin-top: 4px">
-			</a>
+				</div>
+			</li>
+			<li th:if="${IPSRoleMenu.ips_parameter}=='Y'" class="nav-item"><a class="nav-link newtgl"
+					data-toggle="collapse" href="#IPSparasubmenu" id="auditmenu"> <img th:src=@{/Image/Parameter.png}
+						alt="Admin Icon" style="width: 25px; height: 25px; margin-right: 8px;">
+					Merchant Parameter <img th:src=@{/images/dropdowns.png} id="dropico" alt="Admin Icon"
+						style="width: 15px; height: 15px; margin-top: 4px">
+				</a>
 				<div id="IPSparasubmenu" class="collapse submenu1">
-					<ul style="background: #565612;" class="nav flex-column"
-						th:id="${auditflag}"
+					<ul style="background: #565612;" class="nav flex-column" th:id="${auditflag}"
 						th:if="${IPSRoleMenu.service_charges_fees}=='Y' OR ${IPSRoleMenu.wallet_fees_charges}=='Y' OR ${IPSRoleMenu.merchant_category_code}=='Y' OR ${IPSRoleMenu.notification_parameter}=='Y' OR ${IPSRoleMenu.settlement_account}=='Y'"
 						aria-expanded="false">
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.service_charges_fees}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link"
-							style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							id="ServiceChargesAndFees" href="javascript: void(0);"
-							onclick="contentLoad(this)">Service Charges and Fees</a></li>
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.wallet_fees_charges}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link"
-							style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							id="MerchantServiceChargesAndFees" href="javascript: void(0);"
-							onclick="contentLoad(this)">Merchant Charges and Fees</a></li>
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.merchant_category_code}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link"
-							style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							id="MerchantCategoryCode" href="#" onclick="contentLoad(this)">Merchant
+						<li class="nav-item" th:if="${IPSRoleMenu.service_charges_fees}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								id="ServiceChargesAndFees" href="javascript: void(0);"
+								onclick="contentLoad(this)">Service Charges and Fees</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.wallet_fees_charges}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								id="MerchantServiceChargesAndFees" href="javascript: void(0);"
+								onclick="contentLoad(this)">Merchant Charges and Fees</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.merchant_category_code}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								id="MerchantCategoryCode" href="#" onclick="contentLoad(this)">Merchant
 								Category Code</a></li>
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.notification_parameter}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link"
-							style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							id="NotificationParms" href="javascript: void(0);"
-							onclick="contentLoad(this)">Notification Parameter</a></li>
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.settlement_account}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link"
-							style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							id="SettlementAccount" href="javascript: void(0);"
-							onclick="contentLoad(this)">Settlement Account</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.notification_parameter}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								id="NotificationParms" href="javascript: void(0);"
+								onclick="contentLoad(this)">Notification Parameter</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.settlement_account}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								id="SettlementAccount" href="javascript: void(0);"
+								onclick="contentLoad(this)">Settlement Account</a></li>
 						<!--<li class="nav-item" style="outline:5px solid #ff751a"
 							th:if="${IPSRoleMenu.settlement_account}=='Y'"><a class="nav-link" style="font-size: 15px"
 								id="MerOnbordParam" href="javascript: void(0);" onclick="contentLoad(this)">Merchant
 								Onboarding Parameter</a></li>-->
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.settlement_account}=='Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link"
-							style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							id="MerOnbordParam" href="javascript: void(0);"
-							onclick="contentLoad(this)"> Merchant Onboarding Parameter</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.settlement_account}=='Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								id="MerOnbordParam" href="javascript: void(0);" onclick="contentLoad(this)"> Merchant
+								Onboarding Parameter</a></li>
 					</ul>
-				</div></li>
-			<li th:if="${IPSRoleMenu.audit_operations} == 'Y'" class="nav-item"><a
-				class="nav-link newtgl" data-toggle="collapse" href="#Auditsubmenu"
-				id="auditmenu"> <img th:src=@{/Image/audit.png} alt="Admin Icon"
-					style="width: 25px; height: 25px; margin-right: 8px;">Audit
-					Operations <img th:src=@{/images/dropdowns.png} id="dropico"
-					alt="Admin Icon" style="width: 15px; height: 15px; margin-top: 4px">
-			</a>
+				</div>
+			</li>
+			<li th:if="${IPSRoleMenu.audit_operations} == 'Y'" class="nav-item"><a class="nav-link newtgl"
+					data-toggle="collapse" href="#Auditsubmenu" id="auditmenu"> <img th:src=@{/Image/audit.png}
+						alt="Admin Icon" style="width: 25px; height: 25px; margin-right: 8px;">Audit
+					Operations <img th:src=@{/images/dropdowns.png} id="dropico" alt="Admin Icon"
+						style="width: 15px; height: 15px; margin-top: 4px">
+				</a>
 				<div id="Auditsubmenu" class="collapse submenu1">
-					<ul style="background: #565612;" class="nav flex-column"
-						th:id="${auditflag}"
+					<ul style="background: #565612;" class="nav flex-column" th:id="${auditflag}"
 						th:if="${IPSRoleMenu.user_activity_audits} == 'Y' OR ${IPSRoleMenu.service_audits} == 'Y'"
 						aria-expanded="false">
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link" id="userActivityAudit"
-							style="font-size: 15px; color: white; padding-left: 50px;font-weight: bold; background-color: #ff751a;"
-							href="javascript: void(0);" onclick="contentLoad(this)">User
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="userActivityAudit"
+								style="font-size: 15px; color: white; padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">User
 								Activity Audits</a></li>
 						<li class="nav-item" th:if="${IPSRoleMenu.service_audits} == 'Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link" id="serviceAudit"
-							style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							href="javascript: void(0);" onclick="contentLoad(this)">Service
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="serviceAudit"
+								style="font-size: 15px; color: white;padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Service
 								Audits</a></li>
 					</ul>
-				</div></li>
-			<li th:if="${IPSRoleMenu.charge_back} == 'Y'" class="nav-item"><a
-				class="nav-link" data-toggle="collapse" href="javascript: void(0);"
-				onclick="contentLoad(this)" id="pendingChargeBackTransaction"> <img
-					th:src=@{/Image/Chargeback.png} alt="Admin Icon"
-					style="width: 20px; height: 20px; margin-right: 8px;">Charge
+				</div>
+			</li>
+			<li th:if="${IPSRoleMenu.charge_back} == 'Y'" class="nav-item"><a class="nav-link" data-toggle="collapse"
+					href="javascript: void(0);" onclick="contentLoad(this)" id="pendingChargeBackTransaction"> <img
+						th:src=@{/Image/Chargeback.png} alt="Admin Icon"
+						style="width: 20px; height: 20px; margin-right: 8px;">Charge
 					Back Transactions
-			</a></li>
-			<li th:if="${IPSRoleMenu.transaction_monitoring} == 'Y'"
-				class="nav-item"><a class="nav-link" data-toggle="collapse"
-				href="#" id="transactiononitoring" onclick="MerTrans(this)"> <img
-					th:src=@{/Image/transaction.png} alt="Admin Icon"
-					style="width: 20px; height: 20px; margin-right: 8px;">Transaction
+				</a></li>
+			<li th:if="${IPSRoleMenu.transaction_monitoring} == 'Y'" class="nav-item"><a class="nav-link"
+					data-toggle="collapse" href="#" id="transactiononitoring" onclick="MerTrans(this)"> <img
+						th:src=@{/Image/transaction.png} alt="Admin Icon"
+						style="width: 20px; height: 20px; margin-right: 8px;">Transaction
 					Monitoring
-			</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="collapse"
-				href="#" id="paymentprocessing" onclick="contentLoad(this)"> <img
-					th:src=@{/images/payments.png} alt="Admin Icon"
-					style="width: 20px; height: 20px; margin-right: 8px;">Payment
+				</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="collapse" href="#" id="paymentprocessing"
+					onclick="contentLoad(this)"> <img th:src=@{/images/payments.png} alt="Admin Icon"
+						style="width: 20px; height: 20px; margin-right: 8px;">Payment
 					Processing
-			</a></li>
+				</a></li>
 
-			<li th:if="${IPSRoleMenu.merchant_master} == 'Y'" class="nav-item"><a
-				class="nav-link" data-toggle="collapse" href="#" id="merchantReg2"
-				onclick="contentLoad1(this)"><img
-					th:src=@{/Image/merchant_master.png} alt="Admin Icon"
-					style="width: 20px; height: 20px; margin-right: 8px;">
+			<li th:if="${IPSRoleMenu.merchant_master} == 'Y'" class="nav-item"><a class="nav-link"
+					data-toggle="collapse" href="#" id="merchantReg2" onclick="contentLoad1(this)"><img
+						th:src=@{/Image/merchant_master.png} alt="Admin Icon"
+						style="width: 20px; height: 20px; margin-right: 8px;">
 					Merchant Master </a></li>
-			<li th:if="${IPSRoleMenu.audit_operations} == 'Y'" class="nav-item"><a
-				class="nav-link newtgl" data-toggle="collapse" href="#reportsMenu"
-				id="reportsMenuHead"> <img th:src=@{/Image/Reports.png}
-					alt="Admin Icon"
-					style="width: 20px; height: 20px; margin-right: 8px;">Reports
+			<li th:if="${IPSRoleMenu.audit_operations} == 'Y'" class="nav-item"><a class="nav-link newtgl"
+					data-toggle="collapse" href="#reportsMenu" id="reportsMenuHead"> <img th:src=@{/Image/Reports.png}
+						alt="Admin Icon" style="width: 20px; height: 20px; margin-right: 8px;">Reports
 					<img th:src=@{/images/dropdowns.png} id="dropico" alt="Admin Icon"
-					style="width: 15px; height: 15px; margin-top: 4px">
-			</a>
+						style="width: 15px; height: 15px; margin-top: 4px">
+				</a>
 				<div id="reportsMenu" class="collapse submenu1">
-					<ul style="background: #565612;" class="nav flex-column"
-						th:id="${auditflag}"
+					<ul style="background: #565612;" class="nav flex-column" th:id="${auditflag}"
 						th:if="${IPSRoleMenu.user_activity_audits} == 'Y' OR ${IPSRoleMenu.service_audits} == 'Y'"
 						aria-expanded="false">
-						<li class="nav-item"
-							th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link" id="transactionReports"
-							style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
-							href="javascript: void(0);" onclick="contentLoad(this)">Transaction
-						</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="transactionReports"
+								style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Transaction
+							</a></li>
 						<li class="nav-item" th:if="${IPSRoleMenu.service_audits} == 'Y'"
-							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a
-							class="nav-link" id="chargeBackReports"
-							style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
-							href="javascript: void(0);" onclick="contentLoad(this)">Charge
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="chargeBackReports"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Charge
 								Back</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="mauCasTransactions"
+								style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">IPS, MauCas Transactions
+							</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.service_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="outgoingFileReversal"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)"> Outgoing File Reversal</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="incomingFilesProcessing"
+								style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Incoming Files Processing
+							</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.service_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="rejectionPending"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Rejection Pending Reprocessing</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="reportsRequirement"
+								style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Reports Requirement
+							</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.service_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="schemaWiseTransaction"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Schema Wise Transaction</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="rejectionReport"
+								style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Rejection Report
+							</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.service_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="ipsOutgoingReport"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">IPS Outgoing Report</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="mauCasOutgoingReport"
+								style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">MauCas Outgoing Report
+							</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.service_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="schemesUnsettledTransaction"
+								style="font-size: 15px; color: white; padding-left: 50px; font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Schemes Unsettled Report</a></li>
+						<li class="nav-item" th:if="${IPSRoleMenu.user_activity_audits} == 'Y'"
+							style="border-bottom: 3px solid white; outline: 5px solid #ff751a"><a class="nav-link"
+								id="schemesSettledTransaction"
+								style="font-size: 15px; color: white;padding-left: 50px;font-weight: bold; background-color: #ff751a;"
+								href="javascript: void(0);" onclick="contentLoad(this)">Schemes Settled Report
+							</a></li> 
+						 
 					</ul>
-				</div></li>
-			<li th:if="${IPSRoleMenu.charge_back} == 'Y'" class="nav-item"><a
-				class="nav-link" data-toggle="collapse" href="javascript: void(0);"
-				onclick="contentLoad(this)" id="PendingServlist"> <img
-					th:src=@{/Image/ServiceRequest.png} alt="Admin Icon"
-					style="width: 20px; height: 20px; margin-right: 8px;">
+				</div>
+			</li>
+			<li th:if="${IPSRoleMenu.charge_back} == 'Y'" class="nav-item"><a class="nav-link" data-toggle="collapse"
+					href="javascript: void(0);" onclick="contentLoad(this)" id="PendingServlist"> <img
+						th:src=@{/Image/ServiceRequest.png} alt="Admin Icon"
+						style="width: 20px; height: 20px; margin-right: 8px;">
 					Service Request
-			</a></li>
+				</a></li>
 		</ul>
 	</div>
 
 	<!-- Model box  -->
 
-	<div class="modal fade" id="MMModalpopup1" data-backdrop="static"
-		data-keyboard="false" style="background: #000000b0;">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="MMModalpopup1" data-backdrop="static" data-keyboard="false"
+		style="background: #000000b0;">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold"
-					style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
-				<h4 class="modal-body text-center font-weight-bold"
-					style="color: black !important; font-size: 19px"></h4>
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA
+					(BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px">
+				</h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2"
-						style="width: 16%; background: #f26223; font-size: 17px;"
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;"
 						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="MMModalpopup2" data-backdrop="static"
-		data-keyboard="false" style="background: #000000b0;">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="MMModalpopup2" data-backdrop="static" data-keyboard="false"
+		style="background: #000000b0;">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold"
-					style="background: #f26223;">BANK OF BARODA (BOTSWANA) LTD</h3>
-				<h4 class="modal-body text-center font-weight-bold"
-					style="color: black !important; font-size: 19px"></h4>
+				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA
+					(BOTSWANA) LTD</h3>
+				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px">
+				</h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2"
-						style="width: 16%; background: #f26223; font-size: 17px;"
+					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;"
 						data-dismiss="modal" onClick="backToLogin()">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div id="logoutmenu" style="width: 10%; margin-left: 16px;"
-		data-backdrop="static" data-keyboard="false">
+	<div id="logoutmenu" style="width: 10%; margin-left: 16px;" data-backdrop="static" data-keyboard="false">
 		<ul class="nav flex-column">
-			<li class="nav-item" style="border-bottom: 1px solid black;"><input
-				type="button" id="logout" autocomplete="off"
-				style="margin-left: 12px" class="btn btn-default logout"
-				value="LogOut" onclick="logout()" /></li>
-			<li class="nav-item"><input type="button" autocomplete="off"
-				style="margin-left: 12px" class="btn btn-default logout"
-				value="Change Password" id="chngPass" /></li>
+			<li class="nav-item" style="border-bottom: 1px solid black;"><input type="button" id="logout"
+					autocomplete="off" style="margin-left: 12px" class="btn btn-default logout" value="LogOut"
+					onclick="logout()" /></li>
+			<li class="nav-item"><input type="button" autocomplete="off" style="margin-left: 12px"
+					class="btn btn-default logout" value="Change Password" id="chngPass" /></li>
 		</ul>
 	</div>
 
 	<!-- Logout Model Box -->
 
-	<div class="modal fade" id="confirmationModalMM" tabindex="-1"
-		style="background: #000000b0;" role="dialog"
+	<div class="modal fade" id="confirmationModalMM" tabindex="-1" style="background: #000000b0;" role="dialog"
 		aria-labelledby="deleteModalLabel" aria-hidden="true">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-			role="document">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
 			<div class="modal-content">
-				<div
-					style="background-color: #f26223; font-weight: 700; font-size: 20px;">
+				<div style="background-color: #f26223; font-weight: 700; font-size: 20px;">
 					<h4 style="color: white; padding: 13px;">BANK OF BARODA
 						(BOTSWANA) LTD</h4>
 				</div>
 				<h5 style="font-size: 17px; color: black; padding: 15px;">Are
 					You Sure Want to Logout ?</h5>
 				<div style="padding: 10px; text-align: center;">
-					<button type="button" class="btn btn-secondary"
-						style="font-size: 16px" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger"
-						style="font-size: 16px" id="logout" onclick="contentLoad(this)">Yes,Logout</button>
+					<button type="button" class="btn btn-secondary" style="font-size: 16px"
+						data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-danger" style="font-size: 16px" id="logout"
+						onclick="contentLoad(this)">Yes,Logout</button>
 				</div>
 			</div>
 		</div>
@@ -801,59 +807,53 @@ ul li ul li:hover ul {
 
 	<!-- Change password Model Box -->
 
-	<div class="modal fade" id="changepasswordMM" data-backdrop="static"
-		data-keyboard="false" style="background: #000000b0;">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="changepasswordMM" data-backdrop="static" data-keyboard="false"
+		style="background: #000000b0;">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content" style="color: cadetblue;">
 				<!-- Modal Header -->
 				<div class="menu-title-header">
-					<div class="modal-title" id="exampleModalLabel"
-						style="text-align: center; color: white;">CHANGE PASSWORD</div>
+					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">CHANGE
+						PASSWORD</div>
 				</div>
 				<div class="modal-body" style="text-align: center;">
 					<form th:object=${singledetail} id="passform" method="post">
 						<div class="form-group">
 							<div class="row  mb-2 align-items-center">
 								<label class="col-sm-5" for="acctNum" style="color: black">Old
-									Password :</label> <input class="form-control col-sm-5" type="password"
-									id="oldpass" autocomplete="off" name="oldpass" required />
+									Password :</label> <input class="form-control col-sm-5" type="password" id="oldpass"
+									autocomplete="off" name="oldpass" required />
 							</div>
 							<div class="row mb-2 align-items-center">
 								<label class="col-sm-5" for="acctName" style="color: black">New
-									Password :</label> <input class="form-control col-sm-5" type="password"
-									id="newpass" autocomplete="off" name="newpass" required />
+									Password :</label> <input class="form-control col-sm-5" type="password" id="newpass"
+									autocomplete="off" name="newpass" required />
 							</div>
 							<div class="row align-items-center">
 								<label class="col-sm-5" for="acctName" style="color: black">Confirm
-									New Password :</label> <input class="form-control col-sm-5"
-									type="password" id="Connewpass" name="newpass" required
-									autocomplete="off" />
+									New Password :</label> <input class="form-control col-sm-5" type="password"
+									id="Connewpass" name="newpass" required autocomplete="off" />
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="text-center mb-2">
-					<button type="button" class="btn"
-						style="background: #192328f5; font-size: 17px;"
+					<button type="button" class="btn" style="background: #192328f5; font-size: 17px;"
 						onclick="submitchangepassword(this);">Submit</button>
-					<button id="logout" type="button" class="btn"
-						style="background: #192328f5; font-size: 17px;"
+					<button id="logout" type="button" class="btn" style="background: #192328f5; font-size: 17px;"
 						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="modal fade" id="loaderMMPage" data-backdrop="static"
-		data-keyboard="false">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="loaderMMPage" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content" style="background: transparent;">
 				<div class="modal-body" style="text-align: center">
 					<div>
-						<img th:src=@{/images/loader.gif} id="bfirelogo"
-							style="width: 153px; margin-left: 18px;" alt="Bornfire">
+						<img th:src=@{/images/loader.gif} id="bfirelogo" style="width: 153px; margin-left: 18px;"
+							alt="Bornfire">
 					</div>
 				</div>
 			</div>
@@ -861,32 +861,26 @@ ul li ul li:hover ul {
 	</div>
 
 	<div class="modal fade" id="alert1">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="menu-header">
-					<h4 class="modal-title"
-						style="text-align: center; margin-top: 20px;">BANK OF BARODA
+					<h4 class="modal-title" style="text-align: center; margin-top: 20px;">BANK OF BARODA
 						(BOTSWANA) LTD</h4>
 				</div>
 				<br>
 				<div class="form-group">
 					<p style="margin-left: 120px;">Password Expire Date :</p>
-					<p style="margin-top: -30px; margin-left: 290px;"
-						th:value="${session.merUserId}"
+					<p style="margin-top: -30px; margin-left: 290px;" th:value="${session.merUserId}"
 						th:text="${#dates.format(RoleMenu?.password_expiry_date,'dd-MM-yyyy')}">
-					<p style="margin-top: -30px; margin-left: 290px;"
-						th:value="${session.USERID}"
+					<p style="margin-top: -30px; margin-left: 290px;" th:value="${session.USERID}"
 						th:text="${#dates.format(RoleMenuss?.password_expiry_date,'dd-MM-yyyy')}">
 				</div>
 				<br>
 				<div class="modal-body text-center">
 					<p id="alertmsg1" style="font-size: 16px; text-align: center">Do
 						You Want Change Password?</p>
-					<button type="button" class="btn btn-primary" data-dismiss="modal"
-						onclick="Yes(this);">Yes</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal"
-						onclick="">No</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="Yes(this);">Yes</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="">No</button>
 				</div>
 			</div>
 		</div>
@@ -895,12 +889,11 @@ ul li ul li:hover ul {
 	<!-- Modal for alert messages --->
 
 	<div class="modal fade" id="menualert">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="menu-title-header">
-					<div class="modal-title text-white text-center"
-						id="exampleModalLabel">BANK OF BARODA (BOTSWANA) LTD</div>
+					<div class="modal-title text-white text-center" id="exampleModalLabel">BANK OF BARODA (BOTSWANA) LTD
+					</div>
 				</div>
 				<div class="modal-body text-center">
 					<p id="menualertmsg"></p>
@@ -911,18 +904,17 @@ ul li ul li:hover ul {
 	</div>
 
 	<div class="modal fade" id="menualertmsg">
-		<div
-			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="menu-title-header">
-					<div class="modal-title" id="exampleModalLabel"
-						style="text-align: center; color: white;">BANK OF BARODA
+					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK OF
+						BARODA
 						(BOTSWANA) LTD</div>
 				</div>
 				<div class="modal-body text-center">
 					<p id="password not same"></p>
-					<button id="logout" onclick="contentLoad(this)" type="button"
-						class="btn btn-primary" data-dismiss="modal">Close</button>
+					<button id="logout" onclick="contentLoad(this)" type="button" class="btn btn-primary"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

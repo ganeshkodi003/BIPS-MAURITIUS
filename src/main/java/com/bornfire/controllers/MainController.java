@@ -4406,6 +4406,216 @@ public class MainController {
 		}
 
 	}
- 
+	
+	@RequestMapping(value = "holdsubmit", method = RequestMethod.POST)
+	@ResponseBody
+	public String holdsubmit(Model md, HttpServletRequest req, @RequestParam(required = false) String merchant_id,
+			@RequestParam(required = false) String hold_remarks, @RequestParam(required = false) String formmode,
+			@ModelAttribute MerchantMasterMod MerchantMasterMod, @RequestParam(required = false) String msg) {
 
+		String userID = (String) req.getSession().getAttribute("USERID");
+
+		System.out.println(merchant_id);
+		System.out.println(hold_remarks);
+		MerchantMasterMod up = merchantMasterModRep.findByIdCustom(merchant_id);
+
+		up.setHr_hold_date(new Date());
+		up.setHr_status("HOLD");
+		up.setHr_holdreject_flg('Y');
+		up.setHr_hold_remarks(hold_remarks);
+		up.setHr_hold_user(userID);
+		merchantMasterModRep.save(up);
+
+		return "Merchant Moved to Hold List";
+	}
+
+	@RequestMapping(value = "rejectsubmit", method = RequestMethod.POST)
+	@ResponseBody
+	public String rejectsubmit(Model md, HttpServletRequest req, @RequestParam(required = false) String merchant_id,
+			@RequestParam(required = false) String formmode, @ModelAttribute MerchantMasterMod MerchantMasterMod,
+			@RequestParam(required = false) String reject_remarks, @RequestParam(required = false) String msg) {
+
+		String userID = (String) req.getSession().getAttribute("USERID");
+
+		MerchantMasterMod up = merchantMasterModRep.findByIdCustom(merchant_id);
+		up.setHr_status("REJECT");
+		up.setHr_reject_date(new Date());
+		up.setHr_holdreject_flg('Y');
+		up.setHr_reject_remarks(reject_remarks);
+		up.setHr_reject_user(userID);
+		merchantMasterModRep.save(up);
+
+		return "Merchant Moved to Reject List";
+	}
+
+	@RequestMapping(value = "proceedfunc", method = RequestMethod.POST)
+	@ResponseBody
+	public String proceedfunc(Model md, HttpServletRequest req, @RequestParam(required = false) String merchant_id,
+			@RequestParam(required = false) String formmode, @ModelAttribute MerchantMasterMod MerchantMasterMod,
+			@RequestParam(required = false) String reject_remarks, @RequestParam(required = false) String msg) {
+
+		String userID = (String) req.getSession().getAttribute("USERID");
+
+		MerchantMasterMod up = merchantMasterModRep.findByIdCustom(merchant_id);
+		up.setHr_holdreject_flg('N');
+		merchantMasterModRep.save(up);
+
+		return "Merchant Moved to Merchant List";
+	}
+ 
+	@RequestMapping(value = "mauCasTransactions")
+	public String mauCasTransactions(@RequestParam(required = false) String formmode, Model md, HttpServletRequest req)
+			throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "MAU CAS Transactions");
+		md.addAttribute("PdfViewer", "MAUCasTransactionReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "outgoingFileReversal")
+	public String outgoingFileReversal(@RequestParam(required = false) String formmode, Model md,
+			HttpServletRequest req) throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Outgoing File Reversal");
+		md.addAttribute("PdfViewer", "OutgoingFileReversalReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "incomingFilesProcessing")
+	public String incomingFilesProcessing(@RequestParam(required = false) String formmode, Model md,
+			HttpServletRequest req) throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Incoming Files Processing");
+		md.addAttribute("PdfViewer", "IncomingFilesProcessingReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "rejectionPending")
+	public String rejectionPending(@RequestParam(required = false) String formmode, Model md, HttpServletRequest req)
+			throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Rejection Pending");
+		md.addAttribute("PdfViewer", "RejectionPendingReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "reportsRequirement")
+	public String reportsRequirement(@RequestParam(required = false) String formmode, Model md, HttpServletRequest req)
+			throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Reports Requirement");
+		md.addAttribute("PdfViewer", "ReportsRequirementReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "schemaWiseTransaction")
+	public String schemaWiseTransaction(@RequestParam(required = false) String formmode, Model md,
+			HttpServletRequest req) throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Schema Wise Transaction");
+		md.addAttribute("PdfViewer", "SchemaWiseTransactionReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "rejectionReport")
+	public String rejectionReport(@RequestParam(required = false) String formmode, Model md, HttpServletRequest req)
+			throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Rejection Report");
+		md.addAttribute("PdfViewer", "RejectionReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "ipsOutgoingReport")
+	public String ipsOutgoingReport(@RequestParam(required = false) String formmode, Model md, HttpServletRequest req)
+			throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "IPS Outgoing Report");
+		md.addAttribute("PdfViewer", "IpsOutgoingReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "mauCasOutgoingReport")
+	public String mauCasOutgoingReport(@RequestParam(required = false) String formmode, Model md,
+			HttpServletRequest req) throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "MAU CAS Outgoing Report");
+		md.addAttribute("PdfViewer", "MAUCasOutgoingReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "schemesUnsettledTransaction")
+	public String schemesUnsettledTransaction(@RequestParam(required = false) String formmode, Model md,
+			HttpServletRequest req) throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Schemes Unsettled Transaction");
+		md.addAttribute("PdfViewer", "SchemesUnsettledTransactionReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	@RequestMapping(value = "schemesSettledTransaction")
+	public String schemesSettledTransaction(@RequestParam(required = false) String formmode, Model md,
+			HttpServletRequest req) throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("menuname", "Schemes Settled Transaction");
+		md.addAttribute("PdfViewer", "SchemesSettledTransactionReport");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+		}
+		return "TransactionReports.html"; // Using TransactionReports.html for now
+	}
+
+	
 }
