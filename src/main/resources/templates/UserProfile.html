@@ -639,9 +639,9 @@ $(document)
 												<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="User Name"
 														disabled></th> 
-												<th style="text-align: center"><input type="text"
+												<!-- <th style="text-align: center"><input type="text"
 														class="form-control font-weight-bold" placeholder="Employee ID"
-														disabled></th> 
+														disabled></th>  -->
 												<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="Branch code"
 														disabled></th> 
@@ -660,7 +660,7 @@ $(document)
 										<td th:if="${userProfile.xbrl_report}!=null"><img th:src="*{'data:image/png;base64,'+userProfile.xbrl_report}" class="imageround"></img></td> -->
 										<td th:text="${userProfile.userid !=null ? userProfile.userid.toUpperCase() : ''}">456</td>
 										<td class="init-cap" th:text="${userProfile.username !=null ? userProfile.username.toUpperCase() : ''}">TEST</td>
-										<td th:text="${userProfile.empid !=null ? userProfile.empid.toUpperCase() : ''}">123</td>
+										<!-- <td th:text="${userProfile.empid !=null ? userProfile.empid.toUpperCase() : ''}">123</td> -->
 										<td th:text="${userProfile.branch_code !=null ? userProfile.branch_code.toUpperCase() : ''}">123</td>
 										<td  class="init-cap" th:text="${userProfile.branch_name !=null ? userProfile.branch_name.toUpperCase() : ''}">CHENNAI</td>
 										<th:block th:switch="${userProfile.entity_flg}">
