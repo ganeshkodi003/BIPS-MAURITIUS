@@ -726,7 +726,7 @@
 									<label class="col-sm-2 col-form-label"
 										style="color: #343a40; font-weight: bold;">Business Registration Date :</label>
 									<div class="col-sm-2">
-										<label type="text" name="merchant_addr"
+										<label type="text" name="brn_date"
 											th:text="${#dates.format(branchDet?.brn_date, 'dd-MM-yyyy')}" readonly
 											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
 										</label>
@@ -1481,138 +1481,150 @@
 											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
 									</div>
 								</div>
-								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label">Contact Person 1
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
-											th:text="${MerUnit.contact_person1_name}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label">Mobile No 1 :</label>
-									<div class="col-sm-2" style="margin-top: 10px;">
-										<label style="font-size: 0.6rem; height: 20px;"> <span
-												th:text="${MerUnit.cp1_countrycode}"></span> <span
-												th:text="${MerUnit.contact_person1_mobile}"></span>
-										</label>
-									</div>
-									<label class="col-sm-2 col-form-label">Email ID 1 :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pincode" name="pincode"
-											th:text="${MerUnit.contact_person1_email}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label">Contact Person 2
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
-											th:text="${MerUnit.contact_person2_name}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label">Mobile No 2 :</label>
-									<div class="col-sm-2" style="margin-top: 10px;">
-										<label style="font-size: 0.6rem; height: 20px;"> <span
-												th:text="${MerUnit.cp2_countrycode}"></span> <span
-												th:text="${MerUnit.contact_person2_mobile}"></span>
-										</label>
-									</div>
-									<label class="col-sm-2 col-form-label">Email ID 2 :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pincode" name="pincode"
-											th:text="${MerUnit.contact_person2_email}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label">Contact Person 3
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
-											th:text="${MerUnit.contact_person3_name}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label">Mobile No 3 :</label>
-									<div class="col-sm-2" style="margin-top: 10px;">
-										<label style="font-size: 0.6rem; height: 20px;"> <span
-												th:text="${MerUnit.cp3_countrycode}"></span> <span
-												th:text="${MerUnit.contact_person3_mobile}"></span>
-										</label>
-									</div>
-									<label class="col-sm-2 col-form-label">Email ID 3 :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pincode" name="pincode"
-											th:text="${MerUnit.contact_person3_email}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label">Contact Person 4
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
-											th:text="${MerUnit.contact_person4_name}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label">Mobile No 4 :</label>
-									<div class="col-sm-2" style="margin-top: 10px;">
-										<label style="font-size: 0.6rem; height: 20px;"> <span
-												th:text="${MerUnit.cp4_countrycode}"></span> <span
-												th:text="${MerUnit.contact_person4_mobile}"></span>
-										</label>
-									</div>
-									<label class="col-sm-2 col-form-label">Email ID 4 :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pincode" name="pincode"
-											th:text="${MerUnit.contact_person4_email}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label">Contact Person 5
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
-											th:text="${MerUnit.contact_person5_name}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label">Mobile No 5 :</label>
-									<div class="col-sm-2" style="margin-top: 10px;">
-										<label style="font-size: 0.6rem; height: 20px;"> <span
-												th:text="${MerUnit.cp5_countrycode}"></span> <span
-												th:text="${MerUnit.contact_person5_mobile}"></span>
-										</label>
-									</div>
-									<label class="col-sm-2 col-form-label">Email ID 5 :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pincode" name="pincode"
-											th:text="${MerUnit.contact_person5_email}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline" style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label">Contact Person 6
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="merchantqrexpire" name="merchantqrexpire"
-											th:text="${MerUnit.contact_person6_name}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label">Mobile No 6 :</label>
-									<div class="col-sm-2" style="margin-top: 10px;">
-										<label style="font-size: 0.6rem; height: 20px;"> <span
-												th:text="${MerUnit.cp6_countrycode}"></span> <span
-												th:text="${MerUnit.contact_person6_mobile}"></span>
-										</label>
-									</div>
-									<label class="col-sm-2 col-form-label">Email ID 6 :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pincode" name="pincode"
-											th:text="${MerUnit.contact_person6_email}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
+								<div class="row formline" style="font-size: 11px; margin-top: -15px;" th:if="${MerUnit.contact_person1_name}">
+    <label class="col-sm-2 col-form-label">Contact Person 1 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="merchantqrexpire" name="merchantqrexpire"
+            th:text="${MerUnit.contact_person1_name}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Mobile No 1 :</label>
+    <div class="col-sm-2" style="margin-top: 10px;">
+        <label style="font-size: 0.6rem; height: 20px;">
+            <span th:text="${MerUnit.cp1_countrycode}"></span>
+            <span th:text="${MerUnit.contact_person1_mobile}"></span>
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Email ID 1 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="pincode" name="pincode"
+            th:text="${MerUnit.contact_person1_email}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+</div>
+
+<div class="row formline" style="font-size: 11px; margin-top: -15px;" th:if="${MerUnit.contact_person2_name}">
+    <label class="col-sm-2 col-form-label">Contact Person 2 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="merchantqrexpire" name="merchantqrexpire"
+            th:text="${MerUnit.contact_person2_name}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Mobile No 2 :</label>
+    <div class="col-sm-2" style="margin-top: 10px;">
+        <label style="font-size: 0.6rem; height: 20px;">
+            <span th:text="${MerUnit.cp2_countrycode}"></span>
+            <span th:text="${MerUnit.contact_person2_mobile}"></span>
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Email ID 2 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="pincode" name="pincode"
+            th:text="${MerUnit.contact_person2_email}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+</div>
+
+<div class="row formline" style="font-size: 11px; margin-top: -15px;" th:if="${MerUnit.contact_person3_name}">
+    <label class="col-sm-2 col-form-label">Contact Person 3 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="merchantqrexpire" name="merchantqrexpire"
+            th:text="${MerUnit.contact_person3_name}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Mobile No 3 :</label>
+    <div class="col-sm-2" style="margin-top: 10px;">
+        <label style="font-size: 0.6rem; height: 20px;">
+            <span th:text="${MerUnit.cp3_countrycode}"></span>
+            <span th:text="${MerUnit.contact_person3_mobile}"></span>
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Email ID 3 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="pincode" name="pincode"
+            th:text="${MerUnit.contact_person3_email}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+</div>
+
+<div class="row formline" style="font-size: 11px; margin-top: -15px;" th:if="${MerUnit.contact_person4_name}">
+    <label class="col-sm-2 col-form-label">Contact Person 4 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="merchantqrexpire" name="merchantqrexpire"
+            th:text="${MerUnit.contact_person4_name}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Mobile No 4 :</label>
+    <div class="col-sm-2" style="margin-top: 10px;">
+        <label style="font-size: 0.6rem; height: 20px;">
+            <span th:text="${MerUnit.cp4_countrycode}"></span>
+            <span th:text="${MerUnit.contact_person4_mobile}"></span>
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Email ID 4 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="pincode" name="pincode"
+            th:text="${MerUnit.contact_person4_email}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+</div>
+
+<div class="row formline" style="font-size: 11px; margin-top: -15px;" th:if="${MerUnit.contact_person5_name}">
+    <label class="col-sm-2 col-form-label">Contact Person 5 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="merchantqrexpire" name="merchantqrexpire"
+            th:text="${MerUnit.contact_person5_name}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Mobile No 5 :</label>
+    <div class="col-sm-2" style="margin-top: 10px;">
+        <label style="font-size: 0.6rem; height: 20px;">
+            <span th:text="${MerUnit.cp5_countrycode}"></span>
+            <span th:text="${MerUnit.contact_person5_mobile}"></span>
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Email ID 5 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="pincode" name="pincode"
+            th:text="${MerUnit.contact_person5_email}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+</div>
+
+<div class="row formline" style="font-size: 11px; margin-top: -15px;" th:if="${MerUnit.contact_person6_name}">
+    <label class="col-sm-2 col-form-label">Contact Person 6 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="merchantqrexpire" name="merchantqrexpire"
+            th:text="${MerUnit.contact_person6_name}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Mobile No 6 :</label>
+    <div class="col-sm-2" style="margin-top: 10px;">
+        <label style="font-size: 0.6rem; height: 20px;">
+            <span th:text="${MerUnit.cp6_countrycode}"></span>
+            <span th:text="${MerUnit.contact_person6_mobile}"></span>
+        </label>
+    </div>
+    <label class="col-sm-2 col-form-label">Email ID 6 :</label>
+    <div class="col-sm-2">
+        <label type="text" id="pincode" name="pincode"
+            th:text="${MerUnit.contact_person6_email}" readonly
+            style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+        </label>
+    </div>
+</div>
+
 							</div>
 							<label></label>
 							<div class="float-left">
@@ -1699,8 +1711,8 @@
 												id="send_notifi" name="send_notifi" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi != 'Y'}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
-												id="send_notifi" name="send_notifi" type="checkbox" disabled></td>
+												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff; "
+												id="send_notifi" name="send_notifi" type="checkbox" disabled> <input type="radio" checked> </td>
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r2 != null }">
@@ -1740,7 +1752,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r2 != 'Y'}" class="rowDataField"
-												id="send_notifi_r2" name="send_notifi_r2" type="checkbox" disabled></td>
+												id="send_notifi_r2" name="send_notifi_r2" type="checkbox" disabled> <input type="radio" checked></td>
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r3 != null }">
@@ -1780,7 +1792,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r3 != 'Y'}" class="rowDataField"
-												id="send_notifi_r3" name="send_notifi_r3" type="checkbox" disabled></td>
+												id="send_notifi_r3" name="send_notifi_r3" type="checkbox" disabled> <input type="radio" checked></td>
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r4 != null }">
@@ -1818,7 +1830,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r4 != 'Y'}" class="rowDataField"
-												id="send_notifi_r4" name="send_notifi_r4" type="checkbox" disabled></td>
+												id="send_notifi_r4" name="send_notifi_r4" type="checkbox" disabled><input type="radio" checked></td>
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r5 != null }">
@@ -1857,7 +1869,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r5 != 'Y'}" class="rowDataField"
-												id="send_notifi_r5" name="send_notifi_r5" type="checkbox" disabled></td>
+												id="send_notifi_r5" name="send_notifi_r5" type="checkbox" disabled><input type="radio" checked></td>
 										</tr>
 
 
@@ -1897,7 +1909,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r6 != 'Y'}" class="rowDataField"
-												id="send_notifi_r6" name="send_notifi_r6" type="checkbox" disabled></td>
+												id="send_notifi_r6" name="send_notifi_r6" type="checkbox" disabled><input type="radio" checked></td>
 										</tr>
 
 
@@ -1936,7 +1948,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r7 != 'Y'}" class="rowDataField"
-												id="send_notifi_r7" name="send_notifi_r7" type="checkbox" disabled></td>
+												id="send_notifi_r7" name="send_notifi_r7" type="checkbox" disabled><input type="radio" checked></td>
 										</tr>
 
 
@@ -1975,7 +1987,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r8 != 'Y'}" class="rowDataField"
-												id="send_notifi_r8" name="send_notifi_r8" type="checkbox" disabled></td>
+												id="send_notifi_r8" name="send_notifi_r8" type="checkbox" disabled><input type="radio" checked></td>
 										</tr>
 
 
@@ -2014,7 +2026,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r9 != 'Y'}" class="rowDataField"
-												id="send_notifi_r9" name="send_notifi_r9" type="checkbox" disabled></td>
+												id="send_notifi_r9" name="send_notifi_r9" type="checkbox" disabled><input type="radio" checked></td>
 										</tr>
 
 
@@ -2053,7 +2065,7 @@
 												disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r10 != 'Y'}" class="rowDataField"
-												id="send_notifi_r10" name="send_notifi_r10" type="checkbox" disabled>
+												id="send_notifi_r10" name="send_notifi_r10" type="checkbox" disabled><input type="radio" checked>
 											</td>
 										</tr>
 
