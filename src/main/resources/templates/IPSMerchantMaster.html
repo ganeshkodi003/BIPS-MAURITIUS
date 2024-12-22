@@ -6333,6 +6333,7 @@ function updateMerchant(value) {
 
 		function handleInUserName(input) {
 			input.value = input.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
+			document.getElementById("merchant_name").value=input.value;
 		}
 
 		function handleAddress(input) {
@@ -7181,40 +7182,41 @@ $(document)
 		</div>
 
 		<div class="content" th:if="${formmode}=='UploadFile'">
-			<form action="#" method="post" autocomplete="off" style="width: 100%">
-				<div class="card" style="margin-top: 90px;">
-					<div class="card-header" style="background-color: #BBC3CB;">
-						<div class="float-right"></div>
-						<h4 style="color: white; font-size: 1.2rem;">Merchant Master
-							- File Upload</h4>
-					</div>
-					<div class="card-body p-0 mt-3" style="background-color:#ffffff ;">
-						<div class="panel-heading text-center">
-							<div class="form-group ">
-								<div class="row">
-									<div class="col-sm-3">
-										<label class="">Upload</label>
+								<form action="#" method="post" autocomplete="off" style="width: 100%">
+									<div class="card" style="margin-top: 90px;">
+										<div class="card-header" >
+											<div class="float-right"></div>
+											<h4 style="color: white; font-size: 1.2rem;">Merchant Master
+												- File Upload</h4>
+										</div>
+										<div class="card-body p-0 mt-3" style="background-color:#ffffff ;">
+											<div class="panel-heading text-center">
+												<div class="form-group ">
+													<div class="row">
+														<div class="col-sm-3">
+															<label class="">Upload</label>
+														</div>
+														<div class="col-sm-2">
+															<input type="file" id="fileval" name="fileval" accept=".xlsx,.xls,.csv"
+																class="form-control form-control-sm">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="card-footer text-center" >
+											<button type="button" class="btn btn-xs  headerbutton " id="addBtn"
+												onclick="home();">Home</button>
+											<button type="button" class="btn btn-xs  headerbutton" id="nav"
+												onclick="submitexcelgst(this)">Upload</button>
+		<button type="button" class="btn btn-xs  headerbutton" id=""
+												onclick="back();">Back</button>
+											<!-- <button type="button" class="btn btn-xs  headerbutton " id="btnBack"
+												onclick="back();">Back</button> -->
+										</div>
 									</div>
-									<div class="col-sm-2">
-										<input type="file" id="fileval" name="fileval" accept=".xlsx,.xls,.csv"
-											class="form-control form-control-sm">
-									</div>
-								</div>
+								</form>
 							</div>
-						</div>
-					</div>
-					<div class="card-footer text-center" style="background-color: #BBC3CB;">
-						<button type="button" class="btn btn-sm headerbutton  " id="addBtn"
-							onclick="home();">Home</button>
-						<button type="button" class="btn  btn-sm headerbutton" id="nav"
-							onclick="submitexcelgst(this)">Upload</button>
-
-						<button type="button" class="btn btn-sm headerbutton " id=""
-							onclick="back();">Back</button>
-					</div>
-				</div>
-			</form>
-		</div>
 		<!--  ADD : FUNCTION : START -->
 
 		<div id="formSection" th:if="${formmode}=='add'" class="content">

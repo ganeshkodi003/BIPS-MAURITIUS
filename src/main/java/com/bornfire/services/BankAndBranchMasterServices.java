@@ -1,12 +1,23 @@
 package com.bornfire.services;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
 import com.bornfire.entity.*;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -16,6 +27,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bornfire.configuration.PasswordEncryption;
 import com.bornfire.configuration.SequenceGenerator;
@@ -1921,6 +1933,394 @@ public class BankAndBranchMasterServices {
 			e.printStackTrace();
 			return "Error occurred while processing the request";
 		}
+	}
+	
+	public String UploadgstserviceCOLLECTION(String screenId, MultipartFile file, String userid,
+			MerchantMasterMod MerchantMasterMod)
+			throws SQLException, FileNotFoundException, IOException, NullPointerException {
+		System.out.println("Entering third Service Succesfully of GST EXCEL UPLOAD");
+
+		String fileName = file.getOriginalFilename();
+
+		String fileExt = "";
+		String msg = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+			fileExt = fileName.substring(i + 1);
+		}
+
+		if (fileExt.equals("xlsx") || fileExt.equals("xls")) {
+
+			try {	
+				Workbook workbook = WorkbookFactory.create(file.getInputStream());
+
+				List<HashMap<Integer, String>> mapList = new ArrayList<HashMap<Integer, String>>();
+				for (Sheet s : workbook) {
+					for (Row r : s) {
+
+						if (!isRowEmpty(r)) {
+							if (r.getRowNum() == 0) {
+								continue;
+							}
+
+							HashMap<Integer, String> map = new HashMap<>();
+
+							for (int j = 0; j < 100; j++) {
+
+								Cell cell = r.getCell(j);
+								DataFormatter formatter = new DataFormatter();
+								String text = formatter.formatCellValue(cell);
+								map.put(j, text);
+							}
+							mapList.add(map);
+
+						}
+
+					}
+
+				}
+
+				for (HashMap<Integer, String> item : mapList) {
+
+					MerchantMasterMod PO = new MerchantMasterMod(); 
+
+					String merchant_id  = item.get(0);
+					System.out.println("merchant_id: " + merchant_id);  
+
+					String mer_corpName = item.get(1);
+					System.out.println("mer_corpName: " + mer_corpName);
+
+					String merchant_name = item.get(2);
+					System.out.println("merchant_name: " + merchant_name); 
+					
+					String address1 = item.get(3);
+					System.out.println("address1: " + address1);    
+
+					String mer_status = item.get(4);
+					System.out.println("mer_status: " + mer_status);
+
+					String mer_outletaddress = item.get(5);
+					System.out.println("mer_outletaddress: " + mer_outletaddress); 
+					
+					String chargeback_approval = item.get(6);
+					System.out.println("chargeback_approval: " + chargeback_approval); 
+					
+					String repid1  = item.get(7);
+					System.out.println("repid1: " + repid1);  
+
+					String contpers1 = item.get(8);
+					System.out.println("contpers1: " + contpers1);
+
+					String ph_countrycode1 = item.get(9);
+					System.out.println("ph_countrycode1: " + ph_countrycode1); 
+					
+					BigDecimal phno1 = new BigDecimal(item.get(10));
+					System.out.println("phno1: " + phno1); 
+					
+					String ofc_countrycode1  = item.get(11);
+					System.out.println("ofc_countrycode1: " + ofc_countrycode1);  
+ 
+					BigDecimal ofcno1 = new BigDecimal(item.get(12));
+					System.out.println("ofcno1: " + ofcno1); 
+
+					String emailid1 = item.get(13);
+					System.out.println("emailid1: " + emailid1); 
+					
+					String notify_mode1 = item.get(14);
+					System.out.println("notify_mode1: " + notify_mode1); 
+					
+					String repid2  = item.get(15);
+					System.out.println("repid2: " + repid2);  
+
+					String contpers2 = item.get(16);
+					System.out.println("contpers2: " + contpers2);
+
+					String ph_countrycode2 = item.get(17);
+					System.out.println("ph_countrycode2: " + ph_countrycode2); 
+					
+					BigDecimal phno2 = new BigDecimal(item.get(18));
+					System.out.println("phno2: " + phno2); 
+					
+					String ofc_countrycode2  = item.get(19);
+					System.out.println("ofc_countrycode2: " + ofc_countrycode2);  
+
+					BigDecimal ofcno2 = new BigDecimal(item.get(20));
+					System.out.println("ofcno2: " + ofcno2);
+
+					String emailid2 = item.get(21);
+					System.out.println("emailid2: " + emailid2); 
+					
+					String notify_mode2 = item.get(22);
+					System.out.println("notify_mode2: " + notify_mode2); 
+					
+					String repid3  = item.get(23);
+					System.out.println("repid3: " + repid3);  
+
+					String contpers3 = item.get(24);
+					System.out.println("contpers3: " + contpers3);
+
+					String ph_countrycode3 = item.get(25);
+					System.out.println("ph_countrycode3: " + ph_countrycode3); 
+					
+					BigDecimal phno3 = new BigDecimal(item.get(26));
+					System.out.println("phno3: " + phno3); 
+					
+					String ofc_countrycode3  = item.get(27);
+					System.out.println("ofc_countrycode3: " + ofc_countrycode3);  
+
+					BigDecimal ofcno3 = new BigDecimal(item.get(28));
+					System.out.println("ofcno3: " + ofcno3);
+
+					String emailid3 = item.get(29);
+					System.out.println("emailid3: " + emailid3); 
+					
+					String notify_mode3 = item.get(30);
+					System.out.println("notify_mode3: " + notify_mode3); 
+					
+					String repid4  = item.get(31);
+					System.out.println("repid4: " + repid4);  
+
+					String contpers4 = item.get(32);
+					System.out.println("contpers4: " + contpers4);
+
+					String ph_countrycode4 = item.get(33);
+					System.out.println("ph_countrycode4: " + ph_countrycode4); 
+					
+					BigDecimal phno4 = new BigDecimal(item.get(34));
+					System.out.println("phno4: " + phno4); 
+					
+					String ofc_countrycode4  = item.get(35);
+					System.out.println("ofc_countrycode4: " + ofc_countrycode4);  
+
+					BigDecimal ofcno4 = new BigDecimal(item.get(36));
+					System.out.println("ofcno4: " + ofcno4);
+
+					String emailid4 = item.get(37);
+					System.out.println("emailid4: " + emailid4); 
+					
+					String notify_mode4 = item.get(38);
+					System.out.println("notify_mode4: " + notify_mode4); 
+					
+					String repid5  = item.get(39);
+					System.out.println("repid5: " + repid5);  
+
+					String contpers5 = item.get(40);
+					System.out.println("contpers5: " + contpers5);
+
+					String ph_countrycode5 = item.get(41);
+					System.out.println("ph_countrycode5: " + ph_countrycode5); 
+					
+					BigDecimal phno5 = new BigDecimal(item.get(42));
+					System.out.println("phno5: " + phno5); 
+					
+					String ofc_countrycode5  = item.get(43);
+					System.out.println("ofc_countrycode5: " + ofc_countrycode5);  
+
+					BigDecimal ofcno5 = new BigDecimal(item.get(44));
+					System.out.println("ofcno5: " + ofcno5);
+
+					String emailid5 = item.get(45);
+					System.out.println("emailid5: " + emailid5); 
+					
+					String notify_mode5 = item.get(46);
+					System.out.println("notify_mode1: " + notify_mode1); 
+					
+					String mer_bipsno  = item.get(47);
+					System.out.println("mer_bipsno: " + mer_bipsno);  
+
+					String mer_type = item.get(48);
+					System.out.println("mer_type: " + mer_type);
+
+					String outlet_location = item.get(49);
+					System.out.println("outlet_location: " + outlet_location); 
+					
+					String Mer_Categorycode = item.get(50);
+					System.out.println("Mer_Categorycode: " + Mer_Categorycode); 
+					
+					String type_qraccept  = item.get(51);
+					System.out.println("type_qraccept: " + type_qraccept);  
+
+					String version = item.get(52);
+					System.out.println("version: " + version);
+
+					String modes = item.get(53);
+					System.out.println("modes: " + modes); 
+					
+					String purpose = item.get(54);
+					System.out.println("purpose: " + purpose); 
+					
+					String tran_id  = item.get(55);
+					System.out.println("tran_id: " + tran_id);  
+
+					String tran_ref = item.get(56);
+					System.out.println("tran_ref: " + tran_ref);
+
+					String tran_note = item.get(57);
+					System.out.println("tran_note: " + tran_note); 
+					
+					String payee_upiid = item.get(58);
+					System.out.println("payee_upiid: " + payee_upiid); 
+					
+					String store_id = item.get(59);
+					System.out.println("store_id: " + store_id); 
+					
+					String Mer_terminalId  = item.get(60);
+					System.out.println("Mer_terminalId: " + Mer_terminalId);  
+
+					String Tran_CrncyCode = item.get(61);
+					System.out.println("Tran_CrncyCode: " + Tran_CrncyCode); 
+					
+					String datePattern = "MM/dd/yy"; // Correct pattern for dates like "12/25/24"
+					SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
+
+					String QR_expirydate = item.get(63);
+					System.out.println("QR_expirydate: " + QR_expirydate);
+					Date date_value = null;
+
+					if (QR_expirydate != null && !QR_expirydate.isEmpty()) {
+					    try {
+					        date_value = dateFormat.parse(QR_expirydate);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value: " + date_value);
+					
+					String Mer_pincode = item.get(64);
+					System.out.println("Mer_pincode: " + Mer_pincode); 
+					
+					String Mer_Tier  = item.get(65);
+					System.out.println("Mer_Tier: " + Mer_Tier);  
+
+					String Mer_Trantype = item.get(66);
+					System.out.println("Mer_Trantype: " + Mer_Trantype);
+
+					String QR_medium = item.get(67);
+					System.out.println("QR_medium: " + QR_medium); 
+					
+					String bank_name1 = item.get(68);
+					System.out.println("bank_name1: " + bank_name1); 
+					
+					String bank_branch1 = item.get(69);
+					System.out.println("bank_branch1: " + bank_branch1); 
+					
+					String bank_acctno1 = item.get(70);
+					System.out.println("bank_acctno1: " + bank_acctno1); 
+
+					
+					PO.setMerchant_legal_id(merchant_id);
+					PO.setMerchant_id(merchant_id); 
+					PO.setMerchant_corp_name(mer_corpName);
+					PO.setMerchant_name(merchant_name);
+					PO.setMerchant_addr(address1);
+					PO.setStatus_enable(mer_status);
+					PO.setStatus_disable(mer_status);
+					PO.setMerchant_city(mer_outletaddress);
+					PO.setChargeback_approval(chargeback_approval);
+					PO.setMer_user_id_r1(repid1);
+					PO.setMer_cont_pers(contpers1);
+					PO.setPh_countrycode_r1(ph_countrycode1);
+					PO.setMer_ph_no(phno1);
+					PO.setOfc_countrycode_r1(ofc_countrycode1);
+					PO.setMer_ofc_no(ofcno1);
+					PO.setMer_email_addr_r1(emailid1);
+					PO.setMer_notifi_mode(notify_mode1);
+					PO.setMer_user_id_r2(repid1);
+					PO.setMer_cont_pers_r2(contpers1);
+					PO.setPh_countrycode_r2(ph_countrycode1);
+					PO.setMer_ph_no_r2(phno2);
+					PO.setOfc_countrycode_r2(ofc_countrycode2);
+					PO.setMer_ofc_no_r2(ofcno2);
+					PO.setMer_email_addr_r2(emailid2);
+					PO.setMer_notifi_mode_r2(notify_mode2);
+
+					PO.setMer_user_id_r3(repid3);
+					PO.setMer_cont_pers_r3(contpers3);
+					PO.setPh_countrycode_r3(ph_countrycode3);
+					PO.setMer_ph_no_r3(phno3);
+					PO.setOfc_countrycode_r3(ofc_countrycode3);
+					PO.setMer_ofc_no_r3(ofcno3);
+					PO.setMer_email_addr_r3(emailid3);
+					PO.setMer_notifi_mode_r3(notify_mode3);
+					
+					PO.setMer_user_id_r4(repid4);
+					PO.setMer_cont_pers_r4(contpers4);
+					PO.setPh_countrycode_r4(ph_countrycode4);
+					PO.setMer_ph_no_r4(phno4);
+					PO.setOfc_countrycode_r4(ofc_countrycode4);
+					PO.setMer_ofc_no_r4(ofcno4);
+					PO.setMer_email_addr_r4(emailid4);
+					PO.setMer_notifi_mode_r4(notify_mode4);
+					
+					PO.setMer_user_id_r5(repid5);
+					PO.setMer_cont_pers_r5(contpers5);
+					PO.setPh_countrycode_r5(ph_countrycode5);
+					PO.setMer_ph_no_r5(phno5);
+					PO.setOfc_countrycode_r5(ofc_countrycode5);
+					PO.setMer_ofc_no_r5(ofcno5);
+					PO.setMer_email_addr_r5(emailid5);
+					PO.setMer_notifi_mode_r5(notify_mode5);
+					 
+					PO.setMerchant_type(mer_type);
+					PO.setMerchant_location(outlet_location);
+					PO.setMerchant_cat_code(Mer_Categorycode);
+					PO.setType_maucas(type_qraccept);
+					//PO.setType_upi(type_qraccept);
+					PO.setVersion(version);
+					PO.setModes(modes);
+					PO.setPurpose(purpose);
+					PO.setTid(tran_id);
+					PO.setTr(tran_ref);
+					PO.setTn(tran_note);
+					PO.setPa(payee_upiid);
+					PO.setMsid(store_id);
+					PO.setMtid(Mer_terminalId);
+					PO.setCurr(Tran_CrncyCode);
+					PO.setQrexpire(date_value);
+					PO.setPincode(Mer_pincode);
+					PO.setTier(Mer_Tier);
+					PO.setTran_type(Mer_Trantype);
+					PO.setQrmedium(QR_medium);
+					PO.setBank_name(bank_name1);
+					PO.setBank_branch(bank_branch1);
+					PO.setBank_account_no(bank_acctno1);
+					
+					PO.setEntity_flg('N'); 
+					PO.setDel_flag("N");
+					PO.setHr_holdreject_flg('N');
+					PO.setModify_flg('N');
+					PO.setEntry_user(userid);
+					PO.setEntry_time(new Date());
+
+					merchantMasterModRep.save(PO);
+
+					msg = "Excel Data Uploaded Successfully";
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "File has not been successfully uploaded";
+			}
+		}
+		return msg;
+
+	}
+	
+	private boolean isRowEmpty(Row row) {
+		boolean isEmpty = true;
+		DataFormatter dataFormatter = new DataFormatter();
+
+		if (row != null) {
+			for (Cell cell : row) {
+				if (dataFormatter.formatCellValue(cell).trim().length() > 0) {
+					isEmpty = false;
+					break;
+				}
+			}
+		}
+		return isEmpty;
 	}
 
 }

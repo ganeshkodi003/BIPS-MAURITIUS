@@ -4617,5 +4617,23 @@ public class MainController {
 		return "TransactionReports.html"; // Using TransactionReports.html for now
 	}
 
-	
+	@PostMapping(value = "leaseuploadexcel")
+	@ResponseBody
+	public String leaseuploadexcel(@RequestParam("file") MultipartFile file, String screenId,
+			@ModelAttribute com.bornfire.entity.MerchantMasterMod MerchantMasterMod, Model md, HttpServletRequest rq)
+			throws FileNotFoundException, SQLException, IOException, NullPointerException {
+
+		System.out.println("the testing   GST EXCEL UPLOAD");
+
+		System.out.println("fileSize" + file.getSize());
+
+		if (file.getSize() < 50000000) {
+			String userid = (String) rq.getSession().getAttribute("USERID");
+			String msg = bankAndBranchMasterServices.UploadgstserviceCOLLECTION(screenId, file, userid,
+					MerchantMasterMod);
+			return msg;
+		} else {
+			return "File has not been successfully uploaded. Requires less than 128 KB size.";
+		}
+	}
 }
