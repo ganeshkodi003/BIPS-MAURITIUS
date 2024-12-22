@@ -2174,7 +2174,7 @@ public class BankAndBranchMasterServices {
 					String datePattern = "MM/dd/yy"; // Correct pattern for dates like "12/25/24"
 					SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
 
-					String QR_expirydate = item.get(63);
+					String QR_expirydate = item.get(62);
 					System.out.println("QR_expirydate: " + QR_expirydate);
 					Date date_value = null;
 
@@ -2189,27 +2189,56 @@ public class BankAndBranchMasterServices {
 					} 
 					System.out.println("date_value: " + date_value);
 					
-					String Mer_pincode = item.get(64);
+					String Mer_pincode = item.get(63);
 					System.out.println("Mer_pincode: " + Mer_pincode); 
 					
-					String Mer_Tier  = item.get(65);
+					String Mer_Tier  = item.get(64);
 					System.out.println("Mer_Tier: " + Mer_Tier);  
 
-					String Mer_Trantype = item.get(66);
+					String Mer_Trantype = item.get(65);
 					System.out.println("Mer_Trantype: " + Mer_Trantype);
 
-					String QR_medium = item.get(67);
+					String QR_medium = item.get(66);
 					System.out.println("QR_medium: " + QR_medium); 
 					
-					String bank_name1 = item.get(68);
+					String bank_name1 = item.get(67);
 					System.out.println("bank_name1: " + bank_name1); 
 					
-					String bank_branch1 = item.get(69);
+					String bank_branch1 = item.get(68);
 					System.out.println("bank_branch1: " + bank_branch1); 
 					
-					String bank_acctno1 = item.get(70);
+					String bank_acctno1 = item.get(69);
 					System.out.println("bank_acctno1: " + bank_acctno1); 
+					
+					String mer_mode = item.get(70);
+					System.out.println("mer_mode: " + mer_mode);  
 
+					String brn_no = item.get(71);
+					System.out.println("brn_no: " + brn_no);
+
+					String brn_date = item.get(72);
+					System.out.println("brn_date: " + brn_date);  
+					Date date_value1 = null;
+
+					if (brn_date != null && !brn_date.isEmpty()) {
+					    try {
+					    	date_value1 = dateFormat.parse(brn_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value1: " + date_value1);
+					
+					String tran_amt = item.get(73);
+					System.out.println("tran_amt: " + tran_amt); 
+					
+					String loyalty_no = item.get(74);
+					System.out.println("loyalty_no: " + loyalty_no); 
+					
+					String purpose_tran = item.get(75);
+					System.out.println("purpose_tran: " + purpose_tran);  
 					
 					PO.setMerchant_legal_id(merchant_id);
 					PO.setMerchant_id(merchant_id); 
@@ -2287,6 +2316,12 @@ public class BankAndBranchMasterServices {
 					PO.setBank_name(bank_name1);
 					PO.setBank_branch(bank_branch1);
 					PO.setBank_account_no(bank_acctno1);
+					PO.setMerchant_mode(mer_mode);
+					PO.setBrn_no(brn_no);
+					PO.setBrn_date(date_value1);
+					PO.setTransaction_amount(tran_amt);
+					PO.setLoyalty_number(loyalty_no);
+					PO.setPurpose_of_tran(purpose_tran); 
 					
 					PO.setEntity_flg('N'); 
 					PO.setDel_flag("N");
@@ -2296,6 +2331,90 @@ public class BankAndBranchMasterServices {
 					PO.setEntry_time(new Date());
 
 					merchantMasterModRep.save(PO);
+					
+					BIPS_Unit_Mangement_Entity UN = new BIPS_Unit_Mangement_Entity(); 
+					
+					String unit_id = item.get(76);
+					System.out.println("unit_id: " + unit_id);
+					
+					String unit_type = item.get(77);
+					System.out.println("unit_type: " + unit_type); 
+					
+					String unit_brn_no = item.get(78);
+					System.out.println("unit_brn_no: " + unit_brn_no); 
+					
+					String unit_brn_date = item.get(79);
+					System.out.println("brn_date: " + unit_brn_date);  
+					Date date_value2 = null;
+
+					if (unit_brn_date != null && !unit_brn_date.isEmpty()) {
+					    try {
+					    	date_value1 = dateFormat.parse(unit_brn_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value2: " + date_value2);
+					
+					String unit_name = item.get(80);
+					System.out.println("unit_name: " + unit_name);
+					
+					String unit_location = item.get(81);
+					System.out.println("unit_location: " + unit_location); 
+					
+					String unit_city = item.get(82);
+					System.out.println("unit_city: " + unit_city); 
+					
+					String unit_country = item.get(83);
+					System.out.println("unit_country: " + unit_country); 
+					
+					String unit_countrycode_phone_no = item.get(84);
+					System.out.println("unit_countrycode_phone_no: " + unit_countrycode_phone_no); 
+					
+					String unit_phone_no = item.get(85);
+					System.out.println("unit_phone_no: " + unit_phone_no); 
+					
+					String unit_head = item.get(86);
+					System.out.println("unit_head: " + unit_head); 
+					
+					String unit_designation = item.get(87);
+					System.out.println("unit_designation: " + unit_designation); 
+					
+					String contact_pers1 = item.get(88);
+					System.out.println("contact_pers1: " + contact_pers1); 
+					
+					String countrycode_pers_1 = item.get(89);
+					System.out.println("countrycode_pers_1: " + countrycode_pers_1); 
+					 
+					String mob_no1 = item.get(90);
+					System.out.println("mob_no1: " + mob_no1);
+					
+					String email_id1 = item.get(91);
+					System.out.println("email_id1: " + email_id1);  
+					
+					UN.setUnit_id(unit_id);
+					UN.setUnit_type(unit_type);
+					UN.setBrn_no(unit_brn_no);
+					UN.setMerchant_user_id(merchant_id);
+					UN.setMerchant_name(merchant_name);
+					UN.setBrn_date(date_value2);
+					UN.setUnit_name(unit_name);
+					UN.setLocation_detail(unit_location);
+					UN.setCity(unit_city);
+					UN.setCountry(unit_country);
+					UN.setPh_countrycode(unit_countrycode_phone_no);
+					UN.setPhone_no(unit_phone_no);
+					UN.setBranch_head(unit_head);
+					UN.setDesignation(unit_designation);
+					UN.setContact_person1_name(contact_pers1);
+					UN.setCp1_countrycode(countrycode_pers_1);
+					UN.setEmail_id(email_id1);
+					//UN.setContact_person1_mobile(mob_no1);
+					
+					bIPS_UnitManagement_Repo.save(UN);
+
 
 					msg = "Excel Data Uploaded Successfully";
 				}
