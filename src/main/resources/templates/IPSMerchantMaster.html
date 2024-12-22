@@ -2192,7 +2192,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					document.getElementById("mtid_vali").innerHTML = "";
 				} else {
 					$('#mtid_span').css({"display": "block", "color": "red"});
-					document.getElementById("mtid_vali").innerHTML = "Enter Merchant Terminal ID";
+					document.getElementById("mtid_vali").innerHTML = "Enter Merchant Terminal Id";
 					returnValue = false;
 				}
 				if (!currvali.trim() == "") {
@@ -5066,7 +5066,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 					returnValue = false;
 				}
 				if (mtidvali.trim().length == 0) {
-					document.getElementById("mtid_vali").innerHTML = "Enter Merchant Terminal ID";
+					document.getElementById("mtid_vali").innerHTML = "Enter Merchant Terminal Id";
 					returnValue = false;
 				}
 				if (currvali.trim().length == 0) {
@@ -6022,7 +6022,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 			var MeruserId = document.getElementById("merchant_user_id1").value;
 			var MerchantName = document.getElementById("merchant_name").value;
 			var UnitId = document.getElementById("unit_id").value;
-			console.log("Unit ID" + UnitId);
+			console.log("Unit Id" + UnitId);
 			var ContactPerson1 = document.getElementById("contact_person1_name").value;
 			var ContactPerson2 = document.getElementById("contact_person2_name").value;
 			var ContactPerson3 = document.getElementById("contact_person3_name").value;
@@ -6301,7 +6301,6 @@ function updateMerchant(value) {
 
 		function handleInUserName(input) {
 			input.value = input.value.replace(/[^a-zA-Z\s]/g, '').toUpperCase();
-			document.getElementById("merchant_name").value=input.value;
 		}
 
 		function handleAddress(input) {
@@ -6810,6 +6809,7 @@ $(document)
 					}
 				});
 	});
+
 
 
 
@@ -7510,7 +7510,7 @@ $(document)
 														Number <span style="color: red; font-size: 20px;">*</span>
 												</label></th>
 												<th style="background: transparent; color: black;"><label>National
-														ID</label></th>
+														Id</label></th>
 												<th style="background: transparent; color: black;"><label>Email
 														Address <span style="color: red; font-size: 20px;">*</span>
 												</label></th>
@@ -7593,7 +7593,7 @@ $(document)
 									</table>
 									<!-- <div class="card-header text-center">
 
-										<button type="button" class="btn btn-sm headerbutton"
+										<button type="button" class="btn btn-sm btn-primary headerbutton"
 											id="amlcheckMerchantbutton" onclick="AMLCheckMerchant();">AML
 											Check</button>
 
@@ -8032,9 +8032,9 @@ $(document)
 												autocomplete="off" readonly>
 										</div>
 										<div class="col-sm-1"></div>
-										<label class="col-sm-2 d-flex">Merchant Terminal ID <span id="mtid_span"
-												th:if="${formmode}=='add'"
-												style="font-size: 20px; display: none; padding-left: 5px;">*</span></label>
+										<label class="col-sm-2 d-flex">Merchant Terminal Id <span
+											id="mtid_span" th:if="${formmode}=='add'"
+											style="font-size: 20px; display: none; padding-left: 5px;">*</span></label>
 										<div class="col-sm-3">
 											<input type="text" id="mtid" maxlength="20"
 												th:if="${formmode}=='add'"
@@ -8340,7 +8340,7 @@ $(document)
 													<th>Document Type</th>
 													<th>Document Code</th>
 													<th>Document Description</th>
-													<th>Unique ID</th>
+													<th>Unique Id</th>
 													<th>Place of Issue</th>
 													<th>Issue Date</th>
 													<th>Expiry Date</th>
@@ -8433,14 +8433,22 @@ $(document)
 											<thead>
 												<tr style="font-weight: bold;">
 
-													<th style="font-weight:bold;text-align: left; ">Document Type</th>
-													<th style="font-weight:bold;text-align: left; ">Document Code</th>
-													<th style="font-weight:bold;text-align: left; ">Document Description</th>
-													<th style="font-weight:bold;text-align: left; ">Unique ID</th>
-													<th style="font-weight:bold;text-align: left; ">Place of Issue</th>
-													<th style="font-weight:bold;text-align: left; ">Issue Date</th>
-													<th style="font-weight:bold;text-align: left; ">Expiry Date</th>
-													<th style="font-weight:bold;text-align: left; ">Document Upload</th>
+													<th style="font-weight: bold; text-align: left;">Document
+														Type</th>
+													<th style="font-weight: bold; text-align: left;">Document
+														Code</th>
+													<th style="font-weight: bold; text-align: left;">Doc
+														Description</th>
+													<th style="font-weight: bold; text-align: left;">Unique
+														Id</th>
+													<th style="font-weight: bold; text-align: left;">Place
+														of Issue</th>
+													<th style="font-weight: bold; text-align: left;">Issue
+														Date</th>
+													<th style="font-weight: bold; text-align: left;">Expiry
+														Date</th>
+													<th style="font-weight: bold; text-align: left;">Document
+														Upload</th>
 											<tbody id="click1">
 												<tr>
 													<td><select id="docType0" name="docType"
@@ -8471,7 +8479,7 @@ $(document)
 													<td><input type="date" id="docExpDate0"
 														name="docExpDate" class="form-control"
 														style="width: 150px; height: 26px;"></td>
-													<td><input id="file0" type="file" class="form-control"></td>
+													<td><input id="file0" type="file" class=""></td>
 												</tr>
 												<tr>
 													<td><select id="docType1" name="docType"
@@ -8673,7 +8681,7 @@ $(document)
 									</div>
 									<!-- <div class="d-flex float-right">
 										<button type="button"
-											class="btn btn-sm headerbutton text-right"
+											class="btn btn-sm btn-primary headerbutton text-right"
 											data-dismiss="modal" onclick="SubmitSig();">Submit</button>
 									</div> -->
 									<script>
@@ -8871,11 +8879,15 @@ $(document)
 																				onclick="submitfile(this)">Submit</button>-->
 									<label></label>
 									<div class="card-footer mt-2 text-center padding-bottom:10px">
-										<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
-											onclick="back();">Back</button>
-										<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton "
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton "
+											data-dismiss="modal" onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton "
+											data-dismiss="modal"
 											th:attr="data-refnumber=${merchant_legal_id}"
 											onclick="nextViewBankDet(this);">Next</button>
 									</div>
@@ -9367,16 +9379,20 @@ $(document)
 											</div>
 										</div> -->
 										<div class="card-footer text-center">
-											<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
-												onclick="previous(this);">Previous</button>
-											<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
-												onclick="home();">Home</button>
-											<button type="button" class="btn btn-sm headerbutton "
+											<button type="button"
+												class="btn btn-sm btn-primary headerbutton "
+												data-dismiss="modal" onclick="previous(this);">Previous</button>
+											<button type="button"
+												class="btn btn-sm btn-primary headerbutton "
+												data-dismiss="modal" onclick="home();">Home</button>
+											<button type="button"
+												class="btn btn-sm btn-primary headerbutton "
 												th:if="${formmode}=='add'" form="BankandBranch"
 												th:attr="data-formmode=addsubmit"
 												onclick="submitaddform(this);">Submit</button>
-											<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
-												onclick="back();">Back</button>
+											<button type="button"
+												class="btn btn-sm btn-primary headerbutton "
+												data-dismiss="modal" onclick="back();">Back</button>
 										</div>
 									</div>
 								</div>
@@ -9431,8 +9447,8 @@ $(document)
 							<div style="margin-left: 100px; margin-bottom: -20px">
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="merchant_legal_user_id">Merchant User ID<span
-												style="color: red; font-size: 20px;"> *</span>
+										<label for="merchant_legal_user_id">Merchant User Id<span
+											style="color: red; font-size: 20px;"> *</span>
 										</label>
 									</div>
 									<div class="col-sm-3">
@@ -9468,8 +9484,8 @@ $(document)
 									<div style="margin-left: 100px">
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="unit_id">Unit ID<span style="color: red; font-size: 20px;">
-														*</span></label>
+												<label for="unit_id">Unit Id<span
+													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="unit_id" name="unit_id"
@@ -9921,8 +9937,8 @@ $(document)
 										<label></label>
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="contact_person1_email">Email ID 1<span
-														style="color: red; font-size: 20px;"> *</span>
+												<label for="contact_person1_email">Email Id 1<span
+													style="color: red; font-size: 20px;"> *</span>
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -9932,8 +9948,8 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="contact_person2_email">Email ID 2<span
-														style="color: red; font-size: 20px;"></span>
+												<label for="contact_person2_email">Email Id 2<span
+													style="color: red; font-size: 20px;"></span>
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -9945,8 +9961,8 @@ $(document)
 										<label></label>
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="contact_person3_email">Email ID 3 <span
-														style="color: red; font-size: 20px;"> </span>
+												<label for="contact_person3_email">Email Id 3 <span
+													style="color: red; font-size: 20px;"> </span>
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -9956,8 +9972,8 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="contact_person4_email">Email ID 4 <span
-														style="color: red; font-size: 20px;"> </span>
+												<label for="contact_person4_email">Email Id 4 <span
+													style="color: red; font-size: 20px;"> </span>
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -9969,8 +9985,8 @@ $(document)
 										<label></label>
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="contact_person5_email">Email ID 5<span
-														style="color: red; font-size: 20px;"> </span>
+												<label for="contact_person5_email">Email Id 5<span
+													style="color: red; font-size: 20px;"> </span>
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -9980,8 +9996,8 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="contact_person6_email">Email ID 6<span
-														style="color: red; font-size: 20px;"> </span>
+												<label for="contact_person6_email">Email Id 6<span
+													style="color: red; font-size: 20px;"> </span>
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -10001,11 +10017,14 @@ $(document)
 									</div> -->
 
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton " data-dismiss="modal"
-											onclick="back();">Back</button>
-										<button type="button" class="btn btn-sm headerbutton"
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton "
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton "
+											data-dismiss="modal" onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
 											th:if="${formmode}=='MerMastadd'" form="TabForm"
 											th:attr="data-formmode=addsubmit" data-dismiss="modal"
 											onclick="UnitSubmit(this);">Next</button>
@@ -10020,7 +10039,7 @@ $(document)
 												MANAGEMENT</h6>
 										</div>
 										<!--<div class="btn-group nav-buttons float-right">
-											<button type="button" class="btn btn-sm headerbutton"
+											<button type="button" class="btn btn-sm btn-primary headerbutton"
 												th:if="${ formmode == 'MerMastadd'}" id="btnAdd"
 												style="margin-top: -5px" onclick="addUserm(this);">Add
 												User</button>
@@ -10031,8 +10050,8 @@ $(document)
 										th:if="${formmode}=='MerMastadd'">
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="user_id">User ID<span style="color: red; font-size: 20px;">
-														*</span></label>
+												<label for="user_id">User Id<span
+													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="user" name="user_id"
@@ -10206,7 +10225,7 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="alternate_email_id">Alternate Email ID </label>
+												<label for="alternate_email_id">Alternate Email Id </label>
 											</div>
 											<div class="col-sm-3">
 												<input type="email" id="alternateemailid"
@@ -10219,7 +10238,7 @@ $(document)
 										<div class="row formline">
 											<div class="col-sm-2">
 												<label for="alternative_device_id1">Alternative
-													Device ID 1</label>
+													Device Id 1</label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="alternative_device_id1"
@@ -10232,8 +10251,8 @@ $(document)
 											<div class="col-sm-2">
 												<label for="Alternative
 													Device Id1">Alternative
-													Device ID 2<span style="color: red; font-size: 20px;">
-													</span>
+													Device Id 2<span style="color: red; font-size: 20px;">
+												</span>
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -10248,8 +10267,8 @@ $(document)
 										<div class="row formline">
 
 											<div class="col-sm-2">
-												<label for="default_device_id">Default Device ID<span
-														style="color: red; font-size: 20px;"> </span></label>
+												<label for="default_device_id">Default Device Id<span
+													style="color: red; font-size: 20px;"> </span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="defaultdeviceid"
@@ -10260,8 +10279,8 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="unit_id">Unit ID<span style="color: red; font-size: 20px;">
-														*</span></label>
+												<label for="unit_id">Unit Id<span
+													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="unitid" name="unit_id_u"
@@ -10334,12 +10353,15 @@ $(document)
 										</div>
 									</div> -->
 									<div class="card-footer text-center mt-2">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="userSubmit(this);">Next</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="userSubmit(this);">Next</button>
 									</div>
 								</div>
 								<div id="tab3" class="tab-content">
@@ -10355,8 +10377,8 @@ $(document)
 									<div style="margin-left: 100px">
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="device_id">Device ID<span
-														style="color: red; font-size: 20px;"> *</span></label>
+												<label for="device_id">Device Id<span
+													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="device_id" name="device_id"
@@ -10396,7 +10418,7 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="device_machine_id">Device Machine ID </label>
+												<label for="device_machine_id">Device Machine Id </label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="device_machine_id"
@@ -10446,8 +10468,8 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="store_id">Store ID<span
-														style="color: red; font-size: 20px;"> </span></label>
+												<label for="store_id">Store Id<span
+													style="color: red; font-size: 20px;"> </span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="store_id" name="store_id"
@@ -10489,8 +10511,8 @@ $(document)
 										<label></label>
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="default_user_id">Default User ID <span
-														style="color: red; font-size: 20px;"> </span></label>
+												<label for="default_user_id">Default User Id <span
+													style="color: red; font-size: 20px;"> </span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="default_user_id"
@@ -10501,7 +10523,7 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="alternate_user_id">Alternate User ID</label>
+												<label for="alternate_user_id">Alternate User Id</label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="alternate_user_id"
@@ -10578,8 +10600,8 @@ $(document)
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
-												<label for="unit_id_d">Unit ID<span
-														style="color: red; font-size: 20px;"> *</span></label>
+												<label for="unit_id_d">Unit Id<span
+													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="unitidd" name="unit_id_d"
@@ -10626,8 +10648,8 @@ $(document)
 										<label></label>
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="unit_name_d">Terminal ID<span
-														style="color: red; font-size: 20px;"> *</span></label>
+												<label for="unit_name_d">Terminal Id<span
+													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="terminal_id" name="terminal_id"
@@ -10648,12 +10670,15 @@ $(document)
 										</div>
 									</div> -->
 									<div class="card-footer text-center mt-2">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="deviceSubmit(this);">Submit</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="deviceSubmit(this);">Submit</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
 									</div>
 								</div>
 							</div>
@@ -10733,7 +10758,7 @@ $(document)
 											</div>
 											<div>
 												<div class="row formline mt-2">
-													<label class="col-sm-2">Merchant ID</label>
+													<label class="col-sm-2">Merchant Id</label>
 													<div class="col-sm-3">
 														<th:block th:switch="${branchDet?.entity_flg}">
 															<!-- Case for entity_flg == 'Y' -->
@@ -10930,7 +10955,7 @@ $(document)
 														<thead>
 															<tr style="background-color: rgb(192, 192, 192)">
 																<th style="background: border-box; color: black;">
-																	<label> Representative ID</label>
+																	<label> Representative Id</label>
 																</th>
 																<th style="background: border-box; color: black;">
 																	<label> Contact Person</label>
@@ -10939,7 +10964,7 @@ $(document)
 																	<label> Phone Number</label>
 																</th>
 																<th style="background: border-box; color: black;">
-																	<label> National ID</label>
+																	<label> National Id</label>
 																</th>
 																<th style="background: border-box; color: black;">
 																	<label> Email Address</label>
@@ -11931,7 +11956,7 @@ $(document)
 														</select> <a style="color: red" id="purpose_val"></a>
 													</div>
 													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Original ID </label>
+													<label class="col-sm-2">Original Id </label>
 													<div class="col-sm-3">
 														<input type="text" id="orgid"
 															th:value="${branchDet?.orgid}"
@@ -11980,7 +12005,7 @@ $(document)
 															autocomplete="off" readonly>
 													</div>
 													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Merchant Terminal ID</label>
+													<label class="col-sm-2">Merchant Terminal Id</label>
 													<div class="col-sm-3">
 														<input type="text" id="mtid" th:value="${branchDet?.mtid}"
 															class="form-control form-control-sm" name="mtid"
@@ -12165,14 +12190,16 @@ $(document)
 														<thead>
 															<tr class="fw-bold" >
 
-																<th>Document Type</th>
-																<th>Document Code</th>
-																<th>Document Description</th>
-																<th>Unique ID</th>
-																<th>Place of Issue</th>
-																<th>Issue Date</th>
-																<th>Expiry Date</th>
-																<th>Document View</th>
+																<th style="font-weight:700;">Document Type</th>
+																<th style="font-weight:700;">Document Code</th>
+																<th style="font-weight:700;">Document Description</th>
+																<th style="font-weight:700;">Unique Id</th>
+																<th style="font-weight:700;">Place of Issue</th>
+																<th style="font-weight:700;">Issue Date</th>
+																<th style="font-weight:700;">Expiry Date</th>
+																<th style="font-weight:700;">Document View</th>
+															</tr>
+															</thead>
 														<tbody id="dataTables">
 															<tr th:each="Doocument : ${DocumentList}">
 
@@ -12284,11 +12311,13 @@ $(document)
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
 
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
 									</div>
 								</div>
 
@@ -12642,10 +12671,12 @@ $(document)
 
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
 									</div>
 								</div>
 
@@ -12654,7 +12685,7 @@ $(document)
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="merchant_legal_user_id">Merchant User ID</label>
+												<label for="merchant_legal_user_id">Merchant User Id</label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="merchant_user_id1"
@@ -12690,30 +12721,30 @@ $(document)
 												class="table table-striped table-bordered  table-hover table-sm"
 												id="" style="table-layout: fixed; width: 100%;">
 												<thead>
-													<thead>
-											
-														<tr class="filters">
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Unit ID"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Unit Name"
-														disabled></th> 
-												<th style="text-align: center"><input type="text"
-														class="form-control font-weight-bold" placeholder="Email address"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Location"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Status"
-														disabled></th> 
-														<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="QR Code"
-														disabled></th> 
-											 	<th class="pb-2 select_th" >Select</th>
-											</tr>
-												 
+												<thead>
+
+													<tr class="filters">
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Unit Id" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Unit Name" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Email address" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Location" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Status" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="QR Code" disabled></th>
+														<th class="pb-2 select_th">Select</th>
+													</tr>
+
 												</thead>
 												<tbody>
 													<tr th:each=" unitl : ${MerchantUnit}">
@@ -12795,10 +12826,12 @@ $(document)
 
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
 									</div>
 								</div>
 
@@ -12807,7 +12840,7 @@ $(document)
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="merchant_legal_user_id">Merchant User ID</label>
+												<label for="merchant_legal_user_id">Merchant User Id</label>
 											</div>
 											<div class="col-sm-3">
 
@@ -12845,27 +12878,27 @@ $(document)
 												class="table table-striped table-bordered  table-hover table-sm"
 												id="" style="table-layout: fixed; width: 100%;">
 												<thead>
-												
-														<tr class="filters">
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="User ID"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="User Name"
-														disabled></th> 
-												<th style="text-align: center"><input type="text"
-														class="form-control font-weight-bold" placeholder="Unit ID"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Unit Name"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Status"
-														disabled></th> 
-													
-											 	<th class="pb-2 select_th" >Select</th>
-											</tr>
-											
+
+													<tr class="filters">
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="User Id" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="User Name" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Unit Id" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Unit Name" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Status" disabled></th>
+
+														<th class="pb-2 select_th">Select</th>
+													</tr>
+
 												</thead>
 												<tbody>
 													<tr th:each="User : ${pro}">
@@ -12931,10 +12964,12 @@ $(document)
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
 									</div>
 								</div>
 
@@ -12943,7 +12978,7 @@ $(document)
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="merchant_legal_user_id">Merchant User ID</label>
+												<label for="merchant_legal_user_id">Merchant User Id</label>
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="merchant_user_id1"
@@ -12984,27 +13019,27 @@ $(document)
 												class="table table-striped table-bordered  table-hover table-sm"
 												id="" style="table-layout: fixed; width: 100%;">
 												<thead>
-											
-										
-														<tr class="filters">
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Device ID"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Default Status"
-														disabled></th> 
-												<th style="text-align: center"><input type="text"
-														class="form-control font-weight-bold" placeholder="Unit ID"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Unit Name"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Status"
-														disabled></th> 
-													
-											 	<th class="pb-2 select_th" >Select</th>
-											</tr>
+
+
+													<tr class="filters">
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Device Id" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Default Status" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Unit Id" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Unit Name" disabled></th>
+														<th style="text-align: center"><input type="text"
+															class="form-control font-weight-bold"
+															placeholder="Status" disabled></th>
+
+														<th class="pb-2 select_th">Select</th>
+													</tr>
 												</thead>
 												<tbody>
 													<tr th:each="Device : ${MerchantDevi}">
@@ -13067,10 +13102,12 @@ $(document)
 										</div>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
 									</div>
 								</div>
 
@@ -13079,7 +13116,7 @@ $(document)
 									<div class="card" style="border: unset !important">
 										<div class="row formline">
 											<div class="col-sm-2">
-												<label for="merchant_legal_user_id">Merchant User ID
+												<label for="merchant_legal_user_id">Merchant User Id
 												</label>
 											</div>
 											<div class="col-sm-3">
@@ -13124,24 +13161,24 @@ $(document)
 										<table class="table table-bordered  table-hover table-sm"
 											id="" style="table-layout: fixed; width: 100%;">
 											<thead>
-											
-														<tr class="filters">
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Representative ID"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Representative Name"
-														disabled></th> 
-												<th style="text-align: center"><input type="text"
-														class="form-control font-weight-bold" placeholder="Mobile Number"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Email address"
-														disabled></th> 
-															<th style="text-align: center"> <input type="text"
-														class="form-control font-weight-bold" placeholder="Category"
-														disabled></th> 
-												<th style="text-align: center"> <input type="text"
+
+												<tr class="filters">
+													<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold"
+														placeholder="Representative Id" disabled></th>
+													<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold"
+														placeholder="Representative Name" disabled></th>
+													<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold"
+														placeholder="Mobile Number" disabled></th>
+													<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold"
+														placeholder="Email address" disabled></th>
+													<th style="text-align: center"><input type="text"
+														class="form-control font-weight-bold"
+														placeholder="Category" disabled></th>
+													<th style="text-align: center"><input type="text"
 														class="form-control font-weight-bold" placeholder="Status"
 														disabled></th>
 
@@ -13214,10 +13251,12 @@ $(document)
 										</table>
 									</div>
 									<div class="card-footer text-center">
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="home();">Home</button>
-										<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-											onclick="back();">Back</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="home();">Home</button>
+										<button type="button"
+											class="btn btn-sm btn-primary headerbutton"
+											data-dismiss="modal" onclick="back();">Back</button>
 									</div>
 								</div>
 							</div>
@@ -13306,9 +13345,9 @@ $(document)
 							<div style="padding-left: 50px; padding-top: 30px;">
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="merchant_legal_user_id">Merchant User ID<span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										<label for="merchant_legal_user_id">Merchant User Id<span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
 												*</span>
 										</label>
 									</div>
@@ -13367,8 +13406,9 @@ $(document)
 
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="unit_id">Unit ID<span style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										<label for="unit_id">Unit Id<span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
 												*</span></label>
 									</div>
 									<div class="col-sm-3">
@@ -14603,9 +14643,9 @@ $(document)
 								<label></label>
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="contact_person1_email">Email ID 1 <span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										<label for="contact_person1_email">Email Id 1 <span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
 												*</span>
 										</label>
 									</div>
@@ -14633,10 +14673,10 @@ $(document)
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">
-										<label for="contact_person2_email">Email ID 2 <span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
-											</span>
+										<label for="contact_person2_email">Email Id 2 <span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										</span>
 										</label>
 									</div>
 									<div class="col-sm-3">
@@ -14665,10 +14705,10 @@ $(document)
 								<label></label>
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="contact_person3_email">Email ID 3 <span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
-											</span>
+										<label for="contact_person3_email">Email Id 3 <span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										</span>
 										</label>
 									</div>
 									<div class="col-sm-3">
@@ -14695,10 +14735,10 @@ $(document)
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">
-										<label for="contact_person3_email">Email ID 4 <span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
-											</span>
+										<label for="contact_person3_email">Email Id 4 <span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										</span>
 										</label>
 									</div>
 									<div class="col-sm-3">
@@ -14727,10 +14767,10 @@ $(document)
 								<label></label>
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="contact_person5_email">Email ID 5 <span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
-											</span>
+										<label for="contact_person5_email">Email Id 5 <span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										</span>
 										</label>
 									</div>
 									<div class="col-sm-3">
@@ -14757,10 +14797,10 @@ $(document)
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">
-										<label for="contact_person3_email">Email ID 6 <span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
-											</span>
+										<label for="contact_person3_email">Email Id 6 <span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UnitmAdd' OR ${formmode}=='UnitEdit'">
+										</span>
 										</label>
 									</div>
 									<div class="col-sm-3">
@@ -14791,26 +14831,33 @@ $(document)
 							<br> <br>
 							<div class="card-footer text-center">
 								<div class="button-container">
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm headerbutton d-none"
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="home();">Home</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton d-none"
 										th:if="${formmode}=='UnitmAdd'" form="TabForm" id="amlsub"
 										th:attr="data-formmode=addsubmit" data-dismiss="modal"
 										onclick="UnitSubmitNew(this);">Submit</button>
-									<button type="button" class="btn btn-sm headerbutton" id="amlcheckbutton"
-										th:if="${formmode}=='UnitmAdd'" onclick="AMLCheckUnit();">AML Check</button>
-									<button type="button" class="btn btn-sm headerbutton"
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										id="amlcheckbutton" th:if="${formmode}=='UnitmAdd'"
+										onclick="AMLCheckUnit();">AML Check</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
 										th:attr="data-entry_user=${MerUnit.entry_user},
 									data-modify_user=${MerUnit.modify_user},data-user_id=${MerUnit.unit_id},data-login_user=${user_id},data-modify_flag=${MerUnit.modify_flag}"
 										th:if="${formmode}=='UnitVerify' And ${MerUnit.entry_flag}=='N'"
 										data-dismiss="modal" onclick="UnitSubmitverify(this);">Verify</button>
-									<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='UnitEdit'"
-										data-dismiss="modal"
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										th:if="${formmode}=='UnitEdit'" data-dismiss="modal"
 										th:attr="data-entry_user=${MerUnit.entry_user},
 									data-modify_user=${MerUnit.modify_user},data-user_id=${MerUnit.unit_id},data-login_user=${user_id},data-modify_flag=${MerUnit.modify_flag},data-verify_user=${MerUnit.verify_user}"
 										onclick="SubmitUnit(this);">Submit</button>
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="back();">Back</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="back();">Back</button>
 								</div>
 
 
@@ -14908,9 +14955,9 @@ $(document)
 							<div style="margin-left: 40px">
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="merchant_user_id">Merchant User ID<span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
+										<label for="merchant_user_id">Merchant User Id<span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
 												*</span></label>
 									</div>
 									<div class="col-sm-3">
@@ -14964,8 +15011,9 @@ $(document)
 								<label></label>
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="user_id">User ID<span style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
+										<label for="user_id">User Id<span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
 												*</span></label>
 									</div>
 									<div class="col-sm-3">
@@ -15433,7 +15481,7 @@ $(document)
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">
-										<label for="alternate_email_id">Alternate Email ID </label>
+										<label for="alternate_email_id">Alternate Email Id </label>
 									</div>
 									<div class="col-sm-3">
 										<input type="email" id="alternateemailid"
@@ -15461,7 +15509,7 @@ $(document)
 								<div class="row formline">
 									<div class="col-sm-2">
 										<label for="alternative_device_id1">Alternative Device
-											ID 1</label>
+											Id 1</label>
 									</div>
 									<div class="col-sm-3">
 										<input type="text" id="alternative_device_id1"
@@ -15491,9 +15539,9 @@ $(document)
 									<div class="col-sm-2">
 										<label for="Alternative
 													Device Id1">Alternative
-											Device ID 2<span style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
-											</span>
+											Device Id 2<span style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
+										</span>
 										</label>
 									</div>
 									<div class="col-sm-3">
@@ -15524,10 +15572,10 @@ $(document)
 								<label></label>
 								<div class="row formline">
 									<div class="col-sm-2">
-										<label for="default_device_id">Default Device ID<span
-												style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
-											</span></label>
+										<label for="default_device_id">Default Device Id<span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
+										</span></label>
 									</div>
 									<div class="col-sm-3">
 										<input type="text" id="defaultdeviceid"
@@ -15555,8 +15603,9 @@ $(document)
 									</div>
 									<div class="col-sm-1"></div>
 									<div class="col-sm-2">
-										<label for="unit_id">Unit ID<span style="color: red; font-size: 20px;"
-												th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
+										<label for="unit_id">Unit Id<span
+											style="color: red; font-size: 20px;"
+											th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
 												*</span></label>
 									</div>
 									<div class="col-sm-3">
@@ -15715,19 +15764,26 @@ $(document)
 
 							<br> <br>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-									onclick="home();">Home</button>
-								<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='UsermAdd'"
-									data-dismiss="modal" onclick="userSubmituser();">Submit</button>
-								<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='UsermEdit'"
-									data-dismiss="modal" onclick="Submituser(this);">Submit</button>
-								<button type="button" class="btn btn-sm headerbutton" form="TabForm"
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton"
+									data-dismiss="modal" onclick="home();">Home</button>
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton"
+									th:if="${formmode}=='UsermAdd'" data-dismiss="modal"
+									onclick="userSubmituser();">Submit</button>
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton"
+									th:if="${formmode}=='UsermEdit'" data-dismiss="modal"
+									onclick="Submituser(this);">Submit</button>
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton" form="TabForm"
 									th:attr="data-entry_user=${Meruserlist.entry_user},
 									data-modify_user=${Meruserlist.modify_user},data-user_id=${Meruserlist.user_id},data-login_user=${user_id},data-modify_flag=${Meruserlist.modify_flag}"
 									th:if="${formmode}=='UsermVerify'" data-dismiss="modal"
 									onclick="Submituserverify(this);">Verify</button>
-								<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-									onclick="back();">Back</button>
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton"
+									data-dismiss="modal" onclick="back();">Back</button>
 							</div>
 							<div class="content" style="margin-left: 20px; padding: 15px;"
 								th:if="${formmode}!='UsermAdd'">
@@ -15889,9 +15945,9 @@ $(document)
 						<div class="card-body pt-0">
 							<div class="row formline">
 								<div class="col-sm-2">
-									<label for="merchant_user_id">Merchant User ID<span
-											style="color: red; font-size: 20px;"
-											th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
+									<label for="merchant_user_id">Merchant User Id<span
+										style="color: red; font-size: 20px;"
+										th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
 											*</span></label>
 								</div>
 								<div class="col-sm-3">
@@ -15942,8 +15998,9 @@ $(document)
 							<label></label>
 							<div class="row formline">
 								<div class="col-sm-2">
-									<label for="device_id">Device ID<span style="color: red; font-size: 20px;"
-											th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
+									<label for="device_id">Device Id<span
+										style="color: red; font-size: 20px;"
+										th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
 											*</span></label>
 								</div>
 								<div class="col-sm-3">
@@ -16033,7 +16090,7 @@ $(document)
 								</div>
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label for="device_machine_id">Device Machine ID </label>
+									<label for="device_machine_id">Device Machine Id </label>
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="device_machine_id"
@@ -16145,9 +16202,10 @@ $(document)
 								</div>
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label for="store_id">Store ID<span style="color: red; font-size: 20px;"
-											th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
-										</span></label>
+									<label for="store_id">Store Id<span
+										style="color: red; font-size: 20px;"
+										th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
+									</span></label>
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="store_id" name="store_id"
@@ -16252,10 +16310,10 @@ $(document)
 							<label></label>
 							<div class="row formline">
 								<div class="col-sm-2">
-									<label for="default_user_id">Default User ID <span
-											style="color: red; font-size: 20px;"
-											th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
-										</span></label>
+									<label for="default_user_id">Default User Id <span
+										style="color: red; font-size: 20px;"
+										th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
+									</span></label>
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="default_user_id"
@@ -16281,7 +16339,7 @@ $(document)
 								</div>
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label for="alternate_user_id">Alternate User ID</label>
+									<label for="alternate_user_id">Alternate User Id</label>
 								</div>
 								<div class="col-sm-3">
 									<input type="text" id="alternate_user_id"
@@ -16452,8 +16510,9 @@ $(document)
 								</div>
 								<div class="col-sm-1"></div>
 								<div class="col-sm-2">
-									<label for="unit_id_d">Unit ID<span style="color: red; font-size: 20px;"
-											th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
+									<label for="unit_id_d">Unit Id<span
+										style="color: red; font-size: 20px;"
+										th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
 											*</span></label>
 								</div>
 								<div class="col-sm-3">
@@ -16556,8 +16615,9 @@ $(document)
 							<label></label>
 							<div class="row formline">
 								<div class="col-sm-2">
-									<label for="unit_name_d">Terminal ID<span style="color: red; font-size: 20px;"
-											th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
+									<label for="unit_name_d">Terminal Id<span
+										style="color: red; font-size: 20px;"
+										th:if="${formmode}=='DevicemAdd' OR ${formmode}=='DevicemEdit'">
 											*</span></label>
 								</div>
 								<div class="col-sm-3">
@@ -16591,23 +16651,25 @@ $(document)
 								class="form-control form-control-sm" hidden="true">
 						</div>
 						<div class="card-footer text-center">
-							<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-								onclick="home();">Home</button>
-							<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='DevicemAdd'"
-								data-dismiss="modal" onclick="deviceSubmitdevice(this);">Submit</button>
-							<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='DevicemVerify'"
-								data-dismiss="modal" th:attr="data-entry_user=${Merdevicelist.entry_user},
+							<button type="button" class="btn btn-sm btn-primary headerbutton"
+								data-dismiss="modal" onclick="home();">Home</button>
+							<button type="button" class="btn btn-sm btn-primary headerbutton"
+								th:if="${formmode}=='DevicemAdd'" data-dismiss="modal"
+								onclick="deviceSubmitdevice(this);">Submit</button>
+							<button type="button" class="btn btn-sm btn-primary headerbutton"
+								th:if="${formmode}=='DevicemVerify'" data-dismiss="modal"
+								th:attr="data-entry_user=${Merdevicelist.entry_user},
 									data-modify_user=${Merdevicelist.modify_user},data-device_id=${Merdevicelist.device_id},
 									data-login_user=${user_id},data-modify_flag=${Merdevicelist.modify_flag}"
 								onclick="Submitdeviceverify(this);">Verify</button>
-							<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='DevicemEdit'"
-								data-dismiss="modal"
+							<button type="button" class="btn btn-sm btn-primary headerbutton"
+								th:if="${formmode}=='DevicemEdit'" data-dismiss="modal"
 								th:attr="data-entry_user=${Merdevicelist.entry_user},
 									data-modify_user=${Merdevicelist.modify_user},data-device_id=${Merdevicelist.device_id},
 									data-login_user=${user_id},data-modify_flag=${Merdevicelist.modify_flag},data-verify_user=${Merdevicelist.verify_user}"
 								onclick="Submitdevice(this);">Submit</button>
-							<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-								onclick="back();">Back</button>
+							<button type="button" class="btn btn-sm btn-primary headerbutton"
+								data-dismiss="modal" onclick="back();">Back</button>
 						</div>
 
 						<div class="content" style="margin-left: 20px; padding: 15px;"
@@ -16768,8 +16830,8 @@ $(document)
 								</div>
 								<label></label>
 								<div class="row formline">
-									<label class="col-sm-2">Merchant ID <span
-											style="color: red; font-size: 20px;">*</span></label>
+									<label class="col-sm-2">Merchant Id <span
+										style="color: red; font-size: 20px;">*</span></label>
 									<div class="col-sm-3">
 										<input type="text" id="merchant_legal_id"
 											onkeyup="this.value = this.value.toUpperCase();"
@@ -17002,8 +17064,8 @@ $(document)
 									<thead>
 										<tr>
 											<th style="background: border-box; color: black;"><label>
-													Representative ID<span style="color: red; font-size: 20px;">*</span>
-												</label></th>
+													Representative Id<span style="color: red; font-size: 20px;">*</span>
+											</label></th>
 											<th style="background: border-box; color: black;"><label>
 													Contact Person<span style="color: red; font-size: 20px;">*</span>
 											</label></th>
@@ -17947,7 +18009,7 @@ $(document)
 										</select> <a style="color: red" id="purpose_val"></a>
 									</div>
 									<div class="col-sm-1"></div>
-									<label class="col-sm-2">Original ID </label>
+									<label class="col-sm-2">Original Id </label>
 									<div class="col-sm-3">
 										<input type="text" id="orgid" th:value="${branchDet?.orgid}"
 											class="form-control form-control-sm" name="orgid"
@@ -17996,7 +18058,7 @@ $(document)
 											autocomplete="off">
 									</div>
 									<div class="col-sm-1"></div>
-									<label class="col-sm-2">Merchant Terminal ID </label>
+									<label class="col-sm-2">Merchant Terminal Id </label>
 									<div class="col-sm-3">
 										<input type="text" id="mtid" th:value="${branchDet?.mtid}"
 											class="form-control form-control-sm" name="mtid"
@@ -18172,16 +18234,16 @@ $(document)
 										<thead>
 											<tr>
 
-																						<th>Document Type</th>
-																						<th>Document Code</th>
-																						<th>Document Description</th>
-																						<th>Unique ID</th>
-																						<th>Place of Issue</th>
-																						<th>Issue Date</th>
-																						<th>Expiry Date</th>
-																						<th>Document View</th>
-																				<tbody id="dataTables">
-																					<tr th:each="Doocument : ${DocumentList}">
+												<th>Document Type</th>
+												<th>Document Code</th>
+												<th>Document Description</th>
+												<th>Unique Id</th>
+												<th>Place of Issue</th>
+												<th>Issue Date</th>
+												<th>Expiry Date</th>
+												<th>Document View</th>
+										<tbody id="dataTables">
+											<tr th:each="Doocument : ${DocumentList}">
 
 												<td th:text="${Doocument?.document_type}"
 													class="rowDataField">Address</td>
@@ -18250,12 +18312,15 @@ $(document)
 									</div>
 								</div>
 								<div class="card-footer text-center">
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="back();">Back</button>
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="nextViewBankDetNew(this);">Next</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="home();">Home</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="back();">Back</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="nextViewBankDetNew(this);">Next</button>
 								</div>
 							</div>
 						</div>
@@ -18643,11 +18708,15 @@ $(document)
 								</div>
 							</div>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-									onclick="previous(this);">Previous</button>
-								<button type="button" class="btn btn-primary btn-sm headerbutton" th:attr="data-formmode=editsubmit"
-									form="BankandBranchedit" onclick="submitaddform(this);">Submit</button>
-								<button type="button" class="btn btn-primary btn-sm headerbutton"
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton"
+									data-dismiss="modal" onclick="previous(this);">Previous</button>
+								<button type="button"
+									class="btn btn-primary btn-sm headerbutton"
+									th:attr="data-formmode=editsubmit" form="BankandBranchedit"
+									onclick="submitaddform(this);">Submit</button>
+								<button type="button"
+									class="btn btn-primary btn-sm headerbutton"
 									onclick="Mainlistpage();">Cancel</button>
 							</div>
 						</div>
@@ -18734,7 +18803,7 @@ $(document)
 								</div>
 								<label></label>
 								<div class="row formline mt-2">
-									<label class="col-sm-2">Merchant ID</label>
+									<label class="col-sm-2">Merchant Id</label>
 									<div class="col-sm-3">
 										<input type="text" id="merchant_legal_id_n"
 											th:value="${branchDet?.merchant_id}"
@@ -18912,7 +18981,7 @@ $(document)
 									<thead>
 										<tr>
 											<th style="background: border-box; color: black;"><label>
-													Representative ID</label></th>
+													Representative Id</label></th>
 											<th style="background: border-box; color: black;"><label>
 													Contact Person</label></th>
 											<th style="background: border-box; color: black;"><label>
@@ -19805,7 +19874,7 @@ $(document)
 										</select> <a style="color: red" id="purpose_val"></a>
 									</div>
 									<div class="col-sm-1"></div>
-									<label class="col-sm-2">Original ID </label>
+									<label class="col-sm-2">Original Id </label>
 									<div class="col-sm-3">
 										<input type="text" id="orgid" th:value="${branchDet?.orgid}"
 											class="form-control form-control-sm" name="orgid"
@@ -19854,7 +19923,7 @@ $(document)
 											autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-1"></div>
-									<label class="col-sm-2">Merchant Terminal ID </label>
+									<label class="col-sm-2">Merchant Terminal Id </label>
 									<div class="col-sm-3">
 										<input type="text" id="mtid" th:value="${branchDet?.mtid}"
 											class="form-control form-control-sm" name="mtid"
@@ -20030,16 +20099,16 @@ $(document)
 										<thead>
 											<tr>
 
-																						<th>Document Type</th>
-																						<th>Document Code</th>
-																						<th>Document Description</th>
-																						<th>Unique ID</th>
-																						<th>Place of Issue</th>
-																						<th>Issue Date</th>
-																						<th>Expiry Date</th>
-																						<th>Document View</th>
-																				<tbody id="dataTables">
-																					<tr th:each="Doocument : ${DocumentList}">
+												<th>Document Type</th>
+												<th>Document Code</th>
+												<th>Document Description</th>
+												<th>Unique Id</th>
+												<th>Place of Issue</th>
+												<th>Issue Date</th>
+												<th>Expiry Date</th>
+												<th>Document View</th>
+										<tbody id="dataTables">
+											<tr th:each="Doocument : ${DocumentList}">
 
 												<td th:text="${Doocument?.document_type}"
 													class="rowDataField">Address</td>
@@ -20108,12 +20177,15 @@ $(document)
 									</div>
 								</div>
 								<div class="card-footer text-center">
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="back();">Back</button>
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="nextViewBankDetNewVerify(this);">Next</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="home();">Home</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="back();">Back</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="nextViewBankDetNewVerify(this);">Next</button>
 								</div>
 							</div>
 						</div>
@@ -20426,9 +20498,11 @@ $(document)
 								</div>
 							</div>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-									onclick="previousverify(this);">Previous</button>
-								<button type="button" class="btn btn-primary btn-sm headerbutton"
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton"
+									data-dismiss="modal" onclick="previousverify(this);">Previous</button>
+								<button type="button"
+									class="btn btn-primary btn-sm headerbutton"
 									th:if="${formmode == 'verify' and branchDet?.hr_status != 'HOLD' and branchDet?.hr_status != 'REJECT'}"
 									th:attr="data-formmode=verifysubmit,data-entry_user=${branchDet?.entry_user},
 									data-modify_user=${branchDet?.modify_user},data-login_user=${user_id},data-modify_flag=${branchDet?.modify_flg},data-work_class=${IPSRoleMenu.work_class}"
@@ -20532,7 +20606,7 @@ $(document)
 								</div>
 								<label></label>
 								<div class="row formline">
-									<label class="col-sm-2">Merchant ID</label>
+									<label class="col-sm-2">Merchant Id</label>
 									<div class="col-sm-3">
 										<input type="text" id="merchant_legal_id"
 											th:value="${branchDet?.merchant_legal_id}"
@@ -20683,7 +20757,7 @@ $(document)
 									<thead>
 										<tr>
 											<th style="background: border-box; color: black;"><label>
-													Representative ID</label></th>
+													Representative Id</label></th>
 											<th style="background: border-box; color: black;"><label>
 													Contact Person</label></th>
 											<th style="background: border-box; color: black;"><label>
@@ -21148,12 +21222,15 @@ $(document)
 									</div>
 								</div>
 								<div class="card-footer text-center">
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="home();">Home</button>
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="back();">Back</button>
-									<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-										onclick="nextViewBankDetNewVerify(this);">Next</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="home();">Home</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="back();">Back</button>
+									<button type="button"
+										class="btn btn-sm btn-primary headerbutton"
+										data-dismiss="modal" onclick="nextViewBankDetNewVerify(this);">Next</button>
 								</div>
 							</div>
 						</div>
@@ -21408,8 +21485,9 @@ $(document)
 								</div>
 							</div>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-									onclick="previous(this);">Previous</button>
+								<button type="button"
+									class="btn btn-sm btn-primary headerbutton"
+									data-dismiss="modal" onclick="previous(this);">Previous</button>
 								<button type="button" class="btn btn-primary btn-sm"
 									th:attr="data-formmode=deletesubmit" form="BankandBranchdelete"
 									onclick="submitdeleteform(this);">Delete</button>
@@ -21497,8 +21575,9 @@ $(document)
 					<div class="card-body pt-0">
 						<div class="row formline">
 							<div class="col-sm-2">
-								<label for="merchant_legal_user_id">Merchant User ID<span
-										style="color: red; font-size: 20px;" th:if="${formmode}=='PassEdit'"> *</span>
+								<label for="merchant_legal_user_id">Merchant User Id<span
+									style="color: red; font-size: 20px;"
+									th:if="${formmode}=='PassEdit'"> *</span>
 								</label>
 							</div>
 							<div class="col-sm-3">
@@ -21541,9 +21620,9 @@ $(document)
 						<label></label>
 						<div class="row formline">
 							<div class="col-sm-2">
-								<label for="password">Merchant Representative ID<span
-										style="color: red; font-size: 20px;" th:if="${formmode}=='PassEdit'">
-										*</span></label>
+								<label for="password">Merchant Representative Id<span
+									style="color: red; font-size: 20px;"
+									th:if="${formmode}=='PassEdit'"> *</span></label>
 							</div>
 							<div class="col-sm-3">
 								<div class="input-group">
@@ -21810,7 +21889,7 @@ $(document)
 							</div>
 							<div class="col-sm-1"></div>
 							<div class="col-sm-2">
-								<label for="alternate_email_id">Alternate Email ID</label>
+								<label for="alternate_email_id">Alternate Email Id</label>
 							</div>
 							<div class="col-sm-3">
 								<input type="email" id="alternate_email_id"
@@ -21927,22 +22006,24 @@ $(document)
 						</div>
 					</div>
 					<div class="card-footer text-center">
-						<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-							onclick="home();">Home</button>
-						<!-- <button type="button" class="btn btn-sm headerbutton"
+						<button type="button" class="btn btn-sm btn-primary headerbutton"
+							data-dismiss="modal" onclick="home();">Home</button>
+						<!-- <button type="button" class="btn btn-sm btn-primary headerbutton"
 											th:if="${formmode}=='UsermAdd'" data-dismiss="modal"
 											onclick="userSubmit();">Submit</button> -->
-						<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='PassEdit'"
-							data-dismiss="modal" onclick="passSubmit();">Submit</button>
+						<button type="button" class="btn btn-sm btn-primary headerbutton"
+							th:if="${formmode}=='PassEdit'" data-dismiss="modal"
+							onclick="passSubmit();">Submit</button>
 
-						<button type="button" class="btn btn-sm headerbutton" th:if="${formmode}=='PassVerify'"
-							data-dismiss="modal" th:attr="data-entry_user=${MerchantPass.entry_user},
+						<button type="button" class="btn btn-sm btn-primary headerbutton"
+							th:if="${formmode}=='PassVerify'" data-dismiss="modal"
+							th:attr="data-entry_user=${MerchantPass.entry_user},
 									data-modify_user=${MerchantPass.modify_user},data-merchant_rep_id=${MerchantPass.merchant_rep_id},
 									data-login_user=${user_id},data-modify_flag=${MerchantPass.modify_flag}"
 							onclick="Submitpassverify(this);">Verify</button>
 
-						<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-							onclick="back();">Back</button>
+						<button type="button" class="btn btn-sm btn-primary headerbutton"
+							data-dismiss="modal" onclick="back();">Back</button>
 					</div>
 					<div class="content" style="margin-left: 20px; padding: 15px;">
 						<div class="row formline">
@@ -22015,7 +22096,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="verifyboxmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn headerbutton" data-dismiss="modal" onclick="back();">OK</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal" onclick="back();">OK</button>
 				</div>
 			</div>
 		</div>
@@ -22032,7 +22114,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn headerbutton" onclick="back();" th:att>Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="back();" th:att>Close</button>
 				</div>
 			</div>
 		</div>
@@ -22049,7 +22132,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn headerbutton" onclick="closemodal();" th:att>Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="closemodal();" th:att>Close</button>
 				</div>
 			</div>
 		</div>
@@ -22065,7 +22149,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsg" style="font-size: 16px;"></p>
-					<button type="button" class="btn headerbutton" onclick="back();" th:att>Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="back();" th:att>Close</button>
 				</div>
 			</div>
 		</div>
@@ -22083,7 +22168,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="ADDMANRSN" style="font-size: 16px;"></p>
-					<button type="button" class="btn headerbutton" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22100,7 +22186,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="errormsg"></p>
-					<button type="button" class="btn headerbutton" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22141,7 +22228,7 @@ $(document)
 							id="table">
 							<thead class="thead-light">
 								<tr>
-									<th>Merchant ID</th>
+									<th>Merchant Id</th>
 									<th>Merchant Account Number</th>
 									<th>Merchant Name</th>
 									<th>Merchant Power Card Number</th>
@@ -22203,8 +22290,10 @@ $(document)
 					style="text-align: center; background-color: #c6ccd2">
 					<!-- Add content here if needed -->
 				</div>
-				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn headerbutton" data-dismiss="modal" style="margin-right: 45%;"
+				<div class="modal-footer"
+					style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal" style="margin-right: 45%;"
 						onclick="listmer()">Close</button>
 				</div>
 			</div>
@@ -22223,9 +22312,10 @@ $(document)
 					style="text-align: center; background-color: #c6ccd2">
 					<!-- Add content here if needed -->
 				</div>
-				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn headerbutton" data-dismiss="modal" style="margin-right: 45%;"
-						onclick="back()">Close</button>
+				<div class="modal-footer"
+					style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal" style="margin-right: 45%;" onclick="back()">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22252,8 +22342,8 @@ $(document)
 
 					<!-- Footer with Close Button -->
 					<div class="modal-footer">
-						<button type="button" class="btn headerbutton" data-dismiss="modal"
-							onclick="openCity(event, 'india');">Close</button>
+						<button type="button" class="btn btn-primary headerbutton"
+							data-dismiss="modal" onclick="openCity(event, 'india');">Close</button>
 						<!-- Calls goBack function -->
 					</div>
 				</div>
@@ -22306,8 +22396,10 @@ $(document)
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn headerbutton" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn headerbutton" onclick="holdfin();">Confirm</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="holdfin();">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -22338,8 +22430,10 @@ $(document)
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn headerbutton" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn headerbutton" onclick="RejectAcc();">Confirm</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="RejectAcc();">Confirm</button>
 				</div>
 			</div>
 		</div>
@@ -22381,7 +22475,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p>Please fill the required fields</p>
-					<button type="button" class="btn headerbutton" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22398,7 +22493,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="invalidfilemsg"></p>
-					<button type="button" class="btn headerbutton" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22426,10 +22522,12 @@ $(document)
 					<div class="modal-title" id="exampleModalLabel"
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
-				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn headerbutton" data-dismiss="modal"
-						style="margin-right: 45%;">Close</button>
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2"></div>
+				<div class="modal-footer"
+					style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal" style="margin-right: 45%;">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22437,7 +22535,7 @@ $(document)
 	<div class="modal" id="qrcode"
 		style="padding-left: 15%; padding-right: 0px;">
 		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content" style="width: 600px; height: 750px;">
+			<div class="modal-content" style="width: 600px; height: 700px;">
 				<div class="modal-header" style="background: #377486; color: white;">
 					<h4 style="background: #377486; color: white" class="modal-title">Merchant
 						QR</h4>
@@ -22447,13 +22545,13 @@ $(document)
 					</button>
 				</div>
 				<div class="modal-body">
-					<p id="name-unit" style="text-align: center; font-weight: bolder;"> </p>
+					<p id="alertmsg"></p>
 					<img src="images/QR.jpeg" style="width: 400px; height: 550px" />
 
 
 					<div class="row">
 						<div class="col text-center">
-							<button type="button" class="btn headerbutton"
+							<button type="button" class="btn btn-primary headerbutton"
 								onclick="DownloadQRCode();">Download QR</button>
 							<input type="text" id="qrsource" style="display: none;">
 							<input type="text" id="qrsourcename" style="display: none;">
@@ -22476,13 +22574,13 @@ $(document)
 				<div class="modal-body" style="text-align: center; flex: 0 0 auto;">
 					<label></label>
 					<div class="row">
-						<label class="col-sm-5" id="popupmerchid">Merchant ID</label> <input class="form-control col-sm-5" type="text"
-							id="acct_num" readonly />
+						<label class="col-sm-5">Merchant ID</label> <input
+							class="form-control col-sm-5" type="text" id="acct_num" readonly />
 					</div>
 					<label></label>
 					<div class="row">
-						<label class="col-sm-5"id="popupmerchname" >Merchant Name</label> <input class="form-control col-sm-5" type="text"
-							id="acct_name" readonly />
+						<label class="col-sm-5">Merchant Name</label> <input
+							class="form-control col-sm-5" type="text" id="acct_name" readonly />
 					</div>
 					<label></label>
 					<div class="row">
@@ -22584,8 +22682,8 @@ $(document)
 					<label></label>
 					<div class="row">
 						<div class="col text-center">
-							<button type="button" class="btn headerbutton" onclick="generateQRCode();">Generate
-								QR</button>
+							<button type="button" class="btn btn-primary headerbutton"
+								onclick="generateQRCode();">Generate QR</button>
 						</div>
 					</div>
 				</div>
@@ -22619,7 +22717,7 @@ $(document)
 					<label></label>
 					<div class="row">
 						<div class="col text-center">
-							<button type="button" class="btn headerbutton" onclick="generateQRCode();">Generate
+							<button type="button" class="btn btn-primary headerbutton" onclick="generateQRCode();">Generate
 								QR</button>
 						</div>
 					</div>
@@ -22638,7 +22736,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: white">
 					<p id="alertmsgee" style="font-size: 16px;"></p>
-					<button type="button" class="btn headerbutton" onclick="closemodals();">Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="closemodals();">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22655,7 +22754,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p id="alertmsgee1" style="font-size: 16px;"></p>
-					<button type="button" class="btn headerbutton" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22672,8 +22772,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p>Same user cannot verify</p>
-					<button type="button" class="btn headerbutton" onclick="back()">
-						Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="back()">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22690,8 +22790,8 @@ $(document)
 				<div class="modal-body"
 					style="text-align: center; background-color: #c6ccd2">
 					<p>same user cannot verify</p>
-					<button type="button" class="btn headerbutton" onclick="back()">
-						Close</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						onclick="back()">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22728,7 +22828,7 @@ $(document)
 					</table>
 				</div>
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn headerbutton" data-dismiss="modal"
+					<button type="button" class="btn btn-primary headerbutton" data-dismiss="modal"
 						style="margin-right: 45%;">Close</button>
 				</div>
 
@@ -22910,8 +23010,10 @@ $(document)
 						<label>Remarks : </label> <input class="ml-4" id="userRemarks"
 							name="userRemarks" style="width: 75%;" required />
 					</div>
-					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn headerbutton" data-dismiss="modal" id="data_userRemarks"
+					<div class="modal-footer"
+						style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary headerbutton"
+							data-dismiss="modal" id="data_userRemarks"
 							style="margin-right: 45%;" onclick="deleteUserRec(this)">Submit</button>
 					</div>
 				</form>
@@ -22935,8 +23037,10 @@ $(document)
 						<label>Remarks : </label> <input class="ml-4" id="deviceRemarks"
 							name="deviceRemarks" style="width: 75%;" required />
 					</div>
-					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn headerbutton" data-dismiss="modal" id="data_deviceRemarks"
+					<div class="modal-footer"
+						style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary headerbutton"
+							data-dismiss="modal" id="data_deviceRemarks"
 							style="margin-right: 45%;" onclick="deleteDeviceRec(this)">Submit</button>
 					</div>
 				</form>
@@ -22961,9 +23065,11 @@ $(document)
 							id="passwordManageRemarks" name="passwordManageRemarks"
 							style="width: 75%;" required />
 					</div>
-					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn headerbutton" data-dismiss="modal"
-							id="data_passwordManageRemarks" style="margin-right: 45%;"
+					<div class="modal-footer"
+						style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary headerbutton"
+							data-dismiss="modal" id="data_passwordManageRemarks"
+							style="margin-right: 45%;"
 							onclick="deletePasswordManageRec(this)">Submit</button>
 					</div>
 				</form>
@@ -22987,8 +23093,10 @@ $(document)
 						<label>Remarks : </label> <input class="ml-4" id="merchantRemarks"
 							name="merchantRemarks" style="width: 75%;" required />
 					</div>
-					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn headerbutton" data-dismiss="modal" id="data_merchantRemarks"
+					<div class="modal-footer"
+						style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary headerbutton"
+							data-dismiss="modal" id="data_merchantRemarks"
 							style="margin-right: 45%;" onclick="deleteMerchantRec(this)">Submit</button>
 					</div>
 				</form>
@@ -23012,8 +23120,10 @@ $(document)
 						<label>Remarks : </label> <input class="ml-4" id="unitRemarks"
 							name="unitRemarks" style="width: 75%;" required />
 					</div>
-					<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-						<button type="button" class="btn headerbutton" data-dismiss="modal" id="data_unitRemarks"
+					<div class="modal-footer"
+						style="background-color: #c6ccd2; border-top: none; text-align: center;">
+						<button type="button" class="btn btn-primary headerbutton"
+							data-dismiss="modal" id="data_unitRemarks"
 							style="margin-right: 45%;" onclick="deleteUnitRec(this)">Submit</button>
 					</div>
 				</form>
@@ -23525,9 +23635,12 @@ $(document)
 					<div class="modal-title" id="exampleModalLabel"
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
-				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn headerbutton" data-dismiss="modal" style="margin-right: 45%;"
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2"></div>
+				<div class="modal-footer"
+					style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal" style="margin-right: 45%;"
 						onclick="closeUser()">close</button>
 				</div>
 			</div>
@@ -23543,9 +23656,12 @@ $(document)
 					<div class="modal-title" id="exampleModalLabel"
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
-				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn headerbutton" data-dismiss="modal" style="margin-right: 45%;"
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2"></div>
+				<div class="modal-footer"
+					style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal" style="margin-right: 45%;"
 						onclick="closeUser()">close</button>
 				</div>
 			</div>
@@ -23561,9 +23677,12 @@ $(document)
 					<div class="modal-title" id="exampleModalLabel"
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
-				<div class="modal-body" style="text-align: center; background-color: #c6ccd2"></div>
-				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
-					<button type="button" class="btn headerbutton" data-dismiss="modal" style="margin-right: 45%;"
+				<div class="modal-body"
+					style="text-align: center; background-color: #c6ccd2"></div>
+				<div class="modal-footer"
+					style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn btn-primary headerbutton"
+						data-dismiss="modal" style="margin-right: 45%;"
 						onclick="closeUser()">close</button>
 				</div>
 			</div>
@@ -23582,9 +23701,10 @@ $(document)
 				</div>
 				<div class="modal-body">Are you sure want to reset the user?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn headerbutton" id="confirmResetBtn">Yes,
-						Reset</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary headerbutton"
+						id="confirmResetBtn">Yes, Reset</button>
 				</div>
 			</div>
 		</div>
@@ -23902,62 +24022,52 @@ $(document)
 
 
 	function generateQRCodeStatic() {
-    // Get values from the first modal
-    const acctNum = document.getElementById("acct_num").value.trim();
-    const acctName = document.getElementById("acct_name").value.trim();
-    const unitId = document.getElementById("unitId").value.trim();
-    const deviceId = document.getElementById("deviceId").value.trim();
+		var acct_num = document.getElementById("acct_num").value.trim();
+		var acct_name = document.getElementById("acct_name").value.trim();
+		var unitId = document.getElementById("unitId").value.trim();
+		var deviceId = document.getElementById("deviceId").value.trim();
 
-    // Validate that all fields are filled
-    if (!acctNum) {
-        alert("Please fill in the Merchant ID.");
-        return;
-    }
-    if (!acctName) {
-        alert("Please fill in the Merchant Name.");
-        return;
-    }
-    if (!unitId || unitId === "SELECT") {
-        alert("Please select a Unit ID.");
-        return;
-    }
-    if (!deviceId || deviceId === "SELECT") {
-        alert("Please select a Terminal ID.");
-        return;
-    }
+		// Validate that all fields are filled
+		if (!acct_num) {
+			alert("Please fill in the Merchant ID.");
+			return;
+		}
+		if (!acct_name) {
+			alert("Please fill in the Merchant Name.");
+			return;
+		}
+		if (!unitId || unitId === "SELECT") {
+			alert("Please select a Unit ID.");
+			return;
+		}
+		if (!deviceId || deviceId === "SELECT") {
+			alert("Please select a Terminal ID.");
+			return;
+		}
 
-    // Update the second modal content
-    const nameUnitElement = document.getElementById('name-unit');
-    nameUnitElement.innerHTML = `
-  
-        Merchant Name: ${acctName}<br>
-       
-        <br>Terminal ID: ${deviceId}
-    `;
-		console.log(nameUnitElement.innerHTML);
+		$('#QRstatic').modal('hide');
 
-    // Hide the first modal and show the second modal
-    $('#QRstatic').modal('hide');
-    $('#qrcode').modal('show');
+		$('#qrcode').modal('toggle');
 
-    // Uncomment this section if you need to make an AJAX call
-    /*
-    $.ajax({
-        type: 'get',
-        url: '/IPSAdmin/getstaticqrcodeMerchantMaucasNewFormat/' + acctNum,
-        success: function (response) {
-            // Set the QR code image and hidden input values
-            $('#base64image').attr('src', response);
-            $("#qrsource").val(response);
-            $("#qrsourcename").val(acctName);
-            $("#qrsourcenumber").val(acctNum);
-        },
-        error: function () {
-            alert("Failed to generate QR code. Please try again.");
-        }
-    });
-    */
-}
+
+		// Make the AJAX call to generate QR
+		/* 	    $.ajax({
+					type: 'get',
+					url: '/IPSAdmin/getstaticqrcodeMerchantMaucasNewFormat/' + acct_num,
+					success: function (response) {
+						// Hide the QRstatic modal and show the generated QR modal
+						$('#QRstatic').modal('hide');
+						$('#base64image').attr('src', response);
+						$('#qrcode').modal('toggle');
+						$("#qrsource").val(response);
+						$("#qrsourcename").val(acct_name);
+						$("#qrsourcenumber").val(acct_num);
+					},
+					error: function () {
+						alert("Failed to generate QR code. Please try again.");
+					}
+				}); */
+	}
 
 
 	function StaticQRcodeUPI(a) {
@@ -24673,7 +24783,7 @@ $(document)
             descriptions = {
                 BRN: 'Business Registration Certificate',
                 TAX: 'Tax Certificate',
-                TRL: 'Trade List'
+                TRL: 'Trade License'
             };
         } else if (selectElement.value === 'BDOC') {
             options = ['ANR', 'BUS', 'RNA', 'UTB'];
@@ -24727,7 +24837,7 @@ $(document)
             descriptions = {
                 BRN: 'Business Registration Certificate',
                 TAX: 'Tax Certificate',
-                TRL: 'Trade List'
+                TRL: 'Trade License'
             };
         } else if (selectElement.value === 'BDOC') {
             options = ['ANR', 'BUS', 'RNA', 'UTB'];
@@ -24776,7 +24886,7 @@ $(document)
             options = [
                 { code: 'BRN', description: 'Business Registration Certificate' },
                 { code: 'TAX', description: 'Tax Certificate' },
-                { code: 'TRL', description: 'Trade List' }
+                { code: 'TRL', description: 'Trade License' }
             ];
         } else if (selectElement.value === 'BDOC') {
             options = [
@@ -24819,7 +24929,7 @@ $(document)
             options = [
                 { code: 'BRN', description: 'Business Registration Certificate' },
                 { code: 'TAX', description: 'Tax Certificate' },
-                { code: 'TRL', description: 'Trade List' }
+                { code: 'TRL', description: 'Trade License' }
             ];
         } else if (docTypeSelect.value === 'BDOC') {
             options = [

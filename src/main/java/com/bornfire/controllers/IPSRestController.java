@@ -2100,7 +2100,7 @@ public class IPSRestController {
 			return imageAsBase64;
 		}
 
-		@PostMapping("/updateMerchantbDesc")
+		@PostMapping("/updateMerchantDesc")
 		@ResponseBody
 		public String updateMerchantDesc(
 		        @RequestParam(required = false) String merchantCode,
