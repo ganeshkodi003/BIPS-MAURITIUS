@@ -478,10 +478,14 @@
 <body class="bg-white">
 
 	<nav class="navbar fixed-top navbar-expand-md navbar-dark  mb-3">
-		<div class="col-sm-12" style="border-color: red">
+		<div class="col-sm-12" style="border-color: red ; display: flex; justify-content: space-between;" >
 			<div class="float-left">
 				<img th:src=@{/images/banklogo.jpeg} id="showmenu" style="width: 350px; height: 70px" alt="Bornfire">
 			</div>
+			<div style=" display: flex; justify-content: center;align-items: center; color: #f26223; font-size: 24; font-weight: bold;">
+				 QR PAYMENT BANK ADMIN PORTAL
+				</div>
+				<div>
 			<div class="btn float-right" id="userdtl" title="Profile" style="margin-top: 20px;">
 				<img th:if="${session.IMAGEUSER} == null" style="width: 30px; height: 30px; cursor: pointer;"
 					th:src="@{/Image/userProfile.png}" class="imageround">
@@ -508,6 +512,7 @@
 				style="margin-top: 23px; width: 4px; margin-left: 17px; margin-right: 32px;">
 				<img th:src=@{/Image/transactionIcon.png} style="width: 30px; height: 30px; cursor: pointer;"
 					onclick="contentLoad(this)" title="Snapshot" id="snapShot" alt="Snapshot">
+			</div>
 			</div>
 		</div>
 	</nav>

@@ -22237,7 +22237,7 @@ $(document)
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="wait">
+	<div class="modal fade" id="wait">generateQRCodeStatic 
 		<div
 			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
@@ -22576,7 +22576,7 @@ $(document)
 	<div class="modal" id="qrcode"
 		style="padding-left: 15%; padding-right: 0px;">
 		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content" style="width: 600px; height: 700px;">
+			<div class="modal-content" style="width: 600px; height: 8	00px;">
 				<div class="modal-header" style="background: #377486; color: white;">
 					<h4 style="background: #377486; color: white" class="modal-title">Merchant
 						QR</h4>
@@ -22586,7 +22586,7 @@ $(document)
 					</button>
 				</div>
 				<div class="modal-body">
-					<p id="alertmsg"></p>
+						<p id="name-unit"> </p>
 					<img src="images/QR.jpeg" style="width: 400px; height: 550px" />
 
 
@@ -24063,52 +24063,61 @@ $(document)
 
 
 	function generateQRCodeStatic() {
-		var acct_num = document.getElementById("acct_num").value.trim();
-		var acct_name = document.getElementById("acct_name").value.trim();
-		var unitId = document.getElementById("unitId").value.trim();
-		var deviceId = document.getElementById("deviceId").value.trim();
+    // Get values from the first modal
+    const acctNum = document.getElementById("acct_num").value.trim();
+    const acctName = document.getElementById("acct_name").value.trim();
+    const unitId = document.getElementById("unitId").value.trim();
+    const deviceId = document.getElementById("deviceId").value.trim();
 
-		// Validate that all fields are filled
-		if (!acct_num) {
-			alert("Please fill in the Merchant ID.");
-			return;
-		}
-		if (!acct_name) {
-			alert("Please fill in the Merchant Name.");
-			return;
-		}
-		if (!unitId || unitId === "SELECT") {
-			alert("Please select a Unit ID.");
-			return;
-		}
-		if (!deviceId || deviceId === "SELECT") {
-			alert("Please select a Terminal ID.");
-			return;
-		}
+    // Validate that all fields are filled
+    if (!acctNum) {
+        alert("Please fill in the Merchant ID.");
+        return;
+    }
+    if (!acctName) {
+        alert("Please fill in the Merchant Name.");
+        return;
+    }
+    if (!unitId || unitId === "SELECT") {
+        alert("Please select a Unit ID.");
+        return;
+    }
+    if (!deviceId || deviceId === "SELECT") {
+        alert("Please select a Terminal ID.");
+        return;
+    }
 
-		$('#QRstatic').modal('hide');
+    // Update the second modal content
+ const nameUnitElement = document.getElementById('name-unit');
+nameUnitElement.innerHTML = `
+    <div style="text-align: center; font-weight: bold; padding: 15px;">
+        Merchant Name: ${acctName}<br><br>
+        Terminal ID: ${deviceId}
+    </div>
+`;
 
-		$('#qrcode').modal('toggle');
+    // Hide the first modal and show the second modal
+    $('#QRstatic').modal('hide');
+    $('#qrcode').modal('show');
 
-
-		// Make the AJAX call to generate QR
-		/* 	    $.ajax({
-					type: 'get',
-					url: '/IPSAdmin/getstaticqrcodeMerchantMaucasNewFormat/' + acct_num,
-					success: function (response) {
-						// Hide the QRstatic modal and show the generated QR modal
-						$('#QRstatic').modal('hide');
-						$('#base64image').attr('src', response);
-						$('#qrcode').modal('toggle');
-						$("#qrsource").val(response);
-						$("#qrsourcename").val(acct_name);
-						$("#qrsourcenumber").val(acct_num);
-					},
-					error: function () {
-						alert("Failed to generate QR code. Please try again.");
-					}
-				}); */
-	}
+    // Uncomment this section if you need to make an AJAX call
+    /*
+    $.ajax({
+        type: 'get',
+        url: '/IPSAdmin/getstaticqrcodeMerchantMaucasNewFormat/' + acctNum,
+        success: function (response) {
+            // Set the QR code image and hidden input values
+            $('#base64image').attr('src', response);
+            $("#qrsource").val(response);
+            $("#qrsourcename").val(acctName);
+            $("#qrsourcenumber").val(acctNum);
+        },
+        error: function () {
+            alert("Failed to generate QR code. Please try again.");
+        }
+    });
+    */
+}
 
 
 	function StaticQRcodeUPI(a) {
