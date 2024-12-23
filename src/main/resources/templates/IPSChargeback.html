@@ -629,24 +629,24 @@ $(document)
 							<tr class="filters">
 
 								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="Tran Date"
+									class="form-control font-weight-bold" placeholder="Transaction Date"
 									disabled></th>
 								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="Audit Ref"
+									class="form-control font-weight-bold" placeholder="Audit Reference"
 									disabled></th>
 								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="Bill Num"
+									class="form-control font-weight-bold" placeholder="Bill Number"
 									disabled></th>
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Merchant ID"
 									disabled></th>
-								<th style="text-align: center"><input type="text"
+								<!-- <th style="text-align: center;width:250px"><input type="text"
 									class="form-control font-weight-bold"
-									placeholder="Merchant Name" disabled></th>
-								<th style="text-align: center"><input type="text"
+									placeholder="Merchant Name" disabled></th> -->
+								<th style="text-align: center;width:300px"><input type="text"
 									class="form-control font-weight-bold"
 									placeholder="Customer Name" disabled></th>
-								<th style="text-align: center"><input type="text"
+								<th style="text-align: right;width:250px"><input type="text"
 									class="form-control font-weight-bold" placeholder="Bill Amount"
 									disabled></th>
 								
@@ -654,7 +654,7 @@ $(document)
 									class="form-control font-weight-bold" placeholder="Remarks"
 									disabled></th>
 								
-								<th class="pb-2 select_th">Select</th>
+								<th class="pb-2 select_th" style="text-align:center">Select</th>
 
 							</tr>
 						</thead>
@@ -670,8 +670,8 @@ $(document)
 								<td style="width: 150px"
 									th:text="${charge.merchant_id != null ? charge.merchant_id.toUpperCase() : ''}"></td>
 								<!-- <td style="width: 150px" th:text="${charge.cim_account != null ? charge.merchant_bill_number.toUpperCase() : ''}"></td> -->
-								<td style="width: 150px"
-									th:text="${charge.cim_account_name != null ? charge.merchant_bill_number.toUpperCase() : ''}"></td>
+								<!-- <td style="width: 150px"
+									th:text="${charge.cim_account_name != null ? charge.merchant_bill_number.toUpperCase() : ''}"></td> -->
 								<!-- <td style="width: 150px" th:text="${charge.ipsx_account != null ? charge.ipsx_account.toUpperCase() : ''}"></td> -->
 								<td style="width: 150px"
 									th:text="${charge.ipsx_account_name != null ? charge.ipsx_account_name.toUpperCase() : ''}"></td>
