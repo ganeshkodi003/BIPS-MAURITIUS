@@ -10666,6 +10666,17 @@ $(document)
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													class="form-control form-control-sm commonBackground">
 											</div>
+											<div class="col-sm-1"></div>
+											<div class="col-sm-2">
+												<label for="remarks">Remarks</label>
+											</div>
+											<div class="col-sm-3">
+												<input type="text" id="remarks" name="remarks"
+													th:if="${formmode}=='MerMastadd'" maxlength="30"
+													autocomplete="off"
+													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+													class="form-control form-control-sm commonBackground">
+											</div>
 										</div>
 
 									</div>
@@ -16646,6 +16657,32 @@ $(document)
 										autocomplete="off"> <input type="text"
 										id="terminal_id" name="terminal_id"
 										th:value="${Merdevicelist.terminal_id}"
+										th:if="${formmode}=='DevicemVerify'"
+										class="form-control form-control-sm" autocomplete="off"
+										readonly>
+								</div>
+								<div class="col-sm-1"></div>
+								<div class="col-sm-2">
+									<label for="remarks">Remarks</label>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" id="remarks" name="remarks"
+										th:if="${formmode}=='DevicemAdd'" autocomplete="off"
+										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+										class="form-control form-control-sm" required> <input
+										type="text" id="remarks" name="remarks"
+										th:value="${Merdevicelist.remarks}"
+										th:if="${formmode}=='MerMastvie'"
+										class="form-control form-control-sm" maxlength="30"
+										autocomplete="off" readonly> <input type="text"
+										id="remarks" name="remarks"
+										th:value="${Merdevicelist.remarks}"
+										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+										th:if="${formmode}=='DevicemEdit'"
+										class="form-control form-control-sm" maxlength="30"
+										autocomplete="off"> <input type="text"
+										id="remarks" name="remarks"
+										th:value="${Merdevicelist.remarks}"
 										th:if="${formmode}=='DevicemVerify'"
 										class="form-control form-control-sm" autocomplete="off"
 										readonly>
