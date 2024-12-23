@@ -1966,7 +1966,7 @@ public class BankAndBranchMasterServices {
 
 							HashMap<Integer, String> map = new HashMap<>();
 
-							for (int j = 0; j < 100; j++) {
+							for (int j = 0; j < 200; j++) {
 
 								Cell cell = r.getCell(j);
 								DataFormatter formatter = new DataFormatter();
@@ -2349,7 +2349,7 @@ public class BankAndBranchMasterServices {
 
 					if (unit_brn_date != null && !unit_brn_date.isEmpty()) {
 					    try {
-					    	date_value1 = dateFormat.parse(unit_brn_date);
+					    	date_value2 = dateFormat.parse(unit_brn_date);
 					    } catch (ParseException e) {
 					        e.printStackTrace();
 					    }
@@ -2412,8 +2412,122 @@ public class BankAndBranchMasterServices {
 					UN.setCp1_countrycode(countrycode_pers_1);
 					UN.setEmail_id(email_id1);
 					//UN.setContact_person1_mobile(mob_no1);
+					UN.setDel_flg("N");
 					
 					bIPS_UnitManagement_Repo.save(UN);
+					
+					BIPS_Mer_User_Management_Entity US = new BIPS_Mer_User_Management_Entity(); 
+					
+					String user_ids = item.get(92);
+					System.out.println("user_ids: " + user_ids); 
+					
+					String user_name = item.get(93);
+					System.out.println("user_name: " + user_name); 
+					
+					String user_designation = item.get(94);
+					System.out.println("user_designation: " + user_designation); 
+					
+					String user_role = item.get(95);
+					System.out.println("user_role: " + user_role); 
+					
+					String pass_exp_date = item.get(96);
+					System.out.println("pass_exp_date: " + pass_exp_date);  
+					Date date_value3 = null;
+
+					if (pass_exp_date != null && !pass_exp_date.isEmpty()) {
+					    try {
+					    	date_value3 = dateFormat.parse(pass_exp_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value3: " + date_value3);
+					
+					String acct_exp_date = item.get(97);
+					System.out.println("acct_exp_date: " + acct_exp_date); 
+					Date date_value4 = null;
+
+					if (acct_exp_date != null && !acct_exp_date.isEmpty()) {
+					    try {
+					    	date_value4 = dateFormat.parse(acct_exp_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value4: " + date_value4);
+					
+					String user_status = item.get(98);
+					System.out.println("user_status: " + user_status); 
+					
+					String mob_countrycode = item.get(99);
+					System.out.println("mob_countrycode: " + mob_countrycode); 
+					
+					String mobile_no = item.get(100);
+					System.out.println("mobile_no: " + mobile_no); 
+					 
+					String email_id = item.get(101);
+					System.out.println("email_id: " + email_id); 
+					 
+					US.setMerchant_user_id(merchant_id);
+					US.setMerchant_name(merchant_name);
+					US.setUser_id(user_ids);
+					US.setUser_name(user_name);
+					US.setUser_designation(user_designation);
+					US.setUser_role(user_role);
+					US.setPassword_expiry_date1(date_value3);
+					US.setAccount_expiry_date1(date_value4);
+					US.setUser_status1(user_status);
+					US.setCountrycode(mob_countrycode);
+					US.setMobile_no1(mobile_no);
+					US.setEmail_address1(email_id);
+					US.setDel_flag1("N");
+					US.setUnit_id_u(unit_id);
+					US.setUnit_name_u(unit_name);
+					
+					bIPS_MerUserManagement_Repo.save(US);
+					
+					BIPS_Mer_Device_Management_Entity DV = new BIPS_Mer_Device_Management_Entity(); 
+					
+					String device_id = item.get(102);
+					System.out.println("device_id: " + device_id);
+					
+					String device_name = item.get(103);
+					System.out.println("device_name: " + device_name); 
+					
+					String device_identification = item.get(104);
+					System.out.println("device_identification: " + device_identification); 
+					
+					String device_modal = item.get(105);
+					System.out.println("device_modal: " + device_modal); 
+					
+					String device_location = item.get(106);
+					System.out.println("device_location: " + device_location); 
+					
+					String device_status = item.get(107);
+					System.out.println("device_status: " + device_status); 
+					
+					String terminal_id = item.get(108);
+					System.out.println("terminal_id: " + terminal_id); 
+					
+					DV.setMerchant_user_id(merchant_id);
+					DV.setMerchant_name(merchant_name);
+					DV.setDevice_id(device_id);
+					DV.setDevice_name(device_name);
+					DV.setDevice_identification_no(device_identification);
+					DV.setDevice_model(device_modal);
+					DV.setLocation(device_location);
+					DV.setDevice_status(device_status);
+					DV.setTerminal_id(terminal_id);
+					DV.setDel_flg("N");
+					DV.setUnit_id_d(unit_id);
+					DV.setUnit_name_d(unit_name);
+					
+					BIPS_MerDeviceManagement_Repo.save(DV);
+					
 
 
 					msg = "Excel Data Uploaded Successfully";
