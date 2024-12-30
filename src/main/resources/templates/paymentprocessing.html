@@ -1,19 +1,39 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="summary">
+<!--
+    VERSION : 01
+	CREATED BY : RIYAS
+	DATE : 	
+-->
+<!--
+    VERSION    : 02
+	UPDATED BY : UPDATE A BACKEND FUNCTIONALITIES AND LITERALS CHANGE
+	DATE       : 30-12-2024
+-->
 <head>
 <title>IPSAdmin</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
 
-<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script src="/webjars/popper.js/1.14.7/umd/popper.min.js" th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js" th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js" th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
 
 <style>
@@ -100,7 +120,8 @@ td {
 	padding-left: 10px;
 }
 
-.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
+.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder
+	{
 	color: black;
 	font-style: italic;
 }
@@ -200,34 +221,33 @@ label {
 <body>
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager">
-				<div class="card">
+		<div class="card">
 
 			<div class="card-header p-1  d-flex " id="modheadtitle"
-				style=" font-size: 1.2rem;">
-				<b style="width:40%; padding: 0; display: flex; align-items: center;">Payment Processing</b>
-				
-				<div
-				style=" width:60%;  "
-				class="row formline d-flex" id="tabs">
-				
-				<div>
-					<button class="tablinks btn btn-xs headerbutton" id="smooth1View"
-						
-						onclick="changeColorView(this, 'settlementForm')">Settlement
-						Transaction</button>
+				style="font-size: 1.2rem;">
+				<b
+					style="width: 40%; padding: 0; display: flex; align-items: center;">Payment
+					Processing</b>
+
+				<div style="width: 60%;" class="row formline d-flex" id="tabs">
+
+					<div>
+						<button class="tablinks btn btn-xs headerbutton" id="smooth1View"
+							onclick="changeColorView(this, 'settlementForm')">Settlement
+							Transaction</button>
+					</div>
+
+					<div style="margin-left: 20px;">
+						<button class="tablinks btn btn-xs headerbutton" id="smooth2View"
+							onclick="changeColorView(this, 'feesForm')">Fees and
+							Charges</button>
+					</div>
 				</div>
-				
-				<div style="margin-left: 20px;">
-					<button class="tablinks btn btn-xs headerbutton" id="smooth2View"
-						onclick="changeColorView(this, 'feesForm')"
-						>Fees and Charges</button>
-				</div>
-			</div>
 			</div>
 			<label></label>
 			<div class="row formline mt-1 p-2">
 
-				
+
 
 				<div class="col-sm-1">
 					<label for="merchandId">Merchant ID</label><span
@@ -257,12 +277,12 @@ label {
 
 
 			</div>
-			
+
 
 
 			<div id="settlementForm" class="p-2 " style="display: none;">
 				<div class="row formline mt-2">
-					
+
 
 					<div class="col-sm-1">
 						<label for="bank">Bank</label><span
@@ -272,7 +292,7 @@ label {
 						<input type="text" id="bank" class="form-control" name="bank"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="accountNumber">Account No.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -282,7 +302,7 @@ label {
 							name="accountNumber" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="accountType">Account Type</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -295,21 +315,34 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					
+
 
 					<div class="col-sm-1">
 						<label for="frequency">Frequency</label><span
 							style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="frequency" class="form-control"
-							name="frequency" style="color: black; font-size: 0.820rem;"
+						<select name="frequency" id="type" style="width: 100%"
+							class="form-control form-control-sm" required>
+							<option value="">SELECT</option>
+							<option value="MONTHLY">MONTHLY</option>
+							<option value="WEEKLY">WEEKLY</option>
+						</select>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-1">
+						<label for="accountBalance">Account Name</label><span
+							style="color: red; font-size: 20px;"> *</span>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" id="acct_name" class="form-control"
+							name="acct_name" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="lastSettlementDate" title="Last Settlement Date">Last Stle Dt.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="lastSettlementDate" title="Last Settlement Date">Last
+							Settl. Dt.</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="lastSettlementDate" class="form-control"
@@ -319,7 +352,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					
+
 
 					<div class="col-sm-1">
 						<label for="date">Date</label><span
@@ -329,7 +362,7 @@ label {
 						<input type="text" id="date" class="form-control" name="date"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="accountBalance">Account Bal.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -339,10 +372,10 @@ label {
 							name="accountBalance" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="balanceIndicator" title="Balance Indicator">Balance Ind.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="balanceIndicator" title="Balance Indicator">Balance
+							Ind.</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="balanceIndicator" class="form-control"
@@ -352,7 +385,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-					
+
 
 					<div class="col-sm-1">
 						<label for="tranDate">Tran Date</label><span
@@ -363,7 +396,7 @@ label {
 							name="tranDate" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="tranAmount">Tran Amount</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -373,7 +406,7 @@ label {
 							name="tranAmount" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="tranReference">Tran Reference</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -389,7 +422,7 @@ label {
 
 			<div id="feesForm" style="display: none; padding: 1em;">
 				<div class="row formline mt-2">
-					
+
 
 					<div class="col-sm-1">
 						<label for="bank">Bank</label><span
@@ -399,7 +432,7 @@ label {
 						<input type="text" id="bank" class="form-control" name="bank"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="account-number">Account No.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -409,7 +442,7 @@ label {
 							name="accountNumber" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="account-type">Account Type</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -420,9 +453,43 @@ label {
 							autocomplete="off" />
 					</div>
 				</div>
+				<div class="row formline mt-2">
+					<div class="col-sm-1">
+						<label for="frequency">Frequency</label><span
+							style="color: red; font-size: 20px;"> *</span>
+					</div>
+					<div class="col-sm-2">
+						<select name="frequency" id="type" style="width: 100%"
+							class="form-control form-control-sm" required>
+							<option value="">SELECT</option>
+							<option value="MONTHLY">MONTHLY</option>
+							<option value="WEEKLY">WEEKLY</option>
+						</select>
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-1">
+						<label for="accountBalance">Account Name</label><span
+							style="color: red; font-size: 20px;"> *</span>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" id="acct_name" class="form-control"
+							name="acct_name" style="color: black; font-size: 0.820rem;"
+							autocomplete="off" />
+					</div>
+					<div class="col-sm-1"></div>
+					<div class="col-sm-1">
+						<label for="lastSettlementDate" title="Last Settlement Date">Last
+							Settl. Dt.</label><span style="color: red; font-size: 20px;"> *</span>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" id="lastSettlementDate" class="form-control"
+							name="lastSettlementDate"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
+					</div>
+				</div>
 
 				<div class="row formline mt-2">
-					
+
 
 					<div class="col-sm-1">
 						<label for="charge-type">Charge Type</label><span
@@ -433,17 +500,17 @@ label {
 							name="chargeType" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="charge-description" title="Charge Description">Charge Des.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="charge-description" title="Charge Description">Charge
+							Des.</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="charge-description" class="form-control"
 							name="chargeDescription"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="charge-details">Charge Details</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -455,32 +522,10 @@ label {
 					</div>
 				</div>
 
-				<div class="row formline mt-2">
-					
 
-					<div class="col-sm-1">
-						<label for="frequency">Frequency</label><span
-							style="color: red; font-size: 20px;"> *</span>
-					</div>
-					<div class="col-sm-2">
-						<input type="text" id="frequency" class="form-control"
-							name="frequency" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
-					</div>
-<div class="col-sm-1"></div>
-					<div class="col-sm-1">
-						<label for="last-tran-date">Last Tran Date</label><span
-							style="color: red; font-size: 20px;"> *</span>
-					</div>
-					<div class="col-sm-2">
-						<input type="text" id="last-tran-date" class="form-control"
-							name="lastTranDate" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
-					</div>
-				</div>
 
 				<div class="row formline mt-2">
-				
+
 
 					<div class="col-sm-1">
 						<label for="date">Date</label><span
@@ -489,7 +534,8 @@ label {
 					<div class="col-sm-2">
 						<input type="text" id="date" class="form-control" name="date"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
-					</div><div class="col-sm-1"></div>
+					</div>
+					<div class="col-sm-1"></div>
 
 					<div class="col-sm-1">
 						<label for="account-balance">Account Bal.</label><span
@@ -500,7 +546,7 @@ label {
 							name="accountBalance" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="balance-indicator">Balance Ind.</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -513,7 +559,7 @@ label {
 				</div>
 
 				<div class="row formline mt-2">
-				
+
 
 					<div class="col-sm-1">
 						<label for="tran-date">Tran Date</label><span
@@ -524,17 +570,17 @@ label {
 							name="tranDate" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="fee-charge-amount" title="Fee/Charge Amount">Fee/Char Amt</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="fee-charge-amount" title="Fee/Charge Amount">Fee/Char
+							Amt</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="fee-charge-amount" class="form-control"
 							name="feeChargeAmount" style="color: black; font-size: 0.820rem;"
 							autocomplete="off" />
 					</div>
-<div class="col-sm-1"></div>
+					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
 						<label for="tran-reference">Tran Reference</label><span
 							style="color: red; font-size: 20px;"> *</span>
@@ -560,10 +606,10 @@ label {
 			</div>
 
 		</div>
-</div>
+	</div>
 
 
-</div>
+	</div>
 </body>
 
 </html>

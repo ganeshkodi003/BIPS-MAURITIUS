@@ -445,12 +445,20 @@ public class IPSAccessRoleService {
 
 	public List<IPSAccessRole> rulelist() {
 		List<IPSAccessRole> list = accessandrolesrepository.finsAllData();
+		for (IPSAccessRole a : list) {
+			String  menu=	a.getMenulist();
+			String caps=	menu.replaceAll("([a-z])([A-Z])", "$1 $2");
+			a.setMenulist(caps);
+		
+		}
+		
 		return list;
 	}
 
 	public IPSAccessRoleModTable getModifyData(String roleID) {
 		Optional<IPSAccessRoleModTable> list = ipsAccessRoleMosRep.findById(roleID);
 		if (list.isPresent()) {
+			
 			return list.get();
 		}
 		return null;

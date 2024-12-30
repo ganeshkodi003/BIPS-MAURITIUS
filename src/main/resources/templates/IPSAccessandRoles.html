@@ -682,11 +682,14 @@ label {
 								th:attr="data-userid=${AccessRole?.role_id}"
 								th:id="${AccessRole?.role_id}" class="userlist">
 								<td th:text="${AccessRole?.role_id.toUpperCase()}"></td>
-								<td class="init-cap" th:text="${AccessRole?.role_desc.toUpperCase()}"></td>
+								<td class="init-cap"
+									th:text="${AccessRole?.role_desc.toUpperCase()}"></td>
 								<td>
-									<ul th:each="value : ${#strings.arraySplit(AccessRole?.menulist.toUpperCase(), ',')}">
-    <li th:if="${value != 'ServiceChargesFees'}" th:text="${value}" class="init-cap"></li>
-</ul>
+									<ul
+										th:each="value : ${#strings.arraySplit(AccessRole?.menulist, ',')}">
+										<li th:if="${value != 'ServiceChargesFees'}"
+											th:text="${value}" class="init-cap"></li>
+									</ul>
 								</td>
 								<th:block th:switch="${AccessRole?.work_class}">
 									<td th:case="'M'">MAKER</td>

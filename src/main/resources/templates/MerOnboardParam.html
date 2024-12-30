@@ -40,22 +40,22 @@
 <script src="js/Chart.js"></script>
 
 <style>
-.checkbox-group {
+.radio-group {
 	display: flex;
 	flex-direction: column;
-	/* Stack checkboxes in a vertical column */
+	/* Stack radioes in a vertical column */
 	gap: 15px;
-	/* Space between checkboxes */
+	/* Space between radioes */
 }
 
-.checkbox-label .label-text {
+.radio-label .label-text {
 	background-color: transparent;
 	/* Remove background color from label text */
 	color: black;
 	/* Optional: Set text color if needed */
 }
 
-.checkbox-label {
+.radio-label {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -63,7 +63,7 @@
 	/* Ensure it takes up full width */
 }
 
-.checkbox-label span {
+.radio-label span {
 	display: inline-block;
 	width: 20px;
 	/* Adjust the size of the circle */
@@ -78,21 +78,21 @@
 	line-height: 20px;
 	/* Centers the text vertically */
 	margin-left: 5px;
-	/* Space between the checkbox and the circle */
+	/* Space between the radio and the circle */
 }
 
 .aln {
 	text-align: center;
 }
 
-.checkbox-label input[type="checkbox"] {
+.radio-label input[type="radio"] {
 	margin-left: 10px;
-	/* Spacing between checkbox and label */
+	/* Spacing between radio and label */
 	width: 20px;
 	height: 20px;
 }
 
-.checkbox-label .serial {
+.radio-label .serial {
 	margin-left: 10px;
 }
 
@@ -101,7 +101,7 @@
 	/* Ensure the label text takes up the remaining space */
 }
 
-.checkbox-label span {
+.radio-label span {
 	margin-left: 10px;
 	display: inline-block;
 }
@@ -629,34 +629,33 @@ th, td {
 						<div class="col-sm-12 d-flex">
 							<div class="col-sm-4">
 
-								<label class="checkbox-label"> <span class="label-text"
-									id="label1">1. MERCHANT DETAILS</span> <input type="checkbox"
+								<label class="radio-label"> <span class="label-text"
+									id="label1">1. Merchant Details</span> <input type="radio"
 									value="" name="cpb.chlist2" id="chlist2" class="chl"
 									onclick="updateSerial(this, 'label1', 'sr1')"> <!-- Span for serial number -->
-								</label> <br> <label class="checkbox-label"> <span
-									class="label-text" id="label2">2. MERCHANT CONTACT
-										DETAILS</span> <input type="checkbox" value="" name="cpb.chlist3"
+								</label> <br> <label class="radio-label"> <span
+									class="label-text" id="label2">2. Merchant Contact Details</span> <input type="radio" value="" name="cpb.chlist3"
 									id="chlist3" class="chl"
 									onclick="updateSerial(this, 'label2', 'sr2')">
 
-								</label> <br> <label class="checkbox-label"> <span
-									class="label-text" id="label3">3. OUTLET DETAILS</span> <input
-									type="checkbox" value="" name="cpb.chlist4" id="chlist4"
+								</label> <br> <label class="radio-label"> <span
+									class="label-text" id="label3">3. Outlet Details</span> <input
+									type="radio" value="" name="cpb.chlist4" id="chlist4"
 									class="chl" onclick="updateSerial(this, 'label3', 'sr3')">
 
-								</label> <br> <label class="checkbox-label"> <span
+								</label> <br> <label class="radio-label"> <span
 									class="label-text" id="label4">4. MAUCAS</span> <input
-									type="checkbox" value="" name="cpb.chlist5" id="chlist5"
+									type="radio" value="" name="cpb.chlist5" id="chlist5"
 									class="chl" onclick="updateSerial(this, 'label4', 'sr4')">
 
-								</label><br> <label class="checkbox-label"> <span
+								</label><br> <label class="radio-label"> <span
 									class="label-text" id="label5">5. UPI</span> <input
-									type="checkbox" value="" name="cpb.chlist6" id="chlist6"
+									type="radio" value="" name="cpb.chlist6" id="chlist6"
 									class="chl" onclick="updateSerial(this, 'label5', 'sr5')">
 
-								</label><br> <label class="checkbox-label"> <span
-									class="label-text" id="label6">6. DOCUMENT DETAILS</span> <input
-									type="checkbox" value="" name="cpb.chlist7" id="chlist7"
+								</label><br> <label class="radio-label"> <span
+									class="label-text" id="label6">6. Document Details</span> <input
+									type="radio" value="" name="cpb.chlist7" id="chlist7"
 									class="chl" onclick="updateSerial(this, 'label6', 'sr6')">
 
 								</label><br>
@@ -665,35 +664,35 @@ th, td {
 							<div class="col-sm-3"></div>
 							<div class="col-sm-4">
 
-								<label class="checkbox-label"> <span class="label-text"
-									id="label7">7. SIGNATURE DETAILS</span> <input type="checkbox"
+								<label class="radio-label"> <span class="label-text"
+									id="label7">7. Signature Details</span> <input type="radio"
 									value="" name="cpb.chlist6" id="chlist6" class="chl"
 									onclick="updateSerial(this, 'label7', 'sr7')">
 
-								</label> <br> <label class="checkbox-label"> <span
-									class="label-text" id="label8">8. BANK DETAILS</span> <input
-									type="checkbox" value="" name="cpb.chlist7" id="chlist7"
+								</label> <br> <label class="radio-label"> <span
+									class="label-text" id="label8">8. Bank Details</span> <input
+									type="radio" value="" name="cpb.chlist7" id="chlist7"
 									class="chl" onclick="updateSerial(this, 'label8', 'sr8')">
 
-								</label> <br> <label class="checkbox-label"> <span
-									class="label-text" id="label9">9. FEES DETAILS </span> <input
-									type="checkbox" value="" name="cpb.chlist8" id="chlist8"
+								</label> <br> <label class="radio-label"> <span
+									class="label-text" id="label9">9. Fees Details </span> <input
+									type="radio" value="" name="cpb.chlist8" id="chlist8"
 									class="chl" onclick="updateSerial(this, 'label9', 'sr9')">
-								</label><br> <label class="checkbox-label"> <span
-									class="label-text" id="label1">10. UNIT MANAGEMENT</span> <input
-									type="checkbox" value="" name="cpb.chlist2" id="chlist2"
+								</label><br> <label class="radio-label"> <span
+									class="label-text" id="label1">10. Unit Management</span> <input
+									type="radio" value="" name="cpb.chlist2" id="chlist2"
 									class="chl" onclick="updateSerial(this, 'label1', 'sr1')">
 
 									<!-- Span for serial number -->
-								</label> <br> <label class="checkbox-label"> <span
-									class="label-text" id="label1">11. USER MANAGEMENT</span> <input
-									type="checkbox" value="" name="cpb.chlist2" id="chlist2"
+								</label> <br> <label class="radio-label"> <span
+									class="label-text" id="label1">11. User Management</span> <input
+									type="radio" value="" name="cpb.chlist2" id="chlist2"
 									class="chl" onclick="updateSerial(this, 'label1', 'sr1')">
 
 									<!-- Span for serial number -->
-								</label> <br> <label class="checkbox-label"> <span
-									class="label-text" id="label1">12. DEVICE MANAGEMENT</span> <input
-									type="checkbox" value="" name="cpb.chlist2" id="chlist2"
+								</label> <br> <label class="radio-label"> <span
+									class="label-text" id="label1">12. Device Management</span> <input
+									type="radio" value="" name="cpb.chlist2" id="chlist2"
 									class="chl" onclick="updateSerial(this, 'label1', 'sr1')">
 
 									<!-- Span for serial number -->
@@ -709,7 +708,7 @@ th, td {
 							</div>
 						</div>
 						<div class="mt-1 mb-0">
-							<table class="table bordered"
+							<table class="table table-bordered"
 								style="width: 100%; border-color: 10px solid black;">
 								<thead style="font-size: 13px; font-weight: 700;">
 									<tr>
@@ -719,108 +718,98 @@ th, td {
 									</tr>
 								</thead>
 								<tbody>
-									<!-- <tr>
-										<td><select id="docType1" name="docType"
-											onchange="first_change(this)"
-											class="form-control form-control-sm"
-											style="height: 24px; width: 200px; white-space: nowrap; overflow: hidden; margin-top: 0px">
-												<option value="">SELECT</option>
-												<option value="RDOC">REGISTRATION DOCUMENT</option>
-												<option value="BDOC">BUSINESS DOCUMENT</option>
-										</select></td>
-										<td><select id="docCode1" name="docCode1"
-											onchange="updateDescription(this)"
-											class="form-control form-control-sm"
-											style="height: 26px; width: 150px;">
-												<option value="">SELECT</option>
-										</select></td>
-										<td><input type="text" id="docDesc1" name="docDesc"
-											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 150px"
-											readonly></td>
-										<td><input type="text" id="uniqId1" name="uniqId"
-											onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 150px">
-										</td>
-										<td><input type="text" id="docIssPlace1"
-											name="docIssPlace"
-											onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 150px">
-										</td>
-										<td><input type="date" id="docIssDate1" name="docIssDate"
-											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 150px">
-										</td>
-										<td><input type="date" id="docExpDate1" name="docExpDate"
-											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 150px">
-										</td>
-										<td><input type="file" id="file1"
-											onchange="readURL(this);"></td>
-									</tr> -->
+
 									<tr>
 										<td><select id="docType1" name="docType"
-											onchange="first_change(this)"
+											onchange="On_change1(this)"
 											class="form-control form-control-sm"
-											style="height: 24px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+											style="height: 30px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
 												<option value="">SELECT</option>
-												<option value="RDOC">REGISTRATION DOCUMENT</option>
-												<option value="BDOC">BUSINESS DOCUMENT</option>
+												<option value="RDANR">REGISTRATION DOCUMENT - ANR -
+													Annual Return</option>
+												<option value="RDBUS">REGISTRATION DOCUMENT - BUS -
+													Business Plan</option>
+												<option value="RDRNA">REGISTRATION DOCUMENT - RNA -
+													Rental Agreement</option>
+												<option value="RDUTB">REGISTRATION DOCUMENT - UTB -
+													Utility Bill</option>
+												<option value="BDBRN">BUSINESS DOCUMENT - BRN -
+													Business Registration Certificate</option>
+												<option value="BDTAX">BUSINESS DOCUMENT - TAX - Tax
+													Certificate</option>
+												<option value="BDTRL">BUSINESS DOCUMENT - TRL -
+													Trade License</option>
+
+
 										</select></td>
-										<td><select id="docCode1" name="docCode1"
-											onchange="updateDescription(this)"
-											class="form-control form-control-sm"
-											style="height: 26px; width: 500px;">
-												<option value="">SELECT</option>
-										</select></td>
+										<td><input type="text" id="docabbr1" name="docabbr1"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 400px"readonly ></td>
 										<td><input type="text" id="docDesc1" name="docDesc"
 											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 400px"></td>
+											autocomplete="off" style="height: 23px; width: 400px" readonly></td>
 									</tr>
 
 									<tr>
 										<td><select id="docType2" name="docType"
-											onchange="first_change2(this)"
+											onchange="On_change2(this)"
 											class="form-control form-control-sm"
-											style="height: 24px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+											style="height: 30px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
 												<option value="">SELECT</option>
-												<option value="RDOC">REGISTRATION DOCUMENT</option>
-												<option value="BDOC">BUSINESS DOCUMENT</option>
+												<option value="RDANR">REGISTRATION DOCUMENT - ANR -
+													Annual Return</option>
+												<option value="RDBUS">REGISTRATION DOCUMENT - BUS -
+													Business Plan</option>
+												<option value="RDRNA">REGISTRATION DOCUMENT - RNA -
+													Rental Agreement</option>
+												<option value="RDUTB">REGISTRATION DOCUMENT - UTB -
+													Utility Bill</option>
+												<option value="BDBRN">BUSINESS DOCUMENT - BRN -
+													Business Registration Certificate</option>
+												<option value="BDTAX">BUSINESS DOCUMENT - TAX - Tax
+													Certificate</option>
+												<option value="BDTRL">BUSINESS DOCUMENT - TRL -
+													Trade License</option>
+
 										</select></td>
-										<td><select id="docCode2" name="docCode2"
-											onchange="updateDescription2(this)"
-											class="form-control form-control-sm"
-											style="height: 26px; width: 500px;">
-												<option value="">SELECT</option>
-										</select></td>
+										<td><input type="text" id="docabbr2" name="docabbr2"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 400px" readonly></td>
 										<td><input type="text" id="docDesc2" name="docDesc"
 											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 400px">
+											autocomplete="off" style="height: 23px; width: 400px"readonly>
 										</td>
 									</tr>
 
 									<tr>
 										<td><select id="docType3" name="docType"
-											onchange="first_change3(this)"
+											onchange="On_change3(this)"
 											class="form-control form-control-sm"
-											style="height: 24px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+											style="height: 30px; width: 500px; white-space: nowrap; overflow: hidden; margin-top: 0px">
 												<option value="">SELECT</option>
-												<option value="RDOC">REGISTRATION DOCUMENT</option>
-												<option value="BDOC">BUSINESS DOCUMENT</option>
+												<option value="RDANR">REGISTRATION DOCUMENT - ANR -
+													Annual Return</option>
+												<option value="RDBUS">REGISTRATION DOCUMENT - BUS -
+													Business Plan</option>
+												<option value="RDRNA">REGISTRATION DOCUMENT - RNA -
+													Rental Agreement</option>
+												<option value="RDUTB">REGISTRATION DOCUMENT - UTB -
+													Utility Bill</option>
+												<option value="BDBRN">BUSINESS DOCUMENT - BRN -
+													Business Registration Certificate</option>
+												<option value="BDTAX">BUSINESS DOCUMENT - TAX - Tax
+													Certificate</option>
+												<option value="BDTRL">BUSINESS DOCUMENT - TRL -
+													Trade License</option>
 										</select></td>
-										<td><select id="docCode3" name="docCode3"
-											onchange="updateDescription3(this)"
-											class="form-control form-control-sm"
-											style="height: 26px; width: 500px;">
-												<option value="">SELECT</option>
-										</select></td>
+										<td><input type="text" id="docabbr3" name="docabbr3"
+											class="form-control col-sm-12 uniform-input"
+											autocomplete="off" style="height: 23px; width: 400px" readonly /></td>
 										<td><input type="text" id="docDesc3" name="docDes3"
 											class="form-control col-sm-12 uniform-input"
-											autocomplete="off" style="height: 23px; width: 400px"></td>
+											autocomplete="off" style="height: 23px; width: 400px" readonly ></td>
 									</tr>
-								
+
 								</tbody>
 							</table>
 						</div>
@@ -858,255 +847,69 @@ th, td {
 	</div>
 
 
-	</div>
 </body>
 
 <script>
-function first_change(selectElement) {
-    const docCodeSelect = document.getElementById('docCode1');
-    const docDescInput = document.getElementById('docDesc1');
-    docCodeSelect.innerHTML = ''; // Clear existing options
-    docDescInput.value = ''; // Clear the Doc Description field
-
-    let options = [];
-    if (selectElement.value === 'RDOC') {
-        options = [
-            { code: 'BRN', description: 'Business Registration Certificate' },
-            { code: 'TAX', description: 'Tax Certificate' },
-            { code: 'TRL', description: 'Trade License' }
-        ];
-    } else if (selectElement.value === 'BDOC') {
-        options = [
-            { code: 'ANR', description: 'Annual Return' },
-            { code: 'BUS', description: 'Business Plan' },
-            { code: 'RNA', description: 'Rental Agreement' },
-            { code: 'UTB', description: 'Utility Bill' }
-        ];
+function On_change1(selectElement) {
+	   const docCodeSelect = document.getElementById('docabbr1');
+       const docDescInput = document.getElementById('docDesc1');
+	
+    const selectedOption = selectElement.options[selectElement.selectedIndex];
+    const selectedValue = selectedOption.value;
+    if (selectedValue) {
+        const parts = selectedOption.text.split(' - ');
+        const abbr = parts[1] || '';
+        const desc = parts[2] || '';
+     
+        docCodeSelect.value = abbr;
+        docDescInput.value = desc;
+    } else {
+        docCodeSelect.value = '';
+        docDescInput.value = '';
     }
 
-    // Populate Document Code select
-    if (options.length > 0) {
-        options.forEach((item, index) => {
-            const option = document.createElement('option');
-            option.value = item.code;
-            option.textContent = item.code;
 
-            // Set the first option as selected
-            if (index === 0) {
-                option.selected = true;
-                docDescInput.value = item.description; // Set the Doc Description for the first option
-            }
-
-            docCodeSelect.appendChild(option);
-        });
-
-        // Attach the onchange listener to update the description
-        docCodeSelect.onchange = function () {
-            updateDescription(docCodeSelect);
-        };
-    }
 }
-
-function updateDescription(selectElement) {
-    const docDescInput = document.getElementById('docDesc1');
-    const docTypeSelect = document.getElementById('docType1');
-
-    let options = [];
-    if (docTypeSelect.value === 'RDOC') {
-        options = [
-            { code: 'BRN', description: 'Business Registration Certificate' },
-            { code: 'TAX', description: 'Tax Certificate' },
-            { code: 'TRL', description: 'Trade License' }
-        ];
-    } else if (docTypeSelect.value === 'BDOC') {
-        options = [
-            { code: 'ANR', description: 'Annual Return' },
-            { code: 'BUS', description: 'Business Plan' },
-            { code: 'RNA', description: 'Rental Agreement' },
-            { code: 'UTB', description: 'Utility Bill' }
-        ];
-    }
-
-    // Update the description based on the selected Document Code
-    const selectedCode = selectElement.value;
-    const selectedOption = options.find((item) => item.code === selectedCode);
-    docDescInput.value = selectedOption ? selectedOption.description : '';
-}
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            console.log('File successfully loaded: ', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-function first_change2(selectElement) {
-    const docCodeSelect = document.getElementById('docCode2');
+function On_change2(selectElement) {
+	   const docCodeSelect = document.getElementById('docabbr2');
     const docDescInput = document.getElementById('docDesc2');
-    docCodeSelect.innerHTML = ''; // Clear existing options
-    docDescInput.value = ''; // Clear the Doc Description field
+	
+ const selectedOption = selectElement.options[selectElement.selectedIndex];
+ const selectedValue = selectedOption.value;
+ if (selectedValue) {
+     const parts = selectedOption.text.split(' - ');
+     const abbr = parts[1] || '';
+     const desc = parts[2] || '';
+  
+     docCodeSelect.value = abbr;
+     docDescInput.value = desc;
+ } else {
+     docCodeSelect.value = '';
+     docDescInput.value = '';
+ }
 
-    let options = [];
-    if (selectElement.value === 'RDOC') {
-        options = [
-            { code: 'BRN', description: 'Business Registration Certificate' },
-            { code: 'TAX', description: 'Tax Certificate' },
-            { code: 'TRL', description: 'Trade License' }
-        ];
-    } else if (selectElement.value === 'BDOC') {
-        options = [
-            { code: 'ANR', description: 'Annual Return' },
-            { code: 'BUS', description: 'Business Plan' },
-            { code: 'RNA', description: 'Rental Agreement' },
-            { code: 'UTB', description: 'Utility Bill' }
-        ];
-    }
 
-    // Populate Document Code dropdown
-    if (options.length > 0) {
-        options.forEach((item, index) => {
-            const option = document.createElement('option');
-            option.value = item.code;
-            option.textContent = item.code;
-
-            // Set the first option as selected
-            if (index === 0) {
-                option.selected = true;
-                docDescInput.value = item.description; // Set description for the first option
-            }
-
-            docCodeSelect.appendChild(option);
-        });
-
-        // Attach the onchange listener to update the description
-        docCodeSelect.onchange = function () {
-            updateDescription2(docCodeSelect);
-        };
-    }
 }
-
-function updateDescription2(selectElement) {
-    const docDescInput = document.getElementById('docDesc2');
-    const docTypeSelect = document.getElementById('docType2');
-
-    let options = [];
-    if (docTypeSelect.value === 'RDOC') {
-        options = [
-            { code: 'BRN', description: 'Business Registration Certificate' },
-            { code: 'TAX', description: 'Tax Certificate' },
-            { code: 'TRL', description: 'Trade License' }
-        ];
-    } else if (docTypeSelect.value === 'BDOC') {
-        options = [
-            { code: 'ANR', description: 'Annual Return' },
-            { code: 'BUS', description: 'Business Plan' },
-            { code: 'RNA', description: 'Rental Agreement' },
-            { code: 'UTB', description: 'Utility Bill' }
-        ];
-    }
-
-    // Update the description based on the selected Document Code
-    const selectedCode = selectElement.value;
-    const selectedOption = options.find((item) => item.code === selectedCode);
-    docDescInput.value = selectedOption ? selectedOption.description : '';
-}
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            console.log('File successfully loaded: ', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-
-
-
-function first_change3(selectElement) {
-    const docCodeSelect = document.getElementById('docCode3');
+function On_change3(selectElement) {
+	   const docCodeSelect = document.getElementById('docabbr3');
     const docDescInput = document.getElementById('docDesc3');
-    docCodeSelect.innerHTML = ''; // Clear existing options
-    docDescInput.value = ''; // Clear the Doc Description field
+	
+ const selectedOption = selectElement.options[selectElement.selectedIndex];
+ const selectedValue = selectedOption.value;
+ if (selectedValue) {
+     const parts = selectedOption.text.split(' - ');
+     const abbr = parts[1] || '';
+     const desc = parts[2] || '';
+  
+     docCodeSelect.value = abbr;
+     docDescInput.value = desc;
+ } else {
+     docCodeSelect.value = '';
+     docDescInput.value = '';
+ }
 
-    let options = [];
-    if (selectElement.value === 'RDOC') {
-        options = [
-            { code: 'BRN', description: 'Business Registration Certificate' },
-            { code: 'TAX', description: 'Tax Certificate' },
-            { code: 'TRL', description: 'Trade License' }
-        ];
-    } else if (selectElement.value === 'BDOC') {
-        options = [
-            { code: 'ANR', description: 'Annual Return' },
-            { code: 'BUS', description: 'Business Plan' },
-            { code: 'RNA', description: 'Rental Agreement' },
-            { code: 'UTB', description: 'Utility Bill' }
-        ];
-    }
 
-    // Populate Document Code select
-    if (options.length > 0) {
-        options.forEach((item, index) => {
-            const option = document.createElement('option');
-            option.value = item.code;
-            option.textContent = item.code;
-
-            // Set the first option as selected
-            if (index === 0) {
-                option.selected = true;
-                docDescInput.value = item.description; // Set the Doc Description for the first option
-            }
-
-            docCodeSelect.appendChild(option);
-        });
-
-        // Attach the onchange listener to update the description
-        docCodeSelect.onchange = function () {
-            updateDescription3(docCodeSelect);
-        };
-    }
 }
-
-function updateDescription3(selectElement) {
-    const docDescInput = document.getElementById('docDesc3');
-    const docTypeSelect = document.getElementById('docType3');
-
-    let options = [];
-    if (docTypeSelect.value === 'RDOC') {
-        options = [
-            { code: 'BRN', description: 'Business Registration Certificate' },
-            { code: 'TAX', description: 'Tax Certificate' },
-            { code: 'TRL', description: 'Trade License' }
-        ];
-    } else if (docTypeSelect.value === 'BDOC') {
-        options = [
-            { code: 'ANR', description: 'Annual Return' },
-            { code: 'BUS', description: 'Business Plan' },
-            { code: 'RNA', description: 'Rental Agreement' },
-            { code: 'UTB', description: 'Utility Bill' }
-        ];
-    }
-
-    // Update the description based on the selected Document Code
-    const selectedCode = selectElement.value;
-    const selectedOption = options.find((item) => item.code === selectedCode);
-    docDescInput.value = selectedOption ? selectedOption.description : '';
-}
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            console.log('File successfully loaded: ', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
 </script>
 
 </html>
