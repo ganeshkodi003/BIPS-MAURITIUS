@@ -2555,5 +2555,433 @@ public class BankAndBranchMasterServices {
 		}
 		return isEmpty;
 	}
+	
+	public String Uploadunit(String screenId, MultipartFile file, String userid,String merchant_id,String merchant_name,
+			MerchantMasterMod MerchantMasterMod)
+			throws SQLException, FileNotFoundException, IOException, NullPointerException {
+		System.out.println("Entering third Service Succesfully of GST EXCEL UPLOAD");
+		System.out.println("MerIdusing " + merchant_id);
+		System.out.println("MerNameusing " + merchant_name);
+
+		String fileName = file.getOriginalFilename();
+
+		String fileExt = "";
+		String msg = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+			fileExt = fileName.substring(i + 1);
+		}
+
+		if (fileExt.equals("xlsx") || fileExt.equals("xls")) {
+
+			try {	
+				Workbook workbook = WorkbookFactory.create(file.getInputStream());
+
+				List<HashMap<Integer, String>> mapList = new ArrayList<HashMap<Integer, String>>();
+				for (Sheet s : workbook) {
+					for (Row r : s) {
+
+						if (!isRowEmpty(r)) {
+							if (r.getRowNum() == 0) {
+								continue;
+							}
+
+							HashMap<Integer, String> map = new HashMap<>();
+
+							for (int j = 0; j < 200; j++) {
+
+								Cell cell = r.getCell(j);
+								DataFormatter formatter = new DataFormatter();
+								String text = formatter.formatCellValue(cell);
+								map.put(j, text);
+							}
+							mapList.add(map);
+
+						}
+
+					}
+
+				}
+
+				for (HashMap<Integer, String> item : mapList) { 
+					
+					BIPS_Unit_Mangement_Entity UN = new BIPS_Unit_Mangement_Entity(); 
+					
+					String datePattern = "MM/dd/yy"; // Correct pattern for dates like "12/25/24"
+					SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
+					
+					String unit_id = item.get(0);
+					System.out.println("unit_id: " + unit_id);
+					
+					String unit_type = item.get(1);
+					System.out.println("unit_type: " + unit_type); 
+					
+					String unit_brn_no = item.get(2);
+					System.out.println("unit_brn_no: " + unit_brn_no); 
+					
+					String unit_brn_date = item.get(3);
+					System.out.println("brn_date: " + unit_brn_date);  
+					Date date_value2 = null;
+
+					if (unit_brn_date != null && !unit_brn_date.isEmpty()) {
+					    try {
+					    	date_value2 = dateFormat.parse(unit_brn_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value2: " + date_value2);
+					
+					String unit_name = item.get(4);
+					System.out.println("unit_name: " + unit_name);
+					
+					String unit_location = item.get(5);
+					System.out.println("unit_location: " + unit_location); 
+					
+					String unit_city = item.get(6);
+					System.out.println("unit_city: " + unit_city); 
+					
+					String unit_country = item.get(7);
+					System.out.println("unit_country: " + unit_country); 
+					
+					String unit_countrycode_phone_no = item.get(8);
+					System.out.println("unit_countrycode_phone_no: " + unit_countrycode_phone_no); 
+					
+					String unit_phone_no = item.get(9);
+					System.out.println("unit_phone_no: " + unit_phone_no); 
+					
+					String unit_head = item.get(10);
+					System.out.println("unit_head: " + unit_head); 
+					
+					String unit_designation = item.get(11);
+					System.out.println("unit_designation: " + unit_designation); 
+					
+					String contact_pers1 = item.get(12);
+					System.out.println("contact_pers1: " + contact_pers1); 
+					
+					String countrycode_pers_1 = item.get(13);
+					System.out.println("countrycode_pers_1: " + countrycode_pers_1);  
+					
+					BigDecimal mob_no1 = new BigDecimal(item.get(14));
+					System.out.println("mob_no1: " + mob_no1);
+					
+					String email_id1 = item.get(15);
+					System.out.println("email_id1: " + email_id1);  
+					
+					UN.setUnit_id(unit_id);
+					UN.setUnit_type(unit_type);
+					UN.setBrn_no(unit_brn_no);
+					UN.setMerchant_user_id(merchant_id);
+					UN.setMerchant_name(merchant_name);
+					UN.setBrn_date(date_value2);
+					UN.setUnit_name(unit_name);
+					UN.setLocation_detail(unit_location);
+					UN.setCity(unit_city);
+					UN.setCountry(unit_country);
+					UN.setPh_countrycode(unit_countrycode_phone_no);
+					UN.setPhone_no(unit_phone_no);
+					UN.setBranch_head(unit_head);
+					UN.setDesignation(unit_designation);
+					UN.setContact_person1_name(contact_pers1);
+					UN.setCp1_countrycode(countrycode_pers_1);
+					UN.setContact_person1_mobile(mob_no1);
+					UN.setContact_person1_email(email_id1);
+					
+					UN.setDel_flg("N");
+					UN.setEntry_flag("N");
+					UN.setModify_flag("N");
+					UN.setEntry_user(userid);
+					UN.setEntry_time(new Date());
+					UN.setModify_user(userid);
+					UN.setModify_time(new Date());
+					
+					bIPS_UnitManagement_Repo.save(UN);
+					msg = "Excel Data Uploaded Successfully";
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "File has not been successfully uploaded";
+			}
+		}
+		return msg;
+
+	}
+	
+	public String Uploaduser(String screenId, MultipartFile file, String userid, String merchant_id, String merchant_name,
+			MerchantMasterMod MerchantMasterMod)
+			throws SQLException, FileNotFoundException, IOException, NullPointerException {
+		System.out.println("Entering third Service Succesfully of GST EXCEL UPLOAD");
+
+		String fileName = file.getOriginalFilename();
+
+		String fileExt = "";
+		String msg = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+			fileExt = fileName.substring(i + 1);
+		}
+
+		if (fileExt.equals("xlsx") || fileExt.equals("xls")) {
+
+			try {	
+				Workbook workbook = WorkbookFactory.create(file.getInputStream());
+
+				List<HashMap<Integer, String>> mapList = new ArrayList<HashMap<Integer, String>>();
+				for (Sheet s : workbook) {
+					for (Row r : s) {
+
+						if (!isRowEmpty(r)) {
+							if (r.getRowNum() == 0) {
+								continue;
+							}
+
+							HashMap<Integer, String> map = new HashMap<>();
+
+							for (int j = 0; j < 200; j++) {
+
+								Cell cell = r.getCell(j);
+								DataFormatter formatter = new DataFormatter();
+								String text = formatter.formatCellValue(cell);
+								map.put(j, text);
+							}
+							mapList.add(map);
+
+						}
+
+					}
+
+				}
+
+				for (HashMap<Integer, String> item : mapList) {
+					String password = env.getProperty("user.password");
+					BIPS_Mer_User_Management_Entity US = new BIPS_Mer_User_Management_Entity(); 
+					String encryptedPassword = PasswordEncryption.getEncryptedPassword(password);
+					
+					String datePattern = "MM/dd/yy"; // Correct pattern for dates like "12/25/24"
+					SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
+					
+					String user_ids = item.get(0);
+					System.out.println("user_ids: " + user_ids); 
+					
+					String user_name = item.get(1);
+					System.out.println("user_name: " + user_name); 
+					
+					String user_designation = item.get(2);
+					System.out.println("user_designation: " + user_designation); 
+					
+					String user_role = item.get(3);
+					System.out.println("user_role: " + user_role); 
+					
+					String pass_exp_date = item.get(4);
+					System.out.println("pass_exp_date: " + pass_exp_date);  
+					Date date_value3 = null;
+
+					if (pass_exp_date != null && !pass_exp_date.isEmpty()) {
+					    try {
+					    	date_value3 = dateFormat.parse(pass_exp_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value3: " + date_value3);
+					
+					String acct_exp_date = item.get(5);
+					System.out.println("acct_exp_date: " + acct_exp_date); 
+					Date date_value4 = null;
+
+					if (acct_exp_date != null && !acct_exp_date.isEmpty()) {
+					    try {
+					    	date_value4 = dateFormat.parse(acct_exp_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value4: " + date_value4);
+					
+					String user_status = item.get(6);
+					System.out.println("user_status: " + user_status); 
+					
+					String mob_countrycode = item.get(7);
+					System.out.println("mob_countrycode: " + mob_countrycode); 
+					
+					String mobile_no = item.get(8);
+					System.out.println("mobile_no: " + mobile_no); 
+					 
+					String email_id = item.get(9);
+					System.out.println("email_id: " + email_id); 
+					
+					String unit_id = item.get(10);
+					System.out.println("unit_id: " + unit_id); 
+					 
+					String unit_name = item.get(11);
+					System.out.println("unit_name: " + unit_name); 
+
+					String makerorchecker = item.get(12);
+					System.out.println("makerorchecker: " + makerorchecker); 
+					 
+					US.setMerchant_user_id(merchant_id);
+					US.setMerchant_name(merchant_name);
+					US.setUser_id(user_ids);
+					US.setUser_name(user_name);
+					US.setUser_designation(user_designation);
+					US.setUser_role(user_role);
+					US.setPassword_expiry_date1(date_value3);
+					US.setAccount_expiry_date1(date_value4);
+					US.setUser_status1(user_status);
+					US.setCountrycode(mob_countrycode);
+					US.setMobile_no1(mobile_no);
+					US.setEmail_address1(email_id);
+					US.setUnit_id_u(unit_id);
+					US.setUnit_name_u(unit_name);
+					US.setMake_or_checker(makerorchecker);
+
+					US.setDel_flag1("N");
+					US.setEntry_user(userid);
+					US.setEntry_time(new Date());
+					US.setModify_user(userid);
+					US.setModify_time(new Date());
+					US.setLogin_status1("N");
+					US.setLogin_channel1("WEB");	
+					US.setEntry_flag("N");
+					US.setModify_flag("N");
+					US.setNo_of_attmp("0");
+					US.setUser_locked_flg("N");
+					US.setUser_category("USER");
+					US.setPassword_life1("180");
+					US.setPassword1(encryptedPassword);
+					US.setUser_disable_flag1("N");
+					
+					bIPS_MerUserManagement_Repo.save(US); 
+					msg = "Excel Data Uploaded Successfully";
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "File has not been successfully uploaded";
+			}
+		}
+		return msg;
+
+	}
+	
+	public String Uploaddevice(String screenId, MultipartFile file, String userid, String merchant_id, String merchant_name,
+			MerchantMasterMod MerchantMasterMod)
+			throws SQLException, FileNotFoundException, IOException, NullPointerException {
+		System.out.println("Entering third Service Succesfully of GST EXCEL UPLOAD");
+
+		String fileName = file.getOriginalFilename();
+
+		String fileExt = "";
+		String msg = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+			fileExt = fileName.substring(i + 1);
+		}
+
+		if (fileExt.equals("xlsx") || fileExt.equals("xls")) {
+
+			try {	
+				Workbook workbook = WorkbookFactory.create(file.getInputStream());
+
+				List<HashMap<Integer, String>> mapList = new ArrayList<HashMap<Integer, String>>();
+				for (Sheet s : workbook) {
+					for (Row r : s) {
+
+						if (!isRowEmpty(r)) {
+							if (r.getRowNum() == 0) {
+								continue;
+							}
+
+							HashMap<Integer, String> map = new HashMap<>();
+
+							for (int j = 0; j < 200; j++) {
+
+								Cell cell = r.getCell(j);
+								DataFormatter formatter = new DataFormatter();
+								String text = formatter.formatCellValue(cell);
+								map.put(j, text);
+							}
+							mapList.add(map);
+
+						}
+
+					}
+
+				}
+
+				for (HashMap<Integer, String> item : mapList) { 
+					
+					BIPS_Mer_Device_Management_Entity DV = new BIPS_Mer_Device_Management_Entity(); 
+					
+					String device_id = item.get(0);
+					System.out.println("device_id: " + device_id);
+					
+					String device_name = item.get(1);
+					System.out.println("device_name: " + device_name); 
+					
+					String device_identification = item.get(2);
+					System.out.println("device_identification: " + device_identification); 
+					
+					String device_modal = item.get(3);
+					System.out.println("device_modal: " + device_modal); 
+					
+					String device_location = item.get(4);
+					System.out.println("device_location: " + device_location); 
+					
+					String device_status = item.get(5);
+					System.out.println("device_status: " + device_status); 
+					
+					String terminal_id = item.get(6);
+					System.out.println("terminal_id: " + terminal_id); 
+
+					String unit_id = item.get(7);
+					System.out.println("unit_id: " + unit_id); 
+					 
+					String unit_name = item.get(8);
+					System.out.println("unit_name: " + unit_name); 
+					
+					DV.setMerchant_user_id(merchant_id);
+					DV.setMerchant_name(merchant_name);
+					DV.setDevice_id(device_id);
+					DV.setDevice_name(device_name);
+					DV.setDevice_identification_no(device_identification);
+					DV.setDevice_model(device_modal);
+					DV.setLocation(device_location);
+					DV.setDevice_status(device_status);
+					DV.setTerminal_id(terminal_id);
+					DV.setUnit_id_d(unit_id);
+					DV.setUnit_name_d(unit_name);
+					
+					DV.setDel_flg("N");
+					DV.setDisable_flag("N");
+					DV.setFingerprint_enable("YES");
+					DV.setFace_recognition_enabled("YES");
+					DV.setEntry_user(userid);
+					DV.setEntry_time(new Date());
+					DV.setModify_user(userid);
+					DV.setModify_time(new Date());
+					DV.setEntry_flag("N");
+					DV.setModify_flag("N");
+					
+					
+					BIPS_MerDeviceManagement_Repo.save(DV);  
+					msg = "Excel Data Uploaded Successfully";
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "File has not been successfully uploaded";
+			}
+		}
+		return msg;
+
+	}
 
 }

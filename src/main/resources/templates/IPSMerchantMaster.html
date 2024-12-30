@@ -3992,6 +3992,30 @@
 			location.href = './merchantReg2?formmode=UploadFile';
 		}
 
+		function UploadUnitbtn(a) {
+			var merchant_id = document.getElementById('merchant_user_id1').value;
+			alert(merchant_id);
+			var merchant_nam = document.getElementById('merchant_name').value;
+			alert(merchant_nam);
+			location.href = './merchantReg2?formmode=UploadUnit&merchant_id=' + merchant_id + '&merchant_nam=' + merchant_nam;
+		}
+		function UploadUserbtn(a) {
+			var merchant_id = document.getElementById('merchant_user_id1').value;
+			alert(merchant_id);
+			var merchant_nam = document.getElementById('merchant_name').value;
+			alert(merchant_nam);
+			location.href = './merchantReg2?formmode=UploadUser&merchant_id=' + merchant_id + '&merchant_nam=' + merchant_nam;
+
+		}
+
+		function UploadDevicebtn(a) {
+			var merchant_id = document.getElementById('merchant_user_id1').value;
+			alert(merchant_id);
+			var merchant_nam = document.getElementById('merchant_name').value;
+			alert(merchant_nam);
+			location.href = './merchantReg2?formmode=UploadDevice&merchant_id=' + merchant_id + '&merchant_nam=' + merchant_nam;
+		}
+
 		function listmer(a) {
 			location.href = './merchantReg2?formmode=list';
 		}
@@ -7207,6 +7231,117 @@
 							onclick="home();">Home</button>
 						<button type="button" class="btn  btn-sm  headerbutton" id="nav"
 							onclick="submitexcelgst(this)">Upload</button>
+
+						<button type="button" class="btn btn-sm  headerbutton " id="" onclick="back();">Back</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="content" th:if="${formmode}=='UploadUnit'">
+			<form action="#" method="post" autocomplete="off" style="width: 100%">
+				<div class="card" style="margin-top: 90px;">
+					<div class="card-header">
+						<div class="float-right"></div>
+						<h4 class="headerh6">Unit File Upload</h4>
+					</div>
+					<div class="card-body p-0 mt-3" style="background-color: #ffffff;">
+						<div class="panel-heading text-center">
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="">Upload</label>
+									</div>
+									<div class="col-sm-2">
+										<input type="file" id="fileval" name="fileval" accept=".xlsx,.xls,.csv"
+											class="form-control form-control-sm">
+										<input type="hidden" id="merid" th:value="${MerId}"
+											class="form-control form-control-sm">
+										<input type="hidden" id="mername" th:value="${MerName}"
+											class="form-control form-control-sm">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer text-center">
+						<button type="button" class="btn btn-sm  headerbutton  " id="addBtn"
+							onclick="home();">Home</button>
+						<button type="button" class="btn  btn-sm  headerbutton" id="nav"
+							onclick="submitexcelunit(this)">Upload</button>
+
+						<button type="button" class="btn btn-sm  headerbutton " id="" onclick="back();">Back</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="content" th:if="${formmode}=='UploadUser'">
+			<form action="#" method="post" autocomplete="off" style="width: 100%">
+				<div class="card" style="margin-top: 90px;">
+					<div class="card-header">
+						<div class="float-right"></div>
+						<h4 class="headerh6">User File Upload</h4>
+					</div>
+					<div class="card-body p-0 mt-3" style="background-color: #ffffff;">
+						<div class="panel-heading text-center">
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="">Upload</label>
+									</div>
+									<div class="col-sm-2">
+										<input type="file" id="fileval" name="fileval" accept=".xlsx,.xls,.csv"
+											class="form-control form-control-sm">
+										<input type="hidden" id="merid" th:value="${MerId}"
+											class="form-control form-control-sm">
+										<input type="hidden" id="mername" th:value="${MerName}"
+											class="form-control form-control-sm">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer text-center">
+						<button type="button" class="btn btn-sm  headerbutton  " id="addBtn"
+							onclick="home();">Home</button>
+						<button type="button" class="btn  btn-sm  headerbutton" id="nav"
+							onclick="submitexceluser(this)">Upload</button>
+
+						<button type="button" class="btn btn-sm  headerbutton " id="" onclick="back();">Back</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="content" th:if="${formmode}=='UploadDevice'">
+			<form action="#" method="post" autocomplete="off" style="width: 100%">
+				<div class="card" style="margin-top: 90px;">
+					<div class="card-header">
+						<div class="float-right"></div>
+						<h4 class="headerh6">Device File Upload</h4>
+					</div>
+					<div class="card-body p-0 mt-3" style="background-color: #ffffff;">
+						<div class="panel-heading text-center">
+							<div class="form-group ">
+								<div class="row">
+									<div class="col-sm-3">
+										<label class="">Upload</label>
+									</div>
+									<div class="col-sm-2">
+										<input type="file" id="fileval" name="fileval" accept=".xlsx,.xls,.csv"
+											class="form-control form-control-sm">
+										<input type=" " id="merid" th:value="${MerId}"
+											class="form-control form-control-sm">
+										<input type=" " id="mername" th:value="${MerName}"
+											class="form-control form-control-sm">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-footer text-center">
+						<button type="button" class="btn btn-sm  headerbutton  " id="addBtn"
+							onclick="home();">Home</button>
+						<button type="button" class="btn  btn-sm  headerbutton" id="nav"
+							onclick="submitexceldevice(this)">Upload</button>
 
 						<button type="button" class="btn btn-sm  headerbutton " id="" onclick="back();">Back</button>
 					</div>
@@ -10905,7 +11040,8 @@
 																		id="mer_notifi_mode"
 																		th:text="${MERLST?.mer_notifi_mode}"></span>
 																	<span id="mer_notifi_mode_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 																<td style="background-color: unset;"
 																	th:if="${MERLST?.send_notifi == 'Y'}"><input
 																		class="ml-4" id="send_notifi" name="send_notifi"
@@ -10993,7 +11129,8 @@
 																		class="ml-4" id="send_notifi_r2"
 																		name="send_notifi_r2" type="checkbox" disabled>
 																	<span id="send_notifi_r2_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 
 															<tr th:if="${MERLST.mer_user_id_r3 != null}">
@@ -11070,7 +11207,8 @@
 																		class="ml-4" id="send_notifi_r3"
 																		name="send_notifi_r3" type="checkbox" disabled>
 																	<span id="send_notifi_r3_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 
 															<tr th:if="${MERLST.mer_user_id_r4 != null}">
@@ -11147,7 +11285,8 @@
 																		class="ml-4" id="send_notifi_r4"
 																		name="send_notifi_r4" type="checkbox" disabled>
 																	<span id="send_notifi_r4_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 
 															<tr th:if="${MERLST.mer_user_id_r5 != null}">
@@ -11224,7 +11363,8 @@
 																		class="ml-4" id="send_notifi_r5"
 																		name="send_notifi_r5" type="checkbox" disabled>
 																	<span id="send_notifi_r5_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 															<tr th:if="${MERLST.mer_user_id_r6 != null}">
 																<td style="background-color: unset;"><span
@@ -11300,7 +11440,8 @@
 																		class="ml-4" id="send_notifi_r6"
 																		name="send_notifi_r6" type="checkbox" disabled>
 																	<span id="send_notifi_r6_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 
 															<tr th:if="${MERLST.mer_user_id_r7 != null}">
@@ -11377,7 +11518,8 @@
 																		class="ml-4" id="send_notifi_r7"
 																		name="send_notifi_r7" type="checkbox" disabled>
 																	<span id="send_notifi_r7_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 															<tr th:if="${MERLST.mer_user_id_r8 != null}">
 																<td style="background-color: unset;"><span
@@ -11453,7 +11595,8 @@
 																		class="ml-4" id="send_notifi_r8"
 																		name="send_notifi_r8" type="checkbox" disabled>
 																	<span id="send_notifi_r8_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 															<tr th:if="${MERLST.mer_user_id_r9 != null}">
 																<td style="background-color: unset;"><span
@@ -11529,14 +11672,16 @@
 																		class="ml-4" id="send_notifi_r9"
 																		name="send_notifi_r9" type="checkbox" disabled>
 																	<span id="send_notifi_r9_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 															</tr>
 															<tr th:if="${MERLST.mer_user_id_r10 != null}">
 																<td style="background-color: unset;"><span
 																		id="mer_user_id_r10"
 																		th:text="${MERLST?.mer_user_id_r10}"></span>
 																	<span id="mer_user_id_r10_vali"
-																		class="text-danger"></span></td>
+																		class="text-danger"></span>
+																</td>
 																<td style="background-color: unset;"><span
 																		id="mer_cont_pers_r10"
 																		th:text="${MERLST?.mer_cont_pers_r10}"></span>
@@ -12645,7 +12790,7 @@
 											</div>
 											<div class="btn-group nav-buttons ">
 												<button type="button" class="btn btn-sm  colorclass mr-2" id="btnAdd"
-													onclick="UploadUnit(this);">Upload</button>
+													onclick="UploadUnitbtn(this);">Upload</button>
 												<button type="button" class="btn btn-sm  mr-2 colorclass" id="btnAdd"
 													onclick="addUnitm(this);">Add Unit</button>
 												<button type="button"
@@ -12802,7 +12947,7 @@
 											</div>
 											<div>
 												<button type="button" class="btn btn-sm  colorclass mr-2" id="btnAdd"
-													onclick="UploadUser(this);">Upload</button>
+													onclick="UploadUserbtn(this);">Upload</button>
 												<button type="button" class="btn btn-sm  colorclass mr-2" id="btnAdd"
 													onclick="addUserm(this);">Add User</button>
 												<button type="button"
@@ -12944,7 +13089,7 @@
 											</div> -->
 											<div>
 												<button type="button" class="btn btn-sm  colorclass mr-2" id="btnAdd"
-													onclick="UploadDevice(this);">Upload</button>
+													onclick="UploadDevicebtn(this);">Upload</button>
 												<button type="button" class="btn btn-sm  colorclass mr-2" id="btnAdd"
 													onclick="addDevicem(this);">Add Device</button>
 												<button type="button"
@@ -16067,7 +16212,7 @@
 										autocomplete="off"
 										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 										class="form-control form-control-sm" required> <input type="text" id="remarks"
-										name="remarks" th:value="${Merdevicelist.remarks}"
+										name="remarks"  
 										th:if="${formmode}=='MerMastvie'" class="form-control form-control-sm"
 										maxlength="30" autocomplete="off" readonly> <input type="text" id="remarks"
 										name="remarks" th:value="${Merdevicelist.remarks}"
@@ -16531,14 +16676,16 @@
 											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_notifi_mode"
 													name="mer_notifi_mode" th:value="${MERLST?.mer_notifi_mode}" />
-												<span id="mer_notifi_mode_vali" class="reqError"></span></td>
+												<span id="mer_notifi_mode_vali" class="reqError"></span>
+											</td>
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi == 'Y'}">
 												<input class="ml-4" id="send_notifi" name="send_notifi" type="checkbox"
 													checked disabled><span id="send_notifi_vali" class="text-danger">
 											</td>
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi != 'Y'}">
 												<input class="ml-4" id="send_notifi" name="send_notifi" type="checkbox"
-													disabled><span id="send_notifi_vali" class="text-danger"></td>
+													disabled><span id="send_notifi_vali" class="text-danger">
+											</td>
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r2 != null }">
@@ -18321,10 +18468,12 @@
 													th:value="${MERLST?.mer_notifi_mode}" readonly /></td>
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi == 'Y'}">
 												<input class="ml-4" id="send_notifi" name="send_notifi" type="checkbox"
-													checked disabled></td>
+													checked disabled>
+											</td>
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi != 'Y'}">
 												<input class="ml-4" id="send_notifi" name="send_notifi" type="checkbox"
-													disabled></td>
+													disabled>
+											</td>
 										</tr>
 										<tr th:if="${MERLST.mer_user_id_r2 != null }">
 											<td style="background-color: unset;"><input type="text"
@@ -18496,7 +18645,8 @@
 													th:value="${MERLST?.mer_notifi_mode_r4}" readonly /></td>
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi_r4=='Y'}">
 												<input id="send_notifi_r4" name="send_notifi_r4" class="ml-4"
-													type="checkbox" checked disabled></td>
+													type="checkbox" checked disabled>
+											</td>
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r4 !='Y'}"><input id="send_notifi_r4"
 													name="send_notifi_r4" class="ml-4" type="checkbox" disabled></td>
@@ -19954,7 +20104,8 @@
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi == 'Y'}">
 												<input class="ml-4" id="send_notifi" name="send_notifi" type="checkbox"
 													checked disabled> <span id="send_notifi_vali"
-													class="text-danger"></span></td>
+													class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi != 'Y'}">
 												<input class="ml-4" id="send_notifi" name="send_notifi" type="checkbox"
 													disabled> <span id="send_notifi_vali" class="text-danger"></span>
@@ -19971,10 +20122,12 @@
 													id="mer_cont_pers_r2_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r2"
 													name="mer_ph_no_r2" th:value="${MERLST?.mer_ph_no_r2}" readonly />
-												<span id="mer_ph_no_r2_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r2_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r2"
 													name="mer_ofc_no_r2" th:value="${MERLST?.mer_ofc_no_r2}" readonly />
-												<span id="mer_ofc_no_r2_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r2_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r2" name="mer_email_addr_r2"
 													th:value="${MERLST?.mer_email_addr_r2}" readonly /> <span
@@ -19991,7 +20144,8 @@
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r2 != 'Y'}"><input class="ml-4"
 													id="send_notifi_r2" name="send_notifi_r2" type="checkbox" disabled>
-												<span id="send_notifi_r2_vali" class="text-danger"></span></td>
+												<span id="send_notifi_r2_vali" class="text-danger"></span>
+											</td>
 										</tr>
 										<tr th:if="${MERLST.mer_user_id_r3 != null }">
 											<td style="background-color: unset;"><input type="text" id="mer_user_id_r3"
@@ -20003,10 +20157,12 @@
 													id="mer_cont_pers_r3_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r3"
 													name="mer_ph_no_r3" th:value="${MERLST?.mer_ph_no_r3}" readonly />
-												<span id="mer_ph_no_r3_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r3_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r3"
 													name="mer_ofc_no_r3" th:value="${MERLST?.mer_ofc_no_r3}" readonly />
-												<span id="mer_ofc_no_r3_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r3_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r3" name="mer_email_addr_r3"
 													th:value="${MERLST?.mer_email_addr_r3}" readonly /> <span
@@ -20023,7 +20179,8 @@
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r3 != 'Y'}"><input class="ml-4"
 													id="send_notifi_r3" name="send_notifi_r3" type="checkbox" disabled>
-												<span id="send_notifi_r3_vali" class="text-danger"></span></td>
+												<span id="send_notifi_r3_vali" class="text-danger"></span>
+											</td>
 										</tr>
 										<tr th:if="${MERLST.mer_user_id_r4 != null }">
 											<td style="background-color: unset;"><input type="text" id="mer_user_id_r4"
@@ -20035,10 +20192,12 @@
 													id="mer_cont_pers_r4_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r4"
 													name="mer_ph_no_r4" th:value="${MERLST?.mer_ph_no_r4}" readonly />
-												<span id="mer_ph_no_r4_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r4_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r4"
 													name="mer_ofc_no_r4" th:value="${MERLST?.mer_ofc_no_r4}" readonly />
-												<span id="mer_ofc_no_r4_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r4_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r4" name="mer_email_addr_r4"
 													th:value="${MERLST?.mer_email_addr_r4}" readonly /> <span
@@ -20050,7 +20209,8 @@
 											<td style="background-color: unset;" th:if="${MERLST?.send_notifi_r4=='Y'}">
 												<input id="send_notifi_r4" name="send_notifi_r4" class="ml-4"
 													type="checkbox" checked disabled> <span id="send_notifi_r4_vali"
-													class="text-danger"></span></td>
+													class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r4 !='Y'}"><input id="send_notifi_r4"
 													name="send_notifi_r4" class="ml-4" type="checkbox" disabled> <span
@@ -20066,10 +20226,12 @@
 													id="mer_cont_pers_r5_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r5"
 													name="mer_ph_no_r5" th:value="${MERLST?.mer_ph_no_r5}" readonly />
-												<span id="mer_ph_no_r5_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r5_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r5"
 													name="mer_ofc_no_r5" th:value="${MERLST?.mer_ofc_no_r5}" readonly />
-												<span id="mer_ofc_no_r5_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r5_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r5" name="mer_email_addr_r5"
 													th:value="${MERLST?.mer_email_addr_r5}" readonly /> <span
@@ -20081,7 +20243,8 @@
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r5 == 'Y'}"><input id="send_notifi_r5"
 													name="send_notifi_r5" class="ml-4" type="checkbox" checked disabled>
-												<span id="send_notifi_r5_vali" class="text-danger"></span></td>
+												<span id="send_notifi_r5_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r5 != 'Y'}"><input id="send_notifi_r5"
 													name="send_notifi_r5" class="ml-4" type="checkbox" disabled> <span
@@ -20097,10 +20260,12 @@
 													id="mer_cont_pers_r6_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r6"
 													name="mer_ph_no_r6" th:value="${MERLST?.mer_ph_no_r6}" readonly />
-												<span id="mer_ph_no_r6_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r6_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r6"
 													name="mer_ofc_no_r6" th:value="${MERLST?.mer_ofc_no_r6}" readonly />
-												<span id="mer_ofc_no_r6_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r6_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r6" name="mer_email_addr_r6"
 													th:value="${MERLST?.mer_email_addr_r6}" readonly /> <span
@@ -20112,7 +20277,8 @@
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r6 == 'Y'}"><input id="send_notifi_r6"
 													name="send_notifi_r6" class="ml-4" type="checkbox" checked disabled>
-												<span id="send_notifi_r6_vali" class="text-danger"></span></td>
+												<span id="send_notifi_r6_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r6 != 'Y'}"><input id="send_notifi_r6"
 													name="send_notifi_r6" class="ml-4" type="checkbox" disabled> <span
@@ -20128,10 +20294,12 @@
 													id="mer_cont_pers_r7_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r7"
 													name="mer_ph_no_r7" th:value="${MERLST?.mer_ph_no_r7}" readonly />
-												<span id="mer_ph_no_r7_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r7_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r7"
 													name="mer_ofc_no_r7" th:value="${MERLST?.mer_ofc_no_r7}" readonly />
-												<span id="mer_ofc_no_r7_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r7_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r7" name="mer_email_addr_r7"
 													th:value="${MERLST?.mer_email_addr_r7}" readonly /> <span
@@ -20143,7 +20311,8 @@
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r7 == 'Y'}"><input id="send_notifi_r7"
 													name="send_notifi_r7" class="ml-4" type="checkbox" checked disabled>
-												<span id="send_notifi_r7_vali" class="text-danger"></span></td>
+												<span id="send_notifi_r7_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r7 != 'Y'}"><input id="send_notifi_r7"
 													name="send_notifi_r7" class="ml-4" type="checkbox" disabled> <span
@@ -20159,10 +20328,12 @@
 													id="mer_cont_pers_r8_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r8"
 													name="mer_ph_no_r8" th:value="${MERLST?.mer_ph_no_r8}" readonly />
-												<span id="mer_ph_no_r8_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r8_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r8"
 													name="mer_ofc_no_r8" th:value="${MERLST?.mer_ofc_no_r8}" readonly />
-												<span id="mer_ofc_no_r8_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r8_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r8" name="mer_email_addr_r8"
 													th:value="${MERLST?.mer_email_addr_r8}" readonly /> <span
@@ -20190,10 +20361,12 @@
 													id="mer_cont_pers_r9_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r9"
 													name="mer_ph_no_r9" th:value="${MERLST?.mer_ph_no_r9}" readonly />
-												<span id="mer_ph_no_r9_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r9_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r9"
 													name="mer_ofc_no_r9" th:value="${MERLST?.mer_ofc_no_r9}" readonly />
-												<span id="mer_ofc_no_r9_vali" class="text-danger"></span></td>
+												<span id="mer_ofc_no_r9_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text"
 													id="mer_email_addr_r9" name="mer_email_addr_r9"
 													th:value="${MERLST?.mer_email_addr_r9}" readonly /> <span
@@ -20205,7 +20378,8 @@
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r9 == 'Y'}"><input id="send_notifi_r9"
 													name="send_notifi_r9" class="ml-4" type="checkbox" checked disabled>
-												<span id="send_notifi_r9_vali" class="text-danger"></span></td>
+												<span id="send_notifi_r9_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"
 												th:if="${MERLST?.send_notifi_r9 != 'Y'}"><input id="send_notifi_r9"
 													name="send_notifi_r9" class="ml-4" type="checkbox" disabled> <span
@@ -20221,7 +20395,8 @@
 													id="mer_cont_pers_r10_vali" class="text-danger"></span></td>
 											<td style="background-color: unset;"><input type="text" id="mer_ph_no_r10"
 													name="mer_ph_no_r10" th:value="${MERLST?.mer_ph_no_r10}" readonly />
-												<span id="mer_ph_no_r10_vali" class="text-danger"></span></td>
+												<span id="mer_ph_no_r10_vali" class="text-danger"></span>
+											</td>
 											<td style="background-color: unset;"><input type="text" id="mer_ofc_no_r10"
 													name="mer_ofc_no_r10" th:value="${MERLST?.mer_ofc_no_r10}"
 													readonly /> <span id="mer_ofc_no_r10_vali"
@@ -21264,6 +21439,23 @@
 				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
 					<button type="button" class="btn " data-dismiss="modal" style="margin-right: 45%;"
 						onclick="listmer()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myModalup1" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="menu-title-header">
+					<div class="modal-title" id="exampleModalLabel" style="text-align: center; color: white;">BANK OF
+						BARODA</div>
+				</div>
+				<div class="modal-body" style="text-align: center; background-color: #c6ccd2">
+					<!-- Add content here if needed -->
+				</div>
+				<div class="modal-footer" style="background-color: #c6ccd2; border-top: none; text-align: center;">
+					<button type="button" class="btn " data-dismiss="modal" style="margin-right: 45%;"
+						onclick="back()">Close</button>
 				</div>
 			</div>
 		</div>
@@ -22928,7 +23120,7 @@
 			formData.append('file', file);
 
 			$.ajax({
-				url: './leaseuploadexcel',
+				url: './Merchantuploadexcel',
 				data: formData,
 				type: 'POST',
 				contentType: false,
@@ -22938,6 +23130,145 @@
 					console.log(response);
 					$('#myModalupload').modal("toggle");
 					$('#myModalupload .modal-body').text(response);
+					//$('#successMessage2').modal('show');
+				},
+				error: function (xhr, status, error) {
+					console.error("AJAX Error:");
+					console.error("Status:", status);
+					console.error("Error:", error);
+					console.error("Response Text:", xhr.responseText); // Logs the server response if available
+					console.error("XHR Object:", xhr);
+					//$('#failureMessage2').modal('show');
+				}
+			});
+		} else {
+			alert('Please select a file before uploading.');
+		}
+	}
+
+	function submitexcelunit() {
+		event.preventDefault(); // Prevent default form submission behavior 
+		var fileInput = document.getElementById('fileval');
+		console.log(fileInput);
+		var merchant_id = document.getElementById('merid').value;
+		alert(merchant_id);
+		var merchant_name = document.getElementById('mername').value;
+		alert(merchant_name);
+		// Check if a file is selected
+		if (fileInput && fileInput.files.length > 0) {
+			var file = fileInput.files[0];
+			//alert(file.name); // Alert with the file name
+
+			var formData = new FormData();
+			formData.append('file', file);
+			formData.append('merchant_id', merchant_id);
+			formData.append('merchant_name', merchant_name);
+
+			$.ajax({
+				url: './Unituploadexcel',
+				data: formData,
+				type: 'POST',
+				contentType: false,
+				processData: false,
+				cache: false, // Disable cache to avoid potential issues
+				success: function (response) {
+					console.log(response);
+					$('#myModalup1').modal("toggle");
+					$('#myModalup1 .modal-body').text(response);
+					//$('#successMessage2').modal('show');
+				},
+				error: function (xhr, status, error) {
+					console.error("AJAX Error:");
+					console.error("Status:", status);
+					console.error("Error:", error);
+					console.error("Response Text:", xhr.responseText); // Logs the server response if available
+					console.error("XHR Object:", xhr);
+					//$('#failureMessage2').modal('show');
+				}
+			});
+		} else {
+			alert('Please select a file before uploading.');
+		}
+	}
+
+	function submitexceluser() {
+		event.preventDefault(); // Prevent default form submission behavior
+
+		var fileInput = document.getElementById('fileval'); 
+		console.log(fileInput);
+		var merchant_id = document.getElementById('merid').value;
+				alert(merchant_id);
+				var merchant_name = document.getElementById('mername').value;
+				alert(merchant_name);
+
+		// Check if a file is selected
+		if (fileInput && fileInput.files.length > 0) {
+			var file = fileInput.files[0];
+			//alert(file.name); // Alert with the file name
+
+			var formData = new FormData();
+			formData.append('file', file);
+			formData.append('merchant_id', merchant_id);
+						formData.append('merchant_name', merchant_name);
+
+			$.ajax({
+				url: './Useruploadexcel',
+				data: formData,
+				type: 'POST',
+				contentType: false,
+				processData: false,
+				cache: false, // Disable cache to avoid potential issues
+				success: function (response) {
+					console.log(response);
+					$('#myModalup1').modal("toggle");
+					$('#myModalup1 .modal-body').text(response);
+					//$('#successMessage2').modal('show');
+				},
+				error: function (xhr, status, error) {
+					console.error("AJAX Error:");
+					console.error("Status:", status);
+					console.error("Error:", error);
+					console.error("Response Text:", xhr.responseText); // Logs the server response if available
+					console.error("XHR Object:", xhr);
+					//$('#failureMessage2').modal('show');
+				}
+			});
+		} else {
+			alert('Please select a file before uploading.');
+		}
+	}
+
+	function submitexceldevice() {
+		event.preventDefault(); // Prevent default form submission behavior
+
+		var fileInput = document.getElementById('fileval'); 
+		console.log(fileInput);
+		var merchant_id = document.getElementById('merid').value;
+				alert(merchant_id);
+				var merchant_name = document.getElementById('mername').value;
+				alert(merchant_name);
+
+		// Check if a file is selected
+		if (fileInput && fileInput.files.length > 0) {
+			var file = fileInput.files[0];
+			//alert(file.name); // Alert with the file name
+
+			var formData = new FormData();
+			formData.append('file', file);
+			formData.append('merchant_id', merchant_id);
+						formData.append('merchant_name', merchant_name);
+
+			$.ajax({
+				url: './Deviceuploadexcel',
+				data: formData,
+				type: 'POST',
+				contentType: false,
+				processData: false,
+				cache: false, // Disable cache to avoid potential issues
+				success: function (response) {
+					console.log(response);
+					$('#myModalup1').modal("toggle");
+					$('#myModalup1 .modal-body').text(response);
 					//$('#successMessage2').modal('show');
 				},
 				error: function (xhr, status, error) {

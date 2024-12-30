@@ -1309,6 +1309,24 @@ public class MainController {
 			md.addAttribute("MerUnit", bIPS_UnitManagement_Repo.getUnitId(unit_id));
 		} else if (formmode.equals("UploadFile")) {
 			md.addAttribute("formmode", "UploadFile");
+		} else if (formmode.equals("UploadUnit")) {
+			md.addAttribute("formmode", "UploadUnit");
+			md.addAttribute("MerId",merchant_id);
+			System.out.println("MerId "+merchant_id);
+			md.addAttribute("MerName",merchant_nam);
+			System.out.println("MerName "+merchant_nam);
+		} else if (formmode.equals("UploadUser")) {
+			md.addAttribute("formmode", "UploadUser");
+			md.addAttribute("MerId",merchant_id);
+			System.out.println("MerId "+merchant_id);
+			md.addAttribute("MerName",merchant_nam);
+			System.out.println("MerName "+merchant_nam);
+		} else if (formmode.equals("UploadDevice")) {
+			md.addAttribute("formmode", "UploadDevice");
+			md.addAttribute("MerId",merchant_id);
+			System.out.println("MerId "+merchant_id);
+			md.addAttribute("MerName",merchant_nam);
+			System.out.println("MerName "+merchant_nam);
 		} else if (formmode.equals("HoldReject")) {
 			md.addAttribute("formmode", "HoldReject");
 			md.addAttribute("bankDetail", merchantMasterModRep.holdrejectlist());
@@ -4623,7 +4641,7 @@ public class MainController {
 		return "TransactionReports.html"; // Using TransactionReports.html for now
 	}
 
-	@PostMapping(value = "leaseuploadexcel")
+	@PostMapping(value = "Merchantuploadexcel")
 	@ResponseBody
 	public String leaseuploadexcel(@RequestParam("file") MultipartFile file, String screenId,
 			@ModelAttribute com.bornfire.entity.MerchantMasterMod MerchantMasterMod, Model md, HttpServletRequest rq)
@@ -4636,6 +4654,73 @@ public class MainController {
 		if (file.getSize() < 50000000) {
 			String userid = (String) rq.getSession().getAttribute("USERID");
 			String msg = bankAndBranchMasterServices.UploadgstserviceCOLLECTION(screenId, file, userid,
+					MerchantMasterMod);
+			return msg;
+		} else {
+			return "File has not been successfully uploaded. Requires less than 128 KB size.";
+		}
+	}
+	
+	@PostMapping(value = "Unituploadexcel")
+	@ResponseBody
+	public String Unituploadexcel(@RequestParam("file") MultipartFile file, String screenId, 
+			 String merchant_id, String merchant_name,
+			@ModelAttribute com.bornfire.entity.MerchantMasterMod MerchantMasterMod, Model md, HttpServletRequest rq)
+			throws FileNotFoundException, SQLException, IOException, NullPointerException {
+
+		System.out.println("the testing   GST EXCEL UPLOAD");
+
+		System.out.println("fileSize" + file.getSize());
+		System.out.println("MerIds " + merchant_id);
+		System.out.println("MerNames " + merchant_name);
+
+		if (file.getSize() < 50000000) {
+			String userid = (String) rq.getSession().getAttribute("USERID");
+			String msg = bankAndBranchMasterServices.Uploadunit(screenId, file, userid, merchant_id,merchant_name,MerchantMasterMod);
+			return msg;
+		} else {
+			return "File has not been successfully uploaded. Requires less than 128 KB size.";
+		}
+	}
+	
+	@PostMapping(value = "Useruploadexcel")
+	@ResponseBody
+	public String Useruploadexcel(@RequestParam("file") MultipartFile file, String screenId,
+			 String merchant_id, String merchant_name,
+			@ModelAttribute com.bornfire.entity.MerchantMasterMod MerchantMasterMod, Model md, HttpServletRequest rq)
+			throws FileNotFoundException, SQLException, IOException, NullPointerException {
+
+		System.out.println("the testing   GST EXCEL UPLOAD"); 
+		System.out.println("fileSize" + file.getSize());
+		System.out.println("MerIduser " + merchant_id);
+		System.out.println("MerNameuser " + merchant_name);
+
+	if (file.getSize() < 50000000) {
+			String userid = (String) rq.getSession().getAttribute("USERID");
+			String msg = bankAndBranchMasterServices.Uploaduser(screenId, file, userid, merchant_id,merchant_name,
+					MerchantMasterMod);
+			return msg;
+		} else {
+			return "File has not been successfully uploaded. Requires less than 128 KB size.";
+		}
+		
+	}
+	
+	@PostMapping(value = "Deviceuploadexcel")
+	@ResponseBody
+	public String Deviceuploadexcel(@RequestParam("file") MultipartFile file, String screenId,
+			 String merchant_id, String merchant_name,
+			@ModelAttribute com.bornfire.entity.MerchantMasterMod MerchantMasterMod, Model md, HttpServletRequest rq)
+			throws FileNotFoundException, SQLException, IOException, NullPointerException {
+
+		System.out.println("the testing   GST EXCEL UPLOAD"); 
+		System.out.println("fileSize" + file.getSize());
+		System.out.println("MerIddev " + merchant_id);
+		System.out.println("MerNamedev " + merchant_name);
+
+		if (file.getSize() < 50000000) {
+			String userid = (String) rq.getSession().getAttribute("USERID");
+			String msg = bankAndBranchMasterServices.Uploaddevice(screenId, file, userid, merchant_id,merchant_name,
 					MerchantMasterMod);
 			return msg;
 		} else {
