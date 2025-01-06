@@ -740,6 +740,7 @@ public class MainController {
 			@RequestParam(value = "settlementAccountValue", required = false) String settlementAccountValue,
 			@RequestParam(value = "bankBranchDetailValue", required = false) String bankBranchDetailValue,
 			@RequestParam(value = "bankBranchDetailValue", required = false) String reportsValue,
+			@RequestParam(value = "paymentValue", required = false) String paymentValue,
 			@ModelAttribute IPSAccessRole accessRole, Model md, HttpServletRequest rq) {
 
 		String userid = (String) rq.getSession().getAttribute("USERID");
@@ -749,7 +750,7 @@ public class MainController {
 				accessValue, ipsparavalue, servchargeValue, walletfeesValue, merchantcategValue, notificationValue,
 				auditValue, useractivityValue, serviceaudValue, chargebackValue, transactionmonitoringValue,
 				merchantmastValue, finalString, referenceValue, settlementAccountValue, bankBranchDetailValue,
-				reportsValue);
+				reportsValue,paymentValue);
 		// System.out.println(msg);
 		return msg;
 	}

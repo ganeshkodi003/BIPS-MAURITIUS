@@ -53,7 +53,16 @@ public class IPSAccessRole {
 	private String settlement_account;
 	private String bank_branch_master;
 	private String reports;
+	private String payment_processing;
 
+
+	public String getPayment_processing() {
+		return payment_processing;
+	}
+
+	public void setPayment_processing(String payment_processing) {
+		this.payment_processing = payment_processing;
+	}
 
 	public String getReports() {
 		return reports;
@@ -406,6 +415,7 @@ public class IPSAccessRole {
 
 	
 
+
 	public IPSAccessRole(String role_id, String role_desc, String permissions, String work_class, String domain_id,
 			String admin, String entity_flg, String auth_flg, String modify_flg, String del_flg, String menulist,
 			String entry_user, String modify_user, String auth_user, Date entry_time, Date modify_time, Date auth_time,
@@ -415,7 +425,8 @@ public class IPSAccessRole {
 			String service_charges_fees, String wallet_fees_charges, String merchant_category_code,
 			String notification_parameter, String user_activity_audits, String merchant_master,
 			String merchant_operations, String service_audits, String charge_back, String transaction_monitoring,
-			String reference_code, String settlement_account, String bank_branch_master, String reports) {
+			String reference_code, String settlement_account, String bank_branch_master, String reports,
+			String payment_processing) {
 		super();
 		this.role_id = role_id;
 		this.role_desc = role_desc;
@@ -460,6 +471,7 @@ public class IPSAccessRole {
 		this.settlement_account = settlement_account;
 		this.bank_branch_master = bank_branch_master;
 		this.reports = reports;
+		this.payment_processing = payment_processing;
 	}
 
 	public IPSAccessRole(IPSAccessRoleModTable ipsAccessRole) {
@@ -505,6 +517,7 @@ public class IPSAccessRole {
 		this.settlement_account = ipsAccessRole.getSettlement_account();
 		this.bank_branch_master = ipsAccessRole.getBank_branch_master();
 		this.reports = ipsAccessRole.getReports();
+		this.payment_processing = ipsAccessRole.getPayment_processing();
 	}
 
 }

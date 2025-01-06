@@ -75,7 +75,7 @@ public class IPSAccessRoleService {
 			String walletfeesValue, String merchantcategValue, String notificationValue, String auditValue,
 			String useractivityValue, String serviceaudValue, String chargebackValue, String transactionmonitoringValue,
 			String merchantmastValue, String finalString, String referenceValue, String settlementAccountValue,
-			String bankBranchDetailValue,String reportsValue) {
+			String bankBranchDetailValue,String reportsValue,String paymentValue) {
 
 		String msg = "";
 
@@ -83,6 +83,7 @@ public class IPSAccessRoleService {
 			IPSAccessRoleModTable up = new IPSAccessRoleModTable(accessRole);
 			String count = accessandrolesrepository.getusercount(up.getRole_id());
 			if (count.equals("0")) {
+				System.out.println("INSIDE"+paymentValue);
 				up.setDel_flg("N");
 				up.setModify_flg("N");
 				up.setEntity_flg("N");
@@ -108,6 +109,7 @@ public class IPSAccessRoleService {
 				up.setSettlement_account(settlementAccountValue);
 				up.setBank_branch_master(bankBranchDetailValue);
 				up.setReports(reportsValue);
+				up.setPayment_processing(paymentValue);
 				ipsAccessRoleMosRep.save(up);
 				msg = "Role Created Successfully";
 
@@ -445,12 +447,12 @@ public class IPSAccessRoleService {
 
 	public List<IPSAccessRole> rulelist() {
 		List<IPSAccessRole> list = accessandrolesrepository.finsAllData();
-		for (IPSAccessRole a : list) {
-			String  menu=	a.getMenulist();
-			String caps=	menu.replaceAll("([a-z])([A-Z])", "$1 $2");
-			a.setMenulist(caps);
-		
-		}
+		/*
+		 * for (IPSAccessRole a : list) { String menu= a.getMenulist(); String caps=
+		 * menu.replaceAll("([a-z])([A-Z])", "$1 $2"); a.setMenulist(caps);
+		 * 
+		 * }
+		 */
 		
 		return list;
 	}

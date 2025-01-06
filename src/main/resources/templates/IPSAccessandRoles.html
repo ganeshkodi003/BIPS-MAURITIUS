@@ -154,7 +154,13 @@ label {
 		var formmode = a.getAttribute("data-formmode");
 		if ($("#IPSAccessRole").valid()) {
 			if (role_id != '') {
-				var checkBoxAdminValue, adminValue, userprofileMaintenance, userprofilevalue, accessandRole, accessValue, ipsparameter, ipsparavalue, servicechargesFees, servchargeValue, walletfeesCharges, walletfeesValue, merchantcategCode, merchantcategValue, notificationparam, notificationValue, cbAudit, auditValue, useractivityAudits, useractivityValue, serviceAuditsValue, serviceaudValue, chargeBack, chargebackValue, transactionMonitoring, transactionMonitoringValue, merchantMaster, merchantValue, reference, referenceVlue, settlementAccount, settlementAccountValue, bankBranchDetail, bankBranchDetailValue, reports, reportsValue;
+				var checkBoxAdminValue, adminValue, userprofileMaintenance, userprofilevalue, accessandRole, 
+				accessValue, ipsparameter, ipsparavalue, servicechargesFees, servchargeValue, walletfeesCharges, 
+				walletfeesValue, merchantcategCode, merchantcategValue, notificationparam, notificationValue, cbAudit, 
+				auditValue, useractivityAudits, useractivityValue, serviceAuditsValue, serviceaudValue, chargeBack, 
+				chargebackValue, transactionMonitoring, transactionMonitoringValue, merchantMaster, merchantValue, 
+				reference, referenceVlue, settlementAccount, settlementAccountValue, bankBranchDetail,
+				 bankBranchDetailValue, reports, reportsValue, paymentprocess;
 				var finalVar = [];
 				checkBoxAdminValue = document.querySelector("#Admin:checked");
 				adminValue = (checkBoxAdminValue) ? 'Y' : 'N';
@@ -166,87 +172,87 @@ label {
 						.querySelector("#UserProfileMaintenance:checked");
 				userprofilevalue = (userprofileMaintenance) ? 'Y' : 'N';
 				if (userprofilevalue === "Y") {
-					finalVar.push("UserProfileMaintenance");
+					finalVar.push("User Profile Maintenance");
 				}
 
 				accessandRole = document.querySelector("#AccessRole:checked");
 				accessValue = (accessandRole) ? 'Y' : 'N';
 				if (accessValue === "Y") {
-					finalVar.push("AccessRole");
+					finalVar.push("Access Role");
 				}
 
 				reference = document.querySelector("#ReferenceCode:checked");
 				referenceValue = (reference) ? 'Y' : 'N';
 				if (referenceValue === "Y") {
-					finalVar.push("ReferenceCode");
+					finalVar.push("Reference Code");
 				}
 
 				bankBranchDetail = document
 						.querySelector("#bankBranchDetail:checked");
 				bankBranchDetailValue = (bankBranchDetail) ? 'Y' : 'N';
 				if (bankBranchDetailValue === "Y") {
-					finalVar.push("BankBranchMaster");
+					finalVar.push("Bank Branch Master");
 				}
 
 				ipsparameter = document
 						.querySelector("#MerchantParameter:checked");
 				ipsparavalue = (ipsparameter) ? 'Y' : 'N';
 				if (ipsparavalue === "Y") {
-					finalVar.push("MerchantParameter");
+					finalVar.push("Merchant Parameter");
 				}
 
 				servicechargesFees = document
 						.querySelector("#ServiceChargesFees:checked");
 				servchargeValue = (servicechargesFees) ? 'Y' : 'N';
 				if (servchargeValue === "Y") {
-					finalVar.push("ServiceChargesFees");
+					finalVar.push("Service Charges Fees");
 				}
 
 				walletfeesCharges = document
 						.querySelector("#MerchantFeesCharges:checked");
 				walletfeesValue = (walletfeesCharges) ? 'Y' : 'N';
 				if (walletfeesValue === "Y") {
-					finalVar.push("MerchantFeesCharges");
+					finalVar.push("Merchant Fees Charges");
 				}
 
 				merchantcategCode = document
 						.querySelector("#MerchantCategoryCode:checked");
 				merchantcategValue = (merchantcategCode) ? 'Y' : 'N';
 				if (merchantcategValue === "Y") {
-					finalVar.push("MerchantCategoryCode");
+					finalVar.push("Merchant Category Code");
 				}
 
 				notificationparam = document
 						.querySelector("#NotificationParameter:checked");
 				notificationValue = (notificationparam) ? 'Y' : 'N';
 				if (notificationValue === "Y") {
-					finalVar.push("NotificationParameter");
+					finalVar.push("Notification Parameter");
 				}
 
 				cbAudit = document.querySelector("#AuditOperations:checked");
 				auditValue = (cbAudit) ? 'Y' : 'N';
 				if (auditValue === "Y") {
-					finalVar.push("AuditOperations");
+					finalVar.push("Audit Operations");
 				}
 
 				useractivityAudits = document
 						.querySelector("#UserActivityAudits:checked");
 				useractivityValue = (useractivityAudits) ? 'Y' : 'N';
 				if (useractivityValue === "Y") {
-					finalVar.push("UserActivityAudits");
+					finalVar.push("User Activity Audits");
 				}
 
 				serviceAuditsValue = document
 						.querySelector("#ServiceAudits:checked");
 				serviceaudValue = (serviceAuditsValue) ? 'Y' : 'N';
 				if (serviceaudValue === "Y") {
-					finalVar.push("ServiceAudits");
+					finalVar.push("Service Audits");
 				}
 
 				chargeBack = document.querySelector("#ChargeBack:checked");
 				chargebackValue = (chargeBack) ? 'Y' : 'N';
 				if (chargebackValue === "Y") {
-					finalVar.push("ChargeBack");
+					finalVar.push("Charge Back");
 				}
 
 				transactionMonitoring = document
@@ -254,7 +260,7 @@ label {
 				transactionmonitoringValue = (transactionMonitoring) ? 'Y'
 						: 'N';
 				if (transactionmonitoringValue === "Y") {
-					finalVar.push("TransactionMonitoring");
+					finalVar.push("Transaction Monitoring");
 				}
 
 				reports = document.querySelector("#Reports:checked");
@@ -267,15 +273,21 @@ label {
 						.querySelector("#MerchantMaster:checked");
 				merchantmastValue = (merchantMaster) ? 'Y' : 'N';
 				if (merchantmastValue === "Y") {
-					finalVar.push("MerchantMaster");
+					finalVar.push("Merchant Master");
 				}
 
 				settlementAccount = document
 						.querySelector("#settlementAccount:checked");
 				settlementAccountValue = (settlementAccount) ? 'Y' : 'N';
 				if (settlementAccountValue === "Y") {
-					finalVar.push("SettlementAccount");
+					finalVar.push("Settlement Account");
 				}
+				
+				paymentprocess = document.querySelector("#PaymentProcessing:checked");
+								paymentValue = (paymentprocess) ? 'Y' : 'N';
+								if (paymentValue === "Y") {
+									finalVar.push("Payment Processing");
+								}
 
 				var formmode = a.getAttribute("data-formmode");
 				var finalString = finalVar.join(',');
@@ -304,6 +316,7 @@ label {
 							+ "&finalString=" + finalString
 							+ "&settlementAccountValue="
 							+ settlementAccountValue
+							+ "&paymentValue=" + paymentValue
 							+ "&bankBranchDetailValue=" + bankBranchDetailValue;
 					$("#IPSAccessRole").attr('action', url);
 					var options = {
@@ -1102,7 +1115,12 @@ label {
 							type="checkbox" id="TransactionMonitoring" value='Y'
 							name="transaction_monitoring" style="margin-right: 10px"
 							th:checked="${IPSAccessRole?.transaction_monitoring}=='Y'" /> <label
-							for="ChargeBack">Transaction Monitoring</label> <br>
+							for="ChargeBack">Transaction Monitoring</label> <br>							<input
+													type="checkbox" id="PaymentProcessing" value='Y'
+													name="payment_processing" style="margin-right: 10px"
+													th:checked="${IPSAccessRole?.payment_processing}=='Y'" /> <label
+													for="Payment Processing">Payment Processing</label> <br>
+
 						<input type="checkbox" id="MerchantMaster" value='Y'
 							name="merchant_master" style="margin-right: 10px"
 							th:checked="${IPSAccessRole?.merchant_master}=='Y'" /> <label
