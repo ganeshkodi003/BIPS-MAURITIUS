@@ -4984,6 +4984,10 @@
 			$("#four1-tab").attr("for", "four1");
 		}
 
+		function previousedit(a) {
+					$("#one-panel").css("display", "block");
+					$("#four1-panel").css("display", "none");
+				}
 		function next_edit(a) {
 			var returnValue;
 
@@ -6957,8 +6961,8 @@
 									<th style="text-align: center"><input type="text"
 											class="form-control font-weight-bold" placeholder="QR Acceptance" disabled>
 									</th>
-									<th class="pb-2 select_th">Generate QR</th>
-									<th class="pb-2 select_th"
+									<th class="pb-2 select_th" style="font-size: 14px;">Generate QR</th>
+									<th class="pb-2 select_th" style="font-size: 14px;"
 										th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Select
 									</th>
 								</tr>
@@ -18175,7 +18179,7 @@
 							</div>
 							<div class="card-footer text-center">
 								<button type="button" class="btn btn-sm  headerbutton" data-dismiss="modal"
-									onclick="previous(this);">Previous</button>
+									onclick="previousedit(this);">Previous</button>
 								<button type="button" class="btn  btn-sm headerbutton"
 									th:attr="data-formmode=editsubmit" form="BankandBranchedit"
 									onclick="submitaddform(this);">Submit</button>

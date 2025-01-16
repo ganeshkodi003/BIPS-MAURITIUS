@@ -729,18 +729,18 @@ $(document)
 				<div class="col-sm-12">
 					<div class="card">
 						<form class="m-0" action="#" th:object="${userProfile}" method="post" autocomplete="off" id="userProfile" th:fragment="finuserapply">
-							<div class="card-header p-1">
+							<div class="card-header p-2">
 								<div class="d-flex justify-content-between align-items-center">
 									<div>
-										<h3 th:if="${formmode}=='add'" class="headerh6 ">User Profile - Add</h3>
-										<h3 th:if="${formmode}=='edit'" class="headerh6">User Profile - Modify</h3>
-										<h3 th:if="${formmode}=='view'" class="headerh6">User Profile - View</h3>
-										<h3 th:if="${formmode}=='viewnew'" class="headerh6">User Profile - View</h3>
-										<h3 th:if="${formmode}=='verify'" class="headerh6">User Profile - Verify</h3>
-										<h3 th:if="${formmode}=='delete'" class="headerh6">User Profile - Delete</h3>
-										<h3 th:if="${formmode}=='cancel'" class="headerh6">User Profile - Cancel</h3>
+										<h3 th:if="${formmode}=='add'" class="headerh6 ml-2">User Profile - Add</h3>
+										<h3 th:if="${formmode}=='edit'" class="headerh6 ml-2">User Profile - Modify</h3>
+										<h3 th:if="${formmode}=='view'" class="headerh6 ml-2">User Profile - View</h3>
+										<h3 th:if="${formmode}=='viewnew'" class="headerh6 ml-2">User Profile - View</h3>
+										<h3 th:if="${formmode}=='verify'" class="headerh6 ml-2">User Profile - Verify</h3>
+										<h3 th:if="${formmode}=='delete'" class="headerh6 ml-2">User Profile - Delete</h3>
+										<h3 th:if="${formmode}=='cancel'" class="headerh6 ml-2">User Profile - Cancel</h3>
 									</div>
-									<button type="button" class="btn btn-xs headerbutton" id="btnInq" onclick="list();">List</button>
+									<!--<button type="button" class="btn btn-xs headerbutton" id="btnInq" onclick="list();">List</button>-->
 								</div>
 							</div>
 							<div class="card-body mb-0 pb-0">

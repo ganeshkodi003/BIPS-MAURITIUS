@@ -381,7 +381,7 @@ $(document)
 		<div th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='delete' " class="card">
 			<form action="#" th:object="${SettlementAccount}" method="POST" autocomplete="off" id="SettlementModify">
 				<div class="card-header text-left">
-					<b th:text="${menuname1}" style="color: white; font-size: 25px;"></b> <input type="hidden" th:value="${formmode}" id="formmode1" style="display: none;">
+					<h6 class="headerh6">Settlement Accounts	</h6><input type="hidden" th:value="${formmode}" id="formmode1" style="display: none;">
 				</div>
 				<div class="content" id="yes">
 					<div class="card-body">
