@@ -102,7 +102,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 #usertable td {
 	padding: 13px;
 }
-
+tbody td {
+    white-space: nowrap;
+}
 .dataTables_scrollBody {
 	overflow: unset !important;
 }
@@ -401,14 +403,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 							'<td style="text-align: left;">' + merchantBillNumber + '</td>' +
 							'<td style="text-align: left;">' + merchantId + '</td>' +
 							/* '<td style="text-align: left;">' + cimAcct + '</td>' + */
-							'<td style="text-align: left;">' + cimAcctName + '</td>' +
+							/* '<td style="text-align: left;">' + cimAcctName + '</td>' + */
 							/* '<td style="text-align: left;">' + ipsxAcct + '</td>' + */
 							'<td style="text-align: left;">' + ipsxAcctName + '</td>' +
 							/* '<td style="text-align: left;">' + tranCurrency + '</td>' + */
 							'<td style="text-align: right;">' + billAmount + '</td>' +
 							/* '<td style="text-align: right;">' + reversalAmount + '</td>' + */
 							'<td style="text-align: left;">' + reversalRemarks + '</td>' +
-							'<td style="text-align: center;">' +
+							'<td style="text-align: center;width:50px;!important">' +
 							'<input type="radio" id="btnclick" name="btnradio"' +
 							' style="cursor: pointer;"' +
 							' data-sequence_unique_id="' + sequenceUniqueId + '"' +
@@ -650,7 +652,7 @@ $(document)
 									class="form-control font-weight-bold" placeholder="Bill Amount"
 									disabled></th>
 								
-								<th style="text-align: center"><input type="text"
+								<th style="text-align: center;width:50px"><input type="text"
 									class="form-control font-weight-bold" placeholder="Remarks"
 									disabled></th>
 								
@@ -681,7 +683,7 @@ $(document)
 								<!-- <td style="text-align: right; width: 150px" th:text="${charge.reversal_amount != null ? #numbers.formatDecimal(charge.reversal_amount, 0, 'COMMA', 2, 'POINT') : ' '}"></td> -->
 								<td style="width: 125px"
 									th:text="${charge.reversal_remarks != null ? charge.reversal_remarks.toUpperCase() : ''}"></td>
-								<td style="text-align: center;"><input type="radio"
+								<td style="text-align: center;width:50px;"><input type="radio"
 									id="btnclick" name="btnradio" style="cursor: pointer;"
 									th:attr="data-sequence_unique_id=${charge.sequence_unique_id}"
 									th:id="${charge.sequence_unique_id}"
