@@ -1,103 +1,109 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="summary">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
-		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
-		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
-	<link rel="stylesheet" type="text/css" href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
-		th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
+	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
 
-	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
-		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
-		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
-		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
-		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
-		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
-	<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
-		th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
-	<script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
-		th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
-	<script src="js/bootstrap411.js"></script>
-	<script src="js/Chart.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script src="/webjars/jquery/3.4.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+<script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+<script
+	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
+	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
+<script src="js/bootstrap411.js"></script>
+<script src="js/Chart.js"></script>
 
-	<style>
-		.filterable .filters input[disabled] {
-			background-color: transparent;
-			border: none;
-			cursor: auto;
-			box-shadow: none;
-			padding: 0;
-			height: auto;
-		}
+<style>
+.filterable .filters input[disabled] {
+	background-color: transparent;
+	border: none;
+	cursor: auto;
+	box-shadow: none;
+	padding: 0;
+	height: auto;
+}
 
-		.filterable .filters input[disabled]::-webkit-input-placeholder {
-			color: #333;
-		}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
 
-		.filterable .filters input[disabled]::-moz-placeholder {
-			color: #333;
-		}
+.filterable .filters input[disabled]::-moz-placeholder {
+	color: #333;
+}
 
-		.filterable .filters input[disabled]:-ms-input-placeholder {
-			color: #333;
-		}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+	color: #333;
+}
 
-		.filterable .filters input[disabled]::-webkit-input-placeholder {
-			color: #333;
-		}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
 
-		td {
-			background-color: #f8f7ff;
-		}
+td {
+	background-color: #f8f7ff;
+}
 
-		.container-manager {
-			padding-right: 43px;
-			padding-left: 15px;
-			margin-right: auto;
-			margin-left: 18.3%;
-			margin-top: 80px;
-		}
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 18.3%;
+	margin-top: 80px;
+}
 
-		.dataTables_empty {
-			color: #be3232;
-		}
+.dataTables_empty {
+	color: #be3232;
+}
 
-		.dataTables_scrollBody {
-			overflow: unset !important;
-		}
+.dataTables_scrollBody {
+	overflow: unset !important;
+}
 
-		.dataTables_wrapper .dataTables_filter {
-			float: right;
-			margin-right: 20px;
-		}
+.dataTables_wrapper .dataTables_filter {
+	float: right;
+	margin-right: 20px;
+}
 
-		.dataTables_filter input {
-			color: black;
-			background-color: white;
-		}
+.dataTables_filter input {
+	color: black;
+	background-color: white;
+}
 
-		.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
-			color: black;
-			font-style: italic;
-		}
+.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder
+	{
+	color: black;
+	font-style: italic;
+}
 
-		input,
-		select {
-			height: 35px !important;
-		}
+input, select {
+	height: 35px !important;
+}
 
-		label {
-			font-size: 18px !important;
-		}
-	</style>
+label {
+	font-size: 18px !important;
+}
+</style>
 </head>
 
 <script th:inline="javascript">
@@ -111,20 +117,20 @@
 		window.history.back();
 	}
 
-	$(document).ready(function () {
+	$(document).ready(function() {
 		$('#usertable').DataTable({
-			"destroy": true,
-			"scrollCollapse": true,
-			"paging": true,
-			"autoWidth": false,
-			"ordering": true,
-			"oLanguage": {
-				"sSearch": "",
-				"sSearchPlaceholder": "Search Here"
+			"destroy" : true,
+			"scrollCollapse" : true,
+			"paging" : true,
+			"autoWidth" : false,
+			"ordering" : true,
+			"oLanguage" : {
+				"sSearch" : "",
+				"sSearchPlaceholder" : "Search Here"
 			},
-			"searching": true,
-			"pageLength": 8,
-			"lengthChange": false,
+			"searching" : true,
+			"pageLength" : 8,
+			"lengthChange" : false,
 		});
 	});
 
@@ -138,28 +144,33 @@
 
 		if (!from_date || !to_date) {
 			$('#myModalpopup1').modal("toggle");
-			$('#myModalpopup1 .modal-body').text("Please fill the From Date and To Date");
+			$('#myModalpopup1 .modal-body').text(
+					"Please fill the From Date and To Date");
 			return;
 		}
 		var formatted_from_date = formatDate(from_date);
 		var formatted_to_date = formatDate(to_date);
 		var filetype = buttonElement.getAttribute("data-fileType");
-		var downloadUrl = './TotalTransactionDownload?filetype=' + filetype + '&from_date=' + formatted_from_date + '&to_date=' + formatted_to_date + '&merchant_id=' + merchant_id + '&unit_id='
-			+ unit_id + '&user_id=' + user_id + '&device_id=' + device_id;
+		var downloadUrl = './TotalTransactionDownload?filetype=' + filetype
+				+ '&from_date=' + formatted_from_date + '&to_date='
+				+ formatted_to_date + '&merchant_id=' + merchant_id
+				+ '&unit_id=' + unit_id + '&user_id=' + user_id + '&device_id='
+				+ device_id;
 		$.ajax({
-			url: downloadUrl,
-			type: 'GET',
-			xhrFields: {
-				responseType: 'blob'
+			url : downloadUrl,
+			type : 'GET',
+			xhrFields : {
+				responseType : 'blob'
 			},
-			success: function (data, status, xhr) {
+			success : function(data, status, xhr) {
 				var contentType = xhr.getResponseHeader('Content-Type');
 				if (contentType === 'application/octet-stream') {
-					var blob = new Blob([data], {
-						type: contentType
+					var blob = new Blob([ data ], {
+						type : contentType
 					});
 					var downloadLink = document.createElement('a');
-					var fileName = xhr.getResponseHeader('Content-Disposition').split('filename=')[1].replace(/"/g, '');
+					var fileName = xhr.getResponseHeader('Content-Disposition')
+							.split('filename=')[1].replace(/"/g, '');
 					downloadLink.href = window.URL.createObjectURL(blob);
 					downloadLink.download = fileName;
 					document.body.appendChild(downloadLink);
@@ -167,17 +178,19 @@
 					document.body.removeChild(downloadLink);
 				} else {
 					var reader = new FileReader();
-					reader.onload = function (e) {
+					reader.onload = function(e) {
 						var response = JSON.parse(e.target.result);
 						$('#myModalpopup1').modal("toggle");
-						$('#myModalpopup1 .modal-body').text(response.message || "Error occurred.");
+						$('#myModalpopup1 .modal-body').text(
+								response.message || "Error occurred.");
 					};
 					reader.readAsText(data);
 				}
 			},
-			error: function (xhr) {
+			error : function(xhr) {
 				$('#myModalpopup1').modal("toggle");
-				$('#myModalpopup1 .modal-body').text("An error occurred while processing your request.");
+				$('#myModalpopup1 .modal-body').text(
+						"An error occurred while processing your request.");
 			}
 		});
 	}
@@ -187,7 +200,8 @@
 		var day = dateParts[0];
 		var month = parseInt(dateParts[1], 10);
 		var year = dateParts[2];
-		var monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+		var monthNames = [ "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL",
+				"AUG", "SEP", "OCT", "NOV", "DEC" ];
 		var monthName = monthNames[month - 1];
 		return day + "-" + monthName + "-" + year;
 	}
@@ -196,106 +210,115 @@
 </script>
 <script type="text/javascript">
 	$(document)
-		.ready(
-			function () {
-				$('.filterable .btn-filter')
-					.click(
-						function () {
-							var $panel = $(this).parents(
-								'.filterable'), $filters = $panel
-									.find('.filters input'), $tbody = $panel
-										.find('.table tbody');
-							if ($filters.prop('disabled') == true) {
-								$filters
-									.prop('disabled', false);
-								$filters.first().focus();
-							} else {
-								$filters.val('').prop(
-									'disabled', true);
-								$tbody.find('.no-result')
-									.remove();
-								$tbody.find('tr').show();
-							}
-						});
+			.ready(
+					function() {
+						$('.filterable .btn-filter')
+								.click(
+										function() {
+											var $panel = $(this).parents(
+													'.filterable'), $filters = $panel
+													.find('.filters input'), $tbody = $panel
+													.find('.table tbody');
+											if ($filters.prop('disabled') == true) {
+												$filters
+														.prop('disabled', false);
+												$filters.first().focus();
+											} else {
+												$filters.val('').prop(
+														'disabled', true);
+												$tbody.find('.no-result')
+														.remove();
+												$tbody.find('tr').show();
+											}
+										});
 
-				$('.filterable .filters input')
-					.keyup(
-						function (e) {
-							/* Ignore tab key */
-							var code = e.keyCode || e.which;
-							if (code == '9')
-								return;
-							/* Useful DOM data and selectors */
-							var $input = $(this), inputContent = $input
-								.val().toLowerCase(), $panel = $input
-									.parents('.filterable'), column = $panel
-										.find('.filters th')
-										.index($input.parents('th')), $table = $panel
-											.find('.table'), $rows = $table
-												.find('tbody tr');
-							/* Dirtiest filter function ever ;) */
-							var $filteredRows = $rows
-								.filter(function () {
-									var value = $(this)
-										.find('td').eq(
-											column)
-										.text()
-										.toLowerCase();
-									return value
-										.indexOf(inputContent) === -1;
-								});
-							/* Clean previous no-result if exist */
-							$table.find('tbody .no-result')
-								.remove();
-							/* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-							$rows.show();
-							$filteredRows.hide();
-							/* Prepend no-result row if all rows are filtered */
-							if ($filteredRows.length === $rows.length) {
-								$table
-									.find('tbody')
-									.prepend(
-										$('<tr class="no-result text-center"><td colspan="'
-											+ $table
-												.find('.filters th').length
-											+ '">No Record found</td></tr>'));
-							}
-						});
-			});
+						$('.filterable .filters input')
+								.keyup(
+										function(e) {
+											/* Ignore tab key */
+											var code = e.keyCode || e.which;
+											if (code == '9')
+												return;
+											/* Useful DOM data and selectors */
+											var $input = $(this), inputContent = $input
+													.val().toLowerCase(), $panel = $input
+													.parents('.filterable'), column = $panel
+													.find('.filters th')
+													.index($input.parents('th')), $table = $panel
+													.find('.table'), $rows = $table
+													.find('tbody tr');
+											/* Dirtiest filter function ever ;) */
+											var $filteredRows = $rows
+													.filter(function() {
+														var value = $(this)
+																.find('td').eq(
+																		column)
+																.text()
+																.toLowerCase();
+														return value
+																.indexOf(inputContent) === -1;
+													});
+											/* Clean previous no-result if exist */
+											$table.find('tbody .no-result')
+													.remove();
+											/* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+											$rows.show();
+											$filteredRows.hide();
+											/* Prepend no-result row if all rows are filtered */
+											if ($filteredRows.length === $rows.length) {
+												$table
+														.find('tbody')
+														.prepend(
+																$('<tr class="no-result text-center"><td colspan="'
+																		+ $table
+																				.find('.filters th').length
+																		+ '">No Record found</td></tr>'));
+											}
+										});
+					});
 </script>
 
 <body>
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager pt-3">
 		<div class="card  panel panel-primary filterable">
-			<div class="card-header d-flex justify-content-between align-items-center">
+			<div
+				class="card-header d-flex justify-content-between align-items-center">
 				<h6 class="headerh6">Transaction Reports</h6>
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="d-flex justify-content-between align-items-center">
 						<input type="text" id="Fromdate" th:value="${Fromdate}"
-							class="form-control form-control-sm mr-3" name="Fromdate" autocomplete="off" readonly />
-						<input type="text" id="Todate" name="cust_name" th:value="${Todate}"
-							class="form-control form-control-sm" autocomplete="false" readonly /> <input type="text"
-							id="MerchantId" th:value="${MerchantId}" class="form-control form-control-sm"
-							autocomplete="false" hidden="true" /> <input type="text" id="UnitId" th:value="${UnitId}"
-							class="form-control form-control-sm" autocomplete="false" hidden="true" /> <input
-							type="text" id="UserId" th:value="${UserId}" class="form-control form-control-sm"
-							autocomplete="false" hidden="true" /> <input type="text" id="DeviceId"
-							th:value="${DeviceId}" class="form-control form-control-sm" autocomplete="false"
+							class="form-control form-control-sm mr-3" name="Fromdate"
+							autocomplete="off" readonly /> <input type="text" id="Todate"
+							name="cust_name" th:value="${Todate}"
+							class="form-control form-control-sm" autocomplete="false"
+							readonly /> <input type="text" id="MerchantId"
+							th:value="${MerchantId}" class="form-control form-control-sm"
+							autocomplete="false" hidden="true" /> <input type="text"
+							id="UnitId" th:value="${UnitId}"
+							class="form-control form-control-sm" autocomplete="false"
+							hidden="true" /> <input type="text" id="UserId"
+							th:value="${UserId}" class="form-control form-control-sm"
+							autocomplete="false" hidden="true" /> <input type="text"
+							id="DeviceId" th:value="${DeviceId}"
+							class="form-control form-control-sm" autocomplete="false"
 							hidden="true" />
 					</div>
 					<div class="btn-group nav-buttons ml-3">
 						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-								title="Action"
+							<button class="btn btn-secondary dropdown-toggle" type="button"
+								id="dropdownMenuButton" title="Action"
 								style="line-height: 0.7; font-size: 18px; color: #162b75; font-weight: 700; background: #e3e3e4; padding: 10px;"
-								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" title="Modify"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">Download</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+								title="Modify"
 								style="line-height: 0.7; background-color: #e3e3e4;">
 								<a class="dropdown-item"
 									style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 8px 10px; top: 10px; font-size: 15px; color: #162b75; font-weight: 700;"
 									th:attr="data-fileType='pdf'" onclick="downloadPdfExcel(this);">PDF</a>
-								<div class="dropdown-divider" style="height: 2px; line-height: 0.7;"></div>
+								<div class="dropdown-divider"
+									style="height: 2px; line-height: 0.7;"></div>
 								<a class="dropdown-item" th:attr="data-fileType='xlsx'"
 									style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 8px 10px; top: 10px; font-size: 15px; color: #162b75; font-weight: 700;"
 									onclick="downloadPdfExcel(this);" title="Verify">Excel</a>
@@ -306,23 +329,41 @@
 				</div>
 			</div>
 			<div class="card-body p-0">
-				<table class="table table-striped table-bordered table-hover table-sm" id="">
+				<table
+					class="table table-striped table-bordered table-hover table-sm"
+					id="">
 					<thead>
-						<tr>
-							<th>Tran Date</th>
-							<th>Mer ID</th>
-							<th>Audit Ref</th>
-							<!-- <th>Mer Acct</th>-->
-							<th>Mer Acct Name</th>
-							<!-- <th>Cust Acct</th> -->
-							<th>Cust Acct Name</th>
-							<!-- <th>Currency</th> -->
-							<th>Amount</th>
-							<th>Status</th>
-							<th>Remarks</th>
-							<th>Rev Date</th>
-							<!-- <th>Rev Amt</th> -->
-							<th>Rev Remarks</th>
+						<tr class="filters">
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Tran Date"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Mer ID"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Audit Ref"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold"
+								placeholder="Mer Acct Name" disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold"
+								placeholder="Cust Acct Name" disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Amount"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Status"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Remarks"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Rev Date"
+								disabled></th>
+							<th style="text-align: center"><input type="text"
+								class="form-control font-weight-bold" placeholder="Rev Remarks"
+								disabled></th>
 						</tr>
 					</thead>
 					<tbody id="transactionBody">
@@ -330,7 +371,8 @@
 							<td
 								th:text="${profile.tran_date != null ? #dates.format(profile.tran_date,'dd-MM-yyyy') : ''}">
 							</td>
-							<td th:text="${profile.merchant_id !=null ? profile.merchant_id.toUpperCase() : ''}"></td>
+							<td
+								th:text="${profile.merchant_id !=null ? profile.merchant_id.toUpperCase() : ''}"></td>
 							<td
 								th:text="${profile.tran_audit_number !=null ? profile.tran_audit_number.toUpperCase() : ''}">
 							</td>
@@ -352,7 +394,8 @@
 								<td th:case="*">UNKNOWN STATUS</td>
 								<!-- Handle any other cases -->
 							</th:block>
-							<td th:text="${profile.tran_rmks !=null ? profile.tran_rmks.toUpperCase() : ''}"></td>
+							<td
+								th:text="${profile.tran_rmks !=null ? profile.tran_rmks.toUpperCase() : ''}"></td>
 							<td
 								th:text="${profile.reversal_date != null ? #dates.format(profile.reversal_date,'dd-MM-yyyy') : ''}">
 							</td>
@@ -365,26 +408,29 @@
 				</table>
 			</div>
 			<div class="card-footer text-center p-1">
-				<button type="button" class="btn btn-sm headerbutton mr-2" data-dismiss="modal"
-					onclick="home();">Home</button>
-				<button type="button" class="btn btn-sm headerbutton" data-dismiss="modal"
-					onclick="back();">Back</button>
+				<button type="button" class="btn btn-sm headerbutton mr-2"
+					data-dismiss="modal" onclick="home();">Home</button>
+				<button type="button" class="btn btn-sm headerbutton"
+					data-dismiss="modal" onclick="back();">Back</button>
 			</div>
 		</div>
 	</div>
 
 	<!-- Model Box -->
 
-	<div class="modal fade" id="myModalpopup1" data-backdrop="static" data-keyboard="false"
-		style="background: #000000b0;" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	<div class="modal fade" id="myModalpopup1" data-backdrop="static"
+		data-keyboard="false" style="background: #000000b0;"
+		aria-hidden="true">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
-				<h3 class="text-center p-2 text-white font-weight-bold" style="background: #f26223;">BANK OF BARODA
-					</h3>
-				<h4 class="modal-body text-center font-weight-bold" style="color: black !important; font-size: 19px">
-				</h4>
+				<h3 class="text-center p-2 text-white font-weight-bold"
+					style="background: #f26223;">BANK OF BARODA</h3>
+				<h4 class="modal-body text-center font-weight-bold"
+					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
-					<button type="button" class="btn mb-2" style="width: 16%; background: #f26223; font-size: 17px;"
+					<button type="button" class="btn mb-2"
+						style="width: 16%; background: #f26223; font-size: 17px;"
 						data-dismiss="modal">Close</button>
 				</div>
 			</div>

@@ -200,6 +200,7 @@ label {
 					to_date : formatToDate
 				},
 				success : function(response) {
+					alert(response);
 					count = response;
 					if (count > 0) {
 						var url = './transactionRecordsView?merchantId=' + merchantId + '&fromDate=' + fromDate + '&toDate=' + toDate + '&unitId=' + unitId + '&userId=' + userId + '&deviceId='

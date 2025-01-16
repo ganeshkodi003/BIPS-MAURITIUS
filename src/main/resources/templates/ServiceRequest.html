@@ -203,7 +203,7 @@ label {
 
 <body>
 	<div th:insert="MMenupage :: header"></div>
-	<div class="container-manager pt-3">
+	<div class="container-manager pt-2">
 		<div th:if="${formmode}=='Approvallist' OR ${formmode}=='Pendinglist'"
 			class="content">
 			<div class="card panel panel-primary filterable">
@@ -285,11 +285,11 @@ label {
 			</div>
 		</div>
 
-		<div class="content pt-3" th:if="${formmode}=='ServReq'">
+		<div class="content " th:if="${formmode}=='ServReq'">
 			<div class="card">
-				<div class=" card-header p-1">
+				<div class=" card-header ">
 					<div class="float-left">
-						<h4 class="headerh6">Service Request</h4>
+						<h4 class="headerh6 p-0">Service Request</h4>
 					</div>
 				</div>
 				<div class="card-body">

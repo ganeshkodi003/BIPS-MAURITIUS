@@ -336,7 +336,9 @@ public class NotificationParmsServices {
 				ipsAuditTableRep.save(audit);
 
 			} else if (Formmode.equals("delete")) {
-				merchantCategoryRep.deleteById(refcode);
+				System.out.println(Formmode+"FormmodeFormmode");
+				MerchantCategoryCodeEntity notificationParmsDEL = merchantCategoryRep.getlist(refcode);
+				notificationParmsDEL.setDel_flg("Y");
 				msg = "Merchant Category Code Deleted Successfully";
 			}
 		} catch (Exception e) {
