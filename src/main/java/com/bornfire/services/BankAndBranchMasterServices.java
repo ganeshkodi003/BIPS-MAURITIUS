@@ -633,9 +633,12 @@ public class BankAndBranchMasterServices {
 					}
 					user.setCurr("MUR");
 					user.setStatus("Unverified");
+					user.setHr_holdreject_flg('N');
 					user.setMerchant_acc_no(user.getBank_account_no());
 					user.setAuth_user(up1.get().getAuth_user());
 					user.setAuth_time(up1.get().getAuth_time());
+					user.setType_maucas(up1.get().getType_maucas());
+					user.setType_upi(up1.get().getType_upi());
 					user.setPhoto(user.getPhoto());
 
 					merchantMasterModRep.save(user);

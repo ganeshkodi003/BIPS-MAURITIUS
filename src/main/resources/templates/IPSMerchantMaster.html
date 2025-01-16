@@ -1351,941 +1351,942 @@
 		};
 
 		function nextViewBankDet(a) {
-			var returnValue;
-			const mainButton = document.getElementById("smooth1View");
-			const bankDetailsButton = document.getElementById("smooth2View");
+					var returnValue;
+					const mainButton = document.getElementById("smooth1View");
+					const bankDetailsButton = document.getElementById("smooth2View");
 
-			// Reset MAIN button's style
-			mainButton.style.backgroundColor = "";
-			mainButton.style.color = "";
+					// Reset MAIN button's style
+					mainButton.style.backgroundColor = "#f26223";
+					mainButton.style.color = "white";
+					bankDetailsButton.style.border = "#f26223";
+					// Set style for BANK DETAILS button
+					bankDetailsButton.style.backgroundColor = "#fde2cf";
+					bankDetailsButton.style.color = "#f26223";
+					bankDetailsButton.style.border = "#f26223";
+					bankDetailsButton.style.fontWeight = "600";
+					var Maucas = document.getElementById("type_maucas").checked;
+					var Upi = document.getElementById("type_upi").checked;
+					var MerchantLegalId = $("#merchant_legal_id").val();
+					var Merchantcorpname = $("#merchant_corp_name").val();
+					var MerchantName = $("#merchant_name").val();
+					var MerchantRegiadd = $("#merchant_addr").val();
+					var Merchantcity = $("#merchant_city").val();
+					var chargebackamount = $("#chargeback_amount").val();
+					var Merchantmode = $("#merchant_mode").val();
+					var statusenable = document.getElementById("status_enable").checked;
+					var statusdisable = document.getElementById("status_disable").checked;
+					var merchantpowcano = $("#merchant_pow_ca_no").val();
+					var merchantcatcode = $("#merchant_cat_code").val();
+					var merchanttype = $("#merchant_type").val();
+					var loyalty = $("#loyalty_number").val();
+					var purposetran = $("#purpose_of_tran").val();
+					var versionvali = $("#version").val();
+					var modesvali = $("#modes").val();
+					var purposevali = $("#purpose").val();
+					var orgidvali = $("#orgid").val();
+					var tidvali = $("#tid").val();
+					var trvali = $("#tr").val();
+					var tnvali = $("#tn").val();
+					var pavali = $("#pa").val();
+					var msidvali = $("#msid").val();
+					var mtidvali = $("#mtid").val();
+					var currvali = $("#curr").val();
+					var qrexpirevali = $("#qrexpire").val();
+					var pincodevali = $("#pincode").val();
+					var tiervali = $("#tier").val();
+					var tran_typevali = $("#tran_type").val();
+					var qrmediumvali = $("#qrmedium").val();
+					var MerLocation = $("#merchant_location").val();
+					var transamount = $("#transaction_amount").val();
+					var chargeapproval = $("input[name='chargeback_approval']:checked").val();
+					var chargeamount = $("#chargeback_amount").val();
 
-			// Set style for BANK DETAILS button
-			bankDetailsButton.style.backgroundColor = "#018398";
-			bankDetailsButton.style.color = "white";
+					var Meruserid1 = $("#mer_user_id_r1").val();
 
-			var Maucas = document.getElementById("type_maucas").checked;
-			var Upi = document.getElementById("type_upi").checked;
-			var MerchantLegalId = $("#merchant_legal_id").val();
-			var Merchantcorpname = $("#merchant_corp_name").val();
-			var MerchantName = $("#merchant_name").val();
-			var MerchantRegiadd = $("#merchant_addr").val();
-			var Merchantcity = $("#merchant_city").val();
-			var chargebackamount = $("#chargeback_amount").val();
-			var Merchantmode = $("#merchant_mode").val();
-			var statusenable = document.getElementById("status_enable").checked;
-			var statusdisable = document.getElementById("status_disable").checked;
-			var merchantpowcano = $("#merchant_pow_ca_no").val();
-			var merchantcatcode = $("#merchant_cat_code").val();
-			var merchanttype = $("#merchant_type").val();
-			var loyalty = $("#loyalty_number").val();
-			var purposetran = $("#purpose_of_tran").val();
-			var versionvali = $("#version").val();
-			var modesvali = $("#modes").val();
-			var purposevali = $("#purpose").val();
-			var orgidvali = $("#orgid").val();
-			var tidvali = $("#tid").val();
-			var trvali = $("#tr").val();
-			var tnvali = $("#tn").val();
-			var pavali = $("#pa").val();
-			var msidvali = $("#msid").val();
-			var mtidvali = $("#mtid").val();
-			var currvali = $("#curr").val();
-			var qrexpirevali = $("#qrexpire").val();
-			var pincodevali = $("#pincode").val();
-			var tiervali = $("#tier").val();
-			var tran_typevali = $("#tran_type").val();
-			var qrmediumvali = $("#qrmedium").val();
-			var MerLocation = $("#merchant_location").val();
-			var transamount = $("#transaction_amount").val();
-			var chargeapproval = $("input[name='chargeback_approval']:checked").val();
-			var chargeamount = $("#chargeback_amount").val();
+					var Mercontpers = $("#mer_cont_pers").val();
+					var Merphno = $("#mer_ph_no").val();
+					var Merofcno = $("#mer_ofc_no").val();
+					var Meremailaddr1 = $("#mer_email_addr").val();
+					var Mernotifimode = $("#mer_notifi_mode").val();
+					var Mersendnotifi = $("#send_notifi").val();
 
-			var Meruserid1 = $("#mer_user_id_r1").val();
+					var Meruserid2 = $("#mer_user_id_r2").val();
+					var Mercontpers2 = $("#mer_cont_pers_r2").val();
+					var Merphno2 = $("#mer_ph_no_r2").val();
+					var Merofcno2 = $("#mer_ofc_no_r2").val();
+					var Meremailaddr2 = $("#mer_email_addr_r2").val();
+					var Mernotifimode2 = $("#mer_notifi_mode_r2").val();
+					var Mersendnotifi2 = $("#send_notifi_r2").val();
 
-			var Mercontpers = $("#mer_cont_pers").val();
-			var Merphno = $("#mer_ph_no").val();
-			var Merofcno = $("#mer_ofc_no").val();
-			var Meremailaddr1 = $("#mer_email_addr").val();
-			var Mernotifimode = $("#mer_notifi_mode").val();
-			var Mersendnotifi = $("#send_notifi").val();
+					var Meruserid3 = $("#mer_user_id_r3").val();
+					var Mercontpers3 = $("#mer_cont_pers_r3").val();
+					var Merphno3 = $("#mer_ph_no_r3").val();
+					var Merofcno3 = $("#mer_ofc_no_r3").val();
+					var Meremailaddr3 = $("#mer_email_addr_r3").val();
+					var Mernotifimode3 = $("#mer_notifi_mode_r3").val();
+					var Mersendnotifi3 = $("#send_notifi_r3").val();
 
-			var Meruserid2 = $("#mer_user_id_r2").val();
-			var Mercontpers2 = $("#mer_cont_pers_r2").val();
-			var Merphno2 = $("#mer_ph_no_r2").val();
-			var Merofcno2 = $("#mer_ofc_no_r2").val();
-			var Meremailaddr2 = $("#mer_email_addr_r2").val();
-			var Mernotifimode2 = $("#mer_notifi_mode_r2").val();
-			var Mersendnotifi2 = $("#send_notifi_r2").val();
+					var Meruserid4 = $("#mer_user_id_r4").val();
+					var Mercontpers4 = $("#mer_cont_pers_r4").val();
+					var Merphno4 = $("#mer_ph_no_r4").val();
+					var Merofcno4 = $("#mer_ofc_no_r4").val();
+					var Meremailaddr4 = $("#mer_email_addr_r4").val();
+					var Mernotifimode4 = $("#mer_notifi_mode_r4").val();
+					var Mersendnotifi4 = $("#send_notifi_r4").val();
 
-			var Meruserid3 = $("#mer_user_id_r3").val();
-			var Mercontpers3 = $("#mer_cont_pers_r3").val();
-			var Merphno3 = $("#mer_ph_no_r3").val();
-			var Merofcno3 = $("#mer_ofc_no_r3").val();
-			var Meremailaddr3 = $("#mer_email_addr_r3").val();
-			var Mernotifimode3 = $("#mer_notifi_mode_r3").val();
-			var Mersendnotifi3 = $("#send_notifi_r3").val();
+					var Meruserid5 = $("#mer_user_id_r5").val();
+					var Mercontpers5 = $("#mer_cont_pers_r5").val();
+					var Merphno5 = $("#mer_ph_no_r5").val();
+					var Merofcno5 = $("#mer_ofc_no_r5").val();
+					var Meremailaddr5 = $("#mer_email_addr_r5").val();
+					var Mernotifimode5 = $("#mer_notifi_mode_r5").val();
+					var Mersendnotifi5 = $("#send_notifi_r5").val();
 
-			var Meruserid4 = $("#mer_user_id_r4").val();
-			var Mercontpers4 = $("#mer_cont_pers_r4").val();
-			var Merphno4 = $("#mer_ph_no_r4").val();
-			var Merofcno4 = $("#mer_ofc_no_r4").val();
-			var Meremailaddr4 = $("#mer_email_addr_r4").val();
-			var Mernotifimode4 = $("#mer_notifi_mode_r4").val();
-			var Mersendnotifi4 = $("#send_notifi_r4").val();
+					var Meruserid6 = $("#mer_user_id_r6").val();
+					var Mercontpers6 = $("#mer_cont_pers_r6").val();
+					var Merphno6 = $("#mer_ph_no_r6").val();
+					var Merofcno6 = $("#mer_ofc_no_r6").val();
+					var Meremailaddr6 = $("#mer_email_addr_r6").val();
+					var Mernotifimode6 = $("#mer_notifi_mode_r6").val();
+					var Mersendnotifi6 = $("#send_notifi_r6").val();
 
-			var Meruserid5 = $("#mer_user_id_r5").val();
-			var Mercontpers5 = $("#mer_cont_pers_r5").val();
-			var Merphno5 = $("#mer_ph_no_r5").val();
-			var Merofcno5 = $("#mer_ofc_no_r5").val();
-			var Meremailaddr5 = $("#mer_email_addr_r5").val();
-			var Mernotifimode5 = $("#mer_notifi_mode_r5").val();
-			var Mersendnotifi5 = $("#send_notifi_r5").val();
+					var Meruserid7 = $("#mer_user_id_r7").val();
+					var Mercontpers7 = $("#mer_cont_pers_r7").val();
+					var Merphno7 = $("#mer_ph_no_r7").val();
+					var Merofcno7 = $("#mer_ofc_no_r7").val();
+					var Meremailaddr7 = $("#mer_email_addr_r7").val();
+					var Mernotifimode7 = $("#mer_notifi_mode_r7").val();
+					var Mersendnotifi7 = $("#send_notifi_r7").val();
 
-			var Meruserid6 = $("#mer_user_id_r6").val();
-			var Mercontpers6 = $("#mer_cont_pers_r6").val();
-			var Merphno6 = $("#mer_ph_no_r6").val();
-			var Merofcno6 = $("#mer_ofc_no_r6").val();
-			var Meremailaddr6 = $("#mer_email_addr_r6").val();
-			var Mernotifimode6 = $("#mer_notifi_mode_r6").val();
-			var Mersendnotifi6 = $("#send_notifi_r6").val();
+					var Meruserid8 = $("#mer_user_id_r8").val();
+					var Mercontpers8 = $("#mer_cont_pers_r8").val();
+					var Merphno8 = $("#mer_ph_no_r8").val();
+					var Merofcno8 = $("#mer_ofc_no_r8").val();
+					var Meremailaddr8 = $("#mer_email_addr_r8").val();
+					var Mernotifimode8 = $("#mer_notifi_mode_r8").val();
+					var Mersendnotifi8 = $("#send_notifi_r8").val();
 
-			var Meruserid7 = $("#mer_user_id_r7").val();
-			var Mercontpers7 = $("#mer_cont_pers_r7").val();
-			var Merphno7 = $("#mer_ph_no_r7").val();
-			var Merofcno7 = $("#mer_ofc_no_r7").val();
-			var Meremailaddr7 = $("#mer_email_addr_r7").val();
-			var Mernotifimode7 = $("#mer_notifi_mode_r7").val();
-			var Mersendnotifi7 = $("#send_notifi_r7").val();
+					var Meruserid9 = $("#mer_user_id_r9").val();
+					var Mercontpers9 = $("#mer_cont_pers_r9").val();
+					var Merphno9 = $("#mer_ph_no_r9").val();
+					var Merofcno9 = $("#mer_ofc_no_r9").val();
+					var Meremailaddr9 = $("#mer_email_addr_r9").val();
+					var Mernotifimode9 = $("#mer_notifi_mode_r9").val();
+					var Mersendnotifi9 = $("#send_notifi_r9").val();
 
-			var Meruserid8 = $("#mer_user_id_r8").val();
-			var Mercontpers8 = $("#mer_cont_pers_r8").val();
-			var Merphno8 = $("#mer_ph_no_r8").val();
-			var Merofcno8 = $("#mer_ofc_no_r8").val();
-			var Meremailaddr8 = $("#mer_email_addr_r8").val();
-			var Mernotifimode8 = $("#mer_notifi_mode_r8").val();
-			var Mersendnotifi8 = $("#send_notifi_r8").val();
-
-			var Meruserid9 = $("#mer_user_id_r9").val();
-			var Mercontpers9 = $("#mer_cont_pers_r9").val();
-			var Merphno9 = $("#mer_ph_no_r9").val();
-			var Merofcno9 = $("#mer_ofc_no_r9").val();
-			var Meremailaddr9 = $("#mer_email_addr_r9").val();
-			var Mernotifimode9 = $("#mer_notifi_mode_r9").val();
-			var Mersendnotifi9 = $("#send_notifi_r9").val();
-
-			var Meruserid10 = $("#mer_user_id_r10").val();
-			var Mercontpers10 = $("#mer_cont_pers_r10").val();
-			var Merphno10 = $("#mer_ph_no_r10").val();
-			var Merofcno10 = $("#mer_ofc_no_r10").val();
-			var Meremailaddr10 = $("#mer_email_addr_r10").val();
-			var Mernotifimode10 = $("#mer_notifi_mode_r10").val();
-			var Mersendnotifi10 = $("#send_notifi_r10").val();
-			returnValue = true;
+					var Meruserid10 = $("#mer_user_id_r10").val();
+					var Mercontpers10 = $("#mer_cont_pers_r10").val();
+					var Merphno10 = $("#mer_ph_no_r10").val();
+					var Merofcno10 = $("#mer_ofc_no_r10").val();
+					var Meremailaddr10 = $("#mer_email_addr_r10").val();
+					var Mernotifimode10 = $("#mer_notifi_mode_r10").val();
+					var Mersendnotifi10 = $("#send_notifi_r10").val();
+					returnValue = true;
 
 
-			if (!Meruserid1) {
-				document.getElementById("mer_user_id_r1_vali").innerHTML = "Mer Rep ID is required.";
-				returnValue = false;
-			} else {
-				document.getElementById("mer_user_id_r1_vali").innerHTML = "";
-			}
-
-			if (Meruserid1) {
-				if (Mercontpers.trim() !== "") {
-					document.getElementById("mer_cont_pers_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-
-				if (Merphno.trim() !== "") {
-					let cleanedPhNo = Merphno.trim();
-					if (!isNaN(cleanedPhNo) && cleanedPhNo.length >= 8) {
-						document.getElementById("mer_ph_no_vali").innerHTML = "";
+					if (!Meruserid1) {
+						document.getElementById("mer_user_id_r1_vali").innerHTML = "Mer Rep ID is required.";
+						returnValue = false;
 					} else {
-						document.getElementById("mer_ph_no_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("mer_user_id_r1_vali").innerHTML = "";
+					}
+
+					if (Meruserid1) {
+						if (Mercontpers.trim() !== "") {
+							document.getElementById("mer_cont_pers_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+
+						if (Merphno.trim() !== "") {
+							let cleanedPhNo = Merphno.trim();
+							if (!isNaN(cleanedPhNo) && cleanedPhNo.length >= 8) {
+								document.getElementById("mer_ph_no_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+
+
+						if (Meremailaddr1.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr1.trim())) {
+								document.getElementById("mer_email_addr_r1_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r1_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r1_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+
+						if (Mernotifimode.trim() !== "") {
+							document.getElementById("mer_notifi_mode_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+
+						if (Mersendnotifi.trim() !== "") {
+							document.getElementById("send_notifi_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+					console.log(Meruserid1 + "12")
+					if (Meruserid2) {
+						if (Mercontpers2.trim() !== "") {
+							document.getElementById("mer_cont_pers_r2_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r2_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+
+						if (Merphno2.trim() !== "") {
+							let cleanedPhNo2 = Merphno2.trim();
+							if (!isNaN(cleanedPhNo2) && cleanedPhNo2.length >= 8) {
+								document.getElementById("mer_ph_no_r2_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r2_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r2_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno2.trim() !== "") {
+							let cleanedOfcNo2 = Merofcno2.trim();
+							if (!isNaN(cleanedOfcNo2) && cleanedOfcNo2.length >= 8) {
+								document.getElementById("mer_ofc_no_r2_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r2_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r2_vali").innerHTML = "";
+						}
+						console.log(Meruserid1 + "123")
+						if (Meremailaddr2.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr2.trim())) {
+								document.getElementById("mer_email_addr_r2_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r2_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r2_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+
+						if (Mernotifimode2.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r2_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r2_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+
+						if (Mersendnotifi2.trim() !== "") {
+							document.getElementById("send_notifi_r2_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r2_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid3) {
+						if (Mercontpers3.trim() !== "") {
+							document.getElementById("mer_cont_pers_r3_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r3_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+
+						if (Merphno3.trim() !== "") {
+							let cleanedPhNo3 = Merphno3.trim();
+							if (!isNaN(cleanedPhNo3) && cleanedPhNo3.length >= 8) {
+								document.getElementById("mer_ph_no_r3_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r3_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r3_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno3.trim() !== "") {
+							let cleanedOfcNo3 = Merofcno3.trim();
+							if (!isNaN(cleanedOfcNo3) && cleanedOfcNo3.length >= 8) {
+								document.getElementById("mer_ofc_no_r3_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r3_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r3_vali").innerHTML = "";
+						}
+
+						if (Meremailaddr3.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr3.trim())) {
+								document.getElementById("mer_email_addr_r3_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r3_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r3_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+
+						if (Mernotifimode3.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r3_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r3_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+
+						if (Mersendnotifi3.trim() !== "") {
+							document.getElementById("send_notifi_r3_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r3_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid4) {
+						if (Mercontpers4.trim() !== "") {
+							document.getElementById("mer_cont_pers_r4_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r4_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+
+						if (Merphno4.trim() !== "") {
+							let cleanedPhNo4 = Merphno4.trim();
+							if (!isNaN(cleanedPhNo4) && cleanedPhNo4.length >= 8) {
+								document.getElementById("mer_ph_no_r4_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r4_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r4_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno4.trim() !== "") {
+							let cleanedOfcNo4 = Merofcno4.trim();
+							if (!isNaN(cleanedOfcNo4) && cleanedOfcNo4.length >= 8) {
+								document.getElementById("mer_ofc_no_r4_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r4_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r4_vali").innerHTML = "";
+						}
+
+						if (Meremailaddr4.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr4.trim())) {
+								document.getElementById("mer_email_addr_r4_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r4_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r4_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+
+						if (Mernotifimode4.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r4_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r4_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+
+						if (Mersendnotifi4.trim() !== "") {
+							document.getElementById("send_notifi_r4_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r4_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid5) {
+						if (Mercontpers5.trim() !== "") {
+							document.getElementById("mer_cont_pers_r5_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r5_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+						if (Merphno5.trim() !== "") {
+							let cleanedPhNo5 = Merphno5.trim();
+							if (!isNaN(cleanedPhNo5) && cleanedPhNo5.length >= 8) {
+								document.getElementById("mer_ph_no_r5_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r5_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r5_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+						if (Merofcno5.trim() !== "") {
+							let cleanedOfcNo5 = Merofcno5.trim();
+							if (!isNaN(cleanedOfcNo5) && cleanedOfcNo5.length >= 8) {
+								document.getElementById("mer_ofc_no_r5_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r5_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r5_vali").innerHTML = "";
+						}
+						if (Meremailaddr5.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr5.trim())) {
+								document.getElementById("mer_email_addr_r5_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r5_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r5_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+						if (Mernotifimode5.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r5_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r5_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+						if (Mersendnotifi5.trim() !== "") {
+							document.getElementById("send_notifi_r5_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r5_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid6) {
+						if (Mercontpers6.trim() !== "") {
+							document.getElementById("mer_cont_pers_r6_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r6_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+						if (Merphno6.trim() !== "") {
+							let cleanedPhNo6 = Merphno6.trim();
+							if (!isNaN(cleanedPhNo6) && cleanedPhNo6.length >= 8) {
+								document.getElementById("mer_ph_no_r6_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r6_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r6_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno6.trim() !== "") {
+							let cleanedOfcNo6 = Merofcno6.trim();
+							if (!isNaN(cleanedOfcNo6) && cleanedOfcNo6.length >= 8) {
+								document.getElementById("mer_ofc_no_r6_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r6_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r6_vali").innerHTML = "";
+						}
+
+						if (Meremailaddr6.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr6.trim())) {
+								document.getElementById("mer_email_addr_r6_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r6_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r6_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+						if (Mernotifimode6.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r6_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r6_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+						if (Mersendnotifi6.trim() !== "") {
+							document.getElementById("send_notifi_r6_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r6_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid7) {
+						if (Mercontpers7.trim() !== "") {
+							document.getElementById("mer_cont_pers_r7_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r7_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+						if (Merphno7.trim() !== "") {
+							let cleanedPhNo7 = Merphno7.trim();
+							if (!isNaN(cleanedPhNo7) && cleanedPhNo7.length >= 8) {
+								document.getElementById("mer_ph_no_r7_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r7_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r7_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno7.trim() !== "") {
+							let cleanedOfcNo7 = Merofcno7.trim();
+							if (!isNaN(cleanedOfcNo7) && cleanedOfcNo7.length >= 8) {
+								document.getElementById("mer_ofc_no_r7_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r7_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r7_vali").innerHTML = "";
+						}
+						if (Meremailaddr7.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr7.trim())) {
+								document.getElementById("mer_email_addr_r7_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r7_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r7_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+						if (Mernotifimode7.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r7_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r7_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+						if (Mersendnotifi7.trim() !== "") {
+							document.getElementById("send_notifi_r7_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r7_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid8) {
+						if (Mercontpers8.trim() !== "") {
+							document.getElementById("mer_cont_pers_r8_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r8_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+						if (Merphno8.trim() !== "") {
+							let cleanedPhNo8 = Merphno8.trim();
+							if (!isNaN(cleanedPhNo8) && cleanedPhNo8.length >= 8) {
+								document.getElementById("mer_ph_no_r8_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r8_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r8_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno8.trim() !== "") {
+							let cleanedOfcNo8 = Merofcno8.trim();
+							if (!isNaN(cleanedOfcNo8) && cleanedOfcNo8.length >= 8) {
+								document.getElementById("mer_ofc_no_r8_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r8_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r8_vali").innerHTML = "";
+						}
+						if (Meremailaddr8.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr8.trim())) {
+								document.getElementById("mer_email_addr_r8_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r8_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r8_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+						if (Mernotifimode8.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r8_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r8_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+						if (Mersendnotifi8.trim() !== "") {
+							document.getElementById("send_notifi_r8_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r8_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid9) {
+						if (Mercontpers9.trim() !== "") {
+							document.getElementById("mer_cont_pers_r9_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r9_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+						if (Merphno9.trim() !== "") {
+							let cleanedPhNo9 = Merphno9.trim();
+							if (!isNaN(cleanedPhNo9) && cleanedPhNo9.length >= 8) {
+								document.getElementById("mer_ph_no_r9_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r9_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r9_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno9.trim() !== "") {
+							let cleanedOfcNo9 = Merofcno9.trim();
+							if (!isNaN(cleanedOfcNo9) && cleanedOfcNo9.length >= 8) {
+								document.getElementById("mer_ofc_no_r9_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r9_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r9_vali").innerHTML = "";
+						}
+						if (Meremailaddr9.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr9.trim())) {
+								document.getElementById("mer_email_addr_r9_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r9_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r9_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+						if (Mernotifimode9.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r9_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r9_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+						if (Mersendnotifi9.trim() !== "") {
+							document.getElementById("send_notifi_r9_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r9_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (Meruserid10) {
+						if (Mercontpers10.trim() !== "") {
+							document.getElementById("mer_cont_pers_r10_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_cont_pers_r10_vali").innerHTML = "Contact Person is required.";
+							returnValue = false;
+						}
+						if (Merphno10.trim() !== "") {
+							let cleanedPhNo10 = Merphno10.trim();
+							if (!isNaN(cleanedPhNo10) && cleanedPhNo10.length >= 8) {
+								document.getElementById("mer_ph_no_r10_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ph_no_r10_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ph_no_r10_vali").innerHTML = "Phone Number is required.";
+							returnValue = false;
+						}
+
+						if (Merofcno10.trim() !== "") {
+							let cleanedOfcNo10 = Merofcno10.trim();
+							if (!isNaN(cleanedOfcNo10) && cleanedOfcNo10.length >= 8) {
+								document.getElementById("mer_ofc_no_r10_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_ofc_no_r10_vali").innerHTML = "Please enter at least 8 digits.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_ofc_no_r10_vali").innerHTML = "";
+						}
+						if (Meremailaddr10.trim() !== "") {
+							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr10.trim())) {
+								document.getElementById("mer_email_addr_r10_vali").innerHTML = "";
+							} else {
+								document.getElementById("mer_email_addr_r10_vali").innerHTML = "Enter a valid email address.";
+								returnValue = false;
+							}
+						} else {
+							document.getElementById("mer_email_addr_r10_vali").innerHTML = "Email is required.";
+							returnValue = false;
+						}
+						if (Mernotifimode10.trim() !== "") {
+							document.getElementById("mer_notifi_mode_r10_vali").innerHTML = "";
+						} else {
+							document.getElementById("mer_notifi_mode_r10_vali").innerHTML = "Notification is required.";
+							returnValue = false;
+						}
+						if (Mersendnotifi10.trim() !== "") {
+							document.getElementById("send_notifi_r10_vali").innerHTML = "";
+						} else {
+							document.getElementById("send_notifi_r10_vali").innerHTML = "Send Notification is required.";
+							returnValue = false;
+						}
+					}
+
+					if (!MerLocation.trim() == "") {
+						document.getElementById("merchant_location_vali").innerHTML = "";
+					} else {
+						document.getElementById("merchant_location_vali").innerHTML = "Select Location";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ph_no_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-
-
-				if (Meremailaddr1.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr1.trim())) {
-						document.getElementById("mer_email_addr_r1_vali").innerHTML = "";
+					if (!transamount.trim() == "") {
+						document.getElementById("trans_amt_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_email_addr_r1_vali").innerHTML = "Enter a valid email address.";
+						document.getElementById("trans_amt_vali").innerHTML = "Transaction amount is required";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_email_addr_r1_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-
-				if (Mernotifimode.trim() !== "") {
-					document.getElementById("mer_notifi_mode_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-
-				if (Mersendnotifi.trim() !== "") {
-					document.getElementById("send_notifi_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-			console.log(Meruserid1 + "12")
-			if (Meruserid2) {
-				if (Mercontpers2.trim() !== "") {
-					document.getElementById("mer_cont_pers_r2_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r2_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-
-				if (Merphno2.trim() !== "") {
-					let cleanedPhNo2 = Merphno2.trim();
-					if (!isNaN(cleanedPhNo2) && cleanedPhNo2.length >= 8) {
-						document.getElementById("mer_ph_no_r2_vali").innerHTML = "";
+					// Validate Charge Back Approval
+					if (chargeapproval) {
+						document.getElementById("chargeback_approval_vali").innerHTML = "";
+						// If Merchant is selected, validate Charge Back Amount
+						if (chargeapproval === "MERCHANT") {
+							if (chargeamount.trim() !== "") {
+								document.getElementById("chargeback_amount_vali").innerHTML = "";
+							} else {
+								document.getElementById("chargeback_amount_vali").innerHTML = "Chargeback amount is required";
+								returnValue = false;
+							}
+						}
 					} else {
-						document.getElementById("mer_ph_no_r2_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("chargeback_approval_vali").innerHTML = "Chargeback approval is required";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ph_no_r2_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno2.trim() !== "") {
-					let cleanedOfcNo2 = Merofcno2.trim();
-					if (!isNaN(cleanedOfcNo2) && cleanedOfcNo2.length >= 8) {
-						document.getElementById("mer_ofc_no_r2_vali").innerHTML = "";
+					if (!MerchantLegalId.trim() == "") {
+						document.getElementById("merchant_legal_id_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_ofc_no_r2_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("merchant_legal_id_vali").innerHTML = "Merchant id is required.";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ofc_no_r2_vali").innerHTML = "";
-				}
-				console.log(Meruserid1 + "123")
-				if (Meremailaddr2.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr2.trim())) {
-						document.getElementById("mer_email_addr_r2_vali").innerHTML = "";
+					if (!Merchantcorpname.trim() == "") {
+						document.getElementById("merchant_corp_name_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_email_addr_r2_vali").innerHTML = "Enter a valid email address.";
+						document.getElementById("merchant_corp_name_vali").innerHTML = "Merchant Corporate Name is required.";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_email_addr_r2_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-
-				if (Mernotifimode2.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r2_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r2_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-
-				if (Mersendnotifi2.trim() !== "") {
-					document.getElementById("send_notifi_r2_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r2_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (Meruserid3) {
-				if (Mercontpers3.trim() !== "") {
-					document.getElementById("mer_cont_pers_r3_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r3_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-
-				if (Merphno3.trim() !== "") {
-					let cleanedPhNo3 = Merphno3.trim();
-					if (!isNaN(cleanedPhNo3) && cleanedPhNo3.length >= 8) {
-						document.getElementById("mer_ph_no_r3_vali").innerHTML = "";
+					if (!MerchantName.trim() == "") {
+						document.getElementById("merchant_name_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_ph_no_r3_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("merchant_name_vali").innerHTML = "Merchant Name is required.";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ph_no_r3_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno3.trim() !== "") {
-					let cleanedOfcNo3 = Merofcno3.trim();
-					if (!isNaN(cleanedOfcNo3) && cleanedOfcNo3.length >= 8) {
-						document.getElementById("mer_ofc_no_r3_vali").innerHTML = "";
+					if (!Merchantcity.trim() == "") {
+						document.getElementById("merchant_city_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_ofc_no_r3_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("merchant_city_vali").innerHTML = "Merchant City is required.";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ofc_no_r3_vali").innerHTML = "";
-				}
-
-				if (Meremailaddr3.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr3.trim())) {
-						document.getElementById("mer_email_addr_r3_vali").innerHTML = "";
+					if (!MerchantRegiadd.trim() == "") {
+						document.getElementById("merchant_addr_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_email_addr_r3_vali").innerHTML = "Enter a valid email address.";
+						document.getElementById("merchant_addr_vali").innerHTML = "Merchant Registered Address is required.";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_email_addr_r3_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-
-				if (Mernotifimode3.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r3_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r3_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-
-				if (Mersendnotifi3.trim() !== "") {
-					document.getElementById("send_notifi_r3_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r3_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (Meruserid4) {
-				if (Mercontpers4.trim() !== "") {
-					document.getElementById("mer_cont_pers_r4_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r4_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-
-				if (Merphno4.trim() !== "") {
-					let cleanedPhNo4 = Merphno4.trim();
-					if (!isNaN(cleanedPhNo4) && cleanedPhNo4.length >= 8) {
-						document.getElementById("mer_ph_no_r4_vali").innerHTML = "";
+					if (!Merchantmode.trim() == "") {
+						document.getElementById("merchant_mode_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_ph_no_r4_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("merchant_mode_vali").innerHTML = "Merchant Mode is required.";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ph_no_r4_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno4.trim() !== "") {
-					let cleanedOfcNo4 = Merofcno4.trim();
-					if (!isNaN(cleanedOfcNo4) && cleanedOfcNo4.length >= 8) {
-						document.getElementById("mer_ofc_no_r4_vali").innerHTML = "";
+					if (statusenable == true) {
+						document.getElementById("status_enable_vali").innerHTML = "";
+					} else if (statusdisable == true) {
+						document.getElementById("status_enable_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_ofc_no_r4_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("status_enable_vali").innerHTML = "Select Merchant status";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ofc_no_r4_vali").innerHTML = "";
-				}
-
-				if (Meremailaddr4.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr4.trim())) {
-						document.getElementById("mer_email_addr_r4_vali").innerHTML = "";
+					if (!merchantcatcode.trim() == "") {
+						document.getElementById("merchant_cat_code_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_email_addr_r4_vali").innerHTML = "Enter a valid email address.";
+						document.getElementById("merchant_cat_code_vali").innerHTML = "Select Merchant Category Code";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_email_addr_r4_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-
-				if (Mernotifimode4.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r4_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r4_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-
-				if (Mersendnotifi4.trim() !== "") {
-					document.getElementById("send_notifi_r4_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r4_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (Meruserid5) {
-				if (Mercontpers5.trim() !== "") {
-					document.getElementById("mer_cont_pers_r5_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r5_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-				if (Merphno5.trim() !== "") {
-					let cleanedPhNo5 = Merphno5.trim();
-					if (!isNaN(cleanedPhNo5) && cleanedPhNo5.length >= 8) {
-						document.getElementById("mer_ph_no_r5_vali").innerHTML = "";
+					if (!merchanttype.trim() == "") {
+						document.getElementById("merchant_type_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_ph_no_r5_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("merchant_type_vali").innerHTML = "Select Merchant Category Code";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ph_no_r5_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-				if (Merofcno5.trim() !== "") {
-					let cleanedOfcNo5 = Merofcno5.trim();
-					if (!isNaN(cleanedOfcNo5) && cleanedOfcNo5.length >= 8) {
-						document.getElementById("mer_ofc_no_r5_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ofc_no_r5_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ofc_no_r5_vali").innerHTML = "";
-				}
-				if (Meremailaddr5.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr5.trim())) {
-						document.getElementById("mer_email_addr_r5_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_email_addr_r5_vali").innerHTML = "Enter a valid email address.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_email_addr_r5_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-				if (Mernotifimode5.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r5_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r5_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-				if (Mersendnotifi5.trim() !== "") {
-					document.getElementById("send_notifi_r5_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r5_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
 
-			if (Meruserid6) {
-				if (Mercontpers6.trim() !== "") {
-					document.getElementById("mer_cont_pers_r6_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r6_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-				if (Merphno6.trim() !== "") {
-					let cleanedPhNo6 = Merphno6.trim();
-					if (!isNaN(cleanedPhNo6) && cleanedPhNo6.length >= 8) {
-						document.getElementById("mer_ph_no_r6_vali").innerHTML = "";
+					if (Maucas == true) {
+						document.getElementById("merchant_type_qr_accp_vali").innerHTML = "";
+					} else if (Upi == true) {
+						document.getElementById("merchant_type_qr_accp_vali").innerHTML = "";
 					} else {
-						document.getElementById("mer_ph_no_r6_vali").innerHTML = "Please enter at least 8 digits.";
+						document.getElementById("merchant_type_qr_accp_vali").innerHTML = "Select Type of QR Acceptance";
 						returnValue = false;
 					}
-				} else {
-					document.getElementById("mer_ph_no_r6_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno6.trim() !== "") {
-					let cleanedOfcNo6 = Merofcno6.trim();
-					if (!isNaN(cleanedOfcNo6) && cleanedOfcNo6.length >= 8) {
-						document.getElementById("mer_ofc_no_r6_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ofc_no_r6_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ofc_no_r6_vali").innerHTML = "";
-				}
-
-				if (Meremailaddr6.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr6.trim())) {
-						document.getElementById("mer_email_addr_r6_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_email_addr_r6_vali").innerHTML = "Enter a valid email address.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_email_addr_r6_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-				if (Mernotifimode6.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r6_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r6_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-				if (Mersendnotifi6.trim() !== "") {
-					document.getElementById("send_notifi_r6_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r6_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (Meruserid7) {
-				if (Mercontpers7.trim() !== "") {
-					document.getElementById("mer_cont_pers_r7_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r7_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-				if (Merphno7.trim() !== "") {
-					let cleanedPhNo7 = Merphno7.trim();
-					if (!isNaN(cleanedPhNo7) && cleanedPhNo7.length >= 8) {
-						document.getElementById("mer_ph_no_r7_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ph_no_r7_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ph_no_r7_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno7.trim() !== "") {
-					let cleanedOfcNo7 = Merofcno7.trim();
-					if (!isNaN(cleanedOfcNo7) && cleanedOfcNo7.length >= 8) {
-						document.getElementById("mer_ofc_no_r7_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ofc_no_r7_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ofc_no_r7_vali").innerHTML = "";
-				}
-				if (Meremailaddr7.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr7.trim())) {
-						document.getElementById("mer_email_addr_r7_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_email_addr_r7_vali").innerHTML = "Enter a valid email address.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_email_addr_r7_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-				if (Mernotifimode7.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r7_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r7_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-				if (Mersendnotifi7.trim() !== "") {
-					document.getElementById("send_notifi_r7_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r7_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (Meruserid8) {
-				if (Mercontpers8.trim() !== "") {
-					document.getElementById("mer_cont_pers_r8_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r8_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-				if (Merphno8.trim() !== "") {
-					let cleanedPhNo8 = Merphno8.trim();
-					if (!isNaN(cleanedPhNo8) && cleanedPhNo8.length >= 8) {
-						document.getElementById("mer_ph_no_r8_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ph_no_r8_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ph_no_r8_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno8.trim() !== "") {
-					let cleanedOfcNo8 = Merofcno8.trim();
-					if (!isNaN(cleanedOfcNo8) && cleanedOfcNo8.length >= 8) {
-						document.getElementById("mer_ofc_no_r8_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ofc_no_r8_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ofc_no_r8_vali").innerHTML = "";
-				}
-				if (Meremailaddr8.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr8.trim())) {
-						document.getElementById("mer_email_addr_r8_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_email_addr_r8_vali").innerHTML = "Enter a valid email address.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_email_addr_r8_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-				if (Mernotifimode8.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r8_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r8_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-				if (Mersendnotifi8.trim() !== "") {
-					document.getElementById("send_notifi_r8_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r8_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (Meruserid9) {
-				if (Mercontpers9.trim() !== "") {
-					document.getElementById("mer_cont_pers_r9_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r9_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-				if (Merphno9.trim() !== "") {
-					let cleanedPhNo9 = Merphno9.trim();
-					if (!isNaN(cleanedPhNo9) && cleanedPhNo9.length >= 8) {
-						document.getElementById("mer_ph_no_r9_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ph_no_r9_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ph_no_r9_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno9.trim() !== "") {
-					let cleanedOfcNo9 = Merofcno9.trim();
-					if (!isNaN(cleanedOfcNo9) && cleanedOfcNo9.length >= 8) {
-						document.getElementById("mer_ofc_no_r9_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ofc_no_r9_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ofc_no_r9_vali").innerHTML = "";
-				}
-				if (Meremailaddr9.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr9.trim())) {
-						document.getElementById("mer_email_addr_r9_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_email_addr_r9_vali").innerHTML = "Enter a valid email address.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_email_addr_r9_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-				if (Mernotifimode9.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r9_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r9_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-				if (Mersendnotifi9.trim() !== "") {
-					document.getElementById("send_notifi_r9_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r9_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (Meruserid10) {
-				if (Mercontpers10.trim() !== "") {
-					document.getElementById("mer_cont_pers_r10_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_cont_pers_r10_vali").innerHTML = "Contact Person is required.";
-					returnValue = false;
-				}
-				if (Merphno10.trim() !== "") {
-					let cleanedPhNo10 = Merphno10.trim();
-					if (!isNaN(cleanedPhNo10) && cleanedPhNo10.length >= 8) {
-						document.getElementById("mer_ph_no_r10_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ph_no_r10_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ph_no_r10_vali").innerHTML = "Phone Number is required.";
-					returnValue = false;
-				}
-
-				if (Merofcno10.trim() !== "") {
-					let cleanedOfcNo10 = Merofcno10.trim();
-					if (!isNaN(cleanedOfcNo10) && cleanedOfcNo10.length >= 8) {
-						document.getElementById("mer_ofc_no_r10_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_ofc_no_r10_vali").innerHTML = "Please enter at least 8 digits.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_ofc_no_r10_vali").innerHTML = "";
-				}
-				if (Meremailaddr10.trim() !== "") {
-					if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr10.trim())) {
-						document.getElementById("mer_email_addr_r10_vali").innerHTML = "";
-					} else {
-						document.getElementById("mer_email_addr_r10_vali").innerHTML = "Enter a valid email address.";
-						returnValue = false;
-					}
-				} else {
-					document.getElementById("mer_email_addr_r10_vali").innerHTML = "Email is required.";
-					returnValue = false;
-				}
-				if (Mernotifimode10.trim() !== "") {
-					document.getElementById("mer_notifi_mode_r10_vali").innerHTML = "";
-				} else {
-					document.getElementById("mer_notifi_mode_r10_vali").innerHTML = "Notification is required.";
-					returnValue = false;
-				}
-				if (Mersendnotifi10.trim() !== "") {
-					document.getElementById("send_notifi_r10_vali").innerHTML = "";
-				} else {
-					document.getElementById("send_notifi_r10_vali").innerHTML = "Send Notification is required.";
-					returnValue = false;
-				}
-			}
-
-			if (!MerLocation.trim() == "") {
-				document.getElementById("merchant_location_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_location_vali").innerHTML = "Select Location";
-				returnValue = false;
-			}
-			if (!transamount.trim() == "") {
-				document.getElementById("trans_amt_vali").innerHTML = "";
-			} else {
-				document.getElementById("trans_amt_vali").innerHTML = "Transaction amount is required";
-				returnValue = false;
-			}
-			// Validate Charge Back Approval
-			if (chargeapproval) {
-				document.getElementById("chargeback_approval_vali").innerHTML = "";
-				// If Merchant is selected, validate Charge Back Amount
-				if (chargeapproval === "MERCHANT") {
-					if (chargeamount.trim() !== "") {
-						document.getElementById("chargeback_amount_vali").innerHTML = "";
-					} else {
-						document.getElementById("chargeback_amount_vali").innerHTML = "Chargeback amount is required";
-						returnValue = false;
-					}
-				}
-			} else {
-				document.getElementById("chargeback_approval_vali").innerHTML = "Chargeback approval is required";
-				returnValue = false;
-			}
-			if (!MerchantLegalId.trim() == "") {
-				document.getElementById("merchant_legal_id_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_legal_id_vali").innerHTML = "Merchant id is required.";
-				returnValue = false;
-			}
-			if (!Merchantcorpname.trim() == "") {
-				document.getElementById("merchant_corp_name_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_corp_name_vali").innerHTML = "Merchant Corporate Name is required.";
-				returnValue = false;
-			}
-			if (!MerchantName.trim() == "") {
-				document.getElementById("merchant_name_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_name_vali").innerHTML = "Merchant Name is required.";
-				returnValue = false;
-			}
-			if (!Merchantcity.trim() == "") {
-				document.getElementById("merchant_city_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_city_vali").innerHTML = "Merchant City is required.";
-				returnValue = false;
-			}
-			if (!MerchantRegiadd.trim() == "") {
-				document.getElementById("merchant_addr_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_addr_vali").innerHTML = "Merchant Registered Address is required.";
-				returnValue = false;
-			}
-			if (!Merchantmode.trim() == "") {
-				document.getElementById("merchant_mode_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_mode_vali").innerHTML = "Merchant Mode is required.";
-				returnValue = false;
-			}
-			if (statusenable == true) {
-				document.getElementById("status_enable_vali").innerHTML = "";
-			} else if (statusdisable == true) {
-				document.getElementById("status_enable_vali").innerHTML = "";
-			} else {
-				document.getElementById("status_enable_vali").innerHTML = "Select Merchant status";
-				returnValue = false;
-			}
-			if (!merchantcatcode.trim() == "") {
-				document.getElementById("merchant_cat_code_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_cat_code_vali").innerHTML = "Select Merchant Category Code";
-				returnValue = false;
-			}
-			if (!merchanttype.trim() == "") {
-				document.getElementById("merchant_type_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_type_vali").innerHTML = "Select Merchant Category Code";
-				returnValue = false;
-			}
-
-			if (Maucas == true) {
-				document.getElementById("merchant_type_qr_accp_vali").innerHTML = "";
-			} else if (Upi == true) {
-				document.getElementById("merchant_type_qr_accp_vali").innerHTML = "";
-			} else {
-				document.getElementById("merchant_type_qr_accp_vali").innerHTML = "Select Type of QR Acceptance";
-				returnValue = false;
-			}
 
 
-			if (Maucas == true) {
-				if (!loyalty.trim() == "") {
-					document.getElementById("loyalty_number_vali").innerHTML = "";
-				} else {
-					$('#Loyalty_span').css({"display": "block", "color": "red"});
-					document.getElementById("loyalty_number_vali").innerHTML = "Enter Loyalty Number";
-					returnValue1 = false;
-				}
-				if (!purposetran.trim() == "") {
-					document.getElementById("purpose_of_tran_vali").innerHTML = "";
-				} else {
-					$('#Purpose_span').css({"display": "block", "color": "red"});
-					document.getElementById("purpose_of_tran_vali").innerHTML = "Purpose Of Transaction";
-					returnValue1 = false;
-				}
-			}
-			if (Upi == true) {
-				if (!versionvali.trim() == "") {
-					document.getElementById("version_vali").innerHTML = "";
-				} else {
-					$('#version_id').css({"display": "block", "color": "red"});
-					document.getElementById("version_vali").innerHTML = "Enter Version";
-					returnValue = false;
-				}
-				if (!modesvali.trim() == "") {
-					document.getElementById("modes_vali").innerHTML = "";
-				} else {
-					$('#modes_span').css({"display": "block", "color": "red"});
-					document.getElementById("modes_vali").innerHTML = "Select Modes";
-					returnValue = false;
-				}
-				if (!purposevali.trim() == "") {
-					document.getElementById("purpose_vali").innerHTML = "";
-				} else {
-					$('#purpose_span').css({"display": "block", "color": "red"});
-					document.getElementById("purpose_vali").innerHTML = "Select Purpose";
-					returnValue = false;
-				}
+					if (Maucas == true) {
+						if (!loyalty.trim() == "") {
+							document.getElementById("loyalty_number_vali").innerHTML = "";
+						} else {
+							$('#Loyalty_span').css({"display": "block", "color": "red"});
+							document.getElementById("loyalty_number_vali").innerHTML = "Enter Loyalty Number";
+							returnValue1 = false;
+						}
+						if (!purposetran.trim() == "") {
+							document.getElementById("purpose_of_tran_vali").innerHTML = "";
+						} else {
+							$('#Purpose_span').css({"display": "block", "color": "red"});
+							document.getElementById("purpose_of_tran_vali").innerHTML = "Purpose Of Transaction";
+							returnValue1 = false;
+						}
+					}
+					if (Upi == true) {
+						if (!versionvali.trim() == "") {
+							document.getElementById("version_vali").innerHTML = "";
+						} else {
+							$('#version_id').css({"display": "block", "color": "red"});
+							document.getElementById("version_vali").innerHTML = "Enter Version";
+							returnValue = false;
+						}
+						if (!modesvali.trim() == "") {
+							document.getElementById("modes_vali").innerHTML = "";
+						} else {
+							$('#modes_span').css({"display": "block", "color": "red"});
+							document.getElementById("modes_vali").innerHTML = "Select Modes";
+							returnValue = false;
+						}
+						if (!purposevali.trim() == "") {
+							document.getElementById("purpose_vali").innerHTML = "";
+						} else {
+							$('#purpose_span').css({"display": "block", "color": "red"});
+							document.getElementById("purpose_vali").innerHTML = "Select Purpose";
+							returnValue = false;
+						}
 
-				if (!tidvali.trim() == "") {
-					document.getElementById("tid_vali").innerHTML = "";
-				} else {
-					$('#tid_span').css({"display": "block", "color": "red"});
-					document.getElementById("tid_vali").innerHTML = "Enter Transaction ID";
-					returnValue = false;
-				}
-				if (!trvali.trim() == "") {
-					document.getElementById("tr_vali").innerHTML = "";
-				} else {
-					$('#tr_span').css({"display": "block", "color": "red"});
-					document.getElementById("tr_vali").innerHTML = "Enter Transaction Reference";
-					returnValue = false;
-				}
-				if (!tnvali.trim() == "") {
-					document.getElementById("tn_vali").innerHTML = "";
-				} else {
-					$('#tn_span').css({"display": "block", "color": "red"});
-					document.getElementById("tn_vali").innerHTML = "Enter Transaction Note";
-					returnValue = false;
-				}
-				if (!versionvali.trim() == "") {
-					document.getElementById("pa_vali").innerHTML = "";
-				} else {
-					$('#pa_span').css({"display": "block", "color": "red"});
-					document.getElementById("pa_vali").innerHTML = "Enter Payee UPI ID";
-					returnValue = false;
-				}
-				if (!msidvali.trim() == "") {
-					document.getElementById("msgid_vali").innerHTML = "";
-				} else {
-					$('#msid_span').css({"display": "block", "color": "red"});
-					document.getElementById("msgid_vali").innerHTML = "Enter Store ID";
-					returnValue = false;
-				}
-				if (!mtidvali.trim() == "") {
-					document.getElementById("mtid_vali").innerHTML = "";
-				} else {
-					$('#mtid_span').css({"display": "block", "color": "red"});
-					document.getElementById("mtid_vali").innerHTML = "Enter Merchant Terminal ID";
-					returnValue = false;
-				}
-				if (!currvali.trim() == "") {
-					document.getElementById("curr_vali").innerHTML = "";
-				} else {
-					$('#curr_span').css({"display": "block", "color": "red"});
-					document.getElementById("curr_vali").innerHTML = "Enter Transaction currency code";
-					returnValue = false;
-				}
-				if (!qrexpirevali.trim() == "") {
-					document.getElementById("qrexpire_vali").innerHTML = "";
-				} else {
-					$('#qrexpire_span').css({"display": "block", "color": "red"});
-					document.getElementById("qrexpire_vali").innerHTML = "Select Qr Expiry date";
-					returnValue = false;
-				}
-				if (!pincodevali.trim() == "") {
-					document.getElementById("pincode_vali").innerHTML = "";
-				} else {
-					$('#pincode_span').css({"display": "block", "color": "red"});
-					document.getElementById("pincode_vali").innerHTML = "Enter Merchenat pincode";
-					returnValue = false;
-				}
-				if (!tiervali.trim() == "") {
-					document.getElementById("tier_vali").innerHTML = "";
-				} else {
-					$('#tier_span').css({"display": "block", "color": "red"});
-					document.getElementById("tier_vali").innerHTML = "Select Merchant Tier";
-					returnValue = false;
-				}
-				if (!tran_typevali.trim() == "") {
-					document.getElementById("tran_type_vali").innerHTML = "";
-				} else {
-					$('#tran_type_span').css({"display": "block", "color": "red"});
-					document.getElementById("tran_type_vali").innerHTML = "Enter Merchant Tran Type";
-					returnValue = false;
-				}
-				if (!qrmediumvali.trim() == "") {
-					document.getElementById("qrmedium_vali").innerHTML = "";
-				} else {
-					$('#qrmedium_span').css({"display": "block", "color": "red"});
-					document.getElementById("qrmedium_vali").innerHTML = "Select Qr Medium";
-					returnValue = false;
-				}
-			}
-			//returnValue = true;
-			if (returnValue == true) {
-				$("#one-panel").css("display", "none");
-				$("#four1-panel").css("display", "block");
-			} else {
-				$("#ADDMANRSN").text("ENTER REQUIRED FIELD'S");
-				$('#Addval').modal("toggle");
-			}
+						if (!tidvali.trim() == "") {
+							document.getElementById("tid_vali").innerHTML = "";
+						} else {
+							$('#tid_span').css({"display": "block", "color": "red"});
+							document.getElementById("tid_vali").innerHTML = "Enter Transaction ID";
+							returnValue = false;
+						}
+						if (!trvali.trim() == "") {
+							document.getElementById("tr_vali").innerHTML = "";
+						} else {
+							$('#tr_span').css({"display": "block", "color": "red"});
+							document.getElementById("tr_vali").innerHTML = "Enter Transaction Reference";
+							returnValue = false;
+						}
+						if (!tnvali.trim() == "") {
+							document.getElementById("tn_vali").innerHTML = "";
+						} else {
+							$('#tn_span').css({"display": "block", "color": "red"});
+							document.getElementById("tn_vali").innerHTML = "Enter Transaction Note";
+							returnValue = false;
+						}
+						if (!versionvali.trim() == "") {
+							document.getElementById("pa_vali").innerHTML = "";
+						} else {
+							$('#pa_span').css({"display": "block", "color": "red"});
+							document.getElementById("pa_vali").innerHTML = "Enter Payee UPI ID";
+							returnValue = false;
+						}
+						if (!msidvali.trim() == "") {
+							document.getElementById("msgid_vali").innerHTML = "";
+						} else {
+							$('#msid_span').css({"display": "block", "color": "red"});
+							document.getElementById("msgid_vali").innerHTML = "Enter Store ID";
+							returnValue = false;
+						}
+						if (!mtidvali.trim() == "") {
+							document.getElementById("mtid_vali").innerHTML = "";
+						} else {
+							$('#mtid_span').css({"display": "block", "color": "red"});
+							document.getElementById("mtid_vali").innerHTML = "Enter Merchant Terminal ID";
+							returnValue = false;
+						}
+						if (!currvali.trim() == "") {
+							document.getElementById("curr_vali").innerHTML = "";
+						} else {
+							$('#curr_span').css({"display": "block", "color": "red"});
+							document.getElementById("curr_vali").innerHTML = "Enter Transaction currency code";
+							returnValue = false;
+						}
+						if (!qrexpirevali.trim() == "") {
+							document.getElementById("qrexpire_vali").innerHTML = "";
+						} else {
+							$('#qrexpire_span').css({"display": "block", "color": "red"});
+							document.getElementById("qrexpire_vali").innerHTML = "Select Qr Expiry date";
+							returnValue = false;
+						}
+						if (!pincodevali.trim() == "") {
+							document.getElementById("pincode_vali").innerHTML = "";
+						} else {
+							$('#pincode_span').css({"display": "block", "color": "red"});
+							document.getElementById("pincode_vali").innerHTML = "Enter Merchenat pincode";
+							returnValue = false;
+						}
+						if (!tiervali.trim() == "") {
+							document.getElementById("tier_vali").innerHTML = "";
+						} else {
+							$('#tier_span').css({"display": "block", "color": "red"});
+							document.getElementById("tier_vali").innerHTML = "Select Merchant Tier";
+							returnValue = false;
+						}
+						if (!tran_typevali.trim() == "") {
+							document.getElementById("tran_type_vali").innerHTML = "";
+						} else {
+							$('#tran_type_span').css({"display": "block", "color": "red"});
+							document.getElementById("tran_type_vali").innerHTML = "Enter Merchant Tran Type";
+							returnValue = false;
+						}
+						if (!qrmediumvali.trim() == "") {
+							document.getElementById("qrmedium_vali").innerHTML = "";
+						} else {
+							$('#qrmedium_span').css({"display": "block", "color": "red"});
+							document.getElementById("qrmedium_vali").innerHTML = "Select Qr Medium";
+							returnValue = false;
+						}
+					}
+					//returnValue = true;
+					if (returnValue == true) {
+						$("#one-panel").css("display", "none");
+						$("#four1-panel").css("display", "block");
+					} else {
+						$("#ADDMANRSN").text("ENTER REQUIRED FIELD'S");
+						$('#Addval').modal("toggle");
+					}
 
-			submitfile();
-		}
+					submitfile();
+				}
 
 		// MERCHANT ADD : END
 
@@ -2461,14 +2462,15 @@
 		}
 
 		function changeColor(button) {
-			const buttons = document.querySelectorAll('.tablinks');
-			buttons.forEach((btn) => {
-				btn.style.backgroundColor = '';
-				btn.style.color = 'black';
-			});
-			button.style.backgroundColor = '#018398';
-			button.style.color = 'white';
-		}
+					const buttons = document.querySelectorAll('.tablinks');
+					buttons.forEach((btn) => {
+						btn.style.backgroundColor = '#f26223';
+						btn.style.border = '#f26223';
+						btn.style.color = 'white';
+					});
+					button.style.backgroundColor = '#ffe1d0';
+					button.style.color = '#f26223';
+				}
 
 		function showTabView(tabId) {
 			event.preventDefault();
@@ -3169,7 +3171,7 @@
 
 		function nextViewBankDetNew(a) {
 			var returnValue;
-			var MerchantLegalId = $("#merchant_legal_id").val();
+			var MerchantLegalId = $("#merchant_legal_id_n").val();
 			var Merchantcorpname = $("#merchant_corp_name").val();
 			var MerchantName = $("#merchant_name").val();
 			var MerchantRegiadd = $("#merchant_addr").val();
@@ -4963,21 +4965,21 @@
 		}
 
 		function previous(a) {
-			const mainButton = document.getElementById("smooth1View");
-			const bankDetailsButton = document.getElementById("smooth2View");
+					const mainButton = document.getElementById("smooth1View");
+					const bankDetailsButton = document.getElementById("smooth2View");
 
-			bankDetailsButton.style.backgroundColor = "";
-			bankDetailsButton.style.color = "";
+					bankDetailsButton.style.backgroundColor = "#f26223";
+					bankDetailsButton.style.color = "white";
+					bankDetailsButton.style.border = "#f26223";
+					mainButton.style.backgroundColor = "#fde2d0";
+					mainButton.style.color = "black";
 
-			mainButton.style.backgroundColor = "#018398";
-			mainButton.style.color = "white";
 
+					// Set style for BANK DETAILS button
 
-			// Set style for BANK DETAILS button
-
-			$("#one-panel").css("display", "block");
-			$("#four1-panel").css("display", "none");
-		}
+					$("#one-panel").css("display", "block");
+					$("#four1-panel").css("display", "none");
+				}
 		function next1(a) {
 			$("#four1-tab").attr("for", "four1");
 		}
@@ -5209,7 +5211,7 @@
 		});
 
 		$(function () {
-			$("#invoicedate, #qrexpire").datepicker({
+			$("#invoicedate, #qrexpire, #brn_date").datepicker({
 				dateFormat: "dd-mm-yy"
 			});
 		});
@@ -7353,39 +7355,37 @@
 		<div id="formSection" th:if="${formmode}=='add'" class="content">
 			<div class="card mb-0">
 				<div class="card-header p-0" style="height: 60px;">
-					<div class=""
-						style="display: flex; justify-content: center; align-items: center; position: relative; gap: 10px;"
-						id="tabs">
-						<div class="row formline p-2">
-							<h4
-								style="color: white; font-size: 1.2rem; margin-right: 20px; margin-left: 10px; margin-top: 10px; position: absolute; left: 10px;">
-								Merchant
-								Master - Add</h4>
-
-							<div>
-								<button class="tablinks" id="smooth1View"
-									style="width: 200px; height: 40px; background-color: #018398; color: white;">MAIN</button>
-							</div>
-
-							<div style="margin-left: 10px">
-								<button class="tablinks" id="smooth2View" style="width: 200px; height: 40px;">BANK
-									DETAILS</button>
-							</div>
-							<div style="margin-left: 20px;">
-								<button class="tablinks" id="" style="width: 200px; height: 40px;">UNIT
-									MANAGEMENT</button>
-							</div>
-							<div style="margin-left: 20px;">
-								<button class="tablinks" id="" style="width: 200px; height: 40px;">USER
-									MANAGEMENT</button>
-							</div>
-							<div style="margin-left: 20px;">
-								<button class="tablinks" id="smooth5View" style="width: 200px; height: 40px;">DEVICE
-									MANAGEMENT</button>
-							</div>
-						</div>
-					</div>
-				</div>
+									<div class=""
+										style="display: flex; justify-content: center; align-items: center; position: relative; gap: 10px;"
+										id="tabs">
+										<div class="row formline p-2">
+											<h4
+												style="color: white; font-size: 1.2rem; margin-right: 20px; margin-left: 10px; margin-top: 10px; position: absolute; left: 10px;">
+												Merchant
+												Master - Add</h4>
+											<div>
+												<button class="tablinks" id="smooth1View"
+													style="width: 200px; height: 40px; background-color: rgb(255, 224, 209); color: f26223;border:#f16123;font-weight:600;">MAIN</button>
+											</div>
+											<div style="margin-left: 10px">
+												<button class="tablinks" id="smooth2View" style="width: 200px; height: 40px;background-color: #f26223; color: white;border:#f26223;font-weight:700;">BANK
+													DETAILS</button>
+											</div>
+											<div style="margin-left: 20px;">
+												<button class="tablinks" id="" style="width: 200px; height: 40px;background-color: #f26223; color: white;border:#f26223;font-weight:700;">UNIT
+													MANAGEMENT</button>
+											</div>
+											<div style="margin-left: 20px;">
+												<button class="tablinks" id="" style="width: 200px; height: 40px;background-color: #f26223; color: white;border:#f26223;font-weight:700;">USER
+													MANAGEMENT</button>
+											</div>
+											<div style="margin-left: 20px;">
+												<button class="tablinks" id="smooth5View" style="width: 200px; height: 40px;background-color: #f26223; color: white;border:#f26223;font-weight:700;">DEVICE
+													MANAGEMENT</button>
+											</div>
+										</div>
+									</div>
+								</div>
 				<!-- <div style="background-color: lightgrey; width: 100%; margin-left: 1px"
 					class="row formline d-flex justify-content-around p-2" id="tabs">
 					<div>
@@ -9471,30 +9471,32 @@
 		<div th:if="${formmode}=='MerMastadd'" class="content">
 			<div class="card">
 				<div class="card-header d-flex justify-content-around p-1">
-					<div class="float-left d-flex"
-						style="color: white; font-size: 1.5rem; justify-items: center; align-items: center;">
-						Merchant Master</div>
-					<div class="row formline d-flex justify-content-around " style="width: 70%;" id="tabs">
-						<div>
-							<button class="tablinks" id="smooth1"
-								style="width: 300px; height: 40px; background-color: #018398; color: white"
-								onclick="showTab('tab1');changeColor(this)">UNIT
-								MANAGEMENT</button>
-						</div>
-						<div class="col-sm-1"></div>
-						<div>
-							<button class="tablinks" id="smooth2" style="width: 300px; height: 40px;"
-								onclick="showTab('tab2');changeColor(this);">USER
-								MANAGEMENT</button>
-						</div>
-						<div class="col-sm-1"></div>
-						<div>
-							<button class="tablinks" id="smooth3" style="width: 300px; height: 40px"
-								onclick="showTab('tab3');changeColor(this)">DEVICE
-								MANAGEMENT</button>
-						</div>
-					</div>
-				</div>
+									<div class="float-left d-flex"
+										style="color: white; font-size: 1.5rem; justify-items: center; align-items: center;">
+										Merchant Master</div>
+									<div class="row formline d-flex justify-content-around " style="width: 70%;" id="tabs">
+										<div>
+											<button class="tablinks" id="smooth1"
+												style="width: 300px; height: 40px; background-color: #fde2cf; color: black;border:#f26223 "
+												onclick="showTab('tab1');changeColor(this)">UNIT
+												MANAGEMENT</button>
+										</div>
+										<div class="col-sm-1"></div>
+										<div>
+											<button class="tablinks" id="smooth2" style="width: 300px; height: 40px;
+											 background-color: #f26223; color: white;border:#f26223"
+												onclick="showTab('tab2');changeColor(this);">USER
+												MANAGEMENT</button>
+										</div>
+										<div class="col-sm-1"></div>
+										<div>
+											<button class="tablinks" id="smooth3" style="width: 300px; height: 40px;
+											background-color: #f26223; color: white;border: #f26223;"
+												onclick="showTab('tab3');changeColor(this)">DEVICE
+												MANAGEMENT</button>
+										</div>
+									</div>
+								</div>
 				<br>
 				<div class="card-body">
 					<form action="#" method="POST" name="mainform" id="TabForm">
@@ -12264,7 +12266,7 @@
 													style="background-color: white; color: #332d2d; display: flex;">
 													<div class="float-left pt-2">
 														<h6 style="font-size: 1.2rem; font-weight: bold;">DOCUMENT
-															DETAILS</h6>
+															DETAILS f</h6>
 													</div>
 													<!-- <div class="float-right">
 
@@ -12276,7 +12278,6 @@
 															onclick="rowdelete(this)" alt="Remove">
 													</div> -->
 												</div>
-												<!-- BHARATH3 -->
 												<div class="table-responsive mt-2" style="overflow: auto;">
 													<table border="1" id="dynamicTable" class="table table-bordered "
 														style="text-align: center; vertical-align: 22px; margin-top: 10px; font-size: 15px;">
@@ -14779,11 +14780,11 @@
 				<div class="card">
 					<div class=" card-header   ">
 
-										<h4
-											style="color: white; font-size: 1.2rem; margin-right: 20px; margin-left: 10px;   left: 10px;">
-											Merchant Master - User Management</h4>
+						<h4
+							style="color: white; font-size: 1.2rem; margin-right: 20px; margin-left: 10px;   left: 10px;">
+							Merchant Master - User Management</h4>
 
-									</div>
+					</div>
 					<br>
 					<form style="padding-top: 10px;" action="#" method="POST" th:object="${Meruserlist}" name="mainform"
 						id="TabForm">
@@ -16212,10 +16213,9 @@
 										autocomplete="off"
 										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 										class="form-control form-control-sm" required> <input type="text" id="remarks"
-										name="remarks"  
-										th:if="${formmode}=='MerMastvie'" class="form-control form-control-sm"
-										maxlength="30" autocomplete="off" readonly> <input type="text" id="remarks"
-										name="remarks" th:value="${Merdevicelist.remarks}"
+										name="remarks" th:if="${formmode}=='MerMastvie'"
+										class="form-control form-control-sm" maxlength="30" autocomplete="off" readonly>
+									<input type="text" id="remarks" name="remarks" th:value="${Merdevicelist.remarks}"
 										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 										th:if="${formmode}=='DevicemEdit'" class="form-control form-control-sm"
 										maxlength="30" autocomplete="off"> <input type="text" id="remarks"
@@ -16387,7 +16387,7 @@
 									<label class="col-sm-2">Merchant ID <span
 											style="color: red; font-size: 20px;">*</span></label>
 									<div class="col-sm-3">
-										<input type="text" id="merchant_legal_id"
+										<input type="text" id="merchant_legal_id_n"
 											onkeyup="this.value = this.value.toUpperCase();"
 											th:value="${branchDet?.merchant_legal_id}"
 											class="form-control form-control-sm" name="merchant_legal_id" maxlength="20"
@@ -16574,23 +16574,20 @@
 									</div>
 								</div>
 
-								<label></label>
-								<div class=" " style="background-color: white; color: #332d2d; display: flex;">
-									<div class="float-left">
-										<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
-											CONTACT DETAILS</h6>
-									</div>
-									<div class="float-right">
-
+								<label></label> 
+								<div class=" " style="background-color: white; color: #332d2d; display: flex; align-items: center; justify-content: space-between;">
+								    <div>
+								        <h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT CONTACT DETAILS</h6>
+								    </div>
+								    <div style="display: flex; gap: 10px;">
 										<img th:src="@{/images/add.png}" aria-hidden="true"
-											style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-											onclick="Addrowmerchmodify()" alt="Add"> <img
-											th:src="@{/images/MinusIcon.png}" aria-hidden="true"
-											style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-											onclick="removeRowmodify(this)" alt="Remove">
-									</div>
-
+																					style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
+																					onclick="Addrowmerchmodify()" alt="Add"> <img
+																					th:src="@{/images/MinusIcon.png}" aria-hidden="true"
+																					style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
+																					onclick="removeRowmodify(this)" alt="Remove"> </div>
 								</div>
+
 								<label></label>
 								<table class="table table-bordered mt-2" style="width: 100%" id="Merchant_tbl"
 									th:if="${formmode}=='edit'">
@@ -17690,21 +17687,22 @@
 											onclick="rowdelete(this)" alt="Remove">
 									</div> -->
 								</div>
-
 								<div class="table-responsive mt-2" style="overflow: auto;">
-									<table border="1" id="dynamicTable" class="table table-bordered SlabRateTable"
+									<table border="1" id="dynamicTable" class="table table-bordered "
 										style="text-align: center; vertical-align: 22px; margin-top: 10px; font-size: 15px;">
 										<thead>
-											<tr>
+											<tr class="fw-bold">
 
-												<th>Document Type</th>
-												<th>Document Code</th>
-												<th>Document Description</th>
-												<th>Unique ID</th>
-												<th>Place of Issue</th>
-												<th>Issue Date</th>
-												<th>Expiry Date</th>
-												<th>Document View</th>
+												<th style="font-weight: 700;">Document Type</th>
+												<th style="font-weight: 700;">Document Code</th>
+												<th style="font-weight: 700;">Document Description</th>
+												<th style="font-weight: 700;">Unique ID</th>
+												<th style="font-weight: 700;">Place of Issue</th>
+												<th style="font-weight: 700;">Issue Date</th>
+												<th style="font-weight: 700;">Expiry Date</th>
+												<th style="font-weight: 700;">Document View</th>
+											</tr>
+										</thead>
 										<tbody id="dataTables">
 											<tr th:each="Doocument : ${DocumentList}">
 
@@ -17722,25 +17720,57 @@
 												</td>
 												<td th:text="${Doocument?.expiry_date}" class="rowDataField">15-JUN-2023
 												</td>
-												<td
-													th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-													<img th:src=@{/images/info.png} style="width: 30px; height: 30px"
+												<!-- <td class="rowDataField"
+																								th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+																								<img th:src=@{/images/info.png}
+																								style="width: 30px; height: 30px" onclick="show1(this)"
+																								id="openModaldoc"
+																								th:attr="data-doc_type=${Doocument?.unique_id},data-doc_types=${Doocument?.merchant_id}"
+																								data-toggle="modal" data-target=".bd-example-modal-lg">
+																							</td>
+								-->
+												<!-- <td class="rowDataField"
+																								th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
+																								<a th:href="@{'/' + ${Doocument?.unique_id}}"
+																								style="text-decoration: none; color: DodgerBlue;">
+																									<img th:src="@{/images/info.png}"
+																									style="width: 30px; height: 30px;" alt="Info">
+																							</a>
+																							</td> -->
+
+												<!-- <td th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}"
+																							th:data-unique-id="${Doocument?.unique_id}"><a
+																							
+																							
+																								href="javascript:void(0);" onclick="handleClick(this)"
+																								style="text-decoration: none; color: DodgerBlue;">
+																									<img th:src="@{/images/info.png}"
+																									style="width: 30px; height: 30px;" alt="Info">
+																							</a></td> -->
+												<!-- <td th:text="${Doocument?.file_name}"
+																								class="rowDataField" style="width: 100px;" hidden>
+																							</td> -->
+
+												<!-- For .jpeg, .jfif, .jpg files -->
+												<td class="rowDataField"
+													th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg') || Doocument.file_name.endsWith('.png'))}">
+													<img th:src="@{/images/info.png}" style="width: 30px; height: 30px"
 														onclick="show1(this)" id="openModaldoc"
 														th:attr="data-doc_type=${Doocument?.unique_id},data-doc_types=${Doocument?.merchant_id}"
 														data-toggle="modal" data-target=".bd-example-modal-lg">
 												</td>
-												<td
-													th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-													<a th:href="@{'/' + ${Doocument?.unique_id}}"
-														style="text-decoration: none; color: DodgerBlue;"> <img
-															th:src="@{/images/info.png}"
+
+												<!-- For .pdf, .xls files -->
+												<td th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.pdf') || Doocument.file_name.endsWith('.xls'))}"
+													th:data-unique-id="${Doocument?.unique_id}"><a
+														href="javascript:void(0);" onclick="handleClick(this)"
+														style="text-decoration: none; color: DodgerBlue;">
+														<img th:src="@{/images/info.png}"
 															style="width: 30px; height: 30px;" alt="Info">
-													</a>
-												</td>
+													</a></td>
 
 
-												<td th:text="${Doocument?.file_name}" class="rowDataField"
-													style="width: 100px;" hidden></td>
+
 											</tr>
 										</tbody>
 									</table>
@@ -17749,7 +17779,7 @@
 								<div class=" mt-2" style="background-color: white; color: #332d2d; display: flex;">
 									<div class="float-left">
 										<h6 style="font-size: 1.2rem; font-weight: bold;">SIGNATURE
-											DETAILS</h6>
+											DETAILS d</h6>
 									</div>
 								</div>
 								<div class="card-body">
@@ -17763,7 +17793,8 @@
 														id="ca_first_name" readonly />
 												</td>
 
-												<td rowspan="2" style="text-align: center;">Signature:
+												<td rowspan="2" style="text-align: center;">
+													Signature:
 													<div id="imgCapture1" style="border: 1px solid #ccc;" height="60"
 														width="30"></div>
 													<div style="display: none; margin-left: 55px;" id="signature">
@@ -18034,23 +18065,18 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12 column">
-										<div class=" mt-2"
-											style="background-color: white; color: #332d2d; display: flex;">
-											<div class="float-left">
-												<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
-													FEES DETAILS</h6>
-											</div>
-
-											<div class="float-right">
-
-												<img th:src="@{/images/add.png}" aria-hidden="true"
-													style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-													onclick="Addrow3()" alt="Add"> <img
-													th:src="@{/images/MinusIcon.png}" aria-hidden="true"
-													style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-													onclick="deleteRow4(this)" alt="Remove">
-											</div>
+										<div class="mt-2" style="background-color: white; color: #332d2d; display: flex; align-items: center; justify-content: space-between;">
+										    <div>
+										        <h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT FEES DETAILS</h6>
+										    </div>
+										    <div style="display: flex; gap: 10px;">
+										        <img th:src="@{/images/add.png}" aria-hidden="true"
+										            style="cursor: pointer; width: 20px; height: 20px;" onclick="Addrow3()" alt="Add">
+										        <img th:src="@{/images/MinusIcon.png}" aria-hidden="true"
+										            style="cursor: pointer; width: 20px; height: 20px;" onclick="deleteRow4(this)" alt="Remove">
+										    </div>
 										</div>
+
 										<label></label>
 										<table class="table table-bordered mt-2" id="Merchant_detials1">
 											<tr>
@@ -23194,12 +23220,12 @@
 	function submitexceluser() {
 		event.preventDefault(); // Prevent default form submission behavior
 
-		var fileInput = document.getElementById('fileval'); 
+		var fileInput = document.getElementById('fileval');
 		console.log(fileInput);
 		var merchant_id = document.getElementById('merid').value;
-				alert(merchant_id);
-				var merchant_name = document.getElementById('mername').value;
-				alert(merchant_name);
+		alert(merchant_id);
+		var merchant_name = document.getElementById('mername').value;
+		alert(merchant_name);
 
 		// Check if a file is selected
 		if (fileInput && fileInput.files.length > 0) {
@@ -23209,7 +23235,7 @@
 			var formData = new FormData();
 			formData.append('file', file);
 			formData.append('merchant_id', merchant_id);
-						formData.append('merchant_name', merchant_name);
+			formData.append('merchant_name', merchant_name);
 
 			$.ajax({
 				url: './Useruploadexcel',
@@ -23241,12 +23267,12 @@
 	function submitexceldevice() {
 		event.preventDefault(); // Prevent default form submission behavior
 
-		var fileInput = document.getElementById('fileval'); 
+		var fileInput = document.getElementById('fileval');
 		console.log(fileInput);
 		var merchant_id = document.getElementById('merid').value;
-				alert(merchant_id);
-				var merchant_name = document.getElementById('mername').value;
-				alert(merchant_name);
+		alert(merchant_id);
+		var merchant_name = document.getElementById('mername').value;
+		alert(merchant_name);
 
 		// Check if a file is selected
 		if (fileInput && fileInput.files.length > 0) {
@@ -23256,7 +23282,7 @@
 			var formData = new FormData();
 			formData.append('file', file);
 			formData.append('merchant_id', merchant_id);
-						formData.append('merchant_name', merchant_name);
+			formData.append('merchant_name', merchant_name);
 
 			$.ajax({
 				url: './Deviceuploadexcel',
