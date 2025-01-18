@@ -423,10 +423,11 @@ function fnsubmit(button) {
 					</div>
 				</div>
 				<div class="card-body p-0">
+				<div style="max-height: 100vh; overflow-y: auto; border: 1px solid #ddd;">
 					<table
 						class="table  table-bordered table-hover table-condensed table-sm"
 						id="" style="table-layout: fixed; width: 100%;">
-						<thead>
+						<thead style="position: sticky; top: 0;background-color: #f8f9fa; z-index: 1;">
 							<tr  class="filters">
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Reference Code"
@@ -481,6 +482,7 @@ function fnsubmit(button) {
 						</tbody>
 
 					</table>
+					</div>
 				</div>
 				<div class="card-footer text-center">
 					<button type="button"

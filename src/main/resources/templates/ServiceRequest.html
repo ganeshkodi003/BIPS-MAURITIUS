@@ -75,6 +75,16 @@ input, select {
 label {
 	font-size: 18px !important;
 }
+
+   select:focus {
+    border-color:  #f26223; /* Maintain orange border on focus (when clicked or selected) */
+   
+   
+  }
+   select:hover {
+    border-color: #f26223; /* Orange border on hover */
+  }
+  
 </style>
 
 <script>
@@ -210,18 +220,18 @@ label {
 				<div
 					class="card-header d-flex justify-content-between align-items-center">
 					<h4 style="color: white; font-size: 1.5rem;"
-						th:if="${formmode}=='Pendinglist'">Service Pending List</h4>
+						th:if="${formmode}=='Pendinglist'" class="headerbutton ml-2">Service Pending List</h4>
 					<h4 style="color: white; font-size: 1.5rem;"
-						th:if="${formmode}=='Approvallist'">Service Approval List</h4>
+						th:if="${formmode}=='Approvallist'" class="headerbutton">Service Approval List</h4>
 					<div>
-						<select class="form-control-sm bg-white" id="transactionFilter"
+						<select class="form-control-sm  headerbutton text-white p-0" id="transactionFilter"
 							onchange="handleFilterChange()"
-							style="background-color: #e3e3e4; font-size: 15px;">
-							<option value="" hidden="true">Select</option>
+							style="border:#f26223;">
+							<option value="" hidden="true"  style="background-color: rgb(227, 227, 228);color:#424e7c;" > Select</option>
 							<option th:selected="${formmode}=='Pendinglist'"
-								value="PendingServlist">Service Pending List</option>
+								value="PendingServlist" style="background-color: rgb(227, 227, 228);color:#424e7c;" >Service Pending List</option>
 							<option th:selected="${formmode}=='Approvallist'"
-								value="ApprovalServlist">Service Approval List</option>
+								value="ApprovalServlist" style="background-color: rgb(227, 227, 228);color:#424e7c;" >Service Approval List</option>
 						</select>
 						<button type="button" class="btn btns btn-filter headerbutton">Filter</button>
 					</div>

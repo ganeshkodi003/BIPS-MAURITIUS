@@ -90,11 +90,14 @@ label {
 .btnDownload .dropdown-menu {
 	min-width: 8rem !important;
 }
-tbody td {
-    white-space: nowrap;
-}
 
+.table tbody td {
+	white-space: nowrap;
+	line-height: 3px;
+	vertical-align: middle;
+}
 </style>
+
 </head>
 
 <script>
@@ -330,9 +333,9 @@ tbody td {
 							autocomplete="off" readonly />
 					</div>
 					<div class="dropdown btnDownload">
-						<button class="btn btn-secondary dropdown-toggle" type="button"
+						<button class="  dropdown-toggle headerbutton" type="button"
 							id="dropdownMenuButton" title="Action"
-							style="line-height: 0.7; font-size: 18px; color: #162b75; font-weight: 700; background: #e3e3e4; padding: 10px;"
+							style="line-height: 0.7; font-size: 18px;  font-weight: 700; border:#f26223;color:white; padding: 10px;"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Download</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
 							title="Modify"
@@ -352,45 +355,34 @@ tbody td {
 
 			</div>
 			<div class="card-body p-0">
-				
-				<table class="table table-striped table-bordered table-hover "
-					id="">
+
+
+				<table
+					class="table table-striped table-bordered table-hover table-sm">
 					<thead>
 						<tr class="filters">
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Audit Date"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Table Name"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Function"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Enterer"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Entry Time"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Auth User"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Auth Time"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Field Name"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Old Value"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="New Value"
-								disabled></th>
-							<th style="text-align: center"><input type="text"
-								class="form-control font-weight-bold" placeholder="Remarks"
-								disabled></th>
-							
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Audit Date" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Table Name" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Function" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Enterer" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Entry Time" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Auth User" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Auth Time" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Field Name" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Old Value" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="New Value" disabled></th>
+							<th><input type="text" class="form-control font-weight-bold"
+								placeholder="Remarks" disabled></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -405,22 +397,24 @@ tbody td {
 								th:text="${auditdata?.entry_user != null ? auditdata?.entry_user.toUpperCase() : ''}"></td>
 							<td
 								th:text="${#dates.format(auditdata?.entry_time, 'dd-MM-yyyy HH:mm a')}"></td>
-							<td><span th:if="${auditdata?.auth_user} !=''"
+							<td><span th:if="${auditdata?.auth_user} != ''"
 								th:text="${auditdata?.auth_user}"></span> <span
-								th:if="${auditdata?.auth_user} ==null" style='color: red'></span></td>
+								th:if="${auditdata?.auth_user} == null" style="color: red"></span>
+							</td>
 							<td
 								th:text="${#dates.format(auditdata?.auth_time, 'dd-MM-yyyy HH:mm a')}"></td>
-							<td><p th:each="message:${auditdata?.fieldName}"
+							<td><p th:each="message : ${auditdata?.fieldName}"
 									th:text="${message}"></p></td>
-							<td><p th:each="message:${auditdata?.oldvalue}"
+							<td><p th:each="message : ${auditdata?.oldvalue}"
 									th:text="${message}"></p></td>
-							<td><p th:each="message:${auditdata?.newvalue}"
+							<td><p th:each="message : ${auditdata?.newvalue}"
 									th:text="${message}"></p></td>
 							<td
 								th:text="${auditdata?.remarks != null ? auditdata?.remarks.toUpperCase() : ''}"></td>
 						</tr>
 					</tbody>
 				</table>
+
 			</div>
 			<div class="card-footer text-center">
 				<button type="button" class="btn btn-xs mr-2 headerbutton " id=""
@@ -438,7 +432,7 @@ tbody td {
 			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<h3 class="text-center p-2 text-white font-weight-bold"
-					style="background: #f26223;">BANK OF BARODA </h3>
+					style="background: #f26223;">BANK OF BARODA</h3>
 				<h4 class="modal-body text-center font-weight-bold"
 					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">

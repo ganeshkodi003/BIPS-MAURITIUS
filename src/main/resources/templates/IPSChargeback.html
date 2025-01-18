@@ -605,15 +605,15 @@ $(document)
 						<div class="ml-3">
 							<select class="form-control form-control-sm"
 								id="transactionFilter" onchange="handleFilterChange()"
-								style="background-color: #e3e3e4; padding: 0px 25px; font-size: 20px;">
+								style=" border:#f26223;background-color: #f26223;color:white; padding: 0px 25px; font-size: 20px;">
 								<option value="" hidden>Select</option>
 								<option th:selected="${formmode}=='list'"
-									value="chargeBackRecord">All Transactions</option>
+									value="chargeBackRecord" style="background-color: rgb(227, 227, 228);color:#424e7c;">All Transactions</option>
 								<option th:selected="${formmode}=='Revert'"
-									value="RevertedChargeBackTransaction">Reverted
+									value="RevertedChargeBackTransaction" style="background-color: rgb(227, 227, 228);color:#424e7c;">Reverted
 									Transactions</option>
 								<option th:selected="${formmode}=='Pending'"
-									value="pendingChargeBackTransaction">Pending
+									value="pendingChargeBackTransaction" style="background-color: rgb(227, 227, 228);color:#424e7c;">Pending
 									Transactions</option>
 							</select>
 						</div>

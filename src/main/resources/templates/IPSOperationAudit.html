@@ -74,8 +74,11 @@ label {
 	min-width: 8rem !important;
 }
 
-tbody td {
-    white-space: nowrap;
+ 
+.table tbody td {
+	white-space: nowrap;
+	line-height: 10px!important;
+	vertical-align: middle;
 }
 </style>
 </head>
@@ -316,8 +319,8 @@ $(document)
                         <input type="text" id="Fromdate" th:value="${Fromdate}" class="form-control form-control-sm" name="cust_id" autocomplete="off" readonly />
                     </div>
 					<div class="dropdown btnDownload">
-						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" title="Action"
-							style="line-height: 0.7; font-size: 18px; color: #162b75; font-weight: 700; background: #e3e3e4; padding: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+						<button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" title="Action"
+							style="line-height: 0.7; font-size: 18px;   font-weight: 700;  border:#f26223;color:white; padding: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 						>Download</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" title="Modify" style="line-height: 0.7; background-color: #e3e3e4;">
 							<a class="dropdown-item"
@@ -337,7 +340,7 @@ $(document)
 			</div>
 			<div class="card-body p-0">
 
-				<table class="table table-striped table-bordered table-hover" id="">
+				<table class="table table-striped table-bordered table-hover table-sm" id="" style="table-layout: fixed; width: 100%;">
 					<thead>
 						<tr class="filters">
 						
@@ -376,13 +379,13 @@ $(document)
 					</thead>
 					<tbody>
 						<tr th:each="auditdata : ${AuditList}" class="userlist">
-							<td style="line-height: 1.6;"><span th:text="${#dates.format(auditdata?.audit_date, 'dd-MM-yyyy').toUpperCase()}"></span></td>
-							<td style="line-height: 1.6;"><span th:text="${auditdata?.audit_table != null ? auditdata?.audit_table.toUpperCase() : ''}"></span></td>
-							<td style="line-height: 1.6;"><span th:text="${auditdata?.func_code != null ? auditdata?.func_code.toUpperCase() : ''}"></span></td>
+							<td ><span th:text="${#dates.format(auditdata?.audit_date, 'dd-MM-yyyy').toUpperCase()}"></span></td>
+							<td ><span th:text="${auditdata?.audit_table != null ? auditdata?.audit_table.toUpperCase() : ''}"></span></td>
+							<td ><span th:text="${auditdata?.func_code != null ? auditdata?.func_code.toUpperCase() : ''}"></span></td>
 							<td><span th:text="${auditdata?.entry_user != null ? auditdata?.entry_user.toUpperCase() : ''}"></span></td>
-							<td style="line-height: 1.6;"><span th:text="${#dates.format(auditdata?.entry_time, 'dd-MM-yyyy HH:mm a').toUpperCase()}"></span></td>
+							<td ><span th:text="${#dates.format(auditdata?.entry_time, 'dd-MM-yyyy HH:mm a').toUpperCase()}"></span></td>
 							<td><span th:if="${auditdata?.auth_user} != ''" th:text="${auditdata?.auth_user}"></span> <span th:if="${auditdata?.auth_user} == null" style='color: red'></span></td>
-							<td style="line-height: 1.6;"><span th:each="message:${auditdata.fieldName}" th:text="${message.toUpperCase()}"></span></td>
+							<td ><span th:each="message:${auditdata.fieldName}" th:text="${message.toUpperCase()}"></span></td>
 							<td style="line-height: 1.6; white-space: pre-wrap; text-align: left;">
 								<!-- Remove square brackets and convert to uppercase --> <span
 								th:utext="${#strings.arrayJoin(#strings.arraySplit(#strings.replace(#strings.replace(auditdata.oldvalue, '[', ''), ']', ''), ','), ',<br/>').toUpperCase()}"
@@ -393,7 +396,7 @@ $(document)
 								th:utext="${#strings.arrayJoin(#strings.arraySplit(#strings.replace(#strings.replace(auditdata.newvalue, '[', ''), ']', ''), ','), ',<br/>').toUpperCase()}"
 							></span>
 							</td>
-							<td style="line-height: 1.6;"><span th:text="${auditdata?.remarks != null ? auditdata?.remarks.toUpperCase() : ''}"></span></td>
+							<td ><span th:text="${auditdata?.remarks != null ? auditdata?.remarks.toUpperCase() : ''}"></span></td>
 						</tr>
 					</tbody>
 				</table>
