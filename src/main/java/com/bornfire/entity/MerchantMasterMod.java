@@ -288,8 +288,88 @@ public class MerchantMasterMod {
 	private String mer_nat_id_r8;
 	private String mer_nat_id_r9;
 	private String mer_nat_id_r10;
-
+	private String lien_amount1;
+	private String lien_amount2;
+	private String hold_amount1;
+	private String hold_amount2;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date next_settlementdate1;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date next_settlementdate2;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date last_settlementdate1;
+	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	private Date last_settlementdate2;
 	
+	
+	public String getLien_amount1() {
+		return lien_amount1;
+	}
+
+	public void setLien_amount1(String lien_amount1) {
+		this.lien_amount1 = lien_amount1;
+	}
+
+	public String getLien_amount2() {
+		return lien_amount2;
+	}
+
+	public void setLien_amount2(String lien_amount2) {
+		this.lien_amount2 = lien_amount2;
+	}
+
+	public String getHold_amount1() {
+		return hold_amount1;
+	}
+
+	public void setHold_amount1(String hold_amount1) {
+		this.hold_amount1 = hold_amount1;
+	}
+
+	public String getHold_amount2() {
+		return hold_amount2;
+	}
+
+	public void setHold_amount2(String hold_amount2) {
+		this.hold_amount2 = hold_amount2;
+	}
+
+	public Date getNext_settlementdate1() {
+		return next_settlementdate1;
+	}
+
+	public void setNext_settlementdate1(Date next_settlementdate1) {
+		this.next_settlementdate1 = next_settlementdate1;
+	}
+
+	public Date getNext_settlementdate2() {
+		return next_settlementdate2;
+	}
+
+	public void setNext_settlementdate2(Date next_settlementdate2) {
+		this.next_settlementdate2 = next_settlementdate2;
+	}
+
+	public Date getLast_settlementdate1() {
+		return last_settlementdate1;
+	}
+
+	public void setLast_settlementdate1(Date last_settlementdate1) {
+		this.last_settlementdate1 = last_settlementdate1;
+	}
+
+	public Date getLast_settlementdate2() {
+		return last_settlementdate2;
+	}
+
+	public void setLast_settlementdate2(Date last_settlementdate2) {
+		this.last_settlementdate2 = last_settlementdate2;
+	}
+
+	public void setMer_nat_id_r10(String mer_nat_id_r10) {
+		this.mer_nat_id_r10 = mer_nat_id_r10;
+	}
+
 	public String getMer_nat_id() {
 		return mer_nat_id;
 	}
@@ -2519,8 +2599,13 @@ public class MerchantMasterMod {
 				+ ", mer_nat_id_r3=" + mer_nat_id_r3 + ", mer_nat_id_r4=" + mer_nat_id_r4 + ", mer_nat_id_r5="
 				+ mer_nat_id_r5 + ", mer_nat_id_r6=" + mer_nat_id_r6 + ", mer_nat_id_r7=" + mer_nat_id_r7
 				+ ", mer_nat_id_r8=" + mer_nat_id_r8 + ", mer_nat_id_r9=" + mer_nat_id_r9 + ", mer_nat_id_r10="
-				+ mer_nat_id_r10 + "]";
+				+ mer_nat_id_r10 + ", lien_amount1=" + lien_amount1 + ", lien_amount2=" + lien_amount2
+				+ ", hold_amount1=" + hold_amount1 + ", hold_amount2=" + hold_amount2 + ", next_settlementdate1="
+				+ next_settlementdate1 + ", next_settlementdate2=" + next_settlementdate2 + ", last_settlementdate1="
+				+ last_settlementdate1 + ", last_settlementdate2=" + last_settlementdate2 + "]";
 	}
+
+	
 
 	
 }

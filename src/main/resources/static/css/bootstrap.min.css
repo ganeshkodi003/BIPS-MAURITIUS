@@ -2710,7 +2710,7 @@ pre code {
 }
 
 .form-control:disabled, .form-control[readonly] {
-	background-color: #c8d0d9;
+	background-color: #f2f2f2;
 	opacity: 1
 }
 
