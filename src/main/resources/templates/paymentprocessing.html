@@ -1,5 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:fragment="summary">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="summary">
 <!--
     VERSION : 01
 	CREATED BY : RIYAS
@@ -10,134 +9,132 @@
 	UPDATED BY : UPDATE A BACKEND FUNCTIONALITIES AND LITERALS CHANGE
 	DATE       : 30-12-2024
 -->
+
 <head>
-<title>IPSAdmin</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>IPSAdmin</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css"
-	href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css"
-	href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
-	th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"
+		th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css"
+		th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}">
 
-<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
-	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
-<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
-	th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
-<script src="/webjars/jquery/3.4.1/jquery.min.js"
-	th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
-<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
-	th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
-<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
-	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
-<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
-	th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
-<script src="js/bootstrap411.js"></script>
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
+		th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+	<script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
+		th:src="@{/webjars/popper.js/1.14.7/umd/popper.min.js}"></script>
+	<script src="/webjars/jquery/3.4.1/jquery.min.js" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"
+		th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+	<script src="/webjars/jquery-form/4.2.2/jquery.form.min.js"
+		th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+	<script src="/webjars/jquery-validation/1.19.0/jquery.validate.min.js"
+		th:src="@{/webjars/jquery-validation/1.19.0/jquery.validate.min.js}"></script>
+	<script src="js/bootstrap411.js"></script>
 
-<style>
-td {
-	background-color: #f8f7ff;
-}
+	<style>
+		td {
+			background-color: #f8f7ff;
+		}
 
-.underline {
-	text-decoration: underline;
-	color: #08a6f1;
-	cursor: pointer;
-}
+		.underline {
+			text-decoration: underline;
+			color: #08a6f1;
+			cursor: pointer;
+		}
 
-.imageround {
-	vertical-align: middle;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	border-color: red;
-}
+		.imageround {
+			vertical-align: middle;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			border-color: red;
+		}
 
-.container-manager {
-	padding-right: 43px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: 18.3%;
-	margin-top: 80px;
-}
+		.container-manager {
+			padding-right: 43px;
+			padding-left: 15px;
+			margin-right: auto;
+			margin-left: 18.3%;
+			margin-top: 80px;
+		}
 
-.dataTables_empty {
-	color: #be3232;
-}
+		.dataTables_empty {
+			color: #be3232;
+		}
 
-.dataTables_wrapper .dataTables_filter {
-	float: right;
-	margin-right: 20px;
-	margin-top: 10px;
-}
+		.dataTables_wrapper .dataTables_filter {
+			float: right;
+			margin-right: 20px;
+			margin-top: 10px;
+		}
 
-.dataTables_filter input {
-	color: black;
-	background-color: white;
-}
+		.dataTables_filter input {
+			color: black;
+			background-color: white;
+		}
 
-.menu-title-header {
-	padding: 0.45rem 0.45rem;
-	background: #377486;
-	color: #fff;
-	font-family: "Nunito", calibry;
-}
+		.menu-title-header {
+			padding: 0.45rem 0.45rem;
+			background: #377486;
+			color: #fff;
+			font-family: "Nunito", calibry;
+		}
 
-.modal-title {
-	text-align: center;
-	font-size: 14px;
-	color: #332d2d;
-	font-family: calibry
-}
+		.modal-title {
+			text-align: center;
+			font-size: 14px;
+			color: #332d2d;
+			font-family: calibry
+		}
 
-.autocomplete {
-	position: relative;
-	display: inline-block;
-}
+		.autocomplete {
+			position: relative;
+			display: inline-block;
+		}
 
-.dataTables_scrollBody {
-	overflow: unset !important;
-}
+		.dataTables_scrollBody {
+			overflow: unset !important;
+		}
 
-#country-list {
-	min-width: 60px;
-}
+		#country-list {
+			min-width: 60px;
+		}
 
-.input-group-prepend {
-	width: auto;
-}
+		.input-group-prepend {
+			width: auto;
+		}
 
-.input-group .form-control {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-}
+		.input-group .form-control {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
 
-#phoneNumber_Error {
-	font-size: 13px;
-	color: red;
-	padding-left: 10px;
-}
+		#phoneNumber_Error {
+			font-size: 13px;
+			color: red;
+			padding-left: 10px;
+		}
 
-.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder
-	{
-	color: black;
-	font-style: italic;
-}
+		.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
+			color: black;
+			font-style: italic;
+		}
 
-input, select {
-	height: 35px !important;
-}
+		input,
+		select {
+			height: 35px !important;
+		}
 
-label {
-	font-size: 18px !important;
-}
+		label {
+			font-size: 18px !important;
+		}
 
-.actionBtn .dropdown-menu {
-	min-width: 5rem !important;
-}
-</style>
+		.actionBtn .dropdown-menu {
+			min-width: 5rem !important;
+		}
+	</style>
 </head>
 
 <script th:inline="javascript">
@@ -148,20 +145,20 @@ label {
 		document.getElementById("feesForm").style.display = "none";
 
 		// Show the appropriate form based on formMode
-		if (id  === "settlement") {
+		if (id === "settlement") {
 			document.getElementById("settlementForm").style.display = "block";
 		} else if (id === "feeandcharges") {
 			document.getElementById("feesForm").style.display = "block";
 		}
 	}
-	
-	  function changeColorView(button, formId) {
-	        // Reset all buttons to default styles
-					const merchandId = document.getElementById('merchandId').value;
-					if(merchandId){
-	        const buttons = document.querySelectorAll('.tablinks');
-	        buttons.forEach((btn) => {
-	           	btn.style.backgroundColor = '#f26222';
+
+	function changeColorView(button, formId) {
+		// Reset all buttons to default styles
+		const merchandId = document.getElementById('merchandId').value;
+		if (merchandId) {
+			const buttons = document.querySelectorAll('.tablinks');
+			buttons.forEach((btn) => {
+				btn.style.backgroundColor = '#f26222';
 				btn.style.color = '#FFE0D1';
 				btn.style.fontWeight = '100';
 			});
@@ -169,50 +166,52 @@ label {
 			button.style.color = '#f26222';
 			button.style.fontWeight = '700';
 
-			
-	        // Hide all forms
-	        const forms = ['settlementForm', 'feesForm'];
-	        forms.forEach((form) => {
-	            document.getElementById(form).style.display = 'none';
-	        });
 
-	        // Show the selected form
-	        document.getElementById(formId).style.display = 'block';
-				}	else{	
-					alert('Please select a merchant ID.');
-				}
+			// Hide all forms
+			const forms = ['settlementForm', 'feesForm'];
+			forms.forEach((form) => {
+				document.getElementById(form).style.display = 'none';
+			});
 
-	    }
-	  
-	  function getMerchantData(selectElement) {
-		    const merchantId = selectElement.value;
-
-
-
-		    // Check if a valid merchant is selected
-		    if (!merchantId) {
-		        alert('Please select a merchant ID.');
-		        return;
-		    }
-
-		    // Send AJAX GET request with merchantId as a query parameter
-		    $.ajax({
-		        url: './getMerchantName',  // Your backend URL
-		        type: 'GET',
-		        data: { merchantId: merchantId },  // Send merchantId as query parameter
-		        success: function (data) {
-		         
-
-		            document.getElementById('merchandName').value = data || 'N/A';  // Update the input field's value
-		        },
-		        error: function (error) {
-		            console.error('Error:', error.responseText);
-		            alert('Error fetching merchant data');
-		        }
-		    });
+			// Show the selected form
+			document.getElementById(formId).style.display = 'block';
+		} else {
+			alert('Please select a merchant ID.');
 		}
 
+	}
 
+	function getMerchantData(selectElement) {
+		const merchantId = selectElement.value;
+
+
+
+		// Check if a valid merchant is selected
+		if (!merchantId) {
+			alert('Please select a merchant ID.');
+			return;
+		}
+
+		// Send AJAX GET request with merchantId as a query parameter
+		$.ajax({
+			url: './getMerchantName',  // Your backend URL
+			type: 'GET',
+			data: {merchantId: merchantId},  // Send merchantId as query parameter
+			success: function (data) {
+
+
+				document.getElementById('merchandName').value = data || 'N/A';  // Update the input field's value
+			},
+			error: function (error) {
+				console.error('Error:', error.responseText);
+				alert('Error fetching merchant data');
+			}
+		});
+	}
+
+	function back() {
+			window.history.back();
+		}
 	/*]]>*/
 </script>
 
@@ -223,11 +222,12 @@ label {
 	<div class="container-manager">
 		<div class="card">
 
-			<div class="card-header p-1  d-flex " id="modheadtitle"
-				style="font-size: 1.2rem;">
-				<b
-					style="width: 40%; padding: 0; display: flex; align-items: center;">Payment
-					Processing</b>
+			<div class="card-header p-1  d-flex " id="modheadtitle" style="font-size: 1.2rem;">
+				<!--<b style="width: 40%; padding: 0; display: flex; align-items: center;">Payment
+					Processing</b>-->
+					<div class="dispayflexpropty ml-1" style="width: 40%; padding: 0; display: flex; align-items: center;">
+										<h6 class="headerh6 ">Payment Processing</h6>
+									</div>
 
 				<div style="width: 60%;" class="row formline d-flex" id="tabs">
 
@@ -250,12 +250,10 @@ label {
 
 
 				<div class="col-sm-1">
-					<label for="merchandId">Merchant ID</label><span
-						style="color: red; font-size: 20px;"> *</span>
+					<label for="merchandId">Merchant ID</label><span style="color: red; font-size: 20px;"> *</span>
 				</div>
 				<div class="col-sm-2">
-					<select id="merchandId" class="form-control form-control-sm"
-						name="merchandId" autocomplete="off"
+					<select id="merchandId" class="form-control form-control-sm" name="merchandId" autocomplete="off"
 						onchange="getMerchantData(this);">
 						<option value="">Select</option>
 						<th:block th:each="merchantId : ${merchantIds}">
@@ -270,9 +268,8 @@ label {
 					<label for="merchandName">Merchant Name</label>
 				</div>
 				<div class="col-sm-2">
-					<input type="text" id="merchandName" class="form-control "
-						name="merchandName" style="color: black; font-size: 0.820rem;"
-						autocomplete="off" />
+					<input type="text" id="merchandName" class="form-control " name="merchandName"
+						style="color: black; font-size: 0.820rem;" autocomplete="off" />
 				</div>
 
 
@@ -285,8 +282,7 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="bank">Bank</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="bank">Bank</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="bank" class="form-control" name="bank"
@@ -294,23 +290,29 @@ label {
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="accountNumber">Account No.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="accountNumber">Account No.</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="accountNumber" class="form-control"
-							name="accountNumber" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="accountNumber" class="form-control" name="accountNumber"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="accountType">Account Type</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="accountType">Account Type</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="accountType" class="form-control"
+						<!--<input type="text" id="accountType" class="form-control"
 							name="accountType" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+							autocomplete="off" />-->
+						<select name="frequency" id="type" style="width: 100%" class="form-control form-control-sm"
+							required>
+							<option value="">SELECT</option>
+							<option value="SB">SB - SAVING BANK</option>
+							<option value="CA">CA - CURRENT ACCOUNT</option>
+							<option value="OD">OD - OVERDRAFT</option>
+						</select>
 					</div>
 				</div>
 
@@ -318,35 +320,33 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="frequency">Frequency</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="frequency">Frequency</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<select name="frequency" id="type" style="width: 100%"
-							class="form-control form-control-sm" required>
+						<select name="frequency" id="type" style="width: 100%" class="form-control form-control-sm"
+							required>
 							<option value="">SELECT</option>
+							<option value="DAILY">DAILY</option>
 							<option value="MONTHLY">MONTHLY</option>
 							<option value="WEEKLY">WEEKLY</option>
 						</select>
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="accountBalance">Account Name</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="accountBalance">Account Name</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="acct_name" class="form-control"
-							name="acct_name" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="acct_name" class="form-control" name="acct_name"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="lastSettlementDate" title="Last Settlement Date">Last
-							Settl. Dt.</label><span style="color: red; font-size: 20px;"> *</span>
+						<label for="lastSettlementDate" title="Last Settlement Date">Current Date
+						</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="lastSettlementDate" class="form-control"
-							name="lastSettlementDate"
+						<input type="text" id="lastSettlementDate" class="form-control" name="lastSettlementDate"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
@@ -355,8 +355,7 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="date">Balance Date</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="date">Balance Date</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="date" class="form-control" name="date"
@@ -364,13 +363,12 @@ label {
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="accountBalance">Account Bal.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="accountBalance">Account Bal.</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="accountBalance" class="form-control"
-							name="accountBalance" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="accountBalance" class="form-control" name="accountBalance"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
@@ -378,8 +376,7 @@ label {
 							Ind.</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="balanceIndicator" class="form-control"
-							name="balanceIndicator"
+						<input type="text" id="balanceIndicator" class="form-control" name="balanceIndicator"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
@@ -388,33 +385,28 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="tranDate">Tran Date</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="tranDate">Tran Date</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="tranDate" class="form-control"
-							name="tranDate" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="tranDate" class="form-control" name="tranDate"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="tranAmount">Tran Amount</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="tranAmount">Tran Amount</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="tranAmount" class="form-control"
-							name="tranAmount" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="tranAmount" class="form-control" name="tranAmount"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="tranReference">Tran Reference</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="tranReference">Tran Reference</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="tranReference" class="form-control"
-							name="tranReference" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="tranReference" class="form-control" name="tranReference"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
 			</div>
@@ -425,8 +417,7 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="bank">Bank</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="bank">Bank</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="bank" class="form-control" name="bank"
@@ -434,33 +425,30 @@ label {
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="account-number">Account No.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="account-number">Account No.</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="account-number" class="form-control"
-							name="accountNumber" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="account-number" class="form-control" name="accountNumber"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="account-type">Account Type</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="account-type">Account Type</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="account-type" class="form-control"
-							name="accountType" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="account-type" class="form-control" name="accountType"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
 				<div class="row formline mt-2">
 					<div class="col-sm-1">
-						<label for="frequency">Frequency</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="frequency">Frequency</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<select name="frequency" id="type" style="width: 100%"
-							class="form-control form-control-sm" required>
+						<select name="frequency" id="type" style="width: 100%" class="form-control form-control-sm"
+							required>
 							<option value="">SELECT</option>
 							<option value="MONTHLY">MONTHLY</option>
 							<option value="WEEKLY">WEEKLY</option>
@@ -468,13 +456,12 @@ label {
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="accountBalance">Account Name</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="accountBalance">Account Name</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="acct_name" class="form-control"
-							name="acct_name" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="acct_name" class="form-control" name="acct_name"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
@@ -482,8 +469,7 @@ label {
 							Settl. Dt.</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="lastSettlementDate" class="form-control"
-							name="lastSettlementDate"
+						<input type="text" id="lastSettlementDate" class="form-control" name="lastSettlementDate"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
@@ -492,13 +478,11 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="charge-type">Charge Type</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="charge-type">Charge Type</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="charge-type" class="form-control"
-							name="chargeType" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="charge-type" class="form-control" name="chargeType"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
@@ -506,19 +490,17 @@ label {
 							Des.</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="charge-description" class="form-control"
-							name="chargeDescription"
+						<input type="text" id="charge-description" class="form-control" name="chargeDescription"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="charge-details">Charge Details</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="charge-details">Charge Details</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="charge-details" class="form-control"
-							name="chargeDetails" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="charge-details" class="form-control" name="chargeDetails"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
 
@@ -528,8 +510,7 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="date">Balance Date</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="date">Balance Date</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
 						<input type="text" id="date" class="form-control" name="date"
@@ -538,22 +519,20 @@ label {
 					<div class="col-sm-1"></div>
 
 					<div class="col-sm-1">
-						<label for="account-balance">Account Bal.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="account-balance">Account Bal.</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="account-balance" class="form-control"
-							name="accountBalance" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="account-balance" class="form-control" name="accountBalance"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="balance-indicator">Balance Ind.</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="balance-indicator">Balance Ind.</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="balance-indicator" class="form-control"
-							name="balanceIndicator"
+						<input type="text" id="balance-indicator" class="form-control" name="balanceIndicator"
 							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
@@ -562,13 +541,11 @@ label {
 
 
 					<div class="col-sm-1">
-						<label for="tran-date">Tran Date</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="tran-date">Tran Date</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="tran-date" class="form-control"
-							name="tranDate" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="tran-date" class="form-control" name="tranDate"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
@@ -576,19 +553,17 @@ label {
 							Amt</label><span style="color: red; font-size: 20px;"> *</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="fee-charge-amount" class="form-control"
-							name="feeChargeAmount" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="fee-charge-amount" class="form-control" name="feeChargeAmount"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-1">
-						<label for="tran-reference">Tran Reference</label><span
-							style="color: red; font-size: 20px;"> *</span>
+						<label for="tran-reference">Tran Reference</label><span style="color: red; font-size: 20px;">
+							*</span>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" id="tran-reference" class="form-control"
-							name="tranReference" style="color: black; font-size: 0.820rem;"
-							autocomplete="off" />
+						<input type="text" id="tran-reference" class="form-control" name="tranReference"
+							style="color: black; font-size: 0.820rem;" autocomplete="off" />
 					</div>
 				</div>
 			</div>
@@ -597,12 +572,9 @@ label {
 
 
 			<div class="card-footer text-center mt-2">
-				<button type="button" class="btn btn-xs  headerbutton" id=""
-					onclick="home();">Home</button>
-				<button type="button" class="btn btn-xs headerbutton" id=""
-					onclick="displayRecords();">Submit</button>
-				<button type="button" class="btn btn-xs  headerbutton" id=""
-					onclick="back();">Back</button>
+				<button type="button" class="btn btn-xs  headerbutton" id="" onclick="home();">Home</button>
+				<button type="button" class="btn btn-xs headerbutton" id="" onclick="displayRecords();">Submit</button>
+				<button type="button" class="btn btn-xs  headerbutton" id="" onclick="back();">Back</button>
 			</div>
 
 		</div>

@@ -69,9 +69,19 @@ public class BIPS_Mer_User_Management_Entity {
 	@Lob
 	private byte[] photo;
 	private String delete_user;
-	private String remark;
+	//private String remark;
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date delete_time;
+	private String remarks;
+
+	
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 
 	public String getDelete_user() {
 		return delete_user;
@@ -79,15 +89,7 @@ public class BIPS_Mer_User_Management_Entity {
 
 	public void setDelete_user(String delete_user) {
 		this.delete_user = delete_user;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+	} 
 
 	public Date getDelete_time() {
 		return delete_time;
@@ -457,6 +459,8 @@ public class BIPS_Mer_User_Management_Entity {
 		this.alternative_device_id2 = alternative_device_id2;
 	}
 
+
+
 	public BIPS_Mer_User_Management_Entity(String merchant_user_id, String merchant_name, String merchant_legal_user_id,
 			String merchant_corporate_name, String user_id, String user_name, String user_designation, String user_role,
 			String password1, Date password_expiry_date1, String password_life1, Date account_expiry_date1,
@@ -467,7 +471,7 @@ public class BIPS_Mer_User_Management_Entity {
 			String modify_user, String verify_user, Date entry_time, Date modify_time, Date verify_time,
 			String alternative_device_id2, String unit_id_u, String unit_name_u, String unit_type_u, String modify_flag,
 			String entry_flag, String no_of_attmp, String user_locked_flg, String user_category, String countrycode,
-			String alt_countrycode, byte[] photo, String delete_user, String remark, Date delete_time) {
+			String alt_countrycode, byte[] photo, String delete_user, Date delete_time, String remarks) {
 		super();
 		this.merchant_user_id = merchant_user_id;
 		this.merchant_name = merchant_name;
@@ -513,6 +517,10 @@ public class BIPS_Mer_User_Management_Entity {
 		this.user_category = user_category;
 		this.countrycode = countrycode;
 		this.alt_countrycode = alt_countrycode;
+		this.photo = photo;
+		this.delete_user = delete_user;
+		this.delete_time = delete_time;
+		this.remarks = remarks;
 	}
 
 	public BIPS_Mer_User_Management_Entity() {

@@ -2537,7 +2537,7 @@ public class BankAndBranchMasterServices {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				msg = "File has not been successfully uploaded";
+				msg = "Merchant File has not been uploaded";
 			}
 		}
 		return msg;
@@ -2706,7 +2706,7 @@ public class BankAndBranchMasterServices {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				msg = "File has not been successfully uploaded";
+				msg = "Unit File has not been uploaded";
 			}
 		}
 		return msg;
@@ -2828,7 +2828,59 @@ public class BankAndBranchMasterServices {
 					System.out.println("unit_name: " + unit_name); 
 
 					String makerorchecker = item.get(12);
-					System.out.println("makerorchecker: " + makerorchecker); 
+					System.out.println("makerorchecker: " + makerorchecker);  
+					
+					String unit_type = item.get(13);
+					System.out.println("unit_type: " + unit_type);  
+					
+					String user_disable_fromdate = item.get(14);
+					System.out.println("user_disable_fromdate: " + user_disable_fromdate); 
+					Date date_value5 = null; 
+					if (user_disable_fromdate != null && !user_disable_fromdate.isEmpty()) {
+					    try {
+					    	date_value5 = dateFormat.parse(user_disable_fromdate);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value5: " + date_value5); 
+					
+					String user_disable_todate = item.get(15);
+					System.out.println("user_disable_todate: " + user_disable_todate);
+					Date date_value6 = null; 
+					if (user_disable_fromdate != null && !user_disable_todate.isEmpty()) {
+					    try {
+					    	date_value6 = dateFormat.parse(user_disable_todate);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value6: " + date_value6); 
+					 
+					String alter_countrycode = item.get(16);
+					System.out.println("alter_countrycode: " + alter_countrycode); 
+ 
+					BigDecimal alter_mobno = new BigDecimal(item.get(17));
+					System.out.println("alter_mobno: " + alter_mobno); 
+					
+					String alter_emailid = item.get(18);
+					System.out.println("alter_emailid" + alter_emailid); 
+					 
+					String alter_devid1 = item.get(19);
+					System.out.println("alter_devid1: " + alter_devid1); 
+					
+					String alter_devid2 = item.get(20);
+					System.out.println("alter_devid2: " + alter_devid2); 
+					 
+					String default_devid = item.get(21);
+					System.out.println("default_devid: " + default_devid); 
+
+					String remarks = item.get(22);
+					System.out.println("remarks: " + remarks); 
 					 
 					US.setMerchant_user_id(merchant_id);
 					US.setMerchant_name(merchant_name);
@@ -2845,7 +2897,17 @@ public class BankAndBranchMasterServices {
 					US.setUnit_id_u(unit_id);
 					US.setUnit_name_u(unit_name);
 					US.setMake_or_checker(makerorchecker);
-
+					US.setUnit_type_u(unit_type);
+					US.setUser_disable_from_date1(date_value5);
+					US.setUser_disable_to_date1(date_value6);
+					US.setAlt_countrycode(alter_countrycode);
+					US.setAlternate_mobile_no1(alter_mobno);
+					US.setAlternate_email_id1(alter_emailid);
+					US.setAlternative_device_id1(alter_devid1);
+					US.setAlternative_device_id2(alter_devid2);
+					US.setDefault_device_id(default_devid);
+					US.setRemarks(remarks);
+					
 					US.setDel_flag1("N");
 					US.setEntry_user(userid);
 					US.setEntry_time(new Date());
@@ -2867,7 +2929,7 @@ public class BankAndBranchMasterServices {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				msg = "File has not been successfully uploaded";
+				msg = "User File has not been uploaded";
 			}
 		}
 		return msg;
@@ -2929,7 +2991,7 @@ public class BankAndBranchMasterServices {
 					
 					String device_name = item.get(1);
 					System.out.println("device_name: " + device_name); 
-					
+					 
 					String device_identification = item.get(2);
 					System.out.println("device_identification: " + device_identification); 
 					
@@ -2950,7 +3012,51 @@ public class BankAndBranchMasterServices {
 					 
 					String unit_name = item.get(8);
 					System.out.println("unit_name: " + unit_name); 
-					
+					// Validate mandatory fields
+				    if (device_id == null || device_id.isEmpty()) {
+				        return "Field 'Device Id' cannot be null or empty.";
+				    }
+				    if (device_name == null || device_name.isEmpty()) {
+				        return "Field 'Device Name' cannot be null or empty.";
+				    }
+				    if (device_identification == null || device_identification.isEmpty()) {
+				        return "Field 'Device Identification' cannot be null or empty.";
+				    }
+				    if (device_modal == null || device_modal.isEmpty()) {
+				        return "Field 'Device Modal' cannot be null or empty.";
+				    }
+				    if (device_location == null || device_location.isEmpty()) {
+				        return "Field 'Device Location' cannot be null or empty.";
+				    }
+				    if (device_status == null || device_status.isEmpty()) {
+				        return "Field 'Device Status' cannot be null or empty.";
+				    }
+				    if (terminal_id == null || terminal_id.isEmpty()) {
+				        return "Field 'Terminal Id' cannot be null or empty.";
+				    }
+				    if (unit_id == null || unit_id.isEmpty()) {
+				        return "Field 'Unit Id' cannot be null or empty.";
+				    }
+				    if (unit_name == null || unit_name.isEmpty()) {
+				        return "Field 'Unit Name' cannot be null or empty.";
+				    }
+				    
+				    String device_mechine_id = item.get(9);
+				    String device_make = item.get(10);
+				    String store_id = item.get(11);
+				    String finger_print_enable = item.get(12);
+				    String finger_recogn_enable = item.get(13);
+				    String default_user_id = item.get(14);
+				    String alternative_user_id = item.get(15);
+				    String approved_user = item.get(16);
+				    String defined_user = item.get(17);
+				    String user1 = item.get(18);
+				    String user2 = item.get(19);
+				    String unit_typpe = item.get(20);
+				    String remarks = item.get(21);
+				    
+				    
+				    
 					DV.setMerchant_user_id(merchant_id);
 					DV.setMerchant_name(merchant_name);
 					DV.setDevice_id(device_id);
@@ -2963,6 +3069,19 @@ public class BankAndBranchMasterServices {
 					DV.setUnit_id_d(unit_id);
 					DV.setUnit_name_d(unit_name);
 					
+					DV.setDevice_machine_id(device_mechine_id);
+					DV.setDevice_make(device_make);
+					DV.setStore_id(store_id);
+					DV.setFingerprint_enable(finger_print_enable);
+					DV.setFace_recognition_enabled(finger_print_enable);
+					DV.setDefault_user_id(default_user_id);
+					DV.setAlternate_user_id(alternative_user_id);
+					DV.setApproved_user(approved_user);
+					DV.setDefined_user(defined_user);
+					DV.setUser1(user1);
+					DV.setUser2(user2);
+					DV.setUnit_type_d(unit_typpe);
+					DV.setRemark(remarks);
 					DV.setDel_flg("N");
 					DV.setDisable_flag("N");
 					DV.setFingerprint_enable("YES");
@@ -2980,7 +3099,7 @@ public class BankAndBranchMasterServices {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				msg = "File has not been successfully uploaded";
+				msg = "Device File has not been uploaded";
 			}
 		}
 		return msg;

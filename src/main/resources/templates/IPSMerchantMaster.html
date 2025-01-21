@@ -6929,175 +6929,177 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 					<div th:if="${not #lists.isEmpty(bankDetail)}">
 						<table
-							class="table table-striped table-bordered table-hover table-sm"
-							id="" style="table-layout: fixed; width: 100%;">
-							<thead>
+													class="table table-striped table-bordered table-hover table-sm"
+													id="" style="table-layout: fixed; width: 100%;">
+													<thead>
 
-								<tr class="filters">
-									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="Merchant ID" disabled></th>
-									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="Merchant Name" disabled></th>
-									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="Mer Corp Name" disabled></th>
-									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="Merchant Type" disabled></th>
-									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="Mer Outlet Address" disabled></th>
+														<tr class="filters">
+															<th style="text-align: center"><input type="text"
+																class="form-control font-weight-bold"
+																placeholder="Merchant ID" disabled></th>
+															<th style="text-align: center"><input type="text"
+																class="form-control font-weight-bold"
+																placeholder="Merchant Name" disabled></th>
+															<th style="text-align: center"><input type="text"
+																class="form-control font-weight-bold"
+																placeholder="Mer Corp Name" disabled></th>
+															<th style="text-align: center"><input type="text"
+																class="form-control font-weight-bold"
+																placeholder="Merchant Type" disabled></th>
+															<th style="text-align: center"><input type="text"
+																class="form-control font-weight-bold"
+																placeholder="Mer Outlet Address" disabled></th>
 
-									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold" placeholder="Status"
-										disabled></th>
-									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="QR Acceptance" disabled></th>
-									<th class="pb-2 select_th" style="font-size: 14px;">Generate
-										QR</th>
-									<th class="pb-2 select_th" style="font-size: 14px;"
-										th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Select
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr style="font-size: smaller;"
-									th:each="bankList : ${bankDetail}" class="userlist">
-									<th:block id="flag" th:switch="${bankList.entity_flg}">
-										<!-- Case for entity_flg == 'Y' -->
-										<td th:case="'Y'"
-											th:text="${bankList.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}"
-											onclick="GetMerchantTrans(this);" style="color: blue;"
-											th:attr="data-MerchantID=${bankList?.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}">
-										</td>
+															<th style="text-align: center"><input type="text"
+																class="form-control font-weight-bold" placeholder="Status"
+																disabled></th>
+															<th style="text-align: center"><input type="text"
+																class="form-control font-weight-bold"
+																placeholder="QR Acceptance" disabled></th>
+															<th class="font-weight-bold select_th" style="font-size: 16px;">Generate
+																QR</th>
+															<th class="font-weight-bold select_th" style="font-size: 16px;"
+																th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">Select
+															</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr style="font-size: smaller;"
+															th:each="bankList : ${bankDetail}" class="userlist">
+															<th:block id="flag" th:switch="${bankList.entity_flg}">
+																<!-- Case for entity_flg == 'Y' -->
+																<td th:case="'Y'"
+																	th:text="${bankList.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}"
+																	onclick="GetMerchantTrans(this);" style="color: blue;"
+																	th:attr="data-MerchantID=${bankList?.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}">
+																</td>
 
-										<!-- Case for entity_flg == 'N' -->
-										<td th:case="'N'"
-											th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}"
-											onclick="GetMerchantTrans(this);" style="color: blue;"
-											th:attr="data-MerchantID=${bankList?.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}">
-										</td>
+																<!-- Case for entity_flg == 'N' -->
+																<td th:case="'N'"
+																	th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}"
+																	onclick="GetMerchantTrans(this);" style="color: blue;"
+																	th:attr="data-MerchantID=${bankList?.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}">
+																</td>
 
-										<!-- Case for entity_flg == NULL -->
-										<td th:case="'NULL'"
-											th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}"
-											onclick="GetMerchantTrans(this);" style="color: blue;"
-											th:attr="data-MerchantID=${bankList?.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}">
-										</td>
-									</th:block>
-									<td
-										th:text="${bankList?.merchant_name != null ? bankList.merchant_name.toUpperCase() : ''}">
-									</td>
-									<td
-										th:text="${bankList?.merchant_corp_name != null ? bankList.merchant_corp_name.toUpperCase() : ''}">
-									</td>
-									<td
-										th:text="${bankList?.merchant_type != null ? bankList.merchant_type.toUpperCase() : ''}">
-									</td>
-									<td
-										th:text="${bankList?.merchant_location != null ? bankList.merchant_location.toUpperCase() : ''}">
-									</td>
-									<th:block id="flag" th:switch="${bankList.entity_flg}">
-										<td th:case="'Y'" style="color: green;">VERIFIED</td>
-										<td th:case="'N'" style="color: red;">UNVERIFIED</td>
-										<td th:case="NULL" style="color: red;">UNVERIFIED</td>
-									</th:block>
-									<td>
-										<!-- QR Acceptance Column --> <span
-										th:if="${bankList.type_maucas != null}">MAUCAS</span> <span
-										th:if="${bankList.type_upi != null}">UPI</span><span
-										th:if="${bankList.type_maucas == null && bankList.type_upi == null}">NOT
-											AVAILABLE</span>
-									</td>
+																<!-- Case for entity_flg == NULL -->
+																<td th:case="'NULL'"
+																	th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}"
+																	onclick="GetMerchantTrans(this);" style="color: blue;"
+																	th:attr="data-MerchantID=${bankList?.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}">
+																</td>
+															</th:block>
+															<td
+																th:text="${bankList?.merchant_name != null ? bankList.merchant_name.toUpperCase() : ''}">
+															</td>
+															<td
+																th:text="${bankList?.merchant_corp_name != null ? bankList.merchant_corp_name.toUpperCase() : ''}">
+															</td>
+															<td
+																th:text="${bankList?.merchant_type != null ? bankList.merchant_type.toUpperCase() : ''}">
+															</td>
+															<td
+																th:text="${bankList?.merchant_location != null ? bankList.merchant_location.toUpperCase() : ''}">
+															</td>
+															<th:block id="flag" th:switch="${bankList.entity_flg}">
+																<td th:case="'Y'" style="color: green;">VERIFIED</td>
+																<td th:case="'N'" style="color: red;">UNVERIFIED</td>
+																<td th:case="NULL" style="color: red;">UNVERIFIED</td>
+															</th:block>
+															<td>
+																<!-- QR Acceptance Column --> <span
+																th:if="${bankList.type_maucas != null && bankList.type_upi == null}">MAUCAS</span> <span
+																th:if="${bankList.type_upi != null && bankList.type_maucas == null}">UPI</span>
+																<span
+																th:if="${bankList.type_maucas != null && bankList.type_upi != null}">UPI , MAUCAS</span><span
+																th:if="${bankList.type_maucas == null && bankList.type_upi == null}">NOT
+																	AVAILABLE</span>
+															</td>
 
-									<td>
-										<div class="dropdown actionBtn">
-											<button class="btn btn-secondary dropdown-toggle"
-												type="button" id="dropdownMenuButton"
-												style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">QR Type</button>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton"
-												style="background-color: #e3e3e4; color: #3a4550;">
-												<a class="dropdown-item" title="Static QR"
-													th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name}"
-													th:if="${bankList?.type_maucas}=='Maucas'"
-													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-													id="edit_value" onclick="StaticQR(this)">Static QR</a>
+															<td>
+																<div class="dropdown actionBtn">
+																	<button class="btn btn-secondary dropdown-toggle"
+																		type="button" id="dropdownMenuButton"
+																		style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false">QR Type</button>
+																	<div class="dropdown-menu"
+																		aria-labelledby="dropdownMenuButton"
+																		style="background-color: #e3e3e4; color: #3a4550;">
+																		<a class="dropdown-item" title="Static QR"
+																			th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name}"
+																			th:if="${bankList?.type_maucas}=='Maucas'"
+																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+																			id="edit_value" onclick="StaticQR(this)">Static QR</a>
 
-												<!--<div class="dropdown-divider"
-													th:if="${bankList?.type_maucas}=='Maucas' and ${bankList?.static_field}=='Dynamic'">
-												</div>
-												<a class="dropdown-item" title="Dynamic QR"
-													th:if="${bankList?.type_maucas}=='Maucas'  and ${bankList?.static_field}=='Dynamic'"
-													th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name} ,data-storeLabel=${bankList?.store_label},data-loyaltyNumber=${bankList?.loyalty_number} ,data-refereceLabel=${bankList?.reference_label},data-customerLabel=${bankList?.customer_label} ,data-terminalLabel=${bankList?.terminal_label},data-purposeTran=${bankList?.purpose_of_tran} ,data-additionalDetails=${bankList?.add_details_req},data-mobile=${bankList?.merchant_mob_no}"
-													style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
-													id="delete_value" onclick="DynamicQR(this)">Dynamic QR</a>-->
-												<div class="dropdown-divider"
-													th:if="${bankList?.type_upi}=='Upi' and ${bankList?.type_maucas}=='Maucas'">
-												</div>
-												<a class="dropdown-item" title="Static QR"
-													th:if="${bankList?.type_upi}=='Upi'"
-													th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name}"
-													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-													id="edit_value" onclick="StaticQR(this)">Static QR UPI</a>
-											</div>
-										</div>
-									</td>
-									<td
-										th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
-										<div class="dropdown actionBtn">
-											<button class="btn btn-secondary dropdown-toggle"
-												type="button" id="dropdownMenuButton"
-												style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
-												data-toggle="dropdown" aria-haspopup="true"
-												aria-expanded="false">Action</button>
-											<div class="dropdown-menu"
-												aria-labelledby="dropdownMenuButton"
-												style="background-color: #e3e3e4; color: #3a4550;">
-												<a class="dropdown-item" title="View"
-													th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'"
-													th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
-													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-													id="delete_value" onclick="view_btn(this)">View</a>
-												<div class="dropdown-divider"
-													th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'">
-												</div>
-												<a class="dropdown-item" title="View"
-													th:if="${bankList.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'"
-													th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
-													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-													id="view_value" onclick="view_new_btn(this)">View</a> <a
-													class="dropdown-item" title="Modify"
-													th:if="${bankList.entity_flg}=='Y'"
-													th:attr="data-bank_code=${bankList?.merchant_id}"
-													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-													id="edit_value" onclick="edit_btn_submit(this)">Modify</a>
+																		<!--<div class="dropdown-divider"
+																			th:if="${bankList?.type_maucas}=='Maucas' and ${bankList?.static_field}=='Dynamic'">
+																		</div>
+																		<a class="dropdown-item" title="Dynamic QR"
+																			th:if="${bankList?.type_maucas}=='Maucas'  and ${bankList?.static_field}=='Dynamic'"
+																			th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name} ,data-storeLabel=${bankList?.store_label},data-loyaltyNumber=${bankList?.loyalty_number} ,data-refereceLabel=${bankList?.reference_label},data-customerLabel=${bankList?.customer_label} ,data-terminalLabel=${bankList?.terminal_label},data-purposeTran=${bankList?.purpose_of_tran} ,data-additionalDetails=${bankList?.add_details_req},data-mobile=${bankList?.merchant_mob_no}"
+																			style="cursor: pointer; height: 20px; width: 64px; color: #12161b; background: #e3e3e4; height: 16px; border-radius: .20rem; padding: 2px 10px; top: 10px;"
+																			id="delete_value" onclick="DynamicQR(this)">Dynamic QR</a>-->
+																		<div class="dropdown-divider"
+																			th:if="${bankList?.type_upi}=='Upi' and ${bankList?.type_maucas}=='Maucas'">
+																		</div>
+																		<a class="dropdown-item" title="Static QR"
+																			th:if="${bankList?.type_upi}=='Upi'"
+																			th:attr="data-bank_code=${bankList?.merchant_id},data-acct_name=${bankList?.merchant_name}"
+																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+																			id="edit_value" onclick="StaticQR(this)">Static QR UPI</a>
+																	</div>
+																</div>
+															</td>
+															<td
+																th:if="${IPSRoleMenu.work_class}=='C' OR ${IPSRoleMenu.permissions}=='W'">
+																<div class="dropdown actionBtn">
+																	<button class="btn btn-secondary dropdown-toggle"
+																		type="button" id="dropdownMenuButton"
+																		style="line-height: 0.7; width: 80px; font-size: 13px; color: #162b75; font-weight: 700; background: #e3e3e4;"
+																		data-toggle="dropdown" aria-haspopup="true"
+																		aria-expanded="false">Action</button>
+																	<div class="dropdown-menu"
+																		aria-labelledby="dropdownMenuButton"
+																		style="background-color: #e3e3e4; color: #3a4550;">
+																		<a class="dropdown-item" title="View"
+																			th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'"
+																			th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
+																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+																			id="delete_value" onclick="view_btn(this)">View</a>
+																		<div class="dropdown-divider"
+																			th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'">
+																		</div>
+																		<a class="dropdown-item" title="View"
+																			th:if="${bankList.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'"
+																			th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
+																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+																			id="view_value" onclick="view_new_btn(this)">View</a> <a
+																			class="dropdown-item" title="Modify"
+																			th:if="${bankList.entity_flg}=='Y'"
+																			th:attr="data-bank_code=${bankList?.merchant_id}"
+																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+																			id="edit_value" onclick="edit_btn_submit(this)">Modify</a>
 
-												<div class="dropdown-divider"
-													th:if="${bankList.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'">
-												</div>
-												<a class="dropdown-item" title="Verify"
-													th:if="${bankList.entity_flg}=='N'"
-													th:attr="data-bank_code=${bankList?.merchant_id}"
-													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-													id="delete_value" onclick="verify_btn_submit(this)">Verify</a>
-												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" title="Delete"
-													th:attr="data-merchant_id=${bankList?.merchant_id}"
-													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
-													id="delete_value" onclick="deleteMerchantData(this)">Delete</a>
+																		<div class="dropdown-divider"
+																			th:if="${bankList.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'">
+																		</div>
+																		<a class="dropdown-item" title="Verify"
+																			th:if="${bankList.entity_flg}=='N'"
+																			th:attr="data-bank_code=${bankList?.merchant_id}"
+																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+																			id="delete_value" onclick="verify_btn_submit(this)">Verify</a>
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item" title="Delete"
+																			th:attr="data-merchant_id=${bankList?.merchant_id}"
+																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
+																			id="delete_value" onclick="deleteMerchantData(this)">Delete</a>
 
-											</div>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
+																	</div>
+																</div>
+															</td>
+														</tr>
+													</tbody>
+												</table>
 					</div>
 				</div>
 				<div class="card-footer text-center">
@@ -15913,6 +15915,37 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 								</div>
 								<label></label>
 								<div class="row formline">
+									<div class="col-sm-2">
+																			<label for="Remarks">Remarks<span style="color: red; font-size: 20px;"
+																				th:if="${formmode}=='UsermAdd' OR ${formmode}=='UsermEdit'">
+																			</span>
+																			</label>
+																		</div>
+																		<div class="col-sm-3">
+																			<input type="text" id="	remarks"
+																				name="remarks"
+																				th:if="${formmode}=='MerMastvi'"
+																				th:value="${Meruserlist.remarks}"
+																				class="form-control form-control-sm" autocomplete="off"
+																				readonly> <input type="text"
+																				id="remarks" name="remarks"
+																				th:if="${formmode}=='UsermAdd'"
+																				onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																				class="form-control form-control-sm" maxlength="30"
+																				autocomplete="off"> <input type="text"
+																				id="remarks" name="remarks"
+																				th:if="${formmode}=='UsermEdit'"
+																				onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+																				th:value="${Meruserlist.remarks}"
+																				class="form-control form-control-sm" maxlength="30"
+																				autocomplete="off"> <input type="text"
+																				id="remarks" name="remarks"
+																				th:if="${formmode}=='UsermVerify'"
+																				th:value="${Meruserlist.remarks}"
+																				class="form-control form-control-sm" autocomplete="off"
+																				readonly>
+																		</div> 
+																		<div class="col-sm-1"></div> 
 									<div th:if="${formmode}=='UsermAdd' " class="col-sm-2">
 										<label for="mand_account_number">Upload Image</label>
 									</div>
@@ -15955,7 +15988,6 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											title="click to view Image" id="openUploadModal">show
 											view</span>
 									</div>
-									<div class="col-sm-1"></div>
 								</div>
 								<input type="text" id="demouserid" name="demouserid"
 									th:value="${MerchantIdUse}" th:if="${formmode}=='UsermAdd'"

@@ -54,6 +54,8 @@ public class NotificationParmsServices {
 			} else {
 				notificationParmsReg.setENTRY_USER(userid);
 				notificationParmsReg.setENTRY_TIME(new Date());
+				notificationParmsReg.setMODIFY_USER(userid);
+				notificationParmsReg.setMODIFY_TIME(new Date());
 				notificationParmsReg.setDEL_FLG("N");
 				notificationParmsReg.setENTITY_FLG("N");
 				notificationParmsRep.save(notificationParmsReg);
@@ -202,6 +204,8 @@ public class NotificationParmsServices {
 
 				notificationParmsReg.setENTRY_USER(notificationParmsReg1.getENTRY_USER());
 				notificationParmsReg.setENTRY_TIME(notificationParmsReg1.getENTRY_TIME());
+				notificationParmsReg.setMODIFY_USER(notificationParmsReg1.getMODIFY_USER());
+				notificationParmsReg.setMODIFY_TIME(notificationParmsReg1.getMODIFY_TIME());
 				notificationParmsReg.setDEL_FLG("N");
 				notificationParmsReg.setENTITY_FLG("Y");
 				notificationParmsReg.setVERIFY_USER(userid);
