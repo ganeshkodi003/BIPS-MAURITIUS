@@ -252,6 +252,11 @@ label {
 	    $("#FromDate").datepicker({
 	        dateFormat: 'dd-mm-yy',
 	        maxDate: new Date(),
+	        onSelect: function (selected) {
+	            // When From Date is selected, update To Date picker's minDate and default value
+	            $("#currentDate").datepicker("option", "minDate", selected); // Set minDate for To Date
+	            $("#currentDate").val(selected); // Update To Date to match From Date
+	        }
 	    });
 
 	    // Initialize currentDate (To Date) with the current date
