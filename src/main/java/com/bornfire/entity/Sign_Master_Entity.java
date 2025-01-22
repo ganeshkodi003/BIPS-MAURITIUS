@@ -16,8 +16,15 @@ public class Sign_Master_Entity {
 	private String merchant_Id;
 	@Id
 	private BigDecimal s_no;
-
-	
+	private String merchant_name_sign;
+ 
+	 
+	public String getMerchant_name_sign() {
+		return merchant_name_sign;
+	}
+	public void setMerchant_name_sign(String merchant_name_sign) {
+		this.merchant_name_sign = merchant_name_sign;
+	}
 	public Blob getSign() {
 		return sign;
 	}
@@ -38,11 +45,13 @@ public class Sign_Master_Entity {
 	}
  
 	
-	public Sign_Master_Entity(Blob sign, String merchant_Id, BigDecimal s_no) {
+	 
+	public Sign_Master_Entity(Blob sign, String merchant_Id, BigDecimal s_no, String merchant_name_sign) {
 		super();
 		this.sign = sign;
 		this.merchant_Id = merchant_Id;
 		this.s_no = s_no;
+		this.merchant_name_sign = merchant_name_sign;
 	}
 	public Sign_Master_Entity() {
 		super();

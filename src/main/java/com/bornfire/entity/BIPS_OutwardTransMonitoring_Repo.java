@@ -29,8 +29,8 @@ public interface BIPS_OutwardTransMonitoring_Repo extends JpaRepository<BIPS_Out
 	@Query(value = "SELECT * FROM bips_outward_transaction_monitoring_table WHERE TRUNC(tran_date) =?1", nativeQuery = true)
 	List<BIPS_Outward_Trans_Monitoring_Entity> getTranDevlst(String currentDate);
 
-	@Query(value = "SELECT * FROM bips_outward_transaction_hist_monitoring_table WHERE TRUNC(tran_date) =?1", nativeQuery = true)
-	List<BIPS_Outward_Trans_Monitoring_Entity> getTranDevlstHist(String valueDate);
+	@Query(value = "SELECT * FROM bips_outward_transaction_hist_monitoring_table WHERE TRUNC(TRAN_DATE) BETWEEN TO_DATE(?1, 'dd-MM-yyyy') AND TO_DATE(?2, 'dd-MM-yyyy') ORDER BY TRAN_DATE", nativeQuery = true)
+	List<BIPS_Outward_Trans_Monitoring_Entity> getTranDevlstHist(String fromdate,String valueDate);
 
 	@Query(value = "select * from bips_outward_transaction_monitoring_table where merchant_id=?1", nativeQuery = true)
 	List<BIPS_Outward_Trans_Monitoring_Entity> getTranDevlst1(String merchant_id);

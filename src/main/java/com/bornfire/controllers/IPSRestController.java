@@ -558,18 +558,19 @@ public class IPSRestController {
 
 	@RequestMapping(value = "getTransactionRecords", method = RequestMethod.GET)
 	public List<BIPS_Outward_Trans_Monitoring_Entity> getTransactionRecords(
-			@RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date valueDate) {
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date valueDate,
+			@RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") Date FromDate) {
 
 		SimpleDateFormat dateFormatWithMonthName = new SimpleDateFormat("dd-MMM-yyyy");
 		Date currentDate = new Date();
 		String currentDateRef = dateFormatWithMonthName.format(currentDate).toUpperCase();
 		String valueDateRef = dateFormatWithMonthName.format(valueDate).toUpperCase();
-
+		String FromDateRef = dateFormatWithMonthName.format(FromDate).toUpperCase();
 		List<BIPS_Outward_Trans_Monitoring_Entity> records = new ArrayList<>();
 		if (currentDateRef.equals(valueDateRef)) {
 			records = bIPS_OutwardTransMonitoring_Repo.getTranDevlst(currentDateRef);
 		} else {
-			records = bIPS_OutwardTransMonitoring_Repo.getTranDevlstHist(valueDateRef);
+			records = bIPS_OutwardTransMonitoring_Repo.getTranDevlstHist(FromDateRef,valueDateRef);
 		}
 
 		return records;
@@ -1997,7 +1998,7 @@ public class IPSRestController {
 
 		@PostMapping(value = "/AddStudentss")
 		@ResponseBody
-		public String uploadSignatureAndPhoto(@RequestParam String merchant_Id, @RequestParam String srcURL)
+		public String uploadSignatureAndPhoto(@RequestParam String merchant_Id, @RequestParam String srcURL,@RequestParam String merchant_name)
 				throws IOException, SQLException {
 
 			String msg = null;
@@ -2008,7 +2009,8 @@ public class IPSRestController {
 				signatureEntity.setS_no(srlnoStr);
 
 				signatureEntity.setMerchant_Id(merchant_Id);
-				;
+				
+				signatureEntity.setMerchant_name_sign(merchant_name);
 				byte[] buff = srcURL.getBytes();
 				Blob blob = new SerialBlob(buff);
 				signatureEntity.setSign(blob);

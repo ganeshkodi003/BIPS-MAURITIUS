@@ -42,7 +42,10 @@
 	padding: 0;
 	height: auto;
 }
-
+#currentDate {
+    background-color: transparent;  /* Remove background color */
+    border: none;  
+}
 .filterable .filters input[disabled]::-webkit-input-placeholder {
 	color: #333;
 }
@@ -243,18 +246,46 @@ label {
 	});
 
 	$(document).ready(function () {
-		var currentDate = $.datepicker.formatDate('dd-mm-yy', new Date());
-		$("#currentDate").val(currentDate);
-		$("#currentDate").datepicker({
-			dateFormat: 'dd-mm-yy',
-			maxDate: new Date()
-		});
+	    // Initialize FromDate with the current date
+	    var currentDate = $.datepicker.formatDate('dd-mm-yy', new Date());
+	    $("#FromDate").val(currentDate);
+	    $("#FromDate").datepicker({
+	        dateFormat: 'dd-mm-yy',
+	        maxDate: new Date(),
+	    });
+
+	    // Initialize currentDate (To Date) with the current date
+	    $("#currentDate").val(currentDate);
+	    $("#currentDate").datepicker({
+	        dateFormat: 'dd-mm-yy',
+	        maxDate: new Date(),
+	        onSelect: function (selected) {
+	            var fromDate = $("#FromDate").val(); // Get the From Date value
+	            var isFromDateDefault = fromDate === currentDate; 
+	            // Check if From Date is not selected or empty
+	            if (isFromDateDefault ) {
+	                $('#myModalpopup1').modal("toggle");
+	                $('#myModalpopup1 .modal-body').text("Please Select From Date First.");
+	                
+	            } else {
+	                // Proceed with the function if From Date is not empty
+	                getTransactionRecords();
+	            }
+
+	            
+	        }
+	    });
 	});
 
+
+	
 	function getTransactionRecords() {
 		var valueDate = $('#currentDate').val();
+		var FromDate = $('#FromDate').val();
+		alert(FromDate);
+		
 		$.ajax({
-			url: './getTransactionRecords?valueDate=' + valueDate,
+			url: './getTransactionRecords?valueDate=' + valueDate + '&FromDate=' +FromDate,
 			type: 'GET',
 			success: function (data) {
 				var trHTML = '';
@@ -317,9 +348,9 @@ label {
 						        <td style="text-align: left;">${tranAuditNumber}</td>
 						        <td style="text-align: right;">${tranAmount}</td>
 						        <td style="text-align: left; color: ${color};">${tranStatus}</td>
-						        <td style="text-align: left;">${tranRemarks}</td>
+						      
 						        <td style="text-align: left;">${reversalRemarks}</td>
-						        <td style="text-align: center;">
+						        <td style="text-align: center; vertical-align: middle; padding: 0;">
 						            <input type="radio" id="btnclick" name="btnradio" style="cursor: pointer;"
 									data-audit-number="${tranAuditNumber}" id="${tranAuditNumber}" onclick="getUnicRec(this);">
 						        </td>
@@ -476,10 +507,15 @@ $(document)
 						Transaction</h6>
 
 					<div class="d-flex align-items-center">
-						<h3 class="mx-3 text-white">Search Records by Date :</h3>
+						<h3 class="mx-3 text-white">From Date :</h3>
 						<div>
-							<input class="form-control form-control-sm" type="text"
-								id="currentDate" onchange="getTransactionRecords();" readonly>
+							<input class="form-control form-control-sm text-white" style="background-color:#f26223!important;border:none" type="text"
+								id="FromDate"  readonly />
+						</div>
+						<h3 class="mx-3 text-white">To Date :</h3>
+						<div>
+							<input class="form-control form-control-sm text-white" type="text"
+								id="currentDate" onchange="getTransactionRecords();" readonly />
 						</div>
 						<button type="button"
 							class="btn btns btn-filter headerbutton ml-3">Filter</button>
@@ -503,7 +539,7 @@ $(document)
 									class="form-control font-weight-bold" placeholder="Audit Ref"
 									disabled></th>
 								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="Amount"
+									class="form-control font-weight-bold text-right" placeholder="Amount"
 									disabled></th> 
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Status"

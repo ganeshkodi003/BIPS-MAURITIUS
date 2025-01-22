@@ -2245,7 +2245,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 							returnValue = false;
 						}
 					}
-					//returnValue = true;
+					returnValue = true;
 					if (returnValue == true) {
 						$("#one-panel").css("display", "none");
 						$("#four1-panel").css("display", "block");
@@ -4477,14 +4477,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
             <td>
                 <div class="w-75" >
                     
-                    <input type="text" id="mer_nat_id_r${rowCount}" name="mer_nat_id_r${rowCount}" 
+                    <input type="text" id="mer_nat_id_r${rowCount}" onkeyup="this.value = this.value.toUpperCase();" name="mer_nat_id_r${rowCount}" 
                            class="form-control form-control-sm"
                            required autocomplete="off">
                 </div>
                 <span id="mer_nat_id_r${rowCount}_vali" class="reqError"></span>
             </td>
             <td>
-                <input type="text" name="mer_email_addr_r${rowCount}" id="mer_email_addr_r${rowCount}" 
+                <input type="text" name="mer_email_addr_r${rowCount}" id="mer_email_addr_r${rowCount}"  onkeyup="this.value = this.value.toUpperCase();"
                        maxlength="30" class="form-control form-control-sm w-75">
                 <span id="mer_email_addr_r${rowCount}_vali" class="reqError"></span>
             </td>
@@ -7741,12 +7741,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 													</div> <span id="mer_ph_no_vali" class="reqError"></span>
 												</td>
 												<td><input type="text" id="mer_nat_id"
-													name="mer_nat_id"
+													name="mer_nat_id" onkeyup="this.value = this.value.toUpperCase();"
 													class="form-control form-control-sm w-75 " required
 													autocomplete="off"> <span id="mer_nat_id_vali"
 													class="reqError"></span></td>
 												<td><input type="text" name="mer_email_addr_r1"
-													id="mer_email_addr" maxlength="30"
+													id="mer_email_addr" maxlength="30" onkeyup="this.value = this.value.toUpperCase();"
 													class="form-control form-control-sm w-75"> <span
 													id="mer_email_addr_r1_vali" class="reqError"></span></td>
 												<td><select name="mer_notifi_mode" id="mer_notifi_mode"
@@ -8611,24 +8611,24 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											class="table table-bordered "
 											style="text-align: center; vertical-align: 22px;; font-size: 15px;">
 											<thead>
-												<tr style="font-weight: bold;">
+												<tr style="font-weight: bold;font-size:14px;">
 
-													<th style="font-weight: bold; text-align: left;">Document
-														Type</th>
-													<th style="font-weight: bold; text-align: left;">Document
-														Code</th>
-													<th style="font-weight: bold; text-align: left;">Doc
-														Description</th>
-													<th style="font-weight: bold; text-align: left;">Unique
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOCUMENT TYPE
+														</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOCUMENT
+														CODE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOC
+														DESCRIPTION</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">UNIQUE
 														ID</th>
-													<th style="font-weight: bold; text-align: left;">Place
-														of Issue</th>
-													<th style="font-weight: bold; text-align: left;">Issue
-														Date</th>
-													<th style="font-weight: bold; text-align: left;">Expiry
-														Date</th>
-													<th style="font-weight: bold; text-align: left;">Document
-														Upload</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">PLACE
+														OF ISSUE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">ISSUE
+														DATE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">EXPIRY
+														DATE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOCUMENT
+														UPLOAD</th>
 											<tbody id="click1">
 												<tr>
 													<td><select id="docType0" name="docType"
@@ -8645,12 +8645,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 															<option value="">SELECT</option>
 													</select></td>
 													<td><input type="text" id="docDesc0" name="docDesc"
-														maxlength="10" class="form-control"
+														maxlength="10" class="form-control" readonly
 														style="width: 150px; height: 26px;"></td>
-													<td><input type="text" id="uniqId0" name="uniqId"
+													<td><input type="text" id="uniqId0" name="uniqId" onkeyup="this.value = this.value.toUpperCase();"
 														maxlength="13" class="form-control"
 														style="width: 150px; height: 26px;"></td>
-													<td><input type="text" id="docIssPlace0"
+													<td><input type="text" id="docIssPlace0" onkeyup="this.value = this.value.toUpperCase();handleAddress(this)"
 														name="docIssPlace" maxlength="25" class="form-control"
 														style="width: 150px; height: 26px;"></td>
 													<td><input type="date" id="docIssDate0"
@@ -8681,13 +8681,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 														autocomplete="off" style="height: 23px; width: 150px"
 														readonly></td>
 													<td><input type="text" id="uniqId1" name="uniqId"
-														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														onkeyup="this.value = this.value.toUpperCase(); "
 														class="form-control col-sm-12 uniform-input"
 														autocomplete="off" style="height: 23px; width: 150px">
 													</td>
 													<td><input type="text" id="docIssPlace1"
 														name="docIssPlace"
-														onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+														onkeyup="this.value = this.value.toUpperCase();handleAddress(this)"
 														class="form-control col-sm-12 uniform-input"
 														autocomplete="off" style="height: 23px; width: 150px">
 													</td>
@@ -8723,9 +8723,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										<table class="" id="sign"
 											style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 											<tr>
-												<td style="text-align: center;">Name: <input
+												<td style="text-align: center;">Name: <input name="merchant_name_sign"
 													type="text" style="margin-left: 20px; width: 150px;"
-													id="ca_first_name" />
+													id="merchant_name_sign" />
 												</td>
 
 												<td rowspan="2" style="text-align: center;">Signature:
@@ -9014,6 +9014,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										function SubmitSig() {
 
 											var merchant_Id = document.getElementById("merchant_id").value;
+											var merchant_name = document.getElementById("merchant_name_sign").value;
+											alert(merchant_name);
 											let imgElement = null;
 											let Sign = null;
 
@@ -9037,7 +9039,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											$.ajax({
 												type: 'POST',
-												url: './AddStudentss?merchant_Id=' + merchant_Id,
+												url: './AddStudentss?merchant_Id=' + merchant_Id + '&merchant_name=' + merchant_name,
 												data: formData,
 												contentType: false,
 												processData: false,
@@ -24834,48 +24836,100 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 			}
 		} */
 
+		function rowadd() {
+		    var table = document.getElementById("click1");
+		    var mrowCountcor = table.rows.length;
 
-	function rowadd() {
-		var table = document.getElementById("click1");
-		var mrowCountcor = table.rows.length;
+		    if (mrowCountcor < 5) {
+		        var row = table.insertRow();
+		        var cell2 = row.insertCell();
+		        var cell3 = row.insertCell();
+		        var cell4 = row.insertCell();
+		        var cell5 = row.insertCell();
+		        var cell6 = row.insertCell();
+		        var cell7 = row.insertCell();
+		        var cell8 = row.insertCell();
+		        var cell9 = row.insertCell();
 
-		if (mrowCountcor < 5) {
+		        // Dropdown for document type
+		        cell2.innerHTML = `
+		            <select name="docType" id="docType${mrowCountcor}" class="form-control form-control-sm" 
+		                style="height: 26px; width: 200px;" onchange="updateRow(${mrowCountcor})">
+		                <option value="">SELECT</option>
+		                <option value="RDOC">REGISTRATION DOCUMENT</option>
+		                <option value="BDOC">BUSINESS DOCUMENT</option>
+		            </select>`;
 
-			var table = document.getElementById("click1");
-			var row = table.insertRow();
-			//var cell1 = row.insertCell(); 
-			var cell2 = row.insertCell();
-			var cell3 = row.insertCell();
-			var cell4 = row.insertCell();
-			var cell5 = row.insertCell();
-			var cell6 = row.insertCell();
-			var cell7 = row.insertCell();
-			var cell8 = row.insertCell();
-			var cell9 = row.insertCell();
+		        // Placeholder for dynamic input or dropdown
+		        cell3.innerHTML = `
+		            <select name="docCode" id="docCode${mrowCountcor}" class="form-control form-control-sm" 
+		                style="height: 23px; width: 150px" onchange="updateDescription1(${mrowCountcor})">
+		                <option value="">SELECT</option>
+		            </select>`;
 
-			//cell1.innerHTML = '<input type="checkbox"' + mrowCount + '">'; 
-			cell2.innerHTML = '<select name="docType" id="docType' + mrowCountcor + '"  class="form-control form-control-sm" style="height: 24px" onchange="last_change_re(' + mrowCountcor + ')" >' +
-				'<option>SELECT</option>' +
-				'<option value="NIC">CUSTOMER-RETAIL-NIC</option>' +
-				'<option value="PSP">CUSTOMER-RETAIL-PSP</option>' +
-				'<option value="AGM">CUSTOMER-RETAIL-AGM</option>' +
-				'<option value="DOC">CUSTOMER-RETAIL-DOC</option>' +
-				'</select>';
-			cell3.innerHTML = '<input type="text"  name="docCode" id="docCode' + mrowCountcor + '" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 23px; width: 150px" >';
+		        // Placeholder for description
+		        cell4.innerHTML = `
+		            <input type="text" name="docDesc" id="docDesc${mrowCountcor}" class="form-control col-sm-12 uniform-input" readonly 
+		                style="height: 23px; width: 150px">`;
 
-			//  cell3.innerHTML = '<input type="text" name="docCode" id="docCode1' + mrowCount + '" class="uniform-input pl-2" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)">';
-			cell4.innerHTML = '<input type="text" name="docDesc" id="docDesc' + mrowCountcor + '" class="form-control col-sm-12 uniform-input" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)" style="height: 23px; width: 150px">';
-			cell5.innerHTML = '<input type="text" name="uniqId" id="uniqId1' + mrowCount + '" class="form-control col-sm-12 uniform-input" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)" style="height: 23px; width: 150px">';
-			cell6.innerHTML = '<input type="text" name="docIssPlace" id="docIssPlace1' + mrowCount + '" class="form-control col-sm-12 uniform-input" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)" style="height: 23px; width: 150px">';
-			cell7.innerHTML = '<input type="date" name="docIssDate"   id="docIssDate1' + mrowCount + '" class="form-control col-sm-12 uniform-input" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)" style="height: 23px; width: 150px">';
-			cell8.innerHTML = '<input type="date" name="docExpDate"  id="docExpDate1' + mrowCount + '" class="form-control col-sm-12 uniform-input" autocomplete="off" autocomplete="off" onkeyup="this.value = this.value.toUpperCase(); handleIn(this)" style="height: 23px; width: 150px">';
-			cell9.innerHTML = '<input type="file" name="docExpDate" id="file' + mrowCount + '">';
-			mrowCountcor++;
-			mrowCount++;
-		} else {
-			alert("You can only add up to 5 rows.");
+		        // Remaining cells
+		        cell5.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase() ;" name="uniqId" id="uniqId${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 23px; width: 150px">`;
+		        cell6.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase();handleAddress(this);" name="docIssPlace" id="docIssPlace${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 23px; width: 150px">`;
+		        cell7.innerHTML = `<input type="date" name="docIssDate" id="docIssDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
+		        cell8.innerHTML = `<input type="date" name="docExpDate" id="docExpDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
+		        cell9.innerHTML = `<input type="file" name="docFile" id="file${mrowCountcor}">`;
+		    } else {
+		        alert("You can only add up to 5 rows.");
+		    }
 		}
-	}
+
+		function updateRow(rowIndex) {
+		    var docTypeSelect = document.getElementById("docType" + rowIndex);
+		    var docCodeCell = document.getElementById("docCode" + rowIndex);
+
+		    // Data for dropdown options and descriptions
+		    var options = [];
+
+		    if (docTypeSelect.value === "RDOC") {
+		        options = ['BRN', 'TAX', 'TRL'];
+		    } else if (docTypeSelect.value === "BDOC") {
+		        options = ['ANR', 'BUS', 'RNA', 'UTB'];
+		    } else {
+		        // Reset cells if no valid type selected
+		        docCodeCell.innerHTML = `<select name="docCode" id="docCode${rowIndex}" class="form-control col-sm-12 uniform-input" onchange="updateDescription(${rowIndex})">
+		            <option value="">SELECT</option>
+		        </select>`;
+		        document.getElementById("docDesc" + rowIndex).value = '';
+		        return;
+		    }
+
+		    // Update `docCode` cell to dropdown
+		    var dropdownHTML = `<select name="docCode" id="docCode${rowIndex}" class="form-control col-sm-12 uniform-input" onchange="updateDescription(${rowIndex})">
+		        <option value="">SELECT</option>`;
+		    for (var i = 0; i < options.length; i++) {
+		        dropdownHTML += `<option value="${options[i]}">${options[i]}</option>`;
+		    }
+		    dropdownHTML += '</select>';
+		    docCodeCell.innerHTML = dropdownHTML;
+		}
+
+		function updateDescription1(rowIndex) {
+		    var docCodeSelect = document.getElementById("docCode" + rowIndex);
+		    var docDescInput = document.getElementById("docDesc" + rowIndex);
+
+		    var descriptions = {
+		        BRN: 'BUSINESS REGISTRATION CERTIFICATE',
+		        TAX: 'TAX CERTIFICATE',
+		        TRL: 'TRADE LICENSE',
+		        ANR: 'ANNUAL RETURN',
+		        BUS: 'BUSINESS PLAN',
+		        RNA: 'RENTAL AGREEMENT',
+		        UTB: 'UTILITY BILL'
+		    };
+
+		    docDescInput.value = descriptions[docCodeSelect.value] || '';
+		}
+
 	function rowdelete(ele) {
 		var table = document.getElementById("click1");
 
@@ -25228,17 +25282,18 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		if (selectElement.value === 'RDOC') {
 			options = ['BRN', 'TAX', 'TRL'];
 			descriptions = {
-				BRN: 'Business Registration Certificate',
-				TAX: 'Tax Certificate',
-				TRL: 'Trade License'
+					BRN: 'BUSINESS REGISTRATION CERTIFICATE',
+					TAX: 'TAX CERTIFICATE',
+					TRL: 'TRADE LICENSE'
 			};
 		} else if (selectElement.value === 'BDOC') {
 			options = ['ANR', 'BUS', 'RNA', 'UTB'];
 			descriptions = {
-				ANR: 'Annual Return',
-				BUS: 'Business Plan',
-				RNA: 'Rental Agreement',
-				UTB: 'Utility Bill'
+					ANR: 'ANNUAL RETURN',
+					BUS: 'BUSINESS PLAN',
+					RNA: 'RENTAL AGREEMENT',
+					UTB: 'UTILITY BILL'
+
 			};
 		}
 
@@ -25282,17 +25337,18 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		if (selectElement.value === 'RDOC') {
 			options = ['BRN', 'TAX', 'TRL'];
 			descriptions = {
-				BRN: 'Business Registration Certificate',
-				TAX: 'Tax Certificate',
-				TRL: 'Trade License'
+					BRN: 'BUSINESS REGISTRATION CERTIFICATE',
+					TAX: 'TAX CERTIFICATE',
+					TRL: 'TRADE LICENSE'
 			};
 		} else if (selectElement.value === 'BDOC') {
 			options = ['ANR', 'BUS', 'RNA', 'UTB'];
 			descriptions = {
-				ANR: 'Annual Return',
-				BUS: 'Business Plan',
-				RNA: 'Rental Agreement',
-				UTB: 'Utility Bill'
+					ANR: 'ANNUAL RETURN',
+					BUS: 'BUSINESS PLAN',
+					RNA: 'RENTAL AGREEMENT',
+					UTB: 'UTILITY BILL'
+
 			};
 		}
 
@@ -25331,16 +25387,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		let options = [];
 		if (selectElement.value === 'RDOC') {
 			options = [
-				{code: 'BRN', description: 'Business Registration Certificate'},
-				{code: 'TAX', description: 'Tax Certificate'},
-				{code: 'TRL', description: 'Trade License'}
+				{code: 'BRN', description: 'BUSINESS REGISTRATION CERTIFICATE'},
+				{code: 'TAX', description: 'TAX CERTIFICATE'},
+				{code: 'TRL', description: 'TRADE LICENSE'}
 			];
 		} else if (selectElement.value === 'BDOC') {
 			options = [
-				{code: 'ANR', description: 'Annual Return'},
-				{code: 'BUS', description: 'Business Plan'},
-				{code: 'RNA', description: 'Rental Agreement'},
-				{code: 'UTB', description: 'Utility Bill'}
+				{code: 'ANR', description: 'ANNUAL RETURN'},
+				{code: 'BUS', description: 'BUSINESS PLAN'},
+				{code: 'RNA', description: 'RENTAL AGREEMENT'},
+				{code: 'UTB', description: 'UTILITY BILL'}
 			];
 		}
 
@@ -25375,8 +25431,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		if (docTypeSelect.value === 'RDOC') {
 			options = [
 				{code: 'BRN', description: 'Business Registration Certificate'},
-				{code: 'TAX', description: 'Tax Certificate'},
-				{code: 'TRL', description: 'Trade License'}
+				{code: 'TAX', description: 'TAX CERTIFICATE'},
+				{code: 'TRL', description: 'TRADE LICENSE'}
 			];
 		} else if (docTypeSelect.value === 'BDOC') {
 			options = [
