@@ -33,216 +33,185 @@
 	<script src="js/bootstrap411.js"></script>
 	<script src="js/Chart.js"></script>
 
+<style>
+.filterable .filters input[disabled] {
+	background-color: transparent;
+	border: none;
+	cursor: auto;
+	box-shadow: none;
+	padding: 0;
+	height: auto;
+}
 
-	<style>
-		body {
-			background-color: lightgrey;
-		}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
 
-		.h2,
-		h2 {
-			font-size: 2rem;
-			background-color: #555;
-			color: white;
-		}
+.filterable .filters input[disabled]::-moz-placeholder {
+	color: #333;
+}
 
-		.tag-btn {
-			font-size: 10px;
-			text-transform: uppercase;
-			font-weight: bold;
-			color: #fff;
-			cursor: pointer;
-			z-index: 5;
-			position: relative;
-			padding: 10px;
-			margin: 0;
-			line-height: 5px;
-			-webkit-transition: all 0.2s ease-in-out;
-			-moz-transition: all 0.2s ease-in-out;
-			-o-transition: all 0.2s ease-in-out;
-			-ms-transition: all 0.2s ease-in-out;
-			transition: all 0.2s ease-in-out;
-			background-color: #F08080;
-			border: none;
-			color: #fff;
-			box-shadow: none;
-		}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+	color: #333;
+}
 
-		.pagebut {
-			margin-top: 1%;
-			/*  width: 58%;  */
-			padding: 1% 1%;
-			background-color: #2e455d;
-			color: white;
-		}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+	color: #333;
+}
+td {
+	background-color: #f8f7ff;
+}
 
-		select {
-			width: 150px;
-			margin: 10px;
-		}
+.container-manager {
+	padding-right: 43px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: 18.3%;
+	margin-top: 80px;
+}
 
-		td {
-			background-color: #f8f7ff;
-		}
+.dataTables_empty {
+	color: #be3232;
+}
 
-		table.dataTable thead th,
-		table.dataTable tfoot th {
-			font-weight: normal;
-		}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
 
-		table.table .thead-light th {
-			font-size: 13px;
-			border-color: #d4d7da;
-		}
+#usertable {
+	border-collapse: separate;
+	border-spacing: 0;
+}
 
-		select:focus {
-			min-width: 150px;
-			width: auto;
-		}
+#usertable tr {
+	border-bottom: 1px solid #808080;
+}
 
-		#hidden_div {
-			display: none;
-		}
+#usertable td, #usertable th {
+	border: 2px solid #095776;
+	padding: 15px;
+}
 
-		table th {
-			color: white;
-			background-color: #2e455deb;
-			font-size: small;
-		}
+#usertable th:last-child, #usertable td:last-child {
+	border-right: none;
+}
 
-		table td {
-			font-size: small;
-		}
+.dataTables_scrollBody {
+	overflow: unset !important;
+}
 
-		.container-manager {
-			padding-right: 43px;
-			padding-left: 15px;
-			margin-right: auto;
-			margin-left: 18.3%;
-			margin-top: 80px;
-		}
+#usertable_wrapper .dataTables_filter input[type="search"] {
+	margin-left: -10px;
+}
 
-		input[type="text"] {
-			line-height: 15px;
-			font-size: small;
-			height: 25px;
-		}
+th.amount-cell {
+    text-align: right;
+}
 
-		.dataTables_empty {
-			color: #be3232;
-		}
+.dataTables_wrapper .dataTables_filter {
+	float: right;
+	margin-right: 20px;
+}
 
-		#overlay {
-			position: fixed;
-			top: 0;
-			z-index: 100;
-			width: 100%;
-			height: 100%;
-			display: none;
-			background: rgba(0, 0, 0, 0.6);
-		}
+.dataTables_filter input {
+	color: black;
+	background-color: white;
+}
 
-		.cv-spinner {
-			height: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
+.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder
+	{
+	color: black;
+	font-style: italic;
+}
 
-		.spinner {
-			/* width: 40px;
-	height: 40px;
-	border: 4px #00343d solid;
-	border-top: 4px #181818 solid;
-	border-radius: 50%;
-	animation: sp-anime 0.8s infinite linear; */
+input, select {
+	height: 35px !important;
+}
 
-		}
+label {
+	font-size: 18px !important;
+}
 
-		@keyframes sp-anime {
-			100% {
-				transform: rotate(360deg);
-			}
+.btnDownload .dropdown-menu {
+	min-width: 8rem !important;
+}
+#currentDate {
+    background-color: transparent;  /* Remove background color */
+    border: none;  
+}
 
-		}
-
-		/* Chrome, Safari, Edge, Opera */
-		input::-webkit-outer-spin-button,
-		input::-webkit-inner-spin-button {
-			-webkit-appearance: none;
-			margin: 0;
-		}
-
-		#usertable {
-			border-collapse: separate;
-			border-spacing: 0;
-		}
-
-		#usertable tr {
-			border-bottom: 1px solid #808080;
-		}
-
-		#usertable td,
-		#usertable th {
-			border: 2px solid #095776;
-			padding: 15px;
-		}
-
-		#usertable th:last-child,
-		#usertable td:last-child {
-			border-right: none;
-		}
-
-		.dataTables_scrollBody {
-			overflow: unset !important;
-		}
-
-		td {
-			font-size: small;
-		}
-
-		th {
-			color: white;
-			background-color: #2e455deb;
-			font-size: medium;
-		}
-
-		table,
-		tr {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th,
-		td {
-			border: 1px solid #dddddd;
-			padding: 12px;
-			text-align: left;
-		}
-
-		#usertable_wrapper .dataTables_filter input[type="search"] {
-			/* Adjust the value as needed */
-			margin-left: -10px;
-		}
-
-		.dataTables_wrapper .dataTables_filter {
-			float: right;
-			margin-right: 20px;
-
-		}
-
-		.dataTables_filter input {
-			color: black;
-			background-color: white;
-		}
-
-		.dataTables_wrapper .dataTables_filter input[type="search"]::placeholder {
-			color: black;
-			font-style: italic;
-		}
-	</style>
+</style>
 </head>
+<script type="text/javascript">
+$(document)
+.ready(
+	function () {
+		$('.filterable .btn-filter')
+			.click(
+				function () {
+					var $panel = $(this).parents(
+						'.filterable'), $filters = $panel
+							.find('.filters input'), $tbody = $panel
+								.find('.table tbody');
+					if ($filters.prop('disabled') == true) {
+						$filters
+							.prop('disabled', false);
+						$filters.first().focus();
+					} else {
+						$filters.val('').prop(
+							'disabled', true);
+						$tbody.find('.no-result')
+							.remove();
+						$tbody.find('tr').show();
+					}
+				});
 
+		$('.filterable .filters input')
+			.keyup(
+				function (e) {
+					/* Ignore tab key */
+					var code = e.keyCode || e.which;
+					if (code == '9')
+						return;
+					/* Useful DOM data and selectors */
+					var $input = $(this), inputContent = $input
+						.val().toLowerCase(), $panel = $input
+							.parents('.filterable'), column = $panel
+								.find('.filters th')
+								.index($input.parents('th')), $table = $panel
+									.find('.table'), $rows = $table
+										.find('tbody tr');
+					/* Dirtiest filter function ever ;) */
+					var $filteredRows = $rows
+						.filter(function () {
+							var value = $(this)
+								.find('td').eq(
+									column)
+								.text()
+								.toLowerCase();
+							return value
+								.indexOf(inputContent) === -1;
+						});
+					/* Clean previous no-result if exist */
+					$table.find('tbody .no-result')
+						.remove();
+					/* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+					$rows.show();
+					$filteredRows.hide();
+					/* Prepend no-result row if all rows are filtered */
+					if ($filteredRows.length === $rows.length) {
+						$table
+							.find('tbody')
+							.prepend(
+								$('<tr class="no-result text-center"><td colspan="'
+									+ $table
+										.find('.filters th').length
+									+ '">No Record found</td></tr>'));
+					}
+				});
+	});
+</script>
 <script th:inline="javascript">
 	/*<![CDATA[*/
 	$(function () {
@@ -301,16 +270,26 @@
 	});
 
 	$(document).ready(function () {
-		var currentDate = $.datepicker.formatDate('dd-mm-yy', new Date());
+	    // Set the current date as the text inside the input field
+	    var currentDate = $.datepicker.formatDate('dd-mm-yy', new Date());
+	    $("#currentDate").val(currentDate);
 
-		$("#currentDate").val(currentDate); // Set the current date in the input field
-
-		$("#currentDate").datepicker({
-			dateFormat: 'dd-mm-yy',
-			maxDate: new Date()
-
-		});
+	    // Initialize the datepicker
+	    $("#currentDate").datepicker({
+	        dateFormat: 'dd-mm-yy',
+	        maxDate: new Date(),
+	        onSelect: function(dateText) {
+	            // Update the input value with the selected date
+	            $("#currentDate").val(dateText);
+	            // Optionally, call your getTransactionRecords function here
+	            getTransactionRecords();
+	        }
+	    });
 	});
+
+
+
+
 
 
 	/*<![CDATA[*/
@@ -389,24 +368,16 @@
 
 						var color = tranStatus === 'SUCCESS' ? "green" : "red";
 
-
 						trHTML += '<tr>' +
-							'<td style="text-align: left;">' + tranDate + '</td>' +
-							'<td style="text-align: left;">' + merchantId + '</td>' +
-							'<td style="text-align: left;">' + tranAuditNumber + '</td>' +
-							'<td style="text-align: left;">' + cimAcct + '</td>' +
-							'<td style="text-align: left;">' + cimAcctName + '</td>' +
-							'<td style="text-align: left;">' + ipsxAcct + '</td>' +
-							'<td style="text-align: left;">' + ipsxAcctName + '</td>' +
-							'<td style="text-align: left;">' + tranCurrency + '</td>' +
-							'<td style="text-align: right;">' + tranAmount + '</td>' +
-							'<td style="text-align: left;color:' + color + ';">' + tranStatus + '</td>' +
-							'<td style="text-align: left;">' + tranRemarks + '</td>' +
-							'<td style="text-align: left;">' + reversalDate + '</td>' +
-							'<td style="text-align: right;">' + reversalAmount + '</td>' +
-							'<td style="text-align: left;">' + reversalRemarks + '</td>' +
-							// Add more columns for end date and interest amount if needed
-							'</tr>';
+					    '<td style="text-align: left;">' + tranDate + '</td>' +
+					    '<td style="text-align: left;">' + merchantId + '</td>' +
+					    '<td style="text-align: left;">' + tranAuditNumber + '</td>' +
+					    '<td style="text-align: right;">' + tranAmount + '</td>' +
+					    '<td style="text-align: left;color:' + color + ';">' + tranStatus + '</td>' +
+					    '<td style="text-align: left;">' + reversalRemarks + '</td>' +
+					    
+					    '</tr>';
+
 					});
 
 					var userTable = $('#usertable').DataTable({
@@ -498,37 +469,45 @@
 <body>
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager pt-3">
-		<div class="card">
-			<div class="card-header">
-				<div class="float-left">
-					<h6 style="font-size: 1.4rem; color: white;"> Snapshot - All
+		<div class="card panel panel-primary filterable">
+			<div class="card-header p-1 d-flex justify-content-between align-items-center">
+					
+						<h6 class="headerh6 "> Snapshot - All
 						Over Transaction List</h6>
-				</div>
+				<div class="d-flex align-items-center">
+						<h3 class="mx-1 text-white">Search Records by Date :</h3>
+						<div>
+						<input class=" form-control form-control-sm text-white" type="text" id="currentDate" readonly />
+						</div>
+						<button type="button"
+							class="btn btns btn-filter headerbutton ml-3">Filter</button>
+						
+					</div>
 			</div>
-			<div>
-				<div class="row formline mt-2 ml-2">
-					<div class="col-sm-2"><label>Search Records by Date :</label></div>
-					<div class="col-sm-2"><input type="text" id="currentDate" onchange="getTransactionRecords();"
-							readonly></div>
-				</div>
+			<div class="card-body p-0">
 				<!--class="text-nowrap"-->
-				<table id="usertable">
+				<table class="table table-striped table-bordered table-hover table-sm">
 					<thead>
-						<tr>
-							<th>Tran Date</th>
-							<th>Mer ID</th>
-							<th>Audit Ref</th>
-							<th>Mer Acct</th>
-							<th>Mer Acct Name</th>
-							<th>Cust Acct</th>
-							<th>Cust Acct Name</th>
-							<th>Currency</th>
-							<th>Amount</th>
-							<th>Status</th>
-							<th>Remarks</th>
-							<th>Rev Date</th>
-							<th>Rev Amt</th>
-							<th>Rev Remarks</th>
+						<tr class="filters" >
+						<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Tran Date"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Mer ID"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Audit Ref"
+									disabled></th>
+								<th ><input type="text"
+									class="form-control font-weight-bold" placeholder="Amount" style="text-align: right;"
+									disabled></th> 
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Status"
+									disabled></th>
+								<th style="text-align: center"><input type="text"
+									class="form-control font-weight-bold" placeholder="Rev Remarks"
+									disabled></th>
+								
 
 						</tr>
 					</thead>
