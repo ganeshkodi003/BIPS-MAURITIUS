@@ -567,11 +567,12 @@ public class IPSRestController {
 		String valueDateRef = dateFormatWithMonthName.format(valueDate).toUpperCase();
 		String FromDateRef = dateFormatWithMonthName.format(FromDate).toUpperCase();
 		List<BIPS_Outward_Trans_Monitoring_Entity> records = new ArrayList<>();
-		if (currentDateRef.equals(valueDateRef)) {
-			records = bIPS_OutwardTransMonitoring_Repo.getTranDevlst(currentDateRef);
-		} else {
+		/*
+		 * if (currentDateRef.equals(valueDateRef)) { records =
+		 * bIPS_OutwardTransMonitoring_Repo.getTranDevlst(currentDateRef); } else {
+		 */
 			records = bIPS_OutwardTransMonitoring_Repo.getTranDevlstHist(FromDateRef,valueDateRef);
-		}
+			/* } */
 
 		return records;
 	}
