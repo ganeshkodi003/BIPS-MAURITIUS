@@ -1987,6 +1987,9 @@ public class BankAndBranchMasterServices {
 				for (HashMap<Integer, String> item : mapList) {
 
 					MerchantMasterMod PO = new MerchantMasterMod(); 
+					
+					String datePattern = "MM/dd/yy"; // Correct pattern for dates like "12/25/24"
+					SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
 
 					String merchant_id  = item.get(0);
 					System.out.println("merchant_id: " + merchant_id);  
@@ -1997,229 +2000,26 @@ public class BankAndBranchMasterServices {
 					String merchant_name = item.get(2);
 					System.out.println("merchant_name: " + merchant_name); 
 					
-					String address1 = item.get(3);
-					System.out.println("address1: " + address1);    
-
-					String mer_status = item.get(4);
-					System.out.println("mer_status: " + mer_status);
-
-					String mer_outletaddress = item.get(5);
-					System.out.println("mer_outletaddress: " + mer_outletaddress); 
+					String regaddress1 = item.get(3);
+					System.out.println("regaddress1: " + regaddress1);    
 					
-					String chargeback_approval = item.get(6);
-					System.out.println("chargeback_approval: " + chargeback_approval); 
+					String mer_mode = item.get(4);
+					System.out.println("mer_mode: " + mer_mode);    
 					
-					String repid1  = item.get(7);
-					System.out.println("repid1: " + repid1);  
-
-					String contpers1 = item.get(8);
-					System.out.println("contpers1: " + contpers1);
-
-					String ph_countrycode1 = item.get(9);
-					System.out.println("ph_countrycode1: " + ph_countrycode1); 
+					String regaddress2 = item.get(5);
+					System.out.println("regaddress2: " + regaddress2);    
 					
-					BigDecimal phno1 = new BigDecimal(item.get(10));
-					System.out.println("phno1: " + phno1); 
+					String regaddress3 = item.get(6);
+					System.out.println("regaddress3: " + regaddress3);  
 					
-					String ofc_countrycode1  = item.get(11);
-					System.out.println("ofc_countrycode1: " + ofc_countrycode1);  
- 
-					BigDecimal ofcno1 = new BigDecimal(item.get(12));
-					System.out.println("ofcno1: " + ofcno1); 
-
-					String emailid1 = item.get(13);
-					System.out.println("emailid1: " + emailid1); 
+					String merPartner = item.get(7);
+					System.out.println("merPartner: " + merPartner);  
 					
-					String notify_mode1 = item.get(14);
-					System.out.println("notify_mode1: " + notify_mode1); 
-					
-					String repid2  = item.get(15);
-					System.out.println("repid2: " + repid2);  
-
-					String contpers2 = item.get(16);
-					System.out.println("contpers2: " + contpers2);
-
-					String ph_countrycode2 = item.get(17);
-					System.out.println("ph_countrycode2: " + ph_countrycode2); 
-					
-					BigDecimal phno2 = new BigDecimal(item.get(18));
-					System.out.println("phno2: " + phno2); 
-					
-					String ofc_countrycode2  = item.get(19);
-					System.out.println("ofc_countrycode2: " + ofc_countrycode2);  
-
-					BigDecimal ofcno2 = new BigDecimal(item.get(20));
-					System.out.println("ofcno2: " + ofcno2);
-
-					String emailid2 = item.get(21);
-					System.out.println("emailid2: " + emailid2); 
-					
-					String notify_mode2 = item.get(22);
-					System.out.println("notify_mode2: " + notify_mode2); 
-					
-					String repid3  = item.get(23);
-					System.out.println("repid3: " + repid3);  
-
-					String contpers3 = item.get(24);
-					System.out.println("contpers3: " + contpers3);
-
-					String ph_countrycode3 = item.get(25);
-					System.out.println("ph_countrycode3: " + ph_countrycode3); 
-					
-					BigDecimal phno3 = new BigDecimal(item.get(26));
-					System.out.println("phno3: " + phno3); 
-					
-					String ofc_countrycode3  = item.get(27);
-					System.out.println("ofc_countrycode3: " + ofc_countrycode3);  
-
-					BigDecimal ofcno3 = new BigDecimal(item.get(28));
-					System.out.println("ofcno3: " + ofcno3);
-
-					String emailid3 = item.get(29);
-					System.out.println("emailid3: " + emailid3); 
-					
-					String notify_mode3 = item.get(30);
-					System.out.println("notify_mode3: " + notify_mode3); 
-					
-					String repid4  = item.get(31);
-					System.out.println("repid4: " + repid4);  
-
-					String contpers4 = item.get(32);
-					System.out.println("contpers4: " + contpers4);
-
-					String ph_countrycode4 = item.get(33);
-					System.out.println("ph_countrycode4: " + ph_countrycode4); 
-					
-					BigDecimal phno4 = new BigDecimal(item.get(34));
-					System.out.println("phno4: " + phno4); 
-					
-					String ofc_countrycode4  = item.get(35);
-					System.out.println("ofc_countrycode4: " + ofc_countrycode4);  
-
-					BigDecimal ofcno4 = new BigDecimal(item.get(36));
-					System.out.println("ofcno4: " + ofcno4);
-
-					String emailid4 = item.get(37);
-					System.out.println("emailid4: " + emailid4); 
-					
-					String notify_mode4 = item.get(38);
-					System.out.println("notify_mode4: " + notify_mode4); 
-					
-					String repid5  = item.get(39);
-					System.out.println("repid5: " + repid5);  
-
-					String contpers5 = item.get(40);
-					System.out.println("contpers5: " + contpers5);
-
-					String ph_countrycode5 = item.get(41);
-					System.out.println("ph_countrycode5: " + ph_countrycode5); 
-					
-					BigDecimal phno5 = new BigDecimal(item.get(42));
-					System.out.println("phno5: " + phno5); 
-					
-					String ofc_countrycode5  = item.get(43);
-					System.out.println("ofc_countrycode5: " + ofc_countrycode5);  
-
-					BigDecimal ofcno5 = new BigDecimal(item.get(44));
-					System.out.println("ofcno5: " + ofcno5);
-
-					String emailid5 = item.get(45);
-					System.out.println("emailid5: " + emailid5); 
-					
-					String notify_mode5 = item.get(46);
-					System.out.println("notify_mode1: " + notify_mode1); 
-					
-					String mer_bipsno  = item.get(47);
-					System.out.println("mer_bipsno: " + mer_bipsno);  
-
-					String mer_type = item.get(48);
-					System.out.println("mer_type: " + mer_type);
-
-					String outlet_location = item.get(49);
-					System.out.println("outlet_location: " + outlet_location); 
-					
-					String Mer_Categorycode = item.get(50);
-					System.out.println("Mer_Categorycode: " + Mer_Categorycode); 
-					
-					String type_qraccept  = item.get(51);
-					System.out.println("type_qraccept: " + type_qraccept);  
-
-					String version = item.get(52);
-					System.out.println("version: " + version);
-
-					String modes = item.get(53);
-					System.out.println("modes: " + modes); 
-					
-					String purpose = item.get(54);
-					System.out.println("purpose: " + purpose); 
-					
-					String tran_id  = item.get(55);
-					System.out.println("tran_id: " + tran_id);  
-
-					String tran_ref = item.get(56);
-					System.out.println("tran_ref: " + tran_ref);
-
-					String tran_note = item.get(57);
-					System.out.println("tran_note: " + tran_note); 
-					
-					String payee_upiid = item.get(58);
-					System.out.println("payee_upiid: " + payee_upiid); 
-					
-					String store_id = item.get(59);
-					System.out.println("store_id: " + store_id); 
-					
-					String Mer_terminalId  = item.get(60);
-					System.out.println("Mer_terminalId: " + Mer_terminalId);  
-
-					String Tran_CrncyCode = item.get(61);
-					System.out.println("Tran_CrncyCode: " + Tran_CrncyCode); 
-					
-					String datePattern = "MM/dd/yy"; // Correct pattern for dates like "12/25/24"
-					SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
-
-					String QR_expirydate = item.get(62);
-					System.out.println("QR_expirydate: " + QR_expirydate);
-					Date date_value = null;
-
-					if (QR_expirydate != null && !QR_expirydate.isEmpty()) {
-					    try {
-					        date_value = dateFormat.parse(QR_expirydate);
-					    } catch (ParseException e) {
-					        e.printStackTrace();
-					    }
-					} else {
-					    System.out.println("Record Date is null");
-					} 
-					System.out.println("date_value: " + date_value);
-					
-					String Mer_pincode = item.get(63);
-					System.out.println("Mer_pincode: " + Mer_pincode); 
-					
-					String Mer_Tier  = item.get(64);
-					System.out.println("Mer_Tier: " + Mer_Tier);  
-
-					String Mer_Trantype = item.get(65);
-					System.out.println("Mer_Trantype: " + Mer_Trantype);
-
-					String QR_medium = item.get(66);
-					System.out.println("QR_medium: " + QR_medium); 
-					
-					String bank_name1 = item.get(67);
-					System.out.println("bank_name1: " + bank_name1); 
-					
-					String bank_branch1 = item.get(68);
-					System.out.println("bank_branch1: " + bank_branch1); 
-					
-					String bank_acctno1 = item.get(69);
-					System.out.println("bank_acctno1: " + bank_acctno1); 
-					
-					String mer_mode = item.get(70);
-					System.out.println("mer_mode: " + mer_mode);  
-
-					String brn_no = item.get(71);
+					 
+					String brn_no = item.get(8);
 					System.out.println("brn_no: " + brn_no);
 
-					String brn_date = item.get(72);
+					String brn_date = item.get(9);
 					System.out.println("brn_date: " + brn_date);  
 					Date date_value1 = null;
 
@@ -2234,24 +2034,564 @@ public class BankAndBranchMasterServices {
 					} 
 					System.out.println("date_value1: " + date_value1);
 					
-					String tran_amt = item.get(73);
+					String tran_amt = item.get(10);
 					System.out.println("tran_amt: " + tran_amt); 
 					
-					String loyalty_no = item.get(74);
-					System.out.println("loyalty_no: " + loyalty_no); 
+					String mer_city = item.get(11);
+					System.out.println("mer_city: " + mer_city); 
+
+					String mer_status = item.get(12);
+					System.out.println("mer_status: " + mer_status); 
 					
-					String purpose_tran = item.get(75);
-					System.out.println("purpose_tran: " + purpose_tran);  
+					String chargeback_approval = item.get(13);
+					System.out.println("chargeback_approval: " + chargeback_approval);
+					
+					BigDecimal chargeback_amt = new BigDecimal(item.get(14));
+					System.out.println("chargeback_amt: " + chargeback_amt); 
+					
+					String repid1  = item.get(15);
+					System.out.println("repid1: " + repid1);  
+
+					String contpers1 = item.get(16);
+					System.out.println("contpers1: " + contpers1);
+
+					String ph_countrycode1 = item.get(17);
+					System.out.println("ph_countrycode1: " + ph_countrycode1); 
+					
+					BigDecimal phno1 = new BigDecimal(item.get(18));
+					System.out.println("phno1: " + phno1); 
+					
+					String ofc_countrycode1  = item.get(19);
+					System.out.println("ofc_countrycode1: " + ofc_countrycode1);  
+ 
+					BigDecimal ofcno1 = new BigDecimal(item.get(20));
+					System.out.println("ofcno1: " + ofcno1); 
+
+					String emailid1 = item.get(21);
+					System.out.println("emailid1: " + emailid1); 
+					
+					String notify_mode1 = item.get(22);
+					System.out.println("notify_mode1: " + notify_mode1); 
+					
+					String repid2  = item.get(23);
+					System.out.println("repid2: " + repid2);  
+
+					String contpers2 = item.get(24);
+					System.out.println("contpers2: " + contpers2);
+
+					String ph_countrycode2 = item.get(25);
+					System.out.println("ph_countrycode2: " + ph_countrycode2); 
+					
+					BigDecimal phno2 = new BigDecimal(item.get(26));
+					System.out.println("phno2: " + phno2); 
+					
+					String ofc_countrycode2  = item.get(27);
+					System.out.println("ofc_countrycode2: " + ofc_countrycode2);  
+
+					BigDecimal ofcno2 = new BigDecimal(item.get(28));
+					System.out.println("ofcno2: " + ofcno2);
+
+					String emailid2 = item.get(29);
+					System.out.println("emailid2: " + emailid2); 
+					
+					String notify_mode2 = item.get(30);
+					System.out.println("notify_mode2: " + notify_mode2); 
+					
+					String repid3  = item.get(31);
+					System.out.println("repid3: " + repid3);  
+
+					String contpers3 = item.get(32);
+					System.out.println("contpers3: " + contpers3);
+
+					String ph_countrycode3 = item.get(33);
+					System.out.println("ph_countrycode3: " + ph_countrycode3); 
+					
+					BigDecimal phno3 = new BigDecimal(item.get(34));
+					System.out.println("phno3: " + phno3); 
+					
+					String ofc_countrycode3  = item.get(35);
+					System.out.println("ofc_countrycode3: " + ofc_countrycode3);  
+
+					BigDecimal ofcno3 = new BigDecimal(item.get(36));
+					System.out.println("ofcno3: " + ofcno3);
+
+					String emailid3 = item.get(37);
+					System.out.println("emailid3: " + emailid3); 
+					
+					String notify_mode3 = item.get(38);
+					System.out.println("notify_mode3: " + notify_mode3); 
+					
+					String repid4  = item.get(39);
+					System.out.println("repid4: " + repid4);  
+
+					String contpers4 = item.get(40);
+					System.out.println("contpers4: " + contpers4);
+
+					String ph_countrycode4 = item.get(41);
+					System.out.println("ph_countrycode4: " + ph_countrycode4); 
+					
+					BigDecimal phno4 = new BigDecimal(item.get(42));
+					System.out.println("phno4: " + phno4); 
+					
+					String ofc_countrycode4  = item.get(43);
+					System.out.println("ofc_countrycode4: " + ofc_countrycode4);  
+
+					BigDecimal ofcno4 = new BigDecimal(item.get(44));
+					System.out.println("ofcno4: " + ofcno4);
+
+					String emailid4 = item.get(45);
+					System.out.println("emailid4: " + emailid4); 
+					
+					String notify_mode4 = item.get(46);
+					System.out.println("notify_mode4: " + notify_mode4); 
+					
+					String repid5  = item.get(47);
+					System.out.println("repid5: " + repid5);  
+
+					String contpers5 = item.get(48);
+					System.out.println("contpers5: " + contpers5);
+
+					String ph_countrycode5 = item.get(49);
+					System.out.println("ph_countrycode5: " + ph_countrycode5); 
+					
+					BigDecimal phno5 = new BigDecimal(item.get(50));
+					System.out.println("phno5: " + phno5); 
+					
+					String ofc_countrycode5  = item.get(51);
+					System.out.println("ofc_countrycode5: " + ofc_countrycode5);  
+
+					BigDecimal ofcno5 = new BigDecimal(item.get(52));
+					System.out.println("ofcno5: " + ofcno5);
+
+					String emailid5 = item.get(53);
+					System.out.println("emailid5: " + emailid5); 
+					
+					String notify_mode5 = item.get(54);
+					System.out.println("notify_mode1: " + notify_mode1); 
+					
+					String repid6  = item.get(55);
+					System.out.println("repid6: " + repid6);  
+
+					String contpers6 = item.get(56);
+					System.out.println("contpers6: " + contpers6);
+
+					String ph_countrycode6 = item.get(57);
+					System.out.println("ph_countrycode6: " + ph_countrycode6); 
+					
+					BigDecimal phno6 = new BigDecimal(item.get(58));
+					System.out.println("phno6: " + phno6); 
+					
+					String ofc_countrycode6  = item.get(59);
+					System.out.println("ofc_countrycode6: " + ofc_countrycode6);  
+ 
+					BigDecimal ofcno6 = new BigDecimal(item.get(60));
+					System.out.println("ofcno6: " + ofcno6); 
+
+					String emailid6 = item.get(61);
+					System.out.println("emailid6: " + emailid6); 
+					
+					String notify_mode6 = item.get(62);
+					System.out.println("notify_mode6: " + notify_mode6); 
+					
+					String repid7  = item.get(63);
+					System.out.println("repid7: " + repid7);  
+
+					String contpers7 = item.get(64);
+					System.out.println("contpers7: " +contpers7);
+
+					String ph_countrycode7 = item.get(65);
+					System.out.println("ph_countrycode7: " + ph_countrycode7); 
+					
+					BigDecimal phno7 = new BigDecimal(item.get(66));
+					System.out.println("phno7: " + phno7); 
+					
+					String ofc_countrycode7  = item.get(67);
+					System.out.println("ofc_countrycode7: " + ofc_countrycode7);  
+
+					BigDecimal ofcno7 = new BigDecimal(item.get(68));
+					System.out.println("ofcno7: " + ofcno7);
+
+					String emailid7 = item.get(69);
+					System.out.println("emailid7: " + emailid7); 
+					
+					String notify_mode7 = item.get(70);
+					System.out.println("notify_mode7: " + notify_mode7); 
+					
+					String repid8  = item.get(71);
+					System.out.println("repid8: " + repid8);  
+
+					String contpers8 = item.get(72);
+					System.out.println("contpers8: " + contpers8);
+
+					String ph_countrycode8 = item.get(73);
+					System.out.println("ph_countrycode8: " + ph_countrycode8); 
+					
+					BigDecimal phno8 = new BigDecimal(item.get(74));
+					System.out.println("phno8: " + phno8); 
+					
+					String ofc_countrycode8  = item.get(75);
+					System.out.println("ofc_countrycode8: " + ofc_countrycode8);  
+
+					BigDecimal ofcno8 = new BigDecimal(item.get(76));
+					System.out.println("ofcno8: " + ofcno8);
+
+					String emailid8 = item.get(77);
+					System.out.println("emailid8: " + emailid8); 
+					
+					String notify_mode8 = item.get(78);
+					System.out.println("notify_mode8: " + notify_mode8); 
+					
+					String repid9  = item.get(79);
+					System.out.println("repid9: " + repid9);  
+
+					String contpers9 = item.get(80);
+					System.out.println("contpers9: " + contpers9);
+
+					String ph_countrycode9 = item.get(81);
+					System.out.println("ph_countrycode9: " + ph_countrycode9); 
+					
+					BigDecimal phno9 = new BigDecimal(item.get(82));
+					System.out.println("phno9: " + phno9); 
+					
+					String ofc_countrycode9  = item.get(83);
+					System.out.println("ofc_countrycode9: " + ofc_countrycode9);  
+
+					BigDecimal ofcno9 = new BigDecimal(item.get(84));
+					System.out.println("ofcno9: " + ofcno9);
+
+					String emailid9 = item.get(85);
+					System.out.println("emailid9: " + emailid9); 
+					
+					String notify_mode9 = item.get(86);
+					System.out.println("notify_mode9: " + notify_mode9); 
+					
+					String repid10  = item.get(87);
+					System.out.println("repid10: " + repid10);  
+
+					String contpers10 = item.get(88);
+					System.out.println("contpers10: " + contpers10);
+
+					String ph_countrycode10 = item.get(89);
+					System.out.println("ph_countrycode10: " + ph_countrycode10); 
+					
+					BigDecimal phno10 = new BigDecimal(item.get(90));
+					System.out.println("phno10: " + phno10); 
+					
+					String ofc_countrycode10  = item.get(91);
+					System.out.println("ofc_countrycode10: " + ofc_countrycode10);  
+
+					BigDecimal ofcno10 = new BigDecimal(item.get(92));
+					System.out.println("ofcno10: " + ofcno10);
+
+					String emailid10 = item.get(93);
+					System.out.println("emailid10: " + emailid10); 
+					
+					String notify_mode10 = item.get(94);
+					System.out.println("notify_mode10: " + notify_mode10); 
+					
+					String mer_bipsno  = item.get(95);
+					System.out.println("mer_bipsno: " + mer_bipsno);  
+					
+					String mer_terminal  = item.get(96);
+					System.out.println("mer_terminal: " + mer_terminal);  
+
+					String mer_type = item.get(97);
+					System.out.println("mer_type: " + mer_type);
+
+					String outlet_location = item.get(98);
+					System.out.println("outlet_location: " + outlet_location); 
+					
+					String Mer_Categorycode = item.get(99);
+					System.out.println("Mer_Categorycode: " + Mer_Categorycode); 
+					
+					String Mer_Categorydesc = item.get(100);
+					System.out.println("Mer_Categorydesc: " + Mer_Categorydesc); 
+					
+					String address1 = item.get(101);
+					System.out.println("address1: " + address1); 
+					
+					String address2 = item.get(102);
+					System.out.println("address2: " + address2); 
+					
+					String address3 = item.get(103);
+					System.out.println("address3: " + address3); 
+					
+					String type_qraccept  = item.get(104);
+					System.out.println("type_qraccept: " + type_qraccept);  
+					
+					String tip_conv_indic  = item.get(105);
+					System.out.println("tip_conv_indic: " + tip_conv_indic);
+					
+					String conv_fee_type  = item.get(106);
+					System.out.println("conv_fee_type: " + conv_fee_type);
+					
+					String value_conv_fee  = item.get(107);
+					System.out.println("value_conv_fee: " + value_conv_fee);
+					
+					String loyalty_num  = item.get(108);
+					System.out.println("loyalty_num: " + loyalty_num);
+					
+					String purp_of_tran  = item.get(109);
+					System.out.println("purp_of_tran: " + purp_of_tran);
+					
+					String static_dynamic  = item.get(110);
+					System.out.println("static_dynamic: " + static_dynamic);
+
+					String version = item.get(111);
+					System.out.println("version: " + version);
+
+					String modes = item.get(112);
+					System.out.println("modes: " + modes); 
+					
+					String purpose = item.get(113);
+					System.out.println("purpose: " + purpose);
+					
+					String original_id = item.get(114);
+					System.out.println("original_id: " + original_id);
+					
+					String tran_id  = item.get(115);
+					System.out.println("tran_id: " + tran_id);  
+
+					String tran_ref = item.get(116);
+					System.out.println("tran_ref: " + tran_ref);
+
+					String tran_note = item.get(117);
+					System.out.println("tran_note: " + tran_note); 
+					
+					String payee_upiid = item.get(118);
+					System.out.println("payee_upiid: " + payee_upiid); 
+					
+					String store_id = item.get(119);
+					System.out.println("store_id: " + store_id); 
+					
+					String Mer_terminalId  = item.get(120);
+					System.out.println("Mer_terminalId: " + Mer_terminalId);
+					
+					String trans_mandat_amt  = item.get(121);
+					System.out.println("trans_mandat_amt: " + trans_mandat_amt);
+
+					String Tran_CrncyCode = item.get(122);
+					System.out.println("Tran_CrncyCode: " + Tran_CrncyCode); 
+					
+					String mer_invoice_no  = item.get(123);
+					System.out.println("mer_invoice_no: " + mer_invoice_no);
+					
+					String mer_invoice_date = item.get(124);
+					System.out.println("mer_invoice_date: " + mer_invoice_date);
+					Date inv_date = null; 
+					if (mer_invoice_date != null && !mer_invoice_date.isEmpty()) {
+					    try {
+					    	inv_date = dateFormat.parse(mer_invoice_date);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("inv_date: " + inv_date);
+					
+					String mer_invoice_name  = item.get(125);
+					System.out.println("mer_invoice_name: " + mer_invoice_name);
+					
+					String QR_expirydate = item.get(126);
+					System.out.println("QR_expirydate: " + QR_expirydate);
+					Date date_value = null; 
+					if (QR_expirydate != null && !QR_expirydate.isEmpty()) {
+					    try {
+					        date_value = dateFormat.parse(QR_expirydate);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value: " + date_value);
+					
+					String mer_amt  = item.get(127);
+					System.out.println("mer_amt: " + mer_amt);
+					
+					String Mer_pincode = item.get(128);
+					System.out.println("Mer_pincode: " + Mer_pincode); 
+					
+					String Mer_Tier  = item.get(129);
+					System.out.println("Mer_Tier: " + Mer_Tier);  
+
+					String Mer_Trantype = item.get(130);
+					System.out.println("Mer_Trantype: " + Mer_Trantype);
+
+					String QR_medium = item.get(131);
+					System.out.println("QR_medium: " + QR_medium); 
+					
+					String tip_conv_upi  = item.get(132);
+					System.out.println("tip_conv_upi: " + tip_conv_upi);  
+
+					String conv_fee_type_upi = item.get(133);
+					System.out.println("conv_fee_type_upi: " + conv_fee_type_upi);
+
+					String value_conv_fee_upi = item.get(134);
+					System.out.println("value_conv_fee_upi: " + value_conv_fee_upi); 
+					
+					String bank_name1 = item.get(135);
+					System.out.println("bank_name1: " + bank_name1); 
+					
+					String bank_branch1 = item.get(136);
+					System.out.println("bank_branch1: " + bank_branch1);
+					
+					String iban1 = item.get(137);
+					System.out.println("iban1: " + iban1); 
+					
+					String settlement_freq1 = item.get(138);
+					System.out.println("settlement_freq1: " + settlement_freq1);
+					
+					String settlement_day1 = item.get(139);
+					System.out.println("settlement_day1: " + settlement_day1);
+					
+					String settlement_date1 = item.get(139);
+					System.out.println("settlement_date1: " + settlement_date1);
+					
+					String bank_acctno1 = item.get(140);
+					System.out.println("bank_acctno1: " + bank_acctno1); 
+					
+					String bank_acctName1 = item.get(141);
+					System.out.println("bank_acctName1: " + bank_acctName1);
+					
+					String currency1 = item.get(142);
+					System.out.println("currency1: " + currency1);
+					
+					String bank_address1 = item.get(143);
+					System.out.println("bank_address1: " + bank_address1);
+					
+					String last_settle_dt1 = item.get(144);
+					System.out.println("last_settle_dt1: " + last_settle_dt1);
+					Date last_dt1 = null; 
+					if (last_settle_dt1 != null && !last_settle_dt1.isEmpty()) {
+					    try {
+					    	last_dt1 = dateFormat.parse(last_settle_dt1);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("last_dt1: " + last_dt1);
+					
+					String next_settle_dt1 = item.get(145);
+					System.out.println("next_settle_dt1: " + next_settle_dt1);
+					Date next_dt1 = null; 
+					if (next_settle_dt1 != null && !next_settle_dt1.isEmpty()) {
+					    try {
+					    	next_dt1 = dateFormat.parse(next_settle_dt1);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("next_dt1: " + next_dt1);
+					
+					String lien_amt1 = item.get(146);
+					System.out.println("lien_amt1: " + lien_amt1); 
+					
+					String hold_amt1 = item.get(147);
+					System.out.println("hold_amt1: " + hold_amt1);   
+					
+					String bank_name2 = item.get(148);
+					System.out.println("bank_name2: " + bank_name2); 
+					
+					String bank_branch2 = item.get(149);
+					System.out.println("bank_branch2: " + bank_branch2);
+					
+					String iban2 = item.get(150);
+					System.out.println("iban2: " + iban2); 
+					
+					String settlement_freq2 = item.get(151);
+					System.out.println("settlement_freq2: " + settlement_freq2);
+					
+					String settlement_day2 = item.get(152);
+					System.out.println("settlement_day2: " + settlement_day2);
+					
+					String settlement_date2 = item.get(152);
+					System.out.println("settlement_date2: " + settlement_date2);
+					
+					String bank_acctno2 = item.get(153);
+					System.out.println("bank_acctno2: " + bank_acctno2); 
+					
+					String bank_acctName2 = item.get(154);
+					System.out.println("bank_acctName2: " + bank_acctName2);
+					
+					String currency2 = item.get(155);
+					System.out.println("currency2: " + currency2);
+					
+					String bank_address2 = item.get(156);
+					System.out.println("bank_address2: " + bank_address2);
+					
+					String last_settle_dt2 = item.get(157);
+					System.out.println("last_settle_dt2: " + last_settle_dt2);
+					Date last_dt2 = null; 
+					if (last_settle_dt2 != null && !last_settle_dt2.isEmpty()) {
+					    try {
+					    	last_dt2 = dateFormat.parse(last_settle_dt2);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("last_dt2: " + last_dt2);
+					
+					String next_settle_dt2 = item.get(158);
+					System.out.println("next_settle_dt2: " + next_settle_dt2);
+					Date next_dt2 = null; 
+					if (next_settle_dt2 != null && !next_settle_dt2.isEmpty()) {
+					    try {
+					    	next_dt2 = dateFormat.parse(next_settle_dt2);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("next_dt2: " + next_dt2);
+					
+					String lien_amt2 = item.get(159);
+					System.out.println("lien_amt2: " + lien_amt2); 
+					
+					String hold_amt2 = item.get(160);
+					System.out.println("hold_amt2: " + hold_amt2);
+					
+					String fee_desc = item.get(161);
+					System.out.println("fee_desc: " + fee_desc); 
+					
+					String fee_deriv = item.get(162);
+					System.out.println("fee_deriv: " + fee_deriv);
+					
+					String amt_percent_slab = item.get(163);
+					System.out.println("amt_percent_slab: " + amt_percent_slab); 
+					
+					String fee_freq = item.get(164);
+					System.out.println("fee_freq: " + fee_freq);
+					
+					String fee_type = item.get(165);
+					System.out.println("fee_type: " + fee_type);  
 					
 					PO.setMerchant_legal_id(merchant_id);
 					PO.setMerchant_id(merchant_id); 
 					PO.setMerchant_corp_name(mer_corpName);
 					PO.setMerchant_name(merchant_name);
-					PO.setMerchant_addr(address1);
+					PO.setMerchant_addr(regaddress1);
+					PO.setMerchant_mode(mer_mode);
+					PO.setMerchant_addr_2(regaddress2);
+					PO.setMerchant_addr_3(regaddress3);
+					PO.setMer_partner(merPartner);
+					PO.setBrn_no(brn_no);
+					PO.setBrn_date(date_value1);
+					PO.setTransaction_amount(tran_amt);
+					PO.setMerchant_city(mer_city); 
 					PO.setStatus_enable(mer_status);
-					PO.setStatus_disable(mer_status);
-					PO.setMerchant_city(mer_outletaddress);
+					PO.setStatus_disable(mer_status); 
 					PO.setChargeback_approval(chargeback_approval);
+					PO.setChargeback_amount(chargeback_amt);
+					
 					PO.setMer_user_id_r1(repid1);
 					PO.setMer_cont_pers(contpers1);
 					PO.setPh_countrycode_r1(ph_countrycode1);
@@ -2260,6 +2600,7 @@ public class BankAndBranchMasterServices {
 					PO.setMer_ofc_no(ofcno1);
 					PO.setMer_email_addr_r1(emailid1);
 					PO.setMer_notifi_mode(notify_mode1);
+					
 					PO.setMer_user_id_r2(repid1);
 					PO.setMer_cont_pers_r2(contpers1);
 					PO.setPh_countrycode_r2(ph_countrycode1);
@@ -2295,36 +2636,121 @@ public class BankAndBranchMasterServices {
 					PO.setMer_ofc_no_r5(ofcno5);
 					PO.setMer_email_addr_r5(emailid5);
 					PO.setMer_notifi_mode_r5(notify_mode5);
+					
+					PO.setMer_user_id_r6(repid6);
+					PO.setMer_cont_pers_r6(contpers6);
+					PO.setPh_countrycode_r6(ph_countrycode6);
+					PO.setMer_ph_no_r6(phno6);
+					PO.setOfc_countrycode_r6(ofc_countrycode6);
+					PO.setMer_ofc_no_r6(ofcno6);
+					PO.setMer_email_addr_r6(emailid6);
+					PO.setMer_notifi_mode_r6(notify_mode6);
+					
+					PO.setMer_user_id_r7(repid7);
+					PO.setMer_cont_pers_r7(contpers7);
+					PO.setPh_countrycode_r7(ph_countrycode7);
+					PO.setMer_ph_no_r7(phno7);
+					PO.setOfc_countrycode_r7(ofc_countrycode7);
+					PO.setMer_ofc_no_r7(ofcno7);
+					PO.setMer_email_addr_r7(emailid7);
+					PO.setMer_notifi_mode_r7(notify_mode7);
+
+					PO.setMer_user_id_r8(repid8);
+					PO.setMer_cont_pers_r8(contpers8);
+					PO.setPh_countrycode_r8(ph_countrycode8);
+					PO.setMer_ph_no_r8(phno8);
+					PO.setOfc_countrycode_r8(ofc_countrycode8);
+					PO.setMer_ofc_no_r8(ofcno8);
+					PO.setMer_email_addr_r8(emailid8);
+					PO.setMer_notifi_mode_r8(notify_mode8);
+
+					PO.setMer_user_id_r9(repid9);
+					PO.setMer_cont_pers_r9(contpers9);
+					PO.setPh_countrycode_r9(ph_countrycode9);
+					PO.setMer_ph_no_r9(phno9);
+					PO.setOfc_countrycode_r9(ofc_countrycode9);
+					PO.setMer_ofc_no_r9(ofcno9);
+					PO.setMer_email_addr_r9(emailid9);
+					PO.setMer_notifi_mode_r9(notify_mode9);
+
+					PO.setMer_user_id_r10(repid10);
+					PO.setMer_cont_pers_r10(contpers10);
+					PO.setPh_countrycode_r10(ph_countrycode10);
+					PO.setMer_ph_no_r10(phno10);
+					PO.setOfc_countrycode_r10(ofc_countrycode10);
+					PO.setMer_ofc_no_r10(ofcno10);
+					PO.setMer_email_addr_r10(emailid10);
+					PO.setMer_notifi_mode_r10(notify_mode10);
 					 
+					PO.setMerchant_id(mer_bipsno);
+					PO.setMerchant_terminal(Mer_terminalId);
 					PO.setMerchant_type(mer_type);
 					PO.setMerchant_location(outlet_location);
 					PO.setMerchant_cat_code(Mer_Categorycode);
+					PO.setMerchant_cat_desc(Mer_Categorydesc);
+					PO.setMerchant_out_addr_1(address1);
+					PO.setMerchant_out_addr_2(address2);
+					PO.setMerchant_out_addr_3(address3);
 					PO.setType_maucas(type_qraccept);
 					//PO.setType_upi(type_qraccept);
+					PO.setTip_or_conv_indicator(tip_conv_indic);
+					PO.setConv_fees_type(conv_fee_type);
+					PO.setValue_conv_fees(value_conv_fee);
+					PO.setLoyalty_number(loyalty_num);
+					PO.setPurpose_of_tran(purp_of_tran);
+					PO.setStatic_field(static_dynamic);
 					PO.setVersion(version);
 					PO.setModes(modes);
 					PO.setPurpose(purpose);
+					PO.setOrgid(original_id);
 					PO.setTid(tran_id);
 					PO.setTr(tran_ref);
 					PO.setTn(tran_note);
 					PO.setPa(payee_upiid);
 					PO.setMsid(store_id);
 					PO.setMtid(Mer_terminalId);
+					PO.setBam(trans_mandat_amt);
 					PO.setCurr(Tran_CrncyCode);
+					PO.setInvoiceno(mer_invoice_no);
+					PO.setInvoicedate(inv_date);
+					PO.setInvoicename(mer_invoice_name);
 					PO.setQrexpire(date_value);
+					PO.setAm(mer_amt);
 					PO.setPincode(Mer_pincode);
 					PO.setTier(Mer_Tier);
 					PO.setTran_type(Mer_Trantype);
 					PO.setQrmedium(QR_medium);
+					PO.setTip_or_conv_indicator_upi(tip_conv_upi);
+					PO.setConv_fees_type_upi(conv_fee_type_upi);
+					PO.setValue_conv_fees_upi(value_conv_fee_upi);
 					PO.setBank_name(bank_name1);
 					PO.setBank_branch(bank_branch1);
+					PO.setIban(iban1);
+					PO.setSettlement_frequency(settlement_freq1);
+					PO.setSettlement_day(settlement_day1);
+					PO.setSettlement_date(settlement_date1);
 					PO.setBank_account_no(bank_acctno1);
-					PO.setMerchant_mode(mer_mode);
-					PO.setBrn_no(brn_no);
-					PO.setBrn_date(date_value1);
-					PO.setTransaction_amount(tran_amt);
-					PO.setLoyalty_number(loyalty_no);
-					PO.setPurpose_of_tran(purpose_tran); 
+					PO.setBank_name(bank_name1);
+					PO.setCurrency(currency1); 
+					PO.setDetailed_address1(bank_address1);
+					PO.setLast_settlementdate1(last_dt1);
+					PO.setNext_settlementdate1(next_dt1);
+					PO.setLien_amount1(lien_amt1);
+					PO.setHold_amount1(hold_amt1);
+					PO.setBank_name2(bank_name2);
+					PO.setBank_branch2(bank_branch2);
+					PO.setIban2(iban2);
+					PO.setSettlement_frequency2(settlement_freq2);
+					PO.setSettlement_day2(settlement_day2);
+					PO.setSettlement_date2(settlement_date2);
+					PO.setBank_account_no2(bank_acctno2);
+					PO.setBank_name2(bank_name2);
+					PO.setCurrency2(currency2);
+					PO.setDetailed_address2(bank_address2);
+					PO.setLast_settlementdate2(last_dt2);
+					PO.setNext_settlementdate2(next_dt2);
+					PO.setLien_amount2(lien_amt2);
+					PO.setHold_amount2(hold_amt2);
 					
 					PO.setEntity_flg('N'); 
 					PO.setDel_flag("N");
