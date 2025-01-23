@@ -3100,6 +3100,93 @@ public class BankAndBranchMasterServices {
 					String email_id1 = item.get(15);
 					System.out.println("email_id1: " + email_id1);  
 					
+					String address1 = item.get(16);
+					System.out.println("address1: " + address1); 
+					
+					String address2 = item.get(17);
+					System.out.println("address2: " + address2); 
+					
+					String state = item.get(18);
+					System.out.println("state: " + state); 
+					
+					String zip_code = item.get(19);
+					System.out.println("zip_code: " + zip_code); 
+					
+					String remarks = item.get(20);
+					System.out.println("remarks: " + remarks);  
+					
+					String bank_name = item.get(21);
+					System.out.println("bank_name: " + bank_name);  
+					
+					String bank_acct_no = item.get(22);
+					System.out.println("bank_acct_no: " + bank_acct_no);  
+					
+					String branch_swift_code = item.get(23);
+					System.out.println("branch_swift_code: " + branch_swift_code); 
+					
+					String branch_name = item.get(24);
+					System.out.println("branch_name: " + branch_name); 
+					
+					String cont_pers2 = item.get(25);
+					System.out.println("cont_pers2: " + cont_pers2);  
+					
+					String country_code2 = item.get(26);
+					System.out.println("country_code2: " + country_code2);  
+					
+					String mob_no2 = item.get(27);
+					System.out.println("mob_no2: " + mob_no2);  
+	
+					String email_id2 = item.get(28);
+					System.out.println("email_id2: " + email_id2);  
+					
+					String cont_pers3 = item.get(29);
+					System.out.println("cont_pers3: " + cont_pers3);  
+					
+					String country_code3 = item.get(30);
+					System.out.println("country_code3: " + country_code3); 
+					
+					String mob_no3 = item.get(31);
+					System.out.println("mob_no3: " + mob_no3); 
+					
+					String email_id3 = item.get(32);
+					System.out.println("email_id3: " + email_id3);
+					
+					String cont_pers4 = item.get(33);
+					System.out.println("cont_pers4: " + cont_pers4);  
+					
+					String country_code4 = item.get(34);
+					System.out.println("country_code4: " + country_code4); 
+					
+					String mob_no4 = item.get(35);
+					System.out.println("mob_no4: " + mob_no4); 
+					
+					String email_id4 = item.get(36);
+					System.out.println("email_id4: " + email_id4);
+					
+					String cont_pers5 = item.get(37);
+					System.out.println("cont_pers5: " + cont_pers5);  
+					
+					String country_code5 = item.get(38);
+					System.out.println("country_code5: " + country_code5); 
+					
+					String mob_no5 = item.get(39);
+					System.out.println("mob_no5: " + mob_no5); 
+					
+					String email_id5 = item.get(40);
+					System.out.println("email_id5: " + email_id5);
+					
+					String cont_pers6 = item.get(41);
+					System.out.println("cont_pers6: " + cont_pers6);  
+					
+					String country_code6 = item.get(42);
+					System.out.println("country_code6: " + country_code6); 
+					
+					String mob_no6 = item.get(43);
+					System.out.println("mob_no6: " + mob_no6); 
+					
+					String email_id6 = item.get(44);
+					System.out.println("email_id6: " + email_id6);   
+	
 					UN.setUnit_id(unit_id);
 					UN.setUnit_type(unit_type);
 					UN.setBrn_no(unit_brn_no);
@@ -3118,6 +3205,12 @@ public class BankAndBranchMasterServices {
 					UN.setCp1_countrycode(countrycode_pers_1);
 					UN.setContact_person1_mobile(mob_no1);
 					UN.setContact_person1_email(email_id1);
+					UN.setAddress_1(address1);
+					UN.setAddress_2(address2);
+					UN.setState_(state);
+					UN.setZip_code(zip_code);
+					UN.setRemarks(remarks);
+					//UN.setban
 					
 					UN.setDel_flg("N");
 					UN.setEntry_flag("N");
