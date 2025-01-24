@@ -162,10 +162,30 @@ label {
 				reference, referenceVlue, settlementAccount, settlementAccountValue, bankBranchDetail,
 				 bankBranchDetailValue, reports, reportsValue, paymentprocess;
 				var finalVar = [];
+				document.querySelector("#Admin").addEventListener("change", function () {
+				    // Get the admin checkbox
+				    const adminCheckbox = document.querySelector("#Admin");
+				    // Get the user profile and access role checkboxes
+				    const userProfileCheckbox = document.querySelector("#UserProfileMaintenance");
+				    const accessRoleCheckbox = document.querySelector("#AccessRole");
+
+				    // Check if the admin checkbox is checked
+				    if (adminCheckbox.checked) {
+				        // Check the other two checkboxes
+				        userProfileCheckbox.checked = true;
+				        accessRoleCheckbox.checked = true;
+				    } else {
+				        // Uncheck the other two checkboxes
+				        userProfileCheckbox.checked = false;
+				        accessRoleCheckbox.checked = false;
+				    }
+				});
+
 				checkBoxAdminValue = document.querySelector("#Admin:checked");
 				adminValue = (checkBoxAdminValue) ? 'Y' : 'N';
 				if (adminValue === "Y") {
 					finalVar.push("Admin");
+					
 				}
 
 				userprofileMaintenance = document
@@ -186,7 +206,7 @@ label {
 				if (referenceValue === "Y") {
 					finalVar.push("Reference Code");
 				}
-
+				
 				bankBranchDetail = document
 						.querySelector("#bankBranchDetail:checked");
 				bankBranchDetailValue = (bankBranchDetail) ? 'Y' : 'N';
@@ -214,14 +234,13 @@ label {
 				if (walletfeesValue === "Y") {
 					finalVar.push("Merchant Fees Charges");
 				}
-
+			
 				merchantcategCode = document
 						.querySelector("#MerchantCategoryCode:checked");
 				merchantcategValue = (merchantcategCode) ? 'Y' : 'N';
 				if (merchantcategValue === "Y") {
 					finalVar.push("Merchant Category Code");
 				}
-
 				notificationparam = document
 						.querySelector("#NotificationParameter:checked");
 				notificationValue = (notificationparam) ? 'Y' : 'N';
@@ -241,7 +260,7 @@ label {
 				if (useractivityValue === "Y") {
 					finalVar.push("User Activity Audits");
 				}
-
+				
 				serviceAuditsValue = document
 						.querySelector("#ServiceAudits:checked");
 				serviceaudValue = (serviceAuditsValue) ? 'Y' : 'N';
@@ -528,10 +547,41 @@ label {
 		var unorderedList = $(checkbox).next('ul');
 		unorderedList.find('input[type="checkbox"]').prop('checked',
 				checkbox.checked);
+		adminChecked(checkbox)
 	}
 	function checkAdmin(checkbox) {
 		var adminCheckbox = $('#Admin');
 		adminCheckbox.prop('checked', true);
+	}
+	function checkMerParam(checkbox) {
+		var adminCheckbox = $('#MerchantParameter');
+		adminCheckbox.prop('checked', true);
+	}
+	
+	function adminChecked(checkbox) {
+	    // Check the state of the Admin checkbox
+	    var isChecked = $(checkbox).prop('checked');
+	    // Toggle the state of other checkboxes based on Admin's state
+	    $('#UserProfileMaintenance').prop('checked', isChecked);
+	    $('#AccessRole').prop('checked', isChecked);
+	    $('#ReferenceCode').prop('checked', isChecked);
+	    $('#bankBranchDetail').prop('checked', isChecked);
+	}
+	function merparamChecked(checkbox) {
+		        
+	    // Check the state of the Admin checkbox
+	    var isChecked = $(checkbox).prop('checked');
+	    // Toggle the state of other checkboxes based on Admin's state
+	    $('#MerchantFeesCharges').prop('checked', isChecked);
+	    $('#MerchantCategoryCode').prop('checked', isChecked);
+	    $('#NotificationParameter').prop('checked', isChecked);
+	    $('#settlementAccount').prop('checked', isChecked);
+	}
+	function auditChecked(checkbox){
+		 var isChecked = $(checkbox).prop('checked');
+		    // Toggle the state of other checkboxes based on Admin's state
+		    $('#UserActivityAudits').prop('checked', isChecked);
+		    $('#ServiceAudits').prop('checked', isChecked);
 	}
 	function checkIPSparam(checkbox) {
 		var adminCheckbox = $('#IpsParameter');
@@ -541,7 +591,6 @@ label {
 		var adminCheckbox = $('#AuditOperations');
 		adminCheckbox.prop('checked', true);
 	}
-
 	function handleIn(input) {
 		input.value = input.value.replace(/[^\w\s]/gi, '').toUpperCase();
 	}
@@ -1033,102 +1082,114 @@ label {
 							class="close" data-dismiss="modal">X</button>
 					</div>
 					<div class="modal-body" style="background-color: white;">
+					<li style="display: flex; align-items: center;">
 						<input type="checkbox" id="Admin" value="Y" name="admin"
 							th:checked="${IPSAccessRole?.admin}==Y"
 							style="margin-right: 10px" onclick="checkUnorderedList(this)" />Admin
-						Operations
+						Operations </li>
 						<ul>
-							<li><input type="checkbox" id="UserProfileMaintenance"
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="UserProfileMaintenance"
 								value="Y" name="user_profile_maintenance"
 								th:checked="${IPSAccessRole?.user_profile_maintenance == 'Y'}"
 								onclick="checkAdmin(this)"
-								style="margin-right: 10px; margin-top: 10px" /> <label
-								for="UserProfileMaintenance">User Profile Maintenance</label></li>
-							<li><input type="checkbox" id="AccessRole" value="Y"
+								style="margin-right: 10px;margin-top: 0; " /> <label
+								for="UserProfileMaintenance" style="margin-top: 3px;">User Profile Maintenance</label></li>
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="AccessRole" value="Y"
 								name="access_role"
 								th:checked="${IPSAccessRole?.access_role == 'Y'}"
 								onclick="checkAdmin(this)" style="margin-right: 10px" /> <label
-								for="AccessRole">Access and Roles</label></li>
-							<li><input type="checkbox" id="ReferenceCode" value='Y'
+								for="AccessRole" style="margin-top: 3px;">Access and Roles</label></li>
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="ReferenceCode" value='Y'
 								name="reference_code" style="margin-right: 10px"
-								th:checked="${IPSAccessRole?.reference_code}=='Y'" /> <label
-								for="ReferenceCode">Reference Code</label></li>
-							<li><input type="checkbox" id="bankBranchDetail" value='Y'
+								th:checked="${IPSAccessRole?.reference_code}=='Y'" onclick="checkAdmin(this)" /> <label
+								for="ReferenceCode" style="margin-top: 3px;">Reference Code</label></li>
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="bankBranchDetail" value='Y'
 								name="bank_branch_master" style="margin-right: 10px"
-								th:checked="${IPSAccessRole?.bank_branch_master}=='Y'" /> <label
-								for="ReferenceCode">Bank and Branch Master</label></li>
+								th:checked="${IPSAccessRole?.bank_branch_master=='Y'}" onclick="checkAdmin(this)" /> <label
+								for="bankBranchDetail" style="margin-top: 3px;">Bank and Branch Master</label></li>
 						</ul>
+						<li style="display: flex; align-items: center;">
 						<input type="checkbox" id="MerchantParameter" value="Y"
-							name="ipsparameter" onclick="checkUnorderedList(this)"
+							name="ipsparameter" onclick="merparamChecked(this)"
 							th:checked="${IPSAccessRole?.ips_parameter}==Y"
 							style="margin-right: 10px" />Merchant Parameter
-						<ul>
-					
-							<li><input type="checkbox" id="MerchantFeesCharges"
+							</li>
+						   <ul>
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="MerchantFeesCharges"
 								value="Y" name="wallet_fees_charges"
 								th:checked="${IPSAccessRole?.wallet_fees_charges == 'Y'}"
-								onclick="checkIPSparam(this)"
-								style="margin-right: 10px; margin-top: 10px" /> <label
-								for="MerchantFeesCharges">Merchant Fees and Charges</label></li>
-							<li><input type="checkbox" id="MerchantCategoryCode"
+								onclick="checkMerParam(this)"
+								style="margin-right: 10px; margin-top: 0px"/> <label
+								for="MerchantFeesCharges" style="margin-top: 3px;">Merchant Fees and Charges</label>
+								</li> 
+								<li style="display: flex; align-items: center;"><input type="checkbox" id="MerchantCategoryCode"
 								value="Y" name="merchant_category_code"
 								th:checked="${IPSAccessRole?.merchant_category_code == 'Y'}"
-								onclick="checkIPSparam(this)"
-								style="margin-right: 10px; margin-top: 10px" /> <label
-								for="MerchantCategoryCode">Merchant Category Code</label></li>
-							<li><input type="checkbox" id="NotificationParameter"
+								onclick="checkMerParam(this)"
+								style="margin-right: 10px; margin-top: 0px" /> <label
+								for="MerchantCategoryCode" style="margin-top: 3px;">Merchant Category Code</label></li>
+	 						<li style="display: flex; align-items: center;"><input type="checkbox" id="NotificationParameter"
 								value="Y" name="notification_parameter"
 								th:checked="${IPSAccessRole?.notification_parameter == 'Y'}"
-								onclick="checkIPSparam(this)"
-								style="margin-right: 10px; margin-top: 10px" /> <label
-								for="NotificationParameter">Notification Parameter</label></li>
-							<li><input type="checkbox" id="settlementAccount" value="Y"
+								onclick="checkMerParam(this)"
+								style="margin-right: 10px; margin-top: 0px" /> <label
+								for="NotificationParameter" style="margin-top: 3px;">Notification Parameter</label></li>
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="settlementAccount" value="Y"
 								name="settlement_account"
 								th:checked="${IPSAccessRole?.settlement_account == 'Y'}"
-								onclick="checkIPSparam(this)"
-								style="margin-right: 10px; margin-top: 10px" /> <label
-								for="settlementAccount">Settlement Account</label></li>
+								onclick="checkMerParam(this)"
+								style="margin-right: 10px; margin-top: 0px" /> <label
+								for="settlementAccount" style="margin-top: 3px;">Settlement Account</label></li>
 						</ul>
+						<li style="display: flex; align-items: center;">
 						<input type="checkbox" id="AuditOperations" value='Y'
 							name="audit_operations" style="margin-right: 10px"
-							onclick="checkUnorderedList(this)"
+							onclick="auditChecked(this)"
 							th:checked="${IPSAccessRole?.audit_operations}=='Y'" />Audit
 						Operations
+						</li>
 						<ul>
-							<li><input type="checkbox" id="UserActivityAudits" value="Y"
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="UserActivityAudits" value="Y"
 								name="user_activity_audits"
-								style="margin-right: 10px; margin-top: 10px"
+								style="margin-right: 10px; margin-top: 0px"
 								th:checked="${IPSAccessRole?.user_activity_audits == 'Y'}"
 								onclick="checkAudit(this)" /> <label
-								for="UserActivityAudits">User Activity Audits</label></li>
-							<li><input type="checkbox" id="ServiceAudits" value="Y"
+								for="UserActivityAudits"  style="margin-top: 3px;">User Activity Audits</label></li>
+							<li style="display: flex; align-items: center;"><input type="checkbox" id="ServiceAudits" value="Y"
 								name="service_audits"
 								th:checked="${IPSAccessRole?.service_audits == 'Y'}"
 								onclick="checkAudit(this)"
-								style="margin-right: 10px; margin-top: 10px" /> <label
-								for="ServiceAudits">Service Audits</label></li>
+								style="margin-right: 10px; margin-top: 0px" /> <label
+								for="ServiceAudits" style="margin-top: 3px;">Service Audits</label></li>
 						</ul>
+						<li style="display: flex; align-items: center;">
 						<input type="checkbox" id="ChargeBack" value='Y'
-							name="charge_back" style="margin-right: 10px"
-							th:checked="${IPSAccessRole?.charge_back}=='Y'" /> <label
-							for="ChargeBack">Charge Back</label> <br> <input
+							name="charge_back" style="margin-right: 10px; "
+							th:checked="${IPSAccessRole?.charge_back}=='Y'"  /> <label
+							for="ChargeBack" style="margin-top: 5px;">Charge Back</label></li>
+							<li style="display: flex; align-items: center;">
+							  <input
 							type="checkbox" id="TransactionMonitoring" value='Y'
 							name="transaction_monitoring" style="margin-right: 10px"
 							th:checked="${IPSAccessRole?.transaction_monitoring}=='Y'" /> <label
-							for="ChargeBack">Transaction Monitoring</label> <br>							<input
+							for="TransactionMonitoring" style="margin-top: 5px;">Transaction Monitoring</label> </li>	
+							<li style="display: flex; align-items: center;">
+													<input
 													type="checkbox" id="PaymentProcessing" value='Y'
 													name="payment_processing" style="margin-right: 10px"
 													th:checked="${IPSAccessRole?.payment_processing}=='Y'" /> <label
-													for="Payment Processing">Payment Processing</label> <br>
-
+													for="PaymentProcessing" style="margin-top: 5px;">Payment Processing</label> </li>
+                        <li style="display: flex; align-items: center;">
 						<input type="checkbox" id="MerchantMaster" value='Y'
 							name="merchant_master" style="margin-right: 10px"
 							th:checked="${IPSAccessRole?.merchant_master}=='Y'" /> <label
-							for="MerchantMaster">Merchant Master</label> <br> <input
+							for="MerchantMaster" style="margin-top: 5px;">Merchant Master</label> </li> 
+							<li style="display: flex; align-items: center;">
+							<input
 							type="checkbox" id="Reports" value='Y' name="reports"
 							style="margin-right: 10px"
 							th:checked="${IPSAccessRole?.reports}=='Y'" /> <label
-							for="reports">Reports</label>
+							for="Reports" style="margin-top: 5px;">Reports</label> </li>
 						<div style="float: right;">
 							<button type="button" class="btn btn-primary"
 								data-dismiss="modal" onclick="getvalue();">SUBMIT</button>
