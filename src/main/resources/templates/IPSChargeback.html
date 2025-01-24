@@ -102,6 +102,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 #usertable td {
 	padding: 13px;
 }
+#currentDate {
+    background-color: transparent;  /* Remove background color */
+    border: none;  
+}
 tbody td {
     white-space: nowrap;
 }
@@ -597,11 +601,12 @@ $(document)
 					<div class="d-flex align-items-center">
 						<h3 class="mr-2 ml-2" style="color:white">Search Records by Date:</h3>
 						<div>
-							<input class="form-control form-control-sm" type="text"
+							<input class="form-control form-control-sm text-white" type="text" 
 								id="currentDate" onchange="getChargeBackRecords();"
 								th:value="${currentDate != null ? #dates.format(currentDate, 'dd-MM-yyyy') : ''}"
 								readonly>
 						</div>
+						
 						<div class="ml-3">
 							<select class="form-control form-control-sm"
 								id="transactionFilter" onchange="handleFilterChange()"
