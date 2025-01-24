@@ -9,15 +9,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DocumentMaster_Repo  extends JpaRepository<DocumentMaster_Entity, DocumentMaster_Entity_PrimaryId> {
 	
-	@Query(value = "select * from DOCUMENT_MASTER where merchant_id= ?1", nativeQuery = true)
-	List<DocumentMaster_Entity> findByMer( String merchant_id);
+	@Query(value = "select * from DOCUMENT_MASTER where merchant_id= ?1 and del_flg ='N' ", nativeQuery = true)
+	List<DocumentMaster_Entity> findByMer(String merchant_id);
 
-	@Query(value = "select * from DOCUMENT_MASTER where merchant_id= ?1 and unique_id = ?2", nativeQuery = true)
+	@Query(value = "select * from DOCUMENT_MASTER where merchant_id= ?1 and unique_id = ?2 and del_flg ='N'", nativeQuery = true)
 	List<DocumentMaster_Entity> findBy1(String merchant_id,String doc_type);
 	
-	@Query(value = "select * from DOCUMENT_MASTER where merchant_id= ?1 and unique_id = ?2", nativeQuery = true)
+	@Query(value = "select * from DOCUMENT_MASTER where merchant_id= ?1 and unique_id = ?2 and del_flg ='N'", nativeQuery = true)
 	DocumentMaster_Entity findByApplAndUnquieimg(String merchant_id,String doc_type);
 	
-	@Query(value = "select * from DOCUMENT_MASTER where unique_id = ?1", nativeQuery = true)
+	@Query(value = "select * from DOCUMENT_MASTER where unique_id = ?1 and del_flg ='N'", nativeQuery = true)
 	DocumentMaster_Entity findByUnique1(String unique_id);
+	
+	@Query(value = "select * from DOCUMENT_MASTER where merchant_id= ?1 and del_flg ='N' ", nativeQuery = true)
+	List<DocumentMaster_Entity> findByAllMerchant(String merchant_acct_no);
 }

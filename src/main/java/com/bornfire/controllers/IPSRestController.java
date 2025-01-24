@@ -1996,7 +1996,7 @@ public class IPSRestController {
 				return "application/octet-stream"; // Fallback MIME type
 			}
 		}
-
+		
 		@PostMapping(value = "/AddStudentss")
 		@ResponseBody
 		public String uploadSignatureAndPhoto(@RequestParam String merchant_Id, @RequestParam String srcURL,@RequestParam String merchant_name)
@@ -2009,7 +2009,7 @@ public class IPSRestController {
 				BigDecimal srlnoStr = Sign_Master_Repo.getSequence();
 				signatureEntity.setS_no(srlnoStr);
 
-				signatureEntity.setMerchant_Id(merchant_Id);
+				signatureEntity.setMerchant_id(merchant_Id);
 				
 				signatureEntity.setMerchant_name_sign(merchant_name);
 				byte[] buff = srcURL.getBytes();
@@ -2017,6 +2017,48 @@ public class IPSRestController {
 				signatureEntity.setSign(blob);
 
 				Sign_Master_Repo.save(signatureEntity);
+
+				msg = "Signature details Uploaded successfully...";
+			} catch (Exception e) {
+				e.printStackTrace();
+				msg = "Signature details Upload Unsuccessfull...";
+			}
+
+			return msg;
+		}
+		@PostMapping(value = "/SignMod")
+		@ResponseBody
+		public String SignMod(@RequestParam String merchant_Id, @RequestParam String srcURL,@RequestParam String merchant_name,@RequestParam String sign_srl_no)
+				throws IOException, SQLException {
+
+			String msg = null;
+			try {
+				Sign_Master_Entity mod = Sign_Master_Repo.getsrl_no(sign_srl_no);
+			if(mod != null && mod.getS_no() != null) {
+
+				mod.setMerchant_id(merchant_Id);	
+				mod.setMerchant_name_sign(merchant_name);
+				byte[] buff = srcURL.getBytes();
+				Blob blob = new SerialBlob(buff);
+				mod.setSign(blob);
+				Sign_Master_Repo.save(mod);
+			}else {
+				Sign_Master_Entity signatureEntity = new Sign_Master_Entity();
+
+				BigDecimal srlnoStr = Sign_Master_Repo.getSequence();
+				signatureEntity.setS_no(srlnoStr);
+
+				signatureEntity.setMerchant_id(merchant_Id);
+				
+				signatureEntity.setMerchant_name_sign(merchant_name);
+				byte[] buff = srcURL.getBytes();
+				Blob blob = new SerialBlob(buff);
+				signatureEntity.setSign(blob);
+
+				Sign_Master_Repo.save(signatureEntity);
+			}
+
+				
 
 				msg = "Signature details Uploaded successfully...";
 			} catch (Exception e) {

@@ -31,6 +31,7 @@ public class DocumentMaster_Entity {
 	private byte[] upd_file;
 	private String rec_no;
 	private String del_flg;
+ 
 	public String getMerchant_id() {
 		return merchant_id;
 	}

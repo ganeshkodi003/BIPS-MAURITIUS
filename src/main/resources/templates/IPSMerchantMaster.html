@@ -400,9 +400,7 @@ select {
 	margin: 10px;
 }
 
-td {
-	background-color: #f8f7ff;
-}
+
 
 table.table .thead-light th {
 	font-size: 15px;
@@ -474,6 +472,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 .dataTables_empty {
 	color: #be3232;
+}
+td {
+	background-color: white;
 }
 
 .button_plus {
@@ -1293,6 +1294,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 				// If all rows are valid, submit the form
 				if (valid) {
 					if ($("#BankandBranchedit").valid()) {
+						
+						SubmitSigMod();
 						var formmode = a.getAttribute("data-formmode");
 						var url = "addmerchantReg2?formmode=" + formmode;
 						$("#BankandBranchedit").attr('action', url);
@@ -6876,6 +6879,94 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 
 	</script>
+	<!-- for document script  -->
+	<script>
+	function rowdeleteForDoc(ele) {
+	    alert("Inside the function");
+	    var row = ele.parentNode.parentNode;
+		 var unique_no = row.querySelector("input[name='unique_id']").value;
+		 alert(unique_no);
+	     
+	    var table = document.getElementById("dynamicTableForEdit"); // Find the table by ID
+		
+	    if (!table) {
+	        alert("Table not found!");
+	        return; // Exit if the table is not found
+	    }
+
+	    // Get the last row in the table
+	    var lastRow = table.rows[table.rows.length - 1];
+	    if (!lastRow) {
+	        alert("No rows found in the table!");
+	        return; // Exit if no rows exist
+	    }
+	    var fifthCell = lastRow.cells[3];
+	    var unique_no = fifthCell.textContent || fifthCell.innerText; // Use either textContent or innerText
+	    
+	    $.ajax({
+	        url: './DocRemove?unique_no=' + encodeURIComponent(unique_no),
+	        type: 'POST',
+	        contentType: 'application/json',
+	        success: function (data) {
+	        
+	        alert(data);
+	         $('#myModalpopup1').modal("toggle");
+			 $('#myModalpopup1 .modal-body').text("Deleted Successfully...");
+	        }
+	    });
+
+	}
+
+
+	/* function rowdeleteForDoc(ele) {
+		alert("inside")
+	
+		var table = ele.closest("table"); 
+		var lastRow = table.rows[table.rows.length - 1];  
+		lastRow.style.backgroundColor = "yellow"; 
+
+	 
+
+	    // Find the input with the name 'unique_id' within the row and get its value
+	   /*  var unique_no = row.querySelector("input[name='unique_id']").value;
+	    alert(unique_no);
+
+	    $.ajax({
+	        url: '/BGLS/DocRemove?unique_no=' + encodeURIComponent(unique_no),
+	        type: 'POST',
+	        contentType: 'application/json',
+	        success: function (data) {
+	            $('#DOCPOPUP').modal("toggle");
+	            $('#alertmsgdoc').html(data);
+	        }
+	    });
+
+	    // Delete the specific row
+	    row.parentNode.removeChild(row); */
+	
+	</script>
+	<script>
+$(document).ready(function() {
+    // Handle click for Enable/Disable radio buttons
+    $("input[name='status_enable']").click(function() {
+        if ($("#status_enable").prop("checked")) {
+            // Uncheck Suspect if Enable is clicked
+            $("#status_suspect").prop("checked", false);
+        }
+        if ($("#status_disable").prop("checked")) {
+            // Uncheck Suspect if Disable is clicked
+            $("#status_suspect").prop("checked", false);
+        }
+    });
+
+    // Handle click for Suspect radio button
+    $("#status_suspect").click(function() {
+        // Uncheck Enable/Disable if Suspect is clicked
+        $("#status_enable").prop("checked", false);
+        $("#status_disable").prop("checked", false);
+    });
+});
+</script>
 <body onload=" onimageon();">
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager">
@@ -7602,7 +7693,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 												Enable</label> <input type="radio" name="status_enable"
 												Value="Disable" class="ml-3" id="status_disable" required>
 											<label> Disable</label> <input type="radio"
-												name="status_suspect" style="margin-left: 50px"
+												name="status_enable" style="margin-left: 50px"
 												Value="Suspect" id="status_suspect" required> <label>
 												Suspect</label> <span id="status_enable_vali" class="reqError"></span>
 										</div>
@@ -8724,8 +8815,9 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 											<tr>
 												<td style="text-align: center;">Name: <input name="merchant_name_sign"
-													type="text" style="margin-left: 20px; width: 150px;"
-													id="merchant_name_sign" />
+													type="text" 
+													 onkeyup="this.value = this.value.toUpperCase();"
+													id="merchant_name_sign" style="margin-left: 20px; width: 150px;" />
 												</td>
 
 												<td rowspan="2" style="text-align: center;">Signature:
@@ -9011,50 +9103,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										function goBack() {
 											$('#myrequired22').modal('hide'); // Close the modal
 										}
-										function SubmitSig() {
-
-											var merchant_Id = document.getElementById("merchant_id").value;
-											var merchant_name = document.getElementById("merchant_name_sign").value;
-											alert(merchant_name);
-											let imgElement = null;
-											let Sign = null;
-
-											Sign = document.querySelector('#vjImage');
-
-
-											var dataURL = null;
-											if (imgElement) {
-												var canvas = document.createElement('canvas');
-												var ctx = canvas.getContext('2d');
-												canvas.width = imgElement.width;
-												canvas.height = imgElement.height;
-												ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-												dataURL = canvas.toDataURL('image/jpg');
-											}
-											var srcURL = Sign ? Sign.src : null;
-
-											var formData = new FormData();
-											formData.append("srcURL", srcURL);
-											//alert(srcURL);
-
-											$.ajax({
-												type: 'POST',
-												url: './AddStudentss?merchant_Id=' + merchant_Id + '&merchant_name=' + merchant_name,
-												data: formData,
-												contentType: false,
-												processData: false,
-												success: function (response) {
-													//	alert(response)
-
-												},
-												error: function (xhr, status, error) {
-													console.error("Error during submission:", error);
-													alert("An error occurred while submitting the form.");
-												}
-											});
-
-
-										}
+										
 									</script>
 									<!--<button class="btn  p-2" type="button" 
 																				onclick="submitfile(this)">Submit</button>-->
@@ -12393,7 +12442,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 													style="background-color: white; color: #332d2d; display: flex;">
 													<div class="float-left pt-2">
 														<h6 style="font-size: 1.2rem; font-weight: bold;">DOCUMENT
-															DETAILS f</h6>
+															DETAILS </h6>
 													</div>
 													<!-- <div class="float-right">
 
@@ -12510,7 +12559,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 															style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 															<tr>
 																<td style="text-align: center;">Name: <input
-																	type="text" th:value="${branchDet?.merchant_corp_name}"
+																	type="text" th:value="${SignMerName?.merchant_name_sign}"
 																	style="border: none; outline: none;; margin-left: 20px; width: 150px;"
 																	id="ca_first_name" readonly />
 																</td>
@@ -12725,14 +12774,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											<div class="row formline">
 												<label class="col-sm-2">Lien Amount 1</label>
 												<div class="col-sm-3">
-													<input type="text" id="lien_amount1"
+													<input type="text" id="lien_amount1" th:value="${branchDet?.lien_amount1}"
 														class="form-control form-control-sm" name="lien_amount1"
 														autocomplete="off" readonly>
 												</div>
 												<div class="col-sm-1"></div>
 												<label class="col-sm-2">Lien Amount 2</label>
 												<div class="col-sm-3">
-													<input type="text" id="lien_amount2"
+													<input type="text" id="lien_amount2" th:value="${branchDet?.lien_amount2}"
 														class="form-control form-control-sm" name="lien_amount2"
 														autocomplete="off" readonly>
 												</div>
@@ -12741,14 +12790,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											<div class="row formline">
 												<label class="col-sm-2">Hold Amount 1</label>
 												<div class="col-sm-3">
-													<input type="text" id="hold_amount1"
+													<input type="text" id="hold_amount1" th:value="${branchDet?.hold_amount1}"
 														class="form-control form-control-sm" name="hold_amount1"
 														autocomplete="off" readonly>
 												</div>
 												<div class="col-sm-1"></div>
 												<label class="col-sm-2">Hold Amount 2</label>
 												<div class="col-sm-3">
-													<input type="text" id="hold_amount2"
+													<input type="text" id="hold_amount2" th:value="${branchDet?.hold_amount2}"
 														class="form-control form-control-sm" name="hold_amount1"
 														autocomplete="off" readonly>
 												</div>
@@ -12757,14 +12806,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											<div class="row formline">
 												<label class="col-sm-2">Next Settlement date 1</label>
 												<div class="col-sm-3">
-													<input type="text" id="next_settlementdate1"
-														class="form-control form-control-sm"
+													<input type="text" id="next_settlementdate1"  th:value="${#dates.format(branchDet?.next_settlementdate1,'dd-MM-yyyy')}"
+														class="form-control form-control-sm"  
 														name="next_settlementdate1" autocomplete="off" readonly>
 												</div>
 												<div class="col-sm-1"></div>
 												<label class="col-sm-2">Next Settlement date 2</label>
 												<div class="col-sm-3">
-													<input type="text" id="next_settlementdate2"
+													<input type="text" id="next_settlementdate2" th:value="${#dates.format(branchDet?.next_settlementdate2,'dd-MM-yyyy')}"
 														class="form-control form-control-sm"
 														name="next_settlementdate2" autocomplete="off" readonly>
 												</div>
@@ -12774,13 +12823,13 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 												<label class="col-sm-2">Last Settlement date 1</label>
 												<div class="col-sm-3">
 													<input type="text" id="last_settlementdate1"
-														class="form-control form-control-sm"
+														class="form-control form-control-sm" th:value="${#dates.format(branchDet?.last_settlementdate1,'dd-MM-yyyy')}"
 														name="last_settlementdate1" autocomplete="off" readonly>
 												</div>
 												<div class="col-sm-1"></div>
 												<label class="col-sm-2">Last Settlement date 2</label>
 												<div class="col-sm-3">
-													<input type="text" id="last_settlementdate2"
+													<input type="text" id="last_settlementdate2" th:value="${#dates.format(branchDet?.last_settlementdate2,'dd-MM-yyyy')}"
 														class="form-control form-control-sm"
 														name="last_settlementdate2" autocomplete="off" readonly>
 												</div>
@@ -17172,15 +17221,28 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<div class="col-sm-3">
 										<input th:if="${branchDet.status_enable} != 'Enable'"
 											type="radio" name="status_enable" Value="Enable"
-											id="status_enable"> <input
+											id="status_enable">
+											 <input
 											th:if="${branchDet.status_enable} == 'Enable'" type="radio"
 											name="status_enable" Value="Enable" id="status_enable"
-											checked> <label>Enable</label> <input
+											checked> 
+											<label>Enable</label> 
+										<input
 											th:if="${branchDet.status_enable} != 'Disable'" type="radio"
 											name="status_enable" Value="Disable" id="status_disable">
 										<input th:if="${branchDet.status_enable} == 'Disable'"
 											type="radio" name="status_enable" Value="Disable"
-											id="status_disable" checked> <label>Disable</label> <span
+											id="status_disable" checked> 
+											<label>Disable</label> 
+											
+									<input
+											th:if="${branchDet.status_enable} != 'Suspect'" type="radio"
+											name="status_enable" Value="Disable" id="status_suspect">
+										<input th:if="${branchDet.status_enable} == 'Suspect'"
+											type="radio" name="status_enable" Value="Suspect"
+											id="status_suspect" checked> <label>Suspect</label>
+										
+											<span
 											id="status_enable_vali" class="reqError"></span>
 									</div>
 									<div class="col-sm-1"></div>
@@ -18471,37 +18533,42 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 								</div>
 								<label></label>
 								<div class=" mt-2"
-									style="background-color: white; color: #332d2d; display: flex;">
+									style="background-color: white; color: #332d2d; display: flex; align-items: center; justify-content: space-between;">
 									<div class="float-left">
 										<h6 style="font-size: 1.2rem; font-weight: bold;">DOCUMENT
 											DETAILS</h6>
 									</div>
-									<!-- <div class="float-right">
+								<div class="float-right">
 
 										<img th:src="@{/images/add.png}" aria-hidden="true"
 											style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-											onclick="rowadd()" alt="Add"> <img th:src="@{/images/MinusIcon.png}"
-											aria-hidden="true"
-											style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-											onclick="rowdelete(this)" alt="Remove">
-									</div> -->
+											onclick="rowadd()" alt="Add"> 
+									</div>
+									
 								</div>
 								<div class="table-responsive mt-2" style="overflow: auto;">
-									<table border="1" id="dynamicTable"
+									<table border="1" id="dynamicTableForEdit"
 										class="table table-bordered "
 										style="text-align: center; vertical-align: 22px; margin-top: 10px; font-size: 15px;">
 										<thead>
-											<tr class="fw-bold">
+											<tr style="font-weight: bold;font-size:14px;">
 
-												<th style="font-weight: 700;">Document Type</th>
-												<th style="font-weight: 700;">Document Code</th>
-												<th style="font-weight: 700;">Document Description</th>
-												<th style="font-weight: 700;">Unique ID</th>
-												<th style="font-weight: 700;">Place of Issue</th>
-												<th style="font-weight: 700;">Issue Date</th>
-												<th style="font-weight: 700;">Expiry Date</th>
-												<th style="font-weight: 700;">Document View</th>
-											</tr>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOCUMENT TYPE
+														</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOCUMENT
+														CODE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOC
+														DESCRIPTION</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">UNIQUE
+														ID</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">PLACE
+														OF ISSUE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">ISSUE
+														DATE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">EXPIRY
+														DATE</th>
+													<th style="font-weight: bold; text-align: left;font-size:14px;">DOCUMENT
+														UPLOAD</th>
 										</thead>
 										<tbody id="dataTables">
 											<tr th:each="Doocument : ${DocumentList}">
@@ -18512,45 +18579,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 													class="rowDataField">ADD001</td>
 												<td th:text="${Doocument?.document_type_desc}"
 													class="rowDataField">Passport</td>
-												<td th:text="${Doocument?.place_of_issue}"
-													class="rowDataField">Madurai</td>
+												
 												<td th:text="${Doocument?.unique_id}" class="rowDataField">D324234234
 												</td>
+												<td th:text="${Doocument?.place_of_issue}"
+													class="rowDataField">Madurai</td>
 												<td th:text="${Doocument?.issue_date}" class="rowDataField">18-JUN-2018
 												</td>
 												<td th:text="${Doocument?.expiry_date}" class="rowDataField">15-JUN-2023
 												</td>
-												<!-- <td class="rowDataField"
-																								th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-																								<img th:src=@{/images/info.png}
-																								style="width: 30px; height: 30px" onclick="show1(this)"
-																								id="openModaldoc"
-																								th:attr="data-doc_type=${Doocument?.unique_id},data-doc_types=${Doocument?.merchant_id}"
-																								data-toggle="modal" data-target=".bd-example-modal-lg">
-																							</td>
-								-->
-												<!-- <td class="rowDataField"
-																								th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}">
-																								<a th:href="@{'/' + ${Doocument?.unique_id}}"
-																								style="text-decoration: none; color: DodgerBlue;">
-																									<img th:src="@{/images/info.png}"
-																									style="width: 30px; height: 30px;" alt="Info">
-																							</a>
-																							</td> -->
-
-												<!-- <td th:if="${Doocument?.file_name == null || !(Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg'))}"
-																							th:data-unique-id="${Doocument?.unique_id}"><a
-																							
-																							
-																								href="javascript:void(0);" onclick="handleClick(this)"
-																								style="text-decoration: none; color: DodgerBlue;">
-																									<img th:src="@{/images/info.png}"
-																									style="width: 30px; height: 30px;" alt="Info">
-																							</a></td> -->
-												<!-- <td th:text="${Doocument?.file_name}"
-																								class="rowDataField" style="width: 100px;" hidden>
-																							</td> -->
-
+												
 												<!-- For .jpeg, .jfif, .jpg files -->
 												<td class="rowDataField"
 													th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg') || Doocument.file_name.endsWith('.png'))}">
@@ -18570,8 +18608,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 														th:src="@{/images/info.png}"
 														style="width: 30px; height: 30px;" alt="Info">
 												</a></td>
-
-
+												<td style="border:none;background-color:none;"><img th:src="@{/images/MinusIcon.png}"
+											aria-hidden="true"
+											style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
+											onchange="rowdeleteForDoc(this)" alt="Remove"></td>
 
 											</tr>
 										</tbody>
@@ -18582,7 +18622,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									style="background-color: white; color: #332d2d; display: flex;">
 									<div class="float-left">
 										<h6 style="font-size: 1.2rem; font-weight: bold;">SIGNATURE
-											DETAILS d</h6>
+											DETAILS </h6>
+										 
 									</div>
 								</div>
 								<div class="card-body">
@@ -18591,9 +18632,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 											<tr>
 												<td style="text-align: center;">Name: <input
-													type="text" th:value="${branchDet?.merchant_corp_name}"
-													style="border: none; outline: none;; margin-left: 20px; width: 150px;"
-													id="ca_first_name" readonly />
+													name="merchant_name_sign" type="text"
+													th:value="${SignMerName?.merchant_name_sign}"
+													onkeyup="this.value = this.value.toUpperCase();"
+													style="margin-left: 20px; width: 150px;"
+													id="merchant_name_sign" />
+													<input hidden
+													  type="text"
+													th:value="${SignMerName?.s_no}"
+													style="margin-left: 20px; width: 150px;"
+													id="sign_srl_no" />
+
 												</td>
 
 												<td rowspan="2" style="text-align: center;">Signature:
@@ -18601,13 +18650,203 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 														height="60" width="30"></div>
 													<div style="display: none; margin-left: 55px;"
 														id="signature">
-														<input id="sign" type="file" readonly />
+														 
 													</div>
+													<p id="Draw_signature" style="margin-bottom: -1rem">
+														Draw signature</p>
 												</td>
 											</tr>
+
 										</table>
+										<input id="sigurl" type="text"
+											style="display: none; width: 250px; height: 200px" />
+										<div class="modal" id="myModal" data-backdrop="static"
+											data-keyboard="false"
+											style="display: none; padding-left: 10%">
+											<div>
+												<div class="modal-content" id="modal-content1"
+													style="width: 600px">
+
+													<div class="menu-title-header">
+														<div class="modal-title" id=""
+															style="text-align: center; color: white;">
+															Signature Pad <span class="close">&times;</span>
+														</div>
+
+													</div>
+													<div class="modal-body"
+														style="text-align: center; display: flex; align-item: center; justify-content: center">
+														<canvas id="signature-pad" width="400" height="200"></canvas>
+													</div>
+													<div class="modal-footer"
+														style="border-top: none; text-align: center;">
+														<button type="button" class="btn btn-sm  commonBtnStyle"
+															data-dismiss="modal" id="clear-button">Clear</button>
+
+														<button type="button" class="btn btn-sm commonBtnStyle"
+															id="save-button">Save</button>
+													</div>
+												</div>
+
+
+											</div>
+										</div>
 									</div>
 								</div>
+								<script>
+										var signaturePad;
+
+										function openSignaturePad() {
+											var container = document.getElementById('signaturePadContainer');
+											container.style.display = 'block';
+
+											var canvas = document.getElementById('signaturePad');
+											signaturePad = new SignaturePad(canvas);
+										}
+
+										function saveSignature() {
+											if (signaturePad.isEmpty()) {
+												$('#myModalpopup1').modal("toggle");
+												$('#myModalpopup1 .modal-body').text("Please provide a signature...!");
+											
+												 
+											} else {
+												var signatureData = signaturePad.toDataURL();
+												// Do something with the signature data, e.g., save it to a database
+												console.log(signatureData);
+
+												closeSignaturePad();
+											}
+										}
+
+
+
+										function closeSignaturePad() {
+											var container = document.getElementById('signaturePadContainer');
+											container.style.display = 'none';
+										}
+
+										var modal = document.getElementById("myModal");
+										// Get the button that opens the modal
+										var btn = document.getElementById("Draw_signature");
+
+										// Get the <span> element that closes the modal
+										var span = document.getElementsByClassName("close")[0];
+
+										// When the user clicks the button, open the modal 
+										btn.onclick = function () {
+											modal.style.display = "block";
+										}
+
+										// When the user clicks on <span> (x), close the modal
+										span.onclick = function () {
+											modal.style.display = "none";
+										}
+
+
+										// When the user clicks anywhere outside of the modal, close it
+										window.onclick = function (event) {
+											if (event.target == modal) {
+												modal.style.display = "none";
+											}
+										}
+
+										var canvas = document.getElementById('signature-pad');
+
+										var clearButton = document.getElementById('clear-button');
+
+										var saveButton = document.getElementById('save-button');
+
+										// Initialize the signature pad
+										var signaturePad = new SignaturePad(canvas, {
+											backgroundColor: 'rgb(255, 255, 255)', // Background color of the signature pad
+											penColor: 'rgb(0, 0, 0)' // Pen color
+										});
+
+										clearButton.addEventListener('click', function () {
+											signaturePad.clear();
+										});
+
+										// Save the signature as an image when the "Save" button is clicked
+										saveButton.addEventListener('click', function () {
+								 
+										
+											if (signaturePad.isEmpty()) {
+												$('#deleteModelUser').modal("toggle");
+												$('#deleteModelUser .modal-body').text("Please provide a signature first.");
+
+											} else {
+											 
+											
+												// Convert the signature to an image (PNG format)
+												var signatureImage = signaturePad.toDataURL();
+										 
+												// alert(signatureImage);
+												 
+												document.getElementById("sigurl").innerHTML = signatureImage;
+												var imgCaptureDiv = document.getElementById('imgCapture1');
+												closeSignaturePad();
+												var imgElement = document.createElement('img');
+												imgElement.src = signatureImage; // Set the src attribute
+												imgElement.id = 'vjImage'; // Set an id for the image (optional)
+												imgElement.style.height = '100px'; // Set the desired height
+												imgElement.style.width = '200px'; // Set the desired width
+												
+												
+												alert(imgElement);
+												if (!imgCaptureDiv.hasChildNodes()) {
+												    // If empty, append the image element
+												    imgCaptureDiv.appendChild(imgElement);
+												} else {
+												    // If not empty, clear the container first
+												    imgCaptureDiv.innerHTML = ''; // Clear existing content
+												    imgCaptureDiv.appendChild(imgElement); // Append the new image element
+												}
+											 
+												document.getElementById('Draw_signature').style.display = 'none';
+											 
+											}
+										});
+
+
+										function closeSignaturePad() {
+											var container = document.getElementById('myModal');
+											container.style.display = 'none';
+										}
+
+
+										function convertSignatureToImage() {
+											// Get the Data URL from the SignaturePad
+											var signatureImage = signaturePad.toDataURL();
+
+											// Create a new <img> element
+											var imgElement = document.createElement('img');
+
+											// Set the src attribute of the <img> element to the Data URL
+											imgElement.src = signatureImageDataURL;
+
+											// Append the <img> element to a container in your HTML, e.g., a <div> with the id "signatureContainer"
+											document.getElementById('imageContainer').appendChild(imgElement);
+											//alert(document.getElementById('imageContainer').value)
+											//  alert(imgElement);
+										}
+
+
+
+										// Function to show the modal with a custom message
+										function showModal(message) {
+											// Set the message in the modal
+											document.getElementById('popupmsg').innerText = message;
+
+											// Show the modal
+											$('#myrequired22').modal('show'); // Assuming you are using Bootstrap's jQuery modal
+										}
+
+										// Example goBack function to close the modal
+										function goBack() {
+											$('#myrequired22').modal('hide'); // Close the modal
+										}
+										</script>
 								<div class="card-footer text-center">
 									<button type="button" class="btn btn-sm  headerbutton"
 										data-dismiss="modal" onclick="home();">Home</button>
@@ -18804,20 +19043,22 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											name="detailed_address2" autocomplete="off" readonly>
 									</div>
 								</div>
-								<label></label> <label></label>
+								<label></label> 
 								<div class="row formline">
 									<label class="col-sm-2">Lien Amount 1</label>
 									<div class="col-sm-3">
 										<input type="text" id="lien_amount1"
+											th:value="${branchDet?.lien_amount1}"
 											class="form-control form-control-sm" name="lien_amount1"
-											autocomplete="off">
+											autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Lien Amount 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="lien_amount2"
+											th:value="${branchDet?.lien_amount2}"
 											class="form-control form-control-sm" name="lien_amount2"
-											autocomplete="off">
+											autocomplete="off" readonly>
 									</div>
 								</div>
 								<label></label>
@@ -18825,31 +19066,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Hold Amount 1</label>
 									<div class="col-sm-3">
 										<input type="text" id="hold_amount1"
+											th:value="${branchDet?.hold_amount1}"
 											class="form-control form-control-sm" name="hold_amount1"
-											autocomplete="off">
+											autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Hold Amount 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="hold_amount2"
+											th:value="${branchDet?.hold_amount2}"
 											class="form-control form-control-sm" name="hold_amount1"
-											autocomplete="off">
-									</div>
-								</div>
-								<label></label>
-								<div class="row formline">
-									<label class="col-sm-2">Lien Amount 1</label>
-									<div class="col-sm-3">
-										<input type="text" id="lien_amount1"
-											class="form-control form-control-sm" name="lien_amount1"
-											autocomplete="off">
-									</div>
-									<div class="col-sm-1"></div>
-									<label class="col-sm-2">Lien Amount 2</label>
-									<div class="col-sm-3">
-										<input type="text" id="lien_amount2"
-											class="form-control form-control-sm" name="lien_amount2"
-											autocomplete="off">
+											autocomplete="off" readonly>
 									</div>
 								</div>
 								<label></label>
@@ -18857,15 +19084,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Next Settlement date 1</label>
 									<div class="col-sm-3">
 										<input type="text" id="next_settlementdate1"
+											th:value="${#dates.format(branchDet?.next_settlementdate1,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
-											name="next_settlementdate1" autocomplete="off">
+											name="next_settlementdate1" autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Next Settlement date 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="next_settlementdate2"
+											th:value="${#dates.format(branchDet?.next_settlementdate2,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
-											name="next_settlementdate2" autocomplete="off">
+											name="next_settlementdate2" autocomplete="off" readonly>
 									</div>
 								</div>
 								<label></label>
@@ -18874,14 +19103,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<div class="col-sm-3">
 										<input type="text" id="last_settlementdate1"
 											class="form-control form-control-sm"
-											name="last_settlementdate1" autocomplete="off">
+											th:value="${#dates.format(branchDet?.last_settlementdate1,'dd-MM-yyyy')}"
+											name="last_settlementdate1" autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Last Settlement date 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="last_settlementdate2"
+											th:value="${#dates.format(branchDet?.last_settlementdate2,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
-											name="last_settlementdate2" autocomplete="off">
+											name="last_settlementdate2" autocomplete="off" readonly>
 									</div>
 								</div>
 								<div class="row">
@@ -19161,6 +19392,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										<input th:if="${branchDet.status_enable} == 'Disable'"
 											type="radio" name="status_enable" Value="Disable"
 											id="status_disable" checked> <label>Disable</label>
+											
+											
+											<input
+											th:if="${branchDet.status_enable} != 'Suspect'" type="radio"
+											name="status_enable" Value="Disable" id="status_suspect">
+										<input th:if="${branchDet.status_enable} == 'Suspect'"
+											type="radio" name="status_enable" Value="Suspect"
+											id="status_suspect" checked> <label>Suspect</label>
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Registered Address Line 3</label>
@@ -20452,7 +20691,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 											<tr>
 												<td style="text-align: center;">Name: <input
-													type="text" th:text="${branchDet?.merchant_corp_name}"
+													type="text" th:text="${SignMerName?.merchant_name_sign}"
 													style="border: none; outline: none;; margin-left: 20px; width: 150px;"
 													id="ca_first_name" readonly />
 												</td>
@@ -20668,6 +20907,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Lien Amount 1</label>
 									<div class="col-sm-3">
 										<input type="text" id="lien_amount1"
+											th:value="${branchDet?.lien_amount1}"
 											class="form-control form-control-sm" name="lien_amount1"
 											autocomplete="off" readonly>
 									</div>
@@ -20675,6 +20915,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Lien Amount 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="lien_amount2"
+											th:value="${branchDet?.lien_amount2}"
 											class="form-control form-control-sm" name="lien_amount2"
 											autocomplete="off" readonly>
 									</div>
@@ -20684,6 +20925,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Hold Amount 1</label>
 									<div class="col-sm-3">
 										<input type="text" id="hold_amount1"
+											th:value="${branchDet?.hold_amount1}"
 											class="form-control form-control-sm" name="hold_amount1"
 											autocomplete="off" readonly>
 									</div>
@@ -20691,6 +20933,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Hold Amount 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="hold_amount2"
+											th:value="${branchDet?.hold_amount2}"
 											class="form-control form-control-sm" name="hold_amount1"
 											autocomplete="off" readonly>
 									</div>
@@ -20700,6 +20943,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Next Settlement date 1</label>
 									<div class="col-sm-3">
 										<input type="text" id="next_settlementdate1"
+											th:value="${#dates.format(branchDet?.next_settlementdate1,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
 											name="next_settlementdate1" autocomplete="off" readonly>
 									</div>
@@ -20707,6 +20951,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<label class="col-sm-2">Next Settlement date 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="next_settlementdate2"
+											th:value="${#dates.format(branchDet?.next_settlementdate2,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
 											name="next_settlementdate2" autocomplete="off" readonly>
 									</div>
@@ -20717,12 +20962,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<div class="col-sm-3">
 										<input type="text" id="last_settlementdate1"
 											class="form-control form-control-sm"
+											th:value="${#dates.format(branchDet?.last_settlementdate1,'dd-MM-yyyy')}"
 											name="last_settlementdate1" autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Last Settlement date 2</label>
 									<div class="col-sm-3">
 										<input type="text" id="last_settlementdate2"
+											th:value="${#dates.format(branchDet?.last_settlementdate2,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
 											name="last_settlementdate2" autocomplete="off" readonly>
 									</div>
@@ -25522,7 +25769,98 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 			alert("Invalid unique ID!");
 		}
 	}
+	function SubmitSig() {
 
+		var merchant_Id = document.getElementById("merchant_id").value;
+		var merchant_name = document.getElementById("merchant_name_sign").value;
+		alert(merchant_name);
+		let imgElement = null;
+		let Sign = null;
+
+		Sign = document.querySelector('#vjImage');
+
+
+		var dataURL = null;
+		if (imgElement) {
+			var canvas = document.createElement('canvas');
+			var ctx = canvas.getContext('2d');
+			canvas.width = imgElement.width;
+			canvas.height = imgElement.height;
+			ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+			dataURL = canvas.toDataURL('image/jpg');
+		}
+		var srcURL = Sign ? Sign.src : null;
+
+		var formData = new FormData();
+		formData.append("srcURL", srcURL);
+		//alert(srcURL);
+
+		$.ajax({
+			type: 'POST',
+			url: './AddStudentss?merchant_Id=' + merchant_Id + '&merchant_name=' + merchant_name,
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function (response) {
+					alert(response)
+
+			},
+			error: function (xhr, status, error) {
+				console.error("Error during submission:", error);
+				alert("An error occurred while submitting the form.");
+			}
+		});
+
+
+	}
+	
+	
+	function SubmitSigMod() {
+
+		var merchant_Id = document.getElementById("merchant_id").value;
+		var merchant_name = document.getElementById("merchant_name_sign").value;
+		var sign_srl_no = document.getElementById("sign_srl_no").value;
+		
+		 
+		let imgElement = null;
+		let Sign = null;
+
+		Sign = document.querySelector('#vjImage');
+
+
+		var dataURL = null;
+		if (imgElement) {
+			var canvas = document.createElement('canvas');
+			var ctx = canvas.getContext('2d');
+			canvas.width = imgElement.width;
+			canvas.height = imgElement.height;
+			ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
+			dataURL = canvas.toDataURL('image/jpg');
+		}
+		var srcURL = Sign ? Sign.src : null;
+
+		var formData = new FormData();
+		formData.append("srcURL", srcURL);
+		//alert(srcURL);
+
+		$.ajax({
+			type: 'POST',
+			url: './SignMod?merchant_Id=' + merchant_Id + '&merchant_name=' + merchant_name + '&sign_srl_no=' +sign_srl_no,
+			data: formData,
+			contentType: false,
+			processData: false,
+			success: function (response) {
+					//alert(response)
+
+			},
+			error: function (xhr, status, error) {
+				console.error("Error during submission:", error);
+				alert("An error occurred while submitting the form.");
+			}
+		});
+
+
+	}
 </script>
 
 </html>

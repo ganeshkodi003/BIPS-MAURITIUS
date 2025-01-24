@@ -18,4 +18,10 @@ public interface Sign_Master_Repo  extends JpaRepository<Sign_Master_Entity, Big
 	
 	@Query(value = "select * from BIPS_SIGN_MASTER where merchant_id=?1", nativeQuery = true)
 	Sign_Master_Entity getMerId(String merchant_id);
+	@Query(value = "select merchant_id,s_no,merchant_name_sign from BIPS_SIGN_MASTER where merchant_id = ?1", nativeQuery = true)
+	Object[] findByMerchantID(String appl_ref_no);
+	
+	
+	@Query(value = "select * from BIPS_SIGN_MASTER where s_no=?1", nativeQuery = true)
+	Sign_Master_Entity getsrl_no(String s_no);
 }

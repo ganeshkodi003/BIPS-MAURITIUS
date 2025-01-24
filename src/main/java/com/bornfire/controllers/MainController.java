@@ -1140,6 +1140,7 @@ public class MainController {
 			md.addAttribute("pro", bIPS_MerUserManagement_Repo.getUserManage1(merchant_acct_no));
 			md.addAttribute("MerchantDevi", bIPS_MerDeviceManagement_Repo.getaddDevice(merchant_acct_no));
 			md.addAttribute("propass", bIPS_PasswordManagement_Repo.getPassmer(merchant_acct_no));
+			md.addAttribute("SignMerName", Sign_Master_Repo.getMerId(merchant_acct_no));
 		} else if (formmode.equals("viewnew")) {
 			md.addAttribute("formmode", formmode);
 			md.addAttribute("branchDet", merchantMasterModRep.findByIdCustom(merchant_acct_no));
@@ -1157,8 +1158,10 @@ public class MainController {
 			md.addAttribute("propass", bIPS_PasswordManagement_Repo.getPassmer(merchant_acct_no));
 			md.addAttribute("MerchantIdUse", merchant_acct_no);
 			md.addAttribute("MerchantNaUse", merchant_nam);
+			md.addAttribute("SignMerName", Sign_Master_Repo.getMerId(merchant_acct_no));
 		} else if (formmode.equals("edit")) {
 			md.addAttribute("formmode", formmode);
+			 
 			md.addAttribute("branchDet", merchantMasterRep.findByIdCustom(merchant_acct_no));
 			md.addAttribute("merchant_acct_no", merchant_acct_no);
 			md.addAttribute("branchDetails", merchantMasterRep.findByIdCustomvals(merchant_acct_no));
@@ -1178,7 +1181,12 @@ public class MainController {
 			md.addAttribute("Merchant_city", referenceCodeRep.getReferenceList("MM02"));
 			md.addAttribute("Merchant_notification", referenceCodeRep.getReferenceList("MM03"));
 			md.addAttribute("Merchant_type", referenceCodeRep.getReferenceList("MM04"));
-			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
+			md.addAttribute("DocumentList", documentMaster_Repo.findByAllMerchant(merchant_acct_no));
+			md.addAttribute("SignMerName", Sign_Master_Repo.getMerId(merchant_acct_no));
+			
+		 
+
+		 
 		} else if (formmode.equals("delete")) {
 			md.addAttribute("formmode", formmode);
 			md.addAttribute("merchantFeeDetailses", merchantMasterModRep.findByIdCustom(merchant_acct_no));
@@ -1200,6 +1208,7 @@ public class MainController {
 			md.addAttribute("branchDetsunit", bIPS_UnitManagement_Repo.getUnitlist(merchant_acct_no));
 			md.addAttribute("CountryCode", referenceCodeRep.getReferenceList("CC01"));
 			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
+			md.addAttribute("SignMerName", Sign_Master_Repo.getMerId(merchant_acct_no));
 		} else if (formmode.equals("upload")) {
 			md.addAttribute("formmode", formmode);
 			md.addAttribute("menuname", " Merchant -Upload");
@@ -4353,6 +4362,8 @@ public class MainController {
 					byte[] document = docString.getBytes(); // Handle dataURL for images
 					back.setUpd_file(document);
 				}
+				
+				back.setDel_flg("N");
 
 				documentMaster_Repo.save(back);
 
@@ -4727,5 +4738,15 @@ public class MainController {
 		} else {
 			return "File has not been successfully uploaded. Requires less than 128 KB size.";
 		}
+	}
+	
+	@RequestMapping(value = "DocRemove", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String DocRemove(@RequestParam(required = false) String unique_no) {
+
+		DocumentMaster_Entity uniqueid = documentMaster_Repo.findByUnique1(unique_no);
+		uniqueid.setDel_flg("Y");
+		//documentMaster_Repo.save(uniqueid);
+		return "Deleted Successfully.....";
 	}
 }
