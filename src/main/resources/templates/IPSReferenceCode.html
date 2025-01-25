@@ -367,7 +367,16 @@ label {
 										});
 					});
 </script>
+<script>
+    function adjustHeight() {
+        const cardBody = document.getElementById("cardBody");
+        const viewportHeight = window.innerHeight;
+        cardBody.style.maxHeight = `${viewportHeight * 0.95}px`; // Adjust 80% of the viewport height
+    }
 
+    window.addEventListener("resize", adjustHeight);
+    document.addEventListener("DOMContentLoaded", adjustHeight);
+</script>
 <body>
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager">
@@ -386,7 +395,7 @@ label {
 				</div>
 			</div>
 			<div>
-			<div style="max-height: 100vh; overflow-y: auto; border: 1px solid #ddd;">
+			<div  id="cardBody"   style="overflow-y: auto; border: 1px solid #ddd;">
 				<table
 					class="table table-striped table-bordered table-hover table-sm"
 					 style="table-layout: fixed; width: 100%;">

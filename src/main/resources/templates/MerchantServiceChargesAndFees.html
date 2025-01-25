@@ -32,7 +32,8 @@
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
-
+ <!-- Include the external JavaScript file -->
+    <script src="/js/ResponisiveHeight.js"></script>
 <style>
 .filterable .filters input[disabled] {
 	background-color: transparent;
@@ -498,6 +499,7 @@ label {
 										});
 					});
 </script>
+ 
 <body>
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager pt-3">
@@ -513,11 +515,11 @@ label {
 							th:if="${IPSRoleMenu.permissions}=='W'">Add Charge</button>
 					</div>
 				</div>
-				<div class="card-body p-0 ">
+				<div class="card-body p-0 " id="cardBody"   style="overflow-y: auto; border: 1px solid #ddd;">
 					<table
 						class="table table-striped table-bordered table-hover table-sm"
 						id="">
-						<thead>
+						<thead  style="table-layout: fixed; width: 100%;">
 							
 							<tr class="filters">
 								<th style="text-align: center"><input type="text"
@@ -628,6 +630,7 @@ label {
 						id="" onclick="home();">Back</button>
 				</div>
 			</div>
+			
 		</div>
 		<div th:if="${formmode}=='add'" class="content">
 			<div class="card">

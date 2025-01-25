@@ -32,7 +32,8 @@
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
-
+ <!-- Include the external JavaScript file -->
+    <script src="/js/ResponisiveHeight.js"></script>
 <style>
 .filterable .filters input[disabled] {
 	background-color: transparent;
@@ -542,8 +543,8 @@ label {
 						</div>
 						<table
 							class="table  table-bordered table-hover table-condensed table-sm"
-							id="" style="table-layout: fixed; width: 100%;">
-							<thead>
+							 id="cardBody"   style="overflow-y: auto; border: 1px solid #ddd;">
+							<thead style="position: sticky; top: 0;background-color: #f8f9fa; z-index: 1;">
 							
 								<tr class="filters">
 									<th style="text-align: center"><input type="text"
