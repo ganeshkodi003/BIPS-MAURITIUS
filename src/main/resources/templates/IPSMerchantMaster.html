@@ -36,8 +36,7 @@
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <link href="../static/css/custom-styles.css" rel="stylesheet">
-<script src="js/bootstrap411.js"></script>
-
+ 
 
 <style type="text/css">
 .rowDataField {
@@ -1293,6 +1292,8 @@ td {
 
 				// If all rows are valid, submit the form
 				if (valid) {
+					
+					submitfileEdit();
 					if ($("#BankandBranchedit").valid()) {
 						
 						SubmitSigMod();
@@ -5211,7 +5212,7 @@ td {
 		});
 
 		$(function () {
-			$("#invoicedate, #qrexpire, #brn_date").datepicker({
+			$("#invoicedate, #qrexpire").datepicker({
 				dateFormat: "dd-mm-yy"
 			});
 		});
@@ -6967,6 +6968,164 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+function rowaddEdit() {
+    var table = document.getElementById("click1");
+    var mrowCountcor = table.rows.length;
+
+    if (mrowCountcor <= 5) {
+        var row = table.insertRow();
+        var cell2 = row.insertCell();
+        var cell3 = row.insertCell();
+        var cell4 = row.insertCell();
+        var cell5 = row.insertCell();
+        var cell6 = row.insertCell();
+        var cell7 = row.insertCell();
+        var cell8 = row.insertCell();
+        var cell9 = row.insertCell();
+        var cell10 = row.insertCell(); 
+
+        // Dropdown for document type
+        cell2.innerHTML = `
+            <select name="docType" id="docType${mrowCountcor}" class="form-control form-control-sm" 
+                style="height: 26px; width: 200px;" onchange="updateRow(${mrowCountcor})">
+                <option value="">SELECT</option>
+                <option value="RDOC">REGISTRATION DOCUMENT</option>
+                <option value="BDOC">BUSINESS DOCUMENT</option>
+            </select>`;
+
+        // Placeholder for dynamic input or dropdown
+        cell3.innerHTML = `
+            <select name="docCode" id="docCode${mrowCountcor}" class="form-control form-control-sm" 
+                style="height: 23px; width: 150px" onchange="updateDescription1(${mrowCountcor})">
+                <option value="">SELECT</option>
+            </select>`;
+
+        // Placeholder for description
+        cell4.innerHTML = `
+            <input type="text" name="docDesc" id="docDesc${mrowCountcor}" class="form-control col-sm-12 uniform-input" readonly 
+                style="height: 23px; width: 150px">`;
+
+        // Remaining cells
+        cell5.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase() ;" name="uniqId" id="uniqId${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 23px; width: 150px">`;
+        cell6.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase();handleAddress(this);" name="docIssPlace" id="docIssPlace${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 23px; width: 150px">`;
+        cell7.innerHTML = `<input type="date" name="docIssDate" id="docIssDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
+        cell8.innerHTML = `<input type="date" name="docExpDate" id="docExpDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
+        cell9.innerHTML = `<input type="file" name="docFile" id="file${mrowCountcor}">`;
+        cell10.innerHTML = `<img src="${window.location.origin}/images/MinusIcon.png"  aria-hidden="true"
+			style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
+				id="deletefunction" onclick="rowdeleteforjs(this);" alt="Add"> `;
+        cell10.style.border = "none";
+        setDateLimits();
+    } else {
+        alert("You can only add up to 5 rows.");
+    }
+}
+
+    function rowdeleteforjs(ele){
+		  var row = ele.parentNode.parentNode;
+		    row.parentNode.removeChild(row);
+	 }
+    	function submitfileEdit() {
+    	 
+    		//var cif_id = document.getElementById("cif_id").value;
+    		//var rec_no = document.getElementById('numberone').textContent;
+    		
+    		let allFilled = true;
+    			$("#click1 tr").each(function () {
+    				if ($(this).find("input[name='document_type']").val() == "" ||
+    					$(this).find("input[name='docCode']").val() == "" ||
+    					$(this).find("input[name='docDesc']").val() == "" ||
+    					$(this).find("input[name='uniqId']").val() == "" ||
+    					$(this).find("input[name='docIssPlace']").val() == "" ||
+    					$(this).find("input[name='docIssDate']").val() == "" ||
+    					$(this).find("input[name='docExpDate']").val() == "") {
+    					allFilled = false; // Mark as not all fields are filled
+    					return false; // Exit the loop early
+    				}
+    			});
+
+    			if (!allFilled) {
+    				 $('#mypopup22').modal('show'); 
+    	             $("#popupmsg_body").text("Enter the Required Fields.."); 
+    	               
+    				return; // Exit the function if not all fields are filled
+    			}
+    			
+    			
+    		var appl_ref_no = document.getElementById("merchant_legal_id_n").value;
+    	 
+    		const dynamicValues = []; // Initialize the array here
+
+    		// Loop through each row in the tbody with id "click1"
+    		$("#click1 tr").each(function () {
+    			var row = {}; // Create an object to hold the data for this row
+
+    			// Get values from the current row
+    			row.doctype = $(this).find("select[name='docType']").val(); // Use select directly
+    			row.doccode = $(this).find("input[name='docCode']").val();
+    			row.doctypesesc = $(this).find("input[name='docDesc']").val();
+    			row.uniqueid = $(this).find("input[name='uniqId']").val();
+    			row.placeofissue = $(this).find("input[name='docIssPlace']").val();
+    			row.issuedate = $(this).find("input[name='docIssDate']").val();
+    			row.exprydate = $(this).find("input[name='docExpDate']").val();
+
+    			// Get the file input and extract the filename
+    			const fileInput = $(this).find("input[type='file']"); // Adjust selector as necessary
+    		 
+    			console.log(fileInput);
+    			if (fileInput.length > 0 && fileInput[0].files.length > 0) {
+    				const file = fileInput[0].files[0]; // Get the file object
+    				row.file = file; // Set the file object in the row
+    				row.filename = file.name; // Get the filename directly from the file object
+    		 
+    			}
+    			 if (row.doctype || row.doccode || row.doctypesesc || row.uniqueid || row.placeofissue || row.issuedate || row.exprydate || row.filename) {
+    		            dynamicValues.push(row); // Push the row object to the dynamicValues array
+    		        } 
+    		});
+    		console.log(dynamicValues);
+    		// AJAX request to submit data
+    		$.ajax({
+    			url: './multiline?appl_ref_no=' + appl_ref_no,
+    			data: JSON.stringify(dynamicValues),
+    			type: 'POST',
+    			contentType: 'application/json',
+    			success: function (data) {
+    				imageuploadFunction(data, dynamicValues, appl_ref_no);
+
+    			}
+    		});
+    	}
+    	
+    
+    	
+</script>
+<script>
+function rowdeleteDoc(ele) {
+ 
+	var row = ele.parentNode.parentNode;
+	var fifthCell = row.cells[3];
+    var unique_no = fifthCell.textContent || fifthCell.innerText; // Use either textContent or innerText
+    $.ajax({
+        url: './DocRemove?unique_no=' + encodeURIComponent(unique_no),
+        type: 'POST',
+        contentType: 'application/json',
+        success: function (data) {
+         $('#myModalpopup1').modal("toggle");
+		 $('#myModalpopup1 .modal-body').text("Deleted Successfully...");
+        }
+    });
+
+	
+	/* 	 
+
+	
+	    // Delete the specific row
+	    row.parentNode.removeChild(row); */
+	}
+	
+</script>
 <body onload=" onimageon();">
 	<div th:insert="MMenupage :: header"></div>
 	<div class="container-manager">
@@ -7524,7 +7683,7 @@ $(document).ready(function() {
 
 				</div> -->
 
-				<div class="card-body mb-0 pb-0 " style="max-height: 120vh; overflow-y: auto; border: 1px solid #ddd;">
+				<div class="card-body mb-0 pb-0 "  id="cardBody" style="overflow-y: auto; border: 1px solid #ddd;">
 					<form action="#" th:object="${branchDet}" method="POST"
 						name="merchantMaster" autocomplete="off" id="BankandBranch">
 						<div class="panels mb-0 pb-0">
@@ -7625,7 +7784,7 @@ $(document).ready(function() {
 										<div class="col-sm-3">
 											<input type="text" name="mer_partner" id="mer_partner"
 												autocomplete="off" maxlength="30"
-												onkeyup="this.value = this.value.toUpperCase();handleInUserName(this)"
+												onkeyup="this.value = this.value.toUpperCase();"
 												class="form-control form-control-sm">
 										</div>
 										<div class="col-sm-1"></div>
@@ -9022,7 +9181,7 @@ $(document).ready(function() {
 									<!--<button class="btn  p-2" type="button" 
 																				onclick="submitfile(this)">Submit</button>-->
 									<label></label>
-									<div class="card-footer mt-2 text-center padding-bottom:10px">
+									<div class="card-footer mt-2 text-center padding-bottom:10px" >
 										<button type="button" class="btn btn-sm  headerbutton "
 											data-dismiss="modal" onclick="home();">Home</button>
 										<button type="button" class="btn btn-sm  headerbutton "
@@ -9543,7 +9702,14 @@ $(document).ready(function() {
 						</div>
 					</form>
 				</div>
+		
+		
+		
 			</div>
+		
+		
+		
+		
 		</div>
 
 		<!--  ADD : FUNCTION : END -->
@@ -10085,7 +10251,7 @@ $(document).ready(function() {
 												</label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="contact_person1_email"
+												<input type="text" id="contact_person1_email" onkeyup="this.value = this.value.toUpperCase();"
 													name="contact_person1_email" maxlength="30"
 													autocomplete="off" class="form-control form-control-sm">
 											</div>
@@ -10096,7 +10262,7 @@ $(document).ready(function() {
 												</label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="contact_person2_email"
+												<input type="text" id="contact_person2_email" onkeyup="this.value = this.value.toUpperCase();"
 													name="contact_person2_email" maxlength="30"
 													autocomplete="off" class="form-control form-control-sm">
 											</div>
@@ -10109,7 +10275,7 @@ $(document).ready(function() {
 												</label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="contact_person3_email"
+												<input type="text" id="contact_person3_email" onkeyup="this.value = this.value.toUpperCase();"
 													name="contact_person3_email" maxlength="30"
 													autocomplete="off" class="form-control form-control-sm">
 											</div>
@@ -10120,7 +10286,7 @@ $(document).ready(function() {
 												</label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="contact_person4_email"
+												<input type="text" id="contact_person4_email" onkeyup="this.value = this.value.toUpperCase();"
 													name="contact_person4_email" maxlength="30"
 													autocomplete="off" class="form-control form-control-sm">
 											</div>
@@ -10133,7 +10299,7 @@ $(document).ready(function() {
 												</label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="contact_person5_email"
+												<input type="text" id="contact_person5_email" onkeyup="this.value = this.value.toUpperCase();"
 													name="contact_person5_email" maxlength="30"
 													autocomplete="off" class="form-control form-control-sm">
 											</div>
@@ -10144,7 +10310,7 @@ $(document).ready(function() {
 												</label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="contact_person6_email"
+												<input type="text" id="contact_person6_email" onkeyup="this.value = this.value.toUpperCase();"
 													name="contact_person6_email" maxlength="30"
 													autocomplete="off" class="form-control form-control-sm">
 											</div>
@@ -10359,7 +10525,7 @@ $(document).ready(function() {
 													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
-												<input type="email" id="emailaddress" name="email_address1"
+												<input type="email" id="emailaddress" name="email_address1" onkeyup="this.value = this.value.toUpperCase();"
 													class="form-control form-control-sm" maxlength="30"
 													autocomplete="off">
 											</div>
@@ -10368,7 +10534,7 @@ $(document).ready(function() {
 												<label for="alternate_email_id">Alternate Email ID </label>
 											</div>
 											<div class="col-sm-3">
-												<input type="email" id="alternateemailid"
+												<input type="email" id="alternateemailid" onkeyup="this.value = this.value.toUpperCase();"
 													name="alternate_email_id1"
 													class="form-control form-control-sm" maxlength="30"
 													autocomplete="off">
@@ -12375,7 +12541,7 @@ $(document).ready(function() {
 													</div> -->
 												</div>
 												<div class="table-responsive mt-2" style="overflow: auto;">
-													<table border="1" id="dynamicTable"
+													<table border="1" id="click1"
 														class="table table-bordered "
 														style="text-align: center; vertical-align: 22px; margin-top: 10px; font-size: 15px;">
 														<thead>
@@ -18462,12 +18628,12 @@ $(document).ready(function() {
 
 										<img th:src="@{/images/add.png}" aria-hidden="true"
 											style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-											onclick="rowadd()" alt="Add"> 
+											onclick="rowaddEdit()" alt="Add"> 
 									</div>
 									
 								</div>
 								<div class="table-responsive mt-2" style="overflow: auto;">
-									<table border="1" id="dynamicTableForEdit"
+									<table border="1" id="click1"
 										class="table table-bordered "
 										style="text-align: center; vertical-align: 22px; margin-top: 10px; font-size: 15px;">
 										<thead>
@@ -18531,8 +18697,7 @@ $(document).ready(function() {
 												<td style="border:none;background-color:none;"><img th:src="@{/images/MinusIcon.png}"
 											aria-hidden="true"
 											style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-											onchange="rowdeleteForDoc(this)" alt="Remove"></td>
-
+											onclick="rowdeleteDoc(this)" alt="Remove"></td>
 											</tr>
 										</tbody>
 									</table>
@@ -25045,11 +25210,23 @@ $(document).ready(function() {
 		        cell7.innerHTML = `<input type="date" name="docIssDate" id="docIssDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
 		        cell8.innerHTML = `<input type="date" name="docExpDate" id="docExpDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
 		        cell9.innerHTML = `<input type="file" name="docFile" id="file${mrowCountcor}">`;
+		        setDateLimits();
 		    } else {
 		        alert("You can only add up to 5 rows.");
 		    }
 		}
+		
+		function setDateLimits() {
+		    const today = new Date().toISOString().split('T')[0];
 
+		    // Apply limits to all dynamically created inputs
+		    const issueDateInputs = document.querySelectorAll('input[name="docIssDate"]');
+		    const expDateInputs = document.querySelectorAll('input[name="docExpDate"]');
+
+		    issueDateInputs.forEach(input => input.setAttribute('max', today)); // No future dates for issue date
+		    expDateInputs.forEach(input => input.setAttribute('min', today));  // No past dates for expiry date
+		}
+		
 		function updateRow(rowIndex) {
 		    var docTypeSelect = document.getElementById("docType" + rowIndex);
 		    var docCodeCell = document.getElementById("docCode" + rowIndex);
@@ -25795,6 +25972,35 @@ $(document).ready(function() {
             icon.innerHTML = '&#9660;';  // Change to down arrow when content is hidden
         }
     }
+</script>
+<script>
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0];
+
+    // Set the max date for 'issuedate' (no future dates)
+    document.getElementById('brn_date').setAttribute('max', today);
+    document.getElementById('docExpDate0').setAttribute('min', today);
+    document.getElementById('docExpDate1').setAttribute('min', today);
+    
+    // Set the min date for 'la_expiry_date' (no past dates)
+
+    document.getElementById('docIssDate0').setAttr ibute('max', today);
+    document.getElementById('docIssDate1').setAttribute('max', today);
+    
+ }
+
+   
+    
+</script>
+<script>
+    function adjustHeight() {
+        const cardBody = document.getElementById("cardBody");
+        const viewportHeight = window.innerHeight;
+        cardBody.style.maxHeight = `${viewportHeight * 1.1}px`; // Adjust 80% of the viewport height
+    }
+
+    window.addEventListener("resize", adjustHeight);
+    document.addEventListener("DOMContentLoaded", adjustHeight);
 </script>
 
 </html>

@@ -4749,7 +4749,7 @@ public class MainController {
 
 		DocumentMaster_Entity uniqueid = documentMaster_Repo.findByUnique1(unique_no);
 		uniqueid.setDel_flg("Y");
-		//documentMaster_Repo.save(uniqueid);
+		documentMaster_Repo.save(uniqueid);
 		return "Deleted Successfully.....";
 	}
 }
