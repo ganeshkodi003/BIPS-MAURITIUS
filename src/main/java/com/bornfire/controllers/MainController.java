@@ -4356,14 +4356,16 @@ public class MainController {
 				if (!file.get(i).getContentType().startsWith("image/")) {
 					// For non-image files (PDF, Excel, etc.), store the raw file bytes
 					back.setUpd_file(fileBytes);
+					back.setDel_flg("N");
 				} else {
 					// For images, use the dataURL if present
 					String docString = dataURL.get(i);
 					byte[] document = docString.getBytes(); // Handle dataURL for images
 					back.setUpd_file(document);
+					back.setDel_flg("N");
 				}
 				
-				back.setDel_flg("N");
+				
 
 				documentMaster_Repo.save(back);
 
@@ -4429,6 +4431,7 @@ public class MainController {
 			bdcm.setIssue_date(dynamic.getIssuedate());
 			bdcm.setExpiry_date(dynamic.getExprydate());
 			bdcm.setMerchant_id(appl_ref_no);
+			bdcm.setDel_flg("N");
 			documentMaster_Repo.save(bdcm);
 			list_of_bacp_record.add(bdcm);
 		}

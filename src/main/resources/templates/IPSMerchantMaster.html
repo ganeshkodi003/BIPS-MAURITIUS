@@ -7468,13 +7468,13 @@ $(document).ready(function() {
 					<div class=""
 						style="display: flex; justify-content: center; align-items: center; position: relative; gap: 10px;"
 						id="tabs">
-						<div class="row formline p-2">
-							<h4
+						<div class="row formline p-2"> 
+							<h4 class="headerh6"
 								style="color: white; font-size: 1.2rem; margin-right: 20px; margin-left: 10px; margin-top: 10px; position: absolute; left: 10px;">
 								Merchant Master - Add</h4>
 							<div>
 								<button class="tablinks" id="smooth1View"
-									style="width: 200px; height: 40px; background-color: #f26223; color: #000080; border: #f16123; font-weight: 600; font-size: 1.2rem; font-weight: bold;">MAIN</button>
+									style="width: 200px; height: 40px; background-color: #f26223; color: #000080; border: #f16123; font-weight: 600; font-size: 1.1rem; font-weight: bold;">MAIN</button>
 							</div>
 							<div style="margin-left: 10px">
 								<button class="tablinks" id="smooth2View"
@@ -7524,20 +7524,23 @@ $(document).ready(function() {
 
 				</div> -->
 
-				<div class="card-body mb-0 pb-0 ">
+				<div class="card-body mb-0 pb-0 " style="max-height: 120vh; overflow-y: auto; border: 1px solid #ddd;">
 					<form action="#" th:object="${branchDet}" method="POST"
 						name="merchantMaster" autocomplete="off" id="BankandBranch">
 						<div class="panels mb-0 pb-0">
 							<div class="panel p-0" id="one-panel">
 								<div class="card-body pt-0 mb-0 p-0">
-									<div class=" "
-										style="background-color: white; color: #332d2d; display: flex;">
+									<div class=" " 
+			                    	onclick="toggleContent('merchantcontent')"
+										style="background-color: white; color: #332d2d; display: flex; cursor: pointer;">
 										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
+											<h6 style="font-size: 1.0rem; font-weight: bold;">MERCHANT
 												DETAILS</h6>
 										</div>
+										<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
 									</div>
 									<label></label>
+									<div id="merchantcontent"  style="display: none;">
 									<div class="row formline mt-2">
 										<label class="col-sm-2">Merchant ID <span
 											style="font-size: 20px; color: red">*</span></label>
@@ -7753,18 +7756,19 @@ $(document).ready(function() {
 										</div>
 
 									</div>
-
-									<label></label>
-
-									<div
-										style="background-color: white; color: #332d2d; display: flex;">
-										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
-												CONTACT DETAILS</h6>
-										</div>
 									</div>
 									<label></label>
 
+									<div onclick="toggleContent('contactcontent')" class="mt-1"
+										style="background-color: white; color: #332d2d; display: flex; cursor: pointer">
+										<div class="float-left">
+											<h6 style="font-size: 1.0rem; font-weight: bold;">MERCHANT
+												CONTACT DETAILS</h6>
+										</div>
+										<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
+									</div>
+									<label></label>
+								<div id="contactcontent" style="display: none;">
 									<table class=" mt-2" style="width: 100%;" id="merchant1">
 										<thead>
 											<tr>
@@ -7862,6 +7866,7 @@ $(document).ready(function() {
 											</tr>
 										</tbody>
 									</table>
+									</div>
 									<!-- <div class="card-header text-center">
 
 										<button type="button" class="btn btn-sm  headerbutton"
@@ -7869,16 +7874,17 @@ $(document).ready(function() {
 											Check</button>
 
 									</div>
- -->
-									<label></label>
-									<div class=" mt-2"
-										style="background-color: white; color: #332d2d; display: flex;">
+ --> <label></label>
+									<div class=" mt-1" onclick="toggleContent('outletcontent')"
+										style="background-color: white; color: #332d2d; display: flex;cursor: pointer;">
 										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">OUTLET
+											<h6 style="font-size: 1.0rem; font-weight: bold;">OUTLET
 												DETAILS</h6>
 										</div>
+										<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
 									</div>
 									<label></label>
+									<div id="outletcontent" style="display: none;">
 									<div class="row formline  mt-2">
 										<label class="col-sm-2">Merchant BIPS Number <span
 											style="font-size: 20px; color: red">*</span></label>
@@ -7989,7 +7995,7 @@ $(document).ready(function() {
 												id="merchant_type_qr_accp_vali" class="reqError"></span>
 										</div>
 									</div>
-									<label></label>
+									</div> 
 									<!--<div class="row formline" style="display: none;">
 										<label class="col-sm-2">Static QR</label>
 										<div class="col-sm-3">
@@ -8004,13 +8010,15 @@ $(document).ready(function() {
 										</div>
 									</div>-->
 
-									<div class=" mt-2"
-										style="background-color: white; color: #332d2d; display: flex;">
+									<div class=" mt-2" onclick="toggleContent('maucascontent')"
+										style="background-color: white; color: #332d2d; display: flex;cursor: pointer;">
 										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">MAUCAS</h6>
+											<h6 style="font-size: 1.0rem; font-weight: bold;">MAUCAS</h6>
 										</div>
+										<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
 									</div>
 									<label></label>
+									<div id="maucascontent" style="display: none;">
 									<div class="row formline mt-2 ">
 										<label class="col-sm-2">Tip or Convenience Indicator </label>
 										<div class="col-sm-3">
@@ -8088,14 +8096,17 @@ $(document).ready(function() {
 											</select>
 										</div>
 									</div>
-									<div class=" mt-2"
-										style="background-color: white; color: #332d2d; display: flex;">
+									</div>
+									<div class=" mt-2" onclick="toggleContent('upicontent')"
+										style="background-color: white; color: #332d2d; display: flex;cursor: pointer;">
 										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">UPI</h6>
+											<h6 style="font-size: 1.0rem; font-weight: bold;">UPI</h6>
 										</div>
+										<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
 									</div>
 									<!--  div for upi fields -->
 									<label></label>
+									<div id="upicontent" style="display: none;">
 									<div class="row formline  mt-2">
 										<label class="col-sm-2 d-flex">Version <span
 											id="version_id" th:if="${formmode}=='add'"
@@ -8583,15 +8594,18 @@ $(document).ready(function() {
 												name="value_conv_fees_upi" autocomplete="off" readonly>
 										</div>
 									</div>
-									<label></label>
-									<div class="pt-2 pb-2  mt-2"
-										style="color: #332d2d; display: flex; width: 95%; justify-content: space-between;">
+									</div> 
+									<div class="pt-2 pb-2" onclick="toggleContent('documentcontent')"
+										style="color: #332d2d; display: flex; width: 100%; justify-content: space-between; cursor: pointer;">
 										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">DOCUMENT
+											<h6 style="font-size: 1.0rem; font-weight: bold;">DOCUMENT
 												DETAILS</h6>
 										</div>
-										<div class="float-right">
-
+									<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> 
+									</div>
+ 
+									<div class="table-responsive mt-2" style="overflow: auto;display: none;"  id="documentcontent">
+										<div class="float-right mb-2"> 
 											<img th:src="@{/images/add.png}" aria-hidden="true"
 												style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
 												onclick="rowadd()" alt="Add"> <img
@@ -8599,105 +8613,6 @@ $(document).ready(function() {
 												style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
 												onclick="rowdelete(this)" alt="Remove">
 										</div>
-									</div>
-
-
-									<!-- <div class="table-responsive " style="overflow: auto;">
-										<table border="1" id="dynamicTable" class="table table-bordered SlabRateTable"
-											style="text-align: center; vertical-align: 22px; ; font-size: 15px;">
-											<thead>
-												<tr>
-
-													<th>Document Type</th>
-													<th>Document Code</th>
-													<th>Document Description</th>
-													<th>Unique ID</th>
-													<th>Place of Issue</th>
-													<th>Issue Date</th>
-													<th>Expiry Date</th>
-													<th>Document Upload</th>
-											<tbody id="click1">
-												<tr>
-													<td><select id="docType0" name="docType" onchange="zeroth_change()"
-															class="uniform-input pl-2" style="height: 24px">
-															<option value="">SELECT</option>
-															<option value="BRN">CUSTOMER-CORPORATE-BRN</option>
-															<option value="COI">CUSTOMER-CORPORATE-COI</option>
-															<option value="AGM">CUSTOMER-CORPORATE-AGM</option>
-															<option value="DOC">CUSTOMER-CORPORATE-DOC</option>
-														</select></td>
-
-
-													<td><input type="text" id="docCode0" name="docCode"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															maxlength="10" class="uniform-input" autocomplete="off">
-													</td>
-
-													<td><input type="text" id="docDesc0" name="docDesc"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="uniform-input" autocomplete="off"></td>
-													<td><input type="text" id="uniqId0" maxlength="13"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															name="uniqId" class="uniform-input" autocomplete="off"></td>
-													<td><input type="text" id="docIssPlace0"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															name="docIssPlace" maxlength="25" class="uniform-input"
-															autocomplete="off"></td>
-													<td><input type="date" id="docIssDate0"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															name="docIssDate" class="uniform-input" autocomplete="off">
-													</td>
-													<td><input type="date" id="docExpDate0"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															name="docExpDate" class="uniform-input" autocomplete="off">
-													</td>
-													<td class="span2"><input id="file0" type="file"
-															onchange="readURL(this);"></td>
-												</tr>
-												<tr>
-
-													<td><select id="docType1" name="docType" onchange="first_change()"
-															class="uniform-input pl-2" style="height: 24px">
-															<option value="">SELECT</option>
-															<option value="BRN">CUSTOMER-CORPORATE-BRN</option>
-															<option value="COI">CUSTOMER-CORPORATE-COI</option>
-															<option value="AGM">CUSTOMER-CORPORATE-AGM</option>
-															<option value="DOC">CUSTOMER-CORPORATE-DOC</option>
-														</select></td>
-													<td><input type="text" id="docCode1" name="docCode"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															maxlength="10" class="uniform-input" autocomplete="off" />
-													</td>
-													<td><input type="text" id="docDesc1" name="docDesc"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="uniform-input" autocomplete="off"></td>
-													<td><input type="text" id="uniqId1" name="uniqId"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															class="uniform-input" autocomplete="off"></td>
-													<td><input type="text" id="docIssPlace1"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															name="docIssPlace" class="uniform-input" autocomplete="off">
-													</td>
-													<td><input type="date" id="docIssDate1"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															name="docIssDate" class="uniform-input" autocomplete="off">
-													</td>
-													<td><input type="date" id="docExpDate1"
-															onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-															name="docExpDate" class="uniform-input" autocomplete="off">
-													</td>
-													<td><input type="file" id="file1" onchange="readURL(this);"></td>
-
-												</tr>
-											</tbody>
-										</table>
-
-
-									</div> -->
-
-
-									<!-- BHARATH1 -->
-									<div class="table-responsive mt-2" style="overflow: auto;">
 										<table border="1" id="dynamicTable"
 											class="table table-bordered "
 											style="text-align: center; vertical-align: 22px;; font-size: 15px;">
@@ -8797,20 +8712,19 @@ $(document).ready(function() {
 												</tr>
 
 											</tbody>
-										</table>
-
-
+										</table> 
 									</div>
 
 
-									<div class=" mt-2"
-										style="background-color: white; color: #332d2d; display: flex;">
+									<div class=" mt-1" onclick="toggleContent('signaturecontent')"
+										style="background-color: white; color: #332d2d; display: flex; cursor: pointer;">
 										<div class="float-left">
-											<h6 style="font-size: 1.2rem; font-weight: bold;">SIGNATURE
+											<h6 style="font-size: 1.0rem; font-weight: bold;">SIGNATURE
 												DETAILS</h6>
 										</div>
+										<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
 									</div>
-									<div class="mt-2 ">
+									<div class="mt-2 " id="signaturecontent" style="display: none;">
 										<table class="" id="sign"
 											style="margin-bottom: 0px; font-size: initial; border: none; width: 100%">
 											<tr>
@@ -9124,14 +9038,16 @@ $(document).ready(function() {
 							<div class="panel" id="four1-panel" style="display: none">
 								<div>
 									<div class="card-body pt-0">
-										<div class=" "
-											style="background-color: white; color: #332d2d; display: flex;">
+										<div class=" " onclick="toggleContent('bankcontent')"
+											style="background-color: white; color: #332d2d; display: flex; cursor: pointer;">
 											<div class="float-left">
-												<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
+												<h6 style="font-size: 1.0rem; font-weight: bold;">MERCHANT
 													BANK DETAILS</h6>
 											</div>
+											<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
 										</div>
 										<label></label>
+										<div id="bankcontent" style="display: block;">
 										<div class="row formline mt-2">
 											<label class="col-sm-2">Bank Name 1<span
 												style="color: red; font-size: 20px">*</span></label>
@@ -9527,17 +9443,20 @@ $(document).ready(function() {
 													name="hold_amount2" autocomplete="off">
 											</div>
 										</div>
+										</div>
 										<label></label>
 										<div class="row mb-3  mt-2">
 											<div class="col-md-12 column">
-												<div class=" "
-													style="background-color: white; color: #332d2d; display: flex;">
+												<div class=" " onclick="toggleContent('feescontent')"
+													style="background-color: white; color: #332d2d; display: flex;cursor: pointer;">
 													<div class="float-left">
-														<h6 style="font-size: 1.2rem; font-weight: bold;">MERCHANT
+														<h6 style="font-size: 1.0rem; font-weight: bold;">MERCHANT
 															FEES DETAILS</h6>
 													</div>
+													<span class="toggle-icon" style="margin-left: auto; font-size: 20px;">&#9660;</span> <!-- Down arrow icon initially -->
 												</div>
 												<label></label>
+												<div id="feescontent" style="display: block;">
 												<table class="mt-2" style="width: 98%"
 													id="Merchant_detials2">
 													<tr>
@@ -9595,6 +9514,7 @@ $(document).ready(function() {
 														</tr>
 													</tbody>
 												</table>
+												</div>
 												<label></label>
 											</div>
 										</div>
@@ -9633,9 +9553,9 @@ $(document).ready(function() {
 		<div th:if="${formmode}=='MerMastadd'" class="content">
 			<div class="card">
 				<div class="card-header d-flex justify-content-around p-1">
-					<div class="float-left d-flex"
-						style="color: white; font-size: 1.5rem; justify-items: center; align-items: center;">
-						Merchant Master</div>
+					<div class="float-left d-flex headerh6 ml-3"
+						style="color: white; font-size: 1.2rem; justify-items: center; align-items: center;">
+						Merchant Master</div> 
 					<div class="row formline d-flex justify-content-around "
 						style="width: 70%;" id="tabs">
 						<div>
@@ -9699,7 +9619,7 @@ $(document).ready(function() {
 										style="background-color: white; color: #332d2d; display: flex;">
 										<div class="float-left">
 											<h6
-												style="font-size: 1.2rem; font-weight: bold; margin-left: 100px">UNIT
+												style="font-size: 1.0rem; font-weight: bold; margin-left: 100px">UNIT
 												MANAGEMENT</h6>
 										</div>
 									</div>
@@ -10255,7 +10175,7 @@ $(document).ready(function() {
 										style="background-color: white; color: #332d2d; display: flex;">
 										<div class="float-left">
 											<h6
-												style="font-size: 1.2rem; font-weight: bold; margin-left: 100px">USER
+												style="font-size: 1.0rem; font-weight: bold; margin-left: 100px">USER
 												MANAGEMENT</h6>
 										</div>
 										<!--<div class="btn-group nav-buttons float-right">
@@ -10586,7 +10506,7 @@ $(document).ready(function() {
 										style="background-color: white; color: #332d2d; display: flex;">
 										<div class="float-left">
 											<h6
-												style="font-size: 1.2rem; font-weight: bold; margin-left: 100px">DEVICE
+												style="font-size: 1.0rem; font-weight: bold; margin-left: 100px">DEVICE
 												MANAGEMENT</h6>
 										</div>
 									</div>
@@ -25861,6 +25781,20 @@ $(document).ready(function() {
 
 
 	}
+</script>
+<script>
+    function toggleContent(contentId) {
+        const content = document.getElementById(contentId);
+        const icon = document.querySelector(`#${contentId} + .toggle-icon`);  // Select the icon adjacent to the content
+        
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+            icon.innerHTML = '&#9650;';  // Change to up arrow when content is visible
+        } else {
+            content.style.display = 'none';
+            icon.innerHTML = '&#9660;';  // Change to down arrow when content is hidden
+        }
+    }
 </script>
 
 </html>
