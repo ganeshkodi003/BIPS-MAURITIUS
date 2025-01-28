@@ -31,7 +31,7 @@ public class BIPS_Mer_Device_Management_Entity {
 	private String device_status;
 	private String disable_flag;
 	private String entry_flag;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	 @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date entry_time;
 	private String entry_user;
 	private String face_recognition_enabled;
@@ -42,7 +42,7 @@ public class BIPS_Mer_Device_Management_Entity {
 	private String merchant_name;
 	private String merchant_user_id;
 	private String modify_flag;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	 @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date modify_time;
 	private String modify_user;
 	private String remark;
@@ -53,7 +53,7 @@ public class BIPS_Mer_Device_Management_Entity {
 	private String unit_type_d;
 	private String user1;
 	private String user2;
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	 @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date verify_time;
 	private String verify_user;
 	private String del_flg;

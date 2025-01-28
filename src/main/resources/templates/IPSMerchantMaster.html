@@ -10966,7 +10966,7 @@ function rowdeleteDoc(ele) {
 												<label for="remarks">Remarks</label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="remarks" name="remarks"
+												<input type="text" id="remark" name="remark"
 													th:if="${formmode}=='MerMastadd'" maxlength="30"
 													autocomplete="off"
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
@@ -17019,21 +17019,21 @@ function rowdeleteDoc(ele) {
 									<label for="remarks">Remarks</label>
 								</div>
 								<div class="col-sm-3">
-									<input type="text" id="remarks" name="remarks"
+									<input type="text" id="remark" name="remark"
 										th:if="${formmode}=='DevicemAdd'" autocomplete="off"
 										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 										class="form-control form-control-sm" required> <input
-										type="text" id="remarks" name="remarks"
-										th:if="${formmode}=='MerMastvie'"
+										type="text" id="remarks" name="remark"
+										th:if="${formmode}=='MerMastvie'" th:value="${Merdevicelist.remark}"
 										class="form-control form-control-sm" maxlength="30"
 										autocomplete="off" readonly> <input type="text"
-										id="remarks" name="remarks"
-										th:value="${Merdevicelist.remarks}"
+										id="remarks" name="remark"
+										th:value="${Merdevicelist.remark}"
 										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-										th:if="${formmode}=='DevicemEdit'"
+										th:if="${formmode}=='DevicemEdit'" 
 										class="form-control form-control-sm" maxlength="30"
-										autocomplete="off"> <input type="text" id="remarks"
-										name="remarks" th:value="${Merdevicelist.remarks}"
+										autocomplete="off"> <input type="text" id="remark"
+										name="remark" th:value="${Merdevicelist.remark}"
 										th:if="${formmode}=='DevicemVerify'"
 										class="form-control form-control-sm" autocomplete="off"
 										readonly>
@@ -17165,7 +17165,7 @@ function rowdeleteDoc(ele) {
 										autocomplete="off" readonly> <input type="text"
 										id="modify_time" th:if="${formmode}=='DevicemEdit'"
 										th:value="${#dates.format(Merdevicelist?.modify_time,'dd-MM-yyyy HH:mm')}"
-										class="form-control form-control-sm" name="modify_time"
+										class="form-control form-control-sm" name="modify_time" 
 										autocomplete="off" readonly> <input type="text"
 										id="modify_time" th:if="${formmode}=='DevicemVerify'"
 										th:value="${#dates.format(Merdevicelist?.modify_time,'dd-MM-yyyy HH:mm')}"
