@@ -16,6 +16,8 @@
 <script src="/webjars/datatables/1.10.19/js/jquery.dataTables.min.js" th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
 <script src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js" th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
+<script src="js/ResponisiveHeight.js"></script>
+
 <style>
 
 .filterable .filters input[disabled] {
@@ -74,13 +76,17 @@ label {
 	min-width: 8rem !important;
 }
 
- 
-.table tbody td {
-	white-space: nowrap;
-	line-height: 10px!important;
-	vertical-align: middle;
+.line-spacing {
+       line-height: 1.5; /* Adjust the value for more or less spacing */
+       white-space: pre-wrap; /* Ensures the text respects line breaks */
+   }
+
+#Fromdate {
+    background-color: transparent;  /* Remove background color */
+    border: none;  
 }
 </style>
+
 </head>
 
 <script>
@@ -235,7 +241,6 @@ label {
 		});
 	}
 </script>
-
 <script type="text/javascript">
 $(document)
 .ready(
@@ -315,8 +320,13 @@ $(document)
 			<h4 class="headerh6" th:text="${menuname}"></h4>
 				<div class="ml-auto d-flex align-items-center">
 					 <div class="d-flex align-items-center mr-3">
-                        <label for="Fromdate" class="mr-2 col-sm-7">Search records By Date:</label>
-                        <input type="text" id="Fromdate" th:value="${Fromdate}" class="form-control form-control-sm" name="cust_id" autocomplete="off" readonly />
+						<h3 for="Fromdate" class="mr-2 ml-2 col-sm-7" style="color:white">Search Records by Date:</h3>
+						<div>
+													<input class="form-control form-control-sm text-white" type="text" name="cust_id"
+														id="Fromdate" onchange="getChargeBackRecords();"
+														th:value="${Fromdate}"
+														readonly>
+														</div>
                     </div>
 					<div class="dropdown btnDownload">
 						<button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" title="Action"
@@ -338,13 +348,13 @@ $(document)
 				</div>
 				
 			</div>
-			<div class="card-body p-0">
+			<div class="card-body p-0 mt-3" id="cardBody"   style="overflow-y: auto; border: 1px solid #ddd;">
 
 				<table class="table table-striped table-bordered table-hover table-sm" id="" style="table-layout: fixed; width: 100%;">
-					<thead>
+					<thead style="position: sticky; top: 0;background-color: #f8f9fa; z-index: 1;">
 						<tr class="filters">
 						
-							<th style="text-align: center"><input type="text"
+							<th style="text-align: center "><input type="text"
 								class="form-control font-weight-bold" placeholder="Audit Date"
 								disabled></th>
 							<th style="text-align: center"><input type="text"
@@ -378,26 +388,39 @@ $(document)
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="auditdata : ${AuditList}" class="userlist">
-							<td ><span th:text="${#dates.format(auditdata?.audit_date, 'dd-MM-yyyy').toUpperCase()}"></span></td>
-							<td ><span th:text="${auditdata?.audit_table != null ? auditdata?.audit_table.toUpperCase() : ''}"></span></td>
-							<td ><span th:text="${auditdata?.func_code != null ? auditdata?.func_code.toUpperCase() : ''}"></span></td>
-							<td><span th:text="${auditdata?.entry_user != null ? auditdata?.entry_user.toUpperCase() : ''}"></span></td>
-							<td ><span th:text="${#dates.format(auditdata?.entry_time, 'dd-MM-yyyy HH:mm a').toUpperCase()}"></span></td>
-							<td><span th:if="${auditdata?.auth_user} != ''" th:text="${auditdata?.auth_user}"></span> <span th:if="${auditdata?.auth_user} == null" style='color: red'></span></td>
-							<td ><span th:each="message:${auditdata.fieldName}" th:text="${message.toUpperCase()}"></span></td>
-							<td style="line-height: 1.6; white-space: pre-wrap; text-align: left;">
-								<!-- Remove square brackets and convert to uppercase --> <span
-								th:utext="${#strings.arrayJoin(#strings.arraySplit(#strings.replace(#strings.replace(auditdata.oldvalue, '[', ''), ']', ''), ','), ',<br/>').toUpperCase()}"
-							></span>
-							</td>
-							<td style="line-height: 1.6; white-space: pre-wrap; text-align: left;">
-								<!-- Remove square brackets and convert to uppercase --> <span
-								th:utext="${#strings.arrayJoin(#strings.arraySplit(#strings.replace(#strings.replace(auditdata.newvalue, '[', ''), ']', ''), ','), ',<br/>').toUpperCase()}"
-							></span>
-							</td>
-							<td ><span th:text="${auditdata?.remarks != null ? auditdata?.remarks.toUpperCase() : ''}"></span></td>
-						</tr>
+					    <tr th:each="auditdata : ${AuditList}" class="userlist">
+					        <td>
+					            <span class="line-spacing" th:text="${#dates.format(auditdata?.audit_date, 'dd-MM-yyyy').toUpperCase()}"></span>
+					        </td>
+					        <td>
+					            <span class="line-spacing" th:text="${auditdata?.audit_table != null ? auditdata?.audit_table.toUpperCase() : ''}"></span>
+					        </td>
+					        <td>
+					            <span class="line-spacing" th:text="${auditdata?.func_code != null ? auditdata?.func_code.toUpperCase() : ''}"></span>
+					        </td>
+					        <td>
+					            <span class="line-spacing" th:text="${auditdata?.entry_user != null ? auditdata?.entry_user.toUpperCase() : ''}"></span>
+					        </td>
+					        <td>
+					            <span class="line-spacing" th:text="${#dates.format(auditdata?.entry_time, 'dd-MM-yyyy HH:mm a').toUpperCase()}"></span>
+					        </td>
+					        <td>
+					            <span class="line-spacing" th:if="${auditdata?.auth_user} != ''" th:text="${auditdata?.auth_user}"></span>
+					            <span class="line-spacing" th:if="${auditdata?.auth_user} == null" style="color: red"></span>
+					        </td>
+					        <td>
+					            <span class="line-spacing" th:each="message : ${auditdata.fieldName}" th:text="${message.toUpperCase()}"></span>
+					        </td>
+					        <td style="white-space: pre-wrap; text-align: left;">
+					            <span class="line-spacing" th:utext="${#strings.arrayJoin(#strings.arraySplit(#strings.replace(#strings.replace(auditdata.oldvalue, '[', ''), ']', ''), ','), ',<br/>').toUpperCase()}"></span>
+					        </td>
+					        <td style="white-space: pre-wrap; text-align: left;">
+					            <span class="line-spacing" th:utext="${#strings.arrayJoin(#strings.arraySplit(#strings.replace(#strings.replace(auditdata.newvalue, '[', ''), ']', ''), ','), ',<br/>').toUpperCase()}"></span>
+					        </td>
+					        <td>
+					            <span class="line-spacing" th:text="${auditdata?.remarks != null ? auditdata?.remarks.toUpperCase() : ''}"></span>
+					        </td>
+					    </tr>
 					</tbody>
 				</table>
 			</div>

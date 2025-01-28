@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css"
 	href="/webjars/datatables/1.10.19/css/jquery.dataTables.min.css"
 	th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}">
-
 <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 <script src="/webjars/popper.js/1.14.7/umd/popper.min.js"
@@ -32,6 +31,7 @@
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
+<script src="js/ResponisiveHeight.js"></script> 
 
 <style>
 .filterable .filters input[disabled] {
@@ -137,7 +137,6 @@ label {
 }
 </style>
 </head>
-
 
 <script th:inline="javascript">
 
@@ -527,10 +526,10 @@ $(document)
 					</div>
 
 				</div>
-				<div class="card-body p-0">
+				<div class="card-body p-0 mt-3" id="cardBody"   style="overflow-y: auto; border: 1px solid #ddd;">
 
 					<table class="table table-striped table-bordered table-hover table-sm" >
-						<thead>
+						<thead style="position: sticky; top: 0;background-color: #f8f9fa; z-index: 1;">
 							
 							<tr class="filters">
 
@@ -801,9 +800,8 @@ $(document)
 			</div>
 		</div>
 	</div>
-
 	<!-- Model Box  -->
-
+	
 	<div class="modal fade" id="myModalpopup1" data-backdrop="static"
 		data-keyboard="false" style="background: #000000b0;"
 		aria-hidden="true">
