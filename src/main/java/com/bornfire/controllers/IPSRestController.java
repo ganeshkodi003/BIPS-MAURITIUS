@@ -563,9 +563,13 @@ public class IPSRestController {
 
 		SimpleDateFormat dateFormatWithMonthName = new SimpleDateFormat("dd-MMM-yyyy");
 		Date currentDate = new Date();
+		String FromDateRef = null ;
 		String currentDateRef = dateFormatWithMonthName.format(currentDate).toUpperCase();
 		String valueDateRef = dateFormatWithMonthName.format(valueDate).toUpperCase();
-		String FromDateRef = dateFormatWithMonthName.format(FromDate).toUpperCase();
+        if (FromDate != null) {
+        	FromDateRef =	dateFormatWithMonthName.format(FromDate).toUpperCase();
+        }
+        
 		List<BIPS_Outward_Trans_Monitoring_Entity> records = new ArrayList<>();
 		/*
 		 * if (currentDateRef.equals(valueDateRef)) { records =

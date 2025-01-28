@@ -36,6 +36,7 @@
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <link href="../static/css/custom-styles.css" rel="stylesheet">
+ <script src="js/ResponisiveHeight.js"></script>
  
 
 <style type="text/css">
@@ -6984,7 +6985,7 @@ function rowaddEdit() {
         var cell8 = row.insertCell();
         var cell9 = row.insertCell();
         var cell10 = row.insertCell(); 
-
+       
         // Dropdown for document type
         cell2.innerHTML = `
             <select name="docType" id="docType${mrowCountcor}" class="form-control form-control-sm" 
@@ -7012,10 +7013,12 @@ function rowaddEdit() {
         cell7.innerHTML = `<input type="date" name="docIssDate" id="docIssDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
         cell8.innerHTML = `<input type="date" name="docExpDate" id="docExpDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
         cell9.innerHTML = `<input type="file" name="docFile" id="file${mrowCountcor}">`;
-        cell10.innerHTML = `<img src="${window.location.origin}/images/MinusIcon.png"  aria-hidden="true"
-			style="font-size: 23px; cursor: pointer; width: 20px; height: 20px;"
-				id="deletefunction" onclick="rowdeleteforjs(this);" alt="Add"> `;
+        cell10.innerHTML = `<img src="/IPSAdmin/images/MinusIcon.png"
+            style="cursor: pointer; width: 20px; height: 20px;" 
+            onclick="rowdeleteforjs(this);">`;
+
         cell10.style.border = "none";
+        
         setDateLimits();
     } else {
         alert("You can only add up to 5 rows.");
@@ -7102,6 +7105,10 @@ function rowaddEdit() {
     	
 </script>
 <script>
+    const minusIconPath = /*[[${'/images/MinusIcon.png'}]]*/ '/images/MinusIcon.png';
+</script>
+
+<script>
 function rowdeleteDoc(ele) {
  
 	var row = ele.parentNode.parentNode;
@@ -7177,11 +7184,11 @@ function rowdeleteDoc(ele) {
 						</table>
 					</div>
 
-					<div th:if="${not #lists.isEmpty(bankDetail)}">
+					<div th:if="${not #lists.isEmpty(bankDetail)}" id="cardBody"  style="overflow-y: auto; border: 1px solid #ddd;">
 						<table
 													class="table table-striped table-bordered table-hover table-sm"
-													id="" style="table-layout: fixed; width: 100%;">
-													<thead>
+													 style="table-layout: fixed; width: 100%;">
+													<thead style="position: sticky; top: 0;background-color: #f8f9fa; z-index: 1;">
 
 														<tr class="filters">
 															<th style="text-align: center"><input type="text"
@@ -19125,7 +19132,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="detailed_address2"
 											th:value="${branchDet?.detailed_address2}"
 											class="form-control form-control-sm" value
-											name="detailed_address2" autocomplete="off" readonly>
+											name="detailed_address2" autocomplete="off" readonly> 
 									</div>
 								</div>
 								<label></label> 
@@ -19135,7 +19142,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="lien_amount1"
 											th:value="${branchDet?.lien_amount1}"
 											class="form-control form-control-sm" name="lien_amount1"
-											autocomplete="off" readonly>
+											autocomplete="off"  >
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Lien Amount 2</label>
@@ -19143,7 +19150,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="lien_amount2"
 											th:value="${branchDet?.lien_amount2}"
 											class="form-control form-control-sm" name="lien_amount2"
-											autocomplete="off" readonly>
+											autocomplete="off"  >
 									</div>
 								</div>
 								<label></label>
@@ -19153,7 +19160,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="hold_amount1"
 											th:value="${branchDet?.hold_amount1}"
 											class="form-control form-control-sm" name="hold_amount1"
-											autocomplete="off" readonly>
+											autocomplete="off"  >
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Hold Amount 2</label>
@@ -19161,7 +19168,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="hold_amount2"
 											th:value="${branchDet?.hold_amount2}"
 											class="form-control form-control-sm" name="hold_amount1"
-											autocomplete="off" readonly>
+											autocomplete="off"  >
 									</div>
 								</div>
 								<label></label>
@@ -19171,7 +19178,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="next_settlementdate1"
 											th:value="${#dates.format(branchDet?.next_settlementdate1,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
-											name="next_settlementdate1" autocomplete="off" readonly>
+											name="next_settlementdate1" autocomplete="off"  >
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Next Settlement date 2</label>
@@ -19179,7 +19186,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="next_settlementdate2"
 											th:value="${#dates.format(branchDet?.next_settlementdate2,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
-											name="next_settlementdate2" autocomplete="off" readonly>
+											name="next_settlementdate2" autocomplete="off"  >
 									</div>
 								</div>
 								<label></label>
@@ -19189,7 +19196,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="last_settlementdate1"
 											class="form-control form-control-sm"
 											th:value="${#dates.format(branchDet?.last_settlementdate1,'dd-MM-yyyy')}"
-											name="last_settlementdate1" autocomplete="off" readonly>
+											name="last_settlementdate1" autocomplete="off"  >
 									</div>
 									<div class="col-sm-1"></div>
 									<label class="col-sm-2">Last Settlement date 2</label>
@@ -19197,7 +19204,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="last_settlementdate2"
 											th:value="${#dates.format(branchDet?.last_settlementdate2,'dd-MM-yyyy')}"
 											class="form-control form-control-sm"
-											name="last_settlementdate2" autocomplete="off" readonly>
+											name="last_settlementdate2" autocomplete="off"  >
 									</div>
 								</div>
 								<div class="row">

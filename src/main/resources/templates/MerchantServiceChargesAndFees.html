@@ -498,6 +498,16 @@ label {
 											}
 										});
 					});
+					
+					
+					
+					function formatfornumbers(input) {
+
+						var annualIncomeInput = input.value;
+
+						input.value = parseFloat(annualIncomeInput).toFixed(2);
+
+					}
 </script>
  
 <body>
@@ -681,7 +691,7 @@ label {
 								style="color: red; font-size: 20px;">*</span></label>
 							<div class="col-sm-3">
 								<input type="number" id="amount"
-									class="form-control form-control-sm"
+									class="form-control form-control-sm" onchange="formatfornumbers(this)"
 									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 									name="amount" maxlength="50" autocomplete="off">
 							</div>
@@ -710,7 +720,7 @@ label {
 								id="percentage-asterisk" style="color: red; font-size: 20px;">*</span>
 							</label>
 							<div class="col-sm-3">
-								<input type="number" id="min"
+								<input type="number" id="min" onchange="formatfornumbers(this)"
 									class="form-control form-control-sm commonBackground"
 									name="min" onkeyup="handleMinInput(this)" maxlength="3"
 									autocomplete="off" required>
@@ -721,9 +731,9 @@ label {
 								id="percentage-asterisk" style="color: red; font-size: 20px;">*</span>
 							</label>
 							<div class="col-sm-3">
-								<input type="number" id="max"
+								<input type="number" id="max" 
 									class="form-control form-control-sm commonBackground"
-									name="max" onchange="handleMaxInput(this)" maxlength="50"
+									name="max" onchange="handleMaxInput(this);formatfornumbers(this)" maxlength="50"
 									autocomplete="off" required disabled>
 							</div>
 							<div class="col-sm-1"></div>
