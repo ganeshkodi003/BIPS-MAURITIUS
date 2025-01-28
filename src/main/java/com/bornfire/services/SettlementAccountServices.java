@@ -40,6 +40,8 @@ public class SettlementAccountServices {
 				up.setModify_flg("N");
 				up.setEntry_user(user);
 				up.setEntry_time(new Date());
+				up.setModify_user(user);
+				up.setModify_time(new Date());
 				settlementAccountRepository.save(up);
 				msg = "Added Successfully";
 			} else {
@@ -48,7 +50,9 @@ public class SettlementAccountServices {
 					up.setDel_flg("N");
 					up.setEntity_flg("N");
 					up.setEntry_user(user);
-					up.setEntry_time(new Date());
+					up.setEntry_time(new Date()); 
+					up.setModify_user(user);
+					up.setModify_time(new Date());
 					settlementAccountRepository.save(up);
 					msg = "Added Successfully";
 				} else {

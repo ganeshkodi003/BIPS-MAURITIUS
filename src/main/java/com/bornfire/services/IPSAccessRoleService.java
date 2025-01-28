@@ -90,6 +90,8 @@ public class IPSAccessRoleService {
 				up.setNew_role_flg("Y");
 				up.setEntry_user(USERID);
 				up.setEntry_time(new Date());
+				up.setModify_user(USERID);
+				up.setModify_time(new Date());
 				up.setAdmin(adminValue);
 				up.setUser_profile_maintenance(userprofilevalue);
 				up.setAccess_role(accessValue);

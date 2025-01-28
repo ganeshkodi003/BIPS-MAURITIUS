@@ -307,6 +307,8 @@ public class LoginSecurityServices {
 					Merfeemod.setModify_flg("N");
 					Merfeemod.setEntry_user(User);
 					Merfeemod.setEntry_time(new Date());
+					Merfeemod.setModify_user(User);
+					Merfeemod.setModify_time(new Date());
 
 					merchantChargesAndFeesModRep.save(Merfeemod);
 					msg = "Added Successfully";

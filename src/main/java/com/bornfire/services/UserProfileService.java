@@ -1426,6 +1426,8 @@ public class UserProfileService {
 						up.setModify_flg("N");
 						up.setEntry_time(new Date());
 						up.setEntry_user(inputUser);
+						up.setModify_user(inputUser);
+						up.setModify_time(new Date());
 						up.setNew_user_flg("Y");
 						up.setUserlog_flg("BUSER");
 						up.setLogin_flg("N");

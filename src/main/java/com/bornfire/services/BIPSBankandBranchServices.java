@@ -176,6 +176,8 @@ public class BIPSBankandBranchServices {
 				up.setNew_bank_flg("Y");
 				up.setEntry_time(new Date());
 				up.setEntry_user(user);
+				up.setModify_user(user);
+				up.setModify_time(new Date());
 				bipsSolModRepository.save(up);
 				msg = "Organisation Branch Details Added Sucessfully";
 				String audit_ref_no = sequence.generateRequestUUId();
