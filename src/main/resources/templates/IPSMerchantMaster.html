@@ -706,24 +706,65 @@ td {
 	color: #333;
 }
 </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get today's date in YYYY-MM-DD format
+        const today = new Date().toISOString().split('T')[0];
+
+        // Helper function to set an attribute only if the element exists
+        function setAttributeIfExists(id, attr, value) {
+            let element = document.getElementById(id);
+            if (element) {
+                element.setAttribute(attr, value);
+            }
+        }
+
+        // Set the max date for issuedate (no future dates)
+        setAttributeIfExists('brn_date', 'max', today);
+
+        // Set the min date for expiry dates (no past dates)
+        setAttributeIfExists('docExpDate0', 'min', today);
+        setAttributeIfExists('docExpDate1', 'min', today);
+
+        // Set the max date for document issue dates (no future dates)
+        setAttributeIfExists('docIssDate0', 'max', today);
+        setAttributeIfExists('docIssDate1', 'max', today);
+    });
+</script>
 
 <script type="text/javascript">
-		/* 		function updateMerchant(id) {
-		
-					let value = document.getElementById(id).value;
-					// Set the value of merchant_id and mer_user_id_r1
-		
-					document.getElementById("merchant_id").value = value;
-					console.log(document.getElementById("merchant_id"))
-					console.log(document.getElementById("mer_user_id_r1"))
-					document.getElementById("mer_user_id_r1").value = value + "R1";
-				}
+		function updateMerchant(id) {
+			let value = document.getElementById(id).value;
+
+			if (value) {
+			    
+			    var firstThreeDigits = value.substring(3);
+			    document.getElementById("merchant_id").value = firstThreeDigits;
+			    
+				document.getElementById("mer_user_id_r1").value = firstThreeDigits + "R1";
+			}
+				} 
 		
 				document.addEventListener('DOMContentLoaded', function() {
-					console.log("DOMContentLoaded event triggered");
 					updateMerchant('merchant_legal_id');
-				}); */
+				}); 
 
+				
+				function updateMerchantVerify(id) {
+					let value = document.getElementById(id).value;
+
+					if (value) {
+						document.getElementById("merchant_legal_id_n").value = "ZZZ" + value;
+					    
+					}
+						} 
+				
+						document.addEventListener('DOMContentLoaded', function() {
+							updateMerchantVerify('merchant_legal_id_n');
+						}); 
+			
+						
+						
 		$(document).ready(function () {
 			$(window).keydown(function (event) {
 				if (event.keyCode == 13) {
@@ -1149,8 +1190,9 @@ td {
 
 		function passwordadd(a) {
 			var merchant_user_id = document.getElementById('merchant_legal_id').value;
+			var mer = merchant_user_id.substring(3); 	
 			var merchant_nam = document.getElementById('merchant_name').value;
-			location.href = './merchantReg2?formmode=MerMastadd&merchant_acct_no=' + merchant_user_id + '&merchant_nam=' + merchant_nam;
+			location.href = './merchantReg2?formmode=MerMastadd&merchant_acct_no=' + mer + '&merchant_nam=' + merchant_nam;
 		}
 
 		function passwordview(a) {
@@ -1230,9 +1272,11 @@ td {
 						// Get form mode and construct the URL
 						var formmode = a.getAttribute("data-formmode");
 						var url = "addmerchantReg2?formmode=" + formmode;
-
+						let value = document.getElementById("merchant_legal_id").value;
+						var firstThreeDigits = value.substring(3); 	
 						// Collect the form data
 						var formData = new FormData(document.getElementById('BankandBranch'));
+						formData.append("merchant_legal_id", firstThreeDigits);
 
 						// Convert FormData to a plain object to verify the data being sent
 						const formDataObj = {};
@@ -3986,25 +4030,25 @@ td {
 
 		function UploadUnitbtn(a) {
 			var merchant_id = document.getElementById('merchant_user_id1').value;
-			alert(merchant_id);
+			//alert(merchant_id);
 			var merchant_nam = document.getElementById('merchant_name').value;
-			alert(merchant_nam);
+			//alert(merchant_nam);
 			location.href = './merchantReg2?formmode=UploadUnit&merchant_id=' + merchant_id + '&merchant_nam=' + merchant_nam;
 		}
 		function UploadUserbtn(a) {
 			var merchant_id = document.getElementById('merchant_user_id1').value;
-			alert(merchant_id);
+			//alert(merchant_id);
 			var merchant_nam = document.getElementById('merchant_name').value;
-			alert(merchant_nam);
+			//alert(merchant_nam);
 			location.href = './merchantReg2?formmode=UploadUser&merchant_id=' + merchant_id + '&merchant_nam=' + merchant_nam;
 
 		}
 
 		function UploadDevicebtn(a) {
 			var merchant_id = document.getElementById('merchant_user_id1').value;
-			alert(merchant_id);
+		 
 			var merchant_nam = document.getElementById('merchant_name').value;
-			alert(merchant_nam);
+		 
 			location.href = './merchantReg2?formmode=UploadDevice&merchant_id=' + merchant_id + '&merchant_nam=' + merchant_nam;
 		}
 
@@ -4217,14 +4261,20 @@ td {
 
 					// Set the formatted date value in the form input
 					document.querySelector('#BankandBranchverify input[id="brn_date"]').value = dateValue;
-
-
-
+					let value = document.getElementById("merchant_legal_id_n").value;
+					alert(value);
+					var firstThreeDigits = value.substring(3); 	
+					// Collect the form data
+					alert(firstThreeDigits)
 					var formData = new FormData(document.getElementById('BankandBranchverify'));
+					formData.append("merchant_legal_id", firstThreeDigits);
 
+
+
+ 
 					var url = "addmerchantReg2?formmode=" + formmode;
 
-					$.ajax({
+				$.ajax({
 						type: 'POST',
 						url: url,
 						data: formData,
@@ -4236,7 +4286,7 @@ td {
 						error: function (xhr, statusText, errorThrown) {
 							handleError(xhr, statusText, errorThrown);
 						}
-					});
+					}); 
 
 
 				}
@@ -6355,11 +6405,7 @@ td {
 		}
 
 		// Validation 
-		function updateMerchant(value) {
-			// Update the value of merchant_id field with the value from merchant_legal_id field
-			document.getElementById("merchant_id").value = value;
-			document.getElementById("mer_user_id_r1").value = value + "R1";
-		}
+	
 		function handleInputUserId(input) {
 			input.value = input.value.replace(/[^a-zA-Z0-9\s]/g, '').toUpperCase().trim();
 		}
@@ -6416,11 +6462,11 @@ td {
 					chargebackAmountRow.style.display = 'none';
 				}
 			}
+			 
 
 			bankRadio.addEventListener('change', toggleChargebackAmount);
 			merchantRadio.addEventListener('change', toggleChargebackAmount);
-
-			// Initialize visibility on page load
+ 			// Initialize visibility on page load
 			toggleChargebackAmount();
 		});
 
@@ -7176,7 +7222,7 @@ function rowdeleteDoc(ele) {
 							</thead>
 							<tbody>
 								<tr>
-									<td colspan="6" style="text-align: center;">
+									<td colspan="7" style="text-align: center;">
 										<h4>No Data Found</h4>
 									</td>
 								</tr>
@@ -7223,7 +7269,7 @@ function rowdeleteDoc(ele) {
 													<tbody>
 														<tr style="font-size: smaller;"
 															th:each="bankList : ${bankDetail}" class="userlist">
-															<th:block id="flag" th:switch="${bankList.entity_flg}">
+															<th:block id="flag" th:switch="${bankList?.entity_flg}">
 																<!-- Case for entity_flg == 'Y' -->
 																<td th:case="'Y'"
 																	th:text="${bankList.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}"
@@ -7257,18 +7303,18 @@ function rowdeleteDoc(ele) {
 															<td
 																th:text="${bankList?.merchant_location != null ? bankList.merchant_location.toUpperCase() : ''}">
 															</td>
-															<th:block id="flag" th:switch="${bankList.entity_flg}">
+															<th:block id="flag" th:switch="${bankList?.entity_flg}">
 																<td th:case="'Y'" style="color: green;">VERIFIED</td>
 																<td th:case="'N'" style="color: red;">UNVERIFIED</td>
 																<td th:case="NULL" style="color: red;">UNVERIFIED</td>
 															</th:block>
 															<td>
 																<!-- QR Acceptance Column --> <span
-																th:if="${bankList.type_maucas != null && bankList.type_upi == null}">MAUCAS</span> <span
-																th:if="${bankList.type_upi != null && bankList.type_maucas == null}">UPI</span>
+																th:if="${bankList?.type_maucas != null && bankList?.type_upi == null}">MAUCAS</span> <span
+																th:if="${bankList?.type_upi != null && bankList?.type_maucas == null}">UPI</span>
 																<span
-																th:if="${bankList.type_maucas != null && bankList.type_upi != null}">UPI , MAUCAS</span><span
-																th:if="${bankList.type_maucas == null && bankList.type_upi == null}">NOT
+																th:if="${bankList?.type_maucas != null && bankList?.type_upi != null}">UPI , MAUCAS</span><span
+																th:if="${bankList?.type_maucas == null && bankList?.type_upi == null}">NOT
 																	AVAILABLE</span>
 															</td>
 
@@ -7319,29 +7365,29 @@ function rowdeleteDoc(ele) {
 																		aria-labelledby="dropdownMenuButton"
 																		style="background-color: #e3e3e4; color: #3a4550;">
 																		<a class="dropdown-item" title="View"
-																			th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'"
+																			th:if="${bankList?.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'"
 																			th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
 																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 																			id="delete_value" onclick="view_btn(this)">View</a>
 																		<div class="dropdown-divider"
-																			th:if="${bankList.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'">
+																			th:if="${bankList?.entity_flg}=='Y' and ${IPSRoleMenu.permissions}=='W'">
 																		</div>
 																		<a class="dropdown-item" title="View"
-																			th:if="${bankList.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'"
+																			th:if="${bankList?.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'"
 																			th:attr="data-bank_code=${bankList?.merchant_id},data-mer_name=${bankList?.merchant_name}"
 																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 																			id="view_value" onclick="view_new_btn(this)">View</a> <a
 																			class="dropdown-item" title="Modify"
-																			th:if="${bankList.entity_flg}=='Y'"
+																			th:if="${bankList?.entity_flg}=='Y'"
 																			th:attr="data-bank_code=${bankList?.merchant_id}"
 																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 																			id="edit_value" onclick="edit_btn_submit(this)">Modify</a>
 
 																		<div class="dropdown-divider"
-																			th:if="${bankList.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'">
+																			th:if="${bankList?.entity_flg}=='N' and ${IPSRoleMenu.permissions}=='W'">
 																		</div>
 																		<a class="dropdown-item" title="Verify"
-																			th:if="${bankList.entity_flg}=='N'"
+																			th:if="${bankList?.entity_flg}=='N'"
 																			th:attr="data-bank_code=${bankList?.merchant_id}"
 																			style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 																			id="delete_value" onclick="verify_btn_submit(this)">Verify</a>
@@ -7603,11 +7649,11 @@ function rowdeleteDoc(ele) {
 										<label class="">Upload</label>
 									</div>
 									<div class="col-sm-2">
-										<input type="file" id="fileval" name="fileval"
+										<input type="file" id="fileval" name="fileval" 
 											accept=".xlsx,.xls,.csv" class="form-control form-control-sm">
-										<input type=" " id="merid" th:value="${MerId}"
+										<input type=" " id="merid" th:value="${MerId}" hidden
 											class="form-control form-control-sm"> <input type=" "
-											id="mername" th:value="${MerName}"
+											id="mername" th:value="${MerName}" hidden
 											class="form-control form-control-sm">
 									</div>
 								</div>
@@ -7712,9 +7758,9 @@ function rowdeleteDoc(ele) {
 											style="font-size: 20px; color: red">*</span></label>
 										<div class="col-sm-3">
 											<input type="text" id="merchant_legal_id" maxlength="20"
-												class="form-control form-control-sm"
-												onkeyup="this.value = this.value.toUpperCase(); updateMerchant(this.value);handleInputUserId(this)"
-												name="merchant_legal_id" autocomplete="off" required>
+												class="form-control form-control-sm" th:value="${MerchantIdSeq}"
+												onkeyup="this.value = this.value.toUpperCase(); updateMerchant(this);handleInputUserId(this)"
+											    autocomplete="off" readonly required>
 											<span id="merchant_legal_id_vali" class="reqError"></span>
 										</div>
 										<div class="col-sm-1"></div>
@@ -9805,7 +9851,7 @@ function rowdeleteDoc(ele) {
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="unit_id" name="unit_id"
-													maxlength="15"
+													maxlength="15" readonly th:value="${merunitrid}"
 													onkeyup="this.value = this.value.toUpperCase();updateUnitId(this.value);handleIn(this)"
 													autocomplete="off" class="form-control form-control-sm">
 											</div>
@@ -10367,9 +10413,9 @@ function rowdeleteDoc(ele) {
 													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="user" name="user_id"
+												<input type="text" id="user" name="user_id" th:value="${meruserrid}"
 													th:if="${formmode}=='MerMastadd'" maxlength="15"
-													autocomplete="off"
+													autocomplete="off" readonly
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													class="form-control form-control-sm">
 											</div>
@@ -10692,10 +10738,10 @@ function rowdeleteDoc(ele) {
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="device_id" name="device_id"
-													th:if="${formmode}=='MerMastadd'"
+													th:if="${formmode}=='MerMastadd'" th:value="${merdevicerid}"
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													class="form-control form-control-sm" maxlength="15"
-													autocomplete="off">
+													autocomplete="off" readonly>
 											</div>
 											<div class="col-sm-1"></div>
 											<div class="col-sm-2">
@@ -10915,10 +10961,10 @@ function rowdeleteDoc(ele) {
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="unitidd" name="unit_id_d"
-													th:if="${formmode}=='MerMastadd'"
+													th:if="${formmode}=='MerMastadd'" readonly
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													maxlength="30" autocomplete="off"
-													class="form-control form-control-sm" readonly>
+													class="form-control form-control-sm" >
 											</div>
 
 										</div>
@@ -11127,13 +11173,13 @@ function rowdeleteDoc(ele) {
 													<div class="col-sm-3">
 														<th:block th:switch="${branchDet?.entity_flg}">
 															<!-- Case for entity_flg == 'Y' -->
-															<input th:case="'Y'" type="text" id="merchant_legal_id_n"
+															<input th:case="'Y'" type="text" id="merchand_ids"
 																th:value="${branchDet?.merchant_legal_id}"
 																class="form-control form-control-sm"
 																name="merchant_legal_id" autocomplete="off" readonly>
 
 															<!-- Case for entity_flg == 'N' -->
-															<input th:case="'N'" type="text" id="merchant_legal_id_n"
+															<input th:case="'N'" type="text" id="merchant_legal_id"
 																th:value=" ${branchDet?.merchant_legal_id}"
 																class="form-control form-control-sm"
 																name="merchant_legal_id" autocomplete="off" readonly>
@@ -13781,7 +13827,7 @@ function rowdeleteDoc(ele) {
 										<input type="text" id="unit_id" name="unit_id" maxlength="15"
 											autocomplete="off"
 											onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-											class="form-control form-control-sm"
+											class="form-control form-control-sm" readonly th:value="${UnitId}"
 											th:if="${formmode}=='UnitmAdd'"> <input type="text"
 											id="unit_id" name="unit_id" th:value="${MerUnit.unit_id}"
 											autocomplete="off" class="form-control form-control-sm"
@@ -15373,7 +15419,7 @@ function rowdeleteDoc(ele) {
 											class="form-control form-control-sm" autocomplete="off"
 											readonly> <input type="text" id="user"
 											onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-											name="user_id" th:if="${formmode}=='UsermAdd'"
+											name="user_id" th:if="${formmode}=='UsermAdd'" readonly th:value="${UserId}"
 											class="form-control form-control-sm" maxlength="15"
 											autocomplete="off"> <input type="text" id="user_id"
 											name="user_id" th:value="${Meruserlist.user_id}"
@@ -16388,7 +16434,7 @@ function rowdeleteDoc(ele) {
 										th:if="${formmode}=='MerMastvie'"
 										class="form-control form-control-sm" maxlength="15"
 										autocomplete="off" readonly> <input type="text"
-										id="device_id"
+										id="device_id" th:value="${DeviceId}" readonly
 										onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 										name="device_id" th:if="${formmode}=='DevicemAdd'"
 										class="form-control form-control-sm" autocomplete="off">
@@ -19420,7 +19466,7 @@ function rowdeleteDoc(ele) {
 									<div class="col-sm-3">
 										<input type="text" id="merchant_legal_id_n"
 											th:value="${branchDet?.merchant_id}"
-											class="form-control form-control-sm" name="merchant_legal_id"
+											class="form-control form-control-sm" 
 											autocomplete="off" readonly>
 									</div>
 									<div class="col-sm-1"></div>
@@ -24798,9 +24844,9 @@ function rowdeleteDoc(ele) {
 		var fileInput = document.getElementById('fileval');
 		console.log(fileInput);
 		var merchant_id = document.getElementById('merid').value;
-		alert(merchant_id);
+		 //alert(merchant_id);
 		var merchant_name = document.getElementById('mername').value;
-		alert(merchant_name);
+		//alert(merchant_name);
 		// Check if a file is selected
 		if (fileInput && fileInput.files.length > 0) {
 			var file = fileInput.files[0];
@@ -24844,9 +24890,9 @@ function rowdeleteDoc(ele) {
 		var fileInput = document.getElementById('fileval');
 		console.log(fileInput);
 		var merchant_id = document.getElementById('merid').value;
-		alert(merchant_id);
+//	alert(merchant_id);
 		var merchant_name = document.getElementById('mername').value;
-		alert(merchant_name);
+		//alert(merchant_name);
 
 		// Check if a file is selected
 		if (fileInput && fileInput.files.length > 0) {
@@ -24889,12 +24935,9 @@ function rowdeleteDoc(ele) {
 		event.preventDefault(); // Prevent default form submission behavior
 
 		var fileInput = document.getElementById('fileval');
-		console.log(fileInput);
-		var merchant_id = document.getElementById('merid').value;
-		alert(merchant_id);
-		var merchant_name = document.getElementById('mername').value;
-		alert(merchant_name);
-
+ 		var merchant_id = document.getElementById('merid').value;
+ 		var merchant_name = document.getElementById('mername').value;
+ 
 		// Check if a file is selected
 		if (fileInput && fileInput.files.length > 0) {
 			var file = fileInput.files[0];
@@ -25301,7 +25344,7 @@ function rowdeleteDoc(ele) {
 		//	alert("file");
 		//var cif_id = document.getElementById("cif_id").value;
 		//var rec_no = document.getElementById('numberone').textContent;
-		var appl_ref_no = document.getElementById("merchant_legal_id").value;
+		var appl_ref_no = document.getElementById("merchant_id").value;
 		//alert(appl_ref_no);
 		const dynamicValues = []; // Initialize the array here
 
@@ -25553,8 +25596,8 @@ function rowdeleteDoc(ele) {
 	}
 
 	function onimageon() {
-		var appl_ref_no = document.getElementById("merchant_legal_id_n").value;
-		//alert(appl_ref_no);
+		var appl_ref_no = document.getElementById("merchant_id").value;
+		 
 		console.log(appl_ref_no);
 		$.ajax({
 			type: 'get',
@@ -25980,25 +26023,7 @@ function rowdeleteDoc(ele) {
         }
     }
 </script>
-<script>
-    // Get today's date in YYYY-MM-DD format
-    const today = new Date().toISOString().split('T')[0];
 
-    // Set the max date for 'issuedate' (no future dates)
-    document.getElementById('brn_date').setAttribute('max', today);
-    document.getElementById('docExpDate0').setAttribute('min', today);
-    document.getElementById('docExpDate1').setAttribute('min', today);
-    
-    // Set the min date for 'la_expiry_date' (no past dates)
-
-    document.getElementById('docIssDate0').setAttr ibute('max', today);
-    document.getElementById('docIssDate1').setAttribute('max', today);
-    
- }
-
-   
-    
-</script>
 <script>
     function adjustHeight() {
         const cardBody = document.getElementById("cardBody");

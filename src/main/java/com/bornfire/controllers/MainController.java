@@ -102,6 +102,7 @@ import com.bornfire.entity.MerchantChargesAndFeesRepositry;
 import com.bornfire.entity.MerchantChargesandFeesModRep;
 import com.bornfire.entity.MerchantFeesServiceRepo;
 import com.bornfire.entity.MerchantFeesServiceRepoMod;
+import com.bornfire.entity.MerchantID;
 import com.bornfire.entity.MerchantMaster;
 import com.bornfire.entity.MerchantMasterMod;
 import com.bornfire.entity.MerchantMasterModRep;
@@ -1100,16 +1101,37 @@ public class MainController {
 		} else if (formmode.equals("add")) {
 			md.addAttribute("tranDate", tranDate);
 			md.addAttribute("formmode", formmode);
+			 // Fetch all merchant IDs from the database
+		    List<MerchantMaster> existingMerchants = merchantMasterRep.CheckMerID(); // Assumes method exists
 
-			String merid = merchantMasterModRep.getMerID();
-			String MerchantId;
-			if (merid != null) {
-				MerchantId = String.valueOf(Integer.valueOf(merid) + 1);
-			} else {
-				MerchantId = "M001";
-			}
-			md.addAttribute("MerchantID", MerchantId);
+		    int maxSeq = 0;
 
+		    // Find the highest sequence number
+		    for (MerchantMaster merchantId : existingMerchants) {
+		        if (merchantId.getMerchant_id().startsWith("M")) {
+		            try {
+		                int seq = Integer.parseInt(merchantId.getMerchant_id().substring(1)); // Extract number part
+		                System.out.println(seq > maxSeq );
+		                if (seq > maxSeq) {
+		                    maxSeq = seq; // Update highest sequence
+		                }
+		            } catch (NumberFormatException e) {
+		                // Skip invalid IDs
+		            }
+		        }
+		    }
+
+		    // Generate new sequence number
+		    int newSeq = maxSeq + 1;
+		    String formattedSeq = String.format("%04d", newSeq);
+		    
+		    // Construct new Merchant ID
+		    String merchantIdSeq = "ZZZM" + formattedSeq;
+		    String merchant = "M" + formattedSeq;
+
+		    md.addAttribute("MerchantIdSeq", merchantIdSeq);
+
+		    
 			md.addAttribute("SlabRate", slabRateRepo.GetList());
 			md.addAttribute("merchantcategory", merchantCategoryRep.findAllCustom());
 			md.addAttribute("bankAgentName", bankAgentTableRep.findByCustomBankName());
@@ -1221,6 +1243,21 @@ public class MainController {
 			md.addAttribute("formmode", "MerMastadd");
 			md.addAttribute("MerchantlegId", merchant_acct_no);
 			md.addAttribute("MerchantNa", merchant_nam);
+			
+			int newSeq = 1;
+			String formattedSeq = String.format("%04d", newSeq); // Format as "B0004"
+
+			
+			String merunitrid = merchant_acct_no + "B" + formattedSeq;
+			md.addAttribute("merunitrid", merunitrid);
+			
+			String meruserrid = merchant_acct_no + "B" + formattedSeq + "U"+ formattedSeq;
+			md.addAttribute("meruserrid", meruserrid);
+			
+			String merdevicerid = merchant_acct_no + "B" + formattedSeq +  "D" + formattedSeq ;
+			md.addAttribute("merdevicerid", merdevicerid);
+			
+
 			md.addAttribute("count", count);
 			md.addAttribute("CountryCode", referenceCodeRep.getReferenceList("CC01"));
 			md.addAttribute("UnitType", referenceCodeRep.getReferenceList("MM11"));
@@ -1258,6 +1295,41 @@ public class MainController {
 			md.addAttribute("MerchantUnitType", bIPS_UnitManagement_Repo.getpartUnitType(merchant_id));
 			md.addAttribute("MerchantIdUse", merchant_id);
 			md.addAttribute("MerchantNaUse", merchant_nam);
+			List<BIPS_Mer_User_Management_Entity> existingMerchants = bIPS_MerUserManagement_Repo.getmerid(merchant_id); 
+			int maxSeq = 0;  // Track the highest BXXXX
+			String FirstMerchant = null;
+			// Find the highest BXXXX for the given MXXXX
+			for (BIPS_Mer_User_Management_Entity merchantId : existingMerchants) {
+				System.out.println(merchantId.getMerchant_user_id()+"87568758");
+			    if (merchantId.getMerchant_user_id().startsWith("M")) {
+			        String lastMerchantId = merchantId.getUser_id(); // Example: "M001B003"
+			        System.out.println(lastMerchantId);
+			        try {
+			            // Split the string at 'B' → ["M001", "003"]
+			            String[] parts = lastMerchantId.split("U"); 
+			            if (parts.length == 2) {
+			                FirstMerchant = parts[0]; // Store "M001"
+			                int seq = Integer.parseInt(parts[1]); // Extract BXXXX
+			                if (seq > maxSeq) {
+			                    maxSeq = seq; // Update highest sequence
+			                }
+			            }
+			        } catch (NumberFormatException e) {
+			            // Handle invalid unit IDs gracefully
+			        }
+			    }
+			}
+
+			// Generate the next BXXXX sequence
+			int newSeq = maxSeq + 1;
+			String formattedSeq = String.format("%04d", newSeq); // Format as "B0004"
+
+			// Construct new Unit ID
+			String newuserid = FirstMerchant + "U" + formattedSeq;
+
+			md.addAttribute("UserId", newuserid);
+
+
 		} else if (formmode.equals("UsermEdit")) {
 			md.addAttribute("formmode", "UsermEdit");
 			md.addAttribute("Meruserlist", bIPS_MerUserManagement_Repo.getuser(user_id));
@@ -1276,6 +1348,40 @@ public class MainController {
 			md.addAttribute("user_id", userID);
 			md.addAttribute("MerchantIdDev", merchant_id);
 			md.addAttribute("MerchantNaDev", merchant_nam);
+			List<BIPS_Mer_Device_Management_Entity> existingMerchants = bIPS_MerDeviceManagement_Repo.getMerchantId(merchant_id); 
+			int maxSeq = 0;  // Track the highest BXXXX
+			String FirstMerchant = null;
+			// Find the highest BXXXX for the given MXXXX
+			for (BIPS_Mer_Device_Management_Entity merchantId : existingMerchants) {
+				System.out.println(merchantId.getMerchant_user_id()+"87568758");
+			    if (merchantId.getMerchant_user_id().startsWith("M")) {
+			        String lastMerchantId = merchantId.getDevice_id(); // Example: "M001B003"
+			        System.out.println(lastMerchantId);
+			        try {
+			            // Split the string at 'B' → ["M001", "003"]
+			            String[] parts = lastMerchantId.split("D"); 
+			            if (parts.length == 2) {
+			                FirstMerchant = parts[0]; // Store "M001"
+			                int seq = Integer.parseInt(parts[1]); // Extract BXXXX
+			                if (seq > maxSeq) {
+			                    maxSeq = seq; // Update highest sequence
+			                }
+			            }
+			        } catch (NumberFormatException e) {
+			            // Handle invalid unit IDs gracefully
+			        }
+			    }
+			}
+
+			// Generate the next BXXXX sequence
+			int newSeq = maxSeq + 1;
+			String formattedSeq = String.format("%04d", newSeq); // Format as "B0004"
+
+			// Construct new Unit ID
+			String deviceid = FirstMerchant + "U" + formattedSeq;
+
+			md.addAttribute("DeviceId", deviceid);
+
 		} else if (formmode.equals("DevicemEdit")) {
 			md.addAttribute("user_id", userID);
 			md.addAttribute("formmode", "DevicemEdit");
@@ -1312,6 +1418,42 @@ public class MainController {
 			md.addAttribute("UnitType", referenceCodeRep.getReferenceList("MM11"));
 			md.addAttribute("MerchantIdDev", merchant_id);
 			md.addAttribute("MerchantNaDev", merchant_nam);
+			
+			// Retrieve all existing unit IDs linked to this Merchant ID
+			List<BIPS_Unit_Mangement_Entity> existingMerchants = bIPS_UnitManagement_Repo.UnitId(merchant_id); 
+			int maxSeq = 0;  // Track the highest BXXXX
+			String FirstMerchant = null;
+			// Find the highest BXXXX for the given MXXXX
+			for (BIPS_Unit_Mangement_Entity merchantId : existingMerchants) {
+				System.out.println(merchantId.getMerchant_user_id()+"87568758");
+			    if (merchantId.getMerchant_user_id().startsWith("M")) {
+			        String lastMerchantId = merchantId.getUnit_id(); // Example: "M001B003"
+			        try {
+			            // Split the string at 'B' → ["M001", "003"]
+			            String[] parts = lastMerchantId.split("B"); 
+			            if (parts.length == 2) {
+			                FirstMerchant = parts[0]; // Store "M001"
+			                int seq = Integer.parseInt(parts[1]); // Extract BXXXX
+			                if (seq > maxSeq) {
+			                    maxSeq = seq; // Update highest sequence
+			                }
+			            }
+			        } catch (NumberFormatException e) {
+			            // Handle invalid unit IDs gracefully
+			        }
+			    }
+			}
+
+			// Generate the next BXXXX sequence
+			int newSeq = maxSeq + 1;
+			String formattedSeq = String.format("%04d", newSeq); // Format as "B0004"
+
+			// Construct new Unit ID
+			String newUnitId = FirstMerchant + "B" + formattedSeq;
+
+			md.addAttribute("UnitId", newUnitId);
+
+
 		} else if (formmode.equals("UnitVerify")) {
 			md.addAttribute("user_id", userID);
 			md.addAttribute("formmode", "UnitVerify");
@@ -4266,7 +4408,6 @@ public class MainController {
 		try {
 			System.out.println("inside");
 			List<Sign_Master_Entity> vv = Sign_Master_Repo.findByref_no(appl_ref_no);
-			System.out.println("The encryptedddddd" + vv.get(0).getSign());
 
 			InputStream ll = vv.get(0).getSign().getBinaryStream();
 
@@ -4298,6 +4439,8 @@ public class MainController {
 			md.addAttribute("formmode", "list");
 			md.addAttribute("menu", "MMenupage");
 		} else if (formmode.equals("add")) {
+			md.addAttribute("formmode", formmode);
+		}else if (formmode.equals("CheckDigit")) {
 			md.addAttribute("formmode", formmode);
 		}
 		return "MerOnboardParam";

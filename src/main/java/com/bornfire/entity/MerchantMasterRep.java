@@ -63,6 +63,7 @@ public interface MerchantMasterRep extends JpaRepository<MerchantMaster, String>
 		    nativeQuery = true
 		)
 		List<MerchantMaster> findAllDataHr();
-
+	@Query(value = "SELECT * FROM MERCHANT_MASTER_TABLE UNION ALL SELECT * FROM MERCHANT_MASTER_TABLE_MOD ", nativeQuery = true)
+	List<MerchantMaster> CheckMerID();
 
 }

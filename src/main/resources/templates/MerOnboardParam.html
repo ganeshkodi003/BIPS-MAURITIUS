@@ -568,6 +568,25 @@ th, td {
 			}
 		});
 	}
+ 
+</script>
+<input type="radio" name="status_enable" value="Enable" onchange="ClickToYes()">
+
+<script>
+	function ClickToYes() {
+		alert("checking");
+
+		$.ajax({
+			url: './getCheckDigiValue', // Fixed missing quote
+			type: 'GET',
+			success: function (data) {
+				alert(data);
+			},
+			error: function () {
+				alert('Error fetching data'); // Changed from showErrorModal (assuming this function doesn't exist)
+			}
+		});
+	}
 </script>
 
 <script>
@@ -597,6 +616,16 @@ th, td {
 
 		return formattedNumber;
 	}
+	
+	
+
+</script>
+<script>
+
+function MovoToCheckList(){
+	 
+	 location.href = '/IPSAdmin/MerOnbordParam?formmode=CheckDigit';  
+}
 </script>
 
 <body>
@@ -608,11 +637,14 @@ th, td {
 		<!-- 	<div class="card-group"> -->
 
 
-		<div class="card">
-			<div class="card-header">
+		<div class="card" th:if="${formmode}=='list'">
+			<div class="card-header p-1">
+				
 				<div class="dispayflexpropty">
 			            <h6 class="headerh6">Merchant Onboarding Parameter</h6>
-			        </div>
+					<button type="button" class="btn headerbutton" onclick="MovoToCheckList()">Check Digit</button>
+
+				</div>
 			</div>
 			<div class="panels mb-0 pb-0">
 				<div class="panel" id="one-panel">
@@ -806,6 +838,80 @@ th, td {
 											autocomplete="off" style="height: 23px; width: 400px" readonly ></td>
 									</tr>
 
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer text-center">
+				<button type="button" class="btn btn-sm headerbutton"
+					data-dismiss="modal" onclick="home();">Home</button>
+				<button type="button" class="btn btn-sm headerbutton"
+					data-dismiss="modal" onclick="back();">Back</button>
+			</div>
+		</div>
+		<!-- check digit formmode  -->
+		<div class="card" th:if="${formmode}=='CheckDigit'">
+			<div class="card-header">
+				<div class="dispayflexpropty">
+					<h6 class="headerh6">Check Digit Required</h6>
+					<div class="">
+					<input type="radio" name="status_enable" Value="Enable" onchange="ClickToYes()"
+						id="enable" required> <label> YES</label> <input
+						type="radio" name="status_enable" Value="Disable" class="ml-3"
+						id="disable" required> <label> NO</label>
+						</div> 
+				</div>
+			</div>
+			<div class="panels mb-0 pb-0">
+				<div class="panel" id="one-panel">
+					<div class="card-body pt-0 mb-0">
+					
+						<div class="mb-0 mt-2">
+							<table class="table table-bordered"
+								style="width: 100%; border-color: 10px solid black;">
+								<thead style="font-size: 13px; font-weight: 700;">
+									<tr>
+										<th style="font-weight: 700;">Srl No</th>
+										<th style="font-weight: 700;">Description</th>
+										<th style="font-weight: 700;">Digits</th>
+										<th style="font-weight: 700;">Remarks</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr>
+										<td>1</td>
+									<td>BANK</td>
+									<td>1 - 3</td>
+									<td></td>
+									</tr>
+	<tr>
+										<td>2</td>
+									<td>BRANCH CODE</td>
+									<td>4 - 7</td>
+									<td></td>
+									</tr>
+										<tr>
+										<td>3</td>
+									<td>YEAR OF ONBOARDING</td>
+									<td>8 - 11</td>
+									<td></td>
+									</tr>
+										<tr>
+										<td>4</td>
+									<td>MERCHANT ID</td>
+									<td>12 - 15</td>
+									<td></td>
+									</tr>
+										<tr>
+										<td>5</td>
+									<td>CHECK DIGIT</td>
+									<td>16</td>
+									<td></td>
+									</tr>
+									
 								</tbody>
 							</table>
 						</div>

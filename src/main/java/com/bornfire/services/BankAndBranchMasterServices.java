@@ -1969,7 +1969,7 @@ public class BankAndBranchMasterServices {
 
 							HashMap<Integer, String> map = new HashMap<>();
 
-							for (int j = 0; j < 200; j++) {
+							for (int j = 0; j < 500; j++) {
 
 								Cell cell = r.getCell(j);
 								DataFormatter formatter = new DataFormatter();
@@ -2046,8 +2046,23 @@ public class BankAndBranchMasterServices {
 					String chargeback_approval = item.get(13);
 					System.out.println("chargeback_approval: " + chargeback_approval);
 					
-					BigDecimal chargeback_amt = new BigDecimal(item.get(14));
-					System.out.println("chargeback_amt: " + chargeback_amt); 
+					BigDecimal chargeback_amt = null;
+					String value = item.get(14);
+
+					if (value == null || value.trim().isEmpty()) {
+					    chargeback_amt = BigDecimal.ZERO; // Assign default value for null or empty
+					} else {
+					    try {
+					        chargeback_amt = new BigDecimal(value.trim()); // Convert only if valid
+					    } catch (NumberFormatException e) {
+					        System.out.println("Invalid number format: " + value);
+					        chargeback_amt = BigDecimal.ZERO; // Fallback value
+					    }
+					}
+
+					System.out.println("chargeback_amt: " + chargeback_amt);
+
+
 					
 					String repid1  = item.get(15);
 					System.out.println("repid1: " + repid1);  
@@ -2058,15 +2073,35 @@ public class BankAndBranchMasterServices {
 					String ph_countrycode1 = item.get(17);
 					System.out.println("ph_countrycode1: " + ph_countrycode1); 
 					
-					BigDecimal phno1 = new BigDecimal(item.get(18));
-					System.out.println("phno1: " + phno1); 
-					
+
+					BigDecimal phno1 = null;
+					String value_PH = item.get(18);
+					if (value_PH == null || value_PH.trim().isEmpty()) {
+						phno1 = BigDecimal.ZERO;
+					} else {
+						try {
+							phno1 = new BigDecimal(value_PH.trim());
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid number format: " + value_PH);
+							phno1 = BigDecimal.ZERO;
+						}
+					}
+					System.out.println("phno1: " + phno1);
 					String ofc_countrycode1  = item.get(19);
 					System.out.println("ofc_countrycode1: " + ofc_countrycode1);  
  
-					BigDecimal ofcno1 = new BigDecimal(item.get(20));
-					System.out.println("ofcno1: " + ofcno1); 
-
+					BigDecimal ofcno1 = null;
+					String value_ofno = item.get(20);
+					if (value_ofno == null || value_ofno.trim().isEmpty()) {
+						ofcno1 = BigDecimal.ZERO;
+					} else {
+						try {
+							ofcno1 = new BigDecimal(value_ofno.trim());
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid number format: " + value_ofno);
+							ofcno1 = BigDecimal.ZERO;
+						}
+					}
 					String emailid1 = item.get(21);
 					System.out.println("emailid1: " + emailid1); 
 					
@@ -2082,14 +2117,35 @@ public class BankAndBranchMasterServices {
 					String ph_countrycode2 = item.get(25);
 					System.out.println("ph_countrycode2: " + ph_countrycode2); 
 					
-					BigDecimal phno2 = new BigDecimal(item.get(26));
-					System.out.println("phno2: " + phno2); 
+					 
+					BigDecimal phno2 = null;
+					String value_PH2 = item.get(26);
+					if (value_PH2 == null || value_PH2.trim().isEmpty()) {
+						phno2 = BigDecimal.ZERO;
+					} else {
+						try {
+							phno2 = new BigDecimal(value_PH2.trim());
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid number format: " + value_PH2);
+							phno2 = BigDecimal.ZERO;
+						}
+					}
 					
 					String ofc_countrycode2  = item.get(27);
 					System.out.println("ofc_countrycode2: " + ofc_countrycode2);  
 
-					BigDecimal ofcno2 = new BigDecimal(item.get(28));
-					System.out.println("ofcno2: " + ofcno2);
+					BigDecimal ofcno2 = null;
+					String value_ofno2 = item.get(28);
+					if (value_ofno2 == null || value_ofno2.trim().isEmpty()) {
+						ofcno2 = BigDecimal.ZERO;
+					} else {
+						try {
+							ofcno2 = new BigDecimal(value_ofno2.trim());
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid number format: " + value_ofno2);
+							ofcno2 = BigDecimal.ZERO;
+						}
+					}
 
 					String emailid2 = item.get(29);
 					System.out.println("emailid2: " + emailid2); 
@@ -2106,13 +2162,19 @@ public class BankAndBranchMasterServices {
 					String ph_countrycode3 = item.get(33);
 					System.out.println("ph_countrycode3: " + ph_countrycode3); 
 					
-					BigDecimal phno3 = new BigDecimal(item.get(34));
+					/*BigDecimal phno3 = new BigDecimal(item.get(34));
 					System.out.println("phno3: " + phno3); 
+					*/
 					
+				
+					String value_ph3 = item.get(34);
+					BigDecimal phno3 = (value_ph3 != null && !value_ph3.isEmpty()) ? new BigDecimal(value_ph3) : BigDecimal.ZERO;
+
 					String ofc_countrycode3  = item.get(35);
 					System.out.println("ofc_countrycode3: " + ofc_countrycode3);  
-
-					BigDecimal ofcno3 = new BigDecimal(item.get(36));
+					
+					String VALUE_ofcno3 = item.get(36);
+					BigDecimal ofcno3 = (VALUE_ofcno3 != null && !VALUE_ofcno3.isEmpty()) ? new BigDecimal(VALUE_ofcno3) : BigDecimal.ZERO;
 					System.out.println("ofcno3: " + ofcno3);
 
 					String emailid3 = item.get(37);
@@ -2130,14 +2192,21 @@ public class BankAndBranchMasterServices {
 					String ph_countrycode4 = item.get(41);
 					System.out.println("ph_countrycode4: " + ph_countrycode4); 
 					
-					BigDecimal phno4 = new BigDecimal(item.get(42));
+					String value_phno4 = item.get(42);
+					BigDecimal phno4 = (value_phno4 != null && !value_phno4.isEmpty()) ? new BigDecimal(value_phno4) : BigDecimal.ZERO;
 					System.out.println("phno4: " + phno4); 
 					
 					String ofc_countrycode4  = item.get(43);
 					System.out.println("ofc_countrycode4: " + ofc_countrycode4);  
 
-					BigDecimal ofcno4 = new BigDecimal(item.get(44));
-					System.out.println("ofcno4: " + ofcno4);
+					
+					String processedValue_ofcno4 = processData(item.get(44)); 
+					BigDecimal ofcno4 = new BigDecimal(processedValue_ofcno4);
+
+					/*
+					 * BigDecimal ofcno4 = new BigDecimal(item.get(44));
+					 * System.out.println("ofcno4: " + ofcno4)
+					 */;
 
 					String emailid4 = item.get(45);
 					System.out.println("emailid4: " + emailid4); 
@@ -2154,13 +2223,16 @@ public class BankAndBranchMasterServices {
 					String ph_countrycode5 = item.get(49);
 					System.out.println("ph_countrycode5: " + ph_countrycode5); 
 					
-					BigDecimal phno5 = new BigDecimal(item.get(50));
-					System.out.println("phno5: " + phno5); 
+					String processedValue_phno5 = processData(item.get(50)); 
+					BigDecimal phno5 = new BigDecimal(processedValue_phno5);
+
 					
 					String ofc_countrycode5  = item.get(51);
 					System.out.println("ofc_countrycode5: " + ofc_countrycode5);  
 
-					BigDecimal ofcno5 = new BigDecimal(item.get(52));
+					String value_phno5 = item.get(52);
+					BigDecimal ofcno5 = (value_phno5 != null && !value_phno5.isEmpty()) ? new BigDecimal(value_phno5) : BigDecimal.ZERO;
+					
 					System.out.println("ofcno5: " + ofcno5);
 
 					String emailid5 = item.get(53);
@@ -2177,15 +2249,18 @@ public class BankAndBranchMasterServices {
 
 					String ph_countrycode6 = item.get(57);
 					System.out.println("ph_countrycode6: " + ph_countrycode6); 
+					 
+					String value_phno6 = item.get(58);
+					BigDecimal phno6 = (value_phno6 != null && !value_phno6.isEmpty()) ? new BigDecimal(value_phno6) : BigDecimal.ZERO;
 					
-					BigDecimal phno6 = new BigDecimal(item.get(58));
-					System.out.println("phno6: " + phno6); 
 					
 					String ofc_countrycode6  = item.get(59);
 					System.out.println("ofc_countrycode6: " + ofc_countrycode6);  
  
-					BigDecimal ofcno6 = new BigDecimal(item.get(60));
-					System.out.println("ofcno6: " + ofcno6); 
+					 
+					String value_ofcno6 = item.get(60);
+					BigDecimal ofcno6 = (value_ofcno6 != null && !value_ofcno6.isEmpty()) ? new BigDecimal(value_ofcno6) : BigDecimal.ZERO;
+					
 
 					String emailid6 = item.get(61);
 					System.out.println("emailid6: " + emailid6); 
@@ -2202,14 +2277,22 @@ public class BankAndBranchMasterServices {
 					String ph_countrycode7 = item.get(65);
 					System.out.println("ph_countrycode7: " + ph_countrycode7); 
 					
-					BigDecimal phno7 = new BigDecimal(item.get(66));
-					System.out.println("phno7: " + phno7); 
+					/*
+					 * BigDecimal phno7 = new BigDecimal(item.get(66)); System.out.println("phno7: "
+					 * + phno7);
+					 * 
+					 */					
+					String processedValue = processData(item.get(66)); 
+					BigDecimal phno7 = new BigDecimal(processedValue);
+
+					
 					
 					String ofc_countrycode7  = item.get(67);
 					System.out.println("ofc_countrycode7: " + ofc_countrycode7);  
+ 
+					String processedValue_ofcno7 = processData(item.get(68)); 
+					BigDecimal ofcno7 = new BigDecimal(processedValue_ofcno7);
 
-					BigDecimal ofcno7 = new BigDecimal(item.get(68));
-					System.out.println("ofcno7: " + ofcno7);
 
 					String emailid7 = item.get(69);
 					System.out.println("emailid7: " + emailid7); 
@@ -2225,15 +2308,16 @@ public class BankAndBranchMasterServices {
 
 					String ph_countrycode8 = item.get(73);
 					System.out.println("ph_countrycode8: " + ph_countrycode8); 
-					
-					BigDecimal phno8 = new BigDecimal(item.get(74));
-					System.out.println("phno8: " + phno8); 
+					 
+					String processedValue_phno8 = processData(item.get(74)); 
+					BigDecimal phno8 = new BigDecimal(processedValue_phno8);
+
 					
 					String ofc_countrycode8  = item.get(75);
 					System.out.println("ofc_countrycode8: " + ofc_countrycode8);  
-
-					BigDecimal ofcno8 = new BigDecimal(item.get(76));
-					System.out.println("ofcno8: " + ofcno8);
+  
+					String processedValue_ofcno8 = processData(item.get(76)); 
+					BigDecimal ofcno8 = new BigDecimal(processedValue_ofcno8);
 
 					String emailid8 = item.get(77);
 					System.out.println("emailid8: " + emailid8); 
@@ -2250,15 +2334,19 @@ public class BankAndBranchMasterServices {
 					String ph_countrycode9 = item.get(81);
 					System.out.println("ph_countrycode9: " + ph_countrycode9); 
 					
-					BigDecimal phno9 = new BigDecimal(item.get(82));
-					System.out.println("phno9: " + phno9); 
+					String processedValue_phno9 = processData(item.get(82)); 
+					BigDecimal phno9 = new BigDecimal(processedValue_phno9);
+
+					
 					
 					String ofc_countrycode9  = item.get(83);
 					System.out.println("ofc_countrycode9: " + ofc_countrycode9);  
+ 
+					String processedValue_ofcno9 = processData(item.get(84)); 
+					BigDecimal ofcno9 = new BigDecimal(processedValue_ofcno9);
 
-					BigDecimal ofcno9 = new BigDecimal(item.get(84));
-					System.out.println("ofcno9: " + ofcno9);
-
+					
+					
 					String emailid9 = item.get(85);
 					System.out.println("emailid9: " + emailid9); 
 					
@@ -2273,16 +2361,21 @@ public class BankAndBranchMasterServices {
 
 					String ph_countrycode10 = item.get(89);
 					System.out.println("ph_countrycode10: " + ph_countrycode10); 
-					
-					BigDecimal phno10 = new BigDecimal(item.get(90));
-					System.out.println("phno10: " + phno10); 
+					 
+
+					String processedValue_phno10 = processData(item.get(90)); 
+					BigDecimal phno10 = new BigDecimal(processedValue_phno10);
+
 					
 					String ofc_countrycode10  = item.get(91);
 					System.out.println("ofc_countrycode10: " + ofc_countrycode10);  
 
-					BigDecimal ofcno10 = new BigDecimal(item.get(92));
-					System.out.println("ofcno10: " + ofcno10);
+				
+					String processedValue_ofcno10 = processData(item.get(92)); 
+					BigDecimal ofcno10 = new BigDecimal(processedValue_ofcno10);
 
+					
+					
 					String emailid10 = item.get(93);
 					System.out.println("emailid10: " + emailid10); 
 					
@@ -2682,7 +2775,7 @@ public class BankAndBranchMasterServices {
 					PO.setMer_email_addr_r10(emailid10);
 					PO.setMer_notifi_mode_r10(notify_mode10);
 					 
-					PO.setMerchant_id(mer_bipsno);
+				
 					PO.setMerchant_terminal(Mer_terminalId);
 					PO.setMerchant_type(mer_type);
 					PO.setMerchant_location(outlet_location);
@@ -2763,16 +2856,17 @@ public class BankAndBranchMasterServices {
 					
 					BIPS_Unit_Mangement_Entity UN = new BIPS_Unit_Mangement_Entity(); 
 					
-					String unit_id = item.get(76);
+				 
+					String unit_id = item.get(166);
 					System.out.println("unit_id: " + unit_id);
 					
-					String unit_type = item.get(77);
+					String unit_type = item.get(167);
 					System.out.println("unit_type: " + unit_type); 
 					
-					String unit_brn_no = item.get(78);
+					String unit_brn_no = item.get(168);
 					System.out.println("unit_brn_no: " + unit_brn_no); 
 					
-					String unit_brn_date = item.get(79);
+					String unit_brn_date = item.get(169);
 					System.out.println("brn_date: " + unit_brn_date);  
 					Date date_value2 = null;
 
@@ -2787,42 +2881,193 @@ public class BankAndBranchMasterServices {
 					} 
 					System.out.println("date_value2: " + date_value2);
 					
-					String unit_name = item.get(80);
+					String unit_name = item.get(170);
 					System.out.println("unit_name: " + unit_name);
 					
-					String unit_location = item.get(81);
+					String unit_location = item.get(171);
 					System.out.println("unit_location: " + unit_location); 
 					
-					String unit_city = item.get(82);
+					String unit_city = item.get(172);
 					System.out.println("unit_city: " + unit_city); 
-					
-					String unit_country = item.get(83);
-					System.out.println("unit_country: " + unit_country); 
-					
-					String unit_countrycode_phone_no = item.get(84);
-					System.out.println("unit_countrycode_phone_no: " + unit_countrycode_phone_no); 
-					
-					String unit_phone_no = item.get(85);
-					System.out.println("unit_phone_no: " + unit_phone_no); 
-					
-					String unit_head = item.get(86);
-					System.out.println("unit_head: " + unit_head); 
-					
-					String unit_designation = item.get(87);
-					System.out.println("unit_designation: " + unit_designation); 
-					
-					String contact_pers1 = item.get(88);
-					System.out.println("contact_pers1: " + contact_pers1); 
-					
-					String countrycode_pers_1 = item.get(89);
-					System.out.println("countrycode_pers_1: " + countrycode_pers_1); 
-					 
-					String mob_no1 = item.get(90);
-					System.out.println("mob_no1: " + mob_no1);
-					
-					String email_id1 = item.get(91);
-					System.out.println("email_id1: " + email_id1);  
-					
+                    String unit_country = item.get(173);
+                    System.out.println("unit_country: " + unit_country);
+                    
+                    String unit_countrycode_phone_no = item.get(174);
+                    System.out.println("unit_countrycode_phone_no: " + unit_countrycode_phone_no);
+                    
+                    String unit_phone_no = item.get(175);
+                    System.out.println("unit_phone_no: " + unit_phone_no);
+
+                    String unit_head = item.get(176);
+                    System.out.println("unit_head: " + unit_head);
+
+                    String unit_designation = item.get(177);
+                    System.out.println("unit_designation: " + unit_designation);
+
+                    String contact_pers1 = item.get(178);
+                    System.out.println("contact_pers1: " + contact_pers1);
+//suriya
+                    String countrycode_pers_1 = item.get(179);
+                    System.out.println("countrycode_pers_1: " + countrycode_pers_1);
+ 
+
+					BigDecimal mob_no1 = null;
+					String value1 = item.get(180);
+
+					if (value1 == null || value1.trim().isEmpty()) {
+						mob_no1 = BigDecimal.ZERO; // Assign default value for null or empty
+					} else {
+					    try {
+					    	mob_no1 = new BigDecimal(value1.trim()); // Convert only if valid
+					    } catch (NumberFormatException e) {
+					        System.out.println("Invalid number format: " + value1);
+					        mob_no1 = BigDecimal.ZERO; // Fallback value
+					    }
+					}
+
+					System.out.println("mob_no1: " + mob_no1);        
+                    
+                    String email_id1 = item.get(181);
+                    System.out.println("email_id1: " + email_id1);
+
+                    String address1u = item.get(182);
+                    System.out.println("address1: " + address1u);
+
+                    String address2u = item.get(183);
+                    System.out.println("address2: " + address2u);
+
+                    String state = item.get(184);
+                    System.out.println("state: " + state);
+
+                    String zip_code = item.get(185);
+                    System.out.println("zip_code: " + zip_code);
+
+                    String remarks = item.get(186);
+                    System.out.println("remarks: " + remarks);
+
+                    String bank_name = item.get(187);
+                    System.out.println("bank_name: " + bank_name);
+
+                    String bank_acct_no = item.get(188);
+                    System.out.println("bank_acct_no: " + bank_acct_no);
+
+                    String branch_swift_code = item.get(189);
+                    System.out.println("branch_swift_code: " + branch_swift_code);
+
+                    String branch_name = item.get(190);
+                    System.out.println("branch_name: " + branch_name);
+
+                    String cont_pers2 = item.get(191);
+                    System.out.println("cont_pers2: " + cont_pers2);
+
+                    String country_code2 = item.get(192);
+                    System.out.println("country_code2: " + country_code2);
+
+					BigDecimal mob_no2 = null;
+					String value2 = item.get(193);
+					if (value2 == null || value2.trim().isEmpty()) {
+						mob_no2 = BigDecimal.ZERO;
+					} else {
+						try {
+							mob_no2 = new BigDecimal(value2.trim());
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid number format: " + value2);
+							mob_no2 = BigDecimal.ZERO;
+						}
+					}
+					System.out.println("mob_no2: " + mob_no2);
+
+                    String email_id2 = item.get(194);
+                    System.out.println("email_id2: " + email_id2);
+
+                    String cont_pers3 = item.get(195);
+                    System.out.println("cont_pers3: " + cont_pers3);
+
+                    String country_code3 = item.get(196);
+                    System.out.println("country_code3: " + country_code3);
+                    
+                    BigDecimal mob_no3 = null;
+                    String value3 = item.get(197);
+                    if (value3 == null || value3.trim().isEmpty()) {
+                        mob_no3 = BigDecimal.ZERO; 
+                    } else {
+                        try {
+                            mob_no3 = new BigDecimal(value3.trim());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid number format: " + value3);
+                            mob_no3 = BigDecimal.ZERO;
+                        }
+                    }
+                    System.out.println("mob_no3: " + mob_no3);
+
+                    String email_id3 = item.get(198);
+                    System.out.println("email_id3: " + email_id3);
+
+                    String cont_pers4 = item.get(199);
+                    System.out.println("cont_pers4: " + cont_pers4);
+
+                    String country_code4 = item.get(200);
+                    System.out.println("country_code4: " + country_code4);
+
+                    BigDecimal mob_no4 = null;
+                    String value4 = item.get(201);
+                    if (value4 == null || value4.trim().isEmpty()) {
+                        mob_no4 = BigDecimal.ZERO; 
+                    } else {
+                        try {
+                            mob_no4 = new BigDecimal(value4.trim());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid number format: " + value4);
+                            mob_no4 = BigDecimal.ZERO;
+                        }
+                    }
+                    String email_id4 = item.get(202);
+                    System.out.println("email_id4: " + email_id4);
+
+                    String cont_pers5 = item.get(203);
+                    System.out.println("cont_pers5: " + cont_pers5);
+
+                    String country_code5 = item.get(204);
+                    System.out.println("country_code5: " + country_code5);
+
+                    BigDecimal mob_no5 = null;
+                    String value5 = item.get(205);
+                    if (value5 == null || value5.trim().isEmpty()) {
+                        mob_no5 = BigDecimal.ZERO; 
+                    } else {
+                        try {
+                            mob_no5 = new BigDecimal(value5.trim());
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid number format: " + value5);
+                            mob_no5 = BigDecimal.ZERO;
+                        }
+                    }
+                    String email_id5 = item.get(206);
+                    System.out.println("email_id5: " + email_id5);
+
+                    String cont_pers6 = item.get(207);
+                    System.out.println("cont_pers6: " + cont_pers6);
+
+                    String country_code6 = item.get(208);
+                    System.out.println("country_code6: " + country_code6);
+
+
+					BigDecimal mob_no6 = null;
+					String value6 = item.get(209);
+					if (value6 == null || value6.trim().isEmpty()) {
+						mob_no6 = BigDecimal.ZERO;
+					} else {
+						try {
+							mob_no6 = new BigDecimal(value6.trim());
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid number format: " + value6);
+							mob_no6 = BigDecimal.ZERO;
+						}
+					}
+					System.out.println("mob_no6: " + mob_no6);
+                    String email_id6 = item.get(210);
+                    System.out.println("email_id6: " + email_id6);
+
 					UN.setUnit_id(unit_id);
 					UN.setUnit_type(unit_type);
 					UN.setBrn_no(unit_brn_no);
@@ -2833,39 +3078,99 @@ public class BankAndBranchMasterServices {
 					UN.setLocation_detail(unit_location);
 					UN.setCity(unit_city);
 					UN.setCountry(unit_country);
+					
+					
+					
+					
+					
 					UN.setPh_countrycode(unit_countrycode_phone_no);
 					UN.setPhone_no(unit_phone_no);
 					UN.setBranch_head(unit_head);
 					UN.setDesignation(unit_designation);
+					
 					UN.setContact_person1_name(contact_pers1);
+					UN.setContact_person2_name(cont_pers2);
+					UN.setContact_person3_name(cont_pers3);
+					UN.setContact_person4_name(cont_pers4);
+					UN.setContact_person5_name(cont_pers5);
+					UN.setContact_person6_name(cont_pers6);
+					
 					UN.setCp1_countrycode(countrycode_pers_1);
-					UN.setEmail_id(email_id1);
-					//UN.setContact_person1_mobile(mob_no1);
+					UN.setCp2_countrycode(country_code2);
+					UN.setCp3_countrycode(country_code3);
+					UN.setCp4_countrycode(country_code4);
+					UN.setCp5_countrycode(country_code5);
+					UN.setCp6_countrycode(country_code6);
+					
+					
+					
+					UN.setContact_person1_mobile(mob_no1);
+					UN.setContact_person2_mobile(mob_no2);
+					UN.setContact_person3_mobile(mob_no3);
+					UN.setContact_person4_mobile(mob_no4);
+					UN.setContact_person6_mobile(mob_no6);
+					UN.setContact_person5_mobile(mob_no5);
+					
+					UN.setContact_person1_email(email_id1);
+					UN.setContact_person2_email(email_id2);
+					UN.setContact_person3_email(email_id3);
+					UN.setContact_person4_email(email_id4);
+					UN.setContact_person5_email(email_id5);
+					UN.setContact_person6_email(email_id6);
+	
+					UN.setAddress_1(address1);
+					UN.setAddress_2(address2);
+				
+				
+					
+					
+					UN.setState_(state);
+					UN.setZip_code(zip_code);
+					UN.setRemarks(remarks);
+					UN.setBankcode_name(bank_name);
+					UN.setBank_acct_no(bank_acct_no);
+					UN.setBranch_swiftcode(branch_swift_code);
+					UN.setBranch_name(branch_name);
+				
+				
+					
+					
+					
+					
 					UN.setDel_flg("N");
+					UN.setEntry_flag("N");
+					UN.setModify_flag("N");
+					UN.setEntry_user(userid);
+					UN.setEntry_time(new Date());
+					UN.setModify_user(userid);
+					UN.setModify_time(new Date());
 					
 					bIPS_UnitManagement_Repo.save(UN);
 					
+					String password = env.getProperty("user.password");
 					BIPS_Mer_User_Management_Entity US = new BIPS_Mer_User_Management_Entity(); 
+					String encryptedPassword = PasswordEncryption.getEncryptedPassword(password);
 					
-					String user_ids = item.get(92);
+
+					String user_ids = item.get(211);
 					System.out.println("user_ids: " + user_ids); 
-					
-					String user_name = item.get(93);
+
+					String user_name = item.get(212);
 					System.out.println("user_name: " + user_name); 
-					
-					String user_designation = item.get(94);
+
+					String user_designation = item.get(213);
 					System.out.println("user_designation: " + user_designation); 
-					
-					String user_role = item.get(95);
+
+					String user_role = item.get(214);
 					System.out.println("user_role: " + user_role); 
-					
-					String pass_exp_date = item.get(96);
+
+					String pass_exp_date = item.get(215);
 					System.out.println("pass_exp_date: " + pass_exp_date);  
 					Date date_value3 = null;
 
 					if (pass_exp_date != null && !pass_exp_date.isEmpty()) {
 					    try {
-					    	date_value3 = dateFormat.parse(pass_exp_date);
+					        date_value3 = dateFormat.parse(pass_exp_date);
 					    } catch (ParseException e) {
 					        e.printStackTrace();
 					    }
@@ -2873,14 +3178,14 @@ public class BankAndBranchMasterServices {
 					    System.out.println("Record Date is null");
 					} 
 					System.out.println("date_value3: " + date_value3);
-					
-					String acct_exp_date = item.get(97);
+
+					String acct_exp_date = item.get(216);
 					System.out.println("acct_exp_date: " + acct_exp_date); 
 					Date date_value4 = null;
 
 					if (acct_exp_date != null && !acct_exp_date.isEmpty()) {
 					    try {
-					    	date_value4 = dateFormat.parse(acct_exp_date);
+					        date_value4 = dateFormat.parse(acct_exp_date);
 					    } catch (ParseException e) {
 					        e.printStackTrace();
 					    }
@@ -2888,19 +3193,98 @@ public class BankAndBranchMasterServices {
 					    System.out.println("Record Date is null");
 					} 
 					System.out.println("date_value4: " + date_value4);
-					
-					String user_status = item.get(98);
+
+					String user_status = item.get(217);
 					System.out.println("user_status: " + user_status); 
-					
-					String mob_countrycode = item.get(99);
+
+					String mob_countrycode = item.get(218);
 					System.out.println("mob_countrycode: " + mob_countrycode); 
-					
-					String mobile_no = item.get(100);
+
+					String mobile_no = item.get(219);
 					System.out.println("mobile_no: " + mobile_no); 
 					 
-					String email_id = item.get(101);
+					String email_id = item.get(220);
 					System.out.println("email_id: " + email_id); 
+					
+					String makerorchecker = item.get(221);
+					System.out.println("makerorchecker: " + makerorchecker);
+					
+					String user_disable_fromdate = item.get(222);
+					System.out.println("user_disable_fromdate: " + user_disable_fromdate); 
+					Date date_value5 = null; 
+
+					if (user_disable_fromdate != null && !user_disable_fromdate.isEmpty()) {
+					    try {
+					        date_value5 = dateFormat.parse(user_disable_fromdate);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value5: " + date_value5); 
+
+					String user_disable_todate = item.get(223);
+					System.out.println("user_disable_todate: " + user_disable_todate);
+					Date date_value6 = null; 
+
+					if (user_disable_todate != null && !user_disable_todate.isEmpty()) {
+					    try {
+					        date_value6 = dateFormat.parse(user_disable_todate);
+					    } catch (ParseException e) {
+					        e.printStackTrace();
+					    }
+					} else {
+					    System.out.println("Record Date is null");
+					} 
+					System.out.println("date_value6: " + date_value6); 
 					 
+					String alter_countrycode = item.get(224);
+					System.out.println("alter_countrycode: " + alter_countrycode); 
+
+					
+					BigDecimal alter_mobno = null;
+					String value_MOB = item.get(225);
+
+					if (value_MOB == null || value_MOB.trim().isEmpty()) {
+						alter_mobno = BigDecimal.ZERO; // Assign default value for null or empty
+					} else {
+					    try {
+					    	alter_mobno = new BigDecimal(value_MOB.trim()); // Convert only if valid
+					    } catch (NumberFormatException e) {
+					        System.out.println("Invalid number format: " + value_MOB);
+					        alter_mobno = BigDecimal.ZERO; // Fallback value
+					    }
+					}
+
+					System.out.println("alter_mobno: " + alter_mobno);
+
+					String alter_emailid = item.get(226);
+					System.out.println("alter_emailid: " + alter_emailid); 
+					 
+					String alter_devid1 = item.get(227);
+					System.out.println("alter_devid1: " + alter_devid1); 
+
+					String alter_devid2 = item.get(228);
+					System.out.println("alter_devid2: " + alter_devid2); 
+					 
+					String default_devid = item.get(229);
+					System.out.println("default_devid: " + default_devid); 
+
+					String remarks_u = item.get(230);
+					System.out.println("remarks: " + remarks_u); 
+	
+					String unit_id_un = item.get(231); 
+					System.out.println("unit_id: " + unit_id_un );
+					  
+					String unit_name_un = item.get(232);
+                    System.out.println("unit_name: " + unit_name_un);
+					  	  
+				   String unit_type_un = item.get(233); 
+				   System.out.println("unit_type: " + unit_type_un);
+					  
+					 
+				
 					US.setMerchant_user_id(merchant_id);
 					US.setMerchant_name(merchant_name);
 					US.setUser_id(user_ids);
@@ -2913,35 +3297,141 @@ public class BankAndBranchMasterServices {
 					US.setCountrycode(mob_countrycode);
 					US.setMobile_no1(mobile_no);
 					US.setEmail_address1(email_id);
+					US.setUnit_id_u(unit_id_un);
+					US.setUnit_name_u(unit_name_un);
+					US.setMake_or_checker(makerorchecker);
+					US.setUnit_type_u(unit_type_un);
+					US.setUser_disable_from_date1(date_value5);
+					US.setUser_disable_to_date1(date_value6);
+					US.setAlt_countrycode(alter_countrycode);
+					US.setAlternate_mobile_no1(alter_mobno);
+					US.setAlternate_email_id1(alter_emailid);
+					US.setAlternative_device_id1(alter_devid1);
+					US.setAlternative_device_id2(alter_devid2);
+					US.setDefault_device_id(default_devid);
+					US.setRemarks(remarks_u);
+					
 					US.setDel_flag1("N");
-					US.setUnit_id_u(unit_id);
-					US.setUnit_name_u(unit_name);
+					US.setEntry_user(userid);
+					US.setEntry_time(new Date());
+					US.setModify_user(userid);
+					US.setModify_time(new Date());
+					US.setLogin_status1("N");
+					US.setLogin_channel1("WEB");	
+					US.setEntry_flag("N");
+					US.setModify_flag("N");
+					US.setNo_of_attmp("0");
+					US.setUser_locked_flg("N");
+					US.setUser_category("USER");
+					US.setPassword_life1("180");
+					US.setPassword1(encryptedPassword);
+					US.setUser_disable_flag1("N");
 					
-					bIPS_MerUserManagement_Repo.save(US);
-					
+					bIPS_MerUserManagement_Repo.save(US); 
+					BIPS_Mer_User_Management_Entity savedUser = bIPS_MerUserManagement_Repo.save(US);
+					System.out.println("Saved User: " + savedUser);
+
 					BIPS_Mer_Device_Management_Entity DV = new BIPS_Mer_Device_Management_Entity(); 
 					
-					String device_id = item.get(102);
+					String device_id = item.get(234);
 					System.out.println("device_id: " + device_id);
-					
-					String device_name = item.get(103);
+
+					String device_name = item.get(235);
 					System.out.println("device_name: " + device_name); 
-					
-					String device_identification = item.get(104);
+
+					String device_identification = item.get(236);
 					System.out.println("device_identification: " + device_identification); 
-					
-					String device_modal = item.get(105);
+
+					String device_modal = item.get(237);
 					System.out.println("device_modal: " + device_modal); 
-					
-					String device_location = item.get(106);
+
+					String device_location = item.get(238);
 					System.out.println("device_location: " + device_location); 
-					
-					String device_status = item.get(107);
+
+					String device_status = item.get(239);
 					System.out.println("device_status: " + device_status); 
-					
-					String terminal_id = item.get(108);
+
+					String terminal_id = item.get(240);
 					System.out.println("terminal_id: " + terminal_id); 
+
+					String unit_id_d = item.get(241);
+					System.out.println("unit_id: " + unit_id_d); 
+
+					String unit_name_d = item.get(242);
+					System.out.println("unit_name: " + unit_name_d); 
 					
+					// non -validation fields
+					
+					 String device_mechine_id = item.get(243);
+					    System.out.println("device_mechine_id: " + device_mechine_id);
+
+					    String device_make = item.get(244);
+					    System.out.println("device_make: " + device_make);
+
+					    String store_id_d = item.get(245);
+					    System.out.println("store_id: " + store_id_d);
+
+					    String finger_print_enable = item.get(246);
+					    System.out.println("finger_print_enable: " + finger_print_enable);
+
+					    String finger_recogn_enable = item.get(247);
+					    System.out.println("finger_recogn_enable: " + finger_recogn_enable);
+
+					    String default_user_id = item.get(248);
+					    System.out.println("default_user_id: " + default_user_id);
+
+					    String alternative_user_id = item.get(249);
+					    System.out.println("alternative_user_id: " + alternative_user_id);
+
+					    String approved_user = item.get(250);
+					    System.out.println("approved_user: " + approved_user);
+
+					    String defined_user = item.get(251);
+					    System.out.println("defined_user: " + defined_user);
+
+					    String user1 = item.get(252);
+					    System.out.println("user1: " + user1);
+
+					    String user2 = item.get(253);
+					    System.out.println("user2: " + user2);
+
+					    String unit_typpe = item.get(254);
+					    System.out.println("unit_typpe: " + unit_typpe);
+
+					    String remarks_d = item.get(255);
+					    System.out.println("remarks_d: " + remarks_d);
+
+					    
+                   // Validate mandatory fields
+				    if (device_id == null || device_id.isEmpty()) {
+				        return "Field 'Device Id' cannot be null or empty.";
+				    }
+				    if (device_name == null || device_name.isEmpty()) {
+				        return "Field 'Device Name' cannot be null or empty.";
+				    }
+				    if (device_identification == null || device_identification.isEmpty()) {
+				        return "Field 'Device Identification' cannot be null or empty.";
+				    }
+				    if (device_modal == null || device_modal.isEmpty()) {
+				        return "Field 'Device Modal' cannot be null or empty.";
+				    }
+				    if (device_location == null || device_location.isEmpty()) {
+				        return "Field 'Device Location' cannot be null or empty.";
+				    }
+				    if (device_status == null || device_status.isEmpty()) {
+				        return "Field 'Device Status' cannot be null or empty.";
+				    }
+				    if (terminal_id == null || terminal_id.isEmpty()) {
+				        return "Field 'Terminal Id' cannot be null or empty.";
+				    }
+				    if (unit_id == null || unit_id.isEmpty()) {
+				        return "Field 'Unit Id' cannot be null or empty.";
+				    }
+				    if (unit_name == null || unit_name.isEmpty()) {
+				        return "Field 'Unit Name' cannot be null or empty.";
+				    }
+				   
+				    
 					DV.setMerchant_user_id(merchant_id);
 					DV.setMerchant_name(merchant_name);
 					DV.setDevice_id(device_id);
@@ -2951,12 +3441,34 @@ public class BankAndBranchMasterServices {
 					DV.setLocation(device_location);
 					DV.setDevice_status(device_status);
 					DV.setTerminal_id(terminal_id);
+					DV.setUnit_id_d(unit_id_d);
+					DV.setUnit_name_d(unit_name_d);				
+					DV.setDevice_machine_id(device_mechine_id);
+					DV.setDevice_make(device_make);
+					DV.setStore_id(store_id_d);
+					DV.setFingerprint_enable(finger_print_enable);
+					DV.setFace_recognition_enabled(finger_print_enable);
+					DV.setDefault_user_id(default_user_id);
+					DV.setAlternate_user_id(alternative_user_id);
+					DV.setApproved_user(approved_user);
+					DV.setDefined_user(defined_user);
+					DV.setUser1(user1);
+					DV.setUser2(user2);
+					DV.setUnit_type_d(unit_typpe);
+					DV.setRemark(remarks_d);
 					DV.setDel_flg("N");
-					DV.setUnit_id_d(unit_id);
-					DV.setUnit_name_d(unit_name);
+					DV.setDisable_flag("N");
+					DV.setFingerprint_enable("YES");
+					DV.setFace_recognition_enabled("YES");
+					DV.setEntry_user(userid);
+					DV.setEntry_time(new Date());
+					DV.setModify_user(userid);
+					DV.setModify_time(new Date());
+					DV.setEntry_flag("N");
+					DV.setModify_flag("N");
 					
-					BIPS_MerDeviceManagement_Repo.save(DV);
 					
+					BIPS_MerDeviceManagement_Repo.save(DV);  
 
 
 					msg = "Excel Data Uploaded Successfully";
@@ -3094,8 +3606,10 @@ public class BankAndBranchMasterServices {
 					String countrycode_pers_1 = item.get(13);
 					System.out.println("countrycode_pers_1: " + countrycode_pers_1);  
 					
-					BigDecimal mob_no1 = new BigDecimal(item.get(14));
-					System.out.println("mob_no1: " + mob_no1);
+					String processedValue_mob_no1 = processData(item.get(14)); 
+					BigDecimal mob_no1 = new BigDecimal(processedValue_mob_no1);
+
+					
 					
 					String email_id1 = item.get(15);
 					System.out.println("email_id1: " + email_id1);  
@@ -3624,5 +4138,20 @@ public class BankAndBranchMasterServices {
 		return msg;
 
 	}
-
+	public static String processData(String string) {
+	    try {
+	        // Attempt to convert to BigDecimal
+	        try {
+	            BigDecimal bigDecimalValue = new BigDecimal(string);
+	            System.out.println("Valid BigDecimal: " + bigDecimalValue);
+	            return bigDecimalValue.toString();  // Return valid number as string
+	        } catch (NumberFormatException e) {
+	            System.out.println("Invalid BigDecimal at index: " + string);
+	            return "0"; // Return default value instead of invalid string
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Unexpected error: " + e.getMessage());
+	    }
+	    return "0"; // Return default value in case of unexpected errors
+	}
 }

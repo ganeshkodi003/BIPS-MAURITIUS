@@ -151,7 +151,8 @@ public class IPSWebSecurity extends WebSecurityConfigurerAdapter {
 					request.getSession().setAttribute("PERMISSIONS", user.getPermissions());
 					request.getSession().setAttribute("WORKCLASS", user.getWork_class());
 					request.getSession().setAttribute("BUSER", user.getUserlog_flg());
-
+					request.getSession().setAttribute("BRANCHCODE", user.getBranch_code());
+					request.getSession().setAttribute("BANKNAME", user.getBank_name());
 					if (user.getPhoto() != null) {
 						request.getSession().setAttribute("IMAGEUSER",
 								Base64.getEncoder().encodeToString(user.getPhoto()));

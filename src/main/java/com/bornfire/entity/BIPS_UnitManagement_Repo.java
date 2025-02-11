@@ -37,4 +37,7 @@ public interface BIPS_UnitManagement_Repo extends JpaRepository<BIPS_Unit_Mangem
 	@Query(value = "select UNIT_NAME,UNIT_TYPE from BIPS_MERCHANT_UNIT_MANAGEMENT where UNIT_ID =?1 and del_flg = 'N'", nativeQuery = true)
 	Object[] getUnitDetail(String unitId);
 
+	@Query(value = "select * from BIPS_MERCHANT_UNIT_MANAGEMENT  where merchant_user_id =?1", nativeQuery = true)
+	List<BIPS_Unit_Mangement_Entity> UnitId(String merchant_user_id);
+
 }

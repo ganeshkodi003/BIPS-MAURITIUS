@@ -30,4 +30,10 @@ public interface MerchantMasterModRep extends JpaRepository<MerchantMasterMod, S
 	
 	@Query(value = "SELECT * FROM MERCHANT_MASTER_TABLE_MOD WHERE hr_status IN ('HOLD', 'REJECT') and hr_holdreject_flg='Y'", nativeQuery = true)
 	List<MerchantMasterMod> holdrejectlist();
+	
+	@Query(value = "SELECT MERCHANT_SEQ.nextval  from dual", nativeQuery = true)
+	Integer MerchantSeq();
+	
+	
+
 }

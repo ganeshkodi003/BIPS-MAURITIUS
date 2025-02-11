@@ -14,6 +14,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -113,6 +114,7 @@ import com.bornfire.services.SettlementAccountServices;
 import com.google.zxing.WriterException;
 
 import net.sf.jasperreports.engine.JRException;
+import oracle.sql.DATE;
 
 @RestController
 public class IPSRestController {
@@ -2163,5 +2165,44 @@ public class IPSRestController {
 
 		    return "Success"; // Return a success message
 		}
-
+		
+		@RequestMapping(value = "getCheckDigiValue", method = RequestMethod.GET)
+		public String getCheckDigiValue(HttpServletRequest req)   {
+			System.out.println("CHECKING........");
+			String BRANCHCODE = (String) req.getSession().getAttribute("BRANCHCODE");
+			String BANKNAME = (String) req.getSession().getAttribute("BANKNAME");
+			int year = LocalDate.now().getYear();
+		    System.out.println("Current Year: " + year);
+		    String merchantId = "M001";
+		    String checkdigit =BANKNAME.replace(" ", "") + BRANCHCODE +year +merchantId;
+		    System.out.println(checkdigit);
+		    
+		    StringBuilder asciiValuesStr = new StringBuilder();
+		    List<Integer> asciiValues = new ArrayList<>();
+		    List<Integer> finalList = new ArrayList<>();
+	        for (char c : checkdigit.toCharArray()) {
+	        	 int ascii = (int) c;
+	             asciiValuesStr.append(ascii).append(" "); // Store as string for output
+	             asciiValues.add(ascii);
+	        }
+	        int evenSum = 0, oddSum = 0;
+	        // Output result
+	        System.out.println("Original String: " + checkdigit);
+	        System.out.println("ASCII Values: " + asciiValues.toString().trim());
+	        for (int num : asciiValues) {
+	            if (num % 2 == 0) {
+	                evenSum += num; // Even ASCII value
+	            } else {
+	                oddSum += num; // Odd ASCII value
+	            }
+	        }
+	        System.out.println("Original String: " + checkdigit);
+	        System.out.println("ASCII Values: " + asciiValuesStr.toString().trim());
+	        System.out.println("Sum of Even ASCII Values: " + evenSum);
+	        System.out.println("Sum of Odd ASCII Values: " + oddSum);
+            String CheckDigit = String.valueOf(oddSum) + String.valueOf(evenSum);
+            
+			return CheckDigit;
+		}
+		
 }

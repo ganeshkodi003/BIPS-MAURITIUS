@@ -32,4 +32,10 @@ public interface BIPS_MerUserManagement_Repo extends JpaRepository<BIPS_Mer_User
 
 	@Query(value = "SELECT * FROM BIPS_MERCHANT_USER_MANAGEMENT WHERE user_id=?1 and del_flag1 = 'N'", nativeQuery = true)
 	List<BIPS_Mer_User_Management_Entity> getBlobImage(String userid);
+	
+	
+	@Query(value = "select * FROM BIPS_MERCHANT_USER_MANAGEMENT WHERE merchant_user_id =?1 ", nativeQuery = true)
+	List<BIPS_Mer_User_Management_Entity> getmerid(String merchant_id1);
+
+
 }
