@@ -1,6 +1,8 @@
 package com.bornfire.entity;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -28,6 +30,8 @@ public class IPSAccessRole {
 	private Date modify_time;
 	private Date auth_time;
 	private String audit_operations;
+	
+	@Column(name="IPS_PARAMETER")
 	private String ips_parameter;
 	private String ips_operations;
 	private String monitoring;
