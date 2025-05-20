@@ -568,14 +568,14 @@ $(document)
 				<div
 					class="card-header p-1 d-flex justify-content-between align-items-center">
 					<div>
-						<h4 style="color: white; font-size: 1.4rem;"
-							th:if="${formmode}=='list'">Charge Back Transactions - List</h4>
-						<h4 style="color: white; font-size: 1.4rem;"
+						<h6 style="color: white;" class="headerh6 "
+							th:if="${formmode}=='list'">Charge Back Transactions - List</h6>
+						<h6 style="color: white;" class="headerh6 "
 							th:if="${formmode}=='Revert'">Reverted Charge Back
-							Transactions - List</h4>
-						<h4 style="color: white; font-size: 1.4rem;"
+							Transactions - List</h6>
+						<h6 style="color: white;" class="headerh6 "
 							th:if="${formmode}=='Pending'">Pending Charge Back
-							Transactions - List</h4>
+							Transactions - List</h6>
 					</div>
 					<!-- <div class="d-flex">
 						<input type="text" class="form-control form-control-sm mr-3 bg-white" id="from_date" placeholder="From Date" readonly /> <input class="form-control form-control-sm mr-3 bg-white" type="text"
@@ -635,29 +635,29 @@ $(document)
 						<thead style="position: sticky; top: 0;background-color: #f8f9fa; z-index: 1;">
 							<tr class="filters">
 
-								<th style="text-align: center"><input type="text"
+								<th style="text-align: center;width:14%"><input type="text"
 									class="form-control font-weight-bold" placeholder="Transaction Date"
 									disabled></th>
-								<th style="text-align: center"><input type="text"
+								<th style="text-align: center;width:14%"><input type="text"
 									class="form-control font-weight-bold" placeholder="Audit Reference"
 									disabled></th>
-								<th style="text-align: center"><input type="text"
+								<th style="text-align: center;width:14%"><input type="text"
 									class="form-control font-weight-bold" placeholder="Bill Number"
 									disabled></th>
-								<th style="text-align: center"><input type="text"
+								<th style="text-align: center;width: 14%"><input type="text"
 									class="form-control font-weight-bold" placeholder="Merchant ID"
 									disabled></th>
 								<!-- <th style="text-align: center;width:250px"><input type="text"
 									class="form-control font-weight-bold"
 									placeholder="Merchant Name" disabled></th> -->
-								<th style="text-align: center;width:300px"><input type="text"
+								<th style="text-align: center;width:14%"><input type="text"
 									class="form-control font-weight-bold"
 									placeholder="Customer Name" disabled></th>
-								<th style="text-align: right;width:250px"><input type="text"
+								<th style="text-align: right;width:10%"><input type="text"
 									class="form-control font-weight-bold" placeholder="Bill Amount"
 									disabled></th>
 								
-								<th style="text-align: center;width:50px"><input type="text"
+								<th style="text-align: center;width:13%"><input type="text"
 									class="form-control font-weight-bold" placeholder="Remarks"
 									disabled></th>
 								

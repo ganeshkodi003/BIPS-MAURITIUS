@@ -176,9 +176,9 @@ $(document)
 												<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="Currency"
 														disabled></th> 
-														<th style="text-align: center"> <input type="text"
+													<!-- 	<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="Remarks"
-														disabled></th> 
+														disabled></th>  -->
 														<th style="text-align: center"> <input type="text"
 														class="form-control font-weight-bold" placeholder="Status"
 														disabled></th> 
@@ -199,7 +199,7 @@ $(document)
 								<td style="text-align: end;" th:text="${#numbers.formatDecimal(settlementAccount?.acct_bal, 0, 'COMMA', 2, 'POINT')}"></td>
 								<td style="text-align: end;" th:text="${#numbers.formatDecimal(settlementAccount?.not_bal, 0, 'COMMA', 2, 'POINT')}"></td>
 								<td th:text="${settlementAccount?.acct_criteria}"></td>-->
-								<td th:text="${settlementAccount?.acct_remarks}"></td>
+								<!-- <td th:text="${settlementAccount?.acct_remarks}"></td> -->
 								<th:block th:switch="${settlementAccount?.entity_flg}">
 									<td th:case="'Y'" style="color: green;">VERIFIED</td>
 									<td th:case="'N'" style="color: red;">UNVERIFIED</td>
@@ -362,13 +362,13 @@ $(document)
 							<div class="col-sm-1"></div>
 						</div>
 						<label></label>
-						<div class="row formline">
+						<!-- <div class="row formline">
 							<label class="col-sm-2">Remarks</label>
 							<div class="col-sm-3">
 								<input type="text" id="acct_remarks" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" class="form-control form-control-sm commonBackground" name="acct_remarks" autocomplete="off">
 							</div>
 							<div class="col-sm-1"></div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</form>
@@ -538,7 +538,7 @@ $(document)
 							<div class="col-sm-1"></div>
 						</div>
 						<label></label>
-						<div class="row formline">
+						<!-- <div class="row formline">
 							<label class="col-sm-2">Remarks</label>
 							<div class="col-sm-3">
 								<input type="text" th:if="${formmode}=='edit'" th:value="${SettlementAccount?.acct_remarks}" id="acct_remarks" class="form-control form-control-sm commonBackground" name="acct_remarks"
@@ -548,7 +548,7 @@ $(document)
 								>
 							</div>
 							<div class="col-sm-1"></div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</form>

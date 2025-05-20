@@ -124,7 +124,7 @@ to {
 }
 
 #one:checked ~.tabs #one-tab, #two:checked ~.tabs #two-tab, #three:checked
-	~.tabs #three-tab, #four:checked ~.tabs #four-tab, #four1:checked ~.tabs #four1-tab,
+	 ~.tabs #three-tab, #four:checked ~.tabs #four-tab, #four1:checked ~.tabs #four1-tab,
 	#five:checked ~.tabs #five-tab {
 	background: #fff;
 	color: #000;
@@ -143,7 +143,7 @@ to {
 }
 
 #one:checked ~.tabs #one-tab, #two:checked ~.tabs #two-tab, #three:checked
-	~.tabs #three-tab, #four:checked ~.tabs #four-tab, #four1:checked ~.tabs #four1-tab,
+	 ~.tabs #three-tab, #four:checked ~.tabs #four-tab, #four1:checked ~.tabs #four1-tab,
 	#five:checked ~.tabs #five-tab {
 	background: #fff;
 	color: #000;
@@ -652,6 +652,27 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 		    }
 		}
 	</script>
+	<script>
+  function toggleQRDivs() {
+    const maucasChecked = document.getElementById('type_maucas').checked;
+    const upiChecked = document.getElementById('type_upi').checked;
+
+    // Show/hide based on individual checkbox states
+    document.getElementById('maucasdiv').style.display = maucasChecked ? 'block' : 'none';
+    document.getElementById('upidiv').style.display = upiChecked ? 'block' : 'none';
+  }
+
+  // Attach event listeners on DOM ready
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initial toggle on page load
+    toggleQRDivs();
+
+    // Listen for checkbox changes
+    document.getElementById('type_maucas').addEventListener('change', toggleQRDivs);
+    document.getElementById('type_upi').addEventListener('change', toggleQRDivs);
+  });
+</script>
+	
 </head>
 
 <body onload=" onimageon();">
@@ -863,8 +884,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										th:if="${branchDet?.photo}!=null" title="click to view Image"
 										id="openUploadModal">show view</span>
 								</div>
-							</div> 
-							
+							</div>
+
 							<div class="float-left">
 								<h6 class="font-weight-bold ml-2"
 									style="color: #00008B; font-size: 11px">OUTLET DETAILS</h6>
@@ -974,296 +995,301 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 								</div>
 							</div>
 							<label></label>
-							<div class="float-left" style="margin-top: -10px;">
+							<div class="float-left" style="margin-top: -10px;" id="maucasdiv">
 								<h6 class="font-weight-bold ml-2"
 									style="color: #00008B; font-size: 11px">MAUCAS</h6>
-							</div>
-							<label></label>
-							<div class="ml-2">
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -10px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Tip or
-										Convenience Indicator :</label>
-									<div class="col-sm-2">
-										<label type="text" id="tip_or_conv_indicator"
-											name="tip_or_conv_indicator"
-											th:text="${branchDet?.tip_or_conv_indicator}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
 
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Convenience
-										Fee type :</label>
-									<div class="col-sm-2">
-										<label type="text" id="conv_fees_type" name="conv_fees_type"
-											th:text="${branchDet?.conv_fees_type}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+								<label></label>
+								<div class="ml-2">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -10px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Tip or
+											Convenience Indicator :</label>
+										<div class="col-sm-2">
+											<label type="text" id="tip_or_conv_indicator"
+												name="tip_or_conv_indicator"
+												th:text="${branchDet?.tip_or_conv_indicator}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Convenience
+											Fee type :</label>
+										<div class="col-sm-2">
+											<label type="text" id="conv_fees_type" name="conv_fees_type"
+												th:text="${branchDet?.conv_fees_type}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Value of
+											Convenience Fee :</label>
+										<div class="col-sm-2">
+											<label type="text" id="value_conv_fees"
+												name="value_conv_fees"
+												th:text="${branchDet?.value_conv_fees}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Value of
-										Convenience Fee :</label>
-									<div class="col-sm-2">
-										<label type="text" id="value_conv_fees" name="value_conv_fees"
-											th:text="${branchDet?.value_conv_fees}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Loyalty
-										Number :</label>
-									<div class="col-sm-2">
-										<label type="text" id="loyalty_number" name="loyalty_number"
-											th:text="${branchDet?.loyalty_number}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Purpose Of
-										Transaction :</label>
-									<div class="col-sm-2">
-										<label type="text" id="purpose_of_tran" name="purpose_of_tran"
-											th:text="${branchDet?.purpose_of_tran}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Static/Dynamic
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="static_field" name="static_field"
-											th:text="${branchDet?.static_field}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Loyalty
+											Number :</label>
+										<div class="col-sm-2">
+											<label type="text" id="loyalty_number" name="loyalty_number"
+												th:text="${branchDet?.loyalty_number}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Purpose Of
+											Transaction :</label>
+										<div class="col-sm-2">
+											<label type="text" id="purpose_of_tran"
+												name="purpose_of_tran"
+												th:text="${branchDet?.purpose_of_tran}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Static/Dynamic
+											:</label>
+										<div class="col-sm-2">
+											<label type="text" id="static_field" name="static_field"
+												th:text="${branchDet?.static_field}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
 								</div>
 							</div>
 							<label></label>
-							<div class="float-left" style="margin-top: -10px;">
+							<div class="float-left" style="margin-top: -10px;" id="upidiv">
 								<h6 class="font-weight-bold ml-2"
 									style="color: #00008B; font-size: 11px">UPI</h6>
-							</div>
-							<label></label>
-							<div class="ml-2">
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -10px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Version :</label>
-									<div class="col-sm-2">
-										<label type="text" id="version" name="version"
-											th:text="${branchDet?.version}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
 
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Modes :</label>
-									<div class="col-sm-2">
-										<label type="text" id="modes" name="modes"
-											th:text="${branchDet?.modes}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+								<label></label>
+								<div class="ml-2">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -10px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Version :</label>
+										<div class="col-sm-2">
+											<label type="text" id="version" name="version"
+												th:text="${branchDet?.version}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Modes :</label>
+										<div class="col-sm-2">
+											<label type="text" id="modes" name="modes"
+												th:text="${branchDet?.modes}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Purpose :</label>
+										<div class="col-sm-2">
+											<label type="text" id="purpose" name="purpose"
+												th:text="${branchDet?.purpose}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Purpose :</label>
-									<div class="col-sm-2">
-										<label type="text" id="purpose" name="purpose"
-											th:text="${branchDet?.purpose}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Original
+											ID :</label>
+										<div class="col-sm-2">
+											<label type="text" id="orgid" name="orgid"
+												th:text="${branchDet?.orgid}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Transaction
+											ID :</label>
+										<div class="col-sm-2">
+											<label type="text" id="tid" name="tid"
+												th:text="${branchDet?.tid}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Transaction
+											Reference :</label>
+										<div class="col-sm-2">
+											<label type="text" id="tr" name="tr"
+												th:text="${branchDet?.tr}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Original ID
-										:</label>
-									<div class="col-sm-2">
-										<label type="text" id="orgid" name="orgid"
-											th:text="${branchDet?.orgid}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Transaction
+											Note :</label>
+										<div class="col-sm-2">
+											<label type="text" id="tn" name="tn"
+												th:text="${branchDet?.tn}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Payee UPI
+											ID :</label>
+										<div class="col-sm-2">
+											<label type="text" id="pa" name="pa"
+												th:text="${branchDet?.pa}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Store ID :</label>
+										<div class="col-sm-2">
+											<label type="text" id="msid" name="msid"
+												th:text="${branchDet?.msid}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Transaction
-										ID :</label>
-									<div class="col-sm-2">
-										<label type="text" id="tid" name="tid"
-											th:text="${branchDet?.tid}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Terminal ID :</label>
+										<div class="col-sm-2">
+											<label type="text" id="mtid" name="mtid"
+												th:text="${branchDet?.mtid}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Transaction
+											Mandatory Amount :</label>
+										<div class="col-sm-2">
+											<label type="text" id="bam" name="bam"
+												th:text="${branchDet?.bam}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Transaction
+											Currency Code :</label>
+										<div class="col-sm-2">
+											<label type="text" id="curr" name="curr"
+												th:text="${branchDet?.curr}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Transaction
-										Reference :</label>
-									<div class="col-sm-2">
-										<label type="text" id="tr" name="tr"
-											th:text="${branchDet?.tr}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Invoice No :</label>
+										<div class="col-sm-2">
+											<label type="text" id="invoiceno" name="invoiceno"
+												th:text="${branchDet?.invoiceno}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Invoice Date :</label>
+										<div class="col-sm-2">
+											<label type="text" id="purpose_of_tran"
+												name="purpose_of_tran"
+												th:text="${#dates.format(branchDet?.invoicedate,'dd-MM-yyyy')}"
+												readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Invoice Name :</label>
+										<div class="col-sm-2">
+											<label type="text" id="invoicename" name="invoicename"
+												th:text="${branchDet?.invoicename}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Transaction
-										Note :</label>
-									<div class="col-sm-2">
-										<label type="text" id="tn" name="tn"
-											th:text="${branchDet?.tn}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">QR Expire
+											Date :</label>
+										<div class="col-sm-2">
+											<label type="text" id="merchantqrexpire"
+												name="merchantqrexpire"
+												th:text="${#dates.format(branchDet?.qrexpire,'dd-MM-yyyy')}"
+												readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Amount :</label>
+										<div class="col-sm-2">
+											<label type="text" id="am" name="am"
+												th:text="${branchDet?.am}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Pincode :</label>
+										<div class="col-sm-2">
+											<label type="text" id="pincode" name="pincode"
+												th:text="${branchDet?.pincode}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Payee UPI
-										ID :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pa" name="pa"
-											th:text="${branchDet?.pa}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Tier :</label>
+										<div class="col-sm-2">
+											<label type="text" id="tier" name="tier"
+												th:text="${branchDet?.tier}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Merchant
+											Tran Type :</label>
+										<div class="col-sm-2">
+											<label type="text" id="tran_type" name="tran_type"
+												th:text="${branchDet?.tran_type}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Qr Medium
+											:</label>
+										<div class="col-sm-2">
+											<label type="text" id="qrmedium" name="qrmedium"
+												th:text="${branchDet?.qrmedium}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Store ID :</label>
-									<div class="col-sm-2">
-										<label type="text" id="msid" name="msid"
-											th:text="${branchDet?.msid}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Terminal ID :</label>
-									<div class="col-sm-2">
-										<label type="text" id="mtid" name="mtid"
-											th:text="${branchDet?.mtid}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Transaction
-										Mandatory Amount :</label>
-									<div class="col-sm-2">
-										<label type="text" id="bam" name="bam"
-											th:text="${branchDet?.bam}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Transaction
-										Currency Code :</label>
-									<div class="col-sm-2">
-										<label type="text" id="curr" name="curr"
-											th:text="${branchDet?.curr}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Invoice No :</label>
-									<div class="col-sm-2">
-										<label type="text" id="invoiceno" name="invoiceno"
-											th:text="${branchDet?.invoiceno}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Invoice Date :</label>
-									<div class="col-sm-2">
-										<label type="text" id="purpose_of_tran" name="purpose_of_tran"
-											th:text="${#dates.format(branchDet?.invoicedate,'dd-MM-yyyy')}"
-											readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Invoice Name :</label>
-									<div class="col-sm-2">
-										<label type="text" id="invoicename" name="invoicename"
-											th:text="${branchDet?.invoicename}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">QR Expire
-										Date :</label>
-									<div class="col-sm-2">
-										<label type="text" id="merchantqrexpire"
-											name="merchantqrexpire"
-											th:text="${#dates.format(branchDet?.qrexpire,'dd-MM-yyyy')}"
-											readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Amount :</label>
-									<div class="col-sm-2">
-										<label type="text" id="am" name="am"
-											th:text="${branchDet?.am}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Pincode :</label>
-									<div class="col-sm-2">
-										<label type="text" id="pincode" name="pincode"
-											th:text="${branchDet?.pincode}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Tier :</label>
-									<div class="col-sm-2">
-										<label type="text" id="tier" name="tier"
-											th:text="${branchDet?.tier}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Merchant
-										Tran Type :</label>
-									<div class="col-sm-2">
-										<label type="text" id="tran_type" name="tran_type"
-											th:text="${branchDet?.tran_type}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Qr Medium :</label>
-									<div class="col-sm-2">
-										<label type="text" id="qrmedium" name="qrmedium"
-											th:text="${branchDet?.qrmedium}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-								</div>
-								<div class="row formline"
-									style="font-size: 11px; margin-top: -15px;">
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Tip or
-										Convenience Indicator :</label>
-									<div class="col-sm-2">
-										<label type="text" id="tip_or_conv_indicator_upi"
-											name="tip_or_conv_indicator_upi "
-											th:text="${branchDet?.tip_or_conv_indicator_upi}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Convenience
-										Fee type :</label>
-									<div class="col-sm-2">
-										<label type="text" id="conv_fees_type_upi"
-											name="conv_fees_type_upi"
-											th:text="${branchDet?.conv_fees_type_upi}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
-									</div>
-									<label class="col-sm-2 col-form-label"
-										style="color: #343a40; font-weight: bold;">Value of
-										Convenience Fee :</label>
-									<div class="col-sm-2">
-										<label type="text" id="value_conv_fees_upi"
-											name="value_conv_fees_upi"
-											th:text="${branchDet?.value_conv_fees_upi}" readonly
-											style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+									<div class="row formline"
+										style="font-size: 11px; margin-top: -15px;">
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Tip or
+											Convenience Indicator :</label>
+										<div class="col-sm-2">
+											<label type="text" id="tip_or_conv_indicator_upi"
+												name="tip_or_conv_indicator_upi "
+												th:text="${branchDet?.tip_or_conv_indicator_upi}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Convenience
+											Fee type :</label>
+										<div class="col-sm-2">
+											<label type="text" id="conv_fees_type_upi"
+												name="conv_fees_type_upi"
+												th:text="${branchDet?.conv_fees_type_upi}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
+										<label class="col-sm-2 col-form-label"
+											style="color: #343a40; font-weight: bold;">Value of
+											Convenience Fee :</label>
+										<div class="col-sm-2">
+											<label type="text" id="value_conv_fees_upi"
+												name="value_conv_fees_upi"
+												th:text="${branchDet?.value_conv_fees_upi}" readonly
+												style="margin-top: 10px; font-size: 0.6rem; height: 20px;">
+										</div>
 									</div>
 								</div>
 							</div>
-
 							<div class="float-left">
 								<h6 class="font-weight-bold ml-2"
 									style="color: #00008B; font-size: 11px">BANK DETAILS</h6>
@@ -1771,8 +1797,8 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										</label>
 									</div>
 								</div>
-							</div> 
-							
+							</div>
+
 							<div class="float-left">
 								<h6 class="font-weight-bold ml-2"
 									style="color: #00008B; font-size: 11px">MERCHANT CONTACT
@@ -1872,12 +1898,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 										<tr th:if="${MERLST.mer_user_id_r2 != null }">
 											<td th:text="${MERLST?.mer_user_id_r2}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r2}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r2"
@@ -1900,17 +1926,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r2}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r2}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r2 == 'Y'}"
-												class="rowDataField" id="send_notifi_r2"
+												class="rowDataField" id="send_notifi_r2" style="background-color: #ffffff;"
 												name="send_notifi_r2" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r2 != 'Y'}"
-												class="rowDataField" id="send_notifi_r2"
+												class="rowDataField" id="send_notifi_r2" style="background-color: #ffffff;"
 												name="send_notifi_r2" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
@@ -2270,7 +2296,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 									</tbody>
 								</table>
-							</div> 
+							</div>
 							<div class="float-left">
 								<h6 class="font-weight-bold ml-2"
 									style="color: #00008B; font-size: 11px">MERCHANT FEES
@@ -2398,10 +2424,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											<td th:text="${Doocument?.expiry_date}" class="rowDataField"
 												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
 												15-JUN-2023</td>
-											<td class="rowDataField"
+											<td class="rowDataField" style="background-color: #ffffff;"
 												th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg') || Doocument.file_name.endsWith('.png'))}">
 												<img th:src="@{/images/info.png}"
-												style="width: 30px; height: 30px" onclick="show1(this)"
+												style="width: 30px; height: 30px;background-color: #ffffff;" onclick="show1(this)"
 												id="openModaldoc"
 												th:attr="data-doc_type=${Doocument?.unique_id},data-doc_types=${Doocument?.merchant_id}"
 												data-toggle="modal" data-target=".bd-example-modal-lg">
@@ -2410,11 +2436,11 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											<!-- For .pdf, .xls files -->
 											<td
 												th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.pdf') || Doocument.file_name.endsWith('.xls'))}"
-												th:data-unique-id="${Doocument?.unique_id}"><a
+												th:data-unique-id="${Doocument?.unique_id}" style="background-color: #ffffff;"><a
 												href="javascript:void(0);" onclick="handleClick(this)"
 												style="text-decoration: none; color: DodgerBlue;"> <img
 													th:src="@{/images/info.png}"
-													style="width: 30px; height: 30px;" alt="Info">
+													style="width: 30px; height: 30px;background-color: #ffffff;" alt="Info">
 											</a></td>
 
 
@@ -2438,7 +2464,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 											<td style="text-align: center; background-color: #ffffff;">Name:
 												<input type="text"
 												th:text="${branchDet?.merchant_corp_name}"
-												style="border: none; outline: none; margin-left: 20px; width: 150px; background-color: #ffffff;font-size: 12px"
+												style="border: none; outline: none; margin-left: 20px; width: 150px; background-color: #ffffff; font-size: 12px"
 												id="ca_first_name" readonly />
 											</td>
 
@@ -3290,8 +3316,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 						style="text-align: center; position: relative;">
 						<span class="closedoc" id="closeModaldoc" data-dismiss="modal"
 							style="position: absolute; top: 65px; right: 20px; cursor: pointer; font-size: 24px; color: red;">&times;</span>
-						<br />
-						<br /> <img class="img-responsive" id="doc_image"
+						<br /> <br /> <img class="img-responsive" id="doc_image"
 							style="max-height: 500px; width: 100%;">
 					</div>
 					<!-- <button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">Close</button> -->
