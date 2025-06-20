@@ -2333,20 +2333,20 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<tbody>
 										<tr th:each="Fee : ${merchantFeeDetails}">
 											<td class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												style="font-size: 0.6rem;   background-color: #ffffff;"
 												th:text="${Fee?.fee_desc}"></td>
 											<td class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												style="font-size: 0.6rem; background-color: #ffffff;"
 												th:text="${Fee?.fee_type}"></td>
 											<td class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												style="font-size: 0.6rem;   background-color: #ffffff;"
 												th:text="${Fee?.amount_per == 0 ? '0.00' :#numbers.formatDecimal(Fee?.amount_per, 0, 'COMMA', 2, 'POINT')}">
 											</td>
 											<td class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												style="font-size: 0.6rem;   background-color: #ffffff;"
 												th:text="${Fee?.fee_freq}"></td>
 											<td class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+												style="font-size: 0.6rem;  background-color: #ffffff;"
 												th:text="${Fee?.vat_collect}"></td>
 										</tr>
 									</tbody>
@@ -2355,7 +2355,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 							</div>
 							<div class="float-left">
 								<h6 class="font-weight-bold ml-2"
-									style="color: #00008B; font-size: 11px">DOCUMENT DETAILS</h6>
+									style="color: #00008B; font-size: 11px">TAILS</h6>
 							</div>
 							<div class="table-responsive " style="overflow: auto;">
 								<table border="1" id="dynamicTable"
@@ -2364,35 +2364,35 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									<thead>
 										<tr>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem;  border-color: FFD580;">
 												<label class="mt-1">Document Type</label>
 											</th>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem;border-color: FFD580;">
 												<label>Document Code</label>
 											</th>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem;border-color: FFD580;">
 												<label>Document Description</label>
 											</th>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem;border-color: FFD580;">
 												<label>Unique ID</label>
 											</th>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem;border-color: FFD580;">
 												<label>Place of Issue</label>
 											</th>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem; border-color: FFD580;">
 												<label>Issue Date</label>
 											</th>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem;border-color: FFD580;">
 												<label>Expiry Date</label>
 											</th>
 											<th
-												style="font-size: 0.7rem; padding: 0.1rem; border-color: FFD580;">
+												style="font-size: 0.7rem; border-color: FFD580;">
 												<label>Document View</label>
 											</th>
 										</tr>
@@ -2401,33 +2401,33 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td th:text="${Doocument?.document_type}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												style="font-size: 0.6rem;  background-color: #ffffff;">
 												Address</td>
 											<td th:text="${Doocument?.document_code}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												style="font-size: 0.6rem;  background-color: #ffffff;">
 												ADD001</td>
 											<td th:text="${Doocument?.document_type_desc}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												style="font-size: 0.6rem;  background-color: #ffffff;">
 												Passport</td>
 											<td th:text="${Doocument?.unique_id}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												style="font-size: 0.6rem;  background-color: #ffffff;">
 												D324234234</td>
 											<td th:text="${Doocument?.place_of_issue}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												style="font-size: 0.6rem; background-color: #ffffff;">
 												Madurai</td>
 											<td th:text="${Doocument?.issue_date}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												style="font-size: 0.6rem; background-color: #ffffff;">
 												18-JUN-2018</td>
 											<td th:text="${Doocument?.expiry_date}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
+												style="font-size: 0.6rem; background-color: #ffffff;">
 												15-JUN-2023</td>
 											<td class="rowDataField" style="background-color: #ffffff;"
 												th:if="${Doocument?.file_name != null && (Doocument.file_name.endsWith('.jpeg') || Doocument.file_name.endsWith('.jfif') || Doocument.file_name.endsWith('.jpg') || Doocument.file_name.endsWith('.png'))}">
 												<img th:src="@{/images/info.png}"
-												style="width: 30px; height: 30px;background-color: #ffffff;" onclick="show1(this)"
+												style="width: 20px; height: 20px;background-color: #ffffff;" onclick="show1(this)"
 												id="openModaldoc"
 												th:attr="data-doc_type=${Doocument?.unique_id},data-doc_types=${Doocument?.merchant_id}"
 												data-toggle="modal" data-target=".bd-example-modal-lg">
@@ -2440,7 +2440,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 												href="javascript:void(0);" onclick="handleClick(this)"
 												style="text-decoration: none; color: DodgerBlue;"> <img
 													th:src="@{/images/info.png}"
-													style="width: 30px; height: 30px;background-color: #ffffff;" alt="Info">
+													style="width: 20px; height: 20px;background-color: #ffffff;" alt="Info">
 											</a></td>
 
 

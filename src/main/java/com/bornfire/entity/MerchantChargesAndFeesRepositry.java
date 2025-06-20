@@ -15,7 +15,7 @@ public interface MerchantChargesAndFeesRepositry extends JpaRepository<MerchantC
 	 Optional<MerchantChargesAndFees> findById(String directorId);
 
 
-	@Query(value = "select * from BIPS_MERCHANT_CHARGES_AND_FEES_TABLE where entity_flg='Y' and del_flg='N' and description is not null union all select * from BIPS_MERCHANT_CHARGES_AND_FEES_MOD_TABLE where del_flg='N'", nativeQuery = true)
+	@Query(value = "select * from BIPS_MERCHANT_CHARGES_AND_FEES_TABLE where del_flg='N' and description is not null union all select * from BIPS_MERCHANT_CHARGES_AND_FEES_MOD_TABLE where del_flg='N'", nativeQuery = true)
 	List<MerchantChargesAndFees> findAllCustom();
 	
 	

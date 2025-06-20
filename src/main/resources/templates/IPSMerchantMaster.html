@@ -4059,6 +4059,12 @@ td {
 			location.href = './merchantReg2?formmode=verify&merchant_acct_no=' +
 				merchant_acct_no;
 		}
+		
+		function holdbtn(a) {
+			var merchant_acct_no = a.getAttribute("data-bank_code");
+			location.href = './merchantReg2?formmode=holdscrn&merchant_acct_no=' +
+				merchant_acct_no;
+		}
 
 		function validateForm() {
 			let x = document.forms["qrcodename"]["poi_method"].value;
@@ -4171,7 +4177,6 @@ td {
 		}
 
 		function submitverifyform(a) {
-
 			function formatDateString(dateString) {
 				const date = new Date(dateString);
 				const day = String(date.getDate()).padStart(2, '0');
@@ -4217,10 +4222,10 @@ td {
 					// Set the formatted date value in the form input
 					document.querySelector('#BankandBranchverify input[id="brn_date"]').value = dateValue;
 					let value = document.getElementById("merchant_legal_id_n").value;
-					alert(value);
+					//alert(value);
 					var firstThreeDigits = value.substring(3); 	
 					// Collect the form data
-					alert(firstThreeDigits)
+					//alert(firstThreeDigits)
 					var formData = new FormData(document.getElementById('BankandBranchverify'));
 					formData.append("merchant_legal_id", firstThreeDigits);
 
@@ -7067,7 +7072,7 @@ function rowaddEdit() {
 
     			// Get values from the current row
     			row.doctype = $(this).find("select[name='docType']").val(); // Use select directly
-    			row.doccode = $(this).find("input[name='docCode']").val();
+    			row.doccode = $(this).find("select[name='docCode']").val();
     			row.doctypesesc = $(this).find("input[name='docDesc']").val();
     			row.uniqueid = $(this).find("input[name='uniqId']").val();
     			row.placeofissue = $(this).find("input[name='docIssPlace']").val();
@@ -7395,16 +7400,27 @@ function rowdeleteDoc(ele) {
 
 				<div class="table mt-1 mb-0">
 					<div th:if="${#lists.isEmpty(bankDetail)}">
-						<table class="table table-bordered" id=""
+						<table class="table table-striped table-bordered table-hover table-sm" id=""
 							style="table-layout: fixed; width: 100%;">
 							<thead>
-								<tr>
-									<th>Merchant ID</th>
-									<th>Merchant Corporate Name</th>
-									<th>Merchant Type</th>
-									<th>Merchant Outlet Address</th>
-									<th>Status</th>
-									<th>Select</th>
+								<tr class="filters">
+									<th style="text-align: center"><input type="text"
+										class="form-control font-weight-bold"
+										placeholder="Merchant ID" disabled></th>
+									<th style="text-align: center"><input type="text"
+										class="form-control font-weight-bold"
+										placeholder="Mer Corp Name" disabled /></th>
+									<th style="text-align: center"><input type="text"
+										class="form-control font-weight-bold"
+										placeholder="Merchant Type" disabled></th>
+									<th style="text-align: center"><input type="text"
+										class="form-control font-weight-bold"
+										placeholder="Mer Outlet Address" disabled></th>
+
+									<th style="text-align: center"><input type="text"
+										class="form-control font-weight-bold" placeholder="Status"
+										disabled></th>
+									<th class="pb-2 select_th">Select</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -7432,7 +7448,7 @@ function rowdeleteDoc(ele) {
 										placeholder="Mer Corp Name" disabled /></th>
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold"
-										placeholder=">Merchant Type" disabled></th>
+										placeholder="Merchant Type" disabled></th>
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold"
 										placeholder="Mer Outlet Address" disabled></th>
@@ -7466,7 +7482,7 @@ function rowdeleteDoc(ele) {
 										id="btnclick" name="btnradio" style="cursor: pointer;"
 										th:attr="data-bank_code=${bankList.merchant_id}"
 										th:id="${bankList.merchant_id}"
-										onclick="verify_btn_submit(this); "></td>
+										onclick="holdbtn(this); "></td>
 								</tr>
 							</tbody>
 						</table>
@@ -7631,8 +7647,7 @@ function rowdeleteDoc(ele) {
 				</div>
 			</form>
 		</div>
-		<!--  ADD : FUNCTION : START -->
-		<!-- BHARATH -->
+		<!--  ADD : FUNCTION : START --> 
 		<div id="formSection" th:if="${formmode}=='add'" class="content">
 			<div class="card mb-0">
 				<div class="card-header p-0" style="height: 60px;">
@@ -7731,7 +7746,7 @@ function rowdeleteDoc(ele) {
 											<div class="col-sm-3">
 												<input type="text" id="merchant_corp_name"
 													class="form-control form-control-sm" maxlength="50"
-													onkeyup="this.value = this.value.toUpperCase(); handleInUserName(this)"
+													onkeyup="this.value = this.value.toUpperCase(); "
 													name="merchant_corp_name" autocomplete="off" required>
 												<span id="merchant_corp_name_vali" class="reqError"></span>
 											</div>
@@ -10657,7 +10672,7 @@ function rowdeleteDoc(ele) {
 												<input type="text" id="unitid" name="unit_id_u"
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													maxlength="30" autocomplete="off"
-													class="form-control form-control-sm" readonly>
+													class="form-control form-control-sm" >
 											</div>
 										</div>
 
@@ -10974,7 +10989,7 @@ function rowdeleteDoc(ele) {
 											</div>
 											<div class="col-sm-3">
 												<input type="text" id="unitidd" name="unit_id_d"
-													th:if="${formmode}=='MerMastadd'" readonly
+													th:if="${formmode}=='MerMastadd'" 
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													maxlength="30" autocomplete="off"
 													class="form-control form-control-sm">
@@ -11481,24 +11496,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r2"
-																				name="ofc_countrycode_r2"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r2}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r2"
-																			name="mer_ofc_no_r2"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r2}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r2"
+																	th:text="${MERLST?.mer_nat_id_r2}"></span> <span
+																	id="mer_email_addr_r2_vali" class="text-danger"></span>
 																</td>
 
 																<td style="background-color: unset;"><span
@@ -19453,13 +19454,15 @@ function rowdeleteDoc(ele) {
 
 		<!-- Merchant Verify  : Start-->
 
-		<div th:if="${formmode}=='verify'" class="content"
+		<div th:if="${formmode}=='verify' or ${formmode}=='holdscrn'" class="content"
 			style="margin-right: 10px;">
 			<div class="card">
 				<div class="card-header">
 					<div class="float-left">
-						<h4 style="color: white; font-size: 1.2rem;" class="headerh6">Merchant
+						<h4 style="color: white; font-size: 1.2rem;" th:if="${formmode}=='verify'" class="headerh6">Merchant
 							Master - Verify</h4>
+							<h4 style="color: white; font-size: 1.2rem;" th:if="${formmode}=='holdscrn'" class="headerh6">Merchant
+							Master - Hold/Reject</h4>
 					</div>
 				</div>
 				<form action="#" th:object="${branchDet}" method="POST"
@@ -20395,7 +20398,7 @@ function rowdeleteDoc(ele) {
 								<label></label>
 								<div class="row formline mb-2">
 									<label class="col-sm-2">Type of QR Acceptance</label>
-									<div class="col-sm-3" th:if="${formmode} == 'verify'">
+									<div class="col-sm-3" >
 										<input th:if="${branchDet.type_maucas} != 'Maucas'"
 											type="checkbox" name="type_maucas" Value="Maucas"
 											id="type_maucas"> <input
@@ -21204,7 +21207,7 @@ function rowdeleteDoc(ele) {
 								<button type="button" class="btn btn-sm  headerbutton"
 									data-dismiss="modal" onclick="previousverify(this);">Previous</button>
 								<button type="button" class="btn  btn-sm headerbutton"
-									th:if="${formmode == 'verify' and branchDet?.hr_status != 'HOLD' and branchDet?.hr_status != 'REJECT'}"
+									th:if="${formmode == 'verify'}"
 									th:attr="data-formmode=verifysubmit,data-entry_user=${branchDet?.entry_user},
 									data-modify_user=${branchDet?.modify_user},data-login_user=${user_id},data-modify_flag=${branchDet?.modify_flg},data-work_class=${IPSRoleMenu.work_class}"
 									form="BankandBranchverify" onclick="submitverifyform(this)">Verify</button>
@@ -23026,7 +23029,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<!-- Add content here if needed -->
 				</div>
 				<div class="modal-footer"
@@ -23190,7 +23193,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p>Please fill the required fields</p>
 					<button type="button" class="btn  headerbutton"
 						data-dismiss="modal">Close</button>
@@ -23208,7 +23211,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="invalidfilemsg"></p>
 					<button type="button" class="btn  headerbutton"
 						data-dismiss="modal">Close</button>
@@ -23240,7 +23243,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2"></div>
+					style="text-align: center;"></div>
 				<div class="modal-footer"
 					style="background-color: #c6ccd2; border-top: none; text-align: center;">
 					<button type="button" class="btn  headerbutton"
@@ -23469,7 +23472,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="alertmsgee1" style="font-size: 16px;"></p>
 					<button type="button" class="btn  headerbutton"
 						data-dismiss="modal">Close</button>
@@ -23487,7 +23490,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p>Same user cannot verify</p>
 					<button type="button" class="btn  headerbutton" onclick="back()">Close</button>
 				</div>
@@ -23504,7 +23507,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p>same user cannot verify</p>
 					<button type="button" class="btn  headerbutton" onclick="back()">Close</button>
 				</div>
@@ -23720,7 +23723,7 @@ function rowdeleteDoc(ele) {
 							style="text-align: center; color: white;">BANK OF BARODA</div>
 					</div>
 					<div class="modal-body"
-						style="text-align: center; background-color: #c6ccd2">
+						style="text-align: center;">
 						<label>Remarks : </label> <input class="ml-4" id="userRemarks"
 							name="userRemarks" style="width: 75%;" required />
 					</div>
@@ -23747,7 +23750,7 @@ function rowdeleteDoc(ele) {
 							style="text-align: center; color: white;">BANK OF BARODA</div>
 					</div>
 					<div class="modal-body"
-						style="text-align: center; background-color: #c6ccd2">
+						style="text-align: center;">
 						<label>Remarks : </label> <input class="ml-4" id="deviceRemarks"
 							name="deviceRemarks" style="width: 75%;" required />
 					</div>
@@ -23774,7 +23777,7 @@ function rowdeleteDoc(ele) {
 							style="text-align: center; color: white;">BANK OF BARODA</div>
 					</div>
 					<div class="modal-body"
-						style="text-align: center; background-color: #c6ccd2">
+						style="text-align: center;">
 						<label>Remarks : </label> <input class="ml-4"
 							id="passwordManageRemarks" name="passwordManageRemarks"
 							style="width: 75%;" required />
@@ -23803,7 +23806,7 @@ function rowdeleteDoc(ele) {
 							style="text-align: center; color: white;">BANK OF BARODA</div>
 					</div>
 					<div class="modal-body"
-						style="text-align: center; background-color: #c6ccd2">
+						style="text-align: center;">
 						<label>Remarks : </label> <input class="ml-4" id="merchantRemarks"
 							name="merchantRemarks" style="width: 75%;" required />
 					</div>
@@ -23832,7 +23835,7 @@ function rowdeleteDoc(ele) {
 							style="text-align: center; color: white;">BANK OF BARODA</div>
 					</div>
 					<div class="modal-body"
-						style="text-align: center; background-color: #c6ccd2">
+						style="text-align: center;">
 						<label>Remarks : </label> <input class="ml-4" id="unitRemarks"
 							name="unitRemarks" style="width: 75%;" required />
 					</div>
@@ -23857,7 +23860,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2"></div>
+					style="text-align: center;"></div>
 				<div class="modal-footer"
 					style="background-color: #c6ccd2; border-top: none; text-align: center;">
 					<button type="button" class="btn  headerbutton"
@@ -25114,22 +25117,28 @@ function rowdeleteDoc(ele) {
 			var merchant_id = document.getElementById("merchant_legal_id_n").value;
 			var hold_remarks = document.getElementById("hr_hold_remarks").value;
 
+			// Extract only the part after 'ZZZ' (e.g., from 'ZZZM0011' get 'M0011')
+			if (merchant_id.startsWith("ZZZ")) {
+			    merchant_id = merchant_id.substring(3); // Removes the first 3 characters
+			}
+
 			// Submit the form via AJAX
 			$.ajax({
-				url: './holdsubmit?&merchant_id=' + merchant_id + '&hold_remarks=' + hold_remarks,
-				data: $("#TabForm").serialize(),
-				type: 'POST',
-				success: function (response) {
-					$('#myModalpopup2').modal("toggle");
-					$('#myModalpopup2 .modal-body').text(response);
-				},
-				error: function (error) {
-					console.error("Error: " + error.responseText);
-					alert("Error saving data");
-				}
+			    url: './holdsubmit?merchant_id=' + merchant_id + '&hold_remarks=' + encodeURIComponent(hold_remarks),
+			    data: $("#TabForm").serialize(),
+			    type: 'POST',
+			    success: function (response) {
+			        $('#myModalpopup2').modal("toggle");
+			        $('#myModalpopup2 .modal-body').text(response);
+			    },
+			    error: function (error) {
+			        console.error("Error: " + error.responseText);
+			        alert("Error saving data");
+			    }
 			});
 
 			$('#confirmationModal').modal('hide'); // Hide confirmation modal after Confirm
+
 		}
 	}
 
@@ -25174,8 +25183,13 @@ function rowdeleteDoc(ele) {
 
 	function proceedform() {
 
-		var merchant_id = document.getElementById("merchant_legal_id").value;
+		var merchant_id = document.getElementById("merchant_legal_id_n").value;
 		//alert("merchant_id");
+
+			// Extract only the part after 'ZZZ' (e.g., from 'ZZZM0011' get 'M0011')
+			if (merchant_id.startsWith("ZZZ")) {
+			    merchant_id = merchant_id.substring(3); // Removes the first 3 characters
+			}
 
 		// Submit the form via AJAX
 		$.ajax({
@@ -25384,7 +25398,7 @@ function rowdeleteDoc(ele) {
 
 			// Get values from the current row
 			row.doctype = $(this).find("select[name='docType']").val(); // Use select directly
-			row.doccode = $(this).find("input[name='docCode']").val();
+			row.doccode = $(this).find("select[name='docCode']").val();
 			row.doctypesesc = $(this).find("input[name='docDesc']").val();
 			row.uniqueid = $(this).find("input[name='uniqId']").val();
 			row.placeofissue = $(this).find("input[name='docIssPlace']").val();
@@ -25950,7 +25964,7 @@ function rowdeleteDoc(ele) {
 
 		var merchant_Id = document.getElementById("merchant_id").value;
 		var merchant_name = document.getElementById("merchant_name_sign").value;
-		alert(merchant_name);
+		//alert(merchant_name);
 		let imgElement = null;
 		let Sign = null;
 
@@ -25979,7 +25993,7 @@ function rowdeleteDoc(ele) {
 			contentType: false,
 			processData: false,
 			success: function (response) {
-					alert(response)
+					//alert(response)
 
 			},
 			error: function (xhr, status, error) {

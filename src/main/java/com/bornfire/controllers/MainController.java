@@ -1482,6 +1482,21 @@ public class MainController {
 		} else if (formmode.equals("HoldReject")) {
 			md.addAttribute("formmode", "HoldReject");
 			md.addAttribute("bankDetail", merchantMasterModRep.holdrejectlist());
+		}else if (formmode.equals("holdscrn")) {
+			md.addAttribute("Merchant_mode", referenceCodeRep.getReferenceList("MM01"));
+			md.addAttribute("Merchant_city", referenceCodeRep.getReferenceList("MM02"));
+			md.addAttribute("Merchant_notification", referenceCodeRep.getReferenceList("MM03"));
+			md.addAttribute("Merchant_type", referenceCodeRep.getReferenceList("MM04"));
+			md.addAttribute("formmode", formmode);
+			md.addAttribute("user_id", userID);
+			md.addAttribute("branchDet", merchantMasterModRep.findByIdCustom(merchant_acct_no));
+			md.addAttribute("merchant_acct_no", merchant_acct_no);
+			md.addAttribute("merchantFeeDetails", merchantFeesServiceRepo.merchantDetailsFromMod(merchant_acct_no));
+			md.addAttribute("branchDets", bIPS_UnitManagement_Repo.getUnitlist(merchant_acct_no));
+			md.addAttribute("branchDetsunit", bIPS_UnitManagement_Repo.getUnitlist(merchant_acct_no));
+			md.addAttribute("CountryCode", referenceCodeRep.getReferenceList("CC01"));
+			md.addAttribute("DocumentList", documentMaster_Repo.findByMer(merchant_acct_no));
+			md.addAttribute("SignMerName", Sign_Master_Repo.getMerId(merchant_acct_no));
 		}
 		return "IPSMerchantMaster";
 	}
