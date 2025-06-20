@@ -356,7 +356,7 @@ label {
 						        <td style="text-align: left;">${reversalRemarks}</td>
 						        <td style="text-align: center; vertical-align: middle; padding: 0;">
 						            <input type="radio" id="btnclick" name="btnradio" style="cursor: pointer;"
-									data-audit-number="${tranAuditNumber}" id="${tranAuditNumber}" onclick="getUnicRec(this);">
+									data-sequence_unique_id="${sequenceUniqueId}" id="${sequenceUniqueId}" onclick="getUnicRec(this);">
 						        </td>
 						    </tr>`;
 					});
@@ -423,7 +423,7 @@ label {
 	// New
 	
 	function getUnicRec(a) {
-		var auditRef = a.getAttribute("data-audit-number");
+		var auditRef = a.getAttribute("data-sequence_unique_id");
 		location.href = 'Merchantransaction?formmode=viewTransaction&tran_audit='+ auditRef;
 	}
 	
@@ -584,8 +584,8 @@ $(document)
 									th:text="${profile.reversal_remarks !=null ? profile.reversal_remarks.toUpperCase() : ''}"></td>
 								<td style="text-align: center;"><input type="radio"
 									id="btnclick" name="btnradio" style="cursor: pointer;"
-									th:attr="data-audit-number=${profile.tran_audit_number}"
-									th:id="${profile.tran_audit_number}"
+									th:attr="data-sequence_unique_id=${profile.sequence_unique_id}"
+									th:id="${profile.sequence_unique_id}"
 									onclick="getUnicRec(this);"></td>
 							</tr>
 						</tbody>

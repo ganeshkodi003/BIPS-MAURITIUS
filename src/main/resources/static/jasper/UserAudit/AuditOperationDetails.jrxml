@@ -13,7 +13,7 @@
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="368"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="623"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="IPS BOB BW"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Merchant.jrdax"/>
 	<parameter name="AUDIT_DATE1" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select * from BIPS_AUDIT_TABLE where trunc(audit_date) = $P{AUDIT_DATE1}

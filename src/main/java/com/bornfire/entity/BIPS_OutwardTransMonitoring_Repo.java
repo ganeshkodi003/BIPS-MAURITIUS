@@ -141,6 +141,6 @@ public interface BIPS_OutwardTransMonitoring_Repo extends JpaRepository<BIPS_Out
 	List<BIPS_Outward_Trans_Monitoring_Entity> getTransactionDetailsDevice(String fromdate, String todate,
 			String merchantId, String deviceId);
 	
-	@Query(value = "SELECT * FROM (SELECT * FROM bips_outward_transaction_monitoring_table UNION ALL SELECT * FROM bips_outward_transaction_hist_monitoring_table) WHERE TRAN_AUDIT_NUMBER = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM (SELECT * FROM bips_outward_transaction_monitoring_table UNION ALL SELECT * FROM bips_outward_transaction_hist_monitoring_table) WHERE sequence_unique_id = ?1", nativeQuery = true)
 	BIPS_Outward_Trans_Monitoring_Entity getSingleRecord(String auditRef);
 }

@@ -15,7 +15,7 @@ public interface MerchantCategoryRep extends JpaRepository<MerchantCategoryCodeE
 	 Optional<MerchantCategoryCodeEntity> findById( String directorId);
 
 
-		@Query(value = "select * from BIPS_MERCHANT_CATEGORY_CODE_TABLE where del_flg<>'Y'", nativeQuery = true)
+		@Query(value = "select * from BIPS_MERCHANT_CATEGORY_CODE_TABLE where del_flg<>'Y' order by merchant_code asc", nativeQuery = true)
 		List<MerchantCategoryCodeEntity> findAllCustom();
 		
 		@Query(value = "select * from BIPS_MERCHANT_CATEGORY_CODE_TABLE where merchant_code=?1", nativeQuery = true)
