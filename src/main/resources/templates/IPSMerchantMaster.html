@@ -10669,10 +10669,10 @@ function rowdeleteDoc(ele) {
 													style="color: red; font-size: 20px;"> *</span></label>
 											</div>
 											<div class="col-sm-3">
-												<input type="text" id="unitid" name="unit_id_u"
+												<input type="text" id="unitid" name="unit_id_u" th:value="${merunitrid}"
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
 													maxlength="30" autocomplete="off"
-													class="form-control form-control-sm" >
+													class="form-control form-control-sm" readonly >
 											</div>
 										</div>
 
@@ -10991,8 +10991,8 @@ function rowdeleteDoc(ele) {
 												<input type="text" id="unitidd" name="unit_id_d"
 													th:if="${formmode}=='MerMastadd'" 
 													onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-													maxlength="30" autocomplete="off"
-													class="form-control form-control-sm">
+													maxlength="30" autocomplete="off" th:value="${merunitrid}"
+													class="form-control form-control-sm" readonly>
 											</div>
 
 										</div>
