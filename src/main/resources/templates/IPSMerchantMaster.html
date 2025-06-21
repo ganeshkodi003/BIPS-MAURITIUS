@@ -8898,7 +8898,7 @@ function rowdeleteDoc(ele) {
 															<option value="RDOC">REGISTRATION DOCUMENT</option>
 															<option value="BDOC">BUSINESS DOCUMENT</option>
 													</select></td>
-													<td><select id="docCode1" name="docCode1"
+													<td><select id="docCode1" name="docCode"
 														onchange="updateDescription(this)"
 														class="form-control form-control-sm"
 														style="height: 26px; width: 150px;">
@@ -25390,9 +25390,21 @@ function rowdeleteDoc(ele) {
 		//var rec_no = document.getElementById('numberone').textContent;
 		var appl_ref_no = document.getElementById("merchant_id").value;
 		//alert(appl_ref_no);
-		const dynamicValues = []; // Initialize the array here
-
-		// Loop through each row in the tbody with id "click1"
+		const dynamicValues = [];
+		let allFilled = true;
+		$("#click1 tr").each(function () {
+			if ($(this).find("input[name='document_type']").val() == "" ||
+				$(this).find("input[name='docCode']").val() == "" ||
+				$(this).find("input[name='docDesc']").val() == "" ||
+				$(this).find("input[name='uniqId']").val() == "" ||
+				$(this).find("input[name='docIssPlace']").val() == "" ||
+				$(this).find("input[name='docIssDate']").val() == "" ||
+				$(this).find("input[name='docExpDate']").val() == "") {
+				allFilled = false; // Mark as not all fields are filled
+				return false; // Exit the loop early
+			}
+		});
+		
 		$("#click1 tr").each(function () {
 			var row = {}; // Create an object to hold the data for this row
 
