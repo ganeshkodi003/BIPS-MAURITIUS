@@ -469,6 +469,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	font-weight: bold;
 }
 </style>
+
 <script>
 		function clickPhoto(a) {
 			var userid = a.getAttribute("data-userid")
@@ -1889,11 +1890,14 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 												id="send_notifi" name="send_notifi" type="checkbox" checked
 												disabled></td>
 											<td th:if="${MERLST?.send_notifi != 'Y'}"
-												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
-												id="send_notifi" name="send_notifi" type="checkbox" disabled>
-												<input type="radio" checked>
-											</td>
+	style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;"
+	class="rowDataField">
+	<label class="custom-radio">
+		<input type="radio" checked disabled>
+		<span class="checkmark"></span>
+	</label>
+</td>
+
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r2 != null }">
@@ -1943,12 +1947,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 										<tr th:if="${MERLST.mer_user_id_r3 != null }">
 											<td th:text="${MERLST?.mer_user_id_r3}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r2}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r3"
@@ -1971,29 +1975,29 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r3}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r3}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r3 == 'Y'}"
-												class="rowDataField" id="send_notifi_r2"
+												class="rowDataField" id="send_notifi_r2" style="background-color: #ffffff;"
 												name="send_notifi_r3" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r3 != 'Y'}"
-												class="rowDataField" id="send_notifi_r3"
+												class="rowDataField" id="send_notifi_r3" style="background-color: #ffffff;"
 												name="send_notifi_r3" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r4 != null }">
 											<td th:text="${MERLST?.mer_user_id_r4}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r4}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r4"
@@ -2014,29 +2018,29 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r4}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r4}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r4 == 'Y'}"
-												class="rowDataField" id="send_notifi_r4"
+												class="rowDataField" id="send_notifi_r4" style="background-color: #ffffff;"
 												name="send_notifi_r4" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r4 != 'Y'}"
-												class="rowDataField" id="send_notifi_r4"
+												class="rowDataField" id="send_notifi_r4" style="background-color: #ffffff;"
 												name="send_notifi_r4" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
 
 										<tr th:if="${MERLST.mer_user_id_r5 != null }">
 											<td th:text="${MERLST?.mer_user_id_r5}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r5}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r5"
@@ -2058,17 +2062,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r5}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r5}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r5 == 'Y'}"
-												class="rowDataField" id="send_notifi_r5"
+												class="rowDataField" id="send_notifi_r5" style="background-color: #ffffff;"
 												name="send_notifi_r5" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r5 != 'Y'}"
-												class="rowDataField" id="send_notifi_r5"
+												class="rowDataField" id="send_notifi_r5" style="background-color: #ffffff;"
 												name="send_notifi_r5" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
@@ -2076,12 +2080,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 										<tr th:if="${MERLST.mer_user_id_r6 != null }">
 											<td th:text="${MERLST?.mer_user_id_r6}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r6}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r6"
@@ -2103,16 +2107,16 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r6}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r6}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r6 == 'Y'}"
-												class="rowDataField" id="send_notifi_r6"
+												class="rowDataField" id="send_notifi_r6" style="background-color: #ffffff;"
 												name="send_notifi_r6" type="checkbox" checked disabled>
 											</td>
-											<td th:if="${MERLST?.send_notifi_r6 != 'Y'}"
+											<td th:if="${MERLST?.send_notifi_r6 != 'Y'}" style="background-color: #ffffff;"
 												class="rowDataField" id="send_notifi_r6"
 												name="send_notifi_r6" type="checkbox" disabled><input
 												type="radio" checked></td>
@@ -2121,12 +2125,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 										<tr th:if="${MERLST.mer_user_id_r7 != null }">
 											<td th:text="${MERLST?.mer_user_id_r7}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r7}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r7"
@@ -2145,19 +2149,19 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 												style="font-size: 0.6rem; padding: 0.10rem; background-color: #ffffff;">
 											</td>
 
-											<td class="rowDataField"
+											<td class="rowDataField" 
 												th:text="${MERLST?.mer_email_addr_r7}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r7}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r7 == 'Y'}"
-												class="rowDataField" id="send_notifi_r7"
+												class="rowDataField" id="send_notifi_r7" style="background-color: #ffffff;"
 												name="send_notifi_r7" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r7 != 'Y'}"
-												class="rowDataField" id="send_notifi_r7"
+												class="rowDataField" id="send_notifi_r7" style="background-color: #ffffff;"
 												name="send_notifi_r7" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
@@ -2165,12 +2169,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 										<tr th:if="${MERLST.mer_user_id_r8 != null }">
 											<td th:text="${MERLST?.mer_user_id_r8}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r8}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r8"
@@ -2191,17 +2195,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r8}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r8}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r8 == 'Y'}"
-												class="rowDataField" id="send_notifi_r8"
+												class="rowDataField" id="send_notifi_r8" style="background-color: #ffffff;"
 												name="send_notifi_r8" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r8 != 'Y'}"
-												class="rowDataField" id="send_notifi_r8"
+												class="rowDataField" id="send_notifi_r8" style="background-color: #ffffff;"
 												name="send_notifi_r8" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
@@ -2209,12 +2213,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 										<tr th:if="${MERLST.mer_user_id_r9 != null }">
 											<td th:text="${MERLST?.mer_user_id_r9}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r9}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r9"
@@ -2226,7 +2230,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 													<label type="number" id="mer_ph_no_r9" name="mer_ph_no_r9"
 														th:text="${MERLST?.mer_ph_no_r9}" maxlength="10"
 														autocomplete="off" class="rowDataField"
-														style="font-size: 0.6rem; padding: 0.10rem;"></label>
+														style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></label>
 												</div>
 											</td>
 											<td th:text="${MERLST?.mer_nat_id_r9}" class="rowDataField"
@@ -2235,17 +2239,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r9}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r9}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r9 == 'Y'}"
-												class="rowDataField" id="send_notifi_r4"
+												class="rowDataField" id="send_notifi_r9" style="background-color: #ffffff;"
 												name="send_notifi_r9" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r9 != 'Y'}"
-												class="rowDataField" id="send_notifi_r9"
+												class="rowDataField" id="send_notifi_r9" style="background-color: #ffffff;"
 												name="send_notifi_r9" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
@@ -2253,12 +2257,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 										<tr th:if="${MERLST.mer_user_id_r10 != null }">
 											<td th:text="${MERLST?.mer_user_id_r10}" class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td th:text="${MERLST?.mer_cont_pers_r10}"
 												class="rowDataField"
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
-											<td style="font-size: 0.6rem; padding: 0.10rem;">
+											<td style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;">
 												<div class="input-group" style="width: 100%">
 													<div class="input-group-prepend rowDataField">
 														<label type="text" id="ph_countrycode_r10"
@@ -2279,17 +2283,17 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_email_addr_r10}" readonly
-												style="font-size: 0.6rem; padding: 0.10rem;"></td>
+												style="font-size: 0.6rem; padding: 0.10rem;background-color: #ffffff;"></td>
 											<td class="rowDataField"
 												th:text="${MERLST?.mer_notifi_mode_r10}" readonly
-												style="font-size: 0.7rem; padding: 0.10rem;"></td>
+												style="font-size: 0.7rem; padding: 0.10rem;background-color: #ffffff;"></td>
 
 											<td th:if="${MERLST?.send_notifi_r10 == 'Y'}"
-												class="rowDataField" id="send_notifi_r10"
+												class="rowDataField" id="send_notifi_r10" style="background-color: #ffffff;"
 												name="send_notifi_r10" type="checkbox" checked disabled>
 											</td>
 											<td th:if="${MERLST?.send_notifi_r10 != 'Y'}"
-												class="rowDataField" id="send_notifi_r10"
+												class="rowDataField" id="send_notifi_r10" style="background-color: #ffffff;"
 												name="send_notifi_r10" type="checkbox" disabled><input
 												type="radio" checked></td>
 										</tr>
@@ -2463,7 +2467,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 										<tr>
 											<td style="text-align: center; background-color: #ffffff;">Name:
 												<input type="text"
-												th:text="${branchDet?.merchant_corp_name}"
+												th:text="${SignId?.merchant_name_sign}"
 												style="border: none; outline: none; margin-left: 20px; width: 150px; background-color: #ffffff; font-size: 12px"
 												id="ca_first_name" readonly />
 											</td>

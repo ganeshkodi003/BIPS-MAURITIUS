@@ -4173,7 +4173,8 @@ public class MainController {
 
 			}
 		} else {
-			/* System.out.println("No additional details"); */
+			 System.out.println("No additional details");
+			
 			md.addAttribute("click",
 					bIPS_OutwardTransMonitoring_Repo.getTransactionDetails(Fromdate, Todate, merchantId));
 		}

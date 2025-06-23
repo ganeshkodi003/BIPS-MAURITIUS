@@ -716,6 +716,16 @@ public class BankAndBranchMasterServices {
 					Main.setMerchant_acc_no(Main.getBank_account_no());
 					Main.setDetailed_address1(bankList.get().getDetailed_address1());
 					Main.setDetailed_address2(bankList.get().getDetailed_address2());
+					Main.setMer_nat_id(bankList.get().getMer_nat_id());
+					Main.setMer_nat_id_r2(bankList.get().getMer_nat_id_r2());
+					Main.setMer_nat_id_r3(bankList.get().getMer_nat_id_r3());
+					Main.setMer_nat_id_r4(bankList.get().getMer_nat_id_r4());
+					Main.setMer_nat_id_r5(bankList.get().getMer_nat_id_r5());
+					Main.setMer_nat_id_r6(bankList.get().getMer_nat_id_r6());
+					Main.setMer_nat_id_r7(bankList.get().getMer_nat_id_r7());
+					Main.setMer_nat_id_r8(bankList.get().getMer_nat_id_r8());
+					Main.setMer_nat_id_r9(bankList.get().getMer_nat_id_r9());
+					Main.setMer_nat_id_r10(bankList.get().getMer_nat_id_r10());
 					merchantMasterRep.save(Main);
 					merchantMasterModRep.deleteById(bankList.get().getMerchant_id());
 					List<MerchantFeesServiceChargesMod> merchantFeesServiceCharges = feeRepoMod
@@ -2695,8 +2705,8 @@ public class BankAndBranchMasterServices {
 					PO.setMer_notifi_mode(notify_mode1);
 					
 					PO.setMer_user_id_r2(repid1);
-					PO.setMer_cont_pers_r2(contpers1);
-					PO.setPh_countrycode_r2(ph_countrycode1);
+					PO.setMer_cont_pers_r2(contpers2);
+					PO.setPh_countrycode_r2(ph_countrycode2);
 					PO.setMer_ph_no_r2(phno2);
 					PO.setOfc_countrycode_r2(ofc_countrycode2);
 					PO.setMer_ofc_no_r2(ofcno2);
@@ -2906,7 +2916,7 @@ public class BankAndBranchMasterServices {
 
                     String contact_pers1 = item.get(178);
                     System.out.println("contact_pers1: " + contact_pers1);
-//suriya
+ 
                     String countrycode_pers_1 = item.get(179);
                     System.out.println("countrycode_pers_1: " + countrycode_pers_1);
  
@@ -3206,10 +3216,19 @@ public class BankAndBranchMasterServices {
 					String email_id = item.get(220);
 					System.out.println("email_id: " + email_id); 
 					
-					String makerorchecker = item.get(221);
-					System.out.println("makerorchecker: " + makerorchecker);
+					String unit_id_un = item.get(221); 
+					System.out.println("unit_id: " + unit_id_un );
 					
-					String user_disable_fromdate = item.get(222);
+					String makerorchecker = item.get(223);
+					System.out.println("makerorchecker: " + makerorchecker);
+					  
+					String unit_name_un = item.get(222);
+                    System.out.println("unit_name: " + unit_name_un);
+					  	  
+				   String unit_type_un = item.get(224); 
+				   System.out.println("unit_type: " + unit_type_un); 
+					
+					String user_disable_fromdate = item.get(225);
 					System.out.println("user_disable_fromdate: " + user_disable_fromdate); 
 					Date date_value5 = null; 
 
@@ -3224,7 +3243,7 @@ public class BankAndBranchMasterServices {
 					} 
 					System.out.println("date_value5: " + date_value5); 
 
-					String user_disable_todate = item.get(223);
+					String user_disable_todate = item.get(226);
 					System.out.println("user_disable_todate: " + user_disable_todate);
 					Date date_value6 = null; 
 
@@ -3239,12 +3258,12 @@ public class BankAndBranchMasterServices {
 					} 
 					System.out.println("date_value6: " + date_value6); 
 					 
-					String alter_countrycode = item.get(224);
+					String alter_countrycode = item.get(227);
 					System.out.println("alter_countrycode: " + alter_countrycode); 
 
 					
 					BigDecimal alter_mobno = null;
-					String value_MOB = item.get(225);
+					String value_MOB = item.get(228);
 
 					if (value_MOB == null || value_MOB.trim().isEmpty()) {
 						alter_mobno = BigDecimal.ZERO; // Assign default value for null or empty
@@ -3259,31 +3278,22 @@ public class BankAndBranchMasterServices {
 
 					System.out.println("alter_mobno: " + alter_mobno);
 
-					String alter_emailid = item.get(226);
+					String alter_emailid = item.get(229);
 					System.out.println("alter_emailid: " + alter_emailid); 
 					 
-					String alter_devid1 = item.get(227);
+					String alter_devid1 = item.get(230);
 					System.out.println("alter_devid1: " + alter_devid1); 
 
-					String alter_devid2 = item.get(228);
+					String alter_devid2 = item.get(231);
 					System.out.println("alter_devid2: " + alter_devid2); 
 					 
-					String default_devid = item.get(229);
+					String default_devid = item.get(232);
 					System.out.println("default_devid: " + default_devid); 
 
-					String remarks_u = item.get(230);
+					String remarks_u = item.get(233);
 					System.out.println("remarks: " + remarks_u); 
 	
-					String unit_id_un = item.get(231); 
-					System.out.println("unit_id: " + unit_id_un );
-					  
-					String unit_name_un = item.get(232);
-                    System.out.println("unit_name: " + unit_name_un);
-					  	  
-				   String unit_type_un = item.get(233); 
-				   System.out.println("unit_type: " + unit_type_un);
-					  
-					 
+				
 				
 					US.setMerchant_user_id(merchant_id);
 					US.setMerchant_name(merchant_name);
@@ -4106,7 +4116,7 @@ public class BankAndBranchMasterServices {
 					DV.setDevice_make(device_make);
 					DV.setStore_id(store_id);
 					DV.setFingerprint_enable(finger_print_enable);
-					DV.setFace_recognition_enabled(finger_print_enable);
+					DV.setFace_recognition_enabled(finger_recogn_enable);
 					DV.setDefault_user_id(default_user_id);
 					DV.setAlternate_user_id(alternative_user_id);
 					DV.setApproved_user(approved_user);
@@ -4138,6 +4148,7 @@ public class BankAndBranchMasterServices {
 		return msg;
 
 	}
+	
 	public static String processData(String string) {
 	    try {
 	        // Attempt to convert to BigDecimal

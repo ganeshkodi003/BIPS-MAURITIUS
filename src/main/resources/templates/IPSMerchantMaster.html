@@ -7235,21 +7235,20 @@ function rowdeleteDoc(ele) {
 										<!-- Case for entity_flg == 'Y' -->
 										<td th:case="'Y'"
 											th:text="${bankList.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}"
-											onclick="GetMerchantTrans(this);" style="color: blue;"
+											
 											th:attr="data-MerchantID=${bankList?.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}">
 										</td>
+										<!-- onclick="GetMerchantTrans(this);" style="color: blue;" Hyperlink for merchant id to transaction screen-->
 
 										<!-- Case for entity_flg == 'N' -->
 										<td th:case="'N'"
-											th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}"
-											onclick="GetMerchantTrans(this);" style="color: blue;"
+											th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}" 
 											th:attr="data-MerchantID=${bankList?.merchant_id != null ? bankList.merchant_id.toUpperCase() : ''}">
 										</td>
 
 										<!-- Case for entity_flg == NULL -->
 										<td th:case="'NULL'"
-											th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}"
-											onclick="GetMerchantTrans(this);" style="color: blue;"
+											th:text="${bankList.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}" 
 											th:attr="data-MerchantID=${bankList?.merchant_id != null ?  bankList.merchant_id.toUpperCase() : ''}">
 										</td>
 									</th:block>
@@ -7851,7 +7850,7 @@ function rowdeleteDoc(ele) {
 										<label></label>
 										<div class="row formline mt-1">
 
-											<label class="col-sm-2">Transaction Amount<span
+											<label class="col-sm-2">Ceiling Amount<span
 												style="font-size: 20px; color: red">*</span></label>
 											<div class="col-sm-3">
 												<input type="number" name="transaction_amount"
@@ -11359,7 +11358,7 @@ function rowdeleteDoc(ele) {
 												</div>
 												<label></label>
 												<div class="row formline">
-													<label class="col-sm-2">Transaction Amount</label>
+													<label class="col-sm-2">Ceiling Amount</label>
 													<div class="col-sm-3">
 														<input type="number" name="transaction_amount"
 															th:value="${branchDet?.transaction_amount == 0 ? '0.00' :#numbers.formatDecimal(branchDet?.transaction_amount, 0, 'COMMA', 2, 'POINT')}"
@@ -11553,24 +11552,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r3"
-																				name="ofc_countrycode_r3"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r3}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r3"
-																			name="mer_ofc_no_r3"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r3}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r3"
+																	th:text="${MERLST?.mer_nat_id_r3}"></span> <span
+																	id="mer_email_addr_r3_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r3"
@@ -11623,24 +11608,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r4"
-																				name="ofc_countrycode_r4"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r4}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r4"
-																			name="mer_ofc_no_r4"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r4}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+															<td style="background-color: unset;"><span
+																	id="mer_email_addr_r4"
+																	th:text="${MERLST?.mer_nat_id_r4}"></span> <span
+																	id="mer_email_addr_r4_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r4"
@@ -11693,24 +11664,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r5"
-																				name="ofc_countrycode_r5"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r5}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r5"
-																			name="mer_ofc_no_r5"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r5}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r5"
+																	th:text="${MERLST?.mer_nat_id_r5}"></span> <span
+																	id="mer_email_addr_r5_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r5"
@@ -11762,24 +11719,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r6"
-																				name="ofc_countrycode_r6"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r6}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r6"
-																			name="mer_ofc_no_r6"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r6}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r6"
+																	th:text="${MERLST?.mer_nat_id_r6}"></span> <span
+																	id="mer_email_addr_r6_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r6"
@@ -11832,24 +11775,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r7"
-																				name="ofc_countrycode_r7"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r7}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r7"
-																			name="mer_ofc_no_r7"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r7}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r7"
+																	th:text="${MERLST?.mer_nat_id_r7}"></span> <span
+																	id="mer_email_addr_r7_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r7"
@@ -11901,24 +11830,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r8"
-																				name="ofc_countrycode_r8"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r8}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r8"
-																			name="mer_ofc_no_r8"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r8}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r8"
+																	th:text="${MERLST?.mer_nat_id_r8}"></span> <span
+																	id="mer_email_addr_r8_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r8"
@@ -11970,24 +11885,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r9"
-																				name="ofc_countrycode_r9"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r9}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r9"
-																			name="mer_ofc_no_r9"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r9}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r9"
+																	th:text="${MERLST?.mer_nat_id_r9}"></span> <span
+																	id="mer_email_addr_r9_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r9"
@@ -12039,24 +11940,10 @@ function rowdeleteDoc(ele) {
 
 																	</div>
 																</td>
-																<td style="background-color: unset; width: 15%;">
-																	<div class="input-group" style="width: 100%">
-																		<div class="input-group-prepend">
-																			<input id="ofc_countrycode_r10"
-																				name="ofc_countrycode_r10"
-																				style="border: none; background-color: unset"
-																				th:value="${MERLST?.ofc_countrycode_r10}"
-																				maxlength="10" autocomplete="off"
-																				class="form-control form-control-sm col-2">
-																		</div>
-																		<input type="number" id="mer_ofc_no_r10"
-																			name="mer_ofc_no_r10"
-																			style="margin-left: -120px; border: none; background-color: unset"
-																			th:value="${MERLST?.mer_ofc_no_r10}" maxlength="10"
-																			autocomplete="off"
-																			class="form-control form-control-sm">
-
-																	</div>
+																<td style="background-color: unset;"><span
+																	id="mer_email_addr_r10"
+																	th:text="${MERLST?.mer_nat_id_r10}"></span> <span
+																	id="mer_email_addr_r10_vali" class="text-danger"></span>
 																</td>
 																<td style="background-color: unset;"><span
 																	id="mer_email_addr_r10"
@@ -17460,7 +17347,7 @@ function rowdeleteDoc(ele) {
 								</div>
 								<label></label>
 								<div class="row formline">
-									<label class="col-sm-2">Transaction Amount <span
+									<label class="col-sm-2">Ceiling Amount <span
 										style="font-size: 20px; color: red">*</span></label>
 									<div class="col-sm-3">
 										<input type="number" name="transaction_amount"
@@ -19629,7 +19516,7 @@ function rowdeleteDoc(ele) {
 
 								<label></label>
 								<div class="row formline">
-									<label class="col-sm-2">Transaction Amount </label>
+									<label class="col-sm-2">Ceiling Amount </label>
 									<div class="col-sm-3">
 										<input type="number" name="transaction_amount"
 											th:value="${branchDet?.transaction_amount == 0 ? '0.00' :#numbers.formatDecimal(branchDet?.transaction_amount, 0, 'COMMA', 2, 'POINT')}"
@@ -19705,23 +19592,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r1"
-															name="ofc_countrycode_r1"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r1}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no" name="mer_ofc_no"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id"
+																	th:text="${MERLST?.mer_nat_id}"></span> <span
+																	id="mer_email_addr_r9_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr" name="mer_email_addr_r1"
 												style="background-color: transparent; border: unset"
@@ -19766,24 +19641,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r2"
-															name="ofc_countrycode_r2"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r2}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r2"
-														name="mer_ofc_no_r2"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r2}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r2"
+																	th:text="${MERLST?.mer_nat_id_r2}"></span> <span
+																	id="mer_nat_id_r2_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r2" name="mer_email_addr_r2"
 												style="background-color: transparent; border: unset"
@@ -19828,23 +19690,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r3"
-															name="ofc_countrycode_r3"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r3}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r3"
-														name="mer_ofc_no_r3"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r3}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-												</div>
-											</td>
+										<td style="background-color: unset;"><span
+																	id="mer_nat_id_r3"
+																	th:text="${MERLST?.mer_nat_id_r3}"></span> <span
+																	id="mer_nat_id_r3_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r3" name="mer_email_addr_r3"
 												style="background-color: transparent; border: unset"
@@ -19889,24 +19739,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r4"
-															name="ofc_countrycode_r4"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r4}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r4"
-														name="mer_ofc_no_r4"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r4}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r4"
+																	th:text="${MERLST?.mer_nat_id_r4}"></span> <span
+																	id="mer_nat_id_r4_vali" class="text-danger"></span>
+																</td>
 
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r4" name="mer_email_addr_r4"
@@ -19952,24 +19789,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r5"
-															name="ofc_countrycode_r5"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r5}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r5"
-														name="mer_ofc_no_r5"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r5}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r5"
+																	th:text="${MERLST?.mer_nat_id_r5}"></span> <span
+																	id="mer_nat_id_r5_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r5" name="mer_email_addr_r5"
 												style="background-color: transparent; border: unset"
@@ -20014,24 +19838,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r6"
-															name="ofc_countrycode_r6"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r6}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r6"
-														name="mer_ofc_no_r6"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r6}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r6"
+																	th:text="${MERLST?.mer_nat_id_r6}"></span> <span
+																	id="mer_nat_id_r6_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r6" name="mer_email_addr_r6"
 												style="background-color: transparent; border: unset"
@@ -20076,24 +19887,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r7"
-															name="ofc_countrycode_r7"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r7}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r7"
-														name="mer_ofc_no_r7"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r7}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r7"
+																	th:text="${MERLST?.mer_nat_id_r7}"></span> <span
+																	id="mer_nat_id_r7_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r7" name="mer_email_addr_r7"
 												style="background-color: transparent; border: unset"
@@ -20138,24 +19936,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r9"
-															name="ofc_countrycode_r9"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r9}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r2"
-														name="mer_ofc_no_r9"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r2}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r8"
+																	th:text="${MERLST?.mer_nat_id_r8}"></span> <span
+																	id="mer_nat_id_r8_vali" class="text-danger"></span>
+																</td>
 
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r8" name="mer_email_addr_r8"
@@ -20201,24 +19986,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r9"
-															name="ofc_countrycode_r9"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r9}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r9"
-														name="mer_ofc_no_r9"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r9}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r9"
+																	th:text="${MERLST?.mer_nat_id_r9}"></span> <span
+																	id="mer_nat_id_r9_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r9" name="mer_email_addr_r9"
 												style="background-color: transparent; border: unset"
@@ -20264,24 +20036,11 @@ function rowdeleteDoc(ele) {
 												</div>
 											</td>
 
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<input type id="ofc_countrycode_r10"
-															name="ofc_countrycode_r10"
-															style="background-color: transparent; border: unset"
-															th:value="${MERLST?.ofc_countrycode_r10}" maxlength="10"
-															autocomplete="off"
-															class="form-control form-control-sm col-2">
-													</div>
-													<input type="number" id="mer_ofc_no_r10"
-														name="mer_ofc_no_r10"
-														style="margin-left: -120px; background-color: transparent; border: unset"
-														th:value="${MERLST?.mer_ofc_no_r10}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-
-												</div>
-											</td>
+											<td style="background-color: unset;"><span
+																	id="mer_nat_id_r10"
+																	th:text="${MERLST?.mer_nat_id_r10}"></span> <span
+																	id="mer_nat_id_r10_vali" class="text-danger"></span>
+																</td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r10" name="mer_email_addr_r10"
 												style="background-color: transparent; border: unset"
@@ -21425,7 +21184,7 @@ function rowdeleteDoc(ele) {
 								</div>
 								<label></label>
 								<div class="row formline">
-									<label class="col-sm-2">Transaction Amount </label>
+									<label class="col-sm-2">Ceiling Amount </label>
 									<div class="col-sm-3">
 										<input type="number" name="transaction_amount"
 											th:value="${branchDet?.transaction_amount == 0 ? '0.00' :#numbers.formatDecimal(branchDet?.transaction_amount, 0, 'COMMA', 2, 'POINT')}"
@@ -22792,7 +22551,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="verifyboxmsg" style="font-size: 16px;"></p>
 					<button type="button" class="btn  headerbutton"
 						data-dismiss="modal" onclick="back();">OK</button>
@@ -22810,7 +22569,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="alertmsg" style="font-size: 16px;"></p>
 					<button type="button" class="btn  headerbutton" onclick="back();"
 						th:att>Close</button>
@@ -22828,7 +22587,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="alertmsg" style="font-size: 16px;"></p>
 					<button type="button" class="btn  headerbutton"
 						onclick="closemodal();" th:att>Close</button>
@@ -22845,7 +22604,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="alertmsg" style="font-size: 16px;"></p>
 					<button type="button" class="btn  headerbutton" onclick="back();"
 						th:att>Close</button>
@@ -22864,7 +22623,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="ADDMANRSN" style="font-size: 16px;"></p>
 					<button type="button" class="btn  headerbutton"
 						data-dismiss="modal">Close</button>
@@ -22882,7 +22641,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<p id="errormsg"></p>
 					<button type="button" class="btn  headerbutton"
 						data-dismiss="modal">Close</button>
@@ -22987,7 +22746,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center; ">
 					<!-- Add content here if needed -->
 				</div>
 				<div class="modal-footer"
@@ -23008,7 +22767,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2">
+					style="text-align: center;">
 					<!-- Add content here if needed -->
 				</div>
 				<div class="modal-footer"
@@ -23256,8 +23015,8 @@ function rowdeleteDoc(ele) {
 		style="padding-left: 15%; padding-right: 0px;">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content" style="width: 600px; height: 8 00px;">
-				<div class="modal-header" style="background: #377486; color: white;">
-					<h4 style="background: #377486; color: white" class="modal-title">Merchant
+				<div class="modal-header" style="background: #f26223; color: white;">
+					<h4 style="background: ##f26223; color: white" class="modal-title">Merchant
 						QR</h4>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close" style="color: white;">
@@ -23315,7 +23074,7 @@ function rowdeleteDoc(ele) {
 						<label class="col-sm-5">Terminal ID</label> <select id="deviceId"
 							class="form-control col-sm-5" name="deviceId" autocomplete="off"
 							style="color: black;" readonly>
-							<option value="">SELECT</option>
+							<option value="">Select</option>
 						</select>
 					</div>
 					<label></label>
@@ -24355,7 +24114,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2"></div>
+					style="text-align: center;"></div>
 				<div class="modal-footer"
 					style="background-color: #c6ccd2; border-top: none; text-align: center;">
 					<button type="button" class="btn  headerbutton"
@@ -24376,7 +24135,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2"></div>
+					style="text-align: center;"></div>
 				<div class="modal-footer"
 					style="background-color: #c6ccd2; border-top: none; text-align: center;">
 					<button type="button" class="btn  headerbutton"
@@ -24397,7 +24156,7 @@ function rowdeleteDoc(ele) {
 						style="text-align: center; color: white;">BANK OF BARODA</div>
 				</div>
 				<div class="modal-body"
-					style="text-align: center; background-color: #c6ccd2"></div>
+					style="text-align: center;"></div>
 				<div class="modal-footer"
 					style="background-color: #c6ccd2; border-top: none; text-align: center;">
 					<button type="button" class="btn  headerbutton"
