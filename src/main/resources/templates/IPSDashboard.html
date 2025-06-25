@@ -1121,9 +1121,9 @@ const allBackendDatas = [
         progressive: {
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             datasets: [
-                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [12, 6, 7, 10, 10, 10, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
-                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [14, 6, 8, 10, 10, 10, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
-                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [16, 6, 8, 10, 10, 10, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [12, 6, 7, 10, 10, 10, 10,10,10,10,10,10],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [14, 6, 8, 10, 10, 10, 10,10,10,10,10,10],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [16, 6, 8, 10, 10, 10, 10,10,10,10,10,10],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
             ],
         },
     },
@@ -1132,8 +1132,8 @@ const allBackendDatas = [
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             datasets: [
                 { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [5, 10, 15, 20, 25, 30, 35, 35, 35, 35, 35, 35],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
-                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [6, 12, 18, 24, 30, 36, 40, 40, 40, 40, 40, 40],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
-                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [8, 14, 20, 26, 32, 38, 42, 42, 42, 42, 42, 42],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [6, 12, 18, 24, 30, 36, 36, 36, 36, 36, 36, 36],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [8, 14, 20, 26, 32, 38, 38, 38, 38, 38, 38, 38],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
             ],
         },
         progressive: {
@@ -1157,9 +1157,9 @@ const allBackendDatas = [
         progressive: {
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             datasets: [
-                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [2, 2, 2, 4, 4, 6, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
-                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [3, 3, 3, 4, 5, 4, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
-                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [4, 4, 4, 5, 5, 4, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [2, 2, 2, 4, 4, 6, 6,6,6,6,6,6],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [3, 3, 3, 4, 5, 4, 4,4,4,4,4,4],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [4, 4, 4, 5, 5, 4, 4,4,4,4,4,4],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
             ],
         },
     },
@@ -1452,12 +1452,13 @@ const allBackendDatas = [
     /**
      * Updates the merchant header with today's date.
      */
-    function updateMerchantHeader() {
-    const date = new Date();
-    const formattedDate = `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
-    
-    document.getElementById('merchant-header').innerHTML = `Merchants - ${formattedDate}`;
-}
+     function updateMerchantHeader() {
+    	    const date = new Date();
+    	    const formattedDate = `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}-${date.getFullYear()}`;
+    	    
+    	    document.getElementById('merchant-header').innerHTML = `<span style="margin-left: 20px; font-size: 18px;">All Merchants</span>`;
+    	}
+
 
 
 

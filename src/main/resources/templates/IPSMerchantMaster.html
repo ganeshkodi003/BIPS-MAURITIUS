@@ -17504,25 +17504,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r1" name="ofc_countrycode_r1"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r1}">
-
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no" name="mer_ofc_no"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id" name="mer_nat_id" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id}" /><span
+												id="mer_nat_id_vali" class="reqError"></span></td>
 
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr" name="mer_email_addr_r1" maxlength="30"
@@ -17574,26 +17559,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r2_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r2" name="ofc_countrycode_r2"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r2}">
-
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r2"
-														name="mer_ofc_no_r2"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r2}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r2_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r2" name="mer_nat_id_r2" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r2}" /><span
+												id="mer_nat_id_r2_vali" class="reqError"></span></td>
 
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r2" name="mer_email_addr_r2"
@@ -17643,25 +17612,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r3_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r3" name="ofc_countrycode_r3"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r3}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r3"
-														name="mer_ofc_no_r3"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r3}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r3_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r3" name="mer_nat_id_r3" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r3}" /><span
+												id="mer_nat_id_r3_vali" class="reqError"></span></td>
 
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r3" name="mer_email_addr_r3"
@@ -17710,25 +17664,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r4_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r4" name="ofc_countrycode_r4"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r4}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r4"
-														name="mer_ofc_no_r4"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r4}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r4_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r4" name="mer_nat_id_r4" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r4}" /><span
+												id="mer_nat_id_r4_vali" class="reqError"></span></td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r4" name="mer_email_addr_r4"
 												maxlength="30" autocomplete="off"
@@ -17776,25 +17715,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r5_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r5" name="ofc_countrycode_r5"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r5}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r5"
-														name="mer_ofc_no_r5"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r5}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r5_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r5" name="mer_nat_id_r5" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r5}" /><span
+												id="mer_nat_id_r2_vali" class="reqError"></span></td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r5" name="mer_email_addr_r5"
 												maxlength="30" autocomplete="off"
@@ -17842,25 +17766,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r6_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r6" name="ofc_countrycode_r6"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r6}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r6"
-														name="mer_ofc_no_r6"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r6}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r6_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r6" name="mer_nat_id_r6" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r6}" /><span
+												id="mer_nat_id_r6_vali" class="reqError"></span></td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r6" name="mer_email_addr_r6"
 												maxlength="30" autocomplete="off"
@@ -17909,25 +17818,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r7_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r7" name="ofc_countrycode_r7"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r7}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r7"
-														name="mer_ofc_no_r7"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r7}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r7_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r7" name="mer_nat_id_r7" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r7}" /><span
+												id="mer_nat_id_r7_vali" class="reqError"></span></td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r7" name="mer_email_addr_r7"
 												maxlength="30" autocomplete="off"
@@ -17976,25 +17870,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r8_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r8" name="ofc_countrycode_r8"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r8}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r8"
-														name="mer_ofc_no_r8"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r8}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r8_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r8" name="mer_nat_id_r8" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r8}" /><span
+												id="mer_nat_id_r8_vali" class="reqError"></span></td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r8" name="mer_email_addr_r8"
 												maxlength="30" autocomplete="off"
@@ -18043,25 +17922,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r9_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r9" name="ofc_countrycode_r9"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r9}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r9"
-														name="mer_ofc_no_r9"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r9}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r9_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r9" name="mer_nat_id_r9" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r9}" /><span
+												id="mer_nat_id_r9_vali" class="reqError"></span></td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r9" name="mer_email_addr_r9"
 												maxlength="30" autocomplete="off"
@@ -18112,26 +17976,10 @@ function rowdeleteDoc(ele) {
 													<span id="mer_ph_no_r10_vali" class="reqError"></span>
 												</div>
 											</td>
-											<td style="background-color: unset; width: 15%;">
-												<div class="input-group" style="width: 100%">
-													<div class="input-group-prepend">
-														<select id="ofc_countrycode_r10"
-															name="ofc_countrycode_r10"
-															style="background-color: white; color: black;"
-															class="form-control  form-control-sm"
-															th:field="*{ofc_countrycode_r10}">
-															<option th:each="code : ${CountryCode}"
-																th:value="${code}" th:text="${code}"></option>
-														</select>
-													</div>
-													<input type="number" id="mer_ofc_no_r10"
-														name="mer_ofc_no_r10"
-														style="background-color: white; color: black;"
-														th:value="${MERLST?.mer_ofc_no_r2}" maxlength="10"
-														autocomplete="off" class="form-control form-control-sm">
-													<span id="mer_ofc_no_r10_vali" class="reqError"></span>
-												</div>
-											</td>
+											<td style="background-color: unset;"><input type="text"
+												id="mer_nat_id_r10" name="mer_nat_id_r10" maxlength="14"
+												autocomplete="off" th:value="${MERLST?.mer_nat_id_r10}" /><span
+												id="mer_nat_id_r10_vali" class="reqError"></span></td>
 											<td style="background-color: unset;"><input type="text"
 												id="mer_email_addr_r10" name="mer_email_addr_r10"
 												maxlength="30" autocomplete="off"

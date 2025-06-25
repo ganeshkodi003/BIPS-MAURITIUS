@@ -32,8 +32,8 @@
 	src="/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js"
 	th:src="@{/webjars/datatables/1.10.19/js/dataTables.bootstrap4.min.js}"></script>
 <script src="js/bootstrap411.js"></script>
- <!-- Include the external JavaScript file -->
-    <script src="/js/ResponisiveHeight.js"></script>
+<!-- Include the external JavaScript file -->
+<script src="/js/ResponisiveHeight.js"></script>
 <style>
 .filterable .filters input[disabled] {
 	background-color: transparent;
@@ -148,74 +148,79 @@ label {
 	// ADD FORM
 
 	function submitform() {
-	    // Function to dynamically validate fields
-	    function addDynamicValidation() {
-	        let isValid = true;
+		// Function to dynamically validate fields
+		function addDynamicValidation() {
+			let isValid = true;
 
-	        // Clear all error messages
-	        $(".error-message").remove(); // Remove existing error messages
+			// Clear all error messages
+			$(".error-message").remove(); // Remove existing error messages
 
-	        // SMS Validation
-	        const smsFlag = $("#NOTIFICATION_SMS_FLG").val(); 
-	        const mobile1 = $("#NOTIFICATION_MOBILE_1").val().trim();
-	        if (smsFlag === "YES" && !mobile1) {
-	            isValid = false;
-	            $("#NOTIFICATION_MOBILE_1")
-	                .after('<span class="error-message" style="color: red;">Mobile 1 is required.</span>');
-	        }
+			// SMS Validation
+			const smsFlag = $("#NOTIFICATION_SMS_FLG").val();
+			const mobile1 = $("#NOTIFICATION_MOBILE_1").val().trim();
+			if (smsFlag === "YES" && !mobile1) {
+				isValid = false;
+				$("#NOTIFICATION_MOBILE_1")
+						.after(
+								'<span class="error-message" style="color: red;">Mobile 1 is required.</span>');
+			}
 
-	        // Email Validation
-	        const emailFlag = $("#NOTIFICATION_EMAIL_FLG").val();
-	        const email1 = $("#NOTIFICATION_EMAIL_1").val().trim();
-	        if (emailFlag === "YES") {
-	            if (!email1) {
-	                isValid = false;
-	                $("#NOTIFICATION_EMAIL_1")
-	                    .after('<span class="error-message" style="color: red;">Email ID 1 is required.</span>');
-	            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email1)) {
-	                isValid = false;
-	                $("#NOTIFICATION_EMAIL_1")
-	                    .after('<span class="error-message" style="color: red;">Enter a valid Email ID.</span>');
-	            }
-	        }
+			// Email Validation
+			const emailFlag = $("#NOTIFICATION_EMAIL_FLG").val();
+			const email1 = $("#NOTIFICATION_EMAIL_1").val().trim();
+			if (emailFlag === "YES") {
+				if (!email1) {
+					isValid = false;
+					$("#NOTIFICATION_EMAIL_1")
+							.after(
+									'<span class="error-message" style="color: red;">Email ID 1 is required.</span>');
+				} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email1)) {
+					isValid = false;
+					$("#NOTIFICATION_EMAIL_1")
+							.after(
+									'<span class="error-message" style="color: red;">Enter a valid Email ID.</span>');
+				}
+			}
 
-	        // Alert Validation
-	        const alertFlag = $("#ALERT_FLG").val();
-	        const notificationUser1 = $("#NOTIFICATION_USER_1").val().trim();
-	        if (alertFlag === "YES" && !notificationUser1) {
-	            isValid = false;
-	            $("#NOTIFICATION_USER_1")
-	                .after('<span class="error-message" style="color: red;">Notification User 1 is required.</span>');
-	        }
+			// Alert Validation
+			const alertFlag = $("#ALERT_FLG").val();
+			const notificationUser1 = $("#NOTIFICATION_USER_1").val().trim();
+			if (alertFlag === "YES" && !notificationUser1) {
+				isValid = false;
+				$("#NOTIFICATION_USER_1")
+						.after(
+								'<span class="error-message" style="color: red;">Notification User 1 is required.</span>');
+			}
 
-	        return isValid;
-	    }
+			return isValid;
+		}
 
-	    // Main form submission logic
-	    if ($("#notificationParmsProfile").valid() && addDynamicValidation()) {
-	        $("#loader1").modal("toggle");
-	        var formmode = /*[[${formmode}]]*/ null;
-	        var url = "./createNotificationParms?formmode=" + formmode;
-	        $("#notificationParmsProfile").attr('action', url);
-	        var options = {
-	            success: showResponse,
-	            error: showError
-	        };
-	        $("#notificationParmsProfile").ajaxSubmit(options);
+		// Main form submission logic
+		if ($("#notificationParmsProfile").valid() && addDynamicValidation()) {
+			$("#loader1").modal("toggle");
+			var formmode = /*[[${formmode}]]*/null;
+			var url = "./createNotificationParms?formmode=" + formmode;
+			$("#notificationParmsProfile").attr('action', url);
+			var options = {
+				success : showResponse,
+				error : showError
+			};
+			$("#notificationParmsProfile").ajaxSubmit(options);
 
-	        function showResponse(responseText, statusText, xhr, $form) {
-	            $("#loader1").modal("hide");
-	            $('#myModalpopup2').modal("toggle");
-	            $('#myModalpopup2 .modal-body').text(responseText);
-	        }
+			function showResponse(responseText, statusText, xhr, $form) {
+				$("#loader1").modal("hide");
+				$('#myModalpopup2').modal("toggle");
+				$('#myModalpopup2 .modal-body').text(responseText);
+			}
 
-	        function showError(xhr, status, error) {
-	            $("#loader1").modal("hide");
-	            const errorMessage = xhr.responseText || "An error occurred. Please try again.";
-	            $('#myModalpopup1').modal("toggle");
-	            $('#myModalpopup1 .modal-body').text(errorMessage);
-	        }
-	    }
+			function showError(xhr, status, error) {
+				$("#loader1").modal("hide");
+				const errorMessage = xhr.responseText
+						|| "An error occurred. Please try again.";
+				$('#myModalpopup1').modal("toggle");
+				$('#myModalpopup1 .modal-body').text(errorMessage);
+			}
+		}
 	}
 
 	// EDIT FORM
@@ -532,8 +537,7 @@ label {
 				<div class="col-sm-12">
 					<div class="card panel panel-primary filterable">
 						<div class="card-header p-1 dispayflexpropty ">
-							<h6 class="headerh6">Notification
-								Parameter</h6>
+							<h6 class="headerh6">Notification Parameter</h6>
 							<div class="">
 								<button type="button" class="btn btn-xs headerbutton"
 									id="btnAdd" onclick="addNotificationParms();"
@@ -543,9 +547,10 @@ label {
 						</div>
 						<table
 							class="table  table-bordered table-hover table-condensed table-sm"
-							 id="cardBody"   style="overflow-y: auto; border: 1px solid #ddd;">
-							<thead style="position: sticky; top: 0;background-color: #f8f9fa; z-index: 1;">
-							
+							id="cardBody" style="overflow-y: auto; border: 1px solid #ddd;">
+							<thead
+								style="position: sticky; top: 0; background-color: #f8f9fa; z-index: 1;">
+
 								<tr class="filters">
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold" placeholder="S.No"
@@ -553,21 +558,21 @@ label {
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold" placeholder="Date"
 										disabled></th>
-										<th style="text-align: center"><input type="text"
+									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold" placeholder="Event No"
 										disabled></th>
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold"
 										placeholder="Description" disabled></th>
 									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="SMS" disabled></th>
+										class="form-control font-weight-bold" placeholder="SMS"
+										disabled></th>
 									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="EMAIL" disabled></th>
+										class="form-control font-weight-bold" placeholder="EMAIL"
+										disabled></th>
 									<th style="text-align: center"><input type="text"
-										class="form-control font-weight-bold"
-										placeholder="Alert" disabled></th>
+										class="form-control font-weight-bold" placeholder="Alert"
+										disabled></th>
 									<th style="text-align: center"><input type="text"
 										class="form-control font-weight-bold" placeholder="Status"
 										disabled></th>
@@ -634,7 +639,8 @@ label {
 							</tbody>
 						</table>
 						<div class="card-footer text-center">
-							<button type="button" class="btn btn-xs mr-2 headerbutton headerbutton" id=""
+							<button type="button"
+								class="btn btn-xs mr-2 headerbutton headerbutton" id=""
 								onclick="home();">Home</button>
 							<button type="button" class="btn btn-xs headerbutton" id=""
 								onclick="back();">Back</button>
@@ -652,16 +658,22 @@ label {
 						<form action="#" class="mb-0"
 							th:object="${notificationParmsProfile}" method="post"
 							autocomplete="off" id="notificationParmsProfile"
-							th:fragment="finuserapply"> 
+							th:fragment="finuserapply">
 							<div class="card-header ">
-											<div class="dispayflexpropty d-flex justify-content-between align-items-center">
-												<h6 class="headerh6" th:if="${formmode}=='add'">Notification Parameter - Add</h6>
-												<h6 class="headerh6" th:if="${formmode}=='edit'">Notification Parameter - Edit</h6>
-												<h6 class="headerh6" th:if="${formmode}=='verify'">Notification Parameter - Verify</h6>
-												<h6 class="headerh6" th:if="${formmode}=='view'">Notification Parameter - View</h6>
-												<h6 class="headerh6" th:if="${formmode}=='delete'">Notification Parameter - Delete</h6> 
-											</div>
-										</div>
+								<div
+									class="dispayflexpropty d-flex justify-content-between align-items-center">
+									<h6 class="headerh6" th:if="${formmode}=='add'">Notification
+										Parameter - Add</h6>
+									<h6 class="headerh6" th:if="${formmode}=='edit'">Notification
+										Parameter - Edit</h6>
+									<h6 class="headerh6" th:if="${formmode}=='verify'">Notification
+										Parameter - Verify</h6>
+									<h6 class="headerh6" th:if="${formmode}=='view'">Notification
+										Parameter - View</h6>
+									<h6 class="headerh6" th:if="${formmode}=='delete'">Notification
+										Parameter - Delete</h6>
+								</div>
+							</div>
 							<div class="card-body mb-0 pb-0">
 								<div class="form-group">
 									<div class="row formline">
@@ -834,20 +846,48 @@ label {
 											<label for="userName">Mobile 1 </label>
 										</div>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
-										 <input type="text" id="NOTIFICATION_MOBILE_1"
+											<!--  <input type="text" id="NOTIFICATION_MOBILE_1"
 												name="NOTIFICATION_MOBILE_1"
 												class="form-control form-control-sm commonBackground"
 												autocomplete="off" oninput="validateMobileNumber(this)"
-												maxlength="10" /> 
-										 </div>
+												maxlength="10" />  -->
+
+											<div class="input-group input-group-sm"> 
+												<input type="text" id="ph_countrycode" name="ph_countrycode"
+													class="form-control" value="+230"  
+													style="max-width: 80px; " />
+ 
+												<input type="number" id="NOTIFICATION_MOBILE_1"
+													name="NOTIFICATION_MOBILE_1" 
+													class="form-control" maxlength="10" 
+													oninput="maxLengthCheck(this)" autocomplete="off"
+													style="border-left: 1;" />
+											</div>
+										</div> 
 										<div class="col-sm-3"
 											th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' OR ${formmode}=='cancel'">
-											<input type="number"
+
+											<!-- <input type="number"
 												th:value="${notificationParmsProfile?.NOTIFICATION_MOBILE_1}"
 												id="NOTIFICATION_MOBILE_1" name="NOTIFICATION_MOBILE_1"
 												class="form-control form-control-sm" autocomplete="off"
 												oninput="validateMobileNumber(this)" maxlength="10"
-												th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'" />
+												th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'" /> -->
+											<div class="input-group input-group-sm">
+												<!-- Country Code as input field -->
+												<input type="text" id="ph_countrycode" name="ph_countrycode"
+													class="form-control" value="+230" readonly
+													style="max-width: 80px; background-color: #f2f2f2;" />
+
+												<!-- Mobile Number -->
+												<input type="number" id="NOTIFICATION_MOBILE_1"
+													name="NOTIFICATION_MOBILE_1"
+													th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'"
+													class="form-control" maxlength="10"
+													th:value="${notificationParmsProfile?.NOTIFICATION_MOBILE_1}"
+													oninput="maxLengthCheck(this)" autocomplete="off"
+													style="border-left: 1;" />
+											</div>
 										</div>
 									</div>
 									<label> </label>
@@ -877,20 +917,46 @@ label {
 											<label for="userName">Mobile 2 </label>
 										</div>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
-											<input type="text" id="NOTIFICATION_MOBILE_2"
+											<!-- <input type="text" id="NOTIFICATION_MOBILE_2"
 												name="NOTIFICATION_MOBILE_2"
 												class="form-control form-control-sm commonBackground"
 												autocomplete="off" oninput="validateMobileNumber(this)"
-												maxlength="10" />
+												maxlength="10" /> -->
+												<div class="input-group input-group-sm"> 
+												<input type="text" id="ph_countrycode" name="ph_countrycode"
+													class="form-control" value="+230"  
+													style="max-width: 80px; " />
+ 
+												<input type="number" id="NOTIFICATION_MOBILE_2"
+													name="NOTIFICATION_MOBILE_2" 
+													class="form-control" maxlength="10" 
+													oninput="maxLengthCheck(this)" autocomplete="off"
+													style="border-left: 1;" />
+											</div>
 										</div>
 										<div class="col-sm-3"
 											th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' OR ${formmode}=='cancel'">
-											<input type="number"
+											<!-- <input type="number"
 												th:value="${notificationParmsProfile?.NOTIFICATION_MOBILE_2}"
 												id="NOTIFICATION_MOBILE_2" name="NOTIFICATION_MOBILE_2"
 												class="form-control form-control-sm" autocomplete="off"
 												oninput="validateMobileNumber(this)" maxlength="10"
-												th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'" />
+												th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'" /> -->
+												<div class="input-group input-group-sm">
+												<!-- Country Code as input field -->
+												<input type="text" id="ph_countrycode" name="ph_countrycode"
+													class="form-control"  readonly
+													style="max-width: 80px; background-color: #f2f2f2;" />
+
+												<!-- Mobile Number -->
+												<input type="number" id="NOTIFICATION_MOBILE_2"
+													name="NOTIFICATION_MOBILE_2"
+													th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'"
+													class="form-control" maxlength="10"
+													th:value="${notificationParmsProfile?.NOTIFICATION_MOBILE_2}"
+													oninput="maxLengthCheck(this)" autocomplete="off"
+													style="border-left: 1;" />
+											</div>
 										</div>
 									</div>
 									<label> </label>
@@ -920,21 +986,48 @@ label {
 											<label for="userName">Mobile 3 </label>
 										</div>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
-											<input type="text" id="NOTIFICATION_MOBILE_3"
+											<!-- <input type="text" id="NOTIFICATION_MOBILE_3"
 												name="NOTIFICATION_MOBILE_3"
 												class="form-control form-control-sm commonBackground"
 												autocomplete="off" pattern="[0-9]{10}"
-												title="Please enter exactly 10 digits" maxlength="10" />
+												title="Please enter exactly 10 digits" maxlength="10" /> -->
+												
+												<div class="input-group input-group-sm"> 
+												<input type="text" id="ph_countrycode" name="ph_countrycode"
+													class="form-control" value="+230"  
+													style="max-width: 80px; " />
+ 
+												<input type="number" id="NOTIFICATION_MOBILE_3"
+													name="NOTIFICATION_MOBILE_3" 
+													class="form-control" maxlength="10" 
+													oninput="maxLengthCheck(this)" autocomplete="off"
+													style="border-left: 1;" />
+											</div>
 										</div>
 										<div class="col-sm-3"
 											th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' OR ${formmode}=='cancel'">
-											<input type="number"
+											<!-- <input type="number"
 												th:value="${notificationParmsProfile?.NOTIFICATION_MOBILE_3}"
 												id="NOTIFICATION_MOBILE_3" name="NOTIFICATION_MOBILE_3"
 												class="form-control form-control-sm" autocomplete="off"
 												pattern="[0-9]{10}" title="Please enter exactly 10 digits"
 												maxlength="10"
-												th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'" />
+												th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'" /> -->
+												<div class="input-group input-group-sm">
+												<!-- Country Code as input field -->
+												<input type="text" id="ph_countrycode" name="ph_countrycode"
+													class="form-control" readonly
+													style="max-width: 80px; background-color: #f2f2f2;" />
+
+												<!-- Mobile Number -->
+												<input type="number" id="NOTIFICATION_MOBILE_3"
+													name="NOTIFICATION_MOBILE_3"
+													th:readonly="${notificationParmsProfile?.ENTITY_FLG=='N'} OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='verify'"
+													class="form-control" maxlength="10"
+													th:value="${notificationParmsProfile?.NOTIFICATION_MOBILE_3}"
+													oninput="maxLengthCheck(this)" autocomplete="off"
+													style="border-left: 1;" />
+											</div>
 										</div>
 									</div>
 									<label> </label>
@@ -990,7 +1083,8 @@ label {
 										</div>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input type="text" id="NOTIFICATION_EMAIL_2"
-												name="NOTIFICATION_EMAIL_2" onkeyup="this.value = this.value.toUpperCase(); "
+												name="NOTIFICATION_EMAIL_2"
+												onkeyup="this.value = this.value.toUpperCase(); "
 												class="form-control form-control-sm commonBackground"
 												autocomplete="off" />
 										</div>
@@ -1034,8 +1128,9 @@ label {
 											<label for="mand_account_number">Email ID 3 </label>
 										</div>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
-											<input type="text" id="NOTIFICATION_EMAIL_3" 
-												name="NOTIFICATION_EMAIL_3" onkeyup="this.value = this.value.toUpperCase(); "
+											<input type="text" id="NOTIFICATION_EMAIL_3"
+												name="NOTIFICATION_EMAIL_3"
+												onkeyup="this.value = this.value.toUpperCase(); "
 												class="form-control form-control-sm commonBackground"
 												autocomplete="off" />
 										</div>
@@ -1103,8 +1198,8 @@ label {
 								onclick="verifysubmitform(this);"
 								th:attr="data-formmode=${formmode},data-entity=${ENTITY_FLG},data-modify_user=${notificationParmsProfile?.MODIFY_USER},data-entry_user=${notificationParmsProfile?.ENTRY_USER}">Verify</button>
 
-							<button type="button" class="btn btn-xs headerbutton"
-								id="" onclick="back();">Back</button>
+							<button type="button" class="btn btn-xs headerbutton" id=""
+								onclick="back();">Back</button>
 						</div>
 
 						<div class="content border mx-3 my-2"
@@ -1181,7 +1276,7 @@ label {
 			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<h3 class="text-center p-2 text-white font-weight-bold"
-					style="background: #f26223;">BANK OF BARODA </h3>
+					style="background: #f26223;">BANK OF BARODA</h3>
 				<h4 class="modal-body text-center font-weight-bold"
 					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
@@ -1200,7 +1295,7 @@ label {
 			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<h3 class="text-center p-2 text-white font-weight-bold"
-					style="background: #f26223;">BANK OF BARODA </h3>
+					style="background: #f26223;">BANK OF BARODA</h3>
 				<h4 class="modal-body text-center font-weight-bold"
 					style="color: black !important; font-size: 19px"></h4>
 				<div class="text-center">
