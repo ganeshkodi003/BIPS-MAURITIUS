@@ -25,11 +25,14 @@ public interface MerchantCategoryRep extends JpaRepository<MerchantCategoryCodeE
 		String getlistcount(String merchant);
 		
 		@Query(value = "SELECT MAX(TO_NUMBER(numeric_part)) AS max_numeric_part FROM (SELECT REGEXP_REPLACE(MERCHANT_CODE, '[^[:digit:]]', '') AS numeric_part FROM BIPS_MERCHANT_CATEGORY_CODE_TABLE)", nativeQuery = true)
-		String getMerCode();
-		
+		String getMerCode(); 
 		 
 		 @Modifying
 		 @Transactional
 		 @Query(value = "UPDATE BIPS_MERCHANT_CATEGORY_CODE_TABLE SET MERCHANT_DESC = ?2 WHERE MERCHANT_CODE = ?1", nativeQuery = true)
 		 void updateMerchantDescription(String merchantCode, String merchantDesc);
+		 
+		 @Query(value = "SELECT MERCHANT_CODE, MERCHANT_DESC FROM BIPS_MERCHANT_CATEGORY_CODE_TABLE ORDER BY MERCHANT_CODE ASC", nativeQuery = true)
+		 List<Object[]> getMerCategCode();
+
 }

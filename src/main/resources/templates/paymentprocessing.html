@@ -182,10 +182,7 @@
 	}
 
 	function getMerchantData(selectElement) {
-		const merchantId = selectElement.value;
-
-
-
+		const merchantId = selectElement.value; 
 		// Check if a valid merchant is selected
 		if (!merchantId) {
 			alert('Please select a merchant ID.');
@@ -245,34 +242,30 @@
 				</div>
 			</div>
 			<label></label>
-			<div class="row formline mt-1 p-2">
-
-
-
+			<div class="row formline mt-1 p-2"> 
 				<div class="col-sm-1">
 					<label for="merchandId">Merchant ID<span style="color: red; font-size: 20px;"> *</span></label>
 				</div>
 				<div class="col-sm-2">
 					<select id="merchandId" class="form-control form-control-sm" name="merchandId" autocomplete="off"
-						onchange="getMerchantData(this);">
-						<option value="">Select</option>
-						<th:block th:each="merchantId : ${merchantIds}">
-							<option th:value="${merchantId}" th:text="${merchantId}"></option>
-						</th:block>
-					</select>
-				</div>
+    onchange="getMerchantData(this);">
+    <option value="">Select</option>
+    <th:block th:each="merchant : ${merchantIdNameList}">
+        <option th:value="${merchant[0]}" 
+                th:text="${merchant[0]} + ' - ' + ${merchant[1]}">
+        </option>
+    </th:block>
+</select>
 
-				<div class="col-sm-5"></div>
-
+				</div> 
+				<div class="col-sm-5"></div> 
 				<div class="col-sm-1">
 					<label for="merchandName">Merchant Name</label>
 				</div>
 				<div class="col-sm-2">
 					<input type="text" id="merchandName" class="form-control " name="merchandName"
 						style="color: black; font-size: 0.820rem;" autocomplete="off" />
-				</div>
-
-
+				</div> 
 			</div>
 
 

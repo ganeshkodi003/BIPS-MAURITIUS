@@ -859,7 +859,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 								<label class="col-sm-2 col-form-label"
 									style="color: #343a40; font-weight: bold;">Charge Back
-									Amount : </label>
+									Limit : </label>
 								<div class="col-sm-2">
 									<label type="text" id="merchant_addr" name="merchant_addr"
 										th:text="${branchDet?.chargeback_amount == 0 ? '0.00' :#numbers.formatDecimal(branchDet?.chargeback_amount, 0, 'COMMA', 2, 'POINT')}"
@@ -868,7 +868,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 									</label>
 								</div>
 								<label class="col-sm-2 col-form-label"
-									style="color: #343a40; font-weight: bold;">Transaction
+									style="color: #343a40; font-weight: bold;">Ceiling
 									Amount : </label>
 								<div class="col-sm-2">
 									<label type="text" id="merchant_addr" name="merchant_addr"

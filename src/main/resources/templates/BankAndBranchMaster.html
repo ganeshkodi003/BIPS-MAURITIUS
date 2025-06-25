@@ -397,16 +397,13 @@ td {
 							<tr  class="filters">
 							
 								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="ID" disabled></th>
+									class="form-control font-weight-bold" placeholder="Branch ID" disabled></th>
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Bank ID"
 									disabled></th>
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Bank Name"
-									disabled></th>
-								<th style="text-align: center"><input type="text"
-									class="form-control font-weight-bold" placeholder="Branch ID"
-									disabled></th>
+									disabled></th> 
 								<th style="text-align: center"><input type="text"
 									class="form-control font-weight-bold" placeholder="Branch Name"
 									disabled></th>
@@ -426,8 +423,7 @@ td {
 							<tr th:each="bankdetails: ${BankandBranchList}">
 								<td th:text="${bankdetails.sol_id}"></td>
 								<td th:text="${bankdetails?.bank_code}"></td>
-								<td th:text="${bankdetails?.bank_name}"></td>
-								<td th:text="${bankdetails.parm_1}"></td>
+								<td th:text="${bankdetails?.bank_name}"></td> 
 								<td th:text="${bankdetails?.parm_2}"></td>
 								<!-- <td th:text="${(bankdetails?.addr_1 != null ? bankdetails.addr_1 : '') + (bankdetails?.addr_2 != null ? ', ' + bankdetails.addr_2 : '')}"></td> -->
 								<td th:text="${bankdetails?.city_code}"></td>

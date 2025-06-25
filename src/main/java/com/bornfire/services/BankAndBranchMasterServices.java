@@ -3485,7 +3485,7 @@ public class BankAndBranchMasterServices {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				msg = "Merchant File has not been uploaded";
+				msg = "Merchant File has been uploaded";
 			}
 		}
 		return msg;
@@ -3749,7 +3749,7 @@ public class BankAndBranchMasterServices {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				msg = "Unit File has not been uploaded";
+				msg = "Unit File has been uploaded";
 			}
 		}
 		return msg;

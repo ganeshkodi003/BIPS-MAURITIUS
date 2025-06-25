@@ -326,6 +326,7 @@ public class MainController {
 		md.addAttribute("USERNAME", USERNAME);
 		md.addAttribute("PdfViewer", "Dashboard");
 
+		System.out.println(merchantMasterRep.PiechartCount());
 		UserProfile userProfile = userProfileRep.findById(USERID).orElse(new UserProfile());
 
 		if ("Y".equals(userProfile.getAuthenticate_flg())) {
@@ -347,6 +348,32 @@ public class MainController {
 		md.addAttribute("countfailure", CountFailure);
 		md.addAttribute("totalTransaction", totalTransaction);
 		md.addAttribute("totalamt", totalTranAmount);
+		
+		List<Object[]> rawList = merchantMasterRep.getMerIdName();
+		List<Map<String, String>> merchantIdName = new ArrayList<>();
+
+		for (Object[] row : rawList) {
+		    Map<String, String> map = new HashMap<>();
+		    map.put("Id", row[0].toString());
+		    map.put("Name", row[1].toString());
+		    merchantIdName.add(map);
+		}
+		
+		md.addAttribute("merchantIds", merchantIdName);
+
+		List<Object[]> rawList1 = merchantCategoryRep.getMerCategCode();
+		List<Map<String, String>> merchantCategList = new ArrayList<>();
+
+		for (Object[] row : rawList1) {
+		    Map<String, String> map = new HashMap<>();
+		    map.put("code", row[0].toString());
+		    map.put("desc", row[1].toString());
+		    merchantCategList.add(map);
+		}
+
+		md.addAttribute("merchantCateg", merchantCategList);
+
+
 		return "IPSDashboard";
 	}
 
@@ -4410,10 +4437,13 @@ public class MainController {
 	    md.addAttribute("PdfViewer", "IpsOutgoingReport");
 
 	    if (formmode == null || formmode.equals("list")) {
-	        md.addAttribute("merchantIds", merchantMasterRep.getMerchantIds());
+	        List<Object[]> merchantIdNameList = merchantMasterRep.getMerchantIdAndNameList();
+	        md.addAttribute("merchantIdNameList", merchantIdNameList);
 	    }
+
 	    return "paymentprocessing.html";  // Using TransactionReports.html for now
 	}
+	
 	@RequestMapping(value = "/getimages", method = { RequestMethod.GET })
 	@ResponseBody
 	public String getimagesss(@RequestParam(required = false) String appl_ref_no) throws SQLException {

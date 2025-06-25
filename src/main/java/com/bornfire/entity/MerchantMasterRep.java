@@ -63,7 +63,24 @@ public interface MerchantMasterRep extends JpaRepository<MerchantMaster, String>
 		    nativeQuery = true
 		)
 		List<MerchantMaster> findAllDataHr();
+	
 	@Query(value = "SELECT * FROM MERCHANT_MASTER_TABLE UNION ALL SELECT * FROM MERCHANT_MASTER_TABLE_MOD ", nativeQuery = true)
 	List<MerchantMaster> CheckMerID();
+	
+	@Query(value = "SELECT\r\n"
+			+ "  (SELECT COUNT(*) FROM merchant_master_table) AS merchant_count,\r\n"
+			+ "  (SELECT COUNT(*) FROM BIPS_MERCHANT_UNIT_MANAGEMENT) AS unit_count,\r\n"
+			+ "  (SELECT COUNT(*) FROM BIPS_MERCHANT_USER_MANAGEMENT) AS user_count\r\n"
+			+ "FROM DUAL\r\n"
+			+ " ", nativeQuery = true)
+	List<List<Integer>> PiechartCount();
+	
+	@Query(value = "SELECT MERCHANT_ID, MERCHANT_NAME FROM MERCHANT_MASTER_TABLE UNION ALL SELECT MERCHANT_ID, MERCHANT_NAME FROM MERCHANT_MASTER_TABLE_MOD ORDER BY MERCHANT_ID ASC", nativeQuery = true)
+	 List<Object[]> getMerIdName();
+	 
+	 
+	 @Query(value = "SELECT MERCHANT_ID, MERCHANT_NAME FROM merchant_master_table WHERE ENTITY_FLG = 'Y' ORDER BY REGEXP_REPLACE(MERCHANT_ID, '[0-9]', ''), TO_NUMBER(REGEXP_SUBSTR(MERCHANT_ID, '[0-9]+')) ASC", nativeQuery = true)
+	 List<Object[]> getMerchantIdAndNameList();
+
 
 }

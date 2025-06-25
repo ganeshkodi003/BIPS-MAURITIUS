@@ -18,6 +18,9 @@
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <!-- Include Feather Icons -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
 
 
 <style>
@@ -218,7 +221,426 @@ button {
 
 </head>
 
-<script th:inline="javascript">
+
+<body>
+	<div th:insert="MMenupage :: header"></div>
+
+	<div class="container-manager">
+		<div class="content-page" style="height: 100%;">
+
+			<div
+				style="text-align: center; font-weight: bold; font-size: xx-large; padding-bottom: 10px;">
+				Merchant Statistics</div>
+			<div id="top-row" style="display: flex;">
+				<div id="merchant-header"
+					style="padding: 15px; width: 25%; text-align: center; margin-left: 8%; font-size: larger; font-weight: 500;"></div>
+				<div style="width: 25%; padding: 15px; margin-left: 10%">
+
+<!-- initializeChart('cummulativeChart', backendData.cummulative.labels, allBackendDatas[random()-1].cummulative.datasets); -->
+
+					<select id="filterInput" class="form-control form-control-sm" onchange="loadRandomChart()"
+						name="merchandId">
+						<option value="">Select</option>
+						<th:block th:each="merchant : ${merchantCateg}">
+							<option th:value="${merchant.code}"
+								th:text="${merchant.code + ' - ' + merchant.desc}"></option>
+						</th:block>
+					</select>
+
+
+					<!-- Results Container -->
+					<!-- <ul id="results" class="list-group result-list"
+						style="width: 250px;"></ul> -->
+				</div>
+				<div class="row formline " id="tabs"
+					style="display: flex; width: 50%; justify-content: flex-end; align-items: center;">
+					<button class="tablinks active" id="smooth1View"
+						onclick="changeColorView(this, 'Cummulative')">Cummulative</button>
+					<button class="tablinks" id="smooth2View"
+						onclick="changeColorView(this, 'Progressive')">Month Wise</button>
+				</div>
+			</div> 
+
+			<div class="row ">
+				<div class="col-lg-5 col-md-12 mb-4"> 
+					<div class="card-body card-body px-2 pt-lg-6 ">
+						<div class="row ">
+							<div class="col-lg-12 my-auto text-center d-lg-block d-flex justify-content-center"> 
+								<div id="chart-pie"></div> 
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Second Card: Sales Overview --> 
+				<div class="col-lg-7 col-md-12" > 
+					<div class="card-body ">
+						<div class="chart-container" id="Cummulative"> 
+							<canvas id="cummulativeChart"></canvas>
+						</div>
+						<div class="chart-container" id="Progressive"
+							style="display: none;"> 
+							<canvas id="progressiveChart"></canvas>
+						</div>
+					</div> 
+				</div>
+				<hr style="border: 1px solid #7b838b; width: 100%;"> 
+				<div style="width: 100%; display: flex;">
+					<!-- Left side: All Merchants -->
+					<div
+						style="width: 50%; text-align: center; padding-bottom: 15px; display: flex; justify-content: center; align-items: center;">
+						<span style="font-size: 1.25rem; font-weight: bold;">All
+							Merchants</span>
+					</div> 
+					<!-- Right side: Merchant Wise + Select -->
+					<div
+						style="width: 50%; text-align: center; padding-bottom: 15px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+						<span style="font-size: 1.25rem; font-weight: bold;">Merchant
+							Wise</span> <select id="filterInput" onchange="MerchantChange()"
+							class="form-control form-control-sm" name="merchandId"
+							style="width: auto;">
+							<option value="">Select</option>
+							<th:block th:each="merchant : ${merchantIds}">
+							<option th:value="${merchant.Id}"
+								th:text="${merchant.Id + ' - ' + merchant.Name}"></option>
+						</th:block>
+						</select>
+					</div>
+				</div>
+
+				<div style="width: 100%; display: flex;" class="mt-2">
+					<div
+						style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
+						<div class="insert-date"
+							style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
+						<div
+							style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
+							<select class="month-dropdown"
+								onchange="updateSelectedMonthYear(this)">
+								<!-- Month options will be added dynamically -->
+							</select> <select class="year-dropdown"
+								onchange="updateSelectedMonthYear(this)">
+								<!-- Year options will be added dynamically -->
+							</select>
+							<!-- <div class="selected-month-year-display"
+								style="margin-top: 10px;"></div> -->
+						</div>
+					</div>
+					<div
+						style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
+						<div class="insert-date"
+							style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
+						<div
+							style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
+							<select class="month-dropdown"
+								onchange="updateSelectedMonthYear(this)">
+								<!-- Month options will be added dynamically -->
+							</select> <select class="year-dropdown"
+								onchange="updateSelectedMonthYear(this)">
+								<!-- Year options will be added dynamically -->
+							</select>
+							<div class="selected-month-year-display"
+								style="margin-top: 10px;"></div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+				<div class="row " style="height: 100%; width: 100%">
+
+					<!-- Each chart represents one month -->
+					<div class="chart col-lg-3" id="chart-jan">
+						<canvas id="chart-bars-jan" class="chart-bar chart-canvas"></canvas>
+					</div>
+					<div class="chart col-lg-3" id="chart-feb">
+						<canvas id="chart-bars-feb" class="chart-bar chart-canvas"></canvas>
+					</div>
+					<div class="chart col-lg-3" id="chart-mar">
+						<canvas id="chart-bars-mar" class="chart-bar chart-canvas"></canvas>
+					</div>
+					<div class="chart col-lg-3" id="chart-apr">
+						<canvas id="chart-bars-apr" class="chart-bar chart-canvas"></canvas>
+					</div>
+
+					<!-- Static legend container: Centered in one row -->
+					<div
+						class="col-12 d-flex justify-content-center align-items-center"
+						id="static-legend">
+						<div class="legend-item">
+							<span class="legend-color" style="background-color: #cb9cb3;"></span>
+							No. of Merchants
+						</div>
+						<div class="legend-item">
+							<span class="legend-color" style="background-color: #fb6340;"></span>
+							Vol. of Trans.
+						</div>
+						<div class="legend-item">
+							<span class="legend-color" style="background-color: #36a2eb;"></span>
+							No. of Trans.
+						</div>
+
+
+					</div>
+
+				</div>
+
+
+
+				<!-- End of Row -->
+			</div>
+		</div>
+
+
+		<div id="myModalpopup" class="modal" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-content"
+				style="width: 1000px; margin-top: 90px; margin-left: 650px; text-align: center">
+				<div class="menu-title-header">
+					<div class="modal-title pt-2" id="exampleModalLabel"
+						style="text-align: center; color: white;">SECURITY QUESTION
+						FORM</div>
+				</div>
+				<div class="modal-body scroll"
+					style="text-align: center; background-color: #c6ccd2;">
+					<form id="uploadForm1" method="post" autocomplete="off">
+						<input type="text" name="flag" id="flag" autocomplete="off"
+							th:value="${authenticationValue}"
+							class="form-control form-control-sm" hidden="true" />
+
+						<div class="form-group row">
+							<label for="user_id" class="col-sm-6 col-form-label">User
+								ID <span style="color: red; font-size: 20px;"></span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="user_id" id="user_id"
+									autocomplete="off" th:value="${USERID}" readonly
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="username" class="col-sm-6 col-form-label">User
+								Name <span style="color: red; font-size: 20px;"></span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="username" id="username"
+									th:value="${USERNAME}" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									readonly class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_1" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE BOOK <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_1"
+									id="security_answer_1" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_2" class="col-sm-6 col-form-label">WHAT
+								IS THE NAME OF THE ROAD YOU GREW UP ON <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_2"
+									id="security_answer_2" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_3" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE PET <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_3"
+									id="security_answer_3" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_4" class="col-sm-6 col-form-label">WHAT
+								WAS THE FIRST COMPANY THAT YOU WORKED FOR <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_4"
+									id="security_answer_4" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_5" class="col-sm-6 col-form-label">WHAT
+								IS YOUR MOTHER'S NAME <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_5"
+									id="security_answer_5" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_6" class="col-sm-6 col-form-label">WHAT
+								IS YOUR DATE OF BIRTH <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_6"
+									id="security_answer_6" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_7" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE SCHOOL TEACHER'S NAME <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_7"
+									id="security_answer_7" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_8" class="col-sm-6 col-form-label">WHAT
+								IS YOUR FAVORITE MOVIE <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_8"
+									id="security_answer_8" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_9" class="col-sm-6 col-form-label">WHAT
+								WAS YOUR FIRST VEHICLE <span
+								style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_9"
+									id="security_answer_9" autocomplete="off"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="security_answer_10" class="col-sm-6 col-form-label">WHAT
+								CITY WERE YOU BORN IN <span style="color: red; font-size: 20px;">*</span>
+							</label>
+							<div class="col-sm-6">
+								<input type="text" name="security_answer_10"
+									id="security_answer_10"
+									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
+									class="form-control form-control-sm" required />
+							</div>
+						</div>
+
+						<div class="text-center">
+							<button type="button" class="btn btn-primary"
+								onclick="add1submit();">Submit</button>
+							<button type="button" class="btn btn-primary"
+								onclick="backpopup()">Back</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="changepassword1" data-backdrop="static"
+			data-keyboard="false">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="color: cadetblue;">
+					<!-- Modal Header -->
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel"
+							style="text-align: center; color: white;">CHANGE PASSWORD</div>
+					</div>
+					<div class="modal-body"
+						style="text-align: center; background-color: #c6ccd2">
+						<form th:object="${passform}" id="passFormNew" method="post">
+							<div class="form-group">
+								<div class="row">
+									<label class="col-sm-5">User ID :</label> <input
+										autocomplete="off" class="form-control col-sm-5" type="text"
+										id="userId" th:value="${USERID}" name="userId" required />
+								</div>
+								<div class="row">
+									<label class="col-sm-5">New Password :</label> <input
+										autocomplete="off" class="form-control col-sm-5"
+										type="password" id="newpass1" name="newpass1" required />
+								</div>
+								<div class="row">
+									<label class="col-sm-5" for="acctName">Confirm New
+										Password :</label> <input class="form-control col-sm-5"
+										autocomplete="off" type="password" id="Connpass1"
+										name="Connpass1" required />
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2">
+						<button type="button" class="btn btn-primary"
+							onclick="submitPassword()">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="popupvalidate" data-backdrop="static"
+			data-keyboard="false">
+			<div
+				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content" style="color: cadetblue;">
+					<!-- Modal Header -->
+					<div class="menu-title-header">
+						<div class="modal-title" id="exampleModalLabel"
+							style="text-align: center; color: white;">VALIDATION</div>
+					</div>
+					<div class="modal-body"
+						style="text-align: center; background-color: #c6ccd2">
+						<div class="form-group">
+							<div class="row">
+								<label class="col-sm-8" for="acctName">Fill THE REQUIRD
+									FIELD</label>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer" style="background-color: #c6ccd2">
+						<button type="button" class="btn btn-primary"
+							onclick="closeModal()">CLOSE</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+    <script th:inline="javascript">
 	/*<![CDATA[*/
 
 	// SUBMIT SECURITY ANSWER
@@ -478,490 +900,291 @@ function populateDropdowns() {
     const monthDropdowns = document.querySelectorAll('.month-dropdown');
     const yearDropdowns = document.querySelectorAll('.year-dropdown');
 
+    // Get current month and year
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // getMonth() returns 0-11
+    const currentYear = currentDate.getFullYear();
+
     // Populate months
     const months = [
-        'January', 'February', 'March', 'April', 'May', 'June', 
+        'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
     ];
     monthDropdowns.forEach((dropdown) => {
         months.forEach((month, index) => {
             const option = document.createElement('option');
-            option.value = index + 1; // Month as number (1-12)
+            option.value = index + 1;
             option.textContent = month;
+            if (index + 1 === currentMonth) {
+                option.selected = true; // Set current month as selected
+            }
             dropdown.appendChild(option);
         });
     });
 
     // Populate years
-    const currentYear = new Date().getFullYear();
-    const yearRange = 10; // Number of years to show before and after current year
+    const yearRange = 200;
     yearDropdowns.forEach((dropdown) => {
         for (let year = currentYear - yearRange; year <= currentYear + yearRange; year++) {
             const option = document.createElement('option');
             option.value = year;
             option.textContent = year;
+            if (year === currentYear) {
+                option.selected = true; // Set current year as selected
+            }
             dropdown.appendChild(option);
         }
     });
 }
 
+let selectedMerchantId = "";
+
 function updateSelectedMonthYear(selectElement) {
-    const parentDiv = selectElement.closest('div'); // Get the parent container of the dropdown
+    const parentDiv = selectElement.closest('div');
     const monthDropdown = parentDiv.querySelector('.month-dropdown');
     const yearDropdown = parentDiv.querySelector('.year-dropdown');
     const displayDiv = parentDiv.querySelector('.selected-month-year-display');
-    const selectedMonth = monthDropdown.options[monthDropdown.selectedIndex]?.text || 'Month';
-    const selectedYear = yearDropdown.options[yearDropdown.selectedIndex]?.text || 'Year';
+    const selectedMonth = monthDropdown.value || 'Month';
+    const selectedYear = yearDropdown.value || 'Year';
 
-    displayDiv.innerHTML = `Selected: <strong>${selectedMonth} ${selectedYear}</strong>`;
+   // displayDiv.innerHTML = `Selected: <strong>${selectedMonth} ${selectedYear}</strong>`;
+
+    // Determine which chart to update
+    const index = [...document.querySelectorAll('.month-dropdown')].indexOf(monthDropdown);
+
+    if (index === 0) {
+        // Update chart-bars-feb (2nd chart)
+        const updatedData = getUpdatedMonthlyData(selectedMonth, selectedYear, selectedMerchantId);
+        updateChart('Monthly', 'chart-bars-feb', updatedData);
+    } else if (index === 1) {
+        // Update chart-bars-apr (4th chart)
+        const updatedData = getUpdatedMonthlyData(selectedMonth, selectedYear, selectedMerchantId);
+        updateChart('Monthly', 'chart-bars-apr', updatedData);
+    }
 }
+
 
 // Populate the dropdowns on page load
 document.addEventListener('DOMContentLoaded', populateDropdowns);
 
+function MerchantChange() {
+    const merchantSelect = document.getElementById("filterInput");
+    selectedMerchantId = merchantSelect.value;
+
+    // Dummy data generation for now — replace with AJAX call to fetch data for merchantId if needed
+    const janData = getMerchantChartData("jan", selectedMerchantId);
+    const febData = getMerchantChartData("feb", selectedMerchantId);
+    const marData = getMerchantChartData("mar", selectedMerchantId);
+    const aprData = getMerchantChartData("apr", selectedMerchantId);
+
+    updateChart('Overall', 'chart-bars-jan', janData);
+    updateChart('Monthly', 'chart-bars-feb', febData);
+    updateChart('Overall', 'chart-bars-mar', marData);
+    updateChart('Monthly', 'chart-bars-apr', aprData);
+}
+
+function updateChart(monthType, canvasId, data) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+
+    // Destroy old chart if needed
+    if (canvas.chartInstance) {
+        canvas.chartInstance.destroy();
+    }
+
+    canvas.chartInstance = new Chart(canvas, {
+        type: "bar",
+        data: {
+            labels: [monthType],
+            datasets: [
+                {
+                    label: "No. of Merchants",
+                    backgroundColor: "#cb9cb3",
+                    data: [data[2]],
+                    maxBarThickness: 20
+                },
+                {
+                    label: "Vol. of Trans.",
+                    backgroundColor: "#fb6340",
+                    data: [data[0]],
+                    maxBarThickness: 20
+                },
+                {
+                    label: "No. of Trans.",
+                    backgroundColor: "#36a2eb",
+                    data: [data[1]],
+                    maxBarThickness: 20
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'x',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    enabled: true,
+                    mode: "index",
+                    intersect: false,
+                    callbacks: {
+                        label: function (context) {
+                            let label = context.dataset.label || '';
+                            let value = context.raw;
+                            return label === "Vol. of Trans." ? `${label}: ${value}k` : `${label}: ${value}`;
+                        }
+                    }
+                },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    font: { size: 12 },
+                    formatter: (value, context) => {
+                        return context.dataset.label === "Vol. of Trans." ? value + "k" : value;
+                    },
+                    color: '#444'
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: { color: "#8898aa" },
+                    grid: { color: "rgba(200, 200, 200, 0.3)" }
+                },
+                y: {
+                    ticks: { color: "#8898aa" },
+                    grid: { display: false },
+                    max: getRelativeMaxValue(data)
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
+
+
+function getUpdatedMonthlyData(month, year, merchantId) {
+    // Replace this with actual data fetch logic
+    return [Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)];
+}
+
+function getMerchantChartData(month, merchantId) {
+    // Replace this with actual data fetch logic per merchantId
+    return [Math.floor(Math.random() * 100), Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)];
+}
+
 </script>
-<body>
-	<div th:insert="MMenupage :: header"></div>
-
-	<div class="container-manager">
-		<div class="content-page" style="height: 100%;">
-
-			<div style="text-align: center; font-weight: bold; font-size: xx-large;padding-bottom: 10px;"> Merchant Statistics</div>
-			<div id="top-row" style="display: flex; ">
-				<div id="merchant-header" style=" padding: 15px; width:25%;text-align: center; margin-left: 8% ;font-size: larger; font-weight: 500; "></div>
-				<div style="width:25%; padding: 15px; margin-left: 10%">
-												
-
-							<input type="text" id="filterInput"
-								class="form-control form-control-sm " style="width: 250px;"
-								placeholder="Enter Merchant Code" autocomplete="off">
-
-							<!-- Results Container -->
-							<ul id="results" class="list-group result-list"
-								style="width: 250px;"></ul>
-</div>
-<div class="row formline " id="tabs"
-						style="display: flex;width: 50%; justify-content: flex-end; align-items: center;">
-						<button class="tablinks active" id="smooth1View"
-							onclick="changeColorView(this, 'Cummulative')">Cummulative</button>
-						<button class="tablinks" id="smooth2View"
-							onclick="changeColorView(this, 'Progressive')">Month Wise</button>
-					</div>
-			</div>
-
-
-
-			<div class="row ">
-				<div class="col-lg-5 col-md-12 mb-4">
-
-					<div class="card-body card-body px-2 pt-lg-6 ">
-						<div class="row ">
-							<div
-								class="col-lg-12 my-auto text-center d-lg-block d-flex justify-content-center">
-							
-								<div id="chart-pie"></div>
-								
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Second Card: Sales Overview -->
-
-
-				<div class="col-lg-7 col-md-12" st>
-					
-					
-
-					<div class="card-body ">
-						<div class="chart-container" id="Cummulative">
-
-							<canvas id="cummulativeChart"></canvas>
-						</div>
-						<div class="chart-container" id="Progressive"
-							style="display: none;">
-
-							<canvas id="progressiveChart"></canvas>
-						</div>
-					</div>
-
-				</div>
-				<hr style="border: 1px solid #7b838b; width: 100%;">
-
-
-<div style="width: 100%; display: flex;">
-    <div style="width: 50%; text-align: center; padding-bottom: 15px">All Merchant</div>
-    <div style="width: 50%; text-align: center; padding-bottom: 15px">
-        <h1>Merchant Wise</h1>
-    </div>
-</div>
-<div style="width: 100%; display: flex;">
-    <div style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
-        <div class="insert-date" style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
-        <div style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
-            <select class="month-dropdown" onchange="updateSelectedMonthYear(this)">
-                <!-- Month options will be added dynamically -->
-            </select>
-            <select class="year-dropdown" onchange="updateSelectedMonthYear(this)">
-                <!-- Year options will be added dynamically -->
-            </select>
-            <div class="selected-month-year-display" style="margin-top: 10px;"></div>
-        </div>
-    </div>
-    <div style="width: 50%; text-align: center; padding-bottom: 15px; display: flex;">
-        <div class="insert-date" style="font-size: larger; font-weight: 500; width: 50%; text-align: center;"></div>
-        <div style="font-size: larger; font-weight: 500; width: 50%; text-align: center;">
-            <select class="month-dropdown" onchange="updateSelectedMonthYear(this)">
-                <!-- Month options will be added dynamically -->
-            </select>
-            <select class="year-dropdown" onchange="updateSelectedMonthYear(this)">
-                <!-- Year options will be added dynamically -->
-            </select>
-            <div class="selected-month-year-display" style="margin-top: 10px;"></div>
-        </div>
-    </div>
-</div>
 
 
 
 
-
-				
-				<div class="row " style="height: 100%; width: 100%">
-
-					<!-- Each chart represents one month -->
-					<div class="chart col-lg-3" id="chart-jan">
-						<canvas id="chart-bars-jan" class="chart-bar chart-canvas"></canvas>
-					</div>
-					<div class="chart col-lg-3" id="chart-feb">
-						<canvas id="chart-bars-feb" class="chart-bar chart-canvas"></canvas>
-					</div>
-					<div class="chart col-lg-3" id="chart-mar">
-						<canvas id="chart-bars-mar" class="chart-bar chart-canvas"></canvas>
-					</div>
-					<div class="chart col-lg-3" id="chart-apr">
-						<canvas id="chart-bars-apr" class="chart-bar chart-canvas"></canvas>
-					</div>
-
-					<!-- Static legend container: Centered in one row -->
-					<div
-						class="col-12 d-flex justify-content-center align-items-center"
-						id="static-legend">
-						<div class="legend-item">
-							<span class="legend-color" style="background-color: #fb6340;"></span>
-							Vol. of Trans.
-						</div>
-						<div class="legend-item">
-							<span class="legend-color" style="background-color: #36a2eb;"></span>
-							No. of Trans.
-						</div>
-						
-						<div class="legend-item">
-							<span class="legend-color" style="background-color: #cb9cb3;"></span>
-							No. of Merchants
-						</div>
-					</div>
-
-				</div>
-
-
-
-				<!-- End of Row -->
-			</div>
-		</div>
-
-
-		<div id="myModalpopup" class="modal" data-backdrop="static"
-			data-keyboard="false">
-			<div class="modal-content"
-				style="width: 1000px; margin-top: 90px; margin-left: 650px; text-align: center">
-				<div class="menu-title-header">
-					<div class="modal-title pt-2" id="exampleModalLabel"
-						style="text-align: center; color: white;">SECURITY QUESTION
-						FORM</div>
-				</div>
-				<div class="modal-body scroll"
-					style="text-align: center; background-color: #c6ccd2;">
-					<form id="uploadForm1" method="post" autocomplete="off">
-						<input type="text" name="flag" id="flag" autocomplete="off"
-							th:value="${authenticationValue}"
-							class="form-control form-control-sm" hidden="true" />
-
-						<div class="form-group row">
-							<label for="user_id" class="col-sm-6 col-form-label">User
-								ID <span style="color: red; font-size: 20px;"></span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="user_id" id="user_id"
-									autocomplete="off" th:value="${USERID}" readonly
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="username" class="col-sm-6 col-form-label">User
-								Name <span style="color: red; font-size: 20px;"></span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="username" id="username"
-									th:value="${USERNAME}" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									readonly class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_1" class="col-sm-6 col-form-label">WHAT
-								IS YOUR FAVORITE BOOK <span style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_1"
-									id="security_answer_1" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_2" class="col-sm-6 col-form-label">WHAT
-								IS THE NAME OF THE ROAD YOU GREW UP ON <span
-								style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_2"
-									id="security_answer_2" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_3" class="col-sm-6 col-form-label">WHAT
-								IS YOUR FAVORITE PET <span style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_3"
-									id="security_answer_3" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_4" class="col-sm-6 col-form-label">WHAT
-								WAS THE FIRST COMPANY THAT YOU WORKED FOR <span
-								style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_4"
-									id="security_answer_4" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_5" class="col-sm-6 col-form-label">WHAT
-								IS YOUR MOTHER'S NAME <span style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_5"
-									id="security_answer_5" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_6" class="col-sm-6 col-form-label">WHAT
-								IS YOUR DATE OF BIRTH <span style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_6"
-									id="security_answer_6" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_7" class="col-sm-6 col-form-label">WHAT
-								IS YOUR FAVORITE SCHOOL TEACHER'S NAME <span
-								style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_7"
-									id="security_answer_7" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_8" class="col-sm-6 col-form-label">WHAT
-								IS YOUR FAVORITE MOVIE <span
-								style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_8"
-									id="security_answer_8" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_9" class="col-sm-6 col-form-label">WHAT
-								WAS YOUR FIRST VEHICLE <span
-								style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_9"
-									id="security_answer_9" autocomplete="off"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label for="security_answer_10" class="col-sm-6 col-form-label">WHAT
-								CITY WERE YOU BORN IN <span style="color: red; font-size: 20px;">*</span>
-							</label>
-							<div class="col-sm-6">
-								<input type="text" name="security_answer_10"
-									id="security_answer_10"
-									onkeyup="this.value = this.value.toUpperCase();handleIn(this)"
-									class="form-control form-control-sm" required />
-							</div>
-						</div>
-
-						<div class="text-center">
-							<button type="button" class="btn btn-primary"
-								onclick="add1submit();">Submit</button>
-							<button type="button" class="btn btn-primary"
-								onclick="backpopup()">Back</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="modal fade" id="changepassword1" data-backdrop="static"
-			data-keyboard="false">
-			<div
-				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-				<div class="modal-content" style="color: cadetblue;">
-					<!-- Modal Header -->
-					<div class="menu-title-header">
-						<div class="modal-title" id="exampleModalLabel"
-							style="text-align: center; color: white;">CHANGE PASSWORD</div>
-					</div>
-					<div class="modal-body"
-						style="text-align: center; background-color: #c6ccd2">
-						<form th:object="${passform}" id="passFormNew" method="post">
-							<div class="form-group">
-								<div class="row">
-									<label class="col-sm-5">User ID :</label> <input
-										autocomplete="off" class="form-control col-sm-5" type="text"
-										id="userId" th:value="${USERID}" name="userId" required />
-								</div>
-								<div class="row">
-									<label class="col-sm-5">New Password :</label> <input
-										autocomplete="off" class="form-control col-sm-5"
-										type="password" id="newpass1" name="newpass1" required />
-								</div>
-								<div class="row">
-									<label class="col-sm-5" for="acctName">Confirm New
-										Password :</label> <input class="form-control col-sm-5"
-										autocomplete="off" type="password" id="Connpass1"
-										name="Connpass1" required />
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer" style="background-color: #c6ccd2">
-						<button type="button" class="btn btn-primary"
-							onclick="submitPassword()">Submit</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="popupvalidate" data-backdrop="static"
-			data-keyboard="false">
-			<div
-				class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-				<div class="modal-content" style="color: cadetblue;">
-					<!-- Modal Header -->
-					<div class="menu-title-header">
-						<div class="modal-title" id="exampleModalLabel"
-							style="text-align: center; color: white;">VALIDATION</div>
-					</div>
-					<div class="modal-body"
-						style="text-align: center; background-color: #c6ccd2">
-						<div class="form-group">
-							<div class="row">
-								<label class="col-sm-8" for="acctName">Fill THE REQUIRD
-									FIELD</label>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer" style="background-color: #c6ccd2">
-						<button type="button" class="btn btn-primary"
-							onclick="closeModal()">CLOSE</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<script>
 		feather.replace(); // Replaces placeholder icons with Feather icons
 	
-	// Datas for chart 
-	
+		function loadRandomChart() {
+		    const randomIndex = Math.floor(Math.random() * allBackendDatas.length); // 0-9
+		    const selected = allBackendDatas[randomIndex];
+
+		    // Destroy and draw cummulative chart
+		    if (window.lineChartCummulative) {
+		        window.lineChartCummulative.destroy();
+		    }
+		    window.lineChartCummulative = initializeChart('cummulativeChart', selected.cummulative.labels, selected.cummulative.datasets);
+
+		    // Destroy and draw progressive chart
+		    if (window.lineChartProgressive) {
+		        window.lineChartProgressive.destroy();
+		    }
+		    window.lineChartProgressive = initializeChart('progressiveChart', selected.progressive.labels, selected.progressive.datasets);
+
+		    // Safely pick a pie chart from backendPieData if available
+		    const pieIndex = Math.floor(Math.random() * backendPieData.length);
+		    initializePieChart(backendPieData[pieIndex]);
+		}
+
 	
 	//Line Chart 
 	
 	
 	 // Mock data fetched from the backend
-    const backendData = {
+const allBackendDatas = [
+    {
+        cummulative: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [12, 18, 25, 35, 45, 55, 55, 55, 55, 55, 55, 55],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [14, 20, 28, 38, 48, 58, 58, 58, 58, 58, 58, 58],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [16, 22, 30, 40, 50, 60, 60, 60, 60, 60, 60, 60],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+            ],
+        },
+        progressive: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [12, 6, 7, 10, 10, 10, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [14, 6, 8, 10, 10, 10, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [16, 6, 8, 10, 10, 10, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+            ],
+        },
+    },
+    {
+        cummulative: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [5, 10, 15, 20, 25, 30, 35, 35, 35, 35, 35, 35],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [6, 12, 18, 24, 30, 36, 40, 40, 40, 40, 40, 40],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [8, 14, 20, 26, 32, 38, 42, 42, 42, 42, 42, 42],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+            ],
+        },
+        progressive: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [5, 5, 5, 5, 5, 5, 5,  5, 5, 5, 5, 5],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [6, 6, 6, 6, 6, 6, 6, 6,6,6,6,6],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [8, 6, 6, 6, 6, 6, 6, 6,6,6,6,6],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+            ],
+        },
+    },
+    {
+        cummulative: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [2, 4, 6, 10, 14, 20, 20, 20, 20, 20, 20, 20],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [3, 6, 9, 13, 18, 22, 22, 22, 22, 22, 22, 22],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [4, 8, 12, 17, 22, 26, 26, 26, 26, 26, 26, 26],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+            ],
+        },
+        progressive: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [
+                { label: "Units", borderColor: "#cb0c9f", backgroundColor: "rgba(203,12,159,0.2)", data: [2, 2, 2, 4, 4, 6, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Terminals", borderColor: "#3A416F", backgroundColor: "rgba(72,72,176,0.2)", data: [3, 3, 3, 4, 5, 4, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+                { label: "Users", borderColor: "#FFC107", backgroundColor: "rgba(255,193,7,0.2)", data: [4, 4, 4, 5, 5, 4, 0,0,0,0,0,0],tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true },
+            ],
+        },
+    },
+    // Seven more dummy entries will follow the same structure:
+    ...Array.from({ length: 7 }).map((_, index) => ({
         cummulative: {
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             datasets: [
                 {
                     label: "Units",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
                     borderColor: "#cb0c9f",
-                    borderWidth: 3,
                     backgroundColor: "rgba(203,12,159,0.2)",
-                    fill: true,
-                    data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120], // Example data
+                    data: Array.from({ length: 12 }, (_, i) => 10 + i * (index + 1)),tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true 
                 },
                 {
                     label: "Terminals",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
                     borderColor: "#3A416F",
-                    borderWidth: 3,
                     backgroundColor: "rgba(72,72,176,0.2)",
-                    fill: true,
-                    data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125], // Example data
+                    data: Array.from({ length: 12 }, (_, i) => 12 + i * (index + 2)),tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true 
                 },
                 {
                     label: "Users",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
                     borderColor: "#FFC107",
-                    borderWidth: 3,
                     backgroundColor: "rgba(255,193,7,0.2)",
-                    fill: true,
-                    data: [20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130], // Example data
+                    data: Array.from({ length: 12 }, (_, i) => 14 + i * (index + 3)),tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true 
                 },
             ],
         },
@@ -970,53 +1193,34 @@ document.addEventListener('DOMContentLoaded', populateDropdowns);
             datasets: [
                 {
                     label: "Units",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
                     borderColor: "#cb0c9f",
-                    borderWidth: 3,
                     backgroundColor: "rgba(203,12,159,0.2)",
-                    fill: true,
-                    data: [5, 15, 25, 75, 85, 95, 105, 115, 35, 45, 55, 65,], // Example data
+                    data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 10 + 1)),tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true 
                 },
                 {
                     label: "Terminals",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
                     borderColor: "#3A416F",
-                    borderWidth: 3,
                     backgroundColor: "rgba(72,72,176,0.2)",
-                    fill: true,
-                    data: [10, 20, 30, 40, 50, 90, 100, 110, 120 ,60, 70, 80,], // Example data
+                    data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 12 + 1)),tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true 
                 },
                 {
                     label: "Users",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    pointRadius: 0,
                     borderColor: "#FFC107",
-                    borderWidth: 3,
                     backgroundColor: "rgba(255,193,7,0.2)",
-                    fill: true,
-                    data: [15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125], // Example data
+                    data: Array.from({ length: 12 }, () => Math.floor(Math.random() * 14 + 1)),tension: 0.4,borderWidth: 0,pointRadius: 0,borderWidth: 3,fill: true 
                 },
             ],
         },
-    };
+    })),
+];
 
-    const backendPieData = {
-            labels: ['Merchants', 'Units', 'Users'], // Example labels
-            series: [40, 30, 30], // Example series (data percentages or values)
-            colors: ['#28a745', '#6c757d', '#dc3545'], // Optional custom colors
-        };
-			
 
 
 	
 	
     // Function to initialize a Line chart dynamically
     function initializeChart(canvasId, chartLabels, chartDatasets) {
+    	console.log(canvasId, chartLabels, chartDatasets);
         const ctx = document.getElementById(canvasId).getContext('2d');
         return new Chart(ctx, {
             type: 'line',
@@ -1079,11 +1283,81 @@ document.addEventListener('DOMContentLoaded', populateDropdowns);
         });
     }
     
+    function random() {
+        // Return an array of 3 random integers between 1 and 10
+        const val=Math.floor(Math.random() * 10) + 1;
+        console.log(val);
+        return val;
+    }
+
     
-    // Function to initialize the Pie Chart
+    let backendPieData = [
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [35, 25, 40],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [20, 50, 30],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [45, 35, 20],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [10, 40, 50],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [33, 33, 34],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [60, 25, 15],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [50, 30, 20],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [25, 25, 50],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [40, 30, 30],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        },
+        {
+            labels: ['Merchants', 'Units', 'Users'],
+            series: [30, 50, 20],
+            colors: ['#28a745', '#6c757d', '#dc3545']
+        }
+    ];
+
+
+    let chartPieInstance = null;
+    
     function initializePieChart(data) {
-    	console.log('hello');
-        const chartPie = new ApexCharts(
+        console.log('hello');
+        console.log(data);
+
+        // Destroy existing chart if it exists
+        if (chartPieInstance) {
+            chartPieInstance.destroy();
+        }
+
+        // Create new chart instance
+        chartPieInstance = new ApexCharts(
             document.querySelector("#chart-pie"),
             {
                 chart: {
@@ -1113,9 +1387,9 @@ document.addEventListener('DOMContentLoaded', populateDropdowns);
                         useSeriesColors: true,
                     },
                 },
-                series: data.series, // Dynamic data for the series
-                labels: data.labels, // Dynamic data for the labels
-                colors: data.colors || ['#28a745', '#6c757d', '#dc3545'], // Default or dynamic colors
+                series: data.series,
+                labels: data.labels,
+                colors: data.colors || ['#28a745', '#6c757d', '#dc3545'],
                 responsive: [
                     {
                         breakpoint: 1550,
@@ -1141,25 +1415,39 @@ document.addEventListener('DOMContentLoaded', populateDropdowns);
             }
         );
 
-        // Render the Pie Chart
-        chartPie.render();
+        // Render the new chart
+        chartPieInstance.render();
     }
 
  
 
     window.onload = function () {
-        // Initialize Pie Chart
-        initializePieChart(backendPieData);
+        $.ajax({
+            url: './GetPieCount',
+            type: 'GET',
+            success: function (response) {
+                // Ideally you assign response to backendPieData dynamically here if not hardcoded
+                // backendPieData = response;
+                initializePieChart(backendPieData[0]);
+            },
+            error: function (error) {
+                console.error("Error:", error);
+                alert("Failed to fetch pie data.");
+            }
+        });
 
-        // Initialize Line Charts
-        initializeChart('cummulativeChart', backendData.cummulative.labels, backendData.cummulative.datasets);
-        initializeChart('progressiveChart', backendData.progressive.labels, backendData.progressive.datasets);
+        // Initialize line charts with default backendData
+        window.lineChartCummulative = initializeChart('cummulativeChart', allBackendDatas[0].cummulative.labels, allBackendDatas[0].cummulative.datasets);
+        window.lineChartProgressive = initializeChart('progressiveChart', allBackendDatas[0].progressive.labels, allBackendDatas[0].progressive.datasets);
 
-        // Update Merchant Header with Current Date
         updateMerchantHeader();
-				insertDate();
-
+        insertDate();
     };
+
+    
+    
+    
+    
 
     /**
      * Updates the merchant header with today's date.
@@ -1284,11 +1572,11 @@ document.addEventListener('DOMContentLoaded', populateDropdowns);
 		        
 		    };
 	  var Monthly = {
-		        Monthly: [50, 60, 70], // Data for January
+		        Monthly: [50, 60, 40], // Data for January
 		        
 		    };
 	  var MWOverall = {
-		        Overall: [70, 40, 120], // Data for January
+		        Overall: [70, 40, 10], // Data for January
 		        
 		    };
 	  var MWMonthly = {
@@ -1296,84 +1584,36 @@ document.addEventListener('DOMContentLoaded', populateDropdowns);
 		        
 		    };
 
+	  function getRelativeMaxValue(array) {
+		    const max = Math.max(...array.map(Number));
+		    const buffer = Math.ceil(max * 0.1); // 10% buffer
+		    return max + buffer;
+		}
 
 		    // Create charts for each month
-		    function createChart(month, canvasId ,data ) {
-		        var chartElement = document.getElementById(canvasId);
+		  setTimeout(() => {
+        const janData = getMerchantChartData("jan", 0);
+        const febData = getMerchantChartData("feb", 0);
+        const marData = getMerchantChartData("mar", 0);
+        const aprData = getMerchantChartData("apr", 0);
 
-		        if (!chartElement.getAttribute('data-chart-initialized')) {
-		            new Chart(chartElement, {
-		                type: "bar",  // Bar chart type
-		                data: {
-		                    labels: [month], // Only one label, the current month
-		                    datasets: [
-		                        {
-		                            label: "Vol. of Trans.",  // First dataset label
-		                            backgroundColor: "#fb6340", // Red color for volume
-		                            data: [data[month][0]], // Volume data for the month
-		                            maxBarThickness: 20,  // Maximum thickness of each bar
-		                        },
-		                        {
-		                            label: "No. of Trans.",  // Second dataset label
-		                            backgroundColor: "#36a2eb", // Blue color for transactions
-		                            data: [data[month][1]], // No. of transactions for the month
-		                            maxBarThickness: 20,
-		                        },
-		                       
-		                        {
-		                            label: "No. of Merchants",  // First dataset label
-		                            backgroundColor: "#cb9cb3", // Red color for volume
-		                            data: [data[month][2]], // Volume data for the month
-		                            maxBarThickness: 20,  // Maximum thickness of each bar
-		                        }
-		                    ],
-		                },
-		                options: {
-		                    indexAxis: 'x', // Set the orientation to horizontal (left-to-right bars)
-		                    responsive: true,  // Ensure the chart resizes with window
-		                    maintainAspectRatio: false,  // Allow resizing without distortion
-		                    plugins: {
-		                        legend: {
-		                            display: false,  // Display legend to distinguish datasets
-		                        },
-		                        tooltip: {
-		                            enabled: true,  // Enable tooltips
-		                            mode: "index",  // Tooltip mode: show tooltip for index
-		                            intersect: false,  // Do not show tooltip on exact intersection
-		                        }
-		                    },
-		                    scales: {
-		                        x: {
-		                            beginAtZero: true,  // Start x-axis from zero
-		                            ticks: {
-		                                color: "#8898aa",  // Tick font color
-		                            },
-		                            grid: {
-		                                color: "rgba(200, 200, 200, 0.3)" // Gridline color
-		                            }
-		                        },
-		                        y: {
-		                            ticks: {
-		                                color: "#8898aa",  // Tick font color
-		                            },
-		                            grid: {
-		                                display: false  // Disable y-axis grid lines
-		                            }
-		                        }
-		                    }
-		                },
-		            });
+        updateChart('Overall', 'chart-bars-jan', janData);
+        updateChart('Monthly', 'chart-bars-feb', febData);
+        updateChart('Overall', 'chart-bars-mar', marData);
+        updateChart('Monthly', 'chart-bars-apr', aprData);
+    }, 100);
 
-		            chartElement.setAttribute("data-chart-initialized", "true");
-		        }
-		    }
 
-		    // Initialize charts for each month
+/* 		    // Initialize charts for each month
 		    createChart('Overall', 'chart-bars-jan',Overall);
 		    createChart('Monthly', 'chart-bars-feb',Monthly);
 		    createChart('Overall', 'chart-bars-mar',MWOverall);
-		    createChart('Monthly', 'chart-bars-apr',MWMonthly);	
+		    createChart('Monthly', 'chart-bars-apr',MWMonthly);	 */
 	
     </script>
+    
+    
+
+    
 </body>
 </html>

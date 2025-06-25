@@ -2045,7 +2045,7 @@ td {
 					// Validate Charge Back Approval
 					if (chargeapproval) {
 						document.getElementById("chargeback_approval_vali").innerHTML = "";
-						// If Merchant is selected, validate Charge Back Amount
+						// If Merchant is selected, validate Charge Back Limit
 						if (chargeapproval === "MERCHANT") {
 							if (chargeamount.trim() !== "") {
 								document.getElementById("chargeback_amount_vali").innerHTML = "";
@@ -2391,30 +2391,45 @@ td {
 			validateContact($("#contact_person6_name").val(), $("#contact_person6_mobile").val(), $("#contact_person6_email").val(), $("#cp6_countrycode").val(), 6);
 
 			if (hasError) {
-				$('#myModalpopup1').modal("toggle");
-				$('#myModalpopup1 .modal-body').text("Enter the Required fields");
-				return;
+			    $('#myModalpopup1').modal("toggle");
+			    $('#myModalpopup1 .modal-body').text("Enter the Required fields");
+			    return;
 			} else {
-				$("#smooth1").css("background", "");
-				$("#smooth1").css("color", "black");
-				$("#smooth2").css("background", "#018398");
-				$("#smooth2").css("color", "white");
-				$("#smooth3").css("background", "");
-				$("#smooth3").css("color", "black");
-				$.ajax({
-					url: './addunitform?&formmode=addsubmit',
-					data: $("#TabForm").serialize(),
-					type: 'POST',
-					success: function (data) {
-						console.log(data);
-						showTab("tab2");
-					},
-					error: function (error) {
-						console.error("Error: " + error.responseText);
-						alert("Error saving data");
-					}
-				});
+			    // Set background and color for the tabs
+			  $("#smooth1").css({
+    background: "rgb(242, 98, 35)",
+    color: "white"
+});
+
+$("#smooth2").css({
+    background: "rgb(242, 98, 35)",
+    color: "rgb(0, 0, 128)",
+    fontWeight: "bold"
+});
+
+$("#smooth3").css({
+    background: "rgb(242, 98, 35)",
+    color: "white",
+    fontWeight: "bold"
+});
+
+
+			    // Submit form via AJAX
+			    $.ajax({
+			        url: './addunitform?formmode=addsubmit',
+			        data: $("#TabForm").serialize(),
+			        type: 'POST',
+			        success: function (data) {
+			            console.log(data);
+			            showTab("tab2");
+			        },
+			        error: function (error) {
+			            console.error("Error: " + error.responseText);
+			            alert("Error saving data");
+			        }
+			    });
 			}
+
 		}
 
 		function showResponsess(responseText, statusText, xhr, $form) {
@@ -2594,12 +2609,24 @@ td {
 				$('#myModalpopup1').modal("toggle");
 				$('#myModalpopup1 .modal-body').text("Enter the Required fields");
 			} else {
-				$("#smooth1").css("background", "");
-				$("#smooth1").css("color", "black");
-				$("#smooth2").css("background", "");
-				$("#smooth2").css("color", "black");
-				$("#smooth3").css("background", "#018398");
-				$("#smooth3").css("color", "white");
+				  $("#smooth1").css({
+					    background: "rgb(242, 98, 35)",
+					    color: "white"
+					});
+
+					$("#smooth2").css({
+						 background: "rgb(242, 98, 35)",
+						    color: "white",
+						    fontWeight: "bold"
+					});
+
+					$("#smooth3").css({
+					   
+					    	  background: "rgb(242, 98, 35)",
+							    color: "rgb(0, 0, 128)",
+							    fontWeight: "bold"
+					});
+
 
 				var formData = new FormData();
 				$("#TabForm").find(":input").each(function () {
@@ -3873,7 +3900,7 @@ td {
 			// Validate Charge Back Approval
 			if (chargeapproval) {
 				document.getElementById("chargeback_approval_vali").innerHTML = "";
-				// If Merchant is selected, validate Charge Back Amount
+				// If Merchant is selected, validate Charge Back Limit
 				if (chargeapproval === "MERCHANT") {
 					if (chargeamount.trim() !== "") {
 						document.getElementById("chargeback_amount_vali").innerHTML = "";
@@ -4472,7 +4499,7 @@ td {
             </td>
             <td>
                 <input type="text" name="mer_cont_pers_r${rowCount}" id="mer_cont_pers_r${rowCount}" 
-                        onkeyup="this.value = this.value.toUpperCase();handleInUserName(this)" 
+                        onkeyup="this.value = this.value.toUpperCase();(this)" 
                        class="form-control form-control-sm w-75">
                 <span id="mer_cont_pers_r${rowCount}_vali" class="reqError"></span>
             </td>
@@ -7154,7 +7181,7 @@ function rowdeleteDoc(ele) {
 						<h6 class="headerh6 ">Merchant Master</h6>
 						<div class="">
 							<button type="button" class="btn btn-sm  headerbutton ml-2 "
-								id="uploadBtn" onclick="holdrejectbtn(this)" title="Upload">Hold-Reject</button>
+								id="uploadBtn" onclick="holdrejectbtn(this)" title="Hold-Reject">Hold-Reject</button>
 							<button type="button" class="btn btn-sm  headerbutton ml-2 "
 								id="uploadBtn" onclick="Uploadclick(this)" title="Upload">Upload</button>
 							<button type="button" class="btn btn-sm  headerbutton ml-2 "
@@ -7927,7 +7954,7 @@ function rowdeleteDoc(ele) {
 											<div class="col-sm-1"></div>
 
 											<label class="col-sm-2 d-none" id="chargeback_amount_label">Charge
-												Back Amount<span style="font-size: 20px; color: red">*</span>
+												Back Limit<span style="font-size: 20px; color: red">*</span>
 											</label>
 											<div class="col-sm-3 d-none" id="chargeback_amount_div">
 												<input type="number" name="chargeback_amount"
@@ -7966,7 +7993,7 @@ function rowdeleteDoc(ele) {
 														style="background: transparent; color: black; width: 3%;">
 														<label>S.no</label>
 													</th>
-													<th style="background: transparent; color: black;"><label>Rep
+													<th style="background: transparent; color: black;"><label>Representative
 															ID <span style="color: red; font-size: 20px;">*</span>
 													</label></th>
 													<th style="background: transparent; color: black;"><label>Contact
@@ -8008,7 +8035,7 @@ function rowdeleteDoc(ele) {
 														<span id="mer_user_id_r1_vali" class="reqError"></span></td>
 													<td><input type="text" name="mer_cont_pers"
 														id="mer_cont_pers" maxlength="12"
-														onkeyup="this.value = this.value.toUpperCase();handleInUserName(this)"
+														onkeyup="this.value = this.value.toUpperCase();"
 														class="form-control form-control-sm w-75"> <span
 														id="mer_cont_pers_vali" class="reqError"></span></td>
 													<td>
@@ -8021,12 +8048,12 @@ function rowdeleteDoc(ele) {
 																</select>
 															</div>
 															<input type="number" id="mer_ph_no" name="mer_ph_no"
-																class="form-control form-control-sm	" required
+																class="form-control form-control-sm	" required maxlength="8"
 																autocomplete="off">
 														</div> <span id="mer_ph_no_vali" class="reqError"></span>
 													</td>
 													<td><input type="text" id="mer_nat_id"
-														name="mer_nat_id"
+														name="mer_nat_id" maxlength="14"
 														onkeyup="this.value = this.value.toUpperCase();"
 														class="form-control form-control-sm w-75 " required
 														autocomplete="off"> <span id="mer_nat_id_vali"
@@ -9804,14 +9831,14 @@ function rowdeleteDoc(ele) {
 						<div class="col-sm-1"></div>
 						<div>
 							<button class="tablinks" id="smooth2"
-								style="width: 300px; height: 40px; background-color: #f26223; color: white; border: #f26223"
+								style="width: 300px; height: 40px; background-color: #f26223; color: white; border: #f26223;font-weight: 600;font-weight: bold; "
 								onclick="showTab('tab2');changeColor(this);">USER
 								MANAGEMENT</button>
 						</div>
 						<div class="col-sm-1"></div>
 						<div>
 							<button class="tablinks" id="smooth3"
-								style="width: 300px; height: 40px; background-color: #f26223; color: white; border: #f26223;"
+								style="width: 300px; height: 40px; background-color: #f26223; color: white; border: #f26223;font-weight: 600;font-weight: bold;"
 								onclick="showTab('tab3');changeColor(this)">DEVICE
 								MANAGEMENT</button>
 						</div>
@@ -11348,7 +11375,7 @@ function rowdeleteDoc(ele) {
 															class="form-control form-control-sm" readonly>
 													</div>
 													<div class="col-sm-1"></div>
-													<label class="col-sm-2">Charge Back Amount </label>
+													<label class="col-sm-2">Charge Back Limit </label>
 													<div class="col-sm-3">
 														<input type="number" name="chargeback_amount"
 															id="chargeback_amount" autocomplete="off" maxlength="30"
@@ -17391,7 +17418,7 @@ function rowdeleteDoc(ele) {
 									<div class="col-sm-1"></div>
 
 									<label class="col-sm-2 d-none" id="chargeback_amount_label">Charge
-										Back Amount<span style="font-size: 20px; color: red">*</span>
+										Back Limit<span style="font-size: 20px; color: red">*</span>
 									</label>
 									<div class="col-sm-3 d-none" id="chargeback_amount_div">
 										<input type="number" name="chargeback_amount"
@@ -19505,7 +19532,7 @@ function rowdeleteDoc(ele) {
 											class="form-control form-control-sm" readonly>
 									</div>
 									<div class="col-sm-1"></div>
-									<label class="col-sm-2">Charge Back Amount </label>
+									<label class="col-sm-2">Charge Back Limit </label>
 									<div class="col-sm-3">
 										<input type="number" name="chargeback_amount"
 											id="chargeback_amount" autocomplete="off" maxlength="30"
@@ -19593,7 +19620,7 @@ function rowdeleteDoc(ele) {
 											</td>
 
 											<td style="background-color: unset;"><span
-																	id="mer_nat_id"
+																	id="mer_nat_id"  maxlength="14"
 																	th:text="${MERLST?.mer_nat_id}"></span> <span
 																	id="mer_email_addr_r9_vali" class="text-danger"></span>
 																</td>
@@ -21174,7 +21201,7 @@ function rowdeleteDoc(ele) {
 											class="form-control form-control-sm" readonly>
 									</div>
 									<div class="col-sm-1"></div>
-									<label class="col-sm-2">Charge Back Amount </label>
+									<label class="col-sm-2">Charge Back Limit </label>
 									<div class="col-sm-3">
 										<input type="number" name="chargeback_amount"
 											id="chargeback_amount" autocomplete="off" maxlength="30"
@@ -25268,8 +25295,8 @@ function rowdeleteDoc(ele) {
 				processData: false,
 				contentType: false,
 				success: function (response) {
-					$("#mypopup2 .modal-body").html(response);
-					$('#mypopup2').modal('show');
+					/* $("#mypopup2 .modal-body").html(response);
+					$('#mypopup2').modal('show'); */
 				},
 				error: function (xhr, status, error) {
 					console.error("Error during image upload:", status, error);
