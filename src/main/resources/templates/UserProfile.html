@@ -794,7 +794,7 @@ $(document)
 										<label class="col-sm-2">Bank Code <span style="color: red; font-size: 20px;" th:if="${formmode}=='add'">*</span></label>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input type="text" name="bank_code" th:value="${bank_code}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" id="bankCode" class="form-control form-control-sm"
-												autocomplete="off" required readonly
+												autocomplete="off" required  
 											>
 										</div>
 										<div class="col-sm-3" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' OR ${formmode}=='cancel'">
@@ -812,7 +812,7 @@ $(document)
 										<label class="col-sm-2">Bank Name <span style="color: red; font-size: 20px;" th:if="${formmode}=='add'">*</span></label>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input type="text" name="bank_name" th:value="${bank_name}" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" id="bankName" class="form-control form-control-sm" maxlength="25"
-												autocomplete="off" required readonly
+												autocomplete="off" required  
 											/>
 										</div>
 										<div class="col-sm-3" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' OR ${formmode}=='cancel'">
@@ -827,7 +827,7 @@ $(document)
 										<label class="col-sm-2">Branch Code <span style="color: red; font-size: 20px;" th:if="${formmode}=='add'">*</span></label>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input type="text" name="branch_code" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" th:value="${branch_code}" id="branchCode" value="" class="form-control form-control-sm"
-												autocomplete="off" maxlength="4" required readonly
+												autocomplete="off" maxlength="4" required  
 											/>
 										</div>
 										<div class="col-sm-3" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete' OR ${formmode}=='cancel'">
@@ -840,7 +840,7 @@ $(document)
 										<label class="col-sm-2">Branch Name <span style="color: red; font-size: 20px;" th:if="${formmode}=='add'">*</span></label>
 										<div th:if="${formmode}=='add'" class="col-sm-3">
 											<input type="text" name="branch_name" id="branchName" onkeyup="this.value = this.value.toUpperCase();handleIn(this)" value="" class="form-control form-control-sm" maxlength="25"
-												autocomplete="off" required readonly
+												autocomplete="off" required  
 											/>
 										</div>
 										<div class="col-sm-3" th:if="${formmode}=='edit' OR ${formmode}=='verify' OR ${formmode}=='view' OR ${formmode}=='viewnew' OR ${formmode}=='delete'OR ${formmode}=='cancel'">
