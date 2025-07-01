@@ -618,14 +618,14 @@ label {
 													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="delete_value" onclick="view_btn(this)">View</a>
 												<div class="dropdown-divider"
-													th:if="${Notifi.ENTITY_FLG}=='N' and ${IPSRoleMenu.permissions}=='W'"></div>
+													th:if="${Notifi.ENTITY_FLG}=='N'"></div>
 												<a class="dropdown-item" title="Delete"
 													th:if="${Notifi.ENTITY_FLG}=='N' and ${IPSRoleMenu.permissions}=='W'"
 													th:attr="data-record_srl=${Notifi?.RECORD_SRL_NO}"
 													style="cursor: pointer; height: 20px; width: 50px; background: #e3e3e4; border-radius: .20rem; padding: 2px 10px; top: 10px; padding-bottom: 22px; font-size: 15px; color: #162b75; font-weight: 700;"
 													id="delete_value" onclick="delete_btn_submit(this)">Delete</a>
 												<div class="dropdown-divider"
-													th:if="${Notifi.ENTITY_FLG}=='N' and ${IPSRoleMenu.permissions}=='W'"></div>
+													th:if="${Notifi.ENTITY_FLG}=='N'"></div>
 												<a class="dropdown-item" title="Verify"
 													th:if="${Notifi.ENTITY_FLG}=='N' "
 													th:attr="data-record_srl=${Notifi?.RECORD_SRL_NO}"
@@ -1196,7 +1196,8 @@ label {
 								class="btn btn-xs headerbutton mr-2"
 								form="notificationParmsProfile" id="btnSubmit"
 								onclick="verifysubmitform(this);"
-								th:attr="data-formmode=${formmode},data-entity=${ENTITY_FLG},data-modify_user=${notificationParmsProfile?.MODIFY_USER},data-entry_user=${notificationParmsProfile?.ENTRY_USER}">Verify</button>
+								th:attr="data-formmode=${formmode},data-entity=${ENTITY_FLG},data-modify_user=${notificationParmsProfile?.MODIFY_USER},data-entry_user=${notificationParmsProfile?.ENTRY_USER}"
+								>Verify</button>
 
 							<button type="button" class="btn btn-xs headerbutton" id=""
 								onclick="back();">Back</button>

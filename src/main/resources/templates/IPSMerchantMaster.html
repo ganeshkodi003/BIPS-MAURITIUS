@@ -22335,6 +22335,27 @@ function rowdeleteDoc(ele) {
 									th:if="${formmode}=='PassVerify'"
 									class="form-control form-control-sm" readonly>
 							</div>
+									<div class="col-sm-1"></div>
+							<div class="col-sm-2">
+								<label for="no_of_active_devices">Remarks<span
+									style="color: red; font-size: 20px;"
+									th:if="${formmode}=='PassEdit'"> *</span>
+								</label>
+							</div>
+							<div class="col-sm-3">
+								<input type="number" id="no_of_active_devices"
+									name="no_of_active_devices" 
+									th:if="${formmode}=='PassView'"
+									class="form-control form-control-sm" readonly> <input
+									type="number" id="no_of_active_devices"
+									name="no_of_active_devices" 
+									th:if="${formmode}=='PassEdit'"
+									class="form-control form-control-sm"> <input
+									type="number" id="no_of_active_devices"
+									name="no_of_active_devices" 
+									th:if="${formmode}=='PassVerify'"
+									class="form-control form-control-sm" readonly>
+							</div>
 						</div>
 					</div>
 					<div class="card-footer text-center">
