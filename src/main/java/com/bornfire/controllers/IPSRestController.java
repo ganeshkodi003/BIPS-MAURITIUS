@@ -98,7 +98,8 @@ import com.bornfire.entity.Sign_Master_Entity;
 import com.bornfire.entity.Sign_Master_Repo;
 import com.bornfire.entity.UserProfile;
 import com.bornfire.entity.UserProfileRep;
-import com.bornfire.entity.cimMerchantQRcodeResponse;
+import com.bornfire.entity.cimMerchantQRcodeResponse; 
+import com.bornfire.entity.QR_Temp_Maint_Entity;
 import com.bornfire.exception.Connect24Exception;
 import com.bornfire.exception.ErrorResponseCode;
 import com.bornfire.exception.ServerErrorException;
@@ -315,6 +316,13 @@ public class IPSRestController {
 	public String getMerUserBlobImage(@PathVariable("userID") String userID, Model md) {
 		BIPS_Mer_User_Management_Entity query = mandateServices.MerUserBlobImages(userID);
 		return Base64.getEncoder().encodeToString(query.getPhoto());
+	}
+	
+	@RequestMapping(value = "getBannerBlobImage/{userID}", method = RequestMethod.GET)
+	@ResponseBody
+	public String getBannerBlobImage(@PathVariable("userID") String userID, Model md) {
+		QR_Temp_Maint_Entity query = mandateServices.BannerBlobImage(userID);
+		return Base64.getEncoder().encodeToString(query.getTemplate());
 	}
 
 	@RequestMapping(value = "addFeesAndServices", method = { RequestMethod.GET, RequestMethod.POST })

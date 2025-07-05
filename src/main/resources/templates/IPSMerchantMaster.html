@@ -704,6 +704,11 @@ td {
 .filterable .filters input[disabled]::-webkit-input-placeholder {
 	color: #333;
 }
+.underline {
+	text-decoration: underline;
+	color: #08a6f1;
+	cursor: pointer;
+}
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -1368,19 +1373,7 @@ td {
 					const mainButton = document.getElementById("smooth1View");
 					const bankDetailsButton = document.getElementById("smooth2View");
 
-					// Reset MAIN button's style
-					mainButton.style.backgroundColor = "#f26223";
-					mainButton.style.color = "white";
-					mainButton.style.fontSize = "14px";
-					//bankDetailsButton.style.border = "#f26223";
-					
-					// Set style for BANK DETAILS button
-					bankDetailsButton.style.backgroundColor = "#f26223";
-					bankDetailsButton.style.color = "#000080";
-					bankDetailsButton.style.border = "#f26223";
-					bankDetailsButton.style.fontWeight = "600";
-					bankDetailsButton.style.fontSize= "16px";
-					bankDetailsButton.style.fontWeight = "bold";
+				
 					var Maucas = document.getElementById("type_maucas").checked;
 					var Upi = document.getElementById("type_upi").checked;
 					var MerchantLegalId = $("#merchant_legal_id").val();
@@ -1395,6 +1388,7 @@ td {
 					var merchantpowcano = $("#merchant_pow_ca_no").val();
 					var merchantcatcode = $("#merchant_cat_code").val();
 					var merchanttype = $("#merchant_type").val();
+					var tipconvenience = $("#tip_or_conv_indicator").val();
 					var loyalty = $("#loyalty_number").val();
 					var purposetran = $("#purpose_of_tran").val();
 					var versionvali = $("#version").val();
@@ -1528,12 +1522,14 @@ td {
 							document.getElementById("mer_ph_no_vali").innerHTML = "Phone Number is required.";
 							returnValue = false;
 						}
-
+						
 						if (Merofcno.trim() !== "") {
 							document.getElementById("mer_nat_id").innerHTML = "";
-					} else {
-						document.getElementById("mer_nat_id_vali").innerHTML = "National Id Is Requried";
-					}
+						} else {
+							document.getElementById("mer_nat_id_vali").innerHTML = "National ID is required.";
+							returnValue = false;
+						}
+ 
 
 						if (Meremailaddr1.trim() !== "") {
 							if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Meremailaddr1.trim())) {
@@ -2124,22 +2120,28 @@ td {
 						returnValue = false;
 					}
 
-
 					if (Maucas == true) {
+						if (!tipconvenience.trim() == "") {
+							document.getElementById("tip_convenience_vali").innerHTML = "";
+						} else {
+							$('#tip_convenience').css({"display": "block", "color": "red"});
+							document.getElementById("tip_convenience_vali").innerHTML = "Select Tip/Convenience";
+							returnValue = false;
+						}
 						if (!loyalty.trim() == "") {
 							document.getElementById("loyalty_number_vali").innerHTML = "";
 						} else {
 							$('#Loyalty_span').css({"display": "block", "color": "red"});
 							document.getElementById("loyalty_number_vali").innerHTML = "Enter Loyalty Number";
-							returnValue1 = false;
+							returnValue = false;
 						}
 						if (!purposetran.trim() == "") {
 							document.getElementById("purpose_of_tran_vali").innerHTML = "";
 						} else {
 							$('#Purpose_span').css({"display": "block", "color": "red"});
 							document.getElementById("purpose_of_tran_vali").innerHTML = "Purpose Of Transaction";
-							returnValue1 = false;
-						}
+							returnValue = false;
+						} 
 					}
 					if (Upi == true) {
 						if (!versionvali.trim() == "") {
@@ -2249,10 +2251,25 @@ td {
 							returnValue = false;
 						}
 					}
+					
 					//returnValue = true;
 					if (returnValue == true) {
 						$("#one-panel").css("display", "none");
 						$("#four1-panel").css("display", "block");
+
+						// Reset MAIN button's style
+						mainButton.style.backgroundColor = "#f26223";
+						mainButton.style.color = "white";
+						mainButton.style.fontSize = "14px";
+						//bankDetailsButton.style.border = "#f26223";
+						
+						// Set style for BANK DETAILS button
+						bankDetailsButton.style.backgroundColor = "#f26223";
+						bankDetailsButton.style.color = "#000080";
+						bankDetailsButton.style.border = "#f26223";
+						bankDetailsButton.style.fontWeight = "600";
+						bankDetailsButton.style.fontSize= "16px";
+						bankDetailsButton.style.fontWeight = "bold";
 					} else {
 						$("#ADDMANRSN").text("ENTER REQUIRED FIELD'S");
 						$('#Addval').modal("toggle");
@@ -6554,6 +6571,9 @@ $("#smooth3").css({
 
 		function toggleChargebackAmountField() {
 			const merchantRadio = document.getElementById('chargeback_approval_merchant');
+			const bankRadio = document.getElementById('chargeback_approval_bank');
+			const bothRadio = document.getElementById('chargeback_approval_both');
+
 			const chargebackAmountLabel = document.getElementById('chargeback_amount_label');
 			const chargebackAmountDiv = document.getElementById('chargeback_amount_div');
 			const chargebackAmountInput = document.getElementById('chargeback_amount');
@@ -6564,9 +6584,10 @@ $("#smooth3").css({
 			} else {
 				chargebackAmountLabel.classList.add('d-none');
 				chargebackAmountDiv.classList.add('d-none');
-				chargebackAmountInput.value = ''; // Clear the field value when 'Bank' is selected
+				chargebackAmountInput.value = ''; // Clear the field when not needed
 			}
 		}
+
 
 		// Initial call to set the correct state on page load
 		toggleChargebackAmountField();
@@ -7945,7 +7966,7 @@ function rowdeleteDoc(ele) {
 												</div>
 												<div style="position: relative; gap: 10px;">
 													<input type="radio" name="chargeback_approval" value="BOTH"
-														id="chargeback_approval_both" required> <label
+														id="chargeback_approval_both" onchange="toggleChargebackAmountField()" required> <label
 														for="chargeback_approval_both">Both</label>
 												</div>
 												<span id="chargeback_approval_vali" class="reqError"></span>
@@ -7963,8 +7984,11 @@ function rowdeleteDoc(ele) {
 													class="form-control form-control-sm" required><span
 													id="chargeback_amount_vali" class="reqError"></span>
 											</div>
-
-											<div class="col-sm-1" style="margin-left: 95.4rem">
+ 
+										</div>
+										<label></label>
+											<div class="row formline">  
+											<div class="col-sm-2"  >
 												<button type="button" class="btn btn-sm  colorclass"
 													id="amlcheckMerchantbutton" onclick="AMLCheckMerchant();">AML
 													Check</button>
@@ -8003,7 +8027,7 @@ function rowdeleteDoc(ele) {
 															Number <span style="color: red; font-size: 20px;">*</span>
 													</label></th>
 													<th style="background: transparent; color: black;"><label>National
-															ID</label></th>
+															ID <span style="color: red; font-size: 20px;">*</span></label></th>
 													<th style="background: transparent; color: black;"><label>Email
 															Address <span style="color: red; font-size: 20px;">*</span>
 													</label></th>
@@ -8055,7 +8079,7 @@ function rowdeleteDoc(ele) {
 													<td><input type="text" id="mer_nat_id"
 														name="mer_nat_id" maxlength="14"
 														onkeyup="this.value = this.value.toUpperCase();"
-														class="form-control form-control-sm w-75 " required
+														class="form-control form-control-sm w-75 "  
 														autocomplete="off"> <span id="mer_nat_id_vali"
 														class="reqError"></span></td>
 													<td><input type="text" name="mer_email_addr_r1"
@@ -8077,15 +8101,16 @@ function rowdeleteDoc(ele) {
 													<td colspan="2">
 
 
-														<button type="button" class="btn btn-sm  colorclass "
-															id="amlcheckContactbutton" onclick="AMLCheckContact();">AML
-															Check</button>
+														
 
 
 													</td>
 												</tr>
 											</tbody>
 										</table>
+										<button type="button" class="btn btn-sm  colorclass "
+															id="amlcheckContactbutton" onclick="AMLCheckContact();">AML
+															Check</button>
 									</div>
 									<!-- <div class="card-header text-center">
 
@@ -8245,8 +8270,10 @@ function rowdeleteDoc(ele) {
 									<label></label>
 									<div id="maucascontent" style="display: none;">
 										<div class="row formline mt-2 ">
-											<label class="col-sm-2">Tip or Convenience Indicator
-											</label>
+											<label class="col-sm-2">Tip/Convenience Indicator
+											<span
+												id="tip_convenience" th:if="${formmode}=='add'"
+												style="font-size: 20px; display: none; padding-left: 5px;">*</span></label>
 											<div class="col-sm-3">
 												<select name="tip_or_conv_indicator"
 													id="tip_or_conv_indicator" style="width: 100%"
@@ -8256,7 +8283,9 @@ function rowdeleteDoc(ele) {
 													<option value="01">Tip</option>
 													<option value="02">Convenience</option>
 													<!-- <option value="">other</option> -->
-												</select>
+												</select><span id="tip_convenience_vali"
+													class="reqError"></span><a style="color: red"
+													id="tip_convenience_vali"> </a>
 											</div>
 											<div class="col-sm-1"></div>
 											<label class="col-sm-2">Convenience Fee type</label>
@@ -8919,7 +8948,7 @@ function rowdeleteDoc(ele) {
 													<td><select id="docType1" name="docType"
 														onchange="first_change(this)"
 														class="form-control form-control-sm"
-														style="height: 24px; width: 200px; white-space: nowrap; overflow: hidden; margin-top: 0px">
+														style="height: 26px; width: 200px; white-space: nowrap; overflow: hidden; margin-top: 0px">
 															<option value="">SELECT</option>
 															<option value="RDOC">REGISTRATION DOCUMENT</option>
 															<option value="BDOC">BUSINESS DOCUMENT</option>
@@ -8999,7 +9028,7 @@ function rowdeleteDoc(ele) {
 																</div>
 															</div>
 															<div>
-																<p id="Draw_signature" style="margin-bottom: -1rem">
+																<p id="Draw_signature" class="underline" style="margin-bottom: -1rem;color: blue">
 																	Draw signature</p>
 															</div>
 
@@ -9012,7 +9041,7 @@ function rowdeleteDoc(ele) {
 
 																		<div class="menu-title-header">
 																			<div class="modal-title" id=""
-																				style="text-align: center; color: white;">
+																				style="text-align: center; color: white;cursor: pointer;">
 																				Signature Pad <span class="close">&times;</span>
 																			</div>
 
@@ -23682,7 +23711,7 @@ function rowdeleteDoc(ele) {
 				<div class="modal-footer "
 					style="border-top: none; text-align: center;">
 					<button type="button" class="btn btn-sm  headerbutton"
-						data-dismiss="modal" onclick="popclose()">Back</button>
+						data-dismiss="modal">Back</button>
 					<button type="button" class="btn btn-sm  headerbutton"
 						data-dismiss="modal" onclick="closesubmit()">Proceed</button>
 				</div>
@@ -23857,7 +23886,7 @@ function rowdeleteDoc(ele) {
 				<div class="modal-footer"
 					style="border-top: none; text-align: center;">
 					<button type="button" class="btn btn-sm  headerbutton"
-						data-dismiss="modal" onclick="popclose()">Back</button>
+						data-dismiss="modal" >Back</button>
 					<button type="button" class="btn btn-sm  headerbutton"
 						data-dismiss="modal">Proceed</button>
 				</div>
@@ -23971,7 +24000,7 @@ function rowdeleteDoc(ele) {
 				<div class="modal-footer"
 					style="border-top: none; text-align: center;">
 					<button type="button" class="btn btn-sm  headerbutton"
-						data-dismiss="modal" onclick="popclose()">Back</button>
+						data-dismiss="modal">Back</button>
 					<button type="button" class="btn btn-sm  headerbutton"
 						data-dismiss="modal">Proceed</button>
 				</div>
@@ -24944,20 +24973,20 @@ function rowdeleteDoc(ele) {
 		        // Placeholder for dynamic input or dropdown
 		        cell3.innerHTML = `
 		            <select name="docCode" id="docCode${mrowCountcor}" class="form-control form-control-sm" 
-		                style="height: 23px; width: 150px" onchange="updateDescription1(${mrowCountcor})">
+		                style="height: 26px; width: 150px" onchange="updateDescription1(${mrowCountcor})">
 		                <option value="">SELECT</option>
 		            </select>`;
 
 		        // Placeholder for description
 		        cell4.innerHTML = `
 		            <input type="text" name="docDesc" id="docDesc${mrowCountcor}" class="form-control col-sm-12 uniform-input" readonly 
-		                style="height: 23px; width: 150px">`;
+		                style="height: 26px; width: 150px">`;
 
 		        // Remaining cells
-		        cell5.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase() ;" name="uniqId" id="uniqId${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 23px; width: 150px">`;
-		        cell6.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase();handleAddress(this);" name="docIssPlace" id="docIssPlace${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 23px; width: 150px">`;
-		        cell7.innerHTML = `<input type="date" name="docIssDate" id="docIssDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
-		        cell8.innerHTML = `<input type="date" name="docExpDate" id="docExpDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 23px; width: 150px">`;
+		        cell5.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase() ;" name="uniqId" id="uniqId${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 26px; width: 150px">`;
+		        cell6.innerHTML = `<input type="text" onkeyup="this.value = this.value.toUpperCase();handleAddress(this);" name="docIssPlace" id="docIssPlace${mrowCountcor}" class="form-control col-sm-12 uniform-input" autocomplete="off" style="height: 26px; width: 150px">`;
+		        cell7.innerHTML = `<input type="date" name="docIssDate" id="docIssDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 26px; width: 150px">`;
+		        cell8.innerHTML = `<input type="date" name="docExpDate" id="docExpDate${mrowCountcor}" class="form-control col-sm-12 uniform-input" style="height: 26px; width: 150px">`;
 		        cell9.innerHTML = `<input type="file" name="docFile" id="file${mrowCountcor}">`;
 		        setDateLimits();
 		    } else {

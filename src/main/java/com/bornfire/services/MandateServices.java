@@ -16,6 +16,8 @@ import com.bornfire.entity.BankAgentTableRep;
 import com.bornfire.entity.IPSUserProfileMod;
 import com.bornfire.entity.MerchantMaster;
 import com.bornfire.entity.MerchantMasterRep;
+import com.bornfire.entity.QR_Temp_Maint_Entity;
+import com.bornfire.entity.QR_Temp_Maint_Repo;
 import com.bornfire.entity.UserProfile;
 import com.bornfire.entity.UserProfileRep;
 
@@ -77,6 +79,19 @@ public class MandateServices {
 		List<BIPS_Mer_User_Management_Entity> query = bIPS_MerUserManagement_Repo.getBlobImage(userID);
 		if (query.isEmpty()) {
 			return new BIPS_Mer_User_Management_Entity();
+		} else {
+			return query.get(0);
+		}
+	}
+	
+	@Autowired
+	QR_Temp_Maint_Repo qR_Temp_Maint_Repo;
+
+	public QR_Temp_Maint_Entity BannerBlobImage(String userID) {
+		System.out.println("Banner ID "+userID);
+		List<QR_Temp_Maint_Entity> query = qR_Temp_Maint_Repo.getBlobImage(userID);
+		if (query.isEmpty()) {
+			return new QR_Temp_Maint_Entity();
 		} else {
 			return query.get(0);
 		}

@@ -109,6 +109,8 @@ import com.bornfire.entity.MerchantMasterModRep;
 import com.bornfire.entity.MerchantMasterRep;
 import com.bornfire.entity.NotificationParms;
 import com.bornfire.entity.NotificationParmsRep;
+import com.bornfire.entity.QR_Temp_Maint_Entity;
+import com.bornfire.entity.QR_Temp_Maint_Repo;
 import com.bornfire.entity.ReferenceCodeEntity;
 import com.bornfire.entity.ReferenceCodeRep;
 import com.bornfire.entity.SettlementAccountRepository;
@@ -277,6 +279,9 @@ public class MainController {
 	
 	@Autowired
 	SlabRateRepo slabRateRepo;
+	
+	@Autowired
+	QR_Temp_Maint_Repo qR_Temp_Maint_Repo;
 	
 
 	private String pagesize;
@@ -4941,4 +4946,81 @@ public class MainController {
 		documentMaster_Repo.save(uniqueid);
 		return "Deleted Successfully.....";
 	}
+	
+	@RequestMapping(value = "QRTempMaint", method = { RequestMethod.GET, RequestMethod.POST })
+	public String QRTempMaint(@RequestParam(required = false) String formmode,
+			@RequestParam(required = false) String banner_id, Model md, HttpServletRequest req) throws SQLException {
+		String roleId = (String) req.getSession().getAttribute("ROLEID");
+		md.addAttribute("IPSRoleMenu", AccessRoleService.getRoleMenu(roleId));
+		md.addAttribute("PdfViewer", "ReferenceCode");
+
+		if (formmode == null || formmode.equals("list")) {
+			md.addAttribute("formmode", "list"); 
+			md.addAttribute("termplist", qR_Temp_Maint_Repo.gettemplist());
+
+		} else if (formmode.equals("view")) {
+
+			md.addAttribute("formmode", "view");
+			md.addAttribute("qrtemplate", qR_Temp_Maint_Repo.getTemplate(banner_id));
+
+		} else if (formmode.equals("modify")) { 
+			md.addAttribute("formmode", "modify"); 
+
+		} else if (formmode.equals("edit")) { 
+			md.addAttribute("formmode", "edit");
+
+		}else if (formmode.equals("add")) { 
+			md.addAttribute("formmode", "add");
+			
+			String bannerid = qR_Temp_Maint_Repo.getBannerID();
+			
+			String BANNERID;
+			if (bannerid != null) {
+				BANNERID = "BA0" + (Integer.valueOf(bannerid) + 1);
+			} else {
+				BANNERID = "BA01";
+			} 
+			
+			md.addAttribute("BannerID", BANNERID);
+			
+		} else if (formmode.equals("delete")) { 
+			md.addAttribute("formmode", "delete");
+			
+		}
+
+		return "QRTempMaint";
+	}
+	
+	@RequestMapping(value = "BannerMaint", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> BannerMaint(
+	        @RequestParam(required = false) String banner_id,
+	        @RequestParam(value = "file", required = false) MultipartFile file,
+	        @ModelAttribute QR_Temp_Maint_Entity qR_Temp_Maint_Entity,
+	        HttpServletRequest req) throws IOException {
+
+	    if (file != null && !file.isEmpty()) {
+	        qR_Temp_Maint_Entity.setTemplate(file.getBytes());
+	    }
+
+	    String userID = (String) req.getSession().getAttribute("USERID"); 
+
+	    try {
+	        qR_Temp_Maint_Entity.setDel_flg("N");
+	        qR_Temp_Maint_Entity.setModify_flg("N");
+	        qR_Temp_Maint_Entity.setEntity_flg("N");
+	        qR_Temp_Maint_Entity.setEntry_time(new Date());
+	        qR_Temp_Maint_Entity.setModify_time(new Date());
+	        qR_Temp_Maint_Entity.setEntry_user(userID);
+	        qR_Temp_Maint_Entity.setModify_user(userID);
+
+	        qR_Temp_Maint_Repo.save(qR_Temp_Maint_Entity);
+
+	        return ResponseEntity.ok("Banner added successfully!");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving banner.");
+	    }
+	}
+
 }
